@@ -1,0 +1,177 @@
+/*
+ * CometChat
+ * Copyright (c) 2016 Inscripts - support@cometchat.com | http://www.cometchat.com | http://www.inscripts.com
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+html, body {
+	background: <?php echo $themeSettings['color_white'];?>;
+	height: 100%;
+	overflow: hidden;
+}
+
+.cometchat_wrapper {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.cometchat_sticker_image{
+	cursor: pointer;
+	float: left;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	width: 80px;
+	height: 80px;
+	padding: 4px;
+	margin: 6px;
+}
+
+.container_body.embed {
+	border: 0px;
+	padding: 0px !important;
+}
+
+.container_title.embed {
+	display: none;
+}
+
+.tab {
+	float: left;
+	/*background-color: #EEEEEE;*/
+	background-size: auto 90% !important;
+	color: #333333;
+	text-align: center;
+	cursor: pointer;
+  	border-bottom: 1px solid #C8C8C8;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 40px;
+}
+
+.tab_length6 {
+	width: 9% !important;
+}
+
+.tab_length5 {
+	width: 20%;
+}
+
+.tab h2 {
+	line-height: 26px;
+	font-family: "Lucida Grande",arial,sans-serif;
+	font-size: 13px;
+}
+
+.tab:last-child {
+	border-right: none;
+}
+
+.selected {
+}
+
+.selected  h2 {
+	background: #EEEEEE;
+	font-weight: bold;
+}
+
+.stickers {
+	display: none;
+    <?php if($rtl) :?>
+    padding: 5px 0 0 15px;
+    <?php else :?>
+	padding: 5px 0 0 5px;
+    <?php endif;?>
+    height: 100%;
+    background: none !important;
+}
+
+.sticker_selected {
+	display: block !important;
+}
+.sticker_tab_selected{
+	display: block !important;
+	border-bottom: 5px solid #95D4CE;
+}
+.stickers div {
+	cursor:pointer;
+	margin: 3px;
+	float: left;
+}
+
+#tabs_container {
+	width: 100vw;
+	float: left;
+}
+
+.container_body {
+	height: auto;
+	width: 100% !important;
+	background: #FFFFFF;
+}
+
+.slimScrollDiv {
+	float: left;
+}
+
+.bear {
+	background: url(plugins/stickers/images/bear/bear_1.png) no-repeat center;
+}
+
+.geek {
+	background: url(plugins/stickers/images/geek/geek_1.png) no-repeat center;
+}
+
+.gery {
+	background: url(plugins/stickers/images/gery/gery_1.png) no-repeat center;
+}
+
+.happyghost {
+	background: url(plugins/stickers/images/happyghost/happ_1.png) no-repeat center;
+}
+
+.littledyno {
+	background: url(plugins/stickers/images/littledyno/litt_1.png) no-repeat center;
+}
+
+.momon {
+	background: url(plugins/stickers/images/momon/momo_1.png) no-repeat center;
+}
+
+.monster {
+	background: url(plugins/stickers/images/monster/mons_1.png) no-repeat center;
+}
+
+.penguin {
+	background: url(plugins/stickers/images/penguin/peng_1.png) no-repeat center;
+}
+
+.pirate {
+	background: url(plugins/stickers/images/pirate/pira_1.png) no-repeat center;
+}
+
+.skaterboy {
+	background: url(plugins/stickers/images/skaterboy/skat_1.png) no-repeat center;
+}
+
+.vampire {
+	background: url(plugins/stickers/images/vampire/vamp_1.png) no-repeat center;
+}

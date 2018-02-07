@@ -1,0 +1,23 @@
+<IfModule security_module>
+    SecFilterEngine Off
+</IfModule>
+<IfModule security2_module>
+    SecRuleRemoveByID 1-99999
+    SecRuleRemoveByTag unoeuro
+</IfModule>
+
+RewriteEngine On
+Options -Indexes
+#RewriteBase /
+RewriteCond $1 !^(index\.php|system|admin|templates|uploads|phpexcel|phpmailer)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+    
+#Add more www
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+#Remove www
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http:\/\/%1%{REQUEST_URI} [R=301,QSA,NC,L]

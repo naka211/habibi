@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    DirectoryIndex index.php
+    
+    RewriteEngine On
+    #RewriteBase /cms/admin/
+    RewriteCond $1 !^(index\.php|templates)
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>

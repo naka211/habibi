@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /site/
+Disallow: /system/
+Disallow: /templates/
+Disallow: /thumb/
+Disallow: /uploads/
+Disallow: /phpmailer/
+Disallow: /phpexcel/
