@@ -58,7 +58,7 @@ class MX_Controller
         // Add middleware
         $this->_run_middlewares();
 
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
 	}
 	
 	public function __get($class) 

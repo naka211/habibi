@@ -18,8 +18,7 @@
                 </div>
                 <div class="row mt20">
                     <div class="col-lg-12">
-                        <a class="btn btnSignup" href="#f_Newprofile" data-toggle='modal'>Opret gratis medlemskab
-                            her</a>
+                        <a class="btn btnSignup" href="#f_Newprofile" data-toggle='modal'>Opret gratis medlemskab her</a>
                     </div>
                 </div>
             </div>

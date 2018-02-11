@@ -1531,6 +1531,7 @@ class User extends MX_Controller
         $user = $this->user->getUser('', $email, $password);
         if ($user) {
             $data['status'] = true;
+            $data['b2b'] = false;
             $user->b2b = false;
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);

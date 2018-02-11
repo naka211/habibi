@@ -254,7 +254,7 @@ function login(){
                  contentType: false,
                  cache: false,
                  processData:false,
-                 success: function(data){console.log(data);
+                 success: function(data){
                      $('#loader').fadeOut();
                      if(data.status === true){
                         if(data.b2b === true){
