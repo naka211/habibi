@@ -2082,6 +2082,12 @@ class User extends MX_Controller
         }
     }
 
+    public function testChat(){
+        /*print_r($_SESSION);exit();*/
+        $data['page'] = 'user/testchat';
+        $this->load->view('templates', $data);
+    }
+
     function testEmail()
     {
         var_dump($this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Test subject '.date('d/m/Y H:i'), 'Test content '.date('d/m/Y H:i')));

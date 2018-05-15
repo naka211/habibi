@@ -23,7 +23,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 html, body {
-	background: <?php echo $themeSettings['color_white'];?>;
+	background: <?php echo $layoutSettings['color_white'];?>;
 	direction: <?php echo $dir;?>;
 	height:100%;
 }
@@ -47,7 +47,7 @@ li {
 }
 
 li:before {
-    background: url("layouts/<?php echo $theme;?>/images/bullet.png") no-repeat scroll rgba(0, 0, 0, 0);
+    background: url("<?php echo STATIC_CDN_URL; ?>layouts/<?php echo $layout;?>/images/bullet.png") no-repeat scroll rgba(0, 0, 0, 0);
     content: "";
     height: 10px;
     position: absolute;
@@ -64,9 +64,9 @@ li:before {
 
 .cometchat_wrapper {
 	font-weight:normal;
-	font-family: <?php echo $themeSettings['font_family'];?>;
-	font-size: <?php echo $themeSettings['font_size_mid'];?>;
-	color: <?php echo $themeSettings['dark_grey_color'];?>;
+	font-family: <?php echo $layoutSettings['font_family'];?>;
+	font-size: <?php echo $layoutSettings['font_size_mid'];?>;
+	color: <?php echo $layoutSettings['dark_grey_color'];?>;
 	padding: 10px 8px;
 	padding-<?php echo $right;?>: 0px;
 	width: 255px !important;
@@ -74,7 +74,7 @@ li:before {
 }
 
 .cometchat_wrapper a {
-	color: <?php echo $themeSettings['color_grey'];?>;
+	color: <?php echo $layoutSettings['color_grey'];?>;
 }
 
 .translating {

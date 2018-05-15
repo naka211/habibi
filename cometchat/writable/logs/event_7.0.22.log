@@ -1,0 +1,9 @@
+
+ May 6 06:32:34 : {"LATEST_VERSION":"","api_response":""}
+ May 7 04:11:56 : {"LATEST_VERSION":"","api_response":""}
+ May 7 04:29:32 : {"guestsMode":"1","guestnamePrefix":"Guest","guestsList":"3","guestsUsersList":"3"}
+ May 7 05:13:20 : {"disableDockedLayout":"0","dockedChatBoxAvatar":"1","dockedAlignToLeft":"0","dockedChatListAudioCall":"0","chatboxHeight":"350","chatboxWidth":"230"}
+ May 11 07:30:42 : {"LATEST_VERSION":"7.0.25","api_response":""}
+ May 14 07:48:31 : {"LATEST_VERSION":"7.0.26","api_response":""}
+ May 14 07:53:15 : {"color":"color15"}
+ May 14 07:54:35 : {"disableGroupTab":"0","allowUsers":"1","allowGuests":"1","allowDelete":"1","allowAvatar":"1","crguestsMode":"1","showChatroomUsers":"1","messageBeep":"1","newMessageIndicator":"1","showUsername":"0","showGroupsOnlineUsers":"0","chatroomTimeout":"604800","lastMessages":"10"}

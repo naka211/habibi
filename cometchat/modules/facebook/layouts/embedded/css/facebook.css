@@ -4,7 +4,7 @@
 */
 
 html, body {
-	background: <?php echo $themeSettings['color_white'];?>;
+	background: <?php echo $layoutSettings['color_white'];?>;
 	direction: <?php echo $dir;?>;
 	margin:0;
 	padding:0;
