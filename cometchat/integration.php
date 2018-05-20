@@ -95,9 +95,8 @@ class Integration{
 		}
 
         //T.Trung: adding user session
-        if (!empty($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            $userid = $user->id;
+        if (!empty($_COOKIE['cc_data'])) {
+            $userid = $_COOKIE['cc_data'];
         }
         //T.Trung end
 

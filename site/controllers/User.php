@@ -1536,6 +1536,8 @@ class User extends MX_Controller
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);
             $this->user->updateLogin($user->id, false);
+
+            setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
         } else {
             $data['status'] = false;
         }
@@ -1651,6 +1653,8 @@ class User extends MX_Controller
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
         , 'religion' => '', 'training' => '', 'body' => '');
         $this->session->unset_userdata($SearchUser);
+
+        setcookie('cc_data', '', -time() + (86400 * 30), "/");
 
         redirect(site_url());
     }
