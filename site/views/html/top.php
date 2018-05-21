@@ -13,24 +13,7 @@ if(!empty($user)){
 }
 ?>
 <?php if(!$user && $page == 'home/index'){?>
-<header class="navbar-fixed-top">
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-3 col-md-3">
-            <a href="<?php echo base_url();?>" class="logo"></a>
-          </div>
-          <div class="col-xs-9 col-md-9">
-            <p class="pull-right">
-              <span>Er du allerede medlem? </span> 
-              <i class="fa fa-long-arrow-right"></i>
-              <a class="btnLogin hvr-bounce-to-bottom" href="#Flogin" data-toggle="modal"> Log ind</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-</header>
+
 <?php }else{?>
 <header class="navbar-fixed-top header2">
     <section>
