@@ -100,16 +100,16 @@ class Content_Static extends CI_Controller{
 		if($this->form_validation->run()== FALSE){
 			$this->message = validation_errors();
 		}else{
-            $config['upload_path'] = $this->config->item('root')."uploads/content/";
-    		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-    		$config['max_size']	= $this->config->item('maxupload');
-    		$config['encrypt_name']	= TRUE; //rename to random string image
-            $this->load->library('upload', $config);
     		if(isset($_FILES['img_news']['name'])&&$_FILES['img_news']['name']!=""){
+                $config['upload_path'] = $this->config->item('root')."uploads".DIRECTORY_SEPARATOR."content".DIRECTORY_SEPARATOR;
+                $config['allowed_types'] = '*';
+                $config['max_size']	= $this->config->item('maxupload');
+                $config['encrypt_name']	= TRUE; //rename to random string image
+                $this->load->library('upload', $config);
     			if ($this->upload->do_upload('img_news')){	
     				$data_img = $this->upload->data();
     			} else {
-    				$this->session->set_flashdata('message',"Upload image failed");
+    				$this->session->set_flashdata('message',$this->upload->display_errors());
                     redirect(site_url($this->module_name.'/content_static/add'));
     			}
     		}else {

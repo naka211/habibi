@@ -328,7 +328,7 @@ header .navbar-brand {
 .customerServices_content {
   text-align: right;
 }
-.description {
+.description p{
   font-size: 17.5px;
   line-height: 1.5em;
 }

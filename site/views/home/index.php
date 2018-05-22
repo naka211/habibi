@@ -14,12 +14,10 @@
                             </div>
                         </div>
                     </nav>
-                    <img src="<?php echo base_url().'templates/';?>images/1x/banner01.jpg" alt="" class="img-responsive img_banner">
+                    <img src="<?php echo base_url().'uploads/content/'.getContent(13, 'image');?>" alt="" class="img-responsive img_banner">
                     <div class="caption">
-                        <h2>Velkommen Til habibi! 1</h2>
-                        <p>Danmarks nye invitations Dating site.<br>
-                            Stedet som gør det muligt at komme på DATEN!!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis suspendisse urna nibh.</p>
+                        <h2><?php echo getContent(13, 'title');?></h2>
+                        <?php echo getContent(13, 'content');?>
                         <a data-fancybox data-src="#modalRegister" href="javascript:;" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
                     </div>
                 </div>
@@ -29,14 +27,14 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php echo base_url().'templates/';?>images/1x/img_customServices.png" alt="" class="img-responsive">
+                                    <img src="<?php echo base_url().'uploads/content/'.getContent(18, 'image');?>" alt="" class="img-responsive">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                     <div class="customerServices_content">
-                                        <h2>Dedicated<br>
-                                            Customer Service</h2>
-                                        <p class="description">We pride ourselves on quality and to ensure your experience with us is enjoyable, each profile is reviewed by a member of staff to ensure that a standard level of quality is found.</p>
-                                        <p class="description">We have offices in both Florida, USA and Kent in the United Kingdom and we may be contacted by telephone so members have a customer help line if they need it. Online dating should not mean just online help.</p>
+                                        <h2><?php echo getContent(18, 'title');?></h2>
+                                        <div class="description">
+                                            <?php echo getContent(18, 'content');?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -50,27 +48,26 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                     <div class="relationships_content">
-                                        <h2>Our Dating Website Is<br>
-                                            About Delivering<br>
-                                            Quality Relationships</h2>
-                                        <p class="description">Our proven track record of 14 years strongly suggests that we are not only a successful site, but our staff and approach to this business is of exceptional standards that time and again delivers quality. This is confirmed by our members who have found successful relationships.</p>
-                                        <p class="description">We understand that the quality of the members is what makes a site successful and at Sugardaddie.com, we are not only a recognized millionaire dating site, but also a site that offers sound dating advice too.</p>
+                                        <h2><?php echo getContent(19, 'title');?></h2>
+                                        <div class="description">
+                                            <?php echo getContent(19, 'content');?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php echo base_url().'templates/';?>images/1x/img_couple.png" alt="" class="img-responsive">
+                                    <img src="<?php echo base_url().'uploads/content/'.getContent(19, 'image');?>" alt="" class="img-responsive">
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
 
-                <div class="swiper-slide">
+                <!--<div class="swiper-slide">
                     <section class="section_intro section_delivers">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php echo base_url().'templates/';?>images/1x/img_deliver.png" alt="" class="img-responsive">
+                                    <img src="<?php /*echo base_url().'templates/';*/?>images/1x/img_deliver.png" alt="" class="img-responsive">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                     <div class="delivers_content">
@@ -83,7 +80,7 @@
                             </div>
                         </div>
                     </section>
-                </div>
+                </div>-->
 
                 <div class="swiper-slide">
 

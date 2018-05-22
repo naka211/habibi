@@ -290,3 +290,27 @@ function customRedirectWithMessage($url, $message){
     $ci->session->set_flashdata('message', $message);
     redirect($url);
 }
+
+/**
+ * @param $id
+ * @param $type
+ */
+function getContent($id, $type = 'content'){
+    $ci = &get_instance();
+    $content = $ci->db->select('title, content, image')
+        ->from('tb_content_static')
+        ->where('id', $id)
+        ->get()->row();
+
+    switch ($type){
+        case 'title':
+            return $content->title;
+            break;
+        case 'content':
+            return $content->content;
+            break;
+        case 'image':
+            return $content->image;
+            break;
+    }
+}
