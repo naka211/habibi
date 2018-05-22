@@ -144,18 +144,19 @@ class Content_Static extends CI_Controller{
 			$this->message = validation_errors();
 		}
 		else{
-			$config['upload_path'] = $this->config->item('root')."uploads/content/";
-    		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-    		$config['max_size']	= $this->config->item('maxupload');
-    		$config['encrypt_name']	= TRUE; //rename to random string image
-            $this->load->library('upload', $config);
     		if(isset($_FILES['img_news']['name'])&&$_FILES['img_news']['name']!=""){
-    			if ($this->upload->do_upload('img_news')){	
+                $config['upload_path'] = $this->config->item('root')."uploads".DIRECTORY_SEPARATOR."content".DIRECTORY_SEPARATOR;
+                //$config['allowed_types'] = 'gif|jpg|jpeg|png';
+                $config['allowed_types'] = '*';
+                $config['max_size']	= $this->config->item('maxupload');
+                $config['encrypt_name']	= TRUE; //rename to random string image
+                $this->load->library('upload', $config);
+    			if ($this->upload->do_upload('img_news')){
     				$data_img = $this->upload->data();
                     $DB['image'] = $data_img['file_name'];
     			} else {
-    				$this->session->set_flashdata('message',"Upload image failed");
-                    redirect(site_url($this->module_name.'/content_static/edit'.$id.'/'.$page));
+    				$this->session->set_flashdata('message', $this->upload->display_errors());
+                    redirect(site_url($this->module_name.'/content_static/edit/'.$id.'/'.$page));
     			}
     		}
             $DB['code'] = $this->input->post('code');

@@ -37,7 +37,7 @@
                 <input style="padding:0;border:none;" type="file" class="form-control" id="" name="img_news"/>
                 <div id="image-show">
                     <?php if($item->image){ ?>
-       					<img src="<?php echo base_url_site()."uploads/news/".$item->image;?>" width="150" />
+       					<img src="<?php echo base_url_site()."uploads/content/".$item->image;?>" width="150" />
                         <span id="image-view">
                             <a onclick="deleteimage('tb_news_static','id','<?php echo $item->id;?>','image','image-show')" href="javascript:void(0);" class="btn btn-icon btn-xs btn-danger waves-effect waves-light"
                             data-toggle="tooltip" data-original-title="Remove"><i class="icon glyphicon glyphicon-trash" aria-hidden="true"></i></a>
