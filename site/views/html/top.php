@@ -12,6 +12,7 @@ if(!empty($user)){
     }
 }
 ?>
+
 <?php if(!$user && $page == 'home/index'){?>
 
 <?php }else{?>

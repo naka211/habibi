@@ -7,7 +7,6 @@
 <?php $this->load->view("html/top");?>
 <?php $this->load->view($page);?>
 <?php $this->load->view("html/footer");?>
-
 </body>
 
 </html>

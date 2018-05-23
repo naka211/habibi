@@ -172,25 +172,38 @@
 
     </section>
 
+    <div style="display: none;" id="modalError" class="animated-modal modalLogin">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img src="<?php echo base_url();?>/templates/images/i_warning.png" alt="" class="img-responsive">
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center">
+                    <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div style="display: none;" id="modalLogin" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2>Log in</h2>
-                <form class="frm_login" action="landing.php" method="POST" role="form">
-                    <div class="form-group">
-                        <label for="">Brugernavn</label>
-                        <input type="text" class="form-control">
-                    </div>
+                <h2>Log ind</h2>
+                <?php echo form_open('user/login', array('id'=>'frm_login', 'class'=>'frm_login'))?>
                     <div class="form-group">
                         <label for="">E-mail</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="email">
                     </div>
-                    <button type="submit" class="btn btnSeefull">Opret</button>
+                    <div class="form-group">
+                        <label for="">Kodeord</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <button type="submit" class="btn btnSeefull">Log ind</button>
                     <div class="clearfix text-center">
                         <a data-fancybox data-src="#modalRegister" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Register</a>
                         <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
                     </div>
-                </form>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>
