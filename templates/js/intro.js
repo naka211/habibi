@@ -47,7 +47,7 @@ $(document).ready(function () {
                 cache: false,
                 processData:false,
                 success: function(data){
-                    if(data.status === true){
+                    if(data.status == true){
                         //$('#modalLogin').modal('hide');
                         location.reload();
                     } else {

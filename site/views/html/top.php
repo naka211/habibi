@@ -1,67 +1,61 @@
 <?php $user = $this->session->userdata('user');
 if(!empty($user)){
-    if($user->b2b != 1){
-        $this->load->model('user_model', 'user');
-        $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
-        $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
-        $numPositiveNotification = $this->user->getNumOfNotification($user->id);
-        $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
-    } else {
-        $unreadMessageNotificationHTML = '';
-        $numPositiveNotificationHTML = '';
-    }
+    $this->load->model('user_model', 'user');
+    $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
+    $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
+    $numPositiveNotification = $this->user->getNumOfNotification($user->id);
+    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
 }
 ?>
 
 <?php if(!$user && $page == 'home/index'){?>
 
 <?php }else{?>
-<header class="navbar-fixed-top header2">
-    <section>
-      <div class="container">
-        <div class="row">
-            <div class="col-sm-3 col-md-3">
-                <a class="logo" href="<?php echo base_url();?>">logo</a>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a class="navbar-brand" href="index.php">Habibi</a>
+                    <div class="box_user_top">
+                        <div class="box_user_content">
+                            <h4 class="media-heading">Jorgensen</h4>
+                            <a href="block_list.php">Bloker liste</a> |
+                            <a href="<?php echo site_url('user/logout');?>">Log out</a>
+                        </div>
+                        <a class="img_avatar_sm" href="myprofile.php">
+                            <img src="<?php echo base_url();?>/templates/images/1x/avatar_small.jpg" class="img-responsive" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-9 col-md-9 logined">
-                <?php if($user){?>
-                <p class="pull-right"><a href="javascript:void(0)">Velkommen <?php echo $user->name;?></a> <a href="<?php echo site_url('user/logout');?>">Log ud</a> <a href="<?php echo site_url('tilbud/cart');?>">Kurv (<span id="number-cart"><?php echo $this->cart->total_items();?></span>)</a></p>
-                <?php }else{?>
-                <p class="pull-right"><a href="#Flogin" data-toggle="modal">Log ind</a> <a href="<?php echo site_url('tilbud/cart');?>">Kurv (<span id="number-cart"><?php echo $this->cart->total_items();?></span>)</a></p>
-                <?php }?>
+        </div>
+    </header>
+    <div id="menuwrap">
+        <nav id="menu" class="navbar navbar-light" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="text_menu">MENU</span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="search.php">Søg</a></li>
+                            <li><a href="favorites.php">Favoritter</a></li>
+                            <li><a href="message.php">Besked</a></li>
+                            <li><a href="viewvisit.php">Besøg</a></li>
+                            <li><a href="blink.php">Blink <span>5</span></a></li>
+                            <li><a href="friend.php">Venner</a></li>
+                            <li><a href="request.php">Venneanmodninger <span>2</span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-      </div>
-    </section>
-    <nav role="navigation" class="navbar navbar-inverse border_white">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse">
-          <div class="container">
-            <ul class="nav navbar-nav">
-                <?php if($user && $user->b2b){?>
-                    <li id="menu_sold"><a href="<?php echo site_url('b2b/sold');?>">Solgt</a></li>
-                    <li id="menu_minprofil"><a href="<?php echo site_url('b2b/profile');?>">Min profil</a></li>
-                <?php }else{?>
-                    <li id="menu_minprofil"><a <?php if($user){?> href="<?php echo site_url('user/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Min profil <?php if(!empty($user)){ echo $unreadMessageNotificationHTML;}?></a></li>
-                    <li id="menu_favorit"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/favorit');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Favorit liste</a></li>
-                    <li id="menu_browsing"><a href="<?php echo site_url('user/browsing');?>">Browsing</a></li>
-                    <li id="menu_positiv"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/positiv');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Positiv liste <?php if(!empty($user)){echo $numPositiveNotificationHTML;}?></a></li>
-                    <li id="menu_invitationer"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('invitationer/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Invitationer</a></li>
-                    <li id="menu_tilbud"><a href="<?php echo site_url('tilbud/index');?>">Tilbud</a></li>
-                    <li id="menu_kontakt"><a href="<?php echo site_url('kontakt');?>">Kontakt</a></li>
-                <?php }?>
-            </ul>
-          </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </div>
 <?php }?>

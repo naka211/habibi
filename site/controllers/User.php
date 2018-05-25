@@ -1535,7 +1535,7 @@ class User extends MX_Controller
         $email = $this->input->post('email', true);
         $password = md5($this->input->post('password', true));
         //Login b2b
-        $b2b = $this->user->getB2b('', $email, $password);
+        /*$b2b = $this->user->getB2b('', $email, $password);
         if ($b2b) {
             $b2b->b2b = true;
             $this->session->set_userdata('isLoginSite', true);
@@ -1546,13 +1546,13 @@ class User extends MX_Controller
             header('Content-Type: application/json');
             echo json_encode($data);
             return;
-        }
+        }*/
         //Login user
         $user = $this->user->getUser('', $email, $password);
         if ($user) {
             $data['status'] = true;
-            $data['b2b'] = false;
-            $user->b2b = false;
+            /*$data['b2b'] = false;
+            $user->b2b = false;*/
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);
             $this->user->updateLogin($user->id, false);

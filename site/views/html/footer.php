@@ -1,11 +1,25 @@
 <?php $user = $this->session->userdata('user');?>
-<?php if(!empty($user) && $page == 'home/index'){?>
+<?php if(!empty($user)){?>
     <div id="footer" class="cf"></div>
+    <section class="section_app">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
+                    <h2>HENT APPÉN</h2>
+                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive"></a>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
+                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive"></a>
+                    <h2><a class="link_register" data-fancybox data-src="#modalRegister" href="javascript:;" title="">ELLER TILMELD DIG ONLINE</a></h2>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer class="footer footer_underpages">
         <div class="container">
             <div class="row footer_top">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                    <img src="images/1x/logo.svg" alt="" class="img-responsive logo_footer">
+                    <img src="<?php echo base_url().'templates/';?>images/1x/logo.svg" alt="" class="img-responsive logo_footer">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                     <p class="text_follow">Følg os på Facebook og Instagram</p>
@@ -46,7 +60,6 @@
             </div>
         </div>
     </footer>
-
     <div class='back-to-top' id='back-to-top' title='Back to top'>
         <i class="fas fa-long-arrow-alt-up"></i>
     </div>
@@ -156,143 +169,24 @@
         </div>
     </div>
 
-    <div style="display: none;" id="modalLogin" class="animated-modal modalLogin">
+    <div style="display: none;" id="modalError" class="animated-modal modalLogin">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2>Log in</h2>
-                <form class="frm_login" action="landing.php" method="POST" role="form">
-                    <div class="form-group">
-                        <label for="">Brugernavn</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btnSeefull">Opret</button>
-                    <div class="clearfix text-center">
-                        <a data-fancybox data-src="#modalRegister" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Register</a>
-                        <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
-                    </div>
-                </form>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img src="<?php echo base_url();?>/templates/images/i_warning.png" alt="" class="img-responsive">
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center">
+                    <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
+                </div>
+                <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
             </div>
         </div>
     </div>
-
-    <div style="display: none;" id="modalFP" class="animated-modal modalLogin">
+    <div style="display: none;" id="modalMessage" class="animated-modal modalLogin">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2>GLEMT DIN ADGANGSKODE?</h2>
-                <p>Angiv venligst emailadressen til din konto. En verificeringskode vli blive sendt til dig. Når du har modtaget verificeringskoden vil du kunne vælge en ny adgangskode til din konto.</p>
-                <form class="frm_login" action="#" method="POST" role="form">
-                    <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btnSeefull">Send</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div style="display: none;" id="modalRegister" class="animated-modal modalRegister">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h2>Prøv en søgning</h2>
-                <p>Udfyld de faste søgekriterier og få altid opdaterede profiler her.</p>
-                <p>Join one of the most established and successful dating sites in the world.</p>
-                <p>Featured internationally in media and television.</p>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <form class="frm_register" action="landing.php" method="POST" role="form">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Brugernavn</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Fødselsår</label>
-                                <select name="" class="form-control">
-                                    <option value="">1900</option>
-                                    <option value="">1901</option>
-                                    <option value="">1902</option>
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">E-mail</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Region</label>
-                                <select name="" class="form-control">
-                                    <option value="">København</option>
-                                    <option value="">København</option>
-                                    <option value="">København</option>
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Kodeord</label>
-                                <input type="password" class="form-control">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Gentag kodeord</label>
-                                <input type="password" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <h3>Jeg er</h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Køn</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Etnisk oprindelse</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <h3>Jeg søger</h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Jeg søger</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Etnisk oprindelse</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn_viewSearch">Opret</button>
-                    </div>
-                </form>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="message-content"></p>
+                <button type="submit" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
             </div>
         </div>
     </div>
@@ -300,16 +194,12 @@
     <div style="display: none;" id="modalUpgrade" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <h3>OPGRADER TIL +PLUSPROFIL I<br> 1 MÅNED FOR 149 KR.</h3>
-                <p>Du kan afmelde når som helst.<br>
-                    Læs og besvar beskeder.<br>
-                    Se hvem der viser interesse for dig.<br>
-                    ... og meget, meget mere.<br>
-                    Opgrader nu</p>
+                <h3><?php echo getContent(20, 'title');?></h3>
+                <?php echo getContent(20, 'content');?>
 
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <img src="images/1x/premium.png" alt="" class="img-responsive premium_img">
+                <img src="<?php echo base_url().'templates/';?>images/1x/premium.png" alt="" class="img-responsive premium_img">
             </div>
         </div>
         <div class="text-center">

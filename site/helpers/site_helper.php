@@ -269,9 +269,6 @@ function isDated($user_id_1, $user_id_2){
 function isGoldMember(){
     $ci = &get_instance();
     $user = $ci->session->userdata('user');
-    if($user->b2b == 1){
-        return false;
-    }
     $result = $ci->db->select('type')->from('user')->where('id', $user->id)->get()->row();
     if ($result->type == 2) {
         return true;
