@@ -1133,6 +1133,10 @@ class User extends MX_Controller
     }
 
     /** User*/
+    function setCookie(){
+        setcookie('ha_cookie', 1, time() + (86400 * 30), "/");
+        die('ok');
+    }
     function register(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);

@@ -177,6 +177,14 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $(".btnCookie").click(function () {
+        $.ajax({
+            method: "POST",
+            url: base_url+"user/setCookie",
+            data: { csrf_site_name: token_value }
+        });
     })
 });
 

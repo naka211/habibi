@@ -329,3 +329,15 @@
         </div>
     </div>
 <?php }?>
+<?php if(!isset($_COOKIE['ha_cookie'])){?>
+<section class="cookie">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Cookies er nødvendige for at få hjemmesiden til at fungere, men de gemmer også information om hvordan du bruger vores hjemmeside, så vi kan forbedre den både for dig og for andre. Cookies på denne hjemmeside bruges primært til trafikmåling og optimering af sidens indhold. Du kan forsætte med at bruge vores side som altid, hvis du accepterer at vi bruger cookies. Lær mere om hvordan du håndterer cookies på dine enheder.</p>
+                <a href="javascript:void(0);" class="btn btnCookie"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+<?php }?>
