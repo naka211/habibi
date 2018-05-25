@@ -136,9 +136,9 @@ $(document).ready(function () {
             data: { username: username, csrf_site_name: token_value },
             success: function (data) {
                 if(data.status == false){
-                    $("#username").addClass('error');
-                } else {
                     $("#username").removeClass('error');
+                } else {
+                    $("#username").addClass('error');
                 }
             }
         });
