@@ -68,7 +68,7 @@ $(function ($) {
         });
     });
 
-    var swiper = new Swiper('.swiper_banner.swiper-container', {
+    /*var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',
         // effect: 'fade',
         // autoplay: {
@@ -81,7 +81,7 @@ $(function ($) {
             clickable: true,
         },
 
-    });
+    });*/
 
     //matchHeight columm
     $('.mh').matchHeight();
@@ -223,3 +223,5 @@ document.addEventListener('DOMContentLoaded', function () {
         addHeight: true
     });
 });
+
+

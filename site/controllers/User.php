@@ -1133,40 +1133,33 @@ class User extends MX_Controller
     }
 
     /** User*/
-    function checkUsername(){
-        $data = array();
-        $username = $this->input->post('username');
-        $existed = $this->user->checkUsername($username);
-        if($existed){
-            $data['status'] = true;
-        } else {
-            $data['status'] = false;
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
-    }
     function register(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if ($this->input->post()) {
-            $user = $this->user->getUser(NULL, $this->input->post('email'), NULL, NULL, NULL, 1);
+            /*$user = $this->user->getUser(NULL, $this->input->post('email'), NULL, NULL, NULL, 1);
             if ($user) {
                 $data['status'] = false;
                 $data['message'] = 'E-mail er allerede registeret!';
                 header('Content-Type: application/json');
                 echo json_encode($data);
                 return;
-            }
+            }*/
             $DB['name'] = $this->input->post('name');
             $DB['email'] = $this->input->post('email');
             $DB['password'] = md5($this->input->post('password'));
-            $DB['code'] = $this->input->post('code');
+            /*$DB['code'] = $this->input->post('code');
             $DB['payment'] = $this->input->post('payment');
             $DB['day'] = $this->input->post('day');
-            $DB['month'] = $this->input->post('month');
+            $DB['month'] = $this->input->post('month');*/
             $DB['year'] = $this->input->post('year');
-            $DB['birthday'] = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
+            //$DB['birthday'] = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
+            $DB['region'] = $this->input->post('region');
+            $DB['gender'] = $this->input->post('gender');
+            $DB['ethnic_origin'] = $this->input->post('ethnic_origin');
+            $DB['find_gender'] = $this->input->post('find_gender');
+            $DB['find_ethnicity'] = $this->input->post('find_ethnicity');
+
             $DB['type'] = 1;
             $DB['groups'] = 1; //1: register - 2: facebook - 3: google
             $DB['os'] = $this->agent->platform();
@@ -1183,8 +1176,9 @@ class User extends MX_Controller
             $this->session->set_userdata('email', $DB['email']);
             $this->session->set_userdata('password', $this->input->post('password'));
             $id = $this->user->saveUser($DB);
-            $this->session->set_userdata('userid', $id);
-            if ($DB['payment'] == 1 && $id) {
+            $user = $this->user->getUser('', $DB['email'], $DB['password']);
+            $this->session->set_userdata('user', $user);
+            /*if ($DB['payment'] == 1 && $id) {
                 $this->session->set_userdata('payment', true);
                 $this->session->set_userdata('userId', $id);
                 $data['status'] = true;
@@ -1193,7 +1187,7 @@ class User extends MX_Controller
                 header('Content-Type: application/json');
                 echo json_encode($data);
                 return;
-            }
+            }*/
             if ($id) {
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
@@ -1213,8 +1207,8 @@ class User extends MX_Controller
             echo json_encode($data);
             return;
         }
-        $data['page'] = 'user/register';
-        $this->load->view('templates', $data);
+        /*$data['page'] = 'user/register';
+        $this->load->view('templates', $data);*/
     }
 
     /** PAYMENT*/

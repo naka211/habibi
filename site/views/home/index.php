@@ -246,12 +246,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Brugernavn</label>
-                                <input type="text" class="form-control" name="username" id="username">
+                                <label for="">Navn</label>
+                                <input type="text" class="form-control" name="name">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Fødselsår</label>
-                                <select name="" class="form-control">
+                                <select name="year" class="form-control">
                                     <?php for($i = 1930; $i <= 2010; $i++){?>
                                     <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                     <?php }?>
@@ -264,7 +264,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">E-mail</label>
-                                <input type="text" class="form-control" name="email">
+                                <input type="text" class="form-control" name="email" id="email">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Region</label>
@@ -341,7 +341,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Etnisk oprindelse</label>
-                                <select name="find_ethnic" class="form-control">
+                                <select name="find_ethnicity" class="form-control">
                                     <option value="Europæisk">Europæisk</option>
                                     <option value="Afrikansk">Afrikansk</option>
                                     <option value="Latinamerikansk">Latinamerikansk</option>

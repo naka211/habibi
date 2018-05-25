@@ -249,11 +249,6 @@ class User_model extends CI_Model{
         }
 	}
 
-	function checkUsername($username){
-        $query = $this->db->where('username', $username)->get('tb_user')->num_rows();
-        return $query?true:false;
-    }
-
     function saveUser($DB=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);
