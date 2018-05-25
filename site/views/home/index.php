@@ -1,3 +1,4 @@
+<script src="<?php echo base_url().'templates/';?>js/intro.js"></script>
 <div id="page">
     <section class="banner">
         <div class="swiper_banner swiper-container">
@@ -174,16 +175,26 @@
 
     <div style="display: none;" id="modalError" class="animated-modal modalLogin">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <img src="<?php echo base_url();?>/templates/images/i_warning.png" alt="" class="img-responsive">
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center">
                     <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
                 </div>
+                <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
             </div>
         </div>
     </div>
+    <div style="display: none;" id="modalMessage" class="animated-modal modalLogin">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="message-content"></p>
+                <button type="submit" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
+            </div>
+        </div>
+    </div>
+
 
     <div style="display: none;" id="modalLogin" class="animated-modal modalLogin">
         <div class="row">
@@ -212,13 +223,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h2>GLEMT DIN ADGANGSKODE?</h2>
                 <p>Angiv venligst emailadressen til din konto. En verificeringskode vli blive sendt til dig. Når du har modtaget verificeringskoden vil du kunne vælge en ny adgangskode til din konto.</p>
-                <form class="frm_login" action="#" method="POST" role="form">
+                <?php echo form_open('', array('id'=>'frm_forgotPassword', 'class'=>'frm_login'))?>
                     <div class="form-group">
                         <label for="">E-mail</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="email">
                     </div>
                     <button type="submit" class="btn btnSeefull">Send</button>
-                </form>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>
@@ -231,20 +242,19 @@
                 <p>Featured internationally in media and television.</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <form class="frm_register" action="landing.php" method="POST" role="form">
+                <?php echo form_open('', array('id'=>'frm_register', 'class'=>'frm_register'))?>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Brugernavn</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="username" id="username">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Fødselsår</label>
                                 <select name="" class="form-control">
-                                    <option value="">1900</option>
-                                    <option value="">1901</option>
-                                    <option value="">1902</option>
-                                    <option value="">...</option>
+                                    <?php for($i = 1930; $i <= 2010; $i++){?>
+                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                    <?php }?>
                                 </select>
                             </div>
                         </div>
@@ -254,15 +264,28 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">E-mail</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="email">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Region</label>
-                                <select name="" class="form-control">
-                                    <option value="">København</option>
-                                    <option value="">København</option>
-                                    <option value="">København</option>
-                                    <option value="">...</option>
+                                <select name="region" class="form-control">
+                                    <option value="København">København</option>
+                                    <option value="Storkøbenhavn">Storkøbenhavn</option>
+                                    <option value="Århus">Århus</option>
+                                    <option value="Aalborg">Aalborg</option>
+                                    <option value="Odense">Odense</option>
+                                    <option value="Nordsjælland">Nordsjælland</option>
+                                    <option value="Midt/Vestsjælland">Midt/Vestsjælland</option>
+                                    <option value="Sydsjælland">Sydsjælland</option>
+                                    <option value="Lolland/Falster">Lolland/Falster</option>
+                                    <option value="Fyn">Fyn</option>
+                                    <option value="Nordjylland">Nordjylland</option>
+                                    <option value="Østjylland">Østjylland</option>
+                                    <option value="Vestjylland">Vestjylland</option>
+                                    <option value="Sydjylland">Sydjylland</option>
+                                    <option value="Midtjylland">Midtjylland</option>
+                                    <option value="Sønderjylland">Sønderjylland</option>
+                                    <option value="Bornholm">Bornholm</option>
                                 </select>
                             </div>
                         </div>
@@ -272,11 +295,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Kodeord</label>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" name="password" id="password">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Gentag kodeord</label>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" name="confirmPassword">
                             </div>
                         </div>
                     </div>
@@ -286,14 +309,21 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Køn</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
+                                <select name="gender" class="form-control">
+                                    <option value="1">Mænd</option>
+                                    <option value="2">Kvinder</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Etnisk oprindelse</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
+                                <select name="ethnic_origin" class="form-control">
+                                    <option value="Europæisk">Europæisk</option>
+                                    <option value="Afrikansk">Afrikansk</option>
+                                    <option value="Latinamerikansk">Latinamerikansk</option>
+                                    <option value="Asiatisk">Asiatisk</option>
+                                    <option value="Indisk">Indisk</option>
+                                    <option value="Arabisk">Arabisk</option>
+                                    <option value="Blandet/andet">Blandet/andet</option>
                                 </select>
                             </div>
                         </div>
@@ -304,14 +334,21 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Jeg søger</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
+                                <select name="find_gender" class="form-control">
+                                    <option value="1">Mænd</option>
+                                    <option value="2">Kvinder</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Etnisk oprindelse</label>
-                                <select name="" class="form-control">
-                                    <option value="">...</option>
+                                <select name="find_ethnic" class="form-control">
+                                    <option value="Europæisk">Europæisk</option>
+                                    <option value="Afrikansk">Afrikansk</option>
+                                    <option value="Latinamerikansk">Latinamerikansk</option>
+                                    <option value="Asiatisk">Asiatisk</option>
+                                    <option value="Indisk">Indisk</option>
+                                    <option value="Arabisk">Arabisk</option>
+                                    <option value="Blandet/andet">Blandet/andet</option>
                                 </select>
                             </div>
                         </div>
@@ -319,7 +356,7 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn_viewSearch">Opret</button>
                     </div>
-                </form>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>

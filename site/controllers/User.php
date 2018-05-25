@@ -1133,8 +1133,20 @@ class User extends MX_Controller
     }
 
     /** User*/
-    function register()
-    {
+    function checkUsername(){
+        $data = array();
+        $username = $this->input->post('username');
+        $existed = $this->user->checkUsername($username);
+        if($existed){
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+    function register(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if ($this->input->post()) {
@@ -1442,22 +1454,27 @@ class User extends MX_Controller
      */
     public function forgotPassHandler()
     {
+        $data = array();
         $email = $this->input->post('email');
         //check validation
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_message('valid_email', 'Email feltet skal indeholde en gyldig email-adresse.');
         if ($this->form_validation->run() == false) {
-            customRedirectWithMessage(site_url('user/forgotpass'), validation_errors());
+            $data['status'] = false;
+            $data['message'] = validation_errors();
+            //customRedirectWithMessage(site_url('user/forgotpass'), validation_errors());
         }
 
         $user = $this->user->getUser('', $email);
 
         if (empty($user)) {
-            customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er ikke registreret, skal du kontrollere igen.');
+            $data['status'] = false;
+            $data['message'] = 'Denne konto er ikke registreret, skal du kontrollere igen.';
+            //customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er ikke registreret, skal du kontrollere igen.');
         } else {
             if (!empty($user->facebook)) {
-                customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er logget af Facebook, kan ikke ændre password på denne hjemmeside.');
+                //customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er logget af Facebook, kan ikke ændre password på denne hjemmeside.');
             } else {
                 $new_password = $this->randomPassword(12, 1, "lower_case,upper_case,numbers");
                 $content = 'Kære ' . $user->name . '<br /><br />
@@ -1469,10 +1486,15 @@ class User extends MX_Controller
                 if($sent === true){
                     $data['password'] = md5($new_password[0]);
                     $this->user->saveUser($data, $user->id);
-                    customRedirectWithMessage(base_url(), 'En email er sendt til din email, vær venlig at tjekke det, tak.');
+                    //customRedirectWithMessage(base_url(), 'En email er sendt til din email, vær venlig at tjekke det, tak.');
+                    $data['status'] = true;
+                    $data['message'] = 'En email er sendt til din email, vær venlig at tjekke det, tak.';
                 }
             }
         }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
     }
 
     function randomPassword($length, $count, $characters){
