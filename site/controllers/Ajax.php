@@ -92,6 +92,9 @@ class Ajax extends CI_Controller{
         return;
     }
 
+    /**
+     * Generating age html
+     */
     function generateToAgeSelection(){
         $fromAge = $this->input->post('fromAge', true);
         $htmlSelection = '';
@@ -100,6 +103,22 @@ class Ajax extends CI_Controller{
         }
         echo $htmlSelection;
         exit();
+    }
+
+    /**
+     * Setting cookie for cookie information
+     */
+    function setCookie(){
+        setcookie('ha_cookie', 1, time() + (86400 * 30), "/");
+        die('ok');
+    }
+
+    /**
+     * Setting cookie for panik information
+     */
+    function setCookiePanik(){
+        setcookie('ha_panik_cookie', 1, time() + (86400 * 30), "/");
+        die('ok');
     }
 }
 ?>

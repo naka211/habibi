@@ -125,9 +125,9 @@ class User_model extends CI_Model{
 	    return $query;
     }
     
-    function getList($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL,$inUser=NULL){
-        $this->db->select('u.*');
-        $this->db->from('user as u');
+    function getList($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL,$inUser=NULL, $type = 'random'){
+        $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region');
+        $this->db->from('tb_user as u');
         $this->db->where("u.bl_active",1);
         if($search['name']){
             $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
@@ -140,13 +140,26 @@ class User_model extends CI_Model{
             //$inUser = array(12, 13);
             $this->db->where_in('u.id', $inUser);
         }
-		$this->db->order_by('u.id','DESC');
+
+        if($type == 'random'){
+            $this->db->order_by('u.id','RANDOM');
+        }
+        if($type == 'newest'){
+            $this->db->order_by('u.id','DESC');
+        }
+        if($type == 'popular'){
+            $this->db->order_by('u.visit','DESC');
+            $this->db->order_by('u.id','DESC');
+        }
+
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
     	$query = $this->db->get()->result();
+        //print_r($this->db->last_query());exit();
 	    return $query;
     }
+
     function getUser($id=NULL,$email=NULL,$password=NULL,$facebook=NULL,$google=NULL,$permission=NULL){
         $this->db->select('*')->from('user');
         if($id){

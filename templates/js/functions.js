@@ -66,6 +66,12 @@ $(function ($) {
         event.preventDefault();
         $('.box_notify').hide('slow/400/fast', function () {
         });
+
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/setCookiePanik",
+            data: { csrf_site_name: token_value }
+        });
     });
 
     /*var swiper = new Swiper('.swiper_banner.swiper-container', {

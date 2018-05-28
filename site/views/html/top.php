@@ -16,15 +16,15 @@ if(!empty($user)){
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="navbar-brand" href="index.php">Habibi</a>
+                    <a class="navbar-brand" href="">Habibi</a>
                     <div class="box_user_top">
                         <div class="box_user_content">
-                            <h4 class="media-heading">Jorgensen</h4>
+                            <h4 class="media-heading"><?php echo $user->name;?></h4>
                             <a href="block_list.php">Bloker liste</a> |
                             <a href="<?php echo site_url('user/logout');?>">Log out</a>
                         </div>
                         <a class="img_avatar_sm" href="myprofile.php">
-                            <img src="<?php echo base_url();?>/templates/images/1x/avatar_small.jpg" class="img-responsive" alt="">
+                            <img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
                         </a>
                     </div>
                 </div>

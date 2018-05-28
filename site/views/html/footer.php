@@ -64,11 +64,12 @@
         <i class="fas fa-long-arrow-alt-up"></i>
     </div>
 
+    <?php if(!isset($_COOKIE['ha_panik_cookie'])){?>
     <div class="box_notify">
         <i class="far fa-comment fa-lg"></i> Lorem ipsum dolor sit amet.
-        <a href="#" class="btnClose_xs"><i class="fas fa-times"></i></a>
+        <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
-
+    <?php }?>
     <a href="index.php" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
 
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
