@@ -120,5 +120,15 @@ class Ajax extends CI_Controller{
         setcookie('ha_panik_cookie', 1, time() + (86400 * 30), "/");
         die('ok');
     }
+
+    function logout(){
+        /** Login*/
+        $Login = array('isLoginSite', 'user', 'email', 'password');
+        $this->session->unset_userdata($Login);
+
+        setcookie('cc_data', '', -time() + (86400 * 30), "/");
+
+        die('ok');
+    }
 }
 ?>

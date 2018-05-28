@@ -1649,26 +1649,25 @@ class User extends MX_Controller
         return;
     }
 
-    function logout()
-    {
+    function logout(){
         /** Login*/
         $Login = array('isLoginSite', 'user', 'email', 'password');
         $this->session->unset_userdata($Login);
         /** UserID to payment gold member*/
-        $this->session->unset_userdata('userid');
-        $this->session->unset_userdata('payment');
+        /*$this->session->unset_userdata('userid');
+        $this->session->unset_userdata('payment');*/
         /** Order*/
-        $this->cart->destroy();
+        /*$this->cart->destroy();
         $this->session->unset_userdata('orderID');
-        $this->session->unset_userdata('ID');
+        $this->session->unset_userdata('ID');*/
         /** Invitation*/
-        $Invitation = array('datingID' => '', 'invita' => '', 'listUser' => '');
-        $this->session->unset_userdata($Invitation);
+        /*$Invitation = array('datingID' => '', 'invita' => '', 'listUser' => '');
+        $this->session->unset_userdata($Invitation);*/
         /** Clear session search USER */
-        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
+        /*$SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
         , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);
+        $this->session->unset_userdata($SearchUser);*/
 
         setcookie('cc_data', '', -time() + (86400 * 30), "/");
 

@@ -74,6 +74,17 @@ $(function ($) {
         });
     });
 
+    $('.btnPennic').click(function (event) {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/logout",
+            data: { csrf_site_name: token_value },
+            success: function () {
+                window.open('https://google.com', '_self');
+            }
+        });
+    });
+
     /*var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',
         // effect: 'fade',
