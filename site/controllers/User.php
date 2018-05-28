@@ -29,16 +29,16 @@ class User extends MX_Controller
             redirect(site_url('home/index'));
         }
         /** Clear session search USER */
-        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
+        /*$SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
         , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);
+        $this->session->unset_userdata($SearchUser);*/
 
         $data['user'] = $this->session->userdata('user');
         $data['item'] = $this->user->getUser($data['user']->id);
-        $data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
+        //$data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
         //Change status shoutouts if they are more than 72 hours
-        $this->user->checkShoutoutsStatus($data['user']->id);
+        //$this->user->checkShoutoutsStatus($data['user']->id);
         $data['page'] = 'user/index';
         $this->load->view('templates', $data);
     }

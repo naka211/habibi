@@ -5,6 +5,15 @@ if(!empty($user)){
     $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
     $numPositiveNotification = $this->user->getNumOfNotification($user->id);
     $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
+
+    if(isGoldMember()){
+        $blinkLink = 'href="'.site_url('user/blinks').'"';
+        $messageLink = 'href="'.site_url('user/messages').'"';
+        $visitingLink = 'href="'.site_url('user/visits').'"';
+        $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
+    } else {
+        $blinkLink = $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+    }
 }
 ?>
 
@@ -16,14 +25,14 @@ if(!empty($user)){
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="navbar-brand" href="">Habibi</a>
+                    <a class="navbar-brand" href="<?php echo base_url();?>">Habibi</a>
                     <div class="box_user_top">
                         <div class="box_user_content">
                             <h4 class="media-heading"><?php echo $user->name;?></h4>
                             <a href="block_list.php">Bloker liste</a> |
                             <a href="<?php echo site_url('user/logout');?>">Log out</a>
                         </div>
-                        <a class="img_avatar_sm" href="myprofile.php">
+                        <a class="img_avatar_sm" href="<?php echo site_url('user/index');?>">
                             <img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
                         </a>
                     </div>
@@ -48,11 +57,11 @@ if(!empty($user)){
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="search.php">Søg</a></li>
                             <li><a href="favorites.php">Favoritter</a></li>
-                            <li><a href="message.php">Besked</a></li>
-                            <li><a href="viewvisit.php">Besøg</a></li>
-                            <li><a href="blink.php">Blink <span>5</span></a></li>
+                            <li><a <?php echo $messageLink; ?>>Besked</a></li>
+                            <li><a <?php echo $visitingLink; ?>>Besøg</a></li>
+                            <li><a <?php echo $blinkLink; ?>>Blink <span>5</span></a></li>
                             <li><a href="friend.php">Venner</a></li>
-                            <li><a href="request.php">Venneanmodninger <span>2</span></a></li>
+                            <li><a <?php echo $friendRequestLink; ?>>Venneanmodninger <span>2</span></a></li>
                         </ul>
                     </div>
                 </div>
