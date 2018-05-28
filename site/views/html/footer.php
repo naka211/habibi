@@ -70,7 +70,7 @@
         <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
     <?php }?>
-    <a href="index.php" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
+    <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
 
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
         <div class="row">
