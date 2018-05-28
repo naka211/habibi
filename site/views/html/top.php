@@ -11,6 +11,7 @@ if(!empty($user)){
 <?php if(!$user && $page == 'home/index'){?>
 
 <?php }else{?>
+    <script src="<?php echo base_url().'templates/';?>js/functions.js"></script>
     <header>
         <div class="container">
             <div class="row">

@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">
 
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/jquery.multiselect.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/component.css">
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/styles.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/mobile.css" type="text/css">
@@ -56,6 +57,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
@@ -68,7 +70,7 @@
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-
+    <script src="<?php echo base_url().'templates/';?>js/jquery.multiselect.js"></script>
     <!--<script src="<?php /*echo base_url().'templates/';*/?>js/all.js"></script>-->
 
     <script type="text/javascript">

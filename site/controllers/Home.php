@@ -15,7 +15,7 @@ class Home extends MX_Controller {
         $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
     public function index(){
-        $data = array();
+        $data = $ignore = array();
         $this->user->addMeta($this->_meta, $data);
 
         $user = $this->session->userdata('user');
@@ -24,41 +24,29 @@ class Home extends MX_Controller {
         }else{
             $data['page'] = 'home/index';
         }
+
         if($user){
             $ignore[] = $user->id;
-        }else{
-            $ignore = "";
         }
 
-        if ( ! $users = $this->cache->get('users'))
-        {
-            $listUsers = $this->user->getList(20,0,NULL,$ignore);
-            if($listUsers){
-                $i=0;
-                foreach($listUsers as $row){
-                    $users[$i]['id'] = $row->id;
-                    $users[$i]['name'] = $row->name;
-                    $users[$i]['birthday'] = $row->birthday;
-                    $users[$i]['facebook'] = $row->facebook;
-                    $users[$i]['code'] = $row->code;
-                    $users[$i]['avatar'] = $row->avatar;
-                    $i++;
-                }
-            }else{
-                $users = "";
-            }
+        //if ( ! $randomUsers = $this->cache->get('randomUsers')){
+            $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
+            //$this->cache->save('randomUsers', $randomUsers, $this->_time);
+        //}
 
-            $this->cache->save('users', $users, $this->_time);
-        }
+        //if ( ! $newestUsers = $this->cache->get('newestUsers')){
+            $newestUsers = $this->user->getList(10, 0, null, $ignore, null, 'newest');
+        //$this->cache->save('newestUsers', $newestUsers, $this->_time);
+        //}
 
-        if ( ! $products = $this->cache->get('products')){
-            $products = $this->tilbud->getData(20,0);
+        //if ( ! $popularUsers = $this->cache->get('popularUsers')){
+            $popularUsers = $this->user->getList(10, 0, null, $ignore, null, 'popular');
+        //$this->cache->save('popularUsers', $popularUsers, $this->_time);
+        //}
 
-            $this->cache->save('products', $products, $this->_time);
-        }
-
-        $data['listUser'] = $users;
-        $data['listPro'] = $products;
+        $data['randomUsers'] = $randomUsers;
+        $data['newestUsers'] = $newestUsers;
+        $data['popularUsers'] = $popularUsers;
         $data['user'] = $user;
 		$this->load->view('templates', $data);
 	}

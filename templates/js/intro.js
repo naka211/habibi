@@ -167,7 +167,7 @@ $(document).ready(function () {
         var email = $("#email").val();
         $.ajax({
             method: "POST",
-            url: base_url+"user/checkEmail",
+            url: base_url+"ajax/checkEmail",
             data: { email: email, csrf_site_name: token_value },
             success: function (data) {
                 if(data.status == false){

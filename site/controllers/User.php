@@ -903,7 +903,7 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function browsing($page = 0, $invita = NULL)
+    function searching($page = 0, $invita = NULL)
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
@@ -1680,19 +1680,6 @@ class User extends MX_Controller
     }
 
     /** Action function*/
-    function checkEmail()
-    {
-        $email = $this->input->post('email', true);
-        $id = $this->user->getUser('', $email);
-        if ($id) {
-            $data['status'] = true;
-        } else {
-            $data['status'] = false;
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
-    }
 
     function addFavorite()
     {

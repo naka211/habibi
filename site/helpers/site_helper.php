@@ -311,3 +311,12 @@ function getContent($id, $type = 'content'){
             break;
     }
 }
+
+function printAge($year){
+    if(!empty($year)){
+        $age = (int)date('Y') - $year + 1;
+        return $age.' år – ';
+    } else {
+        return '';
+    }
+}

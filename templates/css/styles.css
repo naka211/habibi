@@ -139,20 +139,13 @@ a:hover, a:focus {
 
 h2 {
     font-size: 40px;
-
+}
 .mb30 {
     margin-bottom: 30px;
 }
-
-margin-bottom:
-
-32
-px
-
-;
-text-transform: uppercase
-
-;
+{
+margin-bottom: 32px;
+text-transform: uppercase;
 }
 h3 {
     font-size: 20px;
@@ -2560,9 +2553,54 @@ ul.list_action li a .i_block {
 .error{
     border: 1px solid red !important;
 }
-
-
-
+/** Multi select **/
+.ms-options-wrap {
+    float: left;
+    position: relative;
+}
+.ms-options-wrap > button:focus, .ms-options-wrap > button {
+    border: none;
+    font-size: 14px;
+    padding: 10px 30px 10px 15px;
+    outline: none;
+    width: 195px;
+}
+.ms-options-wrap > .ms-options {
+    border-color: transparent;
+    width: 195px;
+}
+.ms-options-wrap > .ms-options > .ms-selectall.global {
+    color: #333;
+    margin: 15px;
+}
+.ms-options-wrap > .ms-options > .ms-search input {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px;
+    font-size: 14px;
+}
+.ms-options-wrap > .ms-options .ms-selectall {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.ms-options-wrap > .ms-options > ul label {
+    font-weight: inherit;
+    font-size: 14px;
+    padding: 6px 4px 6px 30px;
+}
+.ms-options-wrap > .ms-options > ul input[type="checkbox"] {
+    left: 10px;
+}
+/** **/
+.box_trySearch .ms-options-wrap {
+    float: none;
+}
+.box_trySearch .ms-options-wrap > button:focus, .box_trySearch .ms-options-wrap > button {
+    width: 100%;
+}
+.box_trySearch .ms-options-wrap > .ms-options {
+    width: 100%;
+}
 
 
 

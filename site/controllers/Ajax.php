@@ -78,5 +78,28 @@ class Ajax extends CI_Controller{
             die('1');
         }
     }
+
+    function checkEmail(){
+        $email = $this->input->post('email', true);
+        $id = $this->user->getUser('', $email);
+        if ($id) {
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    function generateToAgeSelection(){
+        $fromAge = $this->input->post('fromAge', true);
+        $htmlSelection = '';
+        for($i = $fromAge + 1; $i <= 70; $i++){
+            $htmlSelection .= '<option value="'.$i.'">'.$i.'</option>';
+        }
+        echo $htmlSelection;
+        exit();
+    }
 }
 ?>
