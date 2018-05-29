@@ -38,35 +38,35 @@
 |
 */
 $route['default_controller']             = "home";
-$route['^dk/home/(.+)']                = "home/$1";
+//$route['^dk/home/(.+)']                = "home/$1";
 $route['home/(.+)']  				     = "home/$1";
 
-$route['^dk/user/(.+)']                = "user/$1";
+//$route['^dk/user/(.+)']                = "user/$1";
 $route['user/(.+)']                    = "user/$1";
 
-$route['^dk/invitationer/(.+)']        = "invitationer/$1";
+//$route['^dk/invitationer/(.+)']        = "invitationer/$1";
 $route['invitationer/(.+)']            = "invitationer/$1";
 
-$route['^dk/tilbud/(.+)']              = "tilbud/$1";
+//$route['^dk/tilbud/(.+)']              = "tilbud/$1";
 $route['tilbud/(.+)']                  = "tilbud/$1";
 
-$route['^dk/payment/(.+)']             = "payment/$1";
+//$route['^dk/payment/(.+)']             = "payment/$1";
 $route['payment/(.+)']                 = "payment/$1";
 
-$route['^dk/ajax/(.+)']                = "ajax/$1";
+//$route['^dk/ajax/(.+)']                = "ajax/$1";
 $route['ajax/(.+)']                    = "ajax/$1";
 
-$route['^dk/b2b/(.+)']                = "b2b/$1";
+//$route['^dk/b2b/(.+)']                = "b2b/$1";
 $route['b2b/(.+)']                    = "b2b/$1";
 
 /** API*/
-$route['^dk/api/(.+)']                 = "api/$1";
+//$route['^dk/api/(.+)']                 = "api/$1";
 $route['api/(.+)']                     = "api/$1";
 
 /** Change lang*/
-$route['^dk$']                           = $route['default_controller'];
+//$route['^dk$']                           = $route['default_controller'];
 /** Default function at controller home*/
-$route['^dk/(.*)']                       = $route['default_controller']."/$1";
+//$route['^dk/(.*)']                       = $route['default_controller']."/$1";
 $route['(.*)']                           = $route['default_controller']."/$1";
 $route['404_override'] = '';
 
