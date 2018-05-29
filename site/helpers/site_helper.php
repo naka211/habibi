@@ -315,7 +315,7 @@ function getContent($id, $type = 'content'){
 function printAge($year){
     if(!empty($year)){
         $age = (int)date('Y') - $year + 1;
-        return $age.' år – ';
+        return $age.' år';
     } else {
         return '';
     }

@@ -232,3 +232,11 @@
     </div>
 </section>
 <?php }?>
+<script>
+    <?php if($this->session->flashdata('message')){?>
+    $( document ).ready(function() {
+        $('#error-content').html(<?php $this->session->flashdata('message');?>);
+        $.fancybox.open({src: '#modalError'});
+    });
+    <?php }?>
+</script>

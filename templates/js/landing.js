@@ -21,7 +21,7 @@ $(document).ready(function () {
             'selectedOptions': ' valgt region'
         },
         selectAll: true,
-        maxPlaceholderOpts: 3
+        maxPlaceholderOpts: 1
     });
 
 });

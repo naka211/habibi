@@ -13,10 +13,10 @@ class MY_Config extends MX_Config
             $uri = implode('/', $uri);
         }
 
-        if (function_exists('get_instance'))
+        /*if (function_exists('get_instance'))
         {
             $uri = get_instance()->lang->localized($uri);
-        }
+        }*/
 
         return parent::site_url($uri, $protocol);
     }

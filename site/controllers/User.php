@@ -35,7 +35,8 @@ class User extends MX_Controller
         $this->session->unset_userdata($SearchUser);*/
 
         $data['user'] = $this->session->userdata('user');
-        $data['item'] = $this->user->getUser($data['user']->id);
+        $data['images'] = $this->user->getPhoto($data['user']->id);
+        //$data['item'] = $this->user->getUser($data['user']->id);
         //$data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
         //Change status shoutouts if they are more than 72 hours
         //$this->user->checkShoutoutsStatus($data['user']->id);
@@ -112,7 +113,7 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
         $data['listImages'] = $this->user->getPhoto($data['user']->id, 1);
-        $data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
+        //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
         $this->load->view('templates', $data);
     }
@@ -1276,12 +1277,12 @@ class User extends MX_Controller
     }
 
     /** END PAYMENT*/
-    function update()
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
+    function update(){
         $user = $this->session->userdata['user'];
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Rediger profil - '.$user->name);
+
+
         if ($this->input->post()) {
             //Handle profile picture
             /*if(isset($_FILES['newAvatar']['name'])&&$_FILES['newAvatar']['name']!=""){
@@ -1311,7 +1312,7 @@ class User extends MX_Controller
                 $data_img['file_name'] = '';
             }*/
 
-            $DB['avatar'] = $this->input->post('avatar');
+            /*$DB['avatar'] = $this->input->post('avatar');*/
 
             $DB['name']             = $this->input->post('name');
             $DB['day']              = $this->input->post('day');
@@ -1320,7 +1321,6 @@ class User extends MX_Controller
             $DB['birthday']         = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
             $DB['code']             = $this->input->post('code');
             $DB['gender']           = $this->input->post('gender');
-            $DB['height']           = $this->input->post('height');
             $DB['relationship']     = $this->input->post('relationship');
             $DB['children']         = $this->input->post('children');
             $DB['ethnic_origin']    = $this->input->post('ethnic_origin');
@@ -1328,7 +1328,6 @@ class User extends MX_Controller
             $DB['training']         = $this->input->post('training');
             $DB['body']             = $this->input->post('body');
             $DB['smoking']          = $this->input->post('smoking');
-            $DB['stand_by_payment'] = $this->input->post('stand_by_payment');
             $DB['slogan']           = $this->input->post('slogan');
             $DB['description']      = $this->input->post('description');
             if ($this->input->post('password') && $this->input->post('repassword')) {
@@ -1341,6 +1340,8 @@ class User extends MX_Controller
             }
             $id = $this->user->saveUser($DB, $user->id);
             if ($id) {
+                $savedUser = $this->user->getUser($id);
+                $this->session->set_userdata('user', $savedUser);
                 $this->session->set_flashdata('message', "Opdater succesfuldt");
                 redirect(site_url('user/index'));
             } else {
@@ -1349,9 +1350,9 @@ class User extends MX_Controller
             }
         }
 
-        $data['user'] = $user;
-        $data['listProfilePictures'] = $this->user->getPhoto($user->id, 2);
-        $data['item'] = $this->user->getUser($user->id);
+        $data['user'] = $this->user->getUser($user->id);
+        //$data['listProfilePictures'] = $this->user->getPhoto($user->id, 2);
+        //$data['item'] = $this->user->getUser($user->id);
         $data['page'] = 'user/update';
         $this->load->view('templates', $data);
     }

@@ -100,7 +100,7 @@
                                 <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>" title=""><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
                                 <h5 class="name"><?php echo $user->name;?></h5>
                                 <p class="nation"><?php echo $user->ethnic_origin;?></p>
-                                <p class="old"><?php echo printAge($user->year);?><span class="area"><?php echo $user->region;?></span></p>
+                                <p class="old"><?php echo printAge($user->year);?> - <span class="area"><?php echo $user->region;?></span></p>
                             </div>
                         </div>
                         <?php }?>
@@ -121,7 +121,7 @@
                                     <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>" title=""><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
                                     <h5 class="name"><?php echo $user->name;?></h5>
                                     <p class="nation"><?php echo $user->ethnic_origin;?></p>
-                                    <p class="old"><?php echo printAge($user->year);?><span class="area"><?php echo $user->region;?></span></p>
+                                    <p class="old"><?php echo printAge($user->year);?> - <span class="area"><?php echo $user->region;?></span></p>
                                 </div>
                             </div>
                         <?php }?>
@@ -140,7 +140,7 @@
                                     <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>" title=""><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
                                     <h5 class="name"><?php echo $user->name;?></h5>
                                     <p class="nation"><?php echo $user->ethnic_origin;?></p>
-                                    <p class="old"><?php echo printAge($user->year);?><span class="area"><?php echo $user->region;?></span></p>
+                                    <p class="old"><?php echo printAge($user->year);?> - <span class="area"><?php echo $user->region;?></span></p>
                                 </div>
                             </div>
                         <?php }?>
