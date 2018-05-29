@@ -440,15 +440,15 @@ class User_model extends CI_Model{
      */
     function checkStatus($user_id_1 = NULL,$user_id_2 = NULL){
         $status = new stdClass();
-        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('user_favorite')->num_rows();
+        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('tb_user_favorite')->num_rows();
         $status->isFavorite = $query?true:false;
 
-        $query = $this->db->where('user_id', $user_id_1)->where('invited_user_id', $user_id_2)->get('user_dated')->num_rows();
-        $isDated1 = $query?true:false;
-        $query = $this->db->where('user_id', $user_id_2)->where('invited_user_id', $user_id_1)->get('user_dated')->num_rows();
-        $isDated2 = $query?true:false;
+        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('tb_user_friends')->num_rows();
+        $isFriend1 = $query?true:false;
+        $query = $this->db->where('user_from', $user_id_2)->where('user_to', $user_id_1)->get('tb_user_friends')->num_rows();
+        $isFriend2 = $query?true:false;
 
-        $status->isDated = $isDated1||$isDated2?true:false;
+        $status->isFriend = $isFriend1||$isFriend2?true:false;
 
         $query = $this->db->where('from_user_id', $user_id_1)->where('to_user_id', $user_id_2)->get('user_kisses')->num_rows();
         $status->isKissed = $query?true:false;

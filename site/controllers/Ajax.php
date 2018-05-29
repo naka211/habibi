@@ -130,5 +130,20 @@ class Ajax extends CI_Controller{
 
         die('ok');
     }
+
+    function changeChatStatus(){
+        $user = $this->session->userdata('user');
+        $status = $this->input->post('status', true);
+        $result = $this->db->set('chat', $status)
+            ->where("id", $user->id)
+            ->update("tb_user");
+        if($result == false){
+            die('0');
+        } else {
+            $user = $this->user->getUser($user->id);
+            $this->session->set_userdata('user', $user);
+            die('1');
+        }
+    }
 }
 ?>

@@ -58,11 +58,11 @@
                                             </tr>
                                             <tr>
                                                 <th>Religion:</th>
-                                                <td><?php echo $user->code;?></td>
+                                                <td><?php echo $user->religion;?></td>
                                             </tr>
                                             <tr>
                                                 <th>Kropsbygning:</th>
-                                                <td><?php echo $user->religion;?></td>
+                                                <td><?php echo $user->body;?></td>
                                             </tr>
                                             <tr>
                                                 <th>Ryger:</th>
@@ -76,7 +76,15 @@
                             <a class="btn_edit" href="<?php echo site_url('user/update');?>"><i class="i_edit"></i> <span>Redigere</span></a>
                         </div>
 
-                        <a href="#" class="btn btnadd_friend">Turn off chat</a>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="switch-field">
+                                <div class="switch-title">Chat</div>
+                                <input type="radio" id="switch_left" name="chat" value="1" <?php if($user->chat == 1) echo 'checked';?> />
+                                <label for="switch_left">Ja</label>
+                                <input type="radio" id="switch_right" name="chat" value="0" <?php if($user->chat == 0) echo 'checked';?> />
+                                <label for="switch_right">Nej</label>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -95,7 +103,7 @@
                             foreach ($images as $image) {
                                 ?>
                                 <div class="item">
-                                    <img src="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>" alt="" class="img-responsive">
+                                    <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
                                 </div>
                             <?php
                             }

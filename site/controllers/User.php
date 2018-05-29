@@ -55,26 +55,26 @@ class User extends MX_Controller
     {
         $data = array();
         $data['user'] = $this->session->userdata('user');
-        $data['item'] = $this->user->getUser($id);
+        $data['profile'] = $this->user->getUser($id);
 
-        $this->user->addMeta($this->_meta, $data, $data['item']->name . ' - Zeduuce.com');
+        $this->user->addMeta($this->_meta, $data, 'Habibi - '.$data['profile']->name);
 
         //Adding positive notification
-        if($this->user->countSeeTimes($id, $data['user']->id) == 3){
+        /*if($this->user->countSeeTimes($id, $data['user']->id) == 3){
             $this->user->addNotification($id);
             $this->user->addStatus($data['user']->id, $id, 'SeeMore3Times');
             //Check to add to dated
             $this->checkToAddDated($data['user']->id, $id);
-        }
+        }*/
         //Add action to log
         actionUser($data['user']->id, $id, 'View', 1);
 
-        $photo = $this->user->getPhoto($id);
-        if ($photo) {
+        $images = $this->user->getPhoto($id);
+        if ($images) {
             /*$data['avatar'] = $photo[0]->image;*/
-            $data['photo'] = $photo;
+            $data['images'] = $images;
         } else {
-            $data['photo'] = "";
+            $data['images'] = "";
         }
 
         /*$data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);*/

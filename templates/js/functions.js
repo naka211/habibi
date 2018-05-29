@@ -85,6 +85,17 @@ $(function ($) {
         });
     });
 
+    $('.btnPennic').click(function (event) {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/logout",
+            data: { csrf_site_name: token_value },
+            success: function () {
+                window.open('https://google.com', '_self');
+            }
+        });
+    });
+
     /*var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',
         // effect: 'fade',
@@ -241,4 +252,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+$(document).ready(function() {
+    $('input[type=radio][name=chat]').change(function() {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/changeChatStatus",
+            data: { csrf_site_name: token_value, status: this.value}
+        });
+    });
+});
 
