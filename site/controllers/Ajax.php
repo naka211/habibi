@@ -145,5 +145,71 @@ class Ajax extends CI_Controller{
             die('1');
         }
     }
+
+    function sendBlink(){
+        $profile_id = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $profile_id) {
+            $DB['from_user_id'] = $user->id;
+            $DB['to_user_id'] = $profile_id;
+            $DB['seen'] = 0;
+            $DB['send_at'] = time();
+            $id = $this->user->sendBlink($DB);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    function addFavorite()
+    {
+        $userID = $this->input->post('user', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $userID) {
+            $DB['user_from'] = $user->id;
+            $DB['user_to'] = $userID;
+            $DB['dt_create'] = date('Y-m-d H:i:s');
+            $DB['bl_active'] = 1;
+            $id = $this->user->addFavorite($DB);
+
+            if ($id) {
+                actionUser($user->id, $userID, 'Favorite', 2);
+                $data['status'] = true;
+            } else {
+                $data['status'] = false;
+            }
+            //Check to add to dated
+            $this->checkToAddDated($user->id, $userID);
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    function removeFavorite()
+    {
+        $userID = $this->input->post('user', true);
+        $user = $this->session->userdata('user');
+        if ($user && $userID) {
+            $id = $this->user->removeFavorite($user->id, $userID);
+            if ($id) {
+                $data['status'] = true;
+            } else {
+                $data['status'] = false;
+            }
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
 }
 ?>

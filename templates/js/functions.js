@@ -260,5 +260,17 @@ $(document).ready(function() {
             data: { csrf_site_name: token_value, status: this.value}
         });
     });
+
+    sendBlink = function (profile_id) {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/sendBlink",
+            data: { csrf_site_name: token_value, profile_id: profile_id },
+            success: function () {
+                $('#message-content').html("Dit blink er sendt til denne person");
+                $.fancybox.open({src: '#modalMessage'});
+            }
+        });
+    }
 });
 

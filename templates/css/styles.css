@@ -1283,6 +1283,21 @@ select:not([multiple]) {
     background: #000;
 }
 
+.btn_cancel_request {
+    padding: 5px 30px;
+    background: #b3b3b3;
+    font-size: 14.23px;
+    text-transform: uppercase;
+    /*margin-top: 20px;*/
+    margin-bottom: 15px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.btn_cancel_request:hover {
+    background: #000;
+}
+
 .btnadd_block {
     padding: 5px 30px;
     background: #b3b3b3;

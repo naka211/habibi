@@ -443,12 +443,14 @@ class User_model extends CI_Model{
         $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('tb_user_favorite')->num_rows();
         $status->isFavorite = $query?true:false;
 
-        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('tb_user_friends')->num_rows();
-        $isFriend1 = $query?true:false;
-        $query = $this->db->where('user_from', $user_id_2)->where('user_to', $user_id_1)->get('tb_user_friends')->num_rows();
-        $isFriend2 = $query?true:false;
+        $query = $this->db->where("(user_from = $user_id_1 AND user_to = $user_id_2) OR (user_from = $user_id_2 AND user_to = $user_id_1)")->select("status")->from('tb_user_friends');
+        $friendStatus = $query->get()->row();
+        if(!empty($friendStatus)){
+            $status->isFriend = $friendStatus->status;
+        } else {
+            $status->isFriend = -1;
+        }
 
-        $status->isFriend = $isFriend1||$isFriend2?true:false;
 
         $query = $this->db->where('from_user_id', $user_id_1)->where('to_user_id', $user_id_2)->get('user_kisses')->num_rows();
         $status->isKissed = $query?true:false;
@@ -463,7 +465,7 @@ class User_model extends CI_Model{
      * @param null $DB
      * @return bool
      */
-    function sendKiss($DB=NULL){
+    function sendBlink($DB=NULL){
         if($this->db->insert('user_kisses',$DB)){
             return $this->db->insert_id();
         }else{
