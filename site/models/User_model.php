@@ -746,6 +746,16 @@ class User_model extends CI_Model{
         return $this->db->delete('user_blocked');
     }
 
-
+    public function addToVisiting($user_id, $profile_id){
+        $data = array();
+        $data['from_user']  = $user_id;
+        $data['to_user']    = $profile_id;
+        $data['created_at']  = time();
+        if($this->db->insert('tb_user_visit',$data)){
+            return true;
+        } else {
+            return false;
+        }
+    }
     /** The End*/
 }

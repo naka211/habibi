@@ -51,8 +51,8 @@ class User extends MX_Controller
 
         redirect(site_url('/user/profile/'.$id.'/'.$name));
     }
-    function profile($id)
-    {
+
+    function profile($id){
         $data = array();
         $data['user'] = $this->session->userdata('user');
         $data['profile'] = $this->user->getUser($id);
@@ -67,7 +67,7 @@ class User extends MX_Controller
             $this->checkToAddDated($data['user']->id, $id);
         }*/
         //Add action to log
-        actionUser($data['user']->id, $id, 'View', 1);
+        $this->user->addToVisiting($data['user']->id, $id);
 
         $images = $this->user->getPhoto($id);
         if ($images) {
