@@ -325,13 +325,13 @@ class User_model extends CI_Model{
      * @param null $userId
      * @return mixed
      */
-    function getNumUnreadMessage($userId = NULL){
+    function getUnreadMessageQuantity($userId = NULL){
         $this->db->distinct();
         $this->db->select('id');
-        $this->db->from('user_messages');
+        $this->db->from('tb_user_messages');
         $this->db->group_by('user_from');
         $this->db->where('user_to', $userId);
-        $this->db->where('seen', 1);
+        $this->db->where('seen', 0);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -756,6 +756,26 @@ class User_model extends CI_Model{
         } else {
             return false;
         }
+    }
+
+    public function getBlinkingQuantity($user_id){
+        $this->db->distinct();
+        $this->db->select('id');
+        $this->db->from('tb_user_kisses');
+        $this->db->group_by('from_user_id');
+        $this->db->where('to_user_id', $user_id);
+        $this->db->where('seen', 0);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function friendRequestQuantity($user_id){
+        $this->db->select('id');
+        $this->db->from('tb_user_friends');
+        $this->db->where('user_to', $user_id);
+        $this->db->where('status', 0);
+        $query = $this->db->get();
+        return $query->num_rows();
     }
     /** The End*/
 }

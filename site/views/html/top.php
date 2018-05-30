@@ -1,10 +1,12 @@
 <?php $user = $this->session->userdata('user');
 if(!empty($user)){
-    /*$this->load->model('user_model', 'user');
-    $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
-    $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
-    $numPositiveNotification = $this->user->getNumOfNotification($user->id);
-    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';*/
+    $this->load->model('user_model', 'user');
+    $unreadMessageQuantity = $this->user->getUnreadMessageQuantity($user->id);
+    $unreadMessageQuantityHTML = !empty($unreadMessageQuantity) ? '<span>' . $unreadMessageQuantity . '</span>' : '';
+    $blinkingQuantity = $this->user->getBlinkingQuantity($user->id);
+    $blinkingQuantityHTML = !empty($blinkingQuantity) ? '<span>' . $blinkingQuantity . '</span>' : '';
+    $friendRequestQuantity = $this->user->friendRequestQuantity($user->id);
+    $friendRequestQuantityHTML = !empty($friendRequestQuantity) ? '<span>' . $friendRequestQuantity . '</span>' : '';
 
     if(isGoldMember()){
         $blinkLink = 'href="'.site_url('user/blinks').'"';
@@ -57,11 +59,11 @@ if(!empty($user)){
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="search.php">Søg</a></li>
                             <li><a href="favorites.php">Favoritter</a></li>
-                            <li><a <?php echo $messageLink; ?>>Besked</a></li>
+                            <li><a <?php echo $messageLink; ?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
                             <li><a <?php echo $visitingLink; ?>>Besøg</a></li>
-                            <li><a <?php echo $blinkLink; ?>>Blink <span>5</span></a></li>
+                            <li><a <?php echo $blinkLink; ?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
                             <li><a href="friend.php">Venner</a></li>
-                            <li><a <?php echo $friendRequestLink; ?>>Venneanmodninger <span>2</span></a></li>
+                            <li><a <?php echo $friendRequestLink; ?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
                         </ul>
                     </div>
                 </div>
