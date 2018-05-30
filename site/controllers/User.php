@@ -448,21 +448,22 @@ class User extends MX_Controller
      * @param $friendId
      * @param $from 1: positive list, 2: profile
      */
-    public function blockUser($friendId, $from){
+    public function blockUser($profile_id){
         $user = $this->session->userdata('user');
-        $result1 = $this->user->addUserToBlockedList($user->id, $friendId);
+        $this->user->addUserToBlockedList($user->id, $profile_id);
+        customRedirectWithMessage(site_url('home/index'), 'Denne person er tilføjet til bloklisten');
         //disable user in positive list
-        if($from == 1){
+        /*if($from == 1){
             $result2 = $this->user->blockUser($user->id, $friendId);
         } else {
             $result2 = true;
-        }
+        }*/
 
-        if($result1 && $result2){
+        /*if($result1 && $result2){
             redirect($_SERVER['HTTP_REFERER']);
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke blokere denne bruger');
-        }
+        }*/
     }
 
     public function unblockUser($friendId){

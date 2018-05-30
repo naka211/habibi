@@ -2,16 +2,16 @@
 if(isGoldMember()){
     $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
     $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:;"';
-    $visitingLink = 'href="'.site_url('user/visits').'"';
     $chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
-    $blinkAction = $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+    $blinkAction = $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
 }
 if($status->isFavorite){
     $favoriteLink = 'href="javascript:void(0)" class="hover" onclick="removeFavorite('.$profile->id.')" title="Fjern favorit"';
 } else {
     $favoriteLink = 'href="javascript:void(0)" onclick="addFavorite('.$profile->id.')" title="Tilføj favorit"';
 }
+$blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
 ?>
 <div id="content">
     <section class="section_infoProfile">
@@ -99,7 +99,7 @@ if($status->isFavorite){
                             <?php if($status->isFriend == 2){?><li><a <?php echo $chatLink;?>><i class="i_comment"></i></a></li><?php }?>
                             <li><a <?php echo $blinkAction;?>><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
-                            <li><a href="block_list.php"><i class="i_block"></i></a></li>
+                            <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>
                         </ul>
                     </div>
                 </div>
