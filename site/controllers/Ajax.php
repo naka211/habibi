@@ -167,24 +167,15 @@ class Ajax extends CI_Controller{
 
     function addFavorite()
     {
-        $userID = $this->input->post('user', true);
+        $profile_id = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
 
-        if ($user && $userID) {
+        if ($user && $profile_id) {
             $DB['user_from'] = $user->id;
-            $DB['user_to'] = $userID;
-            $DB['dt_create'] = date('Y-m-d H:i:s');
-            $DB['bl_active'] = 1;
+            $DB['user_to'] = $profile_id;
+            $DB['created_at'] = time();
             $id = $this->user->addFavorite($DB);
-
-            if ($id) {
-                actionUser($user->id, $userID, 'Favorite', 2);
-                $data['status'] = true;
-            } else {
-                $data['status'] = false;
-            }
-            //Check to add to dated
-            $this->checkToAddDated($user->id, $userID);
+            $data['status'] = true;
         } else {
             $data['status'] = false;
         }
@@ -195,10 +186,10 @@ class Ajax extends CI_Controller{
 
     function removeFavorite()
     {
-        $userID = $this->input->post('user', true);
+        $profile_id = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
-        if ($user && $userID) {
-            $id = $this->user->removeFavorite($user->id, $userID);
+        if ($user && $profile_id) {
+            $id = $this->user->removeFavorite($user->id, $profile_id);
             if ($id) {
                 $data['status'] = true;
             } else {

@@ -1453,7 +1453,7 @@ ul.list_action li a i {
     background-repeat: no-repeat;
 }
 
-ul.list_action li:hover a {
+ul.list_action li:hover a, ul.list_action li a.hover{
     background: #000;
 }
 

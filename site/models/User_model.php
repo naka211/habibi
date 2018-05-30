@@ -473,86 +473,8 @@ class User_model extends CI_Model{
         }
     }
 
-    /**
-     * @param null $user
-     * @param null $userID
-     * @return bool
-     */
-    function removeKiss($user=NULL,$userID=NULL){
-        $this->db->where('from_user_id',$user);
-        $this->db->where('to_user_id',$userID);
-        if($this->db->delete('user_kisses')){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
     
-    /** POSITIV*/
-    /*function getPositiv($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
-        $this->db->select('u.*');
-        $this->db->from('user_action as ua');
-        $this->db->join('user as u', 'u.id = ua.user_to', 'left');
-        $this->db->where("ua.user_from",$user);
-        $this->db->where("ua.bl_active",1);
-        $this->db->where("u.bl_active",1);
-		$this->db->order_by('ua.id','DESC');
-        if($num || $offset){
-            $this->db->limit($num,$offset);
-        }
-    	$query = $this->db->get()->result();
-	    return $query;
-    }
-    function getNumPositiv($user=NULL){
-        $this->db->select('ua.*');
-        $this->db->from('user_action as ua');
-        $this->db->where("ua.user_from",$user);
-        $this->db->where("ua.bl_active",1);
-    	$query = $this->db->get()->num_rows();
-	    return $query;
-    }*/
-
-    /**
-     * @param null $num
-     * @param null $offset
-     * @param null $userId
-     * @return mixed
-     */
-    function getPositiv($num = NULL, $offset = NULL, $userId = NULL){
-        $datedUserIds = $this->getDatedUserIds($userId);
-        if(empty($datedUserIds)){
-            return false;
-        } else {
-            $this->db->select('u.*');
-            $this->db->from('user as u');
-            $this->db->where("u.bl_active",1);
-            $this->db->where_in("id", $datedUserIds);
-            if($num || $offset){
-                $this->db->limit($num,$offset);
-            }
-            $query = $this->db->get()->result();
-            return $query;
-        }
-    }
-
-    /**
-     * @param $userId
-     * @return array
-     */
-    public function getDatedUserIds($userId){
-        $userIdArr1 = $userIdArr2 = array();
-
-        $result1 = $this->db->distinct()->select("invited_user_id")->from("user_dated")->where("user_id", $userId)->where('blocked', 0)->get()->result();
-        foreach($result1 as $item){
-            $userIdArr1[] = $item->invited_user_id;
-        }
-
-        $result2 = $this->db->distinct()->select("user_id")->from("user_dated")->where("invited_user_id", $userId)->where('blocked', 0)->get()->result();
-        foreach($result2 as $item){
-            $userIdArr2[] = $item->user_id;
-        }
-        return array_unique (array_merge ($userIdArr1, $userIdArr2));
-    }
 
     /**
      * @param null $num
@@ -593,65 +515,15 @@ class User_model extends CI_Model{
         return $ids;
     }
 
-    /**
-     * @param $userId
-     * @param $clientId
-     * @return bool
-     */
-    public function checkIsSentKiss($userId, $clientId){
-        $result = $this->db->where("user_from", $clientId)
-            ->where("user_to", $userId)
-            ->where("bl_active", 1)
-            ->where('action', 'Kiss')
-            ->order_by('id DESC')
-            ->limit(1)
-            ->get("user_activity")->row();
-        return $result ? $result->dt_create : false;
-    }
 
-    public function checkIsApproved($userId, $clientId){
-        $result = $this->db->where("user_to", $userId)
-            ->where("user_from", $clientId)
-            ->where('action', 'AcceptedDating')
-            ->where('bl_active', 1)
-            ->get("user_activity")->row();
-        return $result ? $result->dt_create : false;
-    }
 
     function checkAddedToFavorite($userId1 = NULL, $userId2 = NULL){
         $result = $this->db->where('user_from', $userId2)->where('user_to', $userId1)->get('user_favorite')->row();
         return $result ? $result->dt_create : false;
     }
 
-    public function checkSentInvitation($userId, $clientId){
-        $result = $this->db->where("user_to", $userId)
-            ->where("user_from", $clientId)
-            ->where('action', 'Invite')
-            ->where('bl_active', 1)
-            ->get("user_activity")->row();
-        return $result ? $result->dt_create : false;
-    }
 
-    public function checkSeeMore3Times($userId, $clientId){
-        $result = $this->db->select("id")
-            ->from("user_activity")
-            ->where("user_from", $clientId)
-            ->where("user_to", $userId)
-            ->where("action", "SeeMore3Times")
-            ->where("bl_active", 1)
-            ->get()->num_rows();
-        return $result ? true : false;
-    }
 
-    public function countSeeTimes($userId, $clientId){
-        $result = $this->db->select("COUNT(id) num")->from("user_action")->where("user_from", $clientId)->where("user_to", $userId)->where("type", 1)->get()->row();
-        return $result->num;
-    }
-
-    function getLastSeeTime($user = NULL, $userId = NULL){
-        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->where('type', 1)->order_by('id DESC')->limit(1)->get('user_action')->row();
-        return $result ? $result->dt_create : false;
-    }
 
     function checkUnreadSentMessage($user = NULL, $userId = NULL){
         $result = $this->db->where('user_from', $userId)->where('user_to', $user)->where('seen', 1)->order_by('id DESC')->limit(1)->get('user_messages')->row();
@@ -663,34 +535,9 @@ class User_model extends CI_Model{
         return $result ? $result->dt_create : false;
     }
 
-    public function getNumOfNotification($userId){
-        $result = $this->db->select("number_of_notification")->from("user")->where("id", $userId)->get()->row();
-        return $result->number_of_notification;
-    }
 
-    public function resetNumOfNotification($userId){
-        $this->db->set('number_of_notification', 0);
-        $this->db->where('id', $userId);
-        return $this->db->update('user');
-    }
-    
-    /** TILBUD*/
-    /**
-     * @param $user
-     * @return mixed
-     */
-    function getMyTilbud($user){
-        $query = $this->db->select('po.*, pp.name, pp.image, pp.description, b2b.name as company')
-                ->from('product_order_item as po')
-                ->join('product_product as pp', 'pp.id = po.product_id', 'left')
-                ->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left')
-                ->join('product_order as p', 'p.id = po.order_id', 'left')
-                ->where("p.userID",$user)
-                ->where("p.bl_active",1)
-                ->order_by('po.id','DESC')
-                ->get()->result();
-	    return $query;
-    }
+
+
     
     /** IMAGES*/
     /**
@@ -727,211 +574,11 @@ class User_model extends CI_Model{
         }
     }
     
-    /** INVITATION*/
-    function getDating($user=NULL){
-        $query = $this->db->select('dt.*')
-                ->from('dating as dt')
-                ->where('bl_active',1)
-                ->where('userID',$user)
-                ->order_by('dt.id','DESC')
-                ->get()->result();
-        return $query;
-    }
-    function getUserDating($datingID=NULL,$search=NULL){
-        $query = $this->db->select('du.*, u.name, u.birthday, u.code, u.avatar, u.facebook')
-                ->from('dating_user as du')
-                ->join('user as u','u.id = du.user','left')
-                ->where('du.datingID',$datingID)
-                ->get()->result();
-        return $query;
-    }
-    function getImageDating($datingID=NULL){
-        $query = $this->db->select('di.*')
-                ->from('dating_image as di')
-                ->where('di.datingID',$datingID)
-                ->get()->result();
-        return $query;
-    }
-    function getDatingOrderItem($itemID=NULL){
-        $query = $this->db->select('po.*, pp.name, pp.description, pp.image, pc.name as company')
-                ->from('product_order_item as po')
-                ->join('product_product as pp','pp.id = po.product_id','left')
-                ->join('product_category as pc','pc.category_id = po.category_id','left')
-                ->where('po.id',$itemID)
-                ->get()->row();
-        return $query;
-    }
-    //Delete dating
-    function deleteUser($datingID=NULL){
-        $this->db->where('datingID',$datingID);
-        if($this->db->delete('dating_user')){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    function deleteImage($datingID=NULL){
-        $this->db->where('datingID',$datingID);
-        if($this->db->delete('dating_image')){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    function deleteDating($datingID=NULL){
-        $this->db->where('id',$datingID);
-        if($this->db->delete('dating')){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    //myinvitationerjoin
-    function getDatingByUser($userID=NULL){
-        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, u.name as nameUser, u.avatar, u.facebook')
-                ->from('dating_user as du')
-                ->join('dating as dt','dt.id = du.datingID','left')
-                ->join('user as u','u.id = dt.userID','left')
-                ->where('du.user',$userID)
-                ->where('du.time_end >=',time())
-                ->order_by('dt.id','DESC')
-                ->get()->result();
-        return $query;
-    }
 
-    function getApprovedDatingByUser($userID=NULL){
-        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, du.dt_update as accepted_time, u.name as nameUser, u.avatar, u.facebook')
-            ->from('dating_user as du')
-            ->join('dating as dt','dt.id = du.datingID','left')
-            ->join('user as u','u.id = dt.userID','left')
-            ->where('du.user',$userID)
-            ->where('du.accept ', 1)
-            ->where('du.bl_active ', 1)
-            ->order_by('dt.id','DESC')
-            ->get()->result();
-        return $query;
-    }
-
-    function getSentDatingByUser($friendId=NULL, $userId){
-        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, du.dt_update as replied_time, u.name as nameUser, u.avatar, u.facebook')
-            ->from('dating_user as du')
-            ->join('dating as dt','dt.id = du.datingID','left')
-            ->join('user as u','u.id = dt.userID','left')
-            ->where('du.user',$userId)
-            ->where('dt.userID ', $friendId)
-            ->where('du.bl_active ', 1)
-            ->order_by('dt.id','DESC')
-            ->get()->result();
-        return $query;
-    }
-
-    function rejectDatingUser($DB, $id=NULL){
-        $this->db->where('id',$id);
-        if($this->db->update('dating_user', $DB)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    function acceptDating($DB=NULL,$id=NULL){
-        if($id){
-            $this->db->where('id',$id);
-            $this->db->update('dating_user', $DB);
-            return $id;
-        }else{
-            return false;
-        }
-    }
-    //myinvitationerapproved
-    function getDatingApproved($user=NULL){
-        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept')
-                ->from('dating_user as du')
-                ->join('dating as dt','dt.id = du.datingID','left')
-                ->where('dt.userID',$user)
-                ->where('du.accept',1)
-                ->order_by('dt.id','DESC')
-                ->group_by('dt.id')
-                ->get()->result();
-        return $query;
-    }
-    function getUserApproved($datingID=NULL){
-        $query = $this->db->select('du.*, u.name as nameUser, u.avatar, u.facebook')
-                ->from('dating_user as du')
-                ->join('user as u','u.id = du.user','left')
-                ->where('du.datingID',$datingID)
-                ->where('du.accept',1)
-                ->get()->result();
-        return $query;
-    }
     
     //T.Trung
 
-    /**
-     * @param int $dating_user_id
-     * @return boolean
-     */
-    public function checkOrCreateDatedUser($dating_user_id){
-        $row = $this->db->select('d.userID, du.user')
-            ->from('dating as d')
-            ->join('dating_user as du', 'd.id = du.datingID')
-            ->where('du.id', $dating_user_id)
-            ->get()->row();
-        $user_id = $row->userID;
-        $invited_user_id = $row->user;
 
-        //check 2 person is dated
-        $isDated = isDated($user_id, $invited_user_id);
-        if($isDated === false){
-            $isDated = $this->createDatedUser($user_id, $invited_user_id);
-        }
-        return $isDated;
-    }
-
-    /**
-     * @param $user_id
-     * @param $invited_user_id
-     * @return mixed
-     */
-    public function createDatedUser($user_id, $invited_user_id){
-        $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id, 'accepted_time'=>time());
-        $isDated = $this->db->insert('user_dated', $data);
-        return $isDated;
-    }
-
-    /**
-     * @param integer $num
-     * @param integer $offset
-     * @param integer $user
-     * @param string $search
-     * @return query result
-     */
-    function getContactPersons($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
-        $this->db->select('u.*');
-        $this->db->from('user_dated as ud');
-        $this->db->join('user as u', 'u.id = ud.invited_user_id', 'left');
-        if($search['name']){
-            $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
-        }
-        $this->db->where("ud.user_id",$user);
-        $this->db->order_by('ud.id','DESC');
-        if($num || $offset){
-            $this->db->limit($num,$offset);
-        }
-        $query = $this->db->get()->result();
-        return $query;
-    }
-
-    /**
-     * @param null $user_id
-     * @return integer
-     */
-    function getNumContactPersons($user_id = NULL){
-        $this->db->select('ud.id');
-        $this->db->from('user_dated as ud');
-        $this->db->where("ud.user_id",$user_id);
-        $query = $this->db->get()->num_rows();
-        return $query;
-    }
 
     /**
      * @param null $user_id
@@ -1029,114 +676,7 @@ class User_model extends CI_Model{
             ->update("user_activity");
     }
 
-    //Shoutouts
-    public function getNumShoutouts($userId){
-        $result = $this->db->select("COUNT(id) num")
-            ->from("user_shoutouts")
-            ->where("userId", $userId)
-            ->where("bl_active", 1)
-            ->get()->row();
-        return $result->num;
-    }
 
-    public function getShoutouts($num, $offset, $userId){
-        $result = $this->db->select("*")
-            ->from("user_shoutouts")
-            ->where("userId", $userId)
-            ->where("bl_active", 1)
-            ->order_by("status DESC, id DESC")
-            ->limit($num,$offset)
-            ->get()->result();
-        return $result;
-    }
-
-    /**
-     * @param $shoutoutId
-     * @param $userId
-     * @return mixed
-     */
-    public function checkShoutoutOwner($shoutoutId, $userId){
-        $result = $this->db->where("userId", $userId)
-            ->where("id", $shoutoutId)
-            ->get("user_shoutouts")
-            ->num_rows();
-        return $result;
-    }
-
-    /**
-     * @param $shoutoutId
-     */
-    public function deleteShoutout($shoutoutId){
-        $this->db->where("id", $shoutoutId)->delete("user_shoutouts");
-    }
-
-    public function checkUncreateShoutout($userId){
-        $result = $this->db->select("uncreate_shoutout")->from("user")->where("id", $userId)->get()->row();
-        return $result->uncreate_shoutout;
-    }
-    /**
-     * @param $num
-     * @return mixed
-     */
-    public function updateUncreateShoutout($num){
-        $user = $this->session->userdata('user');
-        $this->db->set('uncreate_shoutout', '`uncreate_shoutout`+'.$num, FALSE);
-        $this->db->where('id', $user->id);
-        return $this->db->update('user');
-    }
-
-    /**
-     * @param $info
-     * @return bool
-     */
-    public function saveShoutout($info){
-        if($this->db->insert('user_shoutouts',$info)){
-            return $this->db->insert_id();
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * @param $userId
-     * @return bool
-     */
-    public function checkShoutoutsStatus($userId){
-        $this->db->set('status', 0);
-        $this->db->where('userId', $userId);
-        $this->db->where('status', 1);
-        $this->db->where("time_to_sec(timediff(NOW(), dt_update )) / 3600 >", 72);
-        if($this->db->update('user_shoutouts')){
-            return true;
-        } else {
-            die('checkShoutoutsStatus is fail');
-        }
-    }
-
-    public function addAcceptedNotification($userId){
-        $userIdArr = array();
-        $result = $this->db->select('invited_user_id')
-            ->from('user_dated')
-            ->where('user_id', $userId)
-            ->get()->result();
-        foreach($result as $user){
-            $userIdArr[] = $user->invited_user_id;
-        }
-        $result = $this->db->select('user_id')
-            ->from('user_dated')
-            ->where('invited_user_id', $userId)
-            ->get()->result();
-        foreach($result as $user){
-            $userIdArr[] = $user->user_id;
-        }
-
-        foreach ($userIdArr as $friendId){
-            //Adding status in postive list
-            $this->addStatus($userId, $friendId, 'AcceptedDating');
-            //Adding notification in top bar
-            $this->addNotification($friendId);
-        }
-    }
 
     //Get monthly fee
     public function getExpiredUsers(){
@@ -1182,20 +722,7 @@ class User_model extends CI_Model{
         return $result?true:false;
     }
 
-    /**
-     * @param $userId
-     * @param $friendId
-     * @return bool
-     */
-    public function removeUser($userId, $friendId){
-        $where = '(user_id = '.$userId.' AND invited_user_id = '.$friendId.') OR (invited_user_id = '.$userId.' AND user_id = '.$friendId.')';
-        $this->db->where($where);
-        if($this->db->delete('user_dated')){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
 
     /**
      * @param $userId
@@ -1219,42 +746,6 @@ class User_model extends CI_Model{
         return $this->db->delete('user_blocked');
     }
 
-    /**
-     * @param $userId
-     * @param $friendId
-     * @param $status
-     * @return bool
-     */
-    public function changeBlockedStatus($userId, $friendId, $status){
-        $where = '(user_id = '.$userId.' AND invited_user_id = '.$friendId.') OR (invited_user_id = '.$userId.' AND user_id = '.$friendId.')';
-        $this->db->set('blocked', $status);
-        $this->db->set('blocked_time', time());
-        $this->db->where($where);
-        $query = $this->db->update('user_dated');
-        if($query){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * @param $userId
-     * @param $friendId
-     * @return bool
-     */
-    public function blockUser($userId, $friendId){
-        return $this->changeBlockedStatus($userId, $friendId, 1);
-    }
-
-    /**
-     * @param $userId
-     * @param $friendId
-     * @return bool
-     */
-    public function unblockUser($userId, $friendId){
-        return $this->changeBlockedStatus($userId, $friendId, 0);
-    }
 
     /** The End*/
 }

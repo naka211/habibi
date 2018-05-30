@@ -1,10 +1,10 @@
 <?php $user = $this->session->userdata('user');
 if(!empty($user)){
-    $this->load->model('user_model', 'user');
+    /*$this->load->model('user_model', 'user');
     $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
     $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
     $numPositiveNotification = $this->user->getNumOfNotification($user->id);
-    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
+    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';*/
 
     if(isGoldMember()){
         $blinkLink = 'href="'.site_url('user/blinks').'"';
