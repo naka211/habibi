@@ -1,16 +1,16 @@
 <?php
 if(isGoldMember()){
-    $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
     $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:;"';
-    $chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
+    //$chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
-    $blinkAction = $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+    $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
 }
 if($status->isFavorite){
     $favoriteLink = 'href="javascript:void(0)" class="hover" onclick="removeFavorite('.$profile->id.')" title="Fjern favorit"';
 } else {
     $favoriteLink = 'href="javascript:void(0)" onclick="addFavorite('.$profile->id.')" title="Tilføj favorit"';
 }
+$blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
 $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
 ?>
 <div id="content">
@@ -99,7 +99,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                         <a href="#" class="btnShowlist">...</a>
                         <ul class="list_action">
                             <li><a <?php echo $messageLink;?>><i class="i_email"></i></a></li>
-                            <?php if($status->isFriend == 2){?><li><a <?php echo $chatLink;?>><i class="i_comment"></i></a></li><?php }?>
+                            <?php /*if($status->isFriend == 2){?><li><a <?php echo $chatLink;?>><i class="i_comment"></i></a></li><?php }*/?>
                             <li><a <?php echo $blinkAction;?>><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
                             <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>
@@ -129,94 +129,40 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
     </section>
 </div>
 
+<?php if(isGoldMember()){?>
 <div style="display: none;" id="modalChat" class="animated-modal modalChat">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="chat">
                 <ul>
-                    <li class="other">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
-
-                        <div class="message blur">
-                            <div class="hider">
-                                <span>Click to read</span>
+                    <?php if($numMessages > 10){?>
+                        <li style="text-align: center;" id="loadMoreMessage">
+                            <a style="color: #f19906;" href="javascript:void(0)" onclick="loadMoreMessages(<?php echo $profile->id;?>, <?php echo $numMessages;?>, 10)">Load earlier message</a>
+                        </li>
+                    <?php }?>
+                    <?php
+                    $messages = array_reverse($messages);
+                    foreach($messages as $message){
+                        if($message->uid == $profile->id){
+                    ?>
+                        <li class="other">
+                            <a class="user"><img alt="" src="<?php echo base_url();?>/uploads/user/<?php echo $message->avatar;?>" /></a>
+                            <div class="message">
+                                <p><?php echo $message->message;?></p>
                             </div>
-                            <p>
-                                Itaque quod et dolore accusantium. Labore aut similique ab voluptas rerum quia. Reprehenderit voluptas doloribus ut nam tenetur ipsam.
-                            </p>
-                        </div>
-                        <div class="date">Sendt: d. 13/02/2018 kl. 22:09</div>
-                    </li>
-                    <li class="other">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
-                        <div class="message">
-                            <div class="hider">
-                                <span>Click to read</span>
+                            <div class="date">Sendt: d. <?php echo date("d/m/Y", $message->dt_create)?> kl. <?php echo date("H:i", $message->dt_create)?></div>
+                        </li>
+                    <?php } else {?>
+                        <li class="you">
+                            <a class="user"><img alt="" src="<?php echo base_url();?>/uploads/user/<?php echo $message->avatar;?>" /></a>
+                            <div class="message">
+                                <p><?php echo $message->message;?></p>
                             </div>
-                            <p>
-                                Modi ratione aliquid non. Et porro deserunt illum sed velit necessitatibus. Quis fuga et et fugit consequuntur. Et veritatis fugiat veniam pariatur maxime iusto aperiam.
-                            </p>
-                        </div>
-                        <div class="date">
-                            Sendt: d. 13/02/2018 kl. 22:09
-                        </div>
-                    </li>
-                    <li class="you">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></a>
-                        <div class="message">
-                            <div class="hider">
-                                <span>Click to read</span>
-                            </div>
-                            <p>
-                                Provident impedit atque nemo culpa et modi molestiae. Error non dolorum voluptas non a. Molestiae et nobis nisi sed.
-                            </p>
-                        </div>
-                        <div class="date">
-                            Sendt: d. 13/02/2018 kl. 22:09
-                        </div>
-                    </li>
-                    <li class="other">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
-                        <div class="message">
-                            <div class="hider">
-                                <span>Click to read</span>
-                            </div>
-                            <p>
-                                Id vel ducimus perferendis fuga excepturi nulla. Dolores dolores amet et laborum facilis. Officia magni ut non autem et qui incidunt. Qui similique fugit vero porro qui cupiditate.
-                            </p>
-                        </div>
-                        <div class="date">
-                            Sendt: d. 13/02/2018 kl. 22:09
-                        </div>
-                    </li>
-                    <li class="you">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></a>
-                        <div class="message">
-                            <div class="hider">
-                                <span>Click to read</span>
-                            </div>
-                            <p>
-                                Provident impedit atque nemo culpa et modi molestiae. Error non dolorum voluptas non a. Molestiae et nobis nisi sed.
-                            </p>
-                        </div>
-                        <div class="date">
-                            Sendt: d. 13/02/2018 kl. 22:09
-                        </div>
-                    </li>
-                    <li class="you">
-                        <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></a>
-                        <div class="message">
-                            <div class="hider">
-                                <span>Click to read</span>
-                            </div>
-                            <p>
-                                Est ut at eum sed perferendis ea hic. Tempora perspiciatis magnam aspernatur explicabo ea. Sint atque quod.
-                            </p>
-                        </div>
-                        <div class="date">
-                            Sendt: d. 13/02/2018 kl. 22:09
-                        </div>
-                    </li>
+                            <div class="date">Sendt: d. <?php echo date("d/m/Y", $message->dt_create)?> kl. <?php echo date("H:i", $message->dt_create)?></div>
+                        </li>
+                    <?php
+                        }
+                    }?>
                 </ul>
                 <form class="frm_Chat" action="" method="POST" role="form">
                     <input type="text" class="form-control" placeholder="Skriv en besked her.........">
@@ -226,3 +172,4 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
         </div>
     </div>
 </div>
+<?php }?>

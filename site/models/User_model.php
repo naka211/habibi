@@ -292,7 +292,7 @@ class User_model extends CI_Model{
         }
     }
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
-		$this->db->select('m.*, u.name');
+		$this->db->select('m.*, u.name, u.id as uid, u.avatar');
 		$this->db->from('user_messages m');
         $this->db->join('user u', 'm.user_from = u.id','left');
         $this->db->where('(m.user_from='.$user.' AND m.user_to='.$userID.') OR (m.user_from='.$userID.' AND m.user_to='.$user.')');
@@ -303,6 +303,15 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+    function getNumMessages($user=NULL,$userID=NULL){
+        $this->db->select('COUNT(id) as num');
+        $this->db->from('user_messages');
+        $this->db->where('(user_from='.$user.' AND user_to='.$userID.') OR (user_from='.$userID.' AND user_to='.$user.')');
+        $query = $this->db->get();
+        return $query->row()->num;
+    }
+
     function getListMessage($user=NULL){
         $this->db->select('DISTINCT(user_from)');
         $this->db->from('user_messages');

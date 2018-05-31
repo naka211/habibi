@@ -2238,7 +2238,7 @@ ul.list_action li a .i_block {
 }
 
 .chat ul li:first-child {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 .chat ul li:last-child {
@@ -2246,8 +2246,8 @@ ul.list_action li a .i_block {
 }
 
 .chat ul li {
-    margin: 65px 0 0 0;
-    font-weight: 300;
+    margin: 40px 0 0 0;
+    font-weight: 400;
 }
 
 .chat ul li.you {
@@ -2260,14 +2260,14 @@ ul.list_action li a .i_block {
 }
 
 .chat ul li a.user {
-    margin: -30px 0 0 0;
+    margin: 0;
     display: block;
     color: #333;
 }
 
 .chat ul li a.user img {
-    width: 65px;
-    height: 65px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     background-color: #f3f3f3;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);

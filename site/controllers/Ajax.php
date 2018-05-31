@@ -200,5 +200,44 @@ class Ajax extends CI_Controller{
         echo json_encode($data);
         return;
     }
+
+    function loadMoreMessages(){
+        $user = $this->session->userdata('user');
+        $profileId = $this->input->post('profileId', true);
+        $total = $this->input->post('total', true);
+        $num = $this->input->post('num', true);
+
+        $messages = $this->user->getMessages($user->id, $profileId, 10, $num);
+        $html = '';
+        $messages = array_reverse($messages);
+        $newNum = $num + 10;
+        if($total > $newNum){
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$total.','.$newNum.')"';
+            $html .= '<li style="text-align: center;" id="loadMoreMessage">
+                            <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Load earlier messages</a>
+                        </li>';
+        }
+        foreach ($messages as $message){
+            if($message->uid == $profileId){
+                $html .= '<li class="other">
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$message->avatar.'" /></a>
+                            <div class="message">
+                                <p>'.$message->message.'</p>
+                            </div>
+                            <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
+                        </li>';
+            } else {
+                $html .= '<li class="you">
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$message->avatar.'" /></a>
+                            <div class="message">
+                                <p>'.$message->message.'</p>
+                            </div>
+                            <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
+                        </li>';
+            }
+        }
+        echo $html;
+        exit();
+    }
 }
 ?>
