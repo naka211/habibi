@@ -1390,105 +1390,47 @@ class User extends MX_Controller
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    // Shoutout
-
-    /**
-     * @param int $page
-     */
-    public function shoutouts($page = 0){
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-
-        $data['user'] = $this->session->userdata('user');
-        $config['base_url'] = base_url() . $this->language . '/user/shoutouts/';
-        $config['total_rows'] = $this->user->getNumShoutouts($data['user']->id);
-        $config['per_page'] = 10;
-        $config['num_links'] = 2;
-        $config['uri_segment'] = $this->uri->total_segments();
-        $this->pagination->initialize($config);
-        $shoutouts = $this->user->getShoutouts($config['per_page'], (int)$page, $data['user']->id);
-        $data['pagination'] = $this->pagination->create_links();
-
-        $data['shoutouts'] = $shoutouts;
-        $data['page'] = 'user/shoutouts';
-        $this->load->view('templates', $data);
-    }
-
-    /**
-     * @param $shoutoutId
-     */
-    public function deleteShoutout($shoutoutId){
+    public function requestAddFriend($profile_id){
         $user = $this->session->userdata('user');
-        if($this->user->checkShoutoutOwner($shoutoutId, $user->id)){
-            $this->user->deleteShoutout($shoutoutId);
+
+        if ($user && $profile_id) {
+            $DB['user_from'] = $user->id;
+            $DB['user_to'] = $profile_id;
+            $DB['status'] = 0;
+            $DB['dt_create'] = time();
+            $id = $this->user->addRequestAddFriend($DB);
+            if($id){
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er sendt');
+            } else {
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke gemme din anmodning');
+            }
         } else {
-            redirect(site_url('home/index'));
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
         }
-        redirect(site_url('user/shoutouts'));
     }
 
-    public function createShoutout(){
+    public function cancelAddFriend($profile_id){
         $user = $this->session->userdata('user');
-        if($this->user->checkUncreateShoutout($user->id) == 0){
-            //Go to payment
-            redirect(site_url('payment/shoutout'));
+
+        if ($user && $profile_id) {
+            $this->user->cancelRequestAddFriend($user->id, $profile_id);
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er annulleret');
         } else {
-            $data['user'] = $user;
-            $data['page'] = 'user/createShoutout';
-            $this->load->view('templates', $data);
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
         }
     }
 
-    public function shoutoutSuccess(){
-        if($this->user->updateUncreateShoutout(1)){
-            redirect(site_url('user/createShoutout'));
-        }
-    }
-
-    public function shoutoutCancel(){
-        $this->session->set_flashdata('message', 'Din betaling er mislykket');
-        redirect(site_url('user/shoutouts'));
-    }
-
-    public function saveShoutout(){
-        $content = $this->input->post('content');
+    public function unFriend($profileId){
         $user = $this->session->userdata('user');
 
-        $insertInfo['userId'] = $user->id;
-        $insertInfo['content'] = $content;
-        $insertInfo['status'] = 1;
-        $time = time();
-        $insertInfo['dt_create'] = date('Y-m-d H:i:s', $time);
-        $insertInfo['dt_update'] = date('Y-m-d H:i:s', $time);
-        $insertInfo['bl_active'] = 0;
-
-        if($this->user->saveShoutout($insertInfo)){
-            //Sending email to admin
-            $sendEmailInfo['name'] = $user->name;
-            $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
-            $sendEmailInfo['content'] = $content;
-            $admin = $this->config->item('email');
-            $emailTo = array($admin, "info@zeduuce.com");
-            sendEmail($emailTo,'shoutoutConfirm',$sendEmailInfo,'');
-
-            $this->user->updateUncreateShoutout(-1);
-
-            $this->session->set_flashdata('message', 'Din shoutout er sendt til os, vi vil kontrollere og godkende det ASAP');
-            redirect(site_url('user/shoutouts'));
+        if ($user && $profileId) {
+            $this->user->cancelRequestAddFriend($user->id, $profileId);
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Denne person er fjernet til din venneliste');
+        } else {
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
         }
     }
 
-    public function checkToAddDated($userId, $friendId){
-        $kissTime       = $this->user->checkIsSentKiss($friendId, $userId);
-        $added          = $this->user->checkAddedToFavorite($friendId, $userId);
-        //$invitedTime    = $this->user->checkSentInvitation($friendId, $userId);
-        $seen           = $this->user->checkSeeMore3Times($friendId, $userId);
-        //var_dump($kissTime);echo '-';var_dump($added);echo '-';var_dump($seen);exit();
-        if($kissTime != false && $added != false /*&& $invitedTime != false*/ && $seen != false){
-            $this->user->createDatedUser($friendId, $userId);
-        }
-    }
 
     public function testChat(){
         /*print_r($_SESSION);exit();*/

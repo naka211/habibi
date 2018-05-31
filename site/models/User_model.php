@@ -777,5 +777,18 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->num_rows();
     }
+
+    public function addRequestAddFriend($db = null){
+        if($this->db->insert('user_friends',$db)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
+
+    public function cancelRequestAddFriend($user_id=NULL,$profile_id=NULL){
+        $this->db->where('user_from', $user_id)->where('user_to', $profile_id)->delete('user_friends');
+        return true;
+    }
     /** The End*/
 }

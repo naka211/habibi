@@ -1298,6 +1298,21 @@ select:not([multiple]) {
     background: #000;
 }
 
+.btnUnfriend {
+    padding: 5px 30px;
+    background: #fa3536;
+    font-size: 14.23px;
+    text-transform: uppercase;
+    /*margin-top: 20px;*/
+    margin-bottom: 15px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.btnUnfriend:hover {
+    background: #000;
+}
+
 .btnadd_block {
     padding: 5px 30px;
     background: #b3b3b3;

@@ -33,6 +33,9 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                         <?php if($status->isFriend == 0){?>
                             <a href="<?php echo site_url('user/cancelAddFriend/'.$profile->id);?>" class="btn btn_cancel_request">Annuller anmodning</a>
                         <?php }?>
+                        <?php if($status->isFriend == 1){?>
+                            <a href="<?php echo site_url('user/unFriend/'.$profile->id);?>" class="btn btnUnfriend">Unfriend</a>
+                        <?php }?>
                         <div class="w_table_infoProfile">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

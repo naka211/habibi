@@ -165,8 +165,7 @@ class Ajax extends CI_Controller{
         return;
     }
 
-    function addFavorite()
-    {
+    function addFavorite(){
         $profile_id = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
 
@@ -184,8 +183,7 @@ class Ajax extends CI_Controller{
         return;
     }
 
-    function removeFavorite()
-    {
+    function removeFavorite(){
         $profile_id = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
         if ($user && $profile_id) {
