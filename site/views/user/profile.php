@@ -1,6 +1,6 @@
 <?php
 if(isGoldMember()){
-    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:;"';
+    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.','.$numMessages.',1)"';
     //$chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
     $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
@@ -135,34 +135,9 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="chat">
                 <ul>
-                    <?php if($numMessages > 10){?>
-                        <li style="text-align: center;" id="loadMoreMessage">
-                            <a style="color: #f19906;" href="javascript:void(0)" onclick="loadMoreMessages(<?php echo $profile->id;?>, <?php echo $numMessages;?>, 10)">Load earlier message</a>
-                        </li>
-                    <?php }?>
-                    <?php
-                    $messages = array_reverse($messages);
-                    foreach($messages as $message){
-                        if($message->uid == $profile->id){
-                    ?>
-                        <li class="other">
-                            <a class="user"><img alt="" src="<?php echo base_url();?>/uploads/user/<?php echo $message->avatar;?>" /></a>
-                            <div class="message">
-                                <p><?php echo $message->message;?></p>
-                            </div>
-                            <div class="date">Sendt: d. <?php echo date("d/m/Y", $message->dt_create)?> kl. <?php echo date("H:i", $message->dt_create)?></div>
-                        </li>
-                    <?php } else {?>
-                        <li class="you">
-                            <a class="user"><img alt="" src="<?php echo base_url();?>/uploads/user/<?php echo $message->avatar;?>" /></a>
-                            <div class="message">
-                                <p><?php echo $message->message;?></p>
-                            </div>
-                            <div class="date">Sendt: d. <?php echo date("d/m/Y", $message->dt_create)?> kl. <?php echo date("H:i", $message->dt_create)?></div>
-                        </li>
-                    <?php
-                        }
-                    }?>
+                    <li style="text-align: center;" id="messageLoading">
+                        <img src="<?php echo base_url();?>templates/images/loading.gif">
+                    </li>
                 </ul>
                 <form class="frm_Chat" action="" method="POST" role="form">
                     <input type="text" class="form-control" placeholder="Skriv en besked her.........">

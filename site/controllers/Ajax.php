@@ -207,10 +207,10 @@ class Ajax extends CI_Controller{
         $total = $this->input->post('total', true);
         $num = $this->input->post('num', true);
 
-        $messages = $this->user->getMessages($user->id, $profileId, 10, $num);
+        $messages = $this->user->getMessages($user->id, $profileId, 1, $num);
         $html = '';
         $messages = array_reverse($messages);
-        $newNum = $num + 10;
+        $newNum = $num + 1;
         if($total > $newNum){
             $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$total.','.$newNum.')"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">

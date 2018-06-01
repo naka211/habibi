@@ -311,6 +311,7 @@ $(document).ready(function() {
             url: base_url+"ajax/loadMoreMessages",
             data: { csrf_site_name: token_value, profileId: profileId, total: total, num: num },
             success: function (html) {
+                $("#messageLoading").fadeOut(100);
                 $(".chat ul").prepend(html).hide().fadeIn(1000);
             }
         });
