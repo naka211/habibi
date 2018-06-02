@@ -390,12 +390,15 @@ class User_model extends CI_Model{
      * @param null $search
      * @return mixed
      */
-    function getFavorites($userId=NULL){
+    function getFavorites($userId=NULL, $num=NULL, $offset=NULL){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.created_at as time_added');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'left');
-        $this->db->where("uf.user_from",$userId);
+        $this->db->where("uf.user_from", $userId);
 		$this->db->order_by('uf.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num, $offset);
+        }
     	$query = $this->db->get()->result();
 	    return $query;
     }
@@ -403,7 +406,6 @@ class User_model extends CI_Model{
         $this->db->select('uf.*');
         $this->db->from('user_favorite as uf');
         $this->db->where("uf.user_from",$user);
-        $this->db->where("uf.bl_active",1);
     	$query = $this->db->get()->num_rows();
 	    return $query;
     }

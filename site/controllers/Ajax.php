@@ -246,5 +246,11 @@ class Ajax extends CI_Controller{
         echo "";
         return;
     }
+
+    public function loadMoreFavorites($offset){
+        $user = $this->session->userdata('user');
+        $list = $this->user->getFavorites($user->id, 8, $offset);
+
+    }
 }
 ?>

@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorites,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -266,104 +266,29 @@ class User extends MX_Controller
 
 
 
-    function favorites()
+    function favorites($page = 0)
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Favoritter list');
 
 
         $data['user'] = $this->session->userdata('user');
-        $list = $this->user->getFavorites($data['user']->id);
+        $config['base_url'] = base_url() . '/user/favorites/';
+        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
+        $config['per_page'] = 8;
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $list = $this->user->getFavorites($data['user']->id, $config['per_page'], (int)$page);
+        $data['pagination'] = $this->pagination->create_links();
+
         $data['list'] = $list;
 
         $data['page'] = 'user/favorites';
         $this->load->view('templates', $data);
     }
 
-    function positiv($page = 0)
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
 
-        /** Clear session search USER */
-        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
-        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
-        , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);
-
-        $data['user'] = $this->session->userdata('user');
-
-        //Reset number of notification in positive list = 0
-        $this->user->resetNumOfNotification($data['user']->id);
-
-        $config['base_url'] = base_url() . $this->language . '/user/positiv/';
-        $config['total_rows'] = count($this->user->getDatedUserIds($data['user']->id));
-        //$config['per_page'] = $this->config->item('numberpage');
-        $config['per_page'] = 5;
-        $config['num_links'] = 2;
-        $config['uri_segment'] = $this->uri->total_segments();
-        $this->pagination->initialize($config);
-        $userList = $this->user->getPositiv($config['per_page'], (int)$page, $data['user']->id);
-        $data['pagination'] = $this->pagination->create_links();
-
-        if ($userList && $data['user']) {
-            $i = 0;
-            foreach ($userList as $row) {
-                //Checking sent kiss
-                $kissTime = $this->user->checkIsSentKiss($data['user']->id, $row->id);
-                if($kissTime){
-                    $userList[$i]->sentKissStatus = true;
-                    $userList[$i]->sentKissTime = strtotime($kissTime);
-                } else {
-                    $userList[$i]->sentKissStatus = false;
-                }
-
-                $acceptedTime = $this->user->checkIsApproved($data['user']->id, $row->id);
-                if($acceptedTime){
-                    $userList[$i]->acceptedStatus = true;
-                    $userList[$i]->acceptedTime = strtotime($acceptedTime);
-                } else {
-                    $userList[$i]->acceptedStatus = false;
-                }
-
-                if($this->user->checkAddedToFavorite($data['user']->id, $row->id)){
-                    $userList[$i]->addedToFavoriteStatus = true;
-                    $userList[$i]->addedToFavoriteTime = strtotime($this->user->checkAddedToFavorite($data['user']->id, $row->id));
-                } else {
-                    $userList[$i]->addedToFavoriteStatus = false;
-                }
-
-                $invitedTime = $this->user->checkSentInvitation($data['user']->id, $row->id);
-                if($invitedTime){
-                    $userList[$i]->sentInvitationStatus = true;
-                    $userList[$i]->invitedTime = strtotime($invitedTime);
-                } else {
-                    $userList[$i]->sentInvitationStatus = false;
-                }
-
-                if($this->user->checkSeeMore3Times($data['user']->id, $row->id)){
-                    $userList[$i]->seeMore3TimesStatus = true;
-                } else {
-                    $userList[$i]->seeMore3TimesStatus = false;
-                }
-                $userList[$i]->lastSeeTime = strtotime($this->user->getLastSeeTime($data['user']->id, $row->id));
-
-                if($this->user->checkUnreadSentMessage($data['user']->id, $row->id)){
-                    $userList[$i]->sentUnreadMessageStatus = true;
-                } else {
-                    $userList[$i]->sentUnreadMessageStatus = false;
-                }
-                $userList[$i]->lastMessageTime = strtotime($this->user->getLastMessageTime($data['user']->id, $row->id));
-
-                $i++;
-            }
-            //print_r($userList);exit();
-        }
-        $data['userList'] = $userList;
-
-        $data['page'] = 'user/positiv';
-        $this->load->view('templates', $data);
-    }
 
     public function deleteUser($friendId){
         $user = $this->session->userdata('user');

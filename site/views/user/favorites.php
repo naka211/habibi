@@ -9,12 +9,12 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row jScroll">
                 <?php foreach($list as $user){?>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
                     <div class="box_favorites_item">
                         <div class="favorites_img">
-                            <a href="#"><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
+                            <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <div class="favorites_footer">
                                 <?php if(isFriend($user->id) == false){?><a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn btn_addFriend">Tilføj ven</a><?php }?>
@@ -27,6 +27,18 @@
                     </div>
                 </div>
                 <?php }?>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <ul class="pagination friends_pagination">
+                        <?php echo $pagination;?>
+                        <!--<li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">50</a></li>-->
+                    </ul>
+                </div>
             </div>
         </div>
     </section>

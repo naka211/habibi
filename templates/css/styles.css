@@ -1832,7 +1832,7 @@ ul.list_action li a .i_block {
     color: #000;
 }
 
-.friends_pagination.pagination > li.active > a, .friends_pagination.pagination > li:hover > a {
+.friends_pagination.pagination > li > a.active, .friends_pagination.pagination > li:hover > a {
     background-color: #ffa507;
     color: #fff;
     border-radius: 3px;
@@ -2694,4 +2694,28 @@ ul.list_action li a .i_block {
     border-radius: 0 4px 4px 0;
 }
 
-
+.favorites_img a.btnClose_img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    z-index: 100;
+    right: 10px;
+    top: 10px;
+    background: transparent;
+    color: #ccc;
+}
+.favorites_img a.btnClose_img:hover {
+    color: #ffa507;
+}
+.btnUpload {
+    background: #ffa507;
+    margin: 30px auto 0;
+    padding: 10px 30px;
+    font-size: 14.23px;
+    text-transform: uppercase;
+    min-width: 160px;
+}
+.btnUpload:hover {
+    background: #000;
+}
