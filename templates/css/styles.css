@@ -1878,6 +1878,7 @@ ul.list_action li a .i_block {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 30px;
+    min-height: 366px;
 }
 
 .box_favorites_item:hover .favorites_footer, .box_favorites_item:hover .favorites_top {
@@ -2471,7 +2472,7 @@ ul.list_action li a .i_block {
     display: inline-block;
 }
 
-#modalQuestion p {
+#modalConfirm p {
     margin-bottom: 30px;
     text-align: center;
 }

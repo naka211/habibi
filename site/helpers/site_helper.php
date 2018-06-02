@@ -320,3 +320,23 @@ function printAge($year){
         return '';
     }
 }
+
+function countImages($profileId){
+    $ci = &get_instance();
+    $imageQuantity = $ci->db->select('COUNT(id) as quantity')
+        ->from('tb_user_image')
+        ->where('userID', $profileId)
+        ->get()->row()->quantity;
+    return $imageQuantity;
+}
+
+function isFriend($profileId){
+    $ci = &get_instance();
+    $userId = $ci->session->userdata('user')->id;
+
+    $query = $ci->db->select("id")
+        ->from('tb_user_friends')
+        ->where("(user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)");
+
+    return $query->get()->num_rows()?true:false;
+}

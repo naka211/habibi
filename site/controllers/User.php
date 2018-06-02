@@ -266,56 +266,17 @@ class User extends MX_Controller
 
 
 
-    function favorit($page = 0)
+    function favorites()
     {
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Favoritter list');
 
-        /** Clear session search USER */
-        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
-        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
-        , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);
 
         $data['user'] = $this->session->userdata('user');
-        $config['base_url'] = base_url() . $this->language . '/user/favorit/';
-        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
-        $config['per_page'] = $this->config->item('numberpage');
-        $config['num_links'] = 2;
-        $config['uri_segment'] = $this->uri->total_segments();
-        $this->pagination->initialize($config);
-        $listUsers = $this->user->getFavorite($config['per_page'], (int)$page, $data['user']->id);
-        $data['pagination'] = $this->pagination->create_links();
-        if ($listUsers) {
-            $i = 0;
-            foreach ($listUsers as $row) {
-                //Checking action to show below
-                $users[$i]['action'] = $this->user->checkAction($data['user']->id, $row->id);
-                $users[$i]['id'] = $row->id;
-                $users[$i]['name'] = $row->name;
-                $users[$i]['time_added'] = strtotime($row->time_added);
-                $users[$i]['birthday'] = $row->birthday;
-                $users[$i]['code'] = $row->code;
-                $users[$i]['facebook'] = $row->facebook;
-                $users[$i]['avatar'] = $row->avatar;
-                /*if ($row->facebook && $row->avatar) {
-                    $users[$i]['avatar'] = $row->avatar;
-                } else {
-                    $photo = $this->user->getPhoto($row->id);
-                    if ($photo) {
-                        $users[$i]['avatar'] = $photo[0]->image;
-                    } else {
-                        $users[$i]['avatar'] = "";
-                    }
-                }*/
-                $i++;
-            }
-        } else {
-            $users = "";
-        }
-        $data['list'] = $users;
+        $list = $this->user->getFavorites($data['user']->id);
+        $data['list'] = $list;
 
-        $data['page'] = 'user/favorit';
+        $data['page'] = 'user/favorites';
         $this->load->view('templates', $data);
     }
 
@@ -1398,6 +1359,20 @@ class User extends MX_Controller
             customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Denne person er fjernet til din venneliste');
         } else {
             customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
+        }
+    }
+
+    function removeFavorite($profileId){
+        $user = $this->session->userdata('user');
+        if ($user && $profileId) {
+            $id = $this->user->removeFavorite($user->id, $profileId);
+            if ($id) {
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Denne person er blevet fjernet til din favoritliste');
+            } else {
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke fjerne');
+            }
+        } else {
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Manglende id');
         }
     }
 

@@ -58,7 +58,7 @@ if(!empty($user)){
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="search.php">Søg</a></li>
-                            <li><a href="favorites.php">Favoritter</a></li>
+                            <li><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
                             <li><a <?php echo $messageLink; ?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
                             <li><a <?php echo $visitingLink; ?>>Besøg</a></li>
                             <li><a <?php echo $blinkLink; ?>>Blink <?php echo $blinkingQuantityHTML?></a></li>

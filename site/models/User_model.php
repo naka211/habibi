@@ -390,19 +390,12 @@ class User_model extends CI_Model{
      * @param null $search
      * @return mixed
      */
-    function getFavorite($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
-        $this->db->select('u.*, uf.dt_create as time_added');
+    function getFavorites($userId=NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.created_at as time_added');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'left');
-        if($search['name']){
-            $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
-        }
-        $this->db->where("uf.user_from",$user);
-        $this->db->where("u.bl_active",1);
+        $this->db->where("uf.user_from",$userId);
 		$this->db->order_by('uf.id','DESC');
-        if($num || $offset){
-            $this->db->limit($num,$offset);
-        }
     	$query = $this->db->get()->result();
 	    return $query;
     }

@@ -342,5 +342,11 @@ $(document).ready(function() {
             $("#message"+profileId).val("");
         });
     }
+
+    confirmRemoveFavorite = function (profileId) {
+        $("#confirmText").html("Er du sikkert på at slette hele chat-beskeden?");
+        $('.btnYes').attr('href', base_url+'user/removeFavorite/'+profileId);
+        $.fancybox.open({src: '#modalConfirm'});
+    }
 });
 
