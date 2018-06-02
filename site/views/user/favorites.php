@@ -50,3 +50,8 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+       $("#favoriteMenu").addClass('active');
+    });
+</script>

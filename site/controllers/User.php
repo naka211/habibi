@@ -266,20 +266,19 @@ class User extends MX_Controller
 
 
 
-    function favorites($page = 0)
+    function favorites($offset = 0)
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Favoritter list');
 
-
         $data['user'] = $this->session->userdata('user');
         $config['base_url'] = base_url() . '/user/favorites/';
         $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
-        $config['per_page'] = 8;
-        $config['num_links'] = 2;
+        $config['per_page'] = $this->config->item('item_per_page');
+        //$config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $list = $this->user->getFavorites($data['user']->id, $config['per_page'], (int)$page);
+        $list = $this->user->getFavorites($data['user']->id, $config['per_page'], (int)$offset);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;

@@ -429,7 +429,7 @@ section.section_intro {
     padding-left: 0;
 }
 
-.nav > li > a:focus, .nav > li > a:hover {
+.nav > li > a:focus, .nav > li > a:hover, .nav > li.active > a {
     color: rgb(255, 165, 7);
     background: transparent;
 }

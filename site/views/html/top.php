@@ -9,13 +9,13 @@ if(!empty($user)){
     $friendRequestQuantityHTML = !empty($friendRequestQuantity) ? '<span>' . $friendRequestQuantity . '</span>' : '';
 
     if(isGoldMember()){
-        $blinkLink = 'href="'.site_url('user/blinks').'"';
         $messageLink = 'href="'.site_url('user/messages').'"';
         $visitingLink = 'href="'.site_url('user/visits').'"';
         $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     } else {
-        $blinkLink = $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+        $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
     }
+    $blinkLink = 'href="'.site_url('user/blinks').'"';
 }
 ?>
 
@@ -57,13 +57,13 @@ if(!empty($user)){
                     </div>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="search.php">Søg</a></li>
-                            <li><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
-                            <li><a <?php echo $messageLink; ?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
-                            <li><a <?php echo $visitingLink; ?>>Besøg</a></li>
-                            <li><a <?php echo $blinkLink; ?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
-                            <li><a href="friend.php">Venner</a></li>
-                            <li><a <?php echo $friendRequestLink; ?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
+                            <li id="searchMenu"><a href="search.php">Søg</a></li>
+                            <li id="favoriteMenu"><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
+                            <li id="messageMenu"><a <?php echo $messageLink; ?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
+                            <li id="visitMenu"><a <?php echo $visitingLink; ?>>Besøg</a></li>
+                            <li id="blinkMenu"><a <?php echo $blinkLink; ?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
+                            <li id="friendMenu"><a href="friend.php">Venner</a></li>
+                            <li id="friendRequestMenu"><a <?php echo $friendRequestLink; ?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
                         </ul>
                     </div>
                 </div>

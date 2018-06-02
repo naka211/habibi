@@ -79,3 +79,8 @@
         </div>
     </section>
 </div>
+<script>
+    $(document).ready(function() {
+        $("#friendRequestMenu").addClass('active');
+    });
+</script>
