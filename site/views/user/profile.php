@@ -1,6 +1,6 @@
 <?php
 if(isGoldMember()){
-    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.','.$numMessages.',1)"';
+    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.','.$numMessages.',0, true)"';
     //$chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
     $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
@@ -135,13 +135,10 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="chat">
                 <ul>
-                    <li style="text-align: center;" id="messageLoading">
-                        <img src="<?php echo base_url();?>templates/images/loading.gif">
-                    </li>
                 </ul>
                 <form class="frm_Chat" action="" method="POST" role="form">
-                    <input type="text" class="form-control" placeholder="Skriv en besked her.........">
-                    <button type="submit" class="btn btnSend">SEND</button>
+                    <input type="text" class="form-control" id="message<?php echo $profile->id;?>" placeholder="Skriv en besked her.........">
+                    <button type="button" class="btn btnSend" onclick="sendMessage(<?php echo $profile->id;?>)">SEND</button>
                 </form>
             </div>
         </div>

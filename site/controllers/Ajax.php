@@ -207,12 +207,12 @@ class Ajax extends CI_Controller{
         $total = $this->input->post('total', true);
         $num = $this->input->post('num', true);
 
-        $messages = $this->user->getMessages($user->id, $profileId, 1, $num);
+        $messages = $this->user->getMessages($user->id, $profileId, 10, $num);
         $html = '';
         $messages = array_reverse($messages);
-        $newNum = $num + 1;
+        $newNum = $num + 10;
         if($total > $newNum){
-            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$total.','.$newNum.')"';
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$total.','.$newNum.', false)"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">
                             <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Load earlier messages</a>
                         </li>';
@@ -238,6 +238,31 @@ class Ajax extends CI_Controller{
         }
         echo $html;
         exit();
+    }
+
+    function sendMessage()
+    {
+        $user = $this->session->userdata('user');
+        if ($user) {
+            $DB['user_from'] = $user->id;
+            $DB['user_to'] = $this->input->post('user_to');
+            $DB['message'] = $this->input->post('message');
+            $DB['seen'] = 0;
+            $DB['dt_create'] = time();
+            $this->user->saveMessage($DB);
+            $item = $this->user->getUser($user->id);
+            $html = '<li class="you">
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$item->avatar.'" /></a>
+                            <div class="message">
+                                <p>'.$DB['message'].'</p>
+                            </div>
+                            <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
+                        </li>';
+            echo $html;
+            return;
+        }
+        echo "";
+        return;
     }
 }
 ?>

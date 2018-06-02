@@ -304,16 +304,42 @@ $(document).ready(function() {
         });
     }
 
-    loadMoreMessages = function (profileId, total, num) {
-        $("#loadMoreMessage").remove();
+    loadMoreMessages = function (profileId, total, num, first) {
+        if(first == false){
+            $("#loadMoreMessage").remove();
+        } else {
+            $(".chat ul").html("");
+            $(".chat ul").append('<li style="text-align: center;" id="messageLoading">\n' +
+                '                        <img src="'+base_url+'templates/images/loading.gif">\n' +
+                '                    </li>');
+        }
+
         $.ajax({
             method: "POST",
             url: base_url+"ajax/loadMoreMessages",
             data: { csrf_site_name: token_value, profileId: profileId, total: total, num: num },
             success: function (html) {
                 $("#messageLoading").fadeOut(100);
+                //Add message to ul
                 $(".chat ul").prepend(html).hide().fadeIn(1000);
+                //Scroll to bottom of ul
+                $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
             }
+        });
+    }
+
+    sendMessage = function (profileId) {
+        var message = $("#message"+profileId).val();
+        $.ajax({
+            type: "post",
+            url: base_url+"ajax/sendMessage",
+            dataType: 'html',
+            data: {message: message, user_to: profileId,'csrf_site_name':token_value}
+        }).done(function(html){
+            $(".chat ul").append(html);
+            //Scroll to bottom of ul
+            $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
+            $("#message"+profileId).val("");
         });
     }
 });

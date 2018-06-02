@@ -254,41 +254,7 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function sendMessage()
-    {
-        $user = $this->session->userdata('user');
-        if ($user) {
-            //Adding positive notification
-            if($this->user->checkSentMessage($user->id, $this->input->post('user_to')) === false){
-                //if($this->user->isBlocked($user->id, $this->input->post('user_to')) == false){
-                    $this->user->addNotification($this->input->post('user_to'));
-                //}
-            }
 
-            $DB['user_from'] = $user->id;
-            $DB['user_to'] = $this->input->post('user_to');
-            $DB['message'] = $this->input->post('message');
-            $DB['seen'] = 1;
-            $DB['dt_create'] = date('Y-m-d H:i:s');
-            $DB['bl_active'] = 1;
-            $this->user->saveMessage($DB);
-            $item = $this->user->getUser($user->id);
-            actionUser($user->id, $DB['user_to'], 'Message', 3);
-            $html = '<div class="row">
-                         <div class="col-sm-3">
-                            <h5>' . $item->name . '</h5>
-                            <p>' . getTimeDifference(strtotime($DB['dt_create'])) . '</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p>' . $DB['message'] . '</p>
-                        </div>
-                    </div>';
-            echo $html;
-            return;
-        }
-        echo "";
-        return;
-    }
 
     function deleteMessage($userID)
     {
