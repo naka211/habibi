@@ -1301,6 +1301,29 @@ class User extends MX_Controller
         }
     }
 
+    public function friendRequests(){
+        $user = $this->session->userdata('user');
+        $receivedRequests = $this->user->getReceivedRequests($user->id);
+        $sentRequests = $this->user->getSentRequests($user->id);
+
+        $data['receivedRequests'] = $receivedRequests;
+        $data['sentRequests'] = $sentRequests;
+
+        $data['page'] = 'user/friendrequests';
+        $this->load->view('templates', $data);
+    }
+
+    public function acceptAddFriend($profileId){
+        $user = $this->session->userdata('user');
+        $this->user->updateFriendRequest($user->id, $profileId, 1);
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den person er tilføjet til vennelisten');
+    }
+
+    public function rejectAddFriend($profileId){
+        $user = $this->session->userdata('user');
+        $this->user->updateFriendRequest($user->id, $profileId, 2);
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den pågældende afvises til vennelisten');
+    }
 
     public function testChat(){
         /*print_r($_SESSION);exit();*/

@@ -1715,7 +1715,7 @@ ul.list_action li a .i_block {
 }
 
 .friend_list_lead {
-    border-bottom: 1px solid #e1e1e1;
+    /*border-bottom: 1px solid #e1e1e1;*/
     margin-bottom: 30px;
     margin-top: 30px;
 }

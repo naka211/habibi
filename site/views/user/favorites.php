@@ -32,11 +32,6 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <ul class="pagination friends_pagination">
                         <?php echo $pagination;?>
-                        <!--<li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">50</a></li>-->
                     </ul>
                 </div>
             </div>

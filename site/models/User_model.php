@@ -794,5 +794,37 @@ class User_model extends CI_Model{
         $this->db->where('user_from', $user_id)->where('user_to', $profile_id)->delete('user_friends');
         return true;
     }
+
+    public function getReceivedRequests($userId){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
+        $this->db->from('user_friends as uf');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'left');
+        $this->db->where("uf.user_to", $userId);
+        $this->db->where("uf.status", 0);
+        $this->db->order_by('uf.id','DESC');
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    public function getSentRequests($userId){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
+        $this->db->from('user_friends as uf');
+        $this->db->join('user as u', 'u.id = uf.user_to', 'left');
+        $this->db->where("uf.user_from", $userId);
+        $this->db->where("uf.status", 0);
+        $this->db->order_by('uf.id','DESC');
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    public function updateFriendRequest($userId, $profileId, $status){
+        $data = array(
+            'status' => $status,
+            'dt_update' => time()
+        );
+        $this->db->where('user_from', $profileId);
+        $this->db->where('user_to', $userId);
+        return $this->db->update('user_friends', $data);
+    }
     /** The End*/
 }
