@@ -1717,7 +1717,7 @@ ul.list_action li a .i_block {
 .friend_list_lead {
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 30px;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
 }
 
 .friend_list h3 {
@@ -1735,6 +1735,10 @@ ul.list_action li a .i_block {
     border-bottom: 1px solid #e1e1e1;
     padding-bottom: 33px;
     margin-bottom: 33px;
+}
+
+.notSeen{
+    border-bottom: 1px solid #ffa507;
 }
 
 .frend_item h4 {

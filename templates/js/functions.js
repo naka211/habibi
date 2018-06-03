@@ -347,8 +347,14 @@ $(document).ready(function() {
     }
 
     confirmRemoveFavorite = function (profileId) {
-        $("#confirmText").html("Er du sikkert på at slette hele chat-beskeden?");
+        $("#confirmText").html("Er du sikker på at fjerne denne person til din favoritliste?");
         $('.btnYes').attr('href', base_url+'user/removeFavorite/'+profileId);
+        $.fancybox.open({src: '#modalConfirm'});
+    }
+
+    confirmDeleteMessage = function (profileId) {
+        $("#confirmText").html("Er du sikkert på at slette hele chat-beskeden?");
+        $('.btnYes').attr('href', base_url+'user/deleteMessage/'+profileId);
         $.fancybox.open({src: '#modalConfirm'});
     }
 });

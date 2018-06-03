@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorites,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorites,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -234,22 +234,24 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function messages($id)
+    function messages($offset = 0)
     {
         //Checking dated
         $user = $this->session->userdata('user');
-        if(isDated($user->id, $id) === false){
-            $this->session->set_flashdata('message', 'Du skal dateret med denne person for at bruge denne funktion !!');
-            redirect(site_url('/user/index'));
-        }
-
         $data = array();
         $this->user->addMeta($this->_meta, $data);
 
-        $data['user'] = $user;
-        $data['item'] = $this->user->getUser($id);
-        $data['messages'] = $this->user->getMessages($data['user']->id, $id);
-        $this->user->clearNotSeen($data['user']->id, $id);
+        $config['base_url'] = base_url() . '/user/messages/';
+        $config['total_rows'] = $this->user->getNumUserSent($user->id);
+        $config['per_page'] = $this->config->item('item_per_page');
+        //$config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $list = $this->user->getUserSent($user->id, $config['per_page'], (int)$offset);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['list'] = $list;
+
         $data['page'] = 'user/messages';
         $this->load->view('templates', $data);
     }
@@ -1331,7 +1333,7 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
         $config['base_url'] = base_url() . '/user/friends/';
-        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
+        $config['total_rows'] = $this->user->getNumFriends($data['user']->id);
         $config['per_page'] = $this->config->item('item_per_page');
         //$config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();

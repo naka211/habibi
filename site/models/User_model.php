@@ -184,61 +184,7 @@ class User_model extends CI_Model{
 	    return $query;
     }
 
-    /**
-     * @param null $id
-     * @param null $email
-     * @param null $password
-     * @return mixed
-     */
-    function getB2b($id=NULL,$email=NULL,$password=NULL){
-        $this->db->select('*')->from('user_b2b');
-        if($id){
-            $this->db->where("id",$id);
-        }
-		if($email){
-            $this->db->where("email",$email);
-		}
-        if($password){
-            $this->db->where("password",$password);
-        }
-        $query = $this->db->get()->row();
-        return $query;
-	}
 
-    function updateB2B($DB=NULL,$id=NULL){
-        if($id){
-            $this->db->where('id',$id);
-            return $this->db->update('user_b2b',$DB);
-        }
-    }
-
-    function getQuantityB2BDeals($company_id){
-        $query = $this->db->select('po.*')
-            ->from('product_order_item as po')
-            ->join('product_product as pp', 'pp.id = po.product_id', 'left')
-            ->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left')
-            ->join('product_order as p', 'p.id = po.order_id', 'left')
-            ->where("b2b.id",$company_id)
-            ->where("p.bl_active",1)
-            ->order_by('po.dt_create','DESC')
-            ->get()->num_rows();
-        return $query;
-    }
-
-    function getB2BDeals($company_id, $num, $offset){
-        $query = $this->db->select('po.*, pp.name, pp.image, pp.description, p.orderID as orderId, pc.name as categoryName')
-            ->from('product_order_item as po')
-            ->join('product_product as pp', 'pp.id = po.product_id', 'left')
-            ->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left')
-            ->join('product_order as p', 'p.id = po.order_id', 'left')
-            ->join('product_category as pc', 'pp.category_id = pc.category_id', 'left')
-            ->where("b2b.id",$company_id)
-            ->where("p.bl_active",1)
-            ->order_by('po.dt_create','DESC')
-            ->limit($num,$offset)
-            ->get()->result();
-        return $query;
-    }
 
     function updateLogin($id=NULL, $b2b=NULL){
         if($b2b){
@@ -292,7 +238,7 @@ class User_model extends CI_Model{
         }
     }
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
-        $this->db->set('seen',1)->where('user_from', $userID)->where('user_to', $user)->update('user_messages');
+        $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
 
 		$this->db->select('m.*, u.name, u.id as uid, u.avatar');
 		$this->db->from('user_messages m');
@@ -871,6 +817,50 @@ class User_model extends CI_Model{
         }
         $query = $this->db->get()->result();
         return $query;
+    }
+
+    public function getNumFriends($userId){
+        $this->db->select('COUNT(id) as num');
+        $this->db->from('user_friendlist');
+        $this->db->where('user_from', $userId);
+        $query = $this->db->get();
+        return $query->row()->num;
+    }
+
+    public function getNumUserSent($userId){
+        $this->db->select('DISTINCT (CASE WHEN user_from = '.$userId.' THEN user_to WHEN user_to = '.$userId.' THEN user_from END) as userId');
+        $this->db->from('user_messages');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function getUserSent($userId, $num, $offset){
+        $this->db->select('DISTINCT (CASE WHEN user_from = '.$userId.' THEN user_to WHEN user_to = '.$userId.' THEN user_from END) as userId');
+        $this->db->from('user_messages');
+        $this->db->order_by('id', 'DESC');
+        if($num || $offset){
+            $this->db->limit($num, $offset);
+        }
+        $userIdArr = $this->db->get()->result();
+
+        $result = array();
+        foreach ($userIdArr as $key => $user){
+            $this->db->select('name, id, avatar, region, ethnic_origin, year');
+            $this->db->from('user');
+            $this->db->where("id", $user->userId);
+            $result[$key] = $this->db->get()->row();
+
+            $this->db->select('message, seen, dt_create');
+            $this->db->from('user_messages');
+            $this->db->where("user_from = $user->userId OR user_to = $user->userId");
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit(1, 0);
+            $query = $this->db->get()->row();
+            $result[$key]->message = $query->message;
+            $result[$key]->added_time = $query->dt_create;
+            $result[$key]->seen = $query->seen;
+        }
+        return $result;
     }
     /** The End*/
 }
