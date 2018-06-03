@@ -106,19 +106,7 @@
             </div>
         </div>
         <div class="text-center">
-            <a href="text_page.php" class="btn btn_Upgrade">Opgrader nu</a>
-        </div>
-    </div>
-
-    <div style="display: none;" id="modalQuestion" class="animated-modal modalLogin">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <p>Er du sikkert på at slette hele chat-beskeden? </p>
-                <div class="text-center">
-                    <a href="#" class="btn btnYes">JA</a>
-                    <a href="#" class="btn btnNo">NEJ</a>
-                </div>
-            </div>
+            <a href="<?php echo site_url('user/upgrade');?>" class="btn btn_Upgrade">Opgrader nu</a>
         </div>
     </div>
 <?php }?>

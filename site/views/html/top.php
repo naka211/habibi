@@ -13,8 +13,9 @@ if(!empty($user)){
         $visitingLink = 'href="'.site_url('user/visits').'"';
         $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     } else {
-        $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+        $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
     }
+    $messageLink = 'href="'.site_url('user/messages').'"';
     $blinkLink = 'href="'.site_url('user/blinks').'"';
     $friendLink = 'href="'.site_url('user/friends').'"';
 }

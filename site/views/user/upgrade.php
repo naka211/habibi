@@ -16,7 +16,7 @@
                 <p class="f14">Guld medlem (koster 149, - dkr. pr. mdr. inkl. moms) </p>
                 <div class="frm-forgetpass mt30">
                     <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm', 'class'=>'form-inline'))?>
-                        <button type="submit" class="btn btnSend">Opgradering</button>
+                        <button type="submit" class="btn bntMessage">Opgradering</button>
                     <?php echo form_close();?>
                 </div>
             </div>
