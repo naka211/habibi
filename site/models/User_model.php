@@ -292,6 +292,8 @@ class User_model extends CI_Model{
         }
     }
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
+        $this->db->set('seen',1)->where('user_from', $userID)->where('user_to', $user)->update('user_messages');
+
 		$this->db->select('m.*, u.name, u.id as uid, u.avatar');
 		$this->db->from('user_messages m');
         $this->db->join('user u', 'm.user_from = u.id','left');
