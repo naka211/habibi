@@ -314,6 +314,9 @@ $(document).ready(function() {
                 '                    </li>');
         }
 
+        //Set onclick function for send message button
+        $(".btnSend").attr('onclick', 'sendMessage('+profileId+')');
+
         $.ajax({
             method: "POST",
             url: base_url+"ajax/loadMoreMessages",
@@ -329,7 +332,7 @@ $(document).ready(function() {
     }
 
     sendMessage = function (profileId) {
-        var message = $("#message"+profileId).val();
+        var message = $("#message").val();
         $.ajax({
             type: "post",
             url: base_url+"ajax/sendMessage",
@@ -339,7 +342,7 @@ $(document).ready(function() {
             $(".chat ul").append(html);
             //Scroll to bottom of ul
             $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-            $("#message"+profileId).val("");
+            $("#message").val("");
         });
     }
 

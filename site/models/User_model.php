@@ -801,7 +801,7 @@ class User_model extends CI_Model{
     }
 
     public function cancelRequestAddFriend($user_id=NULL,$profile_id=NULL){
-        $this->db->where('user_from', $user_id)->where('user_to', $profile_id)->delete('user_friends');
+        $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friends');
         $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friendlist');
         return true;
     }
