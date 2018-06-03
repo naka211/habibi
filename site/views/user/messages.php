@@ -63,6 +63,17 @@
         </div>
     </div>
 <?php }?>
+<div style="display: none;" id="modalConfirm" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p id="confirmText"></p>
+            <div class="text-center">
+                <a href="#" class="btn btnYes">JA</a>
+                <a href="javascript:void(0);" onclick="$.fancybox.close();" class="btn btnNo">NEJ</a>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         $("#messageMenu").addClass('active');

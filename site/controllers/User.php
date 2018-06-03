@@ -207,33 +207,6 @@ class User extends MX_Controller
     }
 
     /** Message*/
-    function mymessages()
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-        $data['user'] = $this->session->userdata('user');
-        $message = $this->user->getListMessage($data['user']->id);
-        $list = "";
-        if ($message) {
-            $i = 0;
-            foreach ($message as $row) {
-                $userSend = $this->user->getUser($row->user_from);
-                if ($userSend) {
-                    $list[$i] = $userSend;
-                    $list[$i]->notSeen = $this->user->getNotSeen($data['user']->id, $row->user_from);
-                    $latestMessage = $this->user->getLatestMessage($data['user']->id, $row->user_from);
-                    $list[$i]->message = $latestMessage->message;
-                    $list[$i]->dt_create = $latestMessage->dt_create;
-                    $i++;
-                }
-            }
-        }
-        $data['list'] = $list;
-        $data['page'] = 'user/mymessages';
-        $this->load->view('templates', $data);
-    }
-
     function messages($offset = 0)
     {
         //Checking dated
@@ -258,12 +231,10 @@ class User extends MX_Controller
 
 
 
-    function deleteMessage($userID)
-    {
+    function deleteMessage($profileId){
         $user = $this->session->userdata('user');
-        $this->user->deleteMessage_FT($user->id, $userID);
-        $this->user->deleteMessage_TF($user->id, $userID);
-        redirect(site_url('user/mymessages'));
+        $this->user->deleteMessage($user->id, $profileId);
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din besked er slettet');
     }
 
 

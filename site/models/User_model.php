@@ -230,13 +230,6 @@ class User_model extends CI_Model{
         }
     }
     /** MESSAGE*/
-    function saveMessage($DB=NULL){
-        if($this->db->insert('user_messages',$DB)){
-            return $this->db->insert_id();
-        }else{
-            return false;
-        }
-    }
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
         $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
 
@@ -256,24 +249,6 @@ class User_model extends CI_Model{
         $this->db->select('COUNT(id) as num');
         $this->db->from('user_messages');
         $this->db->where('(user_from='.$user.' AND user_to='.$userID.') OR (user_from='.$userID.' AND user_to='.$user.')');
-        $query = $this->db->get();
-        return $query->row()->num;
-    }
-
-    function getListMessage($user=NULL){
-        $this->db->select('DISTINCT(user_from)');
-        $this->db->from('user_messages');
-        $this->db->where('user_to', $user);
-        $this->db->order_by('id DESC');
-        $query = $this->db->get();
-        return $query->result();
-    }
-    function getNotSeen($user=NULL,$userID=NULL){
-        $this->db->select('COUNT(*) num');
-        $this->db->from('user_messages');
-        $this->db->where('user_from', $userID);
-        $this->db->where('user_to', $user);
-        $this->db->where('seen', 1);
         $query = $this->db->get();
         return $query->row()->num;
     }
@@ -312,12 +287,9 @@ class User_model extends CI_Model{
         $this->db->set('seen',0)->where('user_from', $userID)->where('user_to', $user)->update('user_messages');
         return true;
     }
-    function deleteMessage_FT($user=NULL,$userID=NULL){
-        $this->db->where('user_from', $user)->where('user_to', $userID)->delete('user_messages');
-        return true;
-    }
-    function deleteMessage_TF($user=NULL,$userID=NULL){
-        $this->db->where('user_to', $user)->where('user_from', $userID)->delete('user_messages');
+
+    function deleteMessage($user=NULL,$userID=NULL){
+        $this->db->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->delete('user_messages');
         return true;
     }
 
