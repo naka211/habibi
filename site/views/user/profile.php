@@ -1,6 +1,6 @@
 <?php
 if(isGoldMember()){
-    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.','.$numMessages.',0, true)"';
+    $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.',0, true)"';
     //$chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
     $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';

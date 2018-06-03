@@ -186,7 +186,7 @@ class Ajax extends CI_Controller{
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);
-        $total = $this->input->post('total', true);
+        $total = $this->user->getNumMessages($user->id, $profileId);
         $num = $this->input->post('num', true);
 
         $messages = $this->user->getMessages($user->id, $profileId, 10, $num);

@@ -81,7 +81,7 @@ class User extends MX_Controller
         $data['status'] = $this->user->checkStatus($data['user']->id, $id);
         if(isGoldMember()){
             $data['messages'] = $this->user->getMessages($data['user']->id, $id, 10, 0);
-            $data['numMessages'] = $this->user->getNumMessages($data['user']->id, $id);
+            /*$data['numMessages'] = $this->user->getNumMessages($data['user']->id, $id);*/
         }
 
         $data['page'] = 'user/profile';

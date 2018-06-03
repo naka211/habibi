@@ -304,7 +304,7 @@ $(document).ready(function() {
         });
     }
 
-    loadMoreMessages = function (profileId, total, num, first) {
+    loadMoreMessages = function (profileId, num, first) {
         if(first == false){
             $("#loadMoreMessage").remove();
         } else {
@@ -317,7 +317,7 @@ $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: base_url+"ajax/loadMoreMessages",
-            data: { csrf_site_name: token_value, profileId: profileId, total: total, num: num },
+            data: { csrf_site_name: token_value, profileId: profileId, num: num },
             success: function (html) {
                 $("#messageLoading").fadeOut(100);
                 //Add message to ul
