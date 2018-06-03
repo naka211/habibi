@@ -16,6 +16,7 @@ if(!empty($user)){
         $messageLink = $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
     }
     $blinkLink = 'href="'.site_url('user/blinks').'"';
+    $friendLink = 'href="'.site_url('user/friends').'"';
 }
 ?>
 
@@ -59,11 +60,11 @@ if(!empty($user)){
                         <ul class="nav navbar-nav">
                             <li id="searchMenu"><a href="search.php">Søg</a></li>
                             <li id="favoriteMenu"><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
-                            <li id="messageMenu"><a <?php echo $messageLink; ?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
-                            <li id="visitMenu"><a <?php echo $visitingLink; ?>>Besøg</a></li>
-                            <li id="blinkMenu"><a <?php echo $blinkLink; ?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
-                            <li id="friendMenu"><a href="friend.php">Venner</a></li>
-                            <li id="friendRequestMenu"><a <?php echo $friendRequestLink; ?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
+                            <li id="messageMenu"><a <?php echo $messageLink;?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
+                            <li id="visitMenu"><a <?php echo $visitingLink;?>>Besøg</a></li>
+                            <li id="blinkMenu"><a <?php echo $blinkLink;?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
+                            <li id="friendMenu"><a <?php echo $friendLink;?>>Venner</a></li>
+                            <li id="friendRequestMenu"><a <?php echo $friendRequestLink;?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
                         </ul>
                     </div>
                 </div>

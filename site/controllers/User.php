@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorites,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorites,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -266,8 +266,7 @@ class User extends MX_Controller
 
 
 
-    function favorites($offset = 0)
-    {
+    function favorites($offset = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Favoritter list');
 
@@ -286,8 +285,6 @@ class User extends MX_Controller
         $data['page'] = 'user/favorites';
         $this->load->view('templates', $data);
     }
-
-
 
     public function deleteUser($friendId){
         $user = $this->session->userdata('user');
@@ -1301,6 +1298,9 @@ class User extends MX_Controller
     }
 
     public function friendRequests(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Venneanmodninger');
+
         $user = $this->session->userdata('user');
         $receivedRequests = $this->user->getReceivedRequests($user->id);
         $sentRequests = $this->user->getSentRequests($user->id);
@@ -1315,6 +1315,7 @@ class User extends MX_Controller
     public function acceptAddFriend($profileId){
         $user = $this->session->userdata('user');
         $this->user->updateFriendRequest($user->id, $profileId, 1);
+        $this->user->insertFriendList($user->id, $profileId);
         customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den person er tilføjet til vennelisten');
     }
 
@@ -1322,6 +1323,26 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         $this->user->updateFriendRequest($user->id, $profileId, 2);
         customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den pågældende afvises til vennelisten');
+    }
+
+    function friends($offset = 0){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Venner');
+
+        $data['user'] = $this->session->userdata('user');
+        $config['base_url'] = base_url() . '/user/friends/';
+        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
+        $config['per_page'] = $this->config->item('item_per_page');
+        //$config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $list = $this->user->getFriends($data['user']->id, $config['per_page'], (int)$offset);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['list'] = $list;
+
+        $data['page'] = 'user/friends';
+        $this->load->view('templates', $data);
     }
 
     public function testChat(){

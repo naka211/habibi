@@ -1715,7 +1715,7 @@ ul.list_action li a .i_block {
 }
 
 .friend_list_lead {
-    /*border-bottom: 1px solid #e1e1e1;*/
+    border-bottom: 1px solid #e1e1e1;
     margin-bottom: 30px;
     margin-top: 30px;
 }
@@ -1749,7 +1749,7 @@ ul.list_action li a .i_block {
 
 .bntMessage {
     background: #ffa507;
-    padding: 8px 20px;
+    padding: 3px 20px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;
@@ -1765,7 +1765,7 @@ ul.list_action li a .i_block {
 .bntRemove {
     font-weight: 500;
     background: #fff;
-    padding: 8px 20px;
+    padding: 3px 20px;
     font-size: 14.23px;
     color: #949494;
     text-transform: uppercase;
@@ -1779,7 +1779,7 @@ ul.list_action li a .i_block {
 
 .bntReject {
     background: #fff;
-    padding: 8px 20px;
+    padding: 3px 20px;
     font-size: 14.23px;
     color: #ffa507;
     font-weight: 500;
@@ -1795,7 +1795,7 @@ ul.list_action li a .i_block {
 
 .bntBlock {
     background: #848484;
-    padding: 8px 20px;
+    padding: 3px 20px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;

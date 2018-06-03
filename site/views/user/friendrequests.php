@@ -1,7 +1,7 @@
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
-            <div class="friend_list_lead">
+            <div class="friend_list_lead" style="border-bottom: none;">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="nav nav-tabs">

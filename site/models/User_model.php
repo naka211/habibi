@@ -384,10 +384,9 @@ class User_model extends CI_Model{
     }
     /** FAVORITE*/
     /**
+     * @param null $userId
      * @param null $num
      * @param null $offset
-     * @param null $user
-     * @param null $search
      * @return mixed
      */
     function getFavorites($userId=NULL, $num=NULL, $offset=NULL){
@@ -402,6 +401,11 @@ class User_model extends CI_Model{
     	$query = $this->db->get()->result();
 	    return $query;
     }
+
+    /**
+     * @param null $user
+     * @return mixed
+     */
     function getNumFavorite($user=NULL){
         $this->db->select('uf.*');
         $this->db->from('user_favorite as uf');
@@ -409,6 +413,12 @@ class User_model extends CI_Model{
     	$query = $this->db->get()->num_rows();
 	    return $query;
     }
+
+    /**
+     * @param null $DB
+     * @param null $id
+     * @return bool|null
+     */
     function addFavorite($DB=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);
@@ -792,6 +802,7 @@ class User_model extends CI_Model{
 
     public function cancelRequestAddFriend($user_id=NULL,$profile_id=NULL){
         $this->db->where('user_from', $user_id)->where('user_to', $profile_id)->delete('user_friends');
+        $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friendlist');
         return true;
     }
 
@@ -825,6 +836,39 @@ class User_model extends CI_Model{
         $this->db->where('user_from', $profileId);
         $this->db->where('user_to', $userId);
         return $this->db->update('user_friends', $data);
+    }
+
+    public function insertFriendList($userId, $profileId){
+        $data = array();
+        $data['user_from']  = $userId;
+        $data['user_to']    = $profileId;
+        $data['created_at']  = time();
+        $this->db->insert('user_friendlist',$data);
+
+        $data1 = array();
+        $data1['user_to']  = $userId;
+        $data1['user_from']    = $profileId;
+        $data1['created_at']  = time();
+        $this->db->insert('user_friendlist',$data1);
+    }
+
+    /**
+     * @param null $userId
+     * @param null $num
+     * @param null $offset
+     * @return mixed
+     */
+    function getFriends($userId=NULL, $num=NULL, $offset=NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time');
+        $this->db->from('user_friendlist as ul');
+        $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
+        $this->db->where("ul.user_from", $userId);
+        $this->db->order_by('ul.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num, $offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
     }
     /** The End*/
 }
