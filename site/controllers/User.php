@@ -1159,7 +1159,7 @@ class User extends MX_Controller
 
     function visited($page = 0){
         $data = array();
-        $this->user->addMeta($this->_meta, $data, 'Habibi - Sendt blinks');
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Medlemmer jeg har besøgt');
 
         $data['user'] = $this->session->userdata('user');
         $config['base_url'] = base_url() . '/user/visited/';
