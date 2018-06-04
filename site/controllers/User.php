@@ -1099,8 +1099,7 @@ class User extends MX_Controller
 
 
 
-    function receivedBlinks($page = 0)
-    {
+    function receivedBlinks($page = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Modtagne blinks');
 
@@ -1122,53 +1121,21 @@ class User extends MX_Controller
      * @param int $page
      * @return load view layout
      */
-    function receivedkisses($page = 0)
-    {
+    function sentBlinks($page = 0){
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-        /** Clear session search USER */
-        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
-        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
-        , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Sendt blinks');
 
         $data['user'] = $this->session->userdata('user');
-        $config['base_url'] = base_url() . $this->language . '/user/receivedkisses/';
-        $config['total_rows'] = $this->user->getNumReceivedKisses($data['user']->id);
-        $config['per_page'] = $this->config->item('numberpage');
+        $config['base_url'] = base_url() . '/user/receivedBlinks/';
+        $config['total_rows'] = $this->user->getNumSentBlinks($data['user']->id);
+        $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $listUsers = $this->user->getReceivedKisses($config['per_page'], (int)$page, $data['user']->id);
+        $data['list'] = $this->user->getSentBlinks($data['user']->id, $config['per_page'], (int)$page);
         $data['pagination'] = $this->pagination->create_links();
-        if ($listUsers) {
-            $i = 0;
-            foreach ($listUsers as $row) {
-                $users[$i]['id'] = $row->id;
-                $users[$i]['name'] = $row->name;
-                $users[$i]['birthday'] = $row->birthday;
-                $users[$i]['code'] = $row->code;
-                $users[$i]['send_at'] = $row->send_at;
-                $users[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
-                    $users[$i]['avatar'] = $row->avatar;
-                } else {
-                    $photo = $this->user->getPhoto($row->id);
-                    if ($photo) {
-                        $users[$i]['avatar'] = $photo[0]->image;
-                    } else {
-                        $users[$i]['avatar'] = "";
-                    }
-                }
-                $i++;
-            }
-        } else {
-            $users = "";
-        }
-        $data['list'] = $users;
 
-        $data['page'] = 'user/receivedkisses';
+        $data['page'] = 'user/sentblinks';
         $this->load->view('templates', $data);
     }
 

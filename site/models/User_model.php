@@ -528,41 +528,9 @@ class User_model extends CI_Model{
     }
 
     /**
+     * @param null $userId
      * @param null $num
      * @param null $offset
-     * @param null $user_id
-     * @param null $search
-     * @return mixed
-     */
-    function getSentKiss($num = NULL, $offset = NULL, $user_id = NULL, $search = NULL){
-        $this->db->select('u.*, uk.send_at');
-        $this->db->from('user_kisses as uk');
-        $this->db->join('user as u', 'u.id = uk.to_user_id', 'left');
-        $this->db->where("uk.from_user_id",$user_id);
-        $this->db->order_by('uk.send_at','DESC');
-        if($num || $offset){
-            $this->db->limit($num,$offset);
-        }
-        $query = $this->db->get()->result();
-        return $query;
-    }
-
-    /**
-     * @param null $user_id
-     * @return mixed
-     */
-    function getNumReceivedKisses($user_id = NULL){
-        $this->db->select('id');
-        $this->db->from('user_kisses');
-        $this->db->where("to_user_id",$user_id);
-        $query = $this->db->get()->num_rows();
-        return $query;
-    }
-
-    /**
-     * @param null $num
-     * @param null $offset
-     * @param null $user_id
      * @param null $search
      * @return mixed
      */
@@ -574,6 +542,40 @@ class User_model extends CI_Model{
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'left');
         $this->db->where("uk.to_user_id",$userId);
         $this->db->group_by("uk.from_user_id");
+        $this->db->order_by('uk.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    /**
+     * @param null $user_id
+     * @return mixed
+     */
+    function getNumSentBlinks($user_id = NULL){
+        $this->db->distinct();
+        $this->db->select('to_user_id');
+        $this->db->from('user_kisses');
+        $this->db->where("from_user_id",$user_id);
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
+
+    /**
+     * @param null $userId
+     * @param null $num
+     * @param null $offset
+     * @param null $search
+     * @return mixed
+     */
+    function getSentBlinks($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.send_at as sent_time');
+        $this->db->from('user_kisses as uk');
+        $this->db->join('user as u', 'u.id = uk.to_user_id', 'left');
+        $this->db->where("uk.from_user_id",$userId);
+        $this->db->group_by("uk.to_user_id");
         $this->db->order_by('uk.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
