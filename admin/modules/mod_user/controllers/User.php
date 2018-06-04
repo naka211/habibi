@@ -154,7 +154,6 @@ class User extends CI_Controller{
             $DB['gender'] = $this->input->post('gender');
             $DB['type'] = $this->input->post('type');
             $DB['code'] = $this->input->post('code');
-            $DB['city'] = $this->input->post('city');
             $DB['description'] = $this->input->post('description');
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
@@ -211,7 +210,6 @@ class User extends CI_Controller{
             $DB['gender'] = $this->input->post('gender');
             $DB['type'] = $this->input->post('type');
             $DB['code'] = $this->input->post('code');
-            $DB['city'] = $this->input->post('city');
             $DB['description'] = $this->input->post('description');
             $DB['dt_update'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = $this->input->post('bl_active');;
