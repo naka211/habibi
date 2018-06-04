@@ -812,31 +812,34 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
-    public function getUserSent($userId, $num, $offset){
-        $this->db->select('DISTINCT (CASE WHEN user_from = '.$userId.' THEN user_to WHEN user_to = '.$userId.' THEN user_from END) as userId');
+    public function getUserSent($userId, $num, $offset)
+    {
+        $this->db->select('DISTINCT (CASE WHEN user_from = ' . $userId . ' THEN user_to WHEN user_to = ' . $userId . ' THEN user_from END) as userId');
         $this->db->from('user_messages');
         $this->db->order_by('id', 'DESC');
-        if($num || $offset){
+        if ($num || $offset) {
             $this->db->limit($num, $offset);
         }
         $userIdArr = $this->db->get()->result();
 
         $result = array();
-        foreach ($userIdArr as $key => $user){
-            $this->db->select('name, id, avatar, region, ethnic_origin, year');
-            $this->db->from('user');
-            $this->db->where("id", $user->userId);
-            $result[$key] = $this->db->get()->row();
+        if (!empty($userIdArr)) {
+            foreach ($userIdArr as $key => $user) {
+                $this->db->select('name, id, avatar, region, ethnic_origin, year');
+                $this->db->from('user');
+                $this->db->where("id", $user->userId);
+                $result[$key] = $this->db->get()->row();
 
-            $this->db->select('message, seen, dt_create');
-            $this->db->from('user_messages');
-            $this->db->where("user_from = $user->userId OR user_to = $user->userId");
-            $this->db->order_by('id', 'DESC');
-            $this->db->limit(1, 0);
-            $query = $this->db->get()->row();
-            $result[$key]->message = $query->message;
-            $result[$key]->added_time = $query->dt_create;
-            $result[$key]->seen = $query->seen;
+                $this->db->select('message, seen, dt_create');
+                $this->db->from('user_messages');
+                $this->db->where("user_from = $user->userId OR user_to = $user->userId");
+                $this->db->order_by('id', 'DESC');
+                $this->db->limit(1, 0);
+                $query = $this->db->get()->row();
+                $result[$key]->message = $query->message;
+                $result[$key]->added_time = $query->dt_create;
+                $result[$key]->seen = $query->seen;
+            }
         }
         return $result;
     }
