@@ -8,7 +8,7 @@
                     </div>
                 </div>
             </div>
-            <p>Du kan straks login med den mail du har oprettet dig med, og dit valgte profil navn. Vi glæder os til at byde dig Du kan straks login med den mail du har oprettet dig med, og dit valgte profil navn. Vi glæder os til at byde dig</p>
+            <p>Du kan straks login med den mail du har oprettet dig med, og dit valgte profil navn. Vi glæder os til at byde dig.</p>
             <a href="" class="btn bntMessage">Til forside</a>
         </div>
     </section>
