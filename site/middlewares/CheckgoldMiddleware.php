@@ -19,7 +19,7 @@ class CheckgoldMiddleware {
         $user = $this->ci->session->userdata('user');
         $result = $this->ci->db->select('type')->from('user')->where('id', $user->id)->get()->row();
         if ($result->type == 1) {
-            $this->ci->session->set_flashdata('goldMember', 'Du skal være guldmedlem til at bruge denne funktion !!');
+            $this->ci->session->set_flashdata('message', 'Du skal være guldmedlem til at bruge denne funktion !!');
             redirect(site_url('home/index'));
         }
     }
