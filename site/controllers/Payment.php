@@ -189,11 +189,11 @@ class Payment extends MX_Controller {
     function upgrade(){
         $userid = $this->session->userdata('userid');
         //Go payment Epay
-        $data['action'] = $this->action;
+
         $data['merchantnumber'] = $this->merchantnumber;
         $data['currency'] = $this->currency;
         $data['windowstate'] = $this->windowstate;
-        $data['md5'] = $this->md5;
+        //$data['md5'] = $this->md5;
 
         $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
         $data['accepturl'] = site_url('user/upgradeSuccess');
@@ -201,7 +201,7 @@ class Payment extends MX_Controller {
         $data['callbackurl'] = site_url('user/upgradeCallback');
         $data['orderid'] = randomPassword();
 
-        $this->session->set_userdata('payment', true);
+        /*$this->session->set_userdata('payment', true);*/
         //Update user
         /*$DB['orderid'] = $data['orderid'];
         $DB['price'] = $this->config->item('priceuser');

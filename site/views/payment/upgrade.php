@@ -19,7 +19,7 @@
                     }*/
 
                 </script>
-                <form id="epayForm" action="<?php echo $action;?>" method="post">
+                <form id="epayForm" action="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx" method="post">
                     <input type="hidden" name="merchantnumber" value="<?php echo $merchantnumber;?>"/>
                     <input type="hidden" name="amount" value="<?php echo $amount;?>"/>
                     <input type="hidden" name="currency" value="<?php echo $currency;?>"/>
@@ -28,7 +28,6 @@
                     <input type="hidden" name="accepturl" value="<?php echo $accepturl;?>" />
                     <input type="hidden" name="callbackurl" value="<?php echo $callbackurl;?>"/>
                     <input type="hidden" name="cancelurl" value="<?php echo $cancelurl;?>" />
-                    <input type="hidden" name="hash" value="<?php echo $md5;?>" />
                     <input type="hidden" name="subscription" value="1">
                     <input type="hidden" type="submit" value="Go to payment"/>
                 </form>
