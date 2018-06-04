@@ -1,25 +1,20 @@
-<section class="breadcrumb-custom">
-    <div class="container">
-        <div class="row">
-            <ul class="breadcrumb">
-                <li><a href="index.php">Forside</a></li>
-                <li class="active">Opgradere til guldmedlem</a></li>
-            </ul>
-        </div>
-    </div>
-</section>
-<section class="forget-pass">
-    <div class="container">
-        <div class="row mt30 mb30">
-            <div class="col-md-9">
-                <h2>Opgradere til guldmedlem</h2>
-                <p class="f14">Guld medlem (koster 149, - dkr. pr. mdr. inkl. moms) </p>
-                <div class="frm-forgetpass mt30">
-                    <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm', 'class'=>'form-inline'))?>
-                        <button type="submit" class="btn bntMessage">Opgradering</button>
-                    <?php echo form_close();?>
+<div id="content">
+    <section class="friend_list mt52">
+        <div class="container">
+            <div class="friend_list_lead">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h3>Opgradere til guldmedlem</h3>
+                    </div>
                 </div>
             </div>
+
+
+            <p>Guld medlem (koster 149, - dkr. pr. mdr. inkl. moms)</p><br>
+                <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm', 'class'=>'form-inline'))?>
+                <button type="submit" class="btn bntMessage">Opgradering</button>
+                <?php echo form_close();?>
+
         </div>
-    </div>
-</section>
+    </section>
+</div>

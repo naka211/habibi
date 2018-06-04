@@ -37,11 +37,12 @@ class Payment extends MX_Controller {
         $data['md5'] = $this->md5;
         
         $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
+        $data['orderid'] = randomPassword();
         $data['accepturl'] = site_url('user/success');
         $data['cancelurl'] = site_url('user/cancel');
         $data['callbackurl'] = site_url('user/callback');
-		$data['orderid'] = 'US-'.randomPassword();
-        
+		$data['orderid'] = randomPassword();
+        print_r($data);exit();
         //Update user
         /*$DB['orderid'] = $data['orderid'];
         $DB['price'] = $this->config->item('priceuser');
@@ -198,7 +199,7 @@ class Payment extends MX_Controller {
         $data['accepturl'] = site_url('user/upgradeSuccess');
         $data['cancelurl'] = site_url('user/upgradeCancel');
         $data['callbackurl'] = site_url('user/upgradeCallback');
-        $data['orderid'] = 'US-'.randomPassword();
+        $data['orderid'] = randomPassword();
 
         $this->session->set_userdata('payment', true);
         //Update user

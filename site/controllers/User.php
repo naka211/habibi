@@ -794,35 +794,33 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data);
 
-        $payment = $this->session->userdata('payment');
+        /*$payment = $this->session->userdata('payment');*/
         $user = $this->session->userdata('user');
-        if ($payment) {
-            //Update payment
-            $DB['subscriptionid'] = $this->input->get('subscriptionid');
-            $DB['orderid'] = $this->input->get('orderid');
-            $DB['price'] = $this->config->item('priceuser');
-            $DB['type'] = 2;
-            $DB['bl_active'] = 1;
-            $DB['paymenttime'] = time();
-            $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
 
-            //Add to log
-            $this->addPaymentLog($user->id);
+        //Update payment
+        $DB['subscriptionid'] = $this->input->get('subscriptionid');
+        $DB['orderid'] = $this->input->get('orderid');
+        $DB['price'] = $this->config->item('priceuser');
+        $DB['type'] = 2;
+        $DB['bl_active'] = 1;
+        $DB['paymenttime'] = time();
+        $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
 
-            //Send email
-            $sendEmailInfo['name']      = $user->name;
-            $sendEmailInfo['email']     = $user->email;
-            $sendEmailInfo['orderId']   = $DB['orderid'];
-            $sendEmailInfo['price']     = $DB['price'].' DKK';
-            $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
-            $emailTo = array($user->email);
-            sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
-        } else {
-            $DB['bl_active'] = 1;
-        }
+        //Add to log
+        $this->addPaymentLog($user->id);
+
+        //Send email
+        $sendEmailInfo['name']      = $user->name;
+        $sendEmailInfo['email']     = $user->email;
+        $sendEmailInfo['orderId']   = $DB['orderid'];
+        $sendEmailInfo['price']     = $DB['price'].' DKK';
+        $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
+        $emailTo = array($user->email);
+        sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
+
         $this->user->saveUser($DB, $user->id);
-        $this->session->unset_userdata('userid');
-        $this->session->unset_userdata('payment');
+        /*$this->session->unset_userdata('userid');
+        $this->session->unset_userdata('payment');*/
         $data['page'] = 'user/upgradeSuccess';
         $this->load->view('templates', $data);
     }
