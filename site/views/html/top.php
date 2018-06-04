@@ -10,7 +10,7 @@ if(!empty($user)){
 
     if(isGoldMember()){
         $messageLink = 'href="'.site_url('user/messages').'"';
-        $visitingLink = 'href="'.site_url('user/visits').'"';
+        $visitingLink = 'href="'.site_url('user/visitMe').'"';
         $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     } else {
         $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';

@@ -37,10 +37,9 @@ $config['email']         = 'trung@mywebcreations.dk';
 $config['app_id']        = "1767525803466906";
 $config['app_secret']    = "bb694c39ca63966432d5cc6d2b2d36e3";
 /** Number on page*/
-$config['numberpage']    = 20;
+$config['item_per_page'] = 20;
 $config['maxupload']     = 8096; //4MB
 $config['priceuser']     = 149;
-$config['pricedating']   = 29;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +94,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'dk';
+$config['language']	= '';
 
 /*
 |--------------------------------------------------------------------------

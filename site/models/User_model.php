@@ -592,6 +592,54 @@ class User_model extends CI_Model{
         return $query;
     }
 
+    /* Visit*/
+    function getNumVisitMe($user_id = NULL){
+        $this->db->distinct();
+        $this->db->select('from_user');
+        $this->db->from('user_visit');
+        $this->db->where("to_user",$user_id);
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
+
+    function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
+        $this->db->from('user_visit as uv');
+        $this->db->join('user as u', 'u.id = uv.from_user', 'left');
+        $this->db->where("uv.to_user",$userId);
+        $this->db->group_by("uv.from_user");
+        $this->db->order_by('uv.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    function getNumVisited($user_id = NULL){
+        $this->db->distinct();
+        $this->db->select('to_user');
+        $this->db->from('user_visit');
+        $this->db->where("from_user",$user_id);
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
+
+    function getVisited($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
+        $this->db->from('user_visit as uv');
+        $this->db->join('user as u', 'u.id = uv.to_user', 'left');
+        $this->db->where("uv.from_user",$userId);
+        $this->db->group_by("uv.to_user");
+        $this->db->order_by('uv.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
+    /* */
+
     public function isBlocked($userId, $friendId){
         $query = $this->db->where('user_from', $friendId)->where('user_to', $userId)->get('user_blocked')->num_rows();
         return $query?true:false;

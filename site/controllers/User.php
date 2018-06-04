@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked', 'Checkgold|only:messages,friends');
+        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked', 'Checkgold|only:messages,friends,visitme');
     }
 
     function index(){
@@ -1139,10 +1139,40 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function changePerPage(){
-        $perPage = $this->input->post('perPage');
-        $this->session->set_userdata('perPage', $perPage);
-        redirect($_SERVER['HTTP_REFERER']);
+    function visitMe($page = 0){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Besøgte mig');
+
+        $data['user'] = $this->session->userdata('user');
+        $config['base_url'] = base_url() . '/user/visitMe/';
+        $config['total_rows'] = $this->user->getNumVisitMe($data['user']->id);
+        $config['per_page'] = $this->config->item('item_per_page');
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $data['list'] = $this->user->getVisitMe($data['user']->id, $config['per_page'], (int)$page);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['page'] = 'user/visitme';
+        $this->load->view('templates', $data);
+    }
+
+    function visited($page = 0){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Sendt blinks');
+
+        $data['user'] = $this->session->userdata('user');
+        $config['base_url'] = base_url() . '/user/visited/';
+        $config['total_rows'] = $this->user->getNumVisited($data['user']->id);
+        $config['per_page'] = $this->config->item('item_per_page');
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $data['list'] = $this->user->getVisited($data['user']->id, $config['per_page'], (int)$page);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['page'] = 'user/visited';
+        $this->load->view('templates', $data);
     }
 
     public function requestAddFriend($profile_id){
