@@ -113,19 +113,6 @@
     <div class="row margin-bottom-10">
         <div class="col-sm-3">
             <div class="form-material">
-                <label class="control-label margin-top-10" for="">City:</label>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="form-material">
-                <input type="text" class="form-control" id="city" name="city"
-                placeholder="City" autocomplete="off" />
-            </div>
-        </div>
-    </div>
-    <div class="row margin-bottom-10">
-        <div class="col-sm-3">
-            <div class="form-material">
                 <label class="control-label margin-top-10" for="">Avatar:</label>
             </div>
         </div>
