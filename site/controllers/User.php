@@ -601,6 +601,7 @@ class User extends MX_Controller
             $id = $this->user->saveUser($DB);
             $user = $this->user->getUser('', $DB['email'], $DB['password']);
             $this->session->set_userdata('user', $user);
+            $this->session->set_userdata('isLoginSite', true);
             /*if ($DB['payment'] == 1 && $id) {
                 $this->session->set_userdata('payment', true);
                 $this->session->set_userdata('userId', $id);
