@@ -9,7 +9,7 @@
                 </div>
             </div>
             <p>Du kan straks login med den mail du har oprettet dig med, og dit valgte profil navn. Vi glæder os til at byde dig.</p>
-            <a href="" class="btn bntMessage">Til forside</a>
+            <a href="<?php echo base_url();?>" class="btn bntMessage">Til forside</a>
         </div>
     </section>
 </div>
