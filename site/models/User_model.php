@@ -821,24 +821,25 @@ class User_model extends CI_Model{
             $this->db->limit($num, $offset);
         }
         $userIdArr = $this->db->get()->result();
-        print_r($userIdArr);exit();
         $result = array();
         if (!empty($userIdArr)) {
             foreach ($userIdArr as $key => $user) {
-                $this->db->select('name, id, avatar, region, ethnic_origin, year');
-                $this->db->from('user');
-                $this->db->where("id", $user->userId);
-                $result[$key] = $this->db->get()->row();
+                if(!empty($user->userId)){
+                    $this->db->select('name, id, avatar, region, ethnic_origin, year');
+                    $this->db->from('user');
+                    $this->db->where("id", $user->userId);
+                    $result[$key] = $this->db->get()->row();
 
-                $this->db->select('message, seen, dt_create');
-                $this->db->from('user_messages');
-                $this->db->where("user_from = $user->userId OR user_to = $user->userId");
-                $this->db->order_by('id', 'DESC');
-                $this->db->limit(1, 0);
-                $query = $this->db->get()->row();
-                $result[$key]->message = $query->message;
-                $result[$key]->added_time = $query->dt_create;
-                $result[$key]->seen = $query->seen;
+                    $this->db->select('message, seen, dt_create');
+                    $this->db->from('user_messages');
+                    $this->db->where("user_from = $user->userId OR user_to = $user->userId");
+                    $this->db->order_by('id', 'DESC');
+                    $this->db->limit(1, 0);
+                    $query = $this->db->get()->row();
+                    $result[$key]->message = $query->message;
+                    $result[$key]->added_time = $query->dt_create;
+                    $result[$key]->seen = $query->seen;
+                }
             }
         }
         return $result;
