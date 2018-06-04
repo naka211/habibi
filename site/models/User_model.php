@@ -230,6 +230,14 @@ class User_model extends CI_Model{
         }
     }
     /** MESSAGE*/
+    function saveMessage($DB=NULL){
+        if($this->db->insert('user_messages',$DB)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
+
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
         $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
 
