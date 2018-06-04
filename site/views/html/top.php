@@ -16,7 +16,7 @@ if(!empty($user)){
         $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
     }
     $messageLink = 'href="'.site_url('user/messages').'"';
-    $blinkLink = 'href="'.site_url('user/blinks').'"';
+    $blinkLink = 'href="'.site_url('user/receivedBlinks').'"';
     $friendLink = 'href="'.site_url('user/friends').'"';
 }
 ?>
