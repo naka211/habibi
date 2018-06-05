@@ -252,5 +252,23 @@ class Ajax extends CI_Controller{
         $list = $this->user->getFavorites($user->id, 8, $offset);
 
     }
+
+    public function loadMultiFilter(){
+        $type = $this->input->post('type');
+        $label = $this->input->post('label');
+        $selectedStr = $this->input->post('selectedStr');
+
+        $arr['ethnic'] = array('Europæisk', 'Afrikansk', 'Latinamerikansk', 'Asiatisk', 'Indisk', 'Arabisk', 'Blandet/andet');
+
+        $html = '<div class="box_form_group"><p for="">'.$label.'</p><select class="form-control 3col active '.$type.'Selection" name="'.$type.'[]" id="'.$type.'" multiple="multiple">';
+        $listOptions = $arr[$type];
+        foreach ($listOptions as $option){
+            $selected = in_array($option, explode(',', $selectedStr))?'selected':'';
+            $html .= '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+        }
+        $html .= '</select></div>';
+        echo $html;
+        exit();
+    }
 }
 ?>

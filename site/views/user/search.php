@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <p>Valgfrie kriterier</p>
-                            <div class="row" id="filter"></div>
+                            <div class="row_search clearfix" id="filter"></div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <a href="#" class="btn btn_addCriteria"><span>Tilføj kriterie:</span> <i class="i_plus_xs"></i></a>
@@ -109,7 +109,7 @@
         $(function() {
             $(".btn_searchResult").click(function() {
                 var params = {};
-                var getSelect = ['fromAge', 'toAge', 'region'];
+                var getSelect = ['fromAge', 'toAge', 'region', 'ethnic', 'order'];
 
                 $.each(getSelect, function(index, value) {
                     var select = $('#' + value);
@@ -126,6 +126,30 @@
                 }
             });
         });
+
+        loadMultiFilter = function (type, label, selectedStr) {
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/loadMultiFilter",
+                data: { csrf_site_name: token_value, type: type, label: label, selectedStr: selectedStr},
+                success: function (html) {
+                    $("#filter").append(html);
+
+                    $('.'+type+'Selection').multiselect({
+                        columns: 2,
+                        texts:{
+                            'selectAll': 'Vælg alle',
+                            'unselectAll': 'Fravælg alle',
+                            'selectedOptions': ' valgt region'
+                        },
+                        selectAll: true,
+                        maxPlaceholderOpts: 1
+                    });
+                }
+            });
+        }
+
+        loadMultiFilter('ethnic', 'Etnisk oprindelse', '<?php echo $this->input->get('ethnic');?>');
 
         $('.regionSelection').multiselect({
             columns: 2,
