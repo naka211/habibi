@@ -2064,7 +2064,7 @@ ul.list_action li a .i_block {
     margin-right: 10px;
 }
 
-.box_form_group label {
+.box_form_group p {
     display: inline-block;
     font-size: 13px;
     font-weight: 500;
@@ -2600,11 +2600,11 @@ ul.list_action li a .i_block {
     font-size: 14px;
     padding: 10px 30px 10px 15px;
     outline: none;
-    width: 380px;
+    width: 350px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;
-    width: 380px;
+    width: 350px;
 }
 .ms-options-wrap > .ms-options > .ms-selectall.global {
     color: #333;

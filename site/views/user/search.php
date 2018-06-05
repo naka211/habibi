@@ -10,7 +10,7 @@
 
                             <div class="row_search clearfix">
                                 <div class="box_form_group">
-                                    <label for="">Region:</label>
+                                    <p for="">Region:</p>
                                     <select class="form-control 3col active regionSelection" name="region[]" id="region" multiple="multiple">
                                         <option value="København" <?php if(inSearch('region', 'København')) echo 'selected';?>>København</option>
                                         <option value="Storkøbenhavn" <?php if(inSearch('region', 'Storkøbenhavn')) echo 'selected';?>>Storkøbenhavn</option>
@@ -32,7 +32,7 @@
                                     </select>
                                 </div>
                                 <div class="box_form_group box_form_group_age">
-                                    <label for="">Alder:</label>
+                                    <p for="">Alder:</p>
                                     <select name="fromAge" class="form-control" id="fromAge">
                                         <?php for($i=18; $i<=70; $i++){?>
                                             <option value="<?php echo $i;?>" <?php if($this->input->get('fromAge') == $i) echo 'selected';?>><?php echo $i;?></option>
@@ -46,7 +46,7 @@
                                     </select>
                                 </div>
                                 <div class="box_form_group">
-                                    <label for="">Sortering:</label>
+                                    <p for="">Sortering:</p>
                                     <select name="order" class="form-control" id="order">
                                         <option value="newest" <?php if($this->input->get('order') == 'newest') echo 'selected';?> >Nyeste</option>
                                         <option value="popular" <?php if($this->input->get('order') == 'popular') echo 'selected';?>>Populær</option>
@@ -125,6 +125,17 @@
                     window.location.href = url + '?' + $.param(params);
                 }
             });
+        });
+
+        $('.regionSelection').multiselect({
+            columns: 2,
+            texts:{
+                'selectAll': 'Vælg alle',
+                'unselectAll': 'Fravælg alle',
+                'selectedOptions': ' valgt region'
+            },
+            selectAll: true,
+            maxPlaceholderOpts: 1
         });
     });
 </script>
