@@ -2052,7 +2052,7 @@ ul.list_action li a .i_block {
 }
 
 .frm_search {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .box_form_group {
@@ -2133,7 +2133,9 @@ ul.list_action li a .i_block {
     font-size: 13px;
     font-weight: 500;
     padding: 4px 10px;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
+    float: left;
+    margin-right: 25px;
 }
 
 .btn_addCriteria:hover {
@@ -2598,11 +2600,11 @@ ul.list_action li a .i_block {
     font-size: 14px;
     padding: 10px 30px 10px 15px;
     outline: none;
-    width: 195px;
+    width: 380px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;
-    width: 195px;
+    width: 380px;
 }
 .ms-options-wrap > .ms-options > .ms-selectall.global {
     color: #333;

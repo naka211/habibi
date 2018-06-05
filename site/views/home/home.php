@@ -31,19 +31,19 @@
                     <div class="box_trySearch">
                         <h2 class="title">Prøv en søgning</h2>
                         <p>Udfyld de faste søgekriterier og få altid opdaterede profiler her.</p>
-                        <?php echo form_open('user/searching', array('method'=>'get', 'id'=>'frm_forgotPassword', 'class'=>'frm_trySearch'))?>
+                        <?php echo form_open('user/searching', array('method'=>'get', 'class'=>'frm_trySearch'))?>
                             <div class="form-group">
                                 <label for="">Alder</label>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                        <select name="from_age" class="form-control" id="fromAge">
+                                        <select name="fromAge" class="form-control" id="fromAge">
                                             <?php for($i=18; $i<=70; $i++){?>
                                             <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                             <?php }?>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                        <select name="to_age" class="form-control" id="toAge">
+                                        <select name="toAge" class="form-control" id="toAge">
                                             <?php for($i=19; $i<=70; $i++){?>
                                                 <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                             <?php }?>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Region</label>
-                                <select name="region" class="form-control 3col active regionSelection" multiple="multiple">
+                                <select name="region[]" id="region" class="form-control 3col active regionSelection" multiple="multiple">
                                     <option value="København">København</option>
                                     <option value="Storkøbenhavn">Storkøbenhavn</option>
                                     <option value="Århus">Århus</option>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Etnisk oprindelse</label>
-                                <select name="ethnic" class="form-control 3col active ethnicSelection" multiple="multiple">
+                                <select name="ethnic[]" id="ethnic" class="form-control 3col active ethnicSelection" multiple="multiple">
                                     <option value="Europæisk">Europæisk</option>
                                     <option value="Afrikansk">Afrikansk</option>
                                     <option value="Latinamerikansk">Latinamerikansk</option>
@@ -86,7 +86,7 @@
                                     <option value="Blandet/andet">Blandet/andet</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn_searchResult">Se hele søgeresultatet</button>
+                            <button type="button" class="btn btn_searchResult">Se hele søgeresultatet</button>
                         <?php echo form_close();?>
                     </div>
                 </div>
@@ -152,3 +152,25 @@
 
     </div>
 </div>
+<script>
+    $(function() {
+        $(".btn_searchResult").click(function() {
+            var params = {};
+            var getSelect = ['fromAge', 'toAge', 'region', 'ethnic'];
+
+            $.each(getSelect, function(index, value) {
+                var select = $('#' + value);
+                if (select.val() != '') {
+                    var selected = select.val();
+                    if (select.attr('multiple'))
+                        selected = selected.join(',');
+                    params[value] = selected;
+                }
+            });
+            if (!$.isEmptyObject(params)) {
+                var url = [location.protocol, '//', location.host, location.pathname, 'user/searching'].join('');
+                window.location.href = url + '?' + $.param(params);
+            }
+        });
+    });
+</script>

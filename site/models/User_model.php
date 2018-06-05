@@ -21,31 +21,21 @@ class User_model extends CI_Model{
     }
 
     /** USER*/
-    /**
-     * @param null $num
-     * @param null $offset
-     * @param null $search
-     * @param null $ignore
-     * @return mixed
-     */
-    function getBrowsing($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
-        $this->db->select('u.*');
+    function getNum($search=NULL,$ignore=NULL){
+        $this->db->select('u.id');
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
         //Search
-        if($search['year_from']){
-            $this->db->where('u.year >=', $search['year_from']);
+        if($search['yearFrom']){
+            $this->db->where('u.year >=', $search['yearFrom']);
         }
-        if($search['year_to']){
-            $this->db->where('u.year <=', $search['year_to']);
+        if($search['yearTo']){
+            $this->db->where('u.year <=', $search['yearTo']);
         }
-        if($search['height_from']){
-            $this->db->where('u.height >=', $search['height_from']);
+        if(isset($search['region']) && !empty($search['region'])){
+            $this->db->where_in('region', explode(',',$search['region']));
         }
-        if($search['height_to']){
-            $this->db->where('u.height <=', $search['height_to']);
-        }
-        if(isset($search['gender'])&&$search['gender']!=0){
+        /*if(isset($search['gender'])&&$search['gender']!=0){
             $this->db->where('u.gender', $search['gender']);
         }
         if(isset($search['relationship'])&&$search['relationship'][0]!=""){
@@ -66,64 +56,72 @@ class User_model extends CI_Model{
         }
         if(isset($search['body'])&&$search['body'][0]!=""){
             $this->db->where_in('u.body', $search['body']);
-        }
+        }*/
         if($ignore){
             //$ignore = array(12, 13);
             $this->db->where_not_in('u.id', $ignore);
         }
-		$this->db->order_by('u.id','DESC');
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
+
+    function getBrowsing($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year');
+        $this->db->from('user as u');
+        $this->db->where("u.bl_active",1);
+        //Search
+        if($search['yearFrom']){
+            $this->db->where('u.year >=', $search['yearFrom']);
+        }
+        if($search['yearTo']){
+            $this->db->where('u.year <=', $search['yearTo']);
+        }
+        if(isset($search['region']) && !empty($search['region'])){
+            $this->db->where_in('region', explode(',',$search['region']));
+        }
+
+        /*if(isset($search['gender'])&&$search['gender']!=0){
+            $this->db->where('u.gender', $search['gender']);
+        }
+        if(isset($search['relationship'])&&$search['relationship'][0]!=""){
+            //$inUser = array(12, 13);
+            $this->db->where_in('u.relationship', $search['relationship']);
+        }
+        if(isset($search['children'])&&$search['children'][0]!=""){
+            $this->db->where_in('u.children', $search['children']);
+        }
+        if(isset($search['ethnic_origin'])&&$search['ethnic_origin'][0]!=""){
+            $this->db->where_in('u.ethnic_origin', $search['ethnic_origin']);
+        }
+        if(isset($search['religion'])&&$search['religion'][0]!=""){
+            $this->db->where_in('u.religion', $search['religion']);
+        }
+        if(isset($search['training'])&&$search['training'][0]!=""){
+            $this->db->where_in('u.training', $search['training']);
+        }
+        if(isset($search['body'])&&$search['body'][0]!=""){
+            $this->db->where_in('u.body', $search['body']);
+        }*/
+        if($ignore){
+            //$ignore = array(12, 13);
+            $this->db->where_not_in('u.id', $ignore);
+        }
+
+        if(isset($search['order']) && $search['order'] == 'popular'){
+            $this->db->order_by('u.visit','DESC');
+            $this->db->order_by('u.id','DESC');
+        } else {
+            $this->db->order_by('u.id','DESC');
+        }
+
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
     	$query = $this->db->get()->result();
+        //print_r($this->db->last_query());exit();
 	    return $query;
     }
-    function getNum($search=NULL,$ignore=NULL){
-        $this->db->select('u.*');
-        $this->db->from('user as u');
-        $this->db->where("u.bl_active",1);
-        //Search
-        if($search['year_from']){
-            $this->db->where('u.year >=', $search['year_from']);
-        }
-        if($search['year_to']){
-            $this->db->where('u.year <=', $search['year_to']);
-        }
-        if($search['height_from']){
-            $this->db->where('u.height >=', $search['height_from']);
-        }
-        if($search['height_to']){
-            $this->db->where('u.height <=', $search['height_to']);
-        }
-        if(isset($search['gender'])&&$search['gender']!=0){
-            $this->db->where('u.gender', $search['gender']);
-        }
-        if(isset($search['relationship'])&&$search['relationship'][0]!=""){
-            //$inUser = array(12, 13);
-            $this->db->where_in('u.relationship', $search['relationship']);
-        }
-        if(isset($search['children'])&&$search['children'][0]!=""){
-            $this->db->where_in('u.children', $search['children']);
-        }
-        if(isset($search['ethnic_origin'])&&$search['ethnic_origin'][0]!=""){
-            $this->db->where_in('u.ethnic_origin', $search['ethnic_origin']);
-        }
-        if(isset($search['religion'])&&$search['religion'][0]!=""){
-            $this->db->where_in('u.religion', $search['religion']);
-        }
-        if(isset($search['training'])&&$search['training'][0]!=""){
-            $this->db->where_in('u.training', $search['training']);
-        }
-        if(isset($search['body'])&&$search['body'][0]!=""){
-            $this->db->where_in('u.body', $search['body']);
-        }
-        if($ignore){
-            //$ignore = array(12, 13);
-            $this->db->where_not_in('u.id', $ignore);
-        }
-    	$query = $this->db->get()->num_rows();
-	    return $query;
-    }
+
     
     function getList($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL,$inUser=NULL, $type = 'random'){
         $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region');
@@ -743,6 +741,10 @@ class User_model extends CI_Model{
     }
 
     public function addToVisiting($user_id, $profile_id){
+        $this->db->set('visit', 'visit+1', false);
+        $this->db->where('id', $profile_id);
+        $this->db->update('tb_user');
+
         $data = array();
         $data['from_user']  = $user_id;
         $data['to_user']    = $profile_id;

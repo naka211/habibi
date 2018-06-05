@@ -326,232 +326,103 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function searching($page = 0, $invita = NULL)
+    function searching($offset = 0)
     {
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
-        if ($invita) {
-            $this->session->set_userdata('invita', $invita);
-        }
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Søgeresultat');
         $user = $this->session->userdata('user');
         if ($user) {
             $ignore[] = $user->id;
-        } else {
-            $ignore = "";
         }
         /** Search browsing*/
-        if ($this->input->post()) {
-            $year = date('Y', time());
-            $year_from = $year - $this->input->post('year_to');
-            $year_to = $year - $this->input->post('year_from');
-            $height_from = $this->input->post('height_from');
-            $height_to = $this->input->post('height_to');
-            $gender = $this->input->post('gender');
-            //Array
-            $relationship = $this->input->post('relationship');
-            $children = $this->input->post('children');
-            $ethnic_origin = $this->input->post('ethnic_origin');
-            $religion = $this->input->post('religion');
-            $training = $this->input->post('training');
-            $body = $this->input->post('body');
-            $smoking = $this->input->post('smoking');
-            if ($year_from) {
-                $search_1 = array('year_from' => $year_from);
-            } else {
-                $search_1 = array();
-            }
-            if ($year_to) {
-                $search_2 = array('year_to' => $year_to);
-            } else {
-                $search_2 = array();
-            }
-            if ($height_from) {
-                $search_3 = array('height_from' => $height_from);
-            } else {
-                $search_3 = array();
-            }
-            if ($height_to) {
-                $search_4 = array('height_to' => $height_to);
-            } else {
-                $search_4 = array();
-            }
-            if ($gender) {
-                $search_5 = array('gender' => $gender);
-            } else {
-                $search_5 = array();
-            }
-            if ($relationship) {
-                $search_6 = array('relationship' => $relationship);
-            } else {
-                $search_6 = array();
-            }
-            if ($children) {
-                $search_7 = array('children' => $children);
-            } else {
-                $search_7 = array();
-            }
-            if ($ethnic_origin) {
-                $search_8 = array('ethnic_origin' => $ethnic_origin);
-            } else {
-                $search_8 = array();
-            }
-            if ($religion) {
-                $search_9 = array('religion' => $religion);
-            } else {
-                $search_9 = array();
-            }
-            if ($training) {
-                $search_10 = array('training' => $training);
-            } else {
-                $search_10 = array();
-            }
-            if ($body) {
-                $search_11 = array('body' => $body);
-            } else {
-                $search_11 = array();
-            }
-            if ($smoking) {
-                $search_12 = array('smoking' => $smoking);
-            } else {
-                $search_12 = array();
-            }
 
-            $search = array_merge($search_1, $search_2, $search_3, $search_4, $search_5, $search_6, $search_7, $search_8, $search_9, $search_10, $search_11, $search_12);
-            $this->session->set_userdata($search);
-        } else {
-            $search['year_from'] = $this->session->userdata('year_from');
-            $search['year_to'] = $this->session->userdata('year_to');
-            $search['height_from'] = $this->session->userdata('height_from');
-            $search['height_to'] = $this->session->userdata('height_to');
-            $search['gender'] = $this->session->userdata('gender');
-            $search['relationship'] = $this->session->userdata('relationship');
-            $search['children'] = $this->session->userdata('children');
-            $search['ethnic_origin'] = $this->session->userdata('ethnic_origin');
-            $search['religion'] = $this->session->userdata('religion');
-            $search['training'] = $this->session->userdata('training');
-            $search['body'] = $this->session->userdata('body');
-            $search['smoking'] = $this->session->userdata('smoking');
+        $year = date('Y', time());
+        $yearFrom = $year - $this->input->get('toAge');
+        $yearTo = $year - $this->input->get('fromAge');
+        $region = $this->input->get('region');
+        $ethnic = $this->input->get('ethnic');
+        /*$gender = $this->input->post('gender');
+        $relationship = $this->input->post('relationship');
+        $children = $this->input->post('children');
+        $ethnic_origin = $this->input->post('ethnic_origin');
+        $religion = $this->input->post('religion');
+        $training = $this->input->post('training');
+        $body = $this->input->post('body');
+        $smoking = $this->input->post('smoking');*/
+        $search = array();
+        if ($yearFrom) {
+            $search['yearFrom'] = $yearFrom;
         }
-        if (isset($search['year_from'])) {
-            $data['year_from'] = date('Y', time()) - $search['year_to'];
-        } else {
-            $data['year_from'] = "";
+        if ($yearTo) {
+            $search['yearTo'] = $yearTo;
         }
-        if (isset($search['year_to'])) {
-            $data['year_to'] = date('Y', time()) - $search['year_from'];
-        } else {
-            $data['year_to'] = "";
+        if ($region) {
+            $search['region'] = $region;
         }
-        if (isset($search['height_from'])) {
-            $data['height_from'] = $search['height_from'];
-        } else {
-            $data['height_from'] = "";
+        if ($ethnic) {
+            $search['ethnic'] = $ethnic;
         }
-        if (isset($search['height_to'])) {
-            $data['height_to'] = $search['height_to'];
+        /*if ($gender) {
+            $search_5 = array('gender' => $gender);
         } else {
-            $data['height_to'] = "";
+            $search_5 = array();
         }
-        if (isset($search['gender'])) {
-            $data['gender'] = $search['gender'];
+        if ($relationship) {
+            $search_6 = array('relationship' => $relationship);
         } else {
-            $data['gender'] = "";
+            $search_6 = array();
         }
-        if (isset($search['relationship'])) {
-            $data['relationship'] = $search['relationship'];
+        if ($children) {
+            $search_7 = array('children' => $children);
         } else {
-            $data['relationship'] = "";
+            $search_7 = array();
         }
-        if (isset($search['children'])) {
-            $data['children'] = $search['children'];
+        if ($ethnic_origin) {
+            $search_8 = array('ethnic_origin' => $ethnic_origin);
         } else {
-            $data['children'] = "";
+            $search_8 = array();
         }
-        if (isset($search['ethnic_origin'])) {
-            $data['ethnic_origin'] = $search['ethnic_origin'];
+        if ($religion) {
+            $search_9 = array('religion' => $religion);
         } else {
-            $data['ethnic_origin'] = "";
+            $search_9 = array();
         }
-        if (isset($search['religion'])) {
-            $data['religion'] = $search['religion'];
+        if ($training) {
+            $search_10 = array('training' => $training);
         } else {
-            $data['religion'] = "";
+            $search_10 = array();
         }
-        if (isset($search['training'])) {
-            $data['training'] = $search['training'];
+        if ($body) {
+            $search_11 = array('body' => $body);
         } else {
-            $data['training'] = "";
+            $search_11 = array();
         }
-        if (isset($search['body'])) {
-            $data['body'] = $search['body'];
+        if ($smoking) {
+            $search_12 = array('smoking' => $smoking);
         } else {
-            $data['body'] = "";
-        }
-        if (isset($search['smoking'])) {
-            $data['smoking'] = $search['smoking'];
-        } else {
-            $data['smoking'] = "";
-        }
+            $search_12 = array();
+        }*/
 
-        $config['base_url'] = base_url() . $this->language . '/user/browsing/';
+        //$search = array_merge($search_1, $search_2, $search_3, $search_4, $search_5, $search_6, $search_7, $search_8, $search_9, $search_10, $search_11, $search_12);
+
+
+        $config['base_url'] = base_url() . '/user/searching';
         $config['total_rows'] = $this->user->getNum($search, $ignore);
-        if(!empty($this->session->userdata('perPage'))){
-            $data['perPage'] = $config['per_page'] = $this->session->userdata('perPage');
-        } else {
-            $data['perPage'] = $config['per_page'] = $this->config->item('numberpage');
-        }
+        $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
+        //Get parameter for pagination
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+
         $this->pagination->initialize($config);
-        $listUsers = $this->user->getBrowsing($config['per_page'], (int)$page, $search, $ignore);
+        $list = $this->user->getBrowsing($config['per_page'], (int)$offset, $search, $ignore);
         $data['pagination'] = $this->pagination->create_links();
-        if ($listUsers) {
-            $i = 0;
-            foreach ($listUsers as $row) {
-                $users[$i]['id'] = $row->id;
-                $users[$i]['name'] = $row->name;
-                $users[$i]['birthday'] = $row->birthday;
-                $users[$i]['code'] = $row->code;
-                $users[$i]['facebook'] = $row->facebook;
-                $users[$i]['avatar'] = $row->avatar;
-                /*if ($row->facebook && $row->avatar) {
-                    $users[$i]['avatar'] = $row->avatar;
-                } else {
-                    $photo = $this->user->getPhoto($row->id);
-                    if ($photo) {
-                        $users[$i]['avatar'] = $photo[0]->image;
-                    } else {
-                        $users[$i]['avatar'] = "";
-                    }
-                }*/
-                $i++;
-            }
-        } else {
-            $users = "";
-        }
-        $data['list'] = $users;
-        $favorite = array();
-        if ($data['list'] && $user) {
-            foreach ($data['list'] as $row) {
-                $check = $this->user->checkFavorite($user->id, $row['id']);
-                if ($check) {
-                    $favorite[] = array(
-                        'id' => $row['id'],
-                    );
-                } else {
-                    $favorite[] = array(
-                        'id' => 0,
-                    );
-                }
 
-            }
-        }
-
-        $data['favorite'] = $favorite;
-        $data['invita'] = $this->session->userdata('invita');
-        $data['user'] = $user;
+        $data['list'] = $list;
         $data['num'] = $config['total_rows'];
-        $data['page'] = 'user/browsing';
+
+        $data['page'] = 'user/search';
         $this->load->view('templates', $data);
     }
 

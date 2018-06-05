@@ -357,5 +357,16 @@ $(document).ready(function() {
         $('.btnYes').attr('href', base_url+'user/deleteMessage/'+profileId);
         $.fancybox.open({src: '#modalConfirm'});
     }
+
+    $('.regionSelection').multiselect({
+        columns: 2,
+        texts:{
+            'selectAll': 'Vælg alle',
+            'unselectAll': 'Fravælg alle',
+            'selectedOptions': ' valgt region'
+        },
+        selectAll: true,
+        maxPlaceholderOpts: 1
+    });
 });
 

@@ -340,3 +340,8 @@ function isFriend($profileId){
 
     return $query->get()->num_rows()?true:false;
 }
+
+function inSearch($filter, $value){
+    $ci = &get_instance();
+    return in_array($value, explode(',', $ci->input->get($filter)));
+}

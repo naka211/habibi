@@ -76,15 +76,15 @@
                             <a class="btn_edit" href="<?php echo site_url('user/update');?>"><i class="i_edit"></i> <span>Redigere</span></a>
                         </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="switch-field">
                                 <div class="switch-title">Chat</div>
-                                <input type="radio" id="switch_left" name="chat" value="1" <?php if($user->chat == 1) echo 'checked';?> />
+                                <input type="radio" id="switch_left" name="chat" value="1" <?php /*if($user->chat == 1) echo 'checked';*/?> />
                                 <label for="switch_left">Ja</label>
-                                <input type="radio" id="switch_right" name="chat" value="0" <?php if($user->chat == 0) echo 'checked';?> />
+                                <input type="radio" id="switch_right" name="chat" value="0" <?php /*if($user->chat == 0) echo 'checked';*/?> />
                                 <label for="switch_right">Nej</label>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
