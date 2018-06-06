@@ -35,28 +35,31 @@ class User_model extends CI_Model{
         if(isset($search['region']) && !empty($search['region'])){
             $this->db->where_in('region', explode(',',$search['region']));
         }
-        /*if(isset($search['gender'])&&$search['gender']!=0){
-            $this->db->where('u.gender', $search['gender']);
+        if(isset($search['gender']) && !empty($search['gender'])){
+            $this->db->where_in('gender', explode(',',$search['gender']));
         }
-        if(isset($search['relationship'])&&$search['relationship'][0]!=""){
-            //$inUser = array(12, 13);
-            $this->db->where_in('u.relationship', $search['relationship']);
+        if(isset($search['relationship']) && !empty($search['relationship'])){
+            $this->db->where_in('relationship', explode(',',$search['relationship']));
         }
-        if(isset($search['children'])&&$search['children'][0]!=""){
-            $this->db->where_in('u.children', $search['children']);
+        if(isset($search['children']) && !empty($search['children'])){
+            $this->db->where_in('children', explode(',',$search['children']));
         }
-        if(isset($search['ethnic_origin'])&&$search['ethnic_origin'][0]!=""){
-            $this->db->where_in('u.ethnic_origin', $search['ethnic_origin']);
+        if(isset($search['ethnic']) && !empty($search['ethnic'])){
+            $this->db->where_in('ethnic', explode(',',$search['ethnic']));
         }
-        if(isset($search['religion'])&&$search['religion'][0]!=""){
-            $this->db->where_in('u.religion', $search['religion']);
+        if(isset($search['religion']) && !empty($search['religion'])){
+            $this->db->where_in('religion', explode(',',$search['religion']));
         }
-        if(isset($search['training'])&&$search['training'][0]!=""){
-            $this->db->where_in('u.training', $search['training']);
+        if(isset($search['training']) && !empty($search['training'])){
+            $this->db->where_in('training', explode(',',$search['training']));
         }
-        if(isset($search['body'])&&$search['body'][0]!=""){
-            $this->db->where_in('u.body', $search['body']);
-        }*/
+        if(isset($search['body']) && !empty($search['body'])){
+            $this->db->where_in('body', explode(',',$search['body']));
+        }
+        if(isset($search['smoking']) && !empty($search['smoking'])){
+            $this->db->where_in('smoking', explode(',',$search['smoking']));
+        }
+
         if($ignore){
             //$ignore = array(12, 13);
             $this->db->where_not_in('u.id', $ignore);
@@ -79,29 +82,32 @@ class User_model extends CI_Model{
         if(isset($search['region']) && !empty($search['region'])){
             $this->db->where_in('region', explode(',',$search['region']));
         }
+        if(isset($search['gender']) && !empty($search['gender'])){
+            $this->db->where_in('gender', explode(',',$search['gender']));
+        }
+        if(isset($search['relationship']) && !empty($search['relationship'])){
+            $this->db->where_in('relationship', explode(',',$search['relationship']));
+        }
+        if(isset($search['children']) && !empty($search['children'])){
+            $this->db->where_in('children', explode(',',$search['children']));
+        }
+        if(isset($search['ethnic']) && !empty($search['ethnic'])){
+            $this->db->where_in('ethnic', explode(',',$search['ethnic']));
+        }
+        if(isset($search['religion']) && !empty($search['religion'])){
+            $this->db->where_in('religion', explode(',',$search['religion']));
+        }
+        if(isset($search['training']) && !empty($search['training'])){
+            $this->db->where_in('training', explode(',',$search['training']));
+        }
+        if(isset($search['body']) && !empty($search['body'])){
+            $this->db->where_in('body', explode(',',$search['body']));
+        }
+        if(isset($search['smoking']) && !empty($search['smoking'])){
+            $this->db->where_in('smoking', explode(',',$search['smoking']));
+        }
 
-        /*if(isset($search['gender'])&&$search['gender']!=0){
-            $this->db->where('u.gender', $search['gender']);
-        }
-        if(isset($search['relationship'])&&$search['relationship'][0]!=""){
-            //$inUser = array(12, 13);
-            $this->db->where_in('u.relationship', $search['relationship']);
-        }
-        if(isset($search['children'])&&$search['children'][0]!=""){
-            $this->db->where_in('u.children', $search['children']);
-        }
-        if(isset($search['ethnic_origin'])&&$search['ethnic_origin'][0]!=""){
-            $this->db->where_in('u.ethnic_origin', $search['ethnic_origin']);
-        }
-        if(isset($search['religion'])&&$search['religion'][0]!=""){
-            $this->db->where_in('u.religion', $search['religion']);
-        }
-        if(isset($search['training'])&&$search['training'][0]!=""){
-            $this->db->where_in('u.training', $search['training']);
-        }
-        if(isset($search['body'])&&$search['body'][0]!=""){
-            $this->db->where_in('u.body', $search['body']);
-        }*/
+
         if($ignore){
             //$ignore = array(12, 13);
             $this->db->where_not_in('u.id', $ignore);

@@ -337,18 +337,18 @@ class User extends MX_Controller
         /** Search browsing*/
 
         $year = date('Y', time());
-        $yearFrom = $year - $this->input->get('toAge');
-        $yearTo = $year - $this->input->get('fromAge');
-        $region = $this->input->get('region');
-        $ethnic = $this->input->get('ethnic');
-        /*$gender = $this->input->post('gender');
-        $relationship = $this->input->post('relationship');
-        $children = $this->input->post('children');
-        $ethnic_origin = $this->input->post('ethnic_origin');
-        $religion = $this->input->post('religion');
-        $training = $this->input->post('training');
-        $body = $this->input->post('body');
-        $smoking = $this->input->post('smoking');*/
+        $yearFrom       = $year - $this->input->get('toAge');
+        $yearTo         = $year - $this->input->get('fromAge');
+        $region         = $this->input->get('region');
+        $gender         = $this->input->get('gender');
+        $relationship   = $this->input->get('relationship');
+        $children       = $this->input->get('children');
+        $ethnic         = $this->input->get('ethnic');
+        $religion       = $this->input->get('religion');
+        $training       = $this->input->get('training');
+        $body           = $this->input->get('body');
+        $smoking        = $this->input->get('smoking');
+
         $search = array();
         if ($yearFrom) {
             $search['yearFrom'] = $yearFrom;
@@ -359,51 +359,31 @@ class User extends MX_Controller
         if ($region) {
             $search['region'] = $region;
         }
+        if ($gender) {
+            $search['gender'] = $gender;
+        }
+        if ($relationship) {
+            $search['relationship'] = $relationship;
+        }
+        if ($children) {
+            $search['children'] = $children;
+        }
         if ($ethnic) {
             $search['ethnic'] = $ethnic;
         }
-        /*if ($gender) {
-            $search_5 = array('gender' => $gender);
-        } else {
-            $search_5 = array();
-        }
-        if ($relationship) {
-            $search_6 = array('relationship' => $relationship);
-        } else {
-            $search_6 = array();
-        }
-        if ($children) {
-            $search_7 = array('children' => $children);
-        } else {
-            $search_7 = array();
-        }
-        if ($ethnic_origin) {
-            $search_8 = array('ethnic_origin' => $ethnic_origin);
-        } else {
-            $search_8 = array();
-        }
         if ($religion) {
-            $search_9 = array('religion' => $religion);
-        } else {
-            $search_9 = array();
+            $search['religion'] = $religion;
         }
         if ($training) {
-            $search_10 = array('training' => $training);
-        } else {
-            $search_10 = array();
+            $search['training'] = $training;
         }
         if ($body) {
-            $search_11 = array('body' => $body);
-        } else {
-            $search_11 = array();
+            $search['body'] = $body;
         }
         if ($smoking) {
-            $search_12 = array('smoking' => $smoking);
-        } else {
-            $search_12 = array();
-        }*/
+            $search['smoking'] = $smoking;
+        }
 
-        //$search = array_merge($search_1, $search_2, $search_3, $search_4, $search_5, $search_6, $search_7, $search_8, $search_9, $search_10, $search_11, $search_12);
 
 
         $config['base_url'] = base_url() . '/user/searching';

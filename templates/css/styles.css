@@ -2054,6 +2054,9 @@ ul.list_action li a .i_block {
 .frm_search {
     /*margin-bottom: 20px;*/
 }
+#filter .box_form_group{
+    margin-top: 10px;
+}
 
 .box_form_group {
     background: #f2f5f7;
@@ -2600,11 +2603,11 @@ ul.list_action li a .i_block {
     font-size: 14px;
     padding: 10px 30px 10px 15px;
     outline: none;
-    width: 350px;
+    width: 300px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;
-    width: 350px;
+    width: 300px;
 }
 .ms-options-wrap > .ms-options > .ms-selectall.global {
     color: #333;

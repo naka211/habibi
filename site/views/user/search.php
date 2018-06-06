@@ -1,3 +1,6 @@
+<?php
+$filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Børn', 'ethnic'=>'Etnisk oprindelse', 'religion'=>'Religion', 'training'=>'Uddannelse', 'body'=>'Kropsbygning', 'smoking'=>'Ryger');
+?>
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
@@ -57,7 +60,19 @@
                             <div class="row_search clearfix" id="filter"></div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <a href="#" class="btn btn_addCriteria"><span>Tilføj kriterie:</span> <i class="i_plus_xs"></i></a>
+                                    <div class="box_form_group" style="background-color: #ffa507;">
+                                        <p for="">Tilføj kriterie:</p>
+                                        <select name="criteria" class="form-control" id="criteria">
+                                            <option value="">Vælg</option>
+                                            <?php
+                                            foreach ($filterArr as $filter=>$label){
+                                            ?>
+                                            <option id="<?php echo $filter;?>Option" value="<?php echo $filter;?>" <?php if(!empty($this->input->get($filter))) echo 'style="display:none;"';?>><?php echo $label;?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                     <button type="button" class="btn btn_searchResult" style="width: auto;">Se hele søgeresultatet</button>
                                 </div>
                             </div>
@@ -109,7 +124,7 @@
         $(function() {
             $(".btn_searchResult").click(function() {
                 var params = {};
-                var getSelect = ['fromAge', 'toAge', 'region', 'ethnic', 'order'];
+                var getSelect = ['fromAge', 'toAge', 'region', 'gender', 'relationship', 'children', 'ethnic', 'religion', 'training', 'body', 'smoking', 'order'];
 
                 $.each(getSelect, function(index, value) {
                     var select = $('#' + value);
@@ -125,6 +140,12 @@
                     window.location.href = url + '?' + $.param(params);
                 }
             });
+
+            $("#criteria").change(function () {
+                var type = this.value;
+                var label = $(this).find("option:selected").text();
+                loadMultiFilter(type, label, '');
+            })
         });
 
         loadMultiFilter = function (type, label, selectedStr) {
@@ -133,14 +154,18 @@
                 url: base_url+"ajax/loadMultiFilter",
                 data: { csrf_site_name: token_value, type: type, label: label, selectedStr: selectedStr},
                 success: function (html) {
+                    //adding a filter
                     $("#filter").append(html);
-
+                    //hide an option and move to top
+                    $("#"+type+"Option").hide();
+                    $("#criteria").val($("#criteria option:first").val());
+                    //create multiselect style
                     $('.'+type+'Selection').multiselect({
                         columns: 2,
                         texts:{
                             'selectAll': 'Vælg alle',
                             'unselectAll': 'Fravælg alle',
-                            'selectedOptions': ' valgt region'
+                            'selectedOptions': ' valgt'
                         },
                         selectAll: true,
                         maxPlaceholderOpts: 1
@@ -149,7 +174,20 @@
             });
         }
 
-        loadMultiFilter('ethnic', 'Etnisk oprindelse', '<?php echo $this->input->get('ethnic');?>');
+        closeFilter = function(type){
+            $("#"+type+"Filter").remove();
+            $("#"+type+"Option").show();
+        }
+        <?php
+        foreach ($filterArr as $filter=>$label){
+            if(!empty($this->input->get($filter))){
+        ?>
+        loadMultiFilter('<?php echo $filter?>', '<?php echo $label?>', '<?php echo $this->input->get($filter);?>');
+        <?php
+            }
+        }
+        ?>
+
 
         $('.regionSelection').multiselect({
             columns: 2,

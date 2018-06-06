@@ -258,15 +258,29 @@ class Ajax extends CI_Controller{
         $label = $this->input->post('label');
         $selectedStr = $this->input->post('selectedStr');
 
+        $arr['gender'] = array(1=>'Mand', 2=>'Kvinde');
+        $arr['relationship'] = array('Aldrig gift', 'Separeret', 'Skilt', 'Enke/enkemand', 'Det får du at vide senere');
+        $arr['children'] = array('Nej', 'Ja; hjemmeboende', 'Ja; udeboende', '1', '2', '3', '3+');
         $arr['ethnic'] = array('Europæisk', 'Afrikansk', 'Latinamerikansk', 'Asiatisk', 'Indisk', 'Arabisk', 'Blandet/andet');
+        $arr['religion'] = array('Agnostiker', 'Ateist', 'Buddhist', 'Kristen', 'Kristen/Katolik', 'Jøde', 'Hindu', 'Muslim', 'Spirituel', 'Andet');
+        $arr['training'] = array('Ingen eksamen', 'Gymnasium/HF', 'Fagskole', 'Bachelorgrad', 'Kandidat/ph.d.');
+        $arr['body'] = array('Slank', 'Atletisk', 'Gennemsnitlig', 'Buttet');
+        $arr['smoking'] = array('Ja', 'Nej', 'Ja; festryger');
 
-        $html = '<div class="box_form_group"><p for="">'.$label.'</p><select class="form-control 3col active '.$type.'Selection" name="'.$type.'[]" id="'.$type.'" multiple="multiple">';
+        $html = '<div class="box_form_group" id="'.$type.'Filter"><p for="">'.$label.'</p><select class="form-control 3col active '.$type.'Selection" name="'.$type.'[]" id="'.$type.'" multiple="multiple">';
         $listOptions = $arr[$type];
-        foreach ($listOptions as $option){
-            $selected = in_array($option, explode(',', $selectedStr))?'selected':'';
-            $html .= '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+        if($type == 'gender'){
+            foreach ($listOptions as $key=>$option){
+                $selected = in_array($key, explode(',', $selectedStr))?'selected':'';
+                $html .= '<option value="'.$key.'" '.$selected.'>'.$option.'</option>';
+            }
+        } else {
+            foreach ($listOptions as $key=>$option){
+                $selected = in_array($option, explode(',', $selectedStr))?'selected':'';
+                $html .= '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+            }
         }
-        $html .= '</select></div>';
+        $html .= '</select><a href="javascript:void(0);" class="btnClose" onclick="closeFilter(\''.$type.'\')"><i class="i_close"></i></a></div>';
         echo $html;
         exit();
     }
