@@ -26,7 +26,7 @@
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <h4><?php echo $user->name; ?></h4>
                                 <p class="age_city"><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
-                                <p>Modtaget: d. <?php echo date("d/m/Y", $user->sent_time); ?></p>
+                                <p>Sendte: d. <span><?php echo date("d/m/Y", $user->sent_time); ?></span> kl.<span><?php echo date("H:i", $user->sent_time); ?></span></p>
                                 <?php if(isFriend($user->id) == false){?><a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn bntMessage">Tilføj ven</a><?php }?>
                                 <a href="<?php echo site_url('user/blockUser/' . $user->id); ?>" class="btn bntBlock">Blok</a>
                             </div>
