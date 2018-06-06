@@ -45,7 +45,7 @@ class User_model extends CI_Model{
             $this->db->where_in('children', explode(',',$search['children']));
         }
         if(isset($search['ethnic']) && !empty($search['ethnic'])){
-            $this->db->where_in('ethnic', explode(',',$search['ethnic']));
+            $this->db->where_in('ethnic_origin', explode(',',$search['ethnic']));
         }
         if(isset($search['religion']) && !empty($search['religion'])){
             $this->db->where_in('religion', explode(',',$search['religion']));
@@ -92,7 +92,7 @@ class User_model extends CI_Model{
             $this->db->where_in('children', explode(',',$search['children']));
         }
         if(isset($search['ethnic']) && !empty($search['ethnic'])){
-            $this->db->where_in('ethnic', explode(',',$search['ethnic']));
+            $this->db->where_in('ethnic_origin', explode(',',$search['ethnic']));
         }
         if(isset($search['religion']) && !empty($search['religion'])){
             $this->db->where_in('religion', explode(',',$search['religion']));
