@@ -37,8 +37,8 @@
                                                 <td><?php echo $user->training;?></td>
                                             </tr>
                                             <tr>
-                                                <th>Postnr:</th>
-                                                <td><?php echo $user->code;?></td>
+                                                <th>Region:</th>
+                                                <td><?php echo $user->region;?></td>
                                             </tr>
                                             </tbody>
                                         </table>

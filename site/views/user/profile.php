@@ -59,8 +59,8 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                                                 <td><?php echo $profile->training;?></td>
                                             </tr>
                                             <tr>
-                                                <th>Postnr:</th>
-                                                <td><?php echo $profile->code;?></td>
+                                                <th>Region:</th>
+                                                <td><?php echo $profile->region;?></td>
                                             </tr>
                                             </tbody>
                                         </table>
