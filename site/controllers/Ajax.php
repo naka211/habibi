@@ -284,5 +284,73 @@ class Ajax extends CI_Controller{
         echo $html;
         exit();
     }
+
+    function uploadPhoto(){
+        $upload_path = "./uploads/photo/";
+
+        $user = $this->session->userdata('user');
+        //$config['upload_path'] = $this->config->item('root') . "uploads/photo/";
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = '*';
+        $config['max_size'] = $this->config->item('maxupload');
+        $config['encrypt_name'] = TRUE;  //rename to random string image
+        $this->load->library('upload', $config);
+        if (isset($_FILES['file']['name'])) {
+            if (!$this->upload->do_upload('file')) {
+                $response['success'] = 0;
+                $response['message'] = $this->upload->display_errors();
+                echo json_encode($response);
+                exit();
+            } else {
+                $data = $this->upload->data();
+                //save to db
+                $DB['userId'] = $user->id;
+                $DB['dt_create'] = time();
+                $DB['image'] = $data['file_name'];
+                $this->user->savePhoto($DB);
+
+                //create thumb
+                $config_resize['image_library'] = 'gd2';
+                $config_resize['source_image'] = $data['full_path'];
+                $config_resize['new_image'] = './uploads/thumb_photo/';
+                $config_resize['thumb_marker'] = '';
+                $config_resize['create_thumb'] = TRUE;
+                $config_resize['maintain_ratio'] = true;
+                $config_resize['quality'] = "100%";
+                $config_resize['width']         = 270;
+                $config_resize['height']       = 270;
+                $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config_resize['width'] / $config_resize['height']);
+                $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config_resize);
+
+                if(!$this->image_lib->resize()){ //Resize image
+                    redirect("errorhandler"); //If error, redirect to an error page
+                }else {
+                    $config_crop['image_library'] = 'gd2';
+                    $config_crop['source_image'] = './uploads/thumb_photo/' . $data['file_name'];
+                    $config_crop['new_image'] = './uploads/thumb_photo/' . $data['file_name'];
+                    $config_crop['quality'] = "100%";
+                    $config_crop['maintain_ratio'] = FALSE;
+                    $config_crop['width'] = 270;
+                    $config_crop['height'] = 270;
+                    $config_crop['x_axis'] = '0';
+                    $config_crop['y_axis'] = '0';
+
+                    $this->image_lib->clear();
+                    $this->image_lib->initialize($config_crop);
+
+                    $this->image_lib->crop();
+
+                }
+
+                $response['success'] = 1;
+                $response['message'] = $this->upload->data();
+                echo json_encode($response);
+                exit();
+            }
+        }
+    }
 }
 ?>

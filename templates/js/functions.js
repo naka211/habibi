@@ -357,5 +357,11 @@ $(document).ready(function() {
         $('.btnYes').attr('href', base_url+'user/deleteMessage/'+profileId);
         $.fancybox.open({src: '#modalConfirm'});
     }
+
+    confirmRemovePhoto = function (photoId) {
+        $("#confirmText").html("Er du sikker på at slette billedet?");
+        $('.btnYes').attr('href', base_url+'user/deletePhoto/'+photoId);
+        $.fancybox.open({src: '#modalConfirm'});
+    }
 });
 

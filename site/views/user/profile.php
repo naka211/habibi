@@ -114,7 +114,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                     <div class="owl-carousel owl-theme owl_gallerys">
                         <?php foreach ($images as $image){?>
                         <div class="item">
-                            <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>" class="img-responsive"></a>
+                            <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>uploads/thumb_photo/<?php echo $image->image;?>" class="img-responsive"></a>
                         </div>
                         <?php }?>
                     </div>

@@ -497,10 +497,7 @@ class User_model extends CI_Model{
         if($userId){
             $this->db->where("userID",$userId);
         }
-        $this->db->where("type",$type);
-        if($avatar != ''){
-            $this->db->where('image != ',$avatar);
-        }
+        $this->db->order_by('id', 'DESC');
         $query = $this->db->get()->result();
         return $query;
     }

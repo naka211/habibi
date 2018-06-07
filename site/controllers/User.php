@@ -110,90 +110,33 @@ class User extends MX_Controller
     }
 
     /** Photo*/
-    function myphoto()
-    {
+    function myphoto(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
 
         $data['user'] = $this->session->userdata('user');
-        $data['listImages'] = $this->user->getPhoto($data['user']->id, 1);
+        $data['listImages'] = $this->user->getPhoto($data['user']->id);
         //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
         $this->load->view('templates', $data);
     }
 
-    function uploadPhoto()
-    {
-        $type = $this->input->post('type');
-        if($type == 1){
-            $upload_path = "./uploads/photo/";
-            $imageFolder = "photo";
-        } else if($type == 2){
-            $upload_path = "./uploads/user/";
-            $imageFolder = "user";
-        }
-        $user = $this->session->userdata('user');
-        //$config['upload_path'] = $this->config->item('root') . "uploads/photo/";
-        $config['upload_path'] = $upload_path;
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = $this->config->item('maxupload');
-        $config['encrypt_name'] = TRUE;  //rename to random string image
-        $this->load->library('upload', $config);
-        if (isset($_FILES['myImage']['name'])) {
-            $data_img = $this->upload->do_multi_upload('myImage');
-            if ($data_img) {
-                $data_img = $data_img;
-            } else {
-                $data_img[] = NULL;
-            }
-        } else {
-            $data_img[] = NULL;
-        }
-        //Save image to DB
-        $list = array();
-        $DB['userID'] = $user->id;
-        $DB['dt_create'] = date('Y-m-d H:i:s');
-        $DB['bl_active'] = 1;
-        $DB['type'] = $type;
-        if ($data_img) {
-            $i = 0;
-            foreach ($data_img as $row) {
-                $DB['image'] = $row['file_name'];
-                $id = $this->user->savePhoto($DB);
-                $list[$i]['image'] = $row['file_name'];
-                $list[$i]['id'] = $id;
-                $i++;
-            }
-        }
-        $data['imageFolder'] = $imageFolder;
-        $data['list'] = $list;
-        $this->load->view('ajax/myphoto', $data);
-        /**
-         * $images_arr = array();
-         * foreach($_FILES['myImage']['name'] as $key=>$val){
-         * $image_name = $_FILES['myImage']['name'][$key];
-         * $tmp_name    = $_FILES['myImage']['tmp_name'][$key];
-         * $size        = $_FILES['myImage']['size'][$key];
-         * $type        = $_FILES['myImage']['type'][$key];
-         * $error        = $_FILES['myImage']['error'][$key];
-         * //display images without stored
-         * $extra_info = getimagesize($_FILES['myImage']['tmp_name'][$key]);
-         * $images_arr[] = "data:" . $extra_info["mime"] . ";base64," . base64_encode(file_get_contents($_FILES['myImage']['tmp_name'][$key]));
-         * }
-         * if($images_arr){
-         * $i = 0;
-         * foreach($images_arr as $image_src){ ?>
-         * <li id="show_images_<?php echo $i;?>" class="portfolio isotope-item">
-         * <div style="width: 150px !important; height: 150px !important; overflow: hidden;">
-         * <a class="portfolio_img" href="javascript:void(0)">
-         * <img src="<?php echo $image_src;?>" width="100%" height="100%" alt="" class="img-responsive"/>
-         * </a>
-         * </div>
-         * <a href="javascript:void(0)" onclick="deleteImages('show_images_<?php echo $i;?>');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-         * </li>
-         * <?php $i++; }}
-         */
+    public function deletePhoto($photoId){
+        $this->db->select('image');
+        $this->db->from('user_image');
+        $this->db->where('id', $photoId);
+        $query = $this->db->get();
+        $image = $query->row();
+
+        unlink("./uploads/photo/".$image->image);
+        unlink("./uploads/thumb_photo/".$image->image);
+
+        $this->db->where('id',$photoId)->delete('user_image');
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
+
+
 
     function mydeal()
     {
