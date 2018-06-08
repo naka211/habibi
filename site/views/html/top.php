@@ -59,7 +59,7 @@ if(!empty($user)){
                     </div>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="nav navbar-nav">
-                            <li id="searchMenu"><a href="search.php">Søg</a></li>
+                            <li id="searchMenu"><a href="<?php echo site_url('user/searching')?>">Søg</a></li>
                             <li id="favoriteMenu"><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
                             <li id="messageMenu"><a <?php echo $messageLink;?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
                             <li id="visitMenu"><a <?php echo $visitingLink;?>>Besøg</a></li>
