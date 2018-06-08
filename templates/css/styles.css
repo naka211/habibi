@@ -2747,3 +2747,12 @@ ul.list_action li a .i_block {
 .btnUpload:hover {
     background: #000;
 }
+.progress-bar{
+    background-color: #ffa507;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 26px;
+}
+.progress{
+    height: 30px;
+}

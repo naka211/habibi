@@ -41,7 +41,9 @@
 <script>
     $(document).ready(function() {
         $("#file").pekeUpload({
-            theme:'bootstrap',
+            bootstrap: true,
+            showPreview: true,
+            showFilename: false,
             btnText: 'Upload',
             allowedExtensions:"jpeg|jpg|png",
             url: base_url+'ajax/uploadPhoto',

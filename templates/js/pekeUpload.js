@@ -82,7 +82,8 @@
                   case false:
                     switch (options.bootstrap) {
                       case true:
-                        html = '<a href="javascript:void(0)" class="btn btn-primary btn-upload pkuparea"> <i class="glyphicon glyphicon-upload"></i> ' + options.btnText + "</a>";
+                        //html = '<a href="javascript:void(0)" class="btn btn-primary btn-upload pkuparea"> <i class="glyphicon glyphicon-upload"></i> ' + options.btnText + "</a>";
+                          html = '<div class="text-center"><a href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> ' + options.btnText + "</a></div>";
                         break;
 
                       case false:
@@ -224,18 +225,18 @@
                         var prev = $('<div class="col-lg-2 col-md-2 col-xs-4"></div>').appendTo(newRow);
                         this.previewFile(prev, file);
                     }
-                    var finfo = $('<div class="col-lg-8 col-md-8 col-xs-8"></div>').appendTo(newRow);
+                    var finfo = $('<div class="col-lg-10 col-md-10 col-xs-8"></div>').appendTo(newRow);
                     if (options.showFilename) {
                         finfo.append('<div class="filename">' + file.name + "</div>");
                     }
-                    if (options.notAjax == false){
+                    //if (options.notAjax == false){
                         var progress = $('<div class="progress"><div class="pkuppbr progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"></div></div>').appendTo(finfo);
                         if (options.showPercent) {
                             progress.find("div.progress-bar").text("0%");
                         }
-                    }
+                    //}
                     var dismiss = $('<div class="col-lg-2 col-md-2 col-xs-2"></div>').appendTo(newRow);
-                    $('<a href="javascript:void(0);" class="btn btn-danger pkdel">'+options.delfiletext+'</a>').appendTo(dismiss);
+                    //$('<a href="javascript:void(0);" class="btn btn-danger pkdel">'+options.delfiletext+'</a>').appendTo(dismiss);
                     break;
 
                   case false:
