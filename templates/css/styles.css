@@ -1735,10 +1735,29 @@ ul.list_action li a .i_block {
     border-bottom: 1px solid #e1e1e1;
     padding-bottom: 33px;
     margin-bottom: 33px;
+    position: relative;
+    overflow: hidden;
 }
 
-.notSeen{
-    border-bottom: 1px solid #ffa507;
+.frend_item_new {
+    border: 1px solid #f1f1f1;
+    padding: 15px;
+}
+.frend_item .new {
+    background: #fa3536;
+    color: #fff;
+    display: inline-block;
+    padding: 15px 90px;
+    font-size: 20px;
+    font-weight: 600;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0px;
+    right: -80px;
 }
 
 .frend_item h4 {

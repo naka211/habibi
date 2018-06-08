@@ -544,9 +544,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
-        $this->db->set('seen',1)->where("to_user_id", $userId)->update('user_kisses');
-
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.send_at as sent_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'left');
         $this->db->where("uk.to_user_id",$userId);
@@ -556,6 +554,10 @@ class User_model extends CI_Model{
             $this->db->limit($num,$offset);
         }
         $query = $this->db->get()->result();
+
+        //Set seen = 1
+        $this->db->set('seen',1)->where("to_user_id", $userId)->update('user_kisses');
+
         return $query;
     }
 

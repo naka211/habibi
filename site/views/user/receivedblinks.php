@@ -15,7 +15,10 @@
                 foreach($list as $user){
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                    <div class="frend_item">
+                    <div class="frend_item <?php if($user->seen == 0) echo 'frend_item_new"';?>">
+                        <?php if($user->seen == 0){?>
+                            <span class="new">Ny</span>
+                        <?php } ?>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <div class="frend_item_avatar">
