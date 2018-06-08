@@ -34,50 +34,8 @@ class Ajax extends CI_Controller{
         return;
 	}
 
-    /**
-     *
-     */
-	function getKissesLog(){
-        $friendId = $this->input->post('friendId');
-        $user = $this->session->userdata('user');
 
-        //Seen the kisses
-        $this->user->disableStatus($friendId, $user->id, 'Kiss');
 
-        //Load all kisses
-        $data['kisses'] = $this->db->where('user_from', $friendId)
-            ->where('user_to', $user->id)
-            ->where('action', 'Kiss')
-            ->where('status', 0)
-            ->get('user_activity')->result();
-
-        $this->load->view('ajax/kisseslog', $data);
-    }
-
-    public function deleteKissLog(){
-	    $id = $this->input->post('id');
-
-        $result = $this->db->set('status', -1)
-            ->where("id", $id)
-            ->update("user_activity");
-        if($result == false){
-            die('0');
-        } else {
-            die('1');
-        }
-    }
-
-    function setUsedDeal(){
-        $id = $this->input->post('id');
-        $result = $this->db->set('used', 1)
-            ->where("id", $id)
-            ->update("product_order_item");
-        if($result == false){
-            die('0');
-        } else {
-            die('1');
-        }
-    }
 
     function checkEmail(){
         $email = $this->input->post('email', true);
@@ -202,7 +160,7 @@ class Ajax extends CI_Controller{
         foreach ($messages as $message){
             if($message->uid == $profileId){
                 $html .= '<li class="other">
-                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$message->avatar.'" /></a>
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
                             <div class="message">
                                 <p>'.$message->message.'</p>
                             </div>
@@ -210,7 +168,7 @@ class Ajax extends CI_Controller{
                         </li>';
             } else {
                 $html .= '<li class="you">
-                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$message->avatar.'" /></a>
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
                             <div class="message">
                                 <p>'.$message->message.'</p>
                             </div>
@@ -234,7 +192,7 @@ class Ajax extends CI_Controller{
             $this->user->saveMessage($DB);
             $item = $this->user->getUser($user->id);
             $html = '<li class="you">
-                            <a class="user"><img alt="" src="'.base_url().'/uploads/user/'.$item->avatar.'" /></a>
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                             <div class="message">
                                 <p>'.$DB['message'].'</p>
                             </div>
@@ -335,6 +293,77 @@ class Ajax extends CI_Controller{
                     $config_crop['maintain_ratio'] = FALSE;
                     $config_crop['width'] = 270;
                     $config_crop['height'] = 270;
+                    $config_crop['x_axis'] = '0';
+                    $config_crop['y_axis'] = '0';
+
+                    $this->image_lib->clear();
+                    $this->image_lib->initialize($config_crop);
+
+                    $this->image_lib->crop();
+
+                }
+
+                $response['success'] = 1;
+                $response['message'] = $this->upload->data();
+                echo json_encode($response);
+                exit();
+            }
+        }
+    }
+
+    function uploadAvatar(){
+        $upload_path = "./uploads/user/";
+
+        $user = $this->session->userdata('user');
+        //$config['upload_path'] = $this->config->item('root') . "uploads/photo/";
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = '*';
+        $config['max_size'] = $this->config->item('maxupload');
+        $config['encrypt_name'] = TRUE;  //rename to random string image
+        $this->load->library('upload', $config);
+        if (isset($_FILES['file']['name'])) {
+            if (!$this->upload->do_upload('file')) {
+                $response['success'] = 0;
+                $response['message'] = $this->upload->display_errors();
+                echo json_encode($response);
+                exit();
+            } else {
+                $data = $this->upload->data();
+                //save to db
+                $currentAvatar = $this->user->getAvatar($user->id);
+                if($currentAvatar != 'no-avatar.jpg'){
+                    @unlink("./uploads/user/".$currentAvatar);
+                    @unlink("./uploads/thumb_user/".$currentAvatar);
+                }
+                $this->user->updateAvatar($user->id, $data['file_name']);
+                $savedUser = $this->user->getUser($user->id);
+                $this->session->set_userdata('user', $savedUser);
+                //create thumb
+                $config_resize['image_library'] = 'gd2';
+                $config_resize['source_image'] = $data['full_path'];
+                $config_resize['new_image'] = './uploads/thumb_user/';
+                $config_resize['thumb_marker'] = '';
+                $config_resize['create_thumb'] = TRUE;
+                $config_resize['maintain_ratio'] = true;
+                $config_resize['quality'] = "100%";
+                $config_resize['width']         = 500;
+                $config_resize['height']       = 500;
+                $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config_resize['width'] / $config_resize['height']);
+                $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config_resize);
+
+                if(!$this->image_lib->resize()){ //Resize image
+                    redirect("errorhandler"); //If error, redirect to an error page
+                }else {
+                    $config_crop['image_library'] = 'gd2';
+                    $config_crop['source_image'] = './uploads/thumb_user/' . $data['file_name'];
+                    $config_crop['new_image'] = './uploads/thumb_user/' . $data['file_name'];
+                    $config_crop['quality'] = "100%";
+                    $config_crop['maintain_ratio'] = FALSE;
+                    $config_crop['width'] = 500;
+                    $config_crop['height'] = 500;
                     $config_crop['x_axis'] = '0';
                     $config_crop['y_axis'] = '0';
 

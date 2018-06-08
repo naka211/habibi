@@ -88,27 +88,6 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function b2b($page = 0)
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-        $data['user'] = $this->session->userdata('user');
-        $data['deals'] = $this->user->getQuantityB2BDeals($data['user']->id);
-
-        $config['base_url'] = base_url() . $this->language . '/user/b2b/';
-        $config['total_rows'] = $this->user->getQuantityB2BDeals($data['user']->id);
-        $config['per_page'] = $this->config->item('numberpage');
-        $config['num_links'] = 2;
-        $config['uri_segment'] = $this->uri->total_segments();
-        $this->pagination->initialize($config);
-        $data['deals'] = $this->user->getB2BDeals($data['user']->id, $config['per_page'], (int)$page);
-        $data['pagination'] = $this->pagination->create_links();
-
-        $data['page'] = 'user/b2b';
-        $this->load->view('templates', $data);
-    }
-
     /** Photo*/
     function myphoto(){
         $data = array();
@@ -118,6 +97,16 @@ class User extends MX_Controller
         $data['listImages'] = $this->user->getPhoto($data['user']->id);
         //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
+        $this->load->view('templates', $data);
+    }
+
+    function editAvatar(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger avatar');
+
+        $user = $this->session->userdata('user');
+        $data['user'] = $this->user->getUser($user->id);
+        $data['page'] = 'user/editavatar';
         $this->load->view('templates', $data);
     }
 
@@ -134,19 +123,6 @@ class User extends MX_Controller
         $this->db->where('id',$photoId)->delete('user_image');
 
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
-    }
-
-
-
-    function mydeal()
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-        $data['user'] = $this->session->userdata('user');
-        $data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
-        $data['page'] = 'user/mydeal';
-        $this->load->view('templates', $data);
     }
 
     /** Message*/
@@ -353,23 +329,11 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if ($this->input->post()) {
-            /*$user = $this->user->getUser(NULL, $this->input->post('email'), NULL, NULL, NULL, 1);
-            if ($user) {
-                $data['status'] = false;
-                $data['message'] = 'E-mail er allerede registeret!';
-                header('Content-Type: application/json');
-                echo json_encode($data);
-                return;
-            }*/
+
             $DB['name'] = $this->input->post('name');
             $DB['email'] = $this->input->post('email');
             $DB['password'] = md5($this->input->post('password'));
-            /*$DB['code'] = $this->input->post('code');
-            $DB['payment'] = $this->input->post('payment');
-            $DB['day'] = $this->input->post('day');
-            $DB['month'] = $this->input->post('month');*/
             $DB['year'] = $this->input->post('year');
-            //$DB['birthday'] = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
             $DB['region'] = $this->input->post('region');
             $DB['gender'] = $this->input->post('gender');
             $DB['ethnic_origin'] = $this->input->post('ethnic_origin');
@@ -395,16 +359,6 @@ class User extends MX_Controller
             $user = $this->user->getUser('', $DB['email'], $DB['password']);
             $this->session->set_userdata('user', $user);
             $this->session->set_userdata('isLoginSite', true);
-            /*if ($DB['payment'] == 1 && $id) {
-                $this->session->set_userdata('payment', true);
-                $this->session->set_userdata('userId', $id);
-                $data['status'] = true;
-                $data['payment'] = true;
-                $data['message'] = '';
-                header('Content-Type: application/json');
-                echo json_encode($data);
-                return;
-            }*/
             if ($id) {
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
@@ -424,8 +378,6 @@ class User extends MX_Controller
             echo json_encode($data);
             return;
         }
-        /*$data['page'] = 'user/register';
-        $this->load->view('templates', $data);*/
     }
 
     /** PAYMENT*/
@@ -745,19 +697,6 @@ class User extends MX_Controller
     function login(){
         $email = $this->input->post('email', true);
         $password = md5($this->input->post('password', true));
-        //Login b2b
-        /*$b2b = $this->user->getB2b('', $email, $password);
-        if ($b2b) {
-            $b2b->b2b = true;
-            $this->session->set_userdata('isLoginSite', true);
-            $this->session->set_userdata('user', $b2b);
-            $this->user->updateLogin($b2b->id, true);
-            $data['status'] = true;
-            $data['b2b'] = true;
-            header('Content-Type: application/json');
-            echo json_encode($data);
-            return;
-        }*/
         //Login user
         $user = $this->user->getUser('', $email, $password);
         if ($user) {
@@ -768,7 +707,7 @@ class User extends MX_Controller
             $this->session->set_userdata('user', $user);
             $this->user->updateLogin($user->id, false);
 
-            setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
+            //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
         } else {
             $data['status'] = false;
         }
@@ -813,78 +752,14 @@ class User extends MX_Controller
         }
     }
 
-    function loginFB()
-    {
-        $post = $this->input->post('response', true);
-        if ($post) {
-            $DB['name'] = $post['name'];
-            $DB['email'] = $post['email'];
-            $DB['facebook'] = $post['id'];
-            $DB['os'] = $this->agent->platform();
-            $DB['ip'] = $this->input->ip_address();
-            $mobile = $this->agent->mobile();
-            if ($mobile) {
-                $DB['device'] = 'Mobile';
-            } else {
-                $DB['device'] = 'Desktop';
-            }
-            if ($post['gender'] == 'male') {
-                $DB['gender'] = 2;
-            } else if ($post['gender'] == 'female') {
-                $DB['gender'] = 1;
-            } else {
-                $DB['gender'] = 0;
-            }
-            $DB['avatar'] = 'https://graph.facebook.com/' . $post['id'] . '/picture?type=large';
-            $DB['login'] = date('Y-m-d H:i:s');
-            $DB['bl_active'] = 1;
-            $check = $this->user->getUser('', $DB['email'], '', $DB['facebook']);
-            if ($check) {
-                $id = $check->id;
-                $id = $this->user->saveUser($DB, $id);
-                $user = $this->user->getUser($id);
-                $user->b2b = false;
-                $this->session->set_userdata('user', $user);
-            } else {
-                $DB['dt_create'] = date('Y-m-d H:i:s');
-                $DB['type'] = 1;
-                $DB['groups'] = 2; //1: register - 2: facebook - 3: google
-                $id = $this->user->saveUser($DB);
-                $user = $this->user->getUser($id);
-                $user->b2b = false;
-                $this->session->set_userdata('user', $user);
-            }
-            $this->session->set_userdata('isLoginSite', true);
-            $data['status'] = true;
-        } else {
-            $data['status'] = false;
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
-    }
+
 
     function logout(){
         /** Login*/
         $Login = array('isLoginSite', 'user', 'email', 'password');
         $this->session->unset_userdata($Login);
-        /** UserID to payment gold member*/
-        /*$this->session->unset_userdata('userid');
-        $this->session->unset_userdata('payment');*/
-        /** Order*/
-        /*$this->cart->destroy();
-        $this->session->unset_userdata('orderID');
-        $this->session->unset_userdata('ID');*/
-        /** Invitation*/
-        /*$Invitation = array('datingID' => '', 'invita' => '', 'listUser' => '');
-        $this->session->unset_userdata($Invitation);*/
-        /** Clear session search USER */
-        /*$SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
-        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
-        , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);*/
 
-        setcookie('cc_data', '', -time() + (86400 * 30), "/");
+        //setcookie('cc_data', '', -time() + (86400 * 30), "/");
 
         redirect(site_url());
     }

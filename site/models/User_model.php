@@ -509,6 +509,7 @@ class User_model extends CI_Model{
         $query = $this->db->get()->num_rows();
 	    return $query;
     }
+
     function savePhoto($DB=NULL){
         if($this->db->insert('user_image',$DB)){
             return $this->db->insert_id();
@@ -516,8 +517,21 @@ class User_model extends CI_Model{
             return false;
         }
     }
-    
 
+    function getAvatar($userId){
+        $this->db->select('avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
+        $avatar = $this->db->get()->row()->avatar;
+        return $avatar;
+    }
+
+    function updateAvatar($userId, $avatar){
+        $this->db->set('avatar', $avatar);
+        $this->db->set('original_avatar', $avatar);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
     
     //T.Trung
 

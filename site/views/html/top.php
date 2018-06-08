@@ -37,7 +37,7 @@ if(!empty($user)){
                             <a href="<?php echo site_url('user/logout');?>">Log out</a>
                         </div>
                         <a class="img_avatar_sm" href="<?php echo site_url('user/index');?>">
-                            <img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
+                            <img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
                         </a>
                     </div>
                 </div>

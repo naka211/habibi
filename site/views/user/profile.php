@@ -19,7 +19,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
             <div class="row top_infoProfile">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div class="img_avatar">
-                        <img class="img-responsive" src="<?php echo base_url();?>/uploads/user/<?php echo $profile->avatar;?>">
+                        <img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $profile->avatar;?>">
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">

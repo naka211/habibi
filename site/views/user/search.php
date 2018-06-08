@@ -91,7 +91,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
+                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
                                 <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                                 <?php if(isFriend($user->id) == false){?>
                                 <div class="favorites_footer">

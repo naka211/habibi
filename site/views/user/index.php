@@ -4,8 +4,8 @@
             <div class="row top_infoProfile">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div class="img_avatar">
-                        <img class="img-responsive" src="<?php echo base_url();?>/uploads/user/<?php echo $user->avatar;?>">
-                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Change your picture</span></a>
+                        <img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>">
+                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Skift din avatar</span></a>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
@@ -96,7 +96,7 @@
                         <div class="item">
                             <a class="btn_editGallery" href="<?php echo site_url('user/myphoto');?>">
                                 <i class="i_plus"></i>
-                                <span>Add Picture</span>
+                                <span>Uploade billede</span>
                             </a>
                         </div>
                         <?php if(!empty($images)) {
