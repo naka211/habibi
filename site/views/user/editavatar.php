@@ -27,7 +27,7 @@
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                //location.reload();
+                location.reload();
             }
         });
     });
