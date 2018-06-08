@@ -280,8 +280,8 @@ class User extends MX_Controller
         /** Search browsing*/
 
         $year = date('Y', time());
-        $yearFrom       = $year - $this->input->get('toAge');
-        $yearTo         = $year - $this->input->get('fromAge');
+        $yearFrom       = $this->input->get('toAge')?$year - $this->input->get('toAge'):null;
+        $yearTo         = $this->input->get('fromAge')?$year - $this->input->get('fromAge'):null;
         $region         = $this->input->get('region');
         $gender         = $this->input->get('gender');
         $relationship   = $this->input->get('relationship');
@@ -326,7 +326,6 @@ class User extends MX_Controller
         if ($smoking) {
             $search['smoking'] = $smoking;
         }
-
 
 
         $config['base_url'] = base_url() . '/user/searching';

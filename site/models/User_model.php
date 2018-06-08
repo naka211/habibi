@@ -26,10 +26,10 @@ class User_model extends CI_Model{
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
         //Search
-        if($search['yearFrom']){
+        if(isset($search['yearFrom']) && !empty($search['yearFrom'])){
             $this->db->where('u.year >=', $search['yearFrom']);
         }
-        if($search['yearTo']){
+        if(isset($search['yearTo']) && !empty($search['yearTo'])){
             $this->db->where('u.year <=', $search['yearTo']);
         }
         if(isset($search['region']) && !empty($search['region'])){
@@ -73,10 +73,10 @@ class User_model extends CI_Model{
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
         //Search
-        if($search['yearFrom']){
+        if(isset($search['yearFrom']) && !empty($search['yearFrom'])){
             $this->db->where('u.year >=', $search['yearFrom']);
         }
-        if($search['yearTo']){
+        if(isset($search['yearTo']) && !empty($search['yearTo'])){
             $this->db->where('u.year <=', $search['yearTo']);
         }
         if(isset($search['region']) && !empty($search['region'])){
