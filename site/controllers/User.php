@@ -487,7 +487,7 @@ class User extends MX_Controller
             $DB['month']            = $this->input->post('month');
             $DB['year']             = $this->input->post('year');
             $DB['birthday']         = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
-            $DB['code']             = $this->input->post('code');
+            $DB['region']           = $this->input->post('region');
             $DB['gender']           = $this->input->post('gender');
             $DB['relationship']     = $this->input->post('relationship');
             $DB['children']         = $this->input->post('children');
