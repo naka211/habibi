@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <input id="file" type="file" name="file"/>
-                    <a class="btn bntMessage">Sløre/a>
+                    <a class="btn bntMessage">Sløre</a>
                     <a class="btn bntMessage">Un-sløre</a>
                     <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete">Slet</a>
                 </div>
