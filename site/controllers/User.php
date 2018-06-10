@@ -110,6 +110,19 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
+    function deleteAvatar(){
+        $user = $this->session->userdata('user');
+
+        $currentAvatar = $this->user->getAvatar($user->id);
+        if($currentAvatar != 'no-avatar.jpg'){
+            @unlink("./uploads/user/".$currentAvatar);
+            @unlink("./uploads/thumb_user/".$currentAvatar);
+        }
+        $this->user->updateAvatar($user->id, 'no-avatar.jpg');
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
     public function deletePhoto($photoId){
         $this->db->select('image');
         $this->db->from('user_image');

@@ -31,7 +31,9 @@
                             <h4><?php echo $user->name; ?></h4>
                             <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                             <p>Sendt: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></span></p>
+                            <?php if(isGoldMember() === true){?>
                             <p class="gray_friend_item"><?php echo word_limiter($user->message, 8);?></p>
+                            <?php }?>
                             <a <?php echo $messageLink;?> class="btn bntMessage">Se chatbesked</a>
                             <a onclick="confirmDeleteMessage(<?php echo $user->id;?>)" href="javascript:;" class="btn bntBlock">SLET</a>
                         </div>
