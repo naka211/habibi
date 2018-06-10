@@ -29,7 +29,7 @@
                                 <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $user->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                                <a href="<?php echo site_url('user/unFriend/'.$user->id);?>" class="btn bntRemove">Unfriend</a>
+                                <a href="<?php echo site_url('user/unFriend/'.$user->id);?>" class="btn bntDelete">Unfriend</a>
                                 <a href="<?php echo site_url('user/blockUser/' . $user->id); ?>" class="btn bntBlock">Blok</a>
                             </div>
                         </div>
