@@ -4,12 +4,12 @@
     <section class="section_infoProfile">
         <div class="container">
             <div class="row top_infoProfile">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-12">
                     <div class="img_avatar">
                         <img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>">
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-ms-8 col-xs-12">
                     <input id="file" type="file" name="file"/>
                     <?php if($user->avatar != 'no-avatar.jpg'){?>
                     <a href="<?php echo site_url('user/blurAvatar');?>" class="btn bntMessage">Sløre</a>
