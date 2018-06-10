@@ -341,7 +341,7 @@ class Ajax extends CI_Controller{
                 //create thumb
                 $config_resize['image_library'] = 'gd2';
                 $config_resize['source_image'] = $data['full_path'];
-                $config_resize['new_image'] = './uploads/thumb_user/';
+                $config_resize['new_image'] = './uploads/thumb_user/'.$data['file_name'];
                 $config_resize['thumb_marker'] = '';
                 $config_resize['create_thumb'] = TRUE;
                 $config_resize['maintain_ratio'] = true;

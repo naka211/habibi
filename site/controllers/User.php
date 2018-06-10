@@ -125,6 +125,73 @@ class User extends MX_Controller
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
+    public function blurAvatar(){
+        $user = $this->session->userdata('user');
+        $currentAvatar = $this->user->getAvatar($user->id);
+        $imagePath = "./uploads/thumb_user/".$currentAvatar;
+
+        $fileExt = pathinfo($imagePath,PATHINFO_EXTENSION);
+        $blurs = 100;
+        if($fileExt == 'jpg'){
+            $image = imagecreatefromjpeg($imagePath);
+            for ($i = 0; $i < $blurs; $i++) {
+                imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
+            }
+            imagejpeg($image, "./uploads/thumb_user/".$currentAvatar);
+        } else if($fileExt == 'png'){
+            $image = imagecreatefrompng($imagePath);
+            for ($i = 0; $i < $blurs; $i++) {
+                imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
+            }
+            imagepng($image, "./uploads/thumb_user/".$currentAvatar);
+        }
+        imagedestroy($image);
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
+    public function unblurAvatar(){
+        $user = $this->session->userdata('user');
+        $currentAvatar = $this->user->getAvatar($user->id);
+        $imagePath = "./uploads/user/".$currentAvatar;
+        list($imgWidth, $imgHeight) = getimagesize($imagePath);
+
+        $config_resize['image_library'] = 'gd2';
+        $config_resize['source_image'] = $imagePath;
+        $config_resize['new_image'] = './uploads/thumb_user/'.$currentAvatar;
+        $config_resize['thumb_marker'] = '';
+        $config_resize['create_thumb'] = TRUE;
+        $config_resize['maintain_ratio'] = true;
+        $config_resize['quality'] = "100%";
+        $config_resize['width']         = 500;
+        $config_resize['height']       = 500;
+        $dim = (intval($imgWidth) / intval($imgHeight)) - ($config_resize['width'] / $config_resize['height']);
+        $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config_resize);
+
+        if(!$this->image_lib->resize()){ //Resize image
+            redirect("errorhandler"); //If error, redirect to an error page
+        }else {
+            $config_crop['image_library'] = 'gd2';
+            $config_crop['source_image'] = './uploads/thumb_user/' . $currentAvatar;
+            $config_crop['new_image'] = './uploads/thumb_user/' . $currentAvatar;
+            $config_crop['quality'] = "100%";
+            $config_crop['maintain_ratio'] = FALSE;
+            $config_crop['width'] = 500;
+            $config_crop['height'] = 500;
+            $config_crop['x_axis'] = '0';
+            $config_crop['y_axis'] = '0';
+
+            $this->image_lib->clear();
+            $this->image_lib->initialize($config_crop);
+
+            $this->image_lib->crop();
+        }
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
     public function deletePhoto($photoId){
         $this->db->select('image');
         $this->db->from('user_image');

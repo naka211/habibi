@@ -11,9 +11,11 @@
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <input id="file" type="file" name="file"/>
-                    <a class="btn bntMessage">Sløre</a>
-                    <a class="btn bntMessage">Un-sløre</a>
+                    <?php if($user->avatar != 'no-avatar.jpg'){?>
+                    <a href="<?php echo site_url('user/blurAvatar');?>" class="btn bntMessage">Sløre</a>
+                    <a href="<?php echo site_url('user/unblurAvatar');?>" class="btn bntMessage">Un-sløre</a>
                     <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete">Slet</a>
+                    <?php }?>
                 </div>
             </div>
         </div>
