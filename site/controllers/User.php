@@ -120,6 +120,8 @@ class User extends MX_Controller
         }
         $this->user->updateAvatar($user->id, 'no-avatar.jpg');
 
+        $this->updateUserSession($user->id);
+
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
@@ -958,6 +960,11 @@ class User extends MX_Controller
 
         $data['page'] = 'user/friends';
         $this->load->view('templates', $data);
+    }
+
+    public function updateUserSession($userId){
+        $newUser = $this->user->getUser($userId);
+        $this->session->set_userdata('user', $newUser);
     }
 
     public function testChat(){
