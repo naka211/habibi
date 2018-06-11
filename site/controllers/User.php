@@ -325,6 +325,8 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Søgeresultat');
         $user = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($user->id);
         if ($user) {
             $ignore[] = $user->id;
         }

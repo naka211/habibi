@@ -25,6 +25,7 @@ class Home extends MX_Controller {
             $data['page'] = 'home/index';
         }
 
+        $ignore = $this->user->getBlockedUserIds($user->id);
         if($user){
             $ignore[] = $user->id;
         }
