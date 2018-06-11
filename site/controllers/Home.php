@@ -26,7 +26,7 @@ class Home extends MX_Controller {
         }else{
             $data['page'] = 'home/index';
         }
-        //print_r($ignore);exit();
+
         //if ( ! $randomUsers = $this->cache->get('randomUsers')){
             $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
             //$this->cache->save('randomUsers', $randomUsers, $this->_time);

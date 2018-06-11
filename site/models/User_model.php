@@ -451,9 +451,13 @@ class User_model extends CI_Model{
         $this->db->select('(CASE WHEN user_from = '.$userId.' THEN user_to WHEN user_to = '.$userId.' THEN user_from END) as userId');
         $this->db->from('user_blocked');
         $result = $this->db->get()->result();
+
         $ids = array();
         foreach ($result as $item){
-            $ids[] = $item->userId;
+            if(!empty($item->userId)){
+                $ids[] = $item->userId;
+            }
+
         }
         return $ids;
     }
