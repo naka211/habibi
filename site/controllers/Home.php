@@ -22,15 +22,11 @@ class Home extends MX_Controller {
         if($user){
             $data['page'] = 'home/home';
             $ignore = $this->user->getBlockedUserIds($user->id);
+            $ignore[] = $user->id;
         }else{
             $data['page'] = 'home/index';
         }
-
-
-        if($user){
-            $ignore[] = $user->id;
-        }
-
+        //print_r($ignore);exit();
         //if ( ! $randomUsers = $this->cache->get('randomUsers')){
             $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
             //$this->cache->save('randomUsers', $randomUsers, $this->_time);
