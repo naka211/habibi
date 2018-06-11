@@ -21,11 +21,12 @@ class Home extends MX_Controller {
         $user = $this->session->userdata('user');
         if($user){
             $data['page'] = 'home/home';
+            $ignore = $this->user->getBlockedUserIds($user->id);
         }else{
             $data['page'] = 'home/index';
         }
 
-        $ignore = $this->user->getBlockedUserIds($user->id);
+
         if($user){
             $ignore[] = $user->id;
         }
