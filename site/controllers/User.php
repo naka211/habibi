@@ -131,19 +131,19 @@ class User extends MX_Controller
         $imagePath = "./uploads/thumb_user/".$currentAvatar;
 
         $fileExt = pathinfo($imagePath,PATHINFO_EXTENSION);
-        $blurs = 100;
-        if($fileExt == 'jpg'){
-            $image = imagecreatefromjpeg($imagePath);
-            for ($i = 0; $i < $blurs; $i++) {
-                imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
-            }
-            imagejpeg($image, "./uploads/thumb_user/".$currentAvatar);
-        } else if($fileExt == 'png'){
+        $blurs = 70;
+        if($fileExt == 'png'){
             $image = imagecreatefrompng($imagePath);
             for ($i = 0; $i < $blurs; $i++) {
                 imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
             }
             imagepng($image, "./uploads/thumb_user/".$currentAvatar);
+        } else {
+            $image = imagecreatefromjpeg($imagePath);
+            for ($i = 0; $i < $blurs; $i++) {
+                imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
+            }
+            imagejpeg($image, "./uploads/thumb_user/".$currentAvatar);
         }
         imagedestroy($image);
 
