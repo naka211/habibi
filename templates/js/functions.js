@@ -363,5 +363,11 @@ $(document).ready(function() {
         $('.btnYes').attr('href', base_url+'user/deletePhoto/'+photoId);
         $.fancybox.open({src: '#modalConfirm'});
     }
+
+    confirmRemoveBlock = function (profileId) {
+        $("#confirmText").html("Er du sikker på at fjerne denne person for at blokere listen?");
+        $('.btnYes').attr('href', base_url+'user/unblockUser/'+profileId);
+        $.fancybox.open({src: '#modalConfirm'});
+    }
 });
 

@@ -1,13 +1,16 @@
+<link rel="stylesheet" href="<?php echo base_url();?>templates/css/peke.css">
+<script src="<?php echo base_url();?>templates/js/pekeUpload.js" type="text/javascript"></script>
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
             <div class="friend_list_lead">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <h3>Min foto</h3>
+                        <h3>Upload billede</h3>
                     </div>
                 </div>
             </div>
+            <input id="file" type="file" name="file" multiple="multiple"/>
             <div class="row">
                 <?php foreach($listImages as $image){?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
@@ -35,3 +38,19 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $("#file").pekeUpload({
+            bootstrap: true,
+            showPreview: true,
+            showFilename: false,
+            btnText: 'Upload',
+            allowedExtensions:"jpeg|jpg|png",
+            url: base_url+'ajax/uploadPhoto',
+            data: {'csrf_site_name':token_value},
+            onFileSuccess: function (file,data) {
+                location.reload();
+            }
+        });
+    });
+</script>

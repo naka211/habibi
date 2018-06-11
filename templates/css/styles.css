@@ -1534,7 +1534,7 @@ ul.list_action li a .i_block {
 .box_user_top h4 {
     font-weight: 300;
     font-size: 13px;
-    margin: 6px 0 0;
+    margin: 12px 0 0;
 }
 
 .box_user_top .img_avatar_sm {
@@ -2770,4 +2770,47 @@ ul.list_action li a .i_block {
 }
 .progress{
     height: 30px;
+}
+
+/* Avatar dropdown */
+.box_user_top .dropdown-toggle {
+    display: inline-block;
+    float: left;
+}
+.dropdown_avatar .dropdown-menu {
+    padding: 15px;
+    box-shadow: none;
+    /*right: 0;*/
+    top: 120%;
+    left: -7px;
+}
+.dropdown_avatar .dropdown-menu .dropdown-item {
+    color: #8c8c8c;
+    display: block;
+    font-size: 12px;
+    padding: 5px 0;
+}
+.dropdown_avatar .dropdown-menu .dropdown-item:hover {
+    color: #000;
+    text-decoration: underline;
+}
+.dropdown_avatar .dropdown-menu:before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #ccc transparent;
+    position: absolute;
+    top: -8px;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+.box_user_top .caret {
+    position: relative;
+    top: 10px;
+    color: #000;
+    margin-left: 5px;
 }

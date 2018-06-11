@@ -420,20 +420,18 @@ class User_model extends CI_Model{
     }
 
 
-    
-
     /**
+     * @param $userId
      * @param null $num
      * @param null $offset
-     * @param null $userId
      * @return bool
      */
-    public function getBlockedList($num = NULL, $offset = NULL, $userId = NULL){
+    public function getBlockList($userId, $num = NULL, $offset = NULL){
         $blockedUserIds = $this->getBlockedUserIds($userId);
         if(empty($blockedUserIds)){
             return false;
         } else {
-            $this->db->select('u.*');
+            $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year');
             $this->db->from('user as u');
             $this->db->where("u.bl_active",1);
             $this->db->where_in("id", $blockedUserIds);
@@ -754,7 +752,7 @@ class User_model extends CI_Model{
         }
     }
 
-    public function removeUserToBlockedList($userId, $friendId){
+    public function removeUserToBlockList($userId, $friendId){
         $this->db->where('user_from', $userId)->where('user_to', $friendId);
         return $this->db->delete('user_blocked');
     }

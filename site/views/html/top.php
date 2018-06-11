@@ -33,12 +33,21 @@ if(!empty($user)){
                     <div class="box_user_top">
                         <div class="box_user_content">
                             <h4 class="media-heading"><?php echo $user->name;?></h4>
-                            <a href="block_list.php">Bloker liste</a> |
-                            <a href="<?php echo site_url('user/logout');?>">Log out</a>
                         </div>
-                        <a class="img_avatar_sm" href="<?php echo site_url('user/index');?>">
-                            <img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
-                        </a>
+                        <div class="dropdown dropdown_avatar show clearfix">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="img_avatar_sm">
+                                    <img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
+                                </div>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="<?php echo site_url('user/index');?>">Min profil</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Min foto</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Bloker liste</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/logout');?>">Log ud</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

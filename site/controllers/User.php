@@ -89,7 +89,18 @@ class User extends MX_Controller
     }
 
     /** Photo*/
-    function myphoto(){
+    function uploadPhoto(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
+
+        $data['user'] = $this->session->userdata('user');
+        $data['listImages'] = $this->user->getPhoto($data['user']->id);
+        //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
+        $data['page'] = 'user/uploadphoto';
+        $this->load->view('templates', $data);
+    }
+
+    function myPhoto(){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
 
@@ -98,6 +109,21 @@ class User extends MX_Controller
         //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
         $this->load->view('templates', $data);
+    }
+
+    public function deletePhoto($photoId){
+        $this->db->select('image');
+        $this->db->from('user_image');
+        $this->db->where('id', $photoId);
+        $query = $this->db->get();
+        $image = $query->row();
+
+        unlink("./uploads/photo/".$image->image);
+        unlink("./uploads/thumb_photo/".$image->image);
+
+        $this->db->where('id',$photoId)->delete('user_image');
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
     function editAvatar(){
@@ -192,20 +218,7 @@ class User extends MX_Controller
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
-    public function deletePhoto($photoId){
-        $this->db->select('image');
-        $this->db->from('user_image');
-        $this->db->where('id', $photoId);
-        $query = $this->db->get();
-        $image = $query->row();
 
-        unlink("./uploads/photo/".$image->image);
-        unlink("./uploads/thumb_photo/".$image->image);
-
-        $this->db->where('id',$photoId)->delete('user_image');
-
-        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
-    }
 
     /** Message*/
     function messages($offset = 0)
@@ -270,60 +283,40 @@ class User extends MX_Controller
         }
     }
 
-    /**
-     * @param $friendId
-     * @param $from 1: positive list, 2: profile
-     */
+
     public function blockUser($profile_id){
         $user = $this->session->userdata('user');
         $this->user->addUserToBlockedList($user->id, $profile_id);
         customRedirectWithMessage(site_url('home/index'), 'Denne person er tilføjet til bloklisten');
-        //disable user in positive list
-        /*if($from == 1){
-            $result2 = $this->user->blockUser($user->id, $friendId);
-        } else {
-            $result2 = true;
-        }*/
-
-        /*if($result1 && $result2){
-            redirect($_SERVER['HTTP_REFERER']);
-        } else {
-            customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke blokere denne bruger');
-        }*/
     }
 
     public function unblockUser($friendId){
         $user = $this->session->userdata('user');
-        $result1 = $this->user->removeUserToBlockedList($user->id, $friendId);
-        //enable the user in positive list
-        $result2 = $this->user->unblockUser($user->id, $friendId);
-        if($result1 && $result2){
-            redirect($_SERVER['HTTP_REFERER']);
-        } else {
-            customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke fjerne blokeringen denne bruger');
+        $result1 = $this->user->removeUserToBlockList($user->id, $friendId);
+        if($result1){
+            customRedirectWithMessage($_SERVER['HTTP_REFERER']);
         }
     }
 
-    function blocked($page = 0)
+    function blockList($offset = 0)
     {
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Blok liste');
 
         $data['user'] = $this->session->userdata('user');
 
-        $config['base_url'] = base_url() . $this->language . '/user/blocked/';
+        $config['base_url'] = base_url() . '/user/blockList/';
         $config['total_rows'] = count($this->user->getBlockedUserIds($data['user']->id));
-        //$config['per_page'] = $this->config->item('numberpage');
-        $config['per_page'] = 5;
+        $config['per_page'] = $this->config->item('item_per_page');;
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $userList = $this->user->getBlockedList($config['per_page'], (int)$page, $data['user']->id);
+        $userList = $this->user->getBlockList($data['user']->id, $config['per_page'], (int)$offset);
         $data['pagination'] = $this->pagination->create_links();
 
-        $data['userList'] = $userList;
+        $data['list'] = $userList;
 
-        $data['page'] = 'user/blocked';
+        $data['page'] = 'user/blocklist';
         $this->load->view('templates', $data);
     }
 
