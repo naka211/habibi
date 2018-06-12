@@ -334,6 +334,7 @@ class Ajax extends CI_Controller{
                 if($currentAvatar != 'no-avatar.jpg'){
                     @unlink("./uploads/user/".$currentAvatar);
                     @unlink("./uploads/thumb_user/".$currentAvatar);
+                    @unlink("./uploads/raw_thumb_user/".$currentAvatar);
                 }
                 $this->user->updateAvatar($user->id, $data['file_name']);
                 $savedUser = $this->user->getUser($user->id);
@@ -372,6 +373,8 @@ class Ajax extends CI_Controller{
 
                     $this->image_lib->crop();
 
+                    $raw_thumb_user = './uploads/raw_thumb_user/'.$data['file_name'];
+                    copy($config_crop['new_image'], $raw_thumb_user);
                 }
 
                 $response['success'] = 1;

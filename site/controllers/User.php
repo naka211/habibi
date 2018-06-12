@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching', 'Checkgold|only:visitme,friendRequests');
+        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar', 'Checkgold|only:visitme,friendRequests');
     }
 
     function index(){
@@ -143,6 +143,7 @@ class User extends MX_Controller
         if($currentAvatar != 'no-avatar.jpg'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
+            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
         }
         $this->user->updateAvatar($user->id, 'no-avatar.jpg');
 
@@ -218,7 +219,18 @@ class User extends MX_Controller
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
+    public function saveAvatar(){
+        $imageData = $this->input->post('imageData');
 
+        $user = $this->session->userdata('user');
+        $currentAvatar = $this->user->getAvatar($user->id);
+
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
+        $thumb_user = './uploads/thumb_user/'.$currentAvatar;
+        file_put_contents($thumb_user, $image);
+
+        customRedirectWithMessage(site_url('user/index'));
+    }
 
     /** Message*/
     function messages($offset = 0)
