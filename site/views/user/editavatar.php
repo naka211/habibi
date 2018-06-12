@@ -52,9 +52,9 @@
         // Canvas
         var canvas = document.getElementById("canvas");
         var cctx = canvas.getContext("2d");
-        var buff = document.createElement("canvas");
+        /*var buff = document.createElement("canvas");
         buff.width = canvas.width;
-        buff.height = canvas.height;
+        buff.height = canvas.height;*/
 
         var imageObj = new Image();
         // this will make CORS happy because the server is well configured
@@ -69,7 +69,7 @@
 // Slider
         var slider = document.getElementById("slider");
         slider.addEventListener("change", function() {
-            StackBlur.image(imageObj, canvas, slider.value,false);
+            StackBlur.image(imageObj, canvas, slider.value, false);
             $("#imageData").val($("#canvas")[0].toDataURL());
         }, false);
     });
