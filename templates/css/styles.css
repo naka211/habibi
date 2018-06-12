@@ -2845,3 +2845,8 @@ ul.list_action li a .i_block {
     background: #ffa507;
     cursor: pointer;
 }
+
+.blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
