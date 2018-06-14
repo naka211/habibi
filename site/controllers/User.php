@@ -221,6 +221,7 @@ class User extends MX_Controller
 
     public function saveAvatar(){
         $imageData = $this->input->post('imageData');
+        $blurIndex = $this->input->post('blurIndex');
 
         $user = $this->session->userdata('user');
         $currentAvatar = $this->user->getAvatar($user->id);
@@ -228,6 +229,8 @@ class User extends MX_Controller
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $thumb_user = './uploads/thumb_user/'.$currentAvatar;
         file_put_contents($thumb_user, $image);
+
+        $this->user->updateBlurIndex($user->id, $blurIndex);
 
         customRedirectWithMessage(site_url('user/index'));
     }

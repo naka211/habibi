@@ -533,6 +533,12 @@ class User_model extends CI_Model{
         $this->db->where('id', $userId);
         return $this->db->update('user');
     }
+
+    function updateBlurIndex($userId, $blurIndex){
+        $this->db->set('blurIndex', $blurIndex);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
     
     //T.Trung
 

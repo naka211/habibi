@@ -112,11 +112,22 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php if(!empty($images)){?>
                     <div class="owl-carousel owl-theme owl_gallerys">
-                        <?php foreach ($images as $image){?>
-                        <div class="item">
-                            <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>uploads/thumb_photo/<?php echo $image->image;?>" class="img-responsive"></a>
-                        </div>
-                        <?php }?>
+                        <?php if($profile->blurIndex == 0) { ?>
+                            <?php foreach ($images as $image) { ?>
+                                <div class="item">
+                                    <a data-fancybox="gallery"
+                                       href="<?php echo base_url(); ?>uploads/photo/<?php echo $image->image; ?>"><img
+                                                src="<?php echo base_url(); ?>uploads/thumb_photo/<?php echo $image->image; ?>"
+                                                class="img-responsive"></a>
+                                </div>
+                            <?php }
+                        } else {?>
+                            <?php foreach ($images as $image) { ?>
+                                <div class="item">
+                                    <img src="<?php echo base_url(); ?>uploads/thumb_photo/<?php echo $image->image; ?>" class="img-responsive blur">
+                                </div>
+                            <?php }
+                        }?>
                     </div>
                     <?php }?>
                     <blockquote class="quote-card">
