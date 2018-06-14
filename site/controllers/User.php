@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar', 'Checkgold|only:visitme,friendRequests');
+        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar', 'Checkgold|only:visitme');
     }
 
     function index(){

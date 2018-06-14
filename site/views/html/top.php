@@ -11,10 +11,11 @@ if(!empty($user)){
     if(isGoldMember()){
         $messageLink = 'href="'.site_url('user/messages').'"';
         $visitingLink = 'href="'.site_url('user/visitMe').'"';
-        $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
+
     } else {
-        $visitingLink = $friendRequestLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+        $visitingLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
     }
+    $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     $messageLink = 'href="'.site_url('user/messages').'"';
     $blinkLink = 'href="'.site_url('user/receivedBlinks').'"';
     $friendLink = 'href="'.site_url('user/friends').'"';
