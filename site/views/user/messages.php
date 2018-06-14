@@ -28,7 +28,9 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <?php if(isGoldMember()){?>
                             <h4><?php echo $user->name; ?></h4>
+                            <?php }?>
                             <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                             <p>Sendt: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></span></p>
                             <?php if(isGoldMember() === true){?>
