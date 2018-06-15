@@ -1,13 +1,3 @@
-<?php
-if(isGoldMember()){
-    $acceptLink = 'href="'.site_url('user/acceptAddFriend/'.$user->id).'"';
-    $rejectLink = 'href="'.site_url('user/rejectAddFriend/'.$user->id).'"';
-    $blockLink = 'href="'.site_url('user/blockUser/'.$user->id).'"';
-
-} else {
-    $acceptLink = $rejectLink = $blockLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
-}
-?>
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
@@ -23,6 +13,14 @@ if(isGoldMember()){
                                 <?php
                                 if(!empty($receivedRequests)) {
                                     foreach ($receivedRequests as $key => $user) {
+                                        if(isGoldMember()){
+                                            $acceptLink = 'href="'.site_url('user/acceptAddFriend/'.$user->id).'"';
+                                            $rejectLink = 'href="'.site_url('user/rejectAddFriend/'.$user->id).'"';
+                                            $blockLink = 'href="'.site_url('user/blockUser/'.$user->id).'"';
+
+                                        } else {
+                                            $acceptLink = $rejectLink = $blockLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+                                        }
                                         ?>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="frend_item">
