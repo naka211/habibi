@@ -101,32 +101,22 @@ $(document).ready(function () {
 
     $("#frm_register").validate({
         errorPlacement: function(error, element) {
-            return false;
+            error.appendTo(element.parent().after());
         },
         rules: {
             "email":{
                 required:true,
-                email: true
+                email: true,
+                remote: {
+                    url: base_url+"ajax/checkEmail",
+                    type: "POST",
+                    data: {
+                        csrf_site_name: token_value
+                    }
+                }
             },
             "name":{
-                required:true,
-                /*depends: function(element) {
-                    //return $("#bonus-material").is(":checked");
-                    var username = $("#username").val();
-                    $.ajax({
-                        method: "POST",
-                        url: base_url+"user/checkUsername",
-                        data: { username: username, csrf_site_name: token_value },
-                        success: function (data) {
-                            return data.status;
-                            /!*if(data.status == false){
-                                $("#username").removeClass('error');
-                            } else {
-                                $("#username").addClass('error');
-                            }*!/
-                        }
-                    });
-                }*/
+                required:true
             },
             "password":{
                 required:true
@@ -134,6 +124,23 @@ $(document).ready(function () {
             "confirmPassword": {
                 required: true,
                 equalTo: "#password"
+            },
+        },
+        messages: {
+            "email":{
+                required: 'Indtast din email',
+                email: 'Indtast venligst en gyldig e-mailadresse',
+                remote: 'Denne email er i brug'
+            },
+            "name":{
+                required: 'Indtast din navn'
+            },
+            "password":{
+                required: 'Skriv dit kodeord'
+            },
+            "confirmPassword": {
+                required: 'Indtast dit kodeord igen',
+                equalTo: 'Genadgangskoden er ikke som kodeord'
             },
         },
         submitHandler: function(form){
@@ -163,7 +170,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#email").blur(function () {
+    /*$("#email").blur(function () {
         var email = $("#email").val();
         $.ajax({
             method: "POST",
@@ -177,7 +184,7 @@ $(document).ready(function () {
                 }
             }
         });
-    });
+    });*/
 
     $(".btnCookie").click(function () {
         $.ajax({

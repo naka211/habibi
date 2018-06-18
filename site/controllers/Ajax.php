@@ -41,13 +41,11 @@ class Ajax extends CI_Controller{
         $email = $this->input->post('email', true);
         $id = $this->user->getUser('', $email);
         if ($id) {
-            $data['status'] = true;
+            echo 'false';
         } else {
-            $data['status'] = false;
+            echo 'true';
         }
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
+        exit;
     }
 
     /**
