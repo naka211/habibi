@@ -119,7 +119,8 @@ $(document).ready(function () {
                 required:true
             },
             "password":{
-                required:true
+                required:true,
+                minlength: 6
             },
             "confirmPassword": {
                 required: true,
@@ -136,7 +137,8 @@ $(document).ready(function () {
                 required: 'Indtast din navn'
             },
             "password":{
-                required: 'Skriv dit kodeord'
+                required: 'Skriv dit kodeord',
+                minlength: "Adgangskoden skal være på mellem {0} tegn."
             },
             "confirmPassword": {
                 required: 'Indtast dit kodeord igen',
