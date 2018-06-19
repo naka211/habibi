@@ -310,7 +310,7 @@ $(document).ready(function() {
         } else {
             $(".chat ul").html("");
             $(".chat ul").append('<li style="text-align: center;" id="messageLoading">\n' +
-                '                        <img src="'+base_url+'templates/images/loading.gif">\n' +
+                '                        <img src="'+base_url+'templates/images/preloader.gif">\n' +
                 '                    </li>');
         }
 
@@ -345,6 +345,18 @@ $(document).ready(function() {
             $("#message").val("");
         });
     }
+
+    //Handle enter key in message
+    $('#message').keyup(function(e){
+        if(e.keyCode == 13){
+            $('.btnSend').click();
+        }
+    });
+
+    $('.frm_Chat').on('keypress', function(e) {
+        return e.which !== 13;
+    });
+    ////
 
     confirmRemoveFavorite = function (profileId) {
         $("#confirmText").html("Er du sikker på at fjerne denne person til din favoritliste?");
