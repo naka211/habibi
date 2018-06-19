@@ -226,13 +226,16 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         $currentAvatar = $this->user->getAvatar($user->id);
 
-        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $imageData = str_replace(' ', '+', $imageData);
+        $image = base64_decode($imageData);
+
+        /*$image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));*/
         $thumb_user = './uploads/thumb_user/'.$currentAvatar;
-        file_put_contents($thumb_user, $image);
-
-        $this->user->updateBlurIndex($user->id, $blurIndex);
-
-        customRedirectWithMessage(site_url('user/index'));
+        if(file_put_contents($thumb_user, $image)){
+            $this->user->updateBlurIndex($user->id, $blurIndex);
+            customRedirectWithMessage(site_url('user/index'));
+        }
     }
 
     /** Message*/
