@@ -244,7 +244,7 @@ class User extends MX_Controller
         //Checking dated
         $user = $this->session->userdata('user');
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Besked');
 
         $config['base_url'] = base_url() . '/user/messages/';
         $config['total_rows'] = $this->user->getNumUserSent($user->id);
