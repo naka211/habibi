@@ -304,7 +304,32 @@ $(document).ready(function() {
         });
     }
 
+    var checkMessageInterval;
+    setCheckMessageInterval = function (profileId) {
+        checkMessageInterval = setInterval(function(){checkMessage(profileId);}, 3000);
+    }
+    stopCheckMessageInterval = function () {
+        clearInterval(checkMessageInterval);
+    }
+
     loadMoreMessages = function (profileId, num, first) {
+        //Open chat box
+        if(first == true){
+            $.fancybox.open({
+                src  : '#modalChat',
+                type : 'inline',
+                opts : {
+                    afterShow : function( instance, current ) {
+                        setCheckMessageInterval(profileId);
+                    },
+                    afterClose : function () {
+                        stopCheckMessageInterval();
+                    }
+                }
+            });
+        }
+        ////
+
         if(first == false){
             $("#loadMoreMessage").remove();
         } else {
@@ -325,6 +350,26 @@ $(document).ready(function() {
                 $("#messageLoading").fadeOut(100);
                 //Add message to ul
                 $(".chat ul").prepend(html).hide().fadeIn(1000);
+                //Scroll to bottom of ul
+                if(first == true){
+                    $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
+                }
+            }
+        });
+    }
+
+    checkMessage = function (profileId) {
+        $.ajax({
+            type: "post",
+            url: base_url+"ajax/checkMessage",
+            dataType: 'json',
+            data: {profileId: profileId, csrf_site_name: token_value}
+        }).done(function(data){
+            if(data.emptyMessage == true){
+                $(".chat ul").html("");
+            }
+            if(data.newMessage == true){
+                $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
             }

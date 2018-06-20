@@ -150,7 +150,7 @@ class Ajax extends CI_Controller{
         $messages = array_reverse($messages);
         $newNum = $num + 10;
         if($total > $newNum){
-            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$total.','.$newNum.', false)"';
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false)"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">
                             <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Load earlier messages</a>
                         </li>';
@@ -178,8 +178,7 @@ class Ajax extends CI_Controller{
         exit();
     }
 
-    function sendMessage()
-    {
+    function sendMessage(){
         $user = $this->session->userdata('user');
         if ($user) {
             $DB['user_from'] = $user->id;
@@ -203,11 +202,48 @@ class Ajax extends CI_Controller{
         return;
     }
 
-    public function loadMoreFavorites($offset){
+    function checkMessage(){
+        $user = $this->session->userdata('user');
+        $profileId = $this->input->post('profileId');
+        $emptyMessage = $this->user->checkEmptyMessage($user->id, $profileId);
+        if($emptyMessage){
+            $data['emptyMessage'] = true;
+        } else {
+            $data['emptyMessage'] = false;
+        }
+
+        $messages = $this->user->checkNewMessage($user->id, $profileId);
+        if(!empty($messages)){
+            $html = '';
+            foreach($messages as $message){
+                $profile = $this->user->getUser($message->user_from);
+                $html .= '<li class="other">
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$profile->avatar.'" /></a>
+                            <div class="message">
+                                <p>'.$message->message.'</p>
+                            </div>
+                            <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
+                        </li>';
+            }
+            $data['newMessage'] = true;
+            $data['html'] = $html;
+
+            $this->user->setSeenMessage($user->id, $profileId);
+        } else {
+            $data['newMessage'] = false;
+            $data['html'] = '';
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    /*public function loadMoreFavorites($offset){
         $user = $this->session->userdata('user');
         $list = $this->user->getFavorites($user->id, 8, $offset);
 
-    }
+    }*/
 
     public function loadMultiFilter(){
         $type = $this->input->post('type');

@@ -265,6 +265,10 @@ class User_model extends CI_Model{
         return $query->row()->num;
     }
 
+    function setSeenMessage($userId, $profileId){
+        return $this->db->set('seen',1)->where("user_from = $profileId AND user_to = $userId")->update('user_messages');
+    }
+
     /**
      * @param null $userId
      * @return mixed
@@ -313,6 +317,24 @@ class User_model extends CI_Model{
         $this->db->where('seen', 1);
         $query = $this->db->get()->num_rows();
         return $query?true:false;
+    }
+
+    public function checkEmptyMessage($userId, $profileId){
+        $this->db->select('id');
+        $this->db->from('user_messages');
+        $this->db->where("(user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)");
+        $this->db->limit(1);
+        $query = $this->db->get()->num_rows();
+        return $query?false:true;
+    }
+
+    public function checkNewMessage($userId, $profileId){
+        $this->db->select('*');
+        $this->db->from('user_messages');
+        $this->db->where('user_from', $profileId);
+        $this->db->where('user_to', $userId);
+        $this->db->where('seen', 0);
+        return $this->db->get()->result();
     }
     /** FAVORITE*/
     /**

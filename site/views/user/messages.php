@@ -11,7 +11,7 @@
             <?php if(!empty($list)){
                 foreach ($list as $user){
                     if(isGoldMember()){
-                        $messageLink = 'data-fancybox data-src="#modalChat" href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true)"';
+                        $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true)"';
                     } else {
                         $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }
@@ -63,7 +63,7 @@
                     </ul>
                     <form class="frm_Chat" action="" method="POST" role="form">
                         <input type="text" class="form-control" id="message" placeholder="Skriv en besked her.........">
-                        <button type="button" class="btn btnSend" onclick="sendMessage()">SEND</button>
+                        <button type="button" class="btn btnSend">SEND</button>
                     </form>
                 </div>
             </div>
