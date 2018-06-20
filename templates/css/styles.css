@@ -1351,7 +1351,7 @@ select:not([multiple]) {
 blockquote {
     border-left: none;
     font-size: 13px;
-    text-align: center;
+    /*text-align: center;*/
     position: relative;
     padding: 0 40px;
     margin: 47px 0 74px;

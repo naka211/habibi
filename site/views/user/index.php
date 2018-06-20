@@ -112,7 +112,7 @@
                     </div>
 
                     <blockquote class="quote-card">
-                        <p><?php echo $user->description;?></p>
+                        <p><?php echo nl2br($user->description);?></p>
                     </blockquote>
                 </div>
             </div>
