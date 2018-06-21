@@ -26,19 +26,19 @@
                                             </tr>
                                             <tr>
                                                 <th>Forhold:</th>
-                                                <td><?php echo $user->relationship;?></td>
+                                                <td><?php echo $user->relationship?$user->relationship:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Etnisk oprindelse: </th>
-                                                <td><?php echo $user->ethnic_origin;?></td>
+                                                <td><?php echo $user->ethnic_origin?$user->ethnic_origin:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Uddannelse:</th>
-                                                <td><?php echo $user->training;?></td>
+                                                <td><?php echo $user->training?$user->training:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Region:</th>
-                                                <td><?php echo $user->region;?></td>
+                                                <td><?php echo $user->region?$user->region:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -54,19 +54,19 @@
                                             </tr>
                                             <tr>
                                                 <th>Born:</th>
-                                                <td><?php echo $user->children;?></td>
+                                                <td><?php echo $user->children?$user->children:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Religion:</th>
-                                                <td><?php echo $user->religion;?></td>
+                                                <td><?php echo $user->religion?$user->religion:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Kropsbygning:</th>
-                                                <td><?php echo $user->body;?></td>
+                                                <td><?php echo $user->body?$user->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Ryger:</th>
-                                                <td><?php echo $user->smoking;?></td>
+                                                <td><?php echo $user->smoking?$user->smoking:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>

@@ -30,6 +30,11 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <div class="box_top_infoProfile">
                         <h3><?php echo $profile->name;?></h3>
+                        <?php if(isGoldMember()){?>
+                            <p>Guld abonnement udløber: <?php echo @date('d/m/Y', $user)?></p>
+                        <?php } else {?>
+                            <p>Gratis medlem: Ubegrænset</p>
+                        <?php }?>
                         <p><?php echo $profile->slogan;?></p>
 
                         <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
@@ -53,19 +58,19 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                                             </tr>
                                             <tr>
                                                 <th>Forhold:</th>
-                                                <td><?php echo $profile->relationship;?></td>
+                                                <td><?php echo $profile->relationship?$profile->relationship:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Etnisk oprindelse: </th>
-                                                <td><?php echo $profile->ethnic_origin;?></td>
+                                                <td><?php echo $profile->ethnic_origin?$profile->ethnic_origin:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Uddannelse:</th>
-                                                <td><?php echo $profile->training;?></td>
+                                                <td><?php echo $profile->training?$profile->training:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Region:</th>
-                                                <td><?php echo $profile->region;?></td>
+                                                <td><?php echo $profile->region?$profile->region:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -81,19 +86,19 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                                             </tr>
                                             <tr>
                                                 <th>Born:</th>
-                                                <td><?php echo $profile->children;?></td>
+                                                <td><?php echo $profile->children?$profile->children:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Religion: </th>
-                                                <td><?php echo $profile->religion;?></td>
+                                                <td><?php echo $profile->religion?$profile->religion:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Kropsbygning:</th>
-                                                <td><?php echo $profile->body;?></td>
+                                                <td><?php echo $profile->body?$profile->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Ryger:</th>
-                                                <td><?php echo $profile->smoking;?></td>
+                                                <td><?php echo $profile->smoking?$profile->smoking:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
