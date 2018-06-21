@@ -17,9 +17,9 @@
                                             $acceptLink = 'href="'.site_url('user/acceptAddFriend/'.$user->id).'"';
                                             $rejectLink = 'href="'.site_url('user/rejectAddFriend/'.$user->id).'"';
                                             $blockLink = 'href="'.site_url('user/blockUser/'.$user->id).'"';
-
+                                            $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                                         } else {
-                                            $acceptLink = $rejectLink = $blockLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+                                            $acceptLink = $rejectLink = $blockLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                                         }
                                         ?>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -27,7 +27,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-3 col-xs-3">
                                                         <div class="frend_item_avatar">
-                                                            <a href="<?php echo site_url('user/profile/' . $user->id . '/' . $user->name); ?>"><img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
+                                                            <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-ms-9 col-xs-9">

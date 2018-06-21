@@ -8,13 +8,7 @@ if(!empty($user)){
     $friendRequestQuantity = $this->user->friendRequestQuantity($user->id);
     $friendRequestQuantityHTML = !empty($friendRequestQuantity) ? '<span>' . $friendRequestQuantity . '</span>' : '';
 
-    if(isGoldMember()){
-        $messageLink = 'href="'.site_url('user/messages').'"';
-        $visitingLink = 'href="'.site_url('user/visitMe').'"';
-
-    } else {
-        $visitingLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
-    }
+    $visitingLink = 'href="'.site_url('user/visitMe').'"';
     $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     $messageLink = 'href="'.site_url('user/messages').'"';
     $blinkLink = 'href="'.site_url('user/receivedBlinks').'"';
