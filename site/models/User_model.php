@@ -470,7 +470,8 @@ class User_model extends CI_Model{
      * @return array
      */
     public function getBlockedUserIds($userId){
-        $this->db->select('(CASE WHEN user_from = '.$userId.' THEN user_to WHEN user_to = '.$userId.' THEN user_from END) as userId');
+        $this->db->select('user_to as userId');
+        $this->db->where('user_from', $userId);
         $this->db->from('user_blocked');
         $result = $this->db->get()->result();
 

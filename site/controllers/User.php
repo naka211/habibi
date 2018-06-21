@@ -26,7 +26,7 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
-            redirect(site_url('home/index'));
+            redirect(site_url(''));
         }
         /** Clear session search USER */
         /*$SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
@@ -305,7 +305,7 @@ class User extends MX_Controller
     public function blockUser($profile_id){
         $user = $this->session->userdata('user');
         $this->user->addUserToBlockedList($user->id, $profile_id);
-        customRedirectWithMessage(site_url('home/index'), 'Denne person er tilføjet til bloklisten');
+        customRedirectWithMessage(site_url(), 'Denne person er tilføjet til bloklisten');
     }
 
     public function unblockUser($friendId){
@@ -838,11 +838,11 @@ class User extends MX_Controller
                 redirect(site_url('user/index'));
                 return;
             } else {
-                redirect(site_url('home/index'));
+                redirect(site_url(''));
                 return;
             }
         } else {
-            redirect(site_url('home/index'));
+            redirect(site_url(''));
             return;
         }
     }
