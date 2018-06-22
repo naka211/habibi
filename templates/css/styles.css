@@ -2781,8 +2781,8 @@ ul.list_action li a .i_block {
     padding: 15px;
     box-shadow: none;
     /*right: 0;*/
-    top: 120%;
-    left: -7px;
+    top: 100%;
+    left: 104px;
 }
 .dropdown_avatar .dropdown-menu .dropdown-item {
     color: #8c8c8c;

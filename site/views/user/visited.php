@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="nav nav-tabs" style="margin-bottom: 0; border: none;">
-                            <li><a href="<?php echo site_url('user/visitme');?>">Modtagne</a></li>
-                            <li class="active"><a href="javascript:void();">Sendte</a></li>
+                            <li><a href="<?php echo site_url('user/visitme');?>">Besøgte mig</a></li>
+                            <li class="active"><a href="javascript:void();">Medlemmer jeg har besøgt</a></li>
                         </ul>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <h4><?php echo $user->name; ?></h4>
                                 <p class="age_city"><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
-                                <p>Modtaget: d. <?php echo date("d/m/Y", $user->seen_time); ?></p>
+                                <p>Besøgt: d. <?php echo date("d/m/Y", $user->seen_time); ?> kl.<span><?php echo date("H:i", $user->seen_time); ?></p>
                                 <?php if(isFriend($user->id) == false){?><a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn bntMessage">Tilføj ven</a><?php }?>
                                 <a href="<?php echo site_url('user/blockUser/' . $user->id); ?>" class="btn bntBlock">Blok</a>
                             </div>

@@ -591,8 +591,7 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'left');
-        $this->db->where("uk.to_user_id",$userId);
-        $this->db->group_by("uk.from_user_id");
+        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.to_user_id = '.$userId.' GROUP BY from_user_id)');
         $this->db->order_by('uk.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -629,8 +628,7 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.to_user_id', 'left');
-        $this->db->where("uk.from_user_id",$userId);
-        $this->db->group_by("uk.to_user_id");
+        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.from_user_id = '.$userId.' GROUP BY to_user_id)');
         $this->db->order_by('uk.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -649,13 +647,12 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+    function getVisitMe($userId = NULL, $num = NULL, $offset = NULL){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.from_user', 'left');
-        $this->db->where("uv.to_user",$userId);
-        $this->db->group_by("uv.from_user");
-        $this->db->order_by('uv.id','DESC');
+        $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.to_user = '.$userId.' GROUP BY from_user)');
+        $this->db->order_by('uv.id', 'DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
@@ -676,8 +673,7 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.to_user', 'left');
-        $this->db->where("uv.from_user",$userId);
-        $this->db->group_by("uv.to_user");
+        $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.from_user = '.$userId.' GROUP BY to_user)');
         $this->db->order_by('uv.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
