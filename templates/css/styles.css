@@ -1473,7 +1473,7 @@ ul.list_action li:hover a, ul.list_action li a.hover{
 }
 
 ul.list_action li:nth-child(2) a {
-    padding-top: 9px;
+    padding-top: 5px;
 }
 
 ul.list_action li:nth-child(3) a {
