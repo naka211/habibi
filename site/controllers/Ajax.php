@@ -157,6 +157,7 @@ class Ajax extends CI_Controller{
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);
+        $profileName = $this->input->post('profileName', true);
         $total = $this->user->getNumMessages($user->id, $profileId);
         $num = $this->input->post('num', true);
 
@@ -165,7 +166,7 @@ class Ajax extends CI_Controller{
         $messages = array_reverse($messages);
         $newNum = $num + 10;
         if($total > $newNum){
-            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false)"';
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false, \''.$profileName.'\')"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">
                             <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Load earlier messages</a>
                         </li>';

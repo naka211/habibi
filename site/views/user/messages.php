@@ -11,7 +11,7 @@
             <?php if(!empty($list)){
                 foreach ($list as $user){
                     if(isGoldMember()){
-                        $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true)"';
+                        $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true, \''.$user->name.'\')"';
                     } else {
                         $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }
@@ -58,6 +58,7 @@
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4></h4>
                 <div class="chat">
                     <ul>
                     </ul>

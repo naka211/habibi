@@ -306,7 +306,8 @@ $(document).ready(function() {
         clearInterval(checkMessageInterval);
     }
 
-    loadMoreMessages = function (profileId, num, first) {
+    loadMoreMessages = function (profileId, num, first, profileName) {
+        $("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
         if(first == true){
             $.fancybox.open({
@@ -339,7 +340,7 @@ $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: base_url+"ajax/loadMoreMessages",
-            data: { csrf_site_name: token_value, profileId: profileId, num: num },
+            data: { csrf_site_name: token_value, profileId: profileId, num: num, profileName: profileName },
             success: function (html) {
                 $("#messageLoading").fadeOut(100);
                 //Add message to ul

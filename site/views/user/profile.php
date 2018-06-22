@@ -1,6 +1,6 @@
 <?php
 if(isGoldMember()){
-    $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.',0, true)"';
+    $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.',0, true, \''.$profile->name.'\')"';
     //$chatLink = 'href="javascript:jqcc.cometchat.chatWith('.$profile->id.');"';
 } else {
     $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
@@ -154,6 +154,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
 <div style="display: none;" id="modalChat" class="animated-modal modalChat">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4></h4>
             <div class="chat">
                 <ul>
                 </ul>
