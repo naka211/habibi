@@ -267,41 +267,29 @@ $(document).ready(function() {
         });
     });
 
-    callAjaxFunction = function (profile_id, link, successful_message, error_message) {
+    callAjaxFunction = function (profile_id, link) {
         $.ajax({
             method: "POST",
             url: base_url+"ajax/"+link,
-            data: { csrf_site_name: token_value, profile_id: profile_id },
-            success: function (data) {
-                if(data.status == true){
-                    $('#message-content').html(successful_message);
-                    $.fancybox.open({src: '#modalMessage'});
-                    return true;
-                } else {
-                    $('#error-content').html(error_message);
-                    $.fancybox.open({src: '#modalError'});
-                    return false;
-                }
-
-            }
+            data: { csrf_site_name: token_value, profile_id: profile_id }
         });
     }
     sendBlink = function (profile_id) {
-        callAjaxFunction(profile_id, 'sendBlink', 'Dit blink er sendt til denne person', 'Noget gik galt');
+        callAjaxFunction(profile_id, 'sendBlink');
     }
 
     addFavorite = function (profile_id) {
-        callAjaxFunction(profile_id, 'addFavorite', 'Denne person er tilføjet til din favoritliste', 'Noget gik galt');
+        callAjaxFunction(profile_id, 'addFavorite');
 
         $("#favoriteBtn").attr({
             "onclick" : "removeFavorite("+profile_id+")",
             "title" : "Fjern favorit",
-            "class" : "hove"
+            "class" : "hover"
         });
     }
 
     removeFavorite = function (profile_id) {
-        callAjaxFunction(profile_id, 'removeFavorite', 'Denne person er fjernet til din favoritliste', 'Noget gik galt');
+        callAjaxFunction(profile_id, 'removeFavorite');
 
         $("#favoriteBtn").attr({
             "onclick" : "addFavorite("+profile_id+")",

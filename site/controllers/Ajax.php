@@ -139,6 +139,21 @@ class Ajax extends CI_Controller{
         return;
     }
 
+    function removeFavorite(){
+        $profile_id = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $profile_id) {
+            $this->user->removeFavorite($user->id, $profile_id);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);
