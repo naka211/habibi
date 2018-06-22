@@ -305,7 +305,7 @@ class User extends MX_Controller
     public function blockUser($profile_id){
         $user = $this->session->userdata('user');
         $this->user->addUserToBlockedList($user->id, $profile_id);
-        customRedirectWithMessage(site_url(), 'Denne person er tilføjet til bloklisten');
+        customRedirectWithMessage(site_url('user/blockList'), 'Denne person er tilføjet til bloklisten');
     }
 
     public function unblockUser($friendId){
