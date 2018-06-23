@@ -31,9 +31,9 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                     <div class="box_top_infoProfile">
                         <h3><?php echo $profile->name;?></h3>
                         <?php if(isGoldMember()){?>
-                            <p>Guld abonnement udløber: <?php echo @date('d/m/Y', $user)?></p>
+                            <p>Guld medlem</p>
                         <?php } else {?>
-                            <p>Gratis medlem: Ubegrænset</p>
+                            <p>Gratis medlem</p>
                         <?php }?>
                         <p><?php echo $profile->slogan;?></p>
 
