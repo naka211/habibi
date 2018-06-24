@@ -69,7 +69,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                                                 <td><?php echo $profile->training?$profile->training:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Region:</th>
+                                                <th>Land:</th>
                                                 <td><?php echo $profile->region?$profile->region:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>

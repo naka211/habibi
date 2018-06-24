@@ -37,7 +37,7 @@
                                                 <td><?php echo $user->training?$user->training:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Region:</th>
+                                                <th>Land:</th>
                                                 <td><?php echo $user->region?$user->region:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>

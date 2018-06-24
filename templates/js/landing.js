@@ -18,7 +18,7 @@ $(document).ready(function () {
         texts:{
             'selectAll': 'Vælg alle',
             'unselectAll': 'Fravælg alle',
-            'selectedOptions': ' valgt region'
+            'selectedOptions': ' valgt'
         },
         selectAll: true,
         maxPlaceholderOpts: 1

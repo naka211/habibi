@@ -53,25 +53,24 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="">Region</label>
+                                <label for="">Land</label>
                                 <select name="region[]" id="region" class="form-control 3col active regionSelection" multiple="multiple">
-                                    <option value="København">København</option>
-                                    <option value="Storkøbenhavn">Storkøbenhavn</option>
-                                    <option value="Århus">Århus</option>
-                                    <option value="Aalborg">Aalborg</option>
-                                    <option value="Odense">Odense</option>
-                                    <option value="Nordsjælland">Nordsjælland</option>
-                                    <option value="Midt/Vestsjælland">Midt/Vestsjælland</option>
-                                    <option value="Sydsjælland">Sydsjælland</option>
-                                    <option value="Lolland/Falster">Lolland/Falster</option>
-                                    <option value="Fyn">Fyn</option>
-                                    <option value="Nordjylland">Nordjylland</option>
-                                    <option value="Østjylland">Østjylland</option>
-                                    <option value="Vestjylland">Vestjylland</option>
-                                    <option value="Sydjylland">Sydjylland</option>
-                                    <option value="Midtjylland">Midtjylland</option>
-                                    <option value="Sønderjylland">Sønderjylland</option>
-                                    <option value="Bornholm">Bornholm</option>
+                                    <option value="Tyrkiet">Tyrkiet</option>
+                                    <option value="Syrien">Syrien</option>
+                                    <option value="Irak">Irak</option>
+                                    <option value="Libanon">Libanon</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Palæstina">Palæstina</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Bosnien">Bosnien</option>
+                                    <option value="Iran">Iran</option>
+                                    <option value="Marokko">Marokko</option>
+                                    <option value="Albanien">Albanien</option>
+                                    <option value="Algeriet">Algeriet</option>
+                                    <option value="Egypten">Egypten</option>
+                                    <option value="Makedionen">Makedionen</option>
+                                    <option value="Andet">Andet</option>
                                 </select>
                             </div>
                             <div class="form-group">

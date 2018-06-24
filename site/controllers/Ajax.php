@@ -281,7 +281,7 @@ class Ajax extends MX_Controller{
         $arr['relationship'] = array('Aldrig gift', 'Separeret', 'Skilt', 'Enke/enkemand', 'Det får du at vide senere');
         $arr['children'] = array('Nej', 'Ja; hjemmeboende', 'Ja; udeboende', '1', '2', '3', '3+');
         $arr['ethnic'] = array('Europæisk', 'Afrikansk', 'Latinamerikansk', 'Asiatisk', 'Indisk', 'Arabisk', 'Blandet/andet');
-        $arr['religion'] = array('Agnostiker', 'Ateist', 'Buddhist', 'Kristen', 'Kristen/Katolik', 'Jøde', 'Hindu', 'Muslim', 'Spirituel', 'Andet');
+        $arr['religion'] = array('Suni', 'Shia', 'Andet');
         $arr['training'] = array('Ingen eksamen', 'Gymnasium/HF', 'Fagskole', 'Bachelorgrad', 'Kandidat/ph.d.');
         $arr['body'] = array('Slank', 'Atletisk', 'Gennemsnitlig', 'Buttet');
         $arr['smoking'] = array('Ja', 'Nej', 'Ja; festryger');

@@ -97,7 +97,7 @@ $(function ($) {
             url: base_url+"ajax/logout",
             data: { csrf_site_name: token_value },
             success: function () {
-                window.open('https://google.com', '_self');
+                window.open('https://www.youtube.com', '_self');
             }
         });
     });

@@ -50,25 +50,24 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="">Region</label>
+                                    <label for="">Land</label>
                                     <select name="region" class="form-control">
-                                        <option value="København" <?php if($user->region == 'København'){echo 'selected="true"';}?>>København</option>
-                                        <option value="Storkøbenhavn" <?php if($user->region == 'Storkøbenhavn'){echo 'selected="true"';}?>>Storkøbenhavn</option>
-                                        <option value="Århus" <?php if($user->region == 'Århus'){echo 'selected="true"';}?>>Århus</option>
-                                        <option value="Aalborg" <?php if($user->region == 'Aalborg'){echo 'selected="true"';}?>>Aalborg</option>
-                                        <option value="Odense" <?php if($user->region == 'Odense'){echo 'selected="true"';}?>>Odense</option>
-                                        <option value="Nordsjælland" <?php if($user->region == 'Nordsjælland'){echo 'selected="true"';}?>>Nordsjælland</option>
-                                        <option value="Midt/Vestsjælland" <?php if($user->region == 'Midt/Vestsjælland'){echo 'selected="true"';}?>>Midt/Vestsjælland</option>
-                                        <option value="Sydsjælland" <?php if($user->region == 'Sydsjælland'){echo 'selected="true"';}?>>Sydsjælland</option>
-                                        <option value="Lolland/Falster" <?php if($user->region == 'Lolland/Falster'){echo 'selected="true"';}?>>Lolland/Falster</option>
-                                        <option value="Fyn" <?php if($user->region == 'Fyn'){echo 'selected="true"';}?>>Fyn</option>
-                                        <option value="Nordjylland" <?php if($user->region == 'Nordjylland'){echo 'selected="true"';}?>>Nordjylland</option>
-                                        <option value="Østjylland" <?php if($user->region == 'Østjylland'){echo 'selected="true"';}?>>Østjylland</option>
-                                        <option value="Vestjylland" <?php if($user->region == 'Vestjylland'){echo 'selected="true"';}?>>Vestjylland</option>
-                                        <option value="Sydjylland" <?php if($user->region == 'Sydjylland'){echo 'selected="true"';}?>>Sydjylland</option>
-                                        <option value="Midtjylland" <?php if($user->region == 'Midtjylland'){echo 'selected="true"';}?>>Midtjylland</option>
-                                        <option value="Sønderjylland" <?php if($user->region == 'Sønderjylland'){echo 'selected="true"';}?>>Sønderjylland</option>
-                                        <option value="Bornholm" <?php if($user->region == 'Bornholm'){echo 'selected="true"';}?>>Bornholm</option>
+                                        <option value="Tyrkiet" <?php if($user->region == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
+                                        <option value="Syrien" <?php if($user->region == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
+                                        <option value="Irak" <?php if($user->region == 'Irak'){echo 'selected="true"';}?>>Irak</option>
+                                        <option value="Libanon" <?php if($user->region == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
+                                        <option value="Pakistan" <?php if($user->region == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
+                                        <option value="Palæstina" <?php if($user->region == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
+                                        <option value="Somalia" <?php if($user->region == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
+                                        <option value="Afghanistan" <?php if($user->region == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
+                                        <option value="Bosnien" <?php if($user->region == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
+                                        <option value="Iran" <?php if($user->region == 'Iran'){echo 'selected="true"';}?>>Iran</option>
+                                        <option value="Marokko" <?php if($user->region == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
+                                        <option value="Albanien" <?php if($user->region == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
+                                        <option value="Algeriet" <?php if($user->region == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
+                                        <option value="Egypten" <?php if($user->region == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
+                                        <option value="Makedionen" <?php if($user->region == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
+                                        <option value="Andet" <?php if($user->region == 'Andet'){echo 'selected="true"';}?>>Andet</option>
                                     </select>
                                 </div>
                             </div>
@@ -139,15 +138,8 @@
                                 <div class="form-group">
                                     <label for="">Religion:</label>
                                     <select name="religion" class="form-control">
-                                        <option <?php if($user->religion == 'Agnostiker'){echo 'selected="true"';}?> value="Agnostiker">Agnostiker</option>
-                                        <option <?php if($user->religion == 'Ateist'){echo 'selected="true"';}?> value="Ateist">Ateist</option>
-                                        <option <?php if($user->religion == 'Buddhist'){echo 'selected="true"';}?> value="Buddhist">Buddhist</option>
-                                        <option <?php if($user->religion == 'Kristen'){echo 'selected="true"';}?> value="Kristen">Kristen</option>
-                                        <option <?php if($user->religion == 'Kristen – katolik'){echo 'selected="true"';}?> value="Kristen – katolik">Kristen – katolik</option>
-                                        <option <?php if($user->religion == 'Jøde'){echo 'selected="true"';}?> value="Jøde">Jøde</option>
-                                        <option <?php if($user->religion == 'Hindu'){echo 'selected="true"';}?> value="Hindu">Hindu</option>
-                                        <option <?php if($user->religion == 'Muslim'){echo 'selected="true"';}?> value="Muslim">Muslim</option>
-                                        <option <?php if($user->religion == 'Spirituel'){echo 'selected="true"';}?> value="Spirituel">Spirituel</option>
+                                        <option <?php if($user->religion == 'Suni'){echo 'selected="true"';}?> value="Suni">Suni</option>
+                                        <option <?php if($user->religion == 'Shia'){echo 'selected="true"';}?> value="Shia">Shia</option>
                                         <option <?php if($user->religion == 'Andet'){echo 'selected="true"';}?> value="Andet">Andet</option>
                                     </select>
                                 </div>
