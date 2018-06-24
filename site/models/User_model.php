@@ -171,6 +171,7 @@ class User_model extends CI_Model{
         }
         if($email){
             $this->db->where("email",$email);
+            $this->db->or_where('name', $email);
         }
         if($password){
             $this->db->where("password",$password);

@@ -812,10 +812,10 @@ class User extends MX_Controller
     }
 
     function login(){
-        $email = $this->input->post('email', true);
+        $info = $this->input->post('info', true);
         $password = md5($this->input->post('password', true));
         //Login user
-        $user = $this->user->getUser('', $email, $password);
+        $user = $this->user->getUser('', $info, $password);
         if ($user) {
             $data['status'] = true;
             /*$data['b2b'] = false;

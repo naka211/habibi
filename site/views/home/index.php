@@ -202,8 +202,8 @@
                 <h2>Log ind</h2>
                 <?php echo form_open('user/login', array('id'=>'frm_login', 'class'=>'frm_login'))?>
                     <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input type="text" class="form-control" name="email">
+                        <label for="">E-mail / Brugernavn</label>
+                        <input type="text" class="form-control" name="info">
                     </div>
                     <div class="form-group">
                         <label for="">Kodeord</label>
