@@ -188,6 +188,14 @@ class User_model extends CI_Model{
 	    return $query;
     }
 
+    function checkName($name){
+        $this->db->select('id');
+        $this->db->from('user');
+        $this->db->where("name", $name);
+        $query = $this->db->get()->row();
+        return $query;
+    }
+
 
 
     function updateLogin($id=NULL, $b2b=NULL){

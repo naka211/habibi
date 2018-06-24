@@ -121,7 +121,14 @@ $(document).ready(function () {
                 }
             },
             "name":{
-                required:true
+                required:true,
+                remote: {
+                    url: base_url+"ajax/checkName",
+                    type: "POST",
+                    data: {
+                        csrf_site_name: token_value
+                    }
+                }
             },
             "password":{
                 required:true,
@@ -139,7 +146,8 @@ $(document).ready(function () {
                 remote: 'Denne email er i brug'
             },
             "name":{
-                required: 'Indtast din navn'
+                required: 'Indtast din navn',
+                remote: 'Denne brugernavn er i brug'
             },
             "password":{
                 required: 'Skriv dit kodeord',

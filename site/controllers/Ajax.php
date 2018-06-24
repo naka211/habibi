@@ -48,6 +48,17 @@ class Ajax extends MX_Controller{
         exit;
     }
 
+    function checkName(){
+        $name = $this->input->post('name', true);
+        $exist = $this->user->checkName($name);
+        if ($exist) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
+        exit;
+    }
+
     /**
      * Generating age html
      */

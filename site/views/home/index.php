@@ -246,8 +246,8 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Navn</label>
-                                <input type="text" class="form-control" name="name">
+                                <label for="">Brugernavn</label>
+                                <input type="text" class="form-control" name="name" id="name">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Fødselsår</label>
