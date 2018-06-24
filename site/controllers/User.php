@@ -22,6 +22,28 @@ class User extends MX_Controller
         return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar,visitMe', 'Checkgold|only:visitme');
     }
 
+    public function start(){
+        $data = $ignore = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Start');
+        $user = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($user->id);
+        $ignore[] = $user->id;
+
+        $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
+
+        $newestUsers = $this->user->getList(10, 0, null, $ignore, null, 'newest');
+
+        $popularUsers = $this->user->getList(10, 0, null, $ignore, null, 'popular');
+
+        $data['randomUsers'] = $randomUsers;
+        $data['newestUsers'] = $newestUsers;
+        $data['popularUsers'] = $popularUsers;
+        $data['user'] = $user;
+        $data['page'] = 'user/start';
+        $this->load->view('templates', $data);
+    }
+
     function index(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
@@ -851,7 +873,7 @@ class User extends MX_Controller
 
     function logout(){
         /** Login*/
-        $Login = array('isLoginSite', 'user', 'email', 'password');
+        $Login = array('isLoginSite', 'user', 'email', 'password', 'lastLoggedTime');
         $this->session->unset_userdata($Login);
 
         //setcookie('cc_data', '', -time() + (86400 * 30), "/");

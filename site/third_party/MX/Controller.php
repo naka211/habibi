@@ -58,6 +58,9 @@ class MX_Controller
         // Add middleware
         $this->_run_middlewares();
 
+        //Check session
+        $this->_checkSession();
+
         //$this->output->enable_profiler(TRUE);
 	}
 	
@@ -109,6 +112,19 @@ class MX_Controller
                 }
             }
 
+        }
+    }
+
+    private function _checkSession(){
+        $user = $this->session->userdata('user');
+        $curMethod = $this->router->fetch_method();
+	    if($user && $curMethod != 'logout' && $curMethod != 'login'){
+            $lastLoggedTime = $this->session->userdata('lastLoggedTime');
+            if(time() - $lastLoggedTime > 60 && $lastLoggedTime != null){
+                redirect(site_url('user/logout'));
+            } else {
+                $this->session->set_userdata('lastLoggedTime', time());
+            }
         }
     }
 }

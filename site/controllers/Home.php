@@ -20,35 +20,14 @@ class Home extends MX_Controller {
 
         $user = $this->session->userdata('user');
         if($user){
-            $data['page'] = 'home/home';
-            $ignore = $this->user->getBlockedUserIds($user->id);
-            $ignore[] = $user->id;
+            redirect(site_url('user/start'));
         }else{
             $data['page'] = 'home/index';
         }
 
-        //if ( ! $randomUsers = $this->cache->get('randomUsers')){
-            $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
-            //$this->cache->save('randomUsers', $randomUsers, $this->_time);
-        //}
-
-        //if ( ! $newestUsers = $this->cache->get('newestUsers')){
-            $newestUsers = $this->user->getList(10, 0, null, $ignore, null, 'newest');
-        //$this->cache->save('newestUsers', $newestUsers, $this->_time);
-        //}
-
-        //if ( ! $popularUsers = $this->cache->get('popularUsers')){
-            $popularUsers = $this->user->getList(10, 0, null, $ignore, null, 'popular');
-        //$this->cache->save('popularUsers', $popularUsers, $this->_time);
-        //}
-
-        $data['randomUsers'] = $randomUsers;
-        $data['newestUsers'] = $newestUsers;
-        $data['popularUsers'] = $popularUsers;
-        $data['user'] = $user;
 		$this->load->view('templates', $data);
 	}
-    
+
     function kontakt(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);

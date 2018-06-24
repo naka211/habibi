@@ -17,8 +17,8 @@ class CheckloginMiddleware {
 
     public function run(){
         if (!checkLogin()) {
-            $this->ci->session->set_flashdata('message', 'Du skal logge ind for at se det !!');
-            redirect(site_url('home/index'));
+            //$this->ci->session->set_flashdata('message', 'Du skal logge ind for at se det !!');
+            redirect(site_url(''));
         }
     }
 }
