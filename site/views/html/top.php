@@ -43,6 +43,7 @@ if(!empty($user)){
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="<?php echo site_url('user/index');?>">Min profil</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/update');?>">Rediger profil</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Min foto</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Bloker liste</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/logout');?>">Log ud</a>
