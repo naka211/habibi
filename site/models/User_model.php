@@ -262,7 +262,7 @@ class User_model extends CI_Model{
 
 		$this->db->select('m.*, u.name, u.id as uid, u.avatar');
 		$this->db->from('user_messages m');
-        $this->db->join('user u', 'm.user_from = u.id','left');
+        $this->db->join('user u', 'm.user_from = u.id','inner');
         $this->db->where('(m.user_from='.$user.' AND m.user_to='.$userID.') OR (m.user_from='.$userID.' AND m.user_to='.$user.')');
         $this->db->order_by('m.id DESC');
         if($num || $offset){
