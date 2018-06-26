@@ -179,7 +179,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
         }
         <?php
         foreach ($filterArr as $filter=>$label){
-            if(!empty($this->input->get($filter))){
+            if(!empty($this->input->get($filter)) || $filter == 'gender'){
         ?>
         loadMultiFilter('<?php echo $filter?>', '<?php echo $label?>', '<?php echo $this->input->get($filter);?>');
         <?php
@@ -193,7 +193,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
             texts:{
                 'selectAll': 'Vælg alle',
                 'unselectAll': 'Fravælg alle',
-                'selectedOptions': ' valgt region'
+                'selectedOptions': ' valgt'
             },
             selectAll: true,
             maxPlaceholderOpts: 1

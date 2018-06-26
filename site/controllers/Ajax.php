@@ -280,9 +280,15 @@ class Ajax extends MX_Controller{
     }*/
 
     public function loadMultiFilter(){
+        $user = $this->session->userdata('user');
+
         $type = $this->input->post('type');
         $label = $this->input->post('label');
         $selectedStr = $this->input->post('selectedStr');
+
+        if($type == 'gender' && empty($selectedStr)){
+            $selectedStr = (string)$user->find_gender;
+        }
 
         $arr['gender'] = array(1=>'Mand', 2=>'Kvinde');
         $arr['relationship'] = array('Aldrig gift', 'Separeret', 'Skilt', 'Enke/enkemand', 'Det får du at vide senere');

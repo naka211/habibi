@@ -358,7 +358,7 @@ class User extends MX_Controller
         $yearFrom       = $this->input->get('toAge')?$year - $this->input->get('toAge'):null;
         $yearTo         = $this->input->get('fromAge')?$year - $this->input->get('fromAge'):null;
         $region         = $this->input->get('region');
-        $gender         = $this->input->get('gender');
+        $gender         = $this->input->get('gender')?$this->input->get('gender'):(string)$user->find_gender;
         $relationship   = $this->input->get('relationship');
         $children       = $this->input->get('children');
         $ethnic         = $this->input->get('ethnic');
