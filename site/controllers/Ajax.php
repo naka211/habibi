@@ -100,6 +100,11 @@ class Ajax extends MX_Controller{
         die('ok');
     }
 
+    function setLastVisitTime(){
+        $this->session->set_userdata('lastVisitTime', time());
+        die('ok');
+    }
+
     function changeChatStatus(){
         $user = $this->session->userdata('user');
         $status = $this->input->post('status', true);

@@ -857,7 +857,7 @@ class User extends MX_Controller
     function logout(){
         /** Login*/
         $curMethod = $this->router->fetch_method();
-        $Login = array('isLoginSite', 'user', 'email', 'password', 'lastLoggedTime');
+        $Login = array('isLoginSite', 'user', 'email', 'password', 'lastVisitTime');
         $this->session->unset_userdata($Login);
 
         //setcookie('cc_data', '', -time() + (86400 * 30), "/");

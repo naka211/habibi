@@ -259,6 +259,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 $(document).ready(function() {
+    /*$(window).on("beforeunload", function(e) {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/setLastVisitTime",
+            data: { csrf_site_name: token_value }
+        });
+    });*/
+
     $('input[type=radio][name=chat]').change(function() {
         $.ajax({
             method: "POST",

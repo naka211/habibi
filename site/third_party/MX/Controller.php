@@ -116,15 +116,13 @@ class MX_Controller
     }
 
     private function _checkSession(){
-        $user = $this->session->userdata('user');
+        /*$user = $this->session->userdata('user');
         $curMethod = $this->router->fetch_method();
 	    if($user && $curMethod != 'logout' && $curMethod != 'login'){
-            $lastLoggedTime = $this->session->userdata('lastLoggedTime');
-            if(time() - $lastLoggedTime > 60 && $lastLoggedTime != null){
+            $lastVisitTime = $this->session->userdata('lastVisitTime');var_dump($lastVisitTime);
+            if(time() - $lastVisitTime > 60 && $lastVisitTime != null){
                 redirect(site_url('user/logout'));
-            } else {
-                $this->session->set_userdata('lastLoggedTime', time());
             }
-        }
+        }*/
     }
 }
