@@ -50,18 +50,9 @@ class User extends MX_Controller
         if (!checkLogin()) {
             redirect(site_url(''));
         }
-        /** Clear session search USER */
-        /*$SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
-        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
-        , 'religion' => '', 'training' => '', 'body' => '');
-        $this->session->unset_userdata($SearchUser);*/
-
         $data['user'] = $this->session->userdata('user');
         $data['images'] = $this->user->getPhoto($data['user']->id);
-        //$data['item'] = $this->user->getUser($data['user']->id);
-        //$data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
-        //Change status shoutouts if they are more than 72 hours
-        //$this->user->checkShoutoutsStatus($data['user']->id);
+
         $data['page'] = 'user/index';
         $this->load->view('templates', $data);
     }
@@ -81,13 +72,6 @@ class User extends MX_Controller
 
         $this->user->addMeta($this->_meta, $data, 'Habibi - '.$data['profile']->name);
 
-        //Adding positive notification
-        /*if($this->user->countSeeTimes($id, $data['user']->id) == 3){
-            $this->user->addNotification($id);
-            $this->user->addStatus($data['user']->id, $id, 'SeeMore3Times');
-            //Check to add to dated
-            $this->checkToAddDated($data['user']->id, $id);
-        }*/
         //Add action to log
         $this->user->addToVisiting($data['user']->id, $id);
 
@@ -99,11 +83,9 @@ class User extends MX_Controller
             $data['images'] = "";
         }
 
-        /*$data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);*/
         $data['status'] = $this->user->checkStatus($data['user']->id, $id);
         if(isGoldMember()){
             $data['messages'] = $this->user->getMessages($data['user']->id, $id, 10, 0);
-            /*$data['numMessages'] = $this->user->getNumMessages($data['user']->id, $id);*/
         }
 
         $data['page'] = 'user/profile';
@@ -600,6 +582,7 @@ class User extends MX_Controller
             /*$DB['avatar'] = $this->input->post('avatar');*/
 
             $DB['name']             = $this->input->post('name');
+            $DB['email']            = $this->input->post('email');
             $DB['day']              = $this->input->post('day');
             $DB['month']            = $this->input->post('month');
             $DB['year']             = $this->input->post('year');
@@ -627,10 +610,10 @@ class User extends MX_Controller
             if ($id) {
                 $savedUser = $this->user->getUser($id);
                 $this->session->set_userdata('user', $savedUser);
-                $this->session->set_flashdata('message', "Opdater succesfuldt");
+                /*$this->session->set_flashdata('message', "Opdater succesfuldt");*/
                 redirect(site_url('user/index'));
             } else {
-                $this->session->set_flashdata('message', "Fejl ved opdatering");
+                /*$this->session->set_flashdata('message', "Fejl ved opdatering");*/
                 redirect(site_url('user/update'));
             }
         }
@@ -873,6 +856,7 @@ class User extends MX_Controller
 
     function logout(){
         /** Login*/
+        $curMethod = $this->router->fetch_method();
         $Login = array('isLoginSite', 'user', 'email', 'password', 'lastLoggedTime');
         $this->session->unset_userdata($Login);
 

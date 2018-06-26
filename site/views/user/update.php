@@ -3,50 +3,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Rediger profil</h3>
+                    <h3 style="margin: 0;">Rediger profil</h3>
                     <hr>
                     <?php echo form_open('user/update', array('id'=>'frm_update', 'class'=>'frm_efitProfile'));?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="">Navn:</label>
-                                    <input type="text" name="name" class="form-control" value="<?php echo $user->name;?>" placeholder="Forstadsfrøken">
+                                    <label for="">Brugernavn:</label>
+                                    <input type="text" name="name" class="form-control" value="<?php echo $user->name;?>">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">Dag:</label>
-                                            <select name="day" class="form-control">
-                                                <?php for($i = 1; $i <= 31; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->day) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">Måned:</label>
-                                            <select name="month" class="form-control">
-                                                <?php for($i = 1; $i <= 12; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->month) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">År:</label>
-                                            <select name="year" class="form-control">
-                                                <?php for($i = 1930; $i <= 2010; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->year) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="">Email:</label>
+                                    <input type="text" name="email" class="form-control" value="<?php echo $user->email;?>">
                                 </div>
                             </div>
+
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
@@ -165,6 +138,40 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Dag:</label>
+                                            <select name="day" class="form-control">
+                                                <?php for($i = 1; $i <= 31; $i++){?>
+                                                    <option value="<?php echo $i;?>" <?php if($i == $user->day) echo 'selected'?>><?php echo $i;?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Måned:</label>
+                                            <select name="month" class="form-control">
+                                                <?php for($i = 1; $i <= 12; $i++){?>
+                                                    <option value="<?php echo $i;?>" <?php if($i == $user->month) echo 'selected'?>><?php echo $i;?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">År:</label>
+                                            <select name="year" class="form-control">
+                                                <?php for($i = 1930; $i <= 2010; $i++){?>
+                                                    <option value="<?php echo $i;?>" <?php if($i == $user->year) echo 'selected'?>><?php echo $i;?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Skriv et motto</label>
@@ -180,13 +187,19 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Vælg kodeord (min. 6 karakter):</label>
-                                    <input type="text" name="password" class="form-control">
+                                    <input type="text" name="password" class="form-control" id="password">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Gentag Kodeord:</label>
                                     <input type="text" name="repassword" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Indtast venligst adgangskoden for at opdatere din profil</label>
+                                    <input type="text" name="oldpassword" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -201,3 +214,74 @@
         </div>
     </section>
 </div>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#frm_update").validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().after());
+            },
+            rules: {
+                "email":{
+                    required:true,
+                    email: true,
+                    remote: {
+                        url: base_url+"ajax/checkEmail",
+                        type: "POST",
+                        data: {
+                            csrf_site_name: token_value
+                        }
+                    }
+                },
+                "name":{
+                    required:true,
+                    remote: {
+                        url: base_url+"ajax/checkName",
+                        type: "POST",
+                        data: {
+                            csrf_site_name: token_value
+                        }
+                    }
+                },/*
+                "password":{
+                    required:true,
+                },
+                "repassword": {
+                    equalTo: {
+                        depends: isPasswordPresent,
+                        param: "#password"
+                    }
+                },*/
+                "oldpassword": {
+                    required:true
+                }
+            },
+            messages: {
+                "email":{
+                    required: 'Indtast din email',
+                    email: 'Indtast venligst en gyldig e-mailadresse',
+                    remote: 'Denne email er i brug'
+                },
+                "name":{
+                    required: 'Indtast din navn',
+                    remote: 'Denne brugernavn er i brug'
+                },/*
+                "password":{
+                    minlength: "Adgangskoden skal være på mellem {0} tegn."
+                },
+                "repassword": {
+                    equalTo: 'Genadgangskoden er ikke som kodeord'
+                },*/
+                "oldpassword": {
+                    required: 'Indtast din nuværende adgangskode',
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+
+        isPasswordPresent = function () {
+            return $('#password').val().length > 0;
+        }
+    });
+</script>
