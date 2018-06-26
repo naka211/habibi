@@ -946,17 +946,20 @@ class User_model extends CI_Model{
                     $this->db->select('name, id, avatar, region, ethnic_origin, year');
                     $this->db->from('user');
                     $this->db->where("id", $user->userId);
-                    $result[$key] = $this->db->get()->row();
+                    $userInfo = $this->db->get()->row();
+                    if($userInfo){
+                        $result[$key] = $userInfo;
 
-                    $this->db->select('message, seen, dt_create');
-                    $this->db->from('user_messages');
-                    $this->db->where("user_from = $user->userId OR user_to = $user->userId");
-                    $this->db->order_by('id', 'DESC');
-                    $this->db->limit(1, 0);
-                    $query = $this->db->get()->row();
-                    $result[$key]->message = $query->message;
-                    $result[$key]->added_time = $query->dt_create;
-                    $result[$key]->seen = $query->seen;
+                        $this->db->select('message, seen, dt_create');
+                        $this->db->from('user_messages');
+                        $this->db->where("user_from = $user->userId OR user_to = $user->userId");
+                        $this->db->order_by('id', 'DESC');
+                        $this->db->limit(1, 0);
+                        $query = $this->db->get()->row();
+                        $result[$key]->message = $query->message;
+                        $result[$key]->added_time = $query->dt_create;
+                        $result[$key]->seen = $query->seen;
+                    }
                 }
             }
         }
