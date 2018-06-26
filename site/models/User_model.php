@@ -359,7 +359,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFavorites($userId=NULL, $num=NULL, $offset=NULL){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.created_at as time_added');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.created_at as added_time');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'left');
         $this->db->where("uf.user_from", $userId);
