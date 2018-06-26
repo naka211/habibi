@@ -86,17 +86,6 @@ $(function ($) {
             url: base_url+"ajax/logout",
             data: { csrf_site_name: token_value },
             success: function () {
-                window.open('https://google.com', '_self');
-            }
-        });
-    });
-
-    $('.btnPennic').click(function (event) {
-        $.ajax({
-            method: "POST",
-            url: base_url+"ajax/logout",
-            data: { csrf_site_name: token_value },
-            success: function () {
                 window.open('https://www.youtube.com', '_self');
             }
         });
