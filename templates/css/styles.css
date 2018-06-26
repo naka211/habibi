@@ -1739,10 +1739,10 @@ ul.list_action li a .i_block {
     overflow: hidden;
 }
 
-.frend_item_new {
+/*.frend_item_new {
     border: 1px solid #f1f1f1;
     padding: 15px 15px 34px 15px;
-}
+}*/
 .frend_item .new {
     background: #fa3536;
     color: #fff;
