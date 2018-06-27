@@ -551,35 +551,13 @@ class User extends MX_Controller
 
 
         if ($this->input->post()) {
-            //Handle profile picture
-            /*if(isset($_FILES['newAvatar']['name'])&&$_FILES['newAvatar']['name']!=""){
-                $config['upload_path'] = $this->config->item('root')."uploads/user/";
-                $config['allowed_types'] = 'gif|jpg|jpeg|png';
-                $config['max_size']	= $this->config->item('maxupload');
-                $config['encrypt_name']	= TRUE;  //rename to random string image
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('newAvatar')){
-                    $data_img = $this->upload->data();
-                }else{
-                    $this->session->set_flashdata('error', $this->upload->error_msg);
-                    redirect(site_url('/user/update'));
-                }
-            }else {
-                if($this->input->post('avatar')){
-                    $data_img['file_name'] = $this->input->post('avatar');
-                } else {
-                    $data_img['file_name'] = '';
-                }
+            $currentPassword = md5($this->input->post('currentPassword', true));
+            //Login user
+            $correctUser = $this->user->getUser($user->id, null, $currentPassword);
+            if(empty($correctUser)){
+                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                redirect(site_url('user/update'));
             }
-
-            //Delete profile picture
-            if($this->input->post('deleteProfilePicture')){
-                unlink("uploads/user/".$this->input->post('avatar'));
-                $data_img['file_name'] = '';
-            }*/
-
-            /*$DB['avatar'] = $this->input->post('avatar');*/
 
             $DB['name']             = $this->input->post('name');
             $DB['email']            = $this->input->post('email');
@@ -588,6 +566,7 @@ class User extends MX_Controller
             $DB['year']             = $this->input->post('year');
             $DB['birthday']         = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
             $DB['region']           = $this->input->post('region');
+            $DB['land']             = $this->input->post('land');
             $DB['gender']           = $this->input->post('gender');
             $DB['relationship']     = $this->input->post('relationship');
             $DB['children']         = $this->input->post('children');

@@ -7,6 +7,7 @@ $(document).ready(function () {
             data: { fromAge: this.value, csrf_site_name: token_value },
             success: function (html) {
                 $('#toAge').find('option').remove().end().append(html);
+                $('#toAge option:last').prop('selected', true);
                 $("#toAge").prop('disabled', false);
             }
        });

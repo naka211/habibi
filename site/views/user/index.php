@@ -38,6 +38,10 @@
                                             </tr>
                                             <tr>
                                                 <th>Land:</th>
+                                                <td><?php echo $user->land?$user->land:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Region:</th>
                                                 <td><?php echo $user->region?$user->region:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>

@@ -45,7 +45,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                         <select name="toAge" class="form-control" id="toAge">
                                             <?php for($i=19; $i<=70; $i++){?>
-                                                <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                <option value="<?php echo $i;?>" <?php echo $i==70?'selected':'';?> ><?php echo $i;?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Land</label>
-                                <select name="region[]" id="region" class="form-control 3col active regionSelection" multiple="multiple">
+                                <select name="land[]" id="land" class="form-control 3col active regionSelection" multiple="multiple">
                                     <option value="Tyrkiet">Tyrkiet</option>
                                     <option value="Syrien">Syrien</option>
                                     <option value="Irak">Irak</option>
@@ -73,18 +73,28 @@
                                     <option value="Andet">Andet</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="">Etnisk oprindelse</label>
-                                <select name="ethnic[]" id="ethnic" class="form-control 3col active ethnicSelection" multiple="multiple">
-                                    <option value="Europæisk">Europæisk</option>
-                                    <option value="Afrikansk">Afrikansk</option>
-                                    <option value="Latinamerikansk">Latinamerikansk</option>
-                                    <option value="Asiatisk">Asiatisk</option>
-                                    <option value="Indisk">Indisk</option>
-                                    <option value="Arabisk">Arabisk</option>
-                                    <option value="Blandet/andet">Blandet/andet</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="">Region</label>
+                            <select name="region[]" id="region" class="form-control 3col active regionSelection" multiple="multiple">
+                                <option value="København">København</option>
+                                <option value="Storkøbenhavn">Storkøbenhavn</option>
+                                <option value="Århus">Århus</option>
+                                <option value="Aalborg">Aalborg</option>
+                                <option value="Odense">Odense</option>
+                                <option value="Nordsjælland">Nordsjælland</option>
+                                <option value="Midt/Vestsjælland">Midt/Vestsjælland</option>
+                                <option value="Sydsjælland">Sydsjælland</option>
+                                <option value="Lolland/Falster">Lolland/Falster</option>
+                                <option value="Fyn">Fyn</option>
+                                <option value="Nordjylland">Nordjylland</option>
+                                <option value="Østjylland">Østjylland</option>
+                                <option value="Vestjylland">Vestjylland</option>
+                                <option value="Sydjylland">Sydjylland</option>
+                                <option value="Midtjylland">Midtjylland</option>
+                                <option value="Sønderjylland">Sønderjylland</option>
+                                <option value="Bornholm">Bornholm</option>
+                            </select>
+                        </div>
                             <button type="button" class="btn btn_searchResult">Se hele søgeresultatet</button>
                         <?php echo form_close();?>
                     </div>
@@ -155,7 +165,7 @@
     $(function() {
         $(".btn_searchResult").click(function() {
             var params = {};
-            var getSelect = ['fromAge', 'toAge', 'region', 'ethnic'];
+            var getSelect = ['fromAge', 'toAge', 'land', 'region'];
 
             $.each(getSelect, function(index, value) {
                 var select = $('#' + value);
@@ -167,7 +177,7 @@
                 }
             });
             if (!$.isEmptyObject(params)) {
-                var url = [location.protocol, '//', location.host, location.pathname, 'user/searching'].join('');
+                var url = ['<?php echo base_url();?>', 'user/searching'].join('');
                 window.location.href = url + '?' + $.param(params);
             }
         });

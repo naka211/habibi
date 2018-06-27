@@ -24,7 +24,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <select name="region" class="form-control">
+                                    <select name="land" class="form-control">
                                         <option value="Tyrkiet" <?php if($user->region == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
                                         <option value="Syrien" <?php if($user->region == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
                                         <option value="Irak" <?php if($user->region == 'Irak'){echo 'selected="true"';}?>>Irak</option>
@@ -41,6 +41,31 @@
                                         <option value="Egypten" <?php if($user->region == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
                                         <option value="Makedionen" <?php if($user->region == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
                                         <option value="Andet" <?php if($user->region == 'Andet'){echo 'selected="true"';}?>>Andet</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Region</label>
+                                    <select name="region" class="form-control">
+                                        <option value="København" <?php if($user->region == 'København'){echo 'selected="true"';}?>>København</option>
+                                        <option value="Storkøbenhavn" <?php if($user->region == 'Storkøbenhavn'){echo 'selected="true"';}?>>Storkøbenhavn</option>
+                                        <option value="Århus" <?php if($user->region == 'Århus'){echo 'selected="true"';}?>>Århus</option>
+                                        <option value="Aalborg" <?php if($user->region == 'Aalborg'){echo 'selected="true"';}?>>Aalborg</option>
+                                        <option value="Odense" <?php if($user->region == 'Odense'){echo 'selected="true"';}?>>Odense</option>
+                                        <option value="Nordsjælland" <?php if($user->region == 'Nordsjælland'){echo 'selected="true"';}?>>Nordsjælland</option>
+                                        <option value="Midt/Vestsjælland" <?php if($user->region == 'Midt/Vestsjælland'){echo 'selected="true"';}?>>Midt/Vestsjælland</option>
+                                        <option value="Sydsjælland" <?php if($user->region == 'Sydsjælland'){echo 'selected="true"';}?>>Sydsjælland</option>
+                                        <option value="Lolland/Falster" <?php if($user->region == 'Lolland/Falster'){echo 'selected="true"';}?>>Lolland/Falster</option>
+                                        <option value="Fyn" <?php if($user->region == 'Fyn'){echo 'selected="true"';}?>>Fyn</option>
+                                        <option value="Nordjylland" <?php if($user->region == 'Nordjylland'){echo 'selected="true"';}?>>Nordjylland</option>
+                                        <option value="Østjylland" <?php if($user->region == 'Østjylland'){echo 'selected="true"';}?>>Østjylland</option>
+                                        <option value="Vestjylland" <?php if($user->region == 'Vestjylland'){echo 'selected="true"';}?>>Vestjylland</option>
+                                        <option value="Sydjylland" <?php if($user->region == 'Sydjylland'){echo 'selected="true"';}?>>Sydjylland</option>
+                                        <option value="Midtjylland" <?php if($user->region == 'Midtjylland'){echo 'selected="true"';}?>>Midtjylland</option>
+                                        <option value="Sønderjylland" <?php if($user->region == 'Sønderjylland'){echo 'selected="true"';}?>>Sønderjylland</option>
+                                        <option value="Bornholm" <?php if($user->region == 'Bornholm'){echo 'selected="true"';}?>>Bornholm</option>
                                     </select>
                                 </div>
                             </div>
@@ -187,19 +212,19 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Vælg kodeord (min. 6 karakter):</label>
-                                    <input type="text" name="password" class="form-control" id="password">
+                                    <input type="password" name="password" class="form-control" id="password">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Gentag Kodeord:</label>
-                                    <input type="text" name="repassword" class="form-control">
+                                    <input type="password" name="repassword" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Indtast venligst adgangskoden for at opdatere din profil</label>
-                                    <input type="text" name="oldpassword" class="form-control">
+                                    <input type="password" name="currentPassword" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -251,7 +276,7 @@
                         param: "#password"
                     }
                 },*/
-                "oldpassword": {
+                "currentPassword": {
                     required:true
                 }
             },
@@ -271,7 +296,7 @@
                 "repassword": {
                     equalTo: 'Genadgangskoden er ikke som kodeord'
                 },*/
-                "oldpassword": {
+                "currentPassword": {
                     required: 'Indtast din nuværende adgangskode',
                 }
             },
