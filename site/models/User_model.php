@@ -886,12 +886,14 @@ class User_model extends CI_Model{
         $data = array();
         $data['user_from']  = $userId;
         $data['user_to']    = $profileId;
+        $data['new']        = 1;
         $data['created_at']  = time();
         $this->db->insert('user_friendlist',$data);
 
         $data1 = array();
         $data1['user_to']  = $userId;
         $data1['user_from']    = $profileId;
+        $data['new']        = 1;
         $data1['created_at']  = time();
         $this->db->insert('user_friendlist',$data1);
     }
@@ -903,7 +905,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFriends($userId=NULL, $num=NULL, $offset=NULL){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time, ul.new');
         $this->db->from('user_friendlist as ul');
         $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
         $this->db->where("ul.user_from", $userId);
@@ -912,6 +914,10 @@ class User_model extends CI_Model{
             $this->db->limit($num, $offset);
         }
         $query = $this->db->get()->result();
+
+        //Update new
+        $this->db->set('new', 0)->where('user_from', $userId)->update('user_friendlist');
+
         return $query;
     }
 
