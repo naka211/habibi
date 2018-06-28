@@ -362,6 +362,7 @@ class User extends MX_Controller
         $year = date('Y', time());
         $yearFrom       = $this->input->get('toAge')?$year - $this->input->get('toAge'):null;
         $yearTo         = $this->input->get('fromAge')?$year - $this->input->get('fromAge'):null;
+        $land           = $this->input->get('land');
         $region         = $this->input->get('region');
         $gender         = $this->input->get('gender')?$this->input->get('gender'):(string)$user->find_gender;
         $relationship   = $this->input->get('relationship');
@@ -378,6 +379,9 @@ class User extends MX_Controller
         }
         if ($yearTo) {
             $search['yearTo'] = $yearTo;
+        }
+        if ($land) {
+            $search['land'] = $land;
         }
         if ($region) {
             $search['region'] = $region;

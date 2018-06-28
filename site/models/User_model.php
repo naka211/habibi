@@ -32,6 +32,9 @@ class User_model extends CI_Model{
         if(isset($search['yearTo']) && !empty($search['yearTo'])){
             $this->db->where('u.year <=', $search['yearTo']);
         }
+        if(isset($search['land']) && !empty($search['land'])){
+            $this->db->where_in('land', explode(',',$search['land']));
+        }
         if(isset($search['region']) && !empty($search['region'])){
             $this->db->where_in('region', explode(',',$search['region']));
         }
@@ -78,6 +81,9 @@ class User_model extends CI_Model{
         }
         if(isset($search['yearTo']) && !empty($search['yearTo'])){
             $this->db->where('u.year <', $search['yearTo']);
+        }
+        if(isset($search['land']) && !empty($search['land'])){
+            $this->db->where_in('land', explode(',',$search['land']));
         }
         if(isset($search['region']) && !empty($search['region'])){
             $this->db->where_in('region', explode(',',$search['region']));
