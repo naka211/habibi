@@ -889,7 +889,7 @@ class User_model extends CI_Model{
     public function getReceivedRequests($userId){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
         $this->db->from('user_friends as uf');
-        $this->db->join('user as u', 'u.id = uf.user_from', 'left');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
         $this->db->where("uf.status", 0);
         $this->db->order_by('uf.id','DESC');
@@ -900,7 +900,7 @@ class User_model extends CI_Model{
     public function getSentRequests($userId){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
         $this->db->from('user_friends as uf');
-        $this->db->join('user as u', 'u.id = uf.user_to', 'left');
+        $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 0);
         $this->db->order_by('uf.id','DESC');
