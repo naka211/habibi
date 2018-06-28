@@ -14,7 +14,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                             <div class="row_search clearfix">
                                 <div class="box_form_group">
                                     <p for="">Land:</p>
-                                    <select class="form-control 3col active regionSelection" name="region[]" id="region" multiple="multiple">
+                                    <select class="form-control 3col active regionSelection" name="land[]" id="land" multiple="multiple">
                                         <option value="Tyrkiet" <?php if(inSearch('land', 'Tyrkiet')) echo 'selected';?>>Tyrkiet</option>
                                         <option value="Syrien" <?php if(inSearch('land', 'Syrien')) echo 'selected';?>>Syrien</option>
                                         <option value="Irak" <?php if(inSearch('land', 'Irak')) echo 'selected';?>>Irak</option>
@@ -145,7 +145,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
         $(function() {
             $(".btn_searchResult").click(function() {
                 var params = {};
-                var getSelect = ['fromAge', 'toAge', 'region', 'gender', 'relationship', 'children', 'ethnic', 'religion', 'training', 'body', 'smoking', 'order'];
+                var getSelect = ['fromAge', 'toAge', 'land', 'region', 'gender', 'relationship', 'children', 'ethnic', 'religion', 'training', 'body', 'smoking', 'order'];
 
                 $.each(getSelect, function(index, value) {
                     var select = $('#' + value);
