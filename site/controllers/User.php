@@ -250,6 +250,8 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Besked');
 
+        //$ignore = $this->user->getBlockedUserIds($user->id);
+
         $config['base_url'] = base_url() . '/user/messages/';
         $config['total_rows'] = $this->user->getNumUserSent($user->id);
         $config['per_page'] = $this->config->item('item_per_page');
@@ -280,13 +282,16 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Favoritter list');
 
         $data['user'] = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/favorites/';
-        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id);
+        $config['total_rows'] = $this->user->getNumFavorite($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         //$config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $list = $this->user->getFavorites($data['user']->id, $config['per_page'], (int)$offset);
+        $list = $this->user->getFavorites($data['user']->id, $config['per_page'], (int)$offset, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;

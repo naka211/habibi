@@ -77,7 +77,7 @@ class User_model extends CI_Model{
             $this->db->where('u.year >=', $search['yearFrom']);
         }
         if(isset($search['yearTo']) && !empty($search['yearTo'])){
-            $this->db->where('u.year <=', $search['yearTo']);
+            $this->db->where('u.year <', $search['yearTo']);
         }
         if(isset($search['region']) && !empty($search['region'])){
             $this->db->where_in('region', explode(',',$search['region']));
@@ -358,11 +358,14 @@ class User_model extends CI_Model{
      * @param null $offset
      * @return mixed
      */
-    function getFavorites($userId=NULL, $num=NULL, $offset=NULL){
+    function getFavorites($userId=NULL, $num=NULL, $offset=NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.created_at as added_time');
         $this->db->from('user_favorite as uf');
-        $this->db->join('user as u', 'u.id = uf.user_to', 'left');
+        $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
+        if($ignore){
+            $this->db->where_not_in('uf.user_to', $ignore);
+        }
 		$this->db->order_by('uf.id','DESC');
         if($num || $offset){
             $this->db->limit($num, $offset);
@@ -375,10 +378,13 @@ class User_model extends CI_Model{
      * @param null $user
      * @return mixed
      */
-    function getNumFavorite($user=NULL){
+    function getNumFavorite($user=NULL, $ignore = null){
         $this->db->select('uf.*');
         $this->db->from('user_favorite as uf');
         $this->db->where("uf.user_from",$user);
+        if($ignore){
+            $this->db->where_not_in('uf.user_to', $ignore);
+        }
     	$query = $this->db->get()->num_rows();
 	    return $query;
     }
@@ -944,7 +950,7 @@ class User_model extends CI_Model{
         if ($num || $offset) {
             $this->db->limit($num, $offset);
         }
-        $userIdArr = $this->db->get()->result();
+        $userIdArr = $this->db->get()->result();print_r($userIdArr);exit();
         $result = array();
         if (!empty($userIdArr)) {
             foreach ($userIdArr as $key => $user) {
