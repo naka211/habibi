@@ -862,13 +862,16 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Modtagne blinks');
 
         $data['user'] = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/receivedBlinks/';
-        $config['total_rows'] = $this->user->getNumReceivedBlinks($data['user']->id);
+        $config['total_rows'] = $this->user->getNumReceivedBlinks($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getReceivedBlinks($data['user']->id, $config['per_page'], (int)$page);
+        $data['list'] = $this->user->getReceivedBlinks($data['user']->id, $config['per_page'], (int)$page, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/receivedblinks';
@@ -884,13 +887,16 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Sendt blinks');
 
         $data['user'] = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/receivedBlinks/';
-        $config['total_rows'] = $this->user->getNumSentBlinks($data['user']->id);
+        $config['total_rows'] = $this->user->getNumSentBlinks($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getSentBlinks($data['user']->id, $config['per_page'], (int)$page);
+        $data['list'] = $this->user->getSentBlinks($data['user']->id, $config['per_page'], (int)$page, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/sentblinks';
@@ -902,13 +908,16 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Besøgte mig');
 
         $data['user'] = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/visitMe/';
-        $config['total_rows'] = $this->user->getNumVisitMe($data['user']->id);
+        $config['total_rows'] = $this->user->getNumVisitMe($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getVisitMe($data['user']->id, $config['per_page'], (int)$page);
+        $data['list'] = $this->user->getVisitMe($data['user']->id, $config['per_page'], (int)$page, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/visitme';
@@ -920,13 +929,16 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Medlemmer jeg har besøgt');
 
         $data['user'] = $this->session->userdata('user');
+
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/visited/';
-        $config['total_rows'] = $this->user->getNumVisited($data['user']->id);
+        $config['total_rows'] = $this->user->getNumVisited($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getVisited($data['user']->id, $config['per_page'], (int)$page);
+        $data['list'] = $this->user->getVisited($data['user']->id, $config['per_page'], (int)$page, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/visited';
@@ -1021,13 +1033,15 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Venner');
 
         $data['user'] = $this->session->userdata('user');
+        $ignore = $this->user->getBlockedUserIds($data['user']->id);
+
         $config['base_url'] = base_url() . '/user/friends/';
-        $config['total_rows'] = $this->user->getNumFriends($data['user']->id);
+        $config['total_rows'] = $this->user->getNumFriends($data['user']->id, $ignore);
         $config['per_page'] = $this->config->item('item_per_page');
         //$config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $list = $this->user->getFriends($data['user']->id, $config['per_page'], (int)$offset);
+        $list = $this->user->getFriends($data['user']->id, $config['per_page'], (int)$offset, $ignore);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;

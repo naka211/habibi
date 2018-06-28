@@ -598,11 +598,14 @@ class User_model extends CI_Model{
      * @param null $user_id
      * @return mixed
      */
-    function getNumReceivedBlinks($user_id = NULL){
+    function getNumReceivedBlinks($user_id = NULL, $ignore = null){
         $this->db->distinct();
         $this->db->select('from_user_id');
         $this->db->from('user_kisses');
         $this->db->where("to_user_id",$user_id);
+        if($ignore){
+            $this->db->where_not_in('from_user_id', $ignore);
+        }
         $query = $this->db->get()->num_rows();
         return $query;
     }
@@ -611,14 +614,17 @@ class User_model extends CI_Model{
      * @param null $userId
      * @param null $num
      * @param null $offset
-     * @param null $search
+     * @param null $ignore
      * @return mixed
      */
-    function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+    function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.to_user_id = '.$userId.' GROUP BY from_user_id)');
+        if($ignore){
+            $this->db->where_not_in('uk.from_user_id', $ignore);
+        }
         $this->db->order_by('uk.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -635,11 +641,14 @@ class User_model extends CI_Model{
      * @param null $user_id
      * @return mixed
      */
-    function getNumSentBlinks($user_id = NULL){
+    function getNumSentBlinks($user_id = NULL, $ignore = null){
         $this->db->distinct();
         $this->db->select('to_user_id');
         $this->db->from('user_kisses');
         $this->db->where("from_user_id",$user_id);
+        if($ignore){
+            $this->db->where_not_in('to_user_id', $ignore);
+        }
         $query = $this->db->get()->num_rows();
         return $query;
     }
@@ -648,14 +657,17 @@ class User_model extends CI_Model{
      * @param null $userId
      * @param null $num
      * @param null $offset
-     * @param null $search
+     * @param null $ignore
      * @return mixed
      */
-    function getSentBlinks($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+    function getSentBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.to_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.from_user_id = '.$userId.' GROUP BY to_user_id)');
+        if($ignore){
+            $this->db->where_not_in('uk.to_user_id', $ignore);
+        }
         $this->db->order_by('uk.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -665,20 +677,26 @@ class User_model extends CI_Model{
     }
 
     /* Visit*/
-    function getNumVisitMe($user_id = NULL){
+    function getNumVisitMe($user_id = NULL, $ignore = null){
         $this->db->distinct();
         $this->db->select('from_user');
         $this->db->from('user_visit');
         $this->db->where("to_user",$user_id);
+        if($ignore){
+            $this->db->where_not_in('from_user', $ignore);
+        }
         $query = $this->db->get()->num_rows();
         return $query;
     }
 
-    function getVisitMe($userId = NULL, $num = NULL, $offset = NULL){
+    function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.to_user = '.$userId.' GROUP BY from_user)');
+        if($ignore){
+            $this->db->where_not_in('uv.from_user', $ignore);
+        }
         $this->db->order_by('uv.id', 'DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -687,20 +705,26 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    function getNumVisited($user_id = NULL){
+    function getNumVisited($user_id = NULL, $ignore = null){
         $this->db->distinct();
         $this->db->select('to_user');
         $this->db->from('user_visit');
         $this->db->where("from_user",$user_id);
+        if($ignore){
+            $this->db->where_not_in('to_user', $ignore);
+        }
         $query = $this->db->get()->num_rows();
         return $query;
     }
 
-    function getVisited($userId = NULL, $num = NULL, $offset = NULL, $search = NULL){
+    function getVisited($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.from_user = '.$userId.' GROUP BY to_user)');
+        if($ignore){
+            $this->db->where_not_in('uv.to_user', $ignore);
+        }
         $this->db->order_by('uv.id','DESC');
         if($num || $offset){
             $this->db->limit($num,$offset);
@@ -916,11 +940,14 @@ class User_model extends CI_Model{
      * @param null $offset
      * @return mixed
      */
-    function getFriends($userId=NULL, $num=NULL, $offset=NULL){
+    function getFriends($userId=NULL, $num=NULL, $offset=NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time, ul.new');
         $this->db->from('user_friendlist as ul');
         $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
         $this->db->where("ul.user_from", $userId);
+        if($ignore){
+            $this->db->where_not_in('ul.user_to', $ignore);
+        }
         $this->db->order_by('ul.id','DESC');
         if($num || $offset){
             $this->db->limit($num, $offset);
@@ -933,10 +960,13 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    public function getNumFriends($userId){
+    public function getNumFriends($userId = null, $ignore = null){
         $this->db->select('COUNT(id) as num');
         $this->db->from('user_friendlist');
         $this->db->where('user_from', $userId);
+        if($ignore){
+            $this->db->where_not_in('user_to', $ignore);
+        }
         $query = $this->db->get();
         return $query->row()->num;
     }
