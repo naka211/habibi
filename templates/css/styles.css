@@ -444,7 +444,7 @@ section.section_intro {
     font-weight: 500;
 }
 
-.navbar-nav > li > a:hover > span {
+.navbar-nav > li > a:hover > span, .nav > li.active > a > span{
     color: #fff;
 }
 

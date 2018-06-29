@@ -7,6 +7,8 @@ if(!empty($user)){
     $blinkingQuantityHTML = !empty($blinkingQuantity) ? '<span>' . $blinkingQuantity . '</span>' : '';
     $friendRequestQuantity = $this->user->friendRequestQuantity($user->id);
     $friendRequestQuantityHTML = !empty($friendRequestQuantity) ? '<span>' . $friendRequestQuantity . '</span>' : '';
+    $newFriendQuantity = $this->user->newFriendQuantity($user->id);
+    $newFriendQuantityHTML = !empty($newFriendQuantity) ? '<span>' . $newFriendQuantity . '</span>' : '';
 
     $visitingLink = 'href="'.site_url('user/visitMe').'"';
     $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
@@ -74,7 +76,7 @@ if(!empty($user)){
                             <li id="messageMenu"><a <?php echo $messageLink;?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
                             <li id="visitMenu"><a <?php echo $visitingLink;?>>Besøg</a></li>
                             <li id="blinkMenu"><a <?php echo $blinkLink;?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
-                            <li id="friendMenu"><a <?php echo $friendLink;?>>Venner</a></li>
+                            <li id="friendMenu"><a <?php echo $friendLink;?>>Venner <?php echo $newFriendQuantityHTML;?></a></li>
                             <li id="friendRequestMenu"><a <?php echo $friendRequestLink;?>>Venneanmodninger <?php echo $friendRequestQuantityHTML;?></a></li>
                         </ul>
                     </div>

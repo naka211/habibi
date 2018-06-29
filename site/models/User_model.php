@@ -870,6 +870,15 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
+    public function newFriendQuantity($user_id){
+        $this->db->select('id');
+        $this->db->from('tb_user_friendlist');
+        $this->db->where('user_from', $user_id);
+        $this->db->where('new', 1);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     public function addRequestAddFriend($db = null){
         if($this->db->insert('user_friends',$db)){
             return $this->db->insert_id();
