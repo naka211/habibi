@@ -40,7 +40,9 @@ class Ajax extends MX_Controller{
     function checkEmail(){
         $user = $this->session->userdata('user');
         $email = $this->input->post('email', true);
-        $exist = $this->user->checkUser($user->id, null, $email);
+        $userId =!empty($user)?$user->id:null;
+
+        $exist = $this->user->checkUser($userId, null, $email);
         if ($exist) {
             echo 'false';
         } else {
@@ -52,7 +54,9 @@ class Ajax extends MX_Controller{
     function checkName(){
         $user = $this->session->userdata('user');
         $name = $this->input->post('name', true);
-        $exist = $this->user->checkUser($user->id, $name);
+        $userId = !empty($user)?$user->id:null;
+
+        $exist = $this->user->checkUser($userId, $name);
         if ($exist) {
             echo 'false';
         } else {

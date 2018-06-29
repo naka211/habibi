@@ -195,7 +195,7 @@ class User_model extends CI_Model{
 	    return $query;
     }
 
-    function checkUser($id, $name = null, $email = null){
+    function checkUser($id = null, $name = null, $email = null){
         $this->db->select('id');
         $this->db->from('user');
         if($name){
@@ -204,7 +204,9 @@ class User_model extends CI_Model{
         if($email){
             $this->db->where("email", $email);
         }
-        $this->db->where('id !=', $id);
+        if($id){
+            $this->db->where('id !=', $id);
+        }
         $query = $this->db->get()->row();
         return $query;
     }
