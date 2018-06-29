@@ -10,6 +10,7 @@
             </div>
             <?php if(!empty($list)){
                 foreach ($list as $user){
+                    if(!in_array($user->id, $ignore)){
                     if(isGoldMember()){
                         $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true, \''.$user->name.'\')"';
                     } else {
@@ -42,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <?php }
+            <?php }}
             }?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">

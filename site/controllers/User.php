@@ -250,8 +250,6 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Besked');
 
-        //$ignore = $this->user->getBlockedUserIds($user->id);
-
         $config['base_url'] = base_url() . '/user/messages/';
         $config['total_rows'] = $this->user->getNumUserSent($user->id);
         $config['per_page'] = $this->config->item('item_per_page');
@@ -262,6 +260,7 @@ class User extends MX_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;
+        $data['ignore'] = $this->user->getBlockedUserIds($user->id);
 
         $data['page'] = 'user/messages';
         $this->load->view('templates', $data);
