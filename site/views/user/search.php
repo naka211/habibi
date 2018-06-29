@@ -58,14 +58,14 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                                 <div class="box_form_group box_form_group_age">
                                     <p for="">Alder:</p>
                                     <select name="fromAge" class="form-control" id="fromAge">
-                                        <?php for($i=18; $i<=70; $i++){?>
+                                        <?php for($i=18; $i<=90; $i++){?>
                                             <option value="<?php echo $i;?>" <?php if($this->input->get('fromAge') == $i) echo 'selected';?>><?php echo $i;?></option>
                                         <?php }?>
                                     </select>
                                     <span class="i_line">−</span>
                                     <select name="toAge" class="form-control option_age" id="toAge">
-                                        <?php for($i=18; $i<=70; $i++){?>
-                                            <option value="<?php echo $i;?>" <?php if($this->input->get('toAge') == $i) echo 'selected'; else if($i == 70) echo 'selected';?>><?php echo $i;?></option>
+                                        <?php for($i=18; $i<=90; $i++){?>
+                                            <option value="<?php echo $i;?>" <?php if($this->input->get('toAge') == $i) echo 'selected'; else if($i == 90) echo 'selected';?>><?php echo $i;?></option>
                                         <?php }?>
                                     </select>
                                 </div>
