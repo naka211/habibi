@@ -478,20 +478,16 @@ class User_model extends CI_Model{
      * @return bool
      */
     public function getBlockList($userId, $num = NULL, $offset = NULL){
-        $blockedUserIds = $this->getBlockedUserIds($userId);
-        if(empty($blockedUserIds)){
-            return false;
-        } else {
-            $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year');
-            $this->db->from('user as u');
-            $this->db->where("u.bl_active",1);
-            $this->db->where_in("id", $blockedUserIds);
-            if($num || $offset){
-                $this->db->limit($num,$offset);
-            }
-            $query = $this->db->get()->result();
-            return $query;
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year');
+        $this->db->from('user as u');
+        $this->db->join('user_blocked as ub', 'u.id = ub.user_to');
+        $this->db->where("u.bl_active",1);
+        $this->db->where("u.user_from", $userId);
+        if($num || $offset){
+            $this->db->limit($num,$offset);
         }
+        $query = $this->db->get()->result();
+        return $query;
     }
 
     /**
