@@ -443,6 +443,7 @@ class User extends MX_Controller
             $DB['password'] = md5($this->input->post('password'));
             $DB['year'] = $this->input->post('year');
             $DB['land'] = $this->input->post('land');
+            $DB['region'] = $this->input->post('region');
             $DB['gender'] = $this->input->post('gender');
             $DB['ethnic_origin'] = $this->input->post('ethnic_origin');
             $DB['find_gender'] = $this->input->post('find_gender');
