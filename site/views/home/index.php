@@ -268,7 +268,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Land</label>
-                                <select name="region" class="form-control">
+                                <select name="land" class="form-control">
                                     <option value="Tyrkiet">Tyrkiet</option>
                                     <option value="Syrien">Syrien</option>
                                     <option value="Irak">Irak</option>
