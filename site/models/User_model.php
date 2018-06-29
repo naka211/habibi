@@ -988,7 +988,7 @@ class User_model extends CI_Model{
         if ($num || $offset) {
             $this->db->limit($num, $offset);
         }
-        $userIdArr = $this->db->get()->result();print_r($userIdArr);exit();
+        $userIdArr = $this->db->get()->result();
         $result = array();
         if (!empty($userIdArr)) {
             foreach ($userIdArr as $key => $user) {
