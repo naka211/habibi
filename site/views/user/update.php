@@ -109,15 +109,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Køn:</label>
                                     <select name="gender" class="form-control">
-                                        <option <?php if($user->gender == 1){echo 'selected="true"';}?> value="1">Mand</option>
-                                        <option <?php if($user->gender == 2){echo 'selected="true"';}?> value="2">Kvinde</option>
+                                        <option <?php /*if($user->gender == 1){echo 'selected="true"';}*/?> value="1">Mand</option>
+                                        <option <?php /*if($user->gender == 2){echo 'selected="true"';}*/?> value="2">Kvinde</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Born:</label>
