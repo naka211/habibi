@@ -482,7 +482,7 @@ class User_model extends CI_Model{
         $this->db->from('user as u');
         $this->db->join('user_blocked as ub', 'u.id = ub.user_to');
         $this->db->where("u.bl_active",1);
-        $this->db->where("u.user_from", $userId);
+        $this->db->where("ub.user_from", $userId);
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
