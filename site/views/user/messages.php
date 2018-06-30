@@ -18,7 +18,7 @@
                     }
             ?>
             <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                <div class="frend_item <?php if($user->seen == 0) echo 'frend_item_new';?>">
+                <div class="frend_item <?php if($user->seen == 0) echo 'frend_item_new';?> friend<?php echo $user->id;?>">
                     <?php if($user->seen == 0){?>
                         <span class="new">Ny</span>
                     <?php } ?>

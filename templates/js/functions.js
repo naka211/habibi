@@ -346,6 +346,10 @@ $(document).ready(function() {
                 if(first == true){
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 }
+                if( $('.friend'+profileId).length ){
+                    $('.friend'+profileId).removeClass('frend_item_new');
+                    $('.new').remove();
+                }
             }
         });
     }
@@ -380,6 +384,8 @@ $(document).ready(function() {
             //Scroll to bottom of ul
             $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
             $("#message").val("");
+            
+            $('.friend'+profileId).find('gray_friend_item').html(message);
         });
     }
 
