@@ -30,11 +30,11 @@ class User extends MX_Controller
         $ignore = $this->user->getBlockedUserIds($user->id);
         $ignore[] = $user->id;
 
-        $randomUsers = $this->user->getList(4, 0, null, $ignore, null, 'random');
+        $randomUsers = $this->user->getList(4, 0, $user->find_gender, $ignore, null, 'random');
 
-        $newestUsers = $this->user->getList(10, 0, null, $ignore, null, 'newest');
+        $newestUsers = $this->user->getList(10, 0, $user->find_gender, $ignore, null, 'newest');
 
-        $popularUsers = $this->user->getList(10, 0, null, $ignore, null, 'popular');
+        $popularUsers = $this->user->getList(10, 0, $user->find_gender, $ignore, null, 'popular');
 
         $data['randomUsers'] = $randomUsers;
         $data['newestUsers'] = $newestUsers;

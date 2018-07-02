@@ -139,8 +139,11 @@ class User_model extends CI_Model{
         $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region');
         $this->db->from('tb_user as u');
         $this->db->where("u.bl_active",1);
-        if($search['name']){
+        /*if($search['name']){
             $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
+        }*/
+        if($search){
+            $this->db->where('u.gender', (int)$search);
         }
         if($ignore){
             //$ignore = array(12, 13);
