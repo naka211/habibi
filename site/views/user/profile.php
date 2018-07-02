@@ -112,8 +112,9 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                         </div>
                         <a href="#" class="btnShowlist">...</a>
                         <ul class="list_action">
-                            <li><a <?php echo $messageLink;?>><i class="i_email"></i></a></li>
-                            <?php /*if($status->isFriend == 2){?><li><a <?php echo $chatLink;?>><i class="i_comment"></i></a></li><?php }*/?>
+                            <?php if(($status->isFriend == 1 && $profile->chat == 0) || $profile->chat == 1){?>
+                                <li><a <?php echo $messageLink;?>><i class="i_email"></i></a></li>
+                            <?php }?>
                             <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'style="border:5px solid #000;"'?>><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
                             <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>

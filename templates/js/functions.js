@@ -256,13 +256,13 @@ $(document).ready(function() {
         });
     });*/
 
-    $('input[type=radio][name=chat]').change(function() {
+    /*$('input[type=radio][name=chat]').change(function() {
         $.ajax({
             method: "POST",
             url: base_url+"ajax/changeChatStatus",
             data: { csrf_site_name: token_value, status: this.value}
         });
-    });
+    });*/
 
     callAjaxFunction = function (profile_id, link) {
         $.ajax({

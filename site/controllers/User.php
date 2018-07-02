@@ -586,6 +586,7 @@ class User extends MX_Controller
             $DB['smoking']          = $this->input->post('smoking');
             $DB['slogan']           = $this->input->post('slogan');
             $DB['description']      = $this->input->post('description');
+            $DB['chat']             = $this->input->post('chat');
             if ($this->input->post('password') && $this->input->post('repassword')) {
                 if ($this->input->post('password') != $this->input->post('repassword')) {
                     $this->session->set_flashdata('message', "Genadgangskode er forkert");
