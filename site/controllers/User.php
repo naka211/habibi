@@ -613,6 +613,8 @@ class User extends MX_Controller
         $DB['subscriptionid'] = $this->input->get('subscriptionid');
         $DB['cardno']    = $this->input->get('cardno');
         $this->user->saveUser($DB, $user->id);
+
+        customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne');
     }
 
     public function changeCardCancel(){
