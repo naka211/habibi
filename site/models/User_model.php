@@ -300,12 +300,16 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getUnreadMessageQuantity($userId = NULL){
+        $ignore = $this->getBlockedUserIds($userId);
         $this->db->distinct();
         $this->db->select('id');
         $this->db->from('tb_user_messages');
         $this->db->group_by('user_from');
         $this->db->where('user_to', $userId);
         $this->db->where('seen', 0);
+        if($ignore){
+            $this->db->where_not_in('user_from', $ignore);
+        }
         $query = $this->db->get();
         return $query->num_rows();
     }
