@@ -21,171 +21,6 @@ class Payment extends MX_Controller {
         $this->windowstate = "3";
         $this->md5 = "0c6f4246756c27adf3eaa80b2839484b";
     }
-    function user(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        
-        $userid = $this->session->userdata('userid');
-        //Go payment Epay
-        $data['action'] = $this->action;
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
-        $data['md5'] = $this->md5;
-        
-        $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
-        $data['orderid'] = randomPassword();
-        $data['accepturl'] = site_url('user/success');
-        $data['cancelurl'] = site_url('user/cancel');
-        $data['callbackurl'] = site_url('user/callback');
-		$data['orderid'] = randomPassword();
-        print_r($data);exit();
-        //Update user
-        /*$DB['orderid'] = $data['orderid'];
-        $DB['price'] = $this->config->item('priceuser');
-        $this->user->saveUser($DB,$userid);*/
-        $data['page'] = 'payment/user';
-		$this->load->view('templates', $data);
-	}
-    
-    function shop(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!$this->cart->total_items()){
-            redirect(site_url('tilbud/cart'));
-        }
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
-        //Save or update order
-        //Create order
-        $user = $this->session->userdata('user');
-        if($this->session->userdata('orderID')){
-            $DB['orderID'] = $this->session->userdata('orderID');
-        }else{
-            $this->session->set_userdata('orderID', 'ZE-'.randomPassword());
-            $DB['orderID'] = $this->session->userdata('orderID');
-        }
-        $DB['userID'] = $user->id;
-        $DB['total'] = $this->cart->total();
-        $DB['bl_active'] = 0;
-        $DB['dt_create'] = date('Y-m-d H:i:s');
-        $catID = "";
-        if($this->session->userdata('ID')){
-            //Update order
-            $this->tilbud->saveOrder($DB, $this->session->userdata('ID'));
-            $this->tilbud->deleteItems($this->session->userdata('ID'));
-            //Add items
-            foreach ($this->cart->contents() as $row){
-                $pro = $this->tilbud->getItem($row['id']);
-                $DBi['order_id'] = $this->session->userdata('ID');
-                $DBi['product_id'] = $row['id'];
-                $DBi['category_id'] = $pro->category_id;
-                $catID .= $pro->category_id.",";
-                $DBi['product_name'] = $pro->name;
-                $DBi['quantity'] = $row['qty'];
-                $DBi['price'] = $row['price'];
-                $DBi['subtotal'] = $row['price']*$row['qty'];
-                $DBi['codes'] = "ZE-".randomPassword();
-                $DBi['dt_create'] = date('Y-m-d H:i:s');
-                $this->tilbud->addItems($DBi);
-            }
-            $cat['categoryID'] = $catID;
-            $this->tilbud->saveOrder($cat, $this->session->userdata('ID'));
-        }else{
-            $ID = $this->tilbud->saveOrder($DB);
-            $this->session->set_userdata('ID', $ID);
-            //Add items
-            foreach ($this->cart->contents() as $row){
-                $pro = $this->tilbud->getItem($row['id']);
-                $DBi['order_id'] = $this->session->userdata('ID');
-                $DBi['product_id'] = $row['id'];
-                $DBi['category_id'] = $pro->category_id;
-                $catID .= $pro->category_id.",";
-                $DBi['product_name'] = $pro->name;
-                $DBi['quantity'] = $row['qty'];
-                $DBi['price'] = $row['price'];
-                $DBi['subtotal'] = $row['price']*$row['qty'];
-                $DBi['codes'] = "ZE-".randomPassword();
-                $DBi['dt_create'] = date('Y-m-d H:i:s');
-                $this->tilbud->addItems($DBi);
-            }
-            $cat['categoryID'] = $catID;
-            $this->tilbud->saveOrder($cat, $this->session->userdata('ID'));
-        }
-        //Go payment Epay
-        $data['action'] = $this->action;
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
-        $data['md5'] = $this->md5;
-        
-        $data['amount'] = number_format($this->cart->total()*100, 0, '.', '');
-        $data['accepturl'] = site_url('tilbud/success');
-        $data['cancelurl'] = site_url('tilbud/cancel');
-        $data['callbackurl'] = site_url('tilbud/callback');
-		$data['orderid'] = $this->session->userdata('orderID');
-        
-        $data['page'] = 'payment/shop';
-		$this->load->view('templates', $data);
-	}
-    function invitationer(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        //Go payment Epay
-        $data['action'] = $this->action;
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
-        $data['md5'] = $this->md5;
-        
-        $data['amount'] = number_format(29*100, 0, '.', '');
-        $data['accepturl'] = site_url('invitationer/success');
-        $data['cancelurl'] = site_url('invitationer/cancel');
-        $data['callbackurl'] = site_url('invitationer/callback');
-		$data['orderid'] = 'IN-'.randomPassword();
-        
-        $datingID = $this->session->userdata('datingID');
-        $DB['orderid'] = $data['orderid'];
-        $DB['price'] = $this->config->item('pricedating');
-        $this->invita->saveDating($DB,$datingID);
-        
-        $data['page'] = 'payment/invitationer';
-		$this->load->view('templates', $data);
-    }
-
-    function shoutout(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        //Go payment Epay
-        $data['action'] = $this->action;
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
-        $data['md5'] = $this->md5;
-
-        $data['amount'] = number_format(10*100, 0, '.', '');
-        $data['accepturl'] = site_url('user/shoutoutSuccess');
-        $data['cancelurl'] = site_url('invitationer/shoutoutCancel');
-        $data['callbackurl'] = site_url('invitationer/shoutoutCallback');
-        $data['orderid'] = 'SO-'.randomPassword();
-
-        $data['page'] = 'payment/shoutout';
-        $this->load->view('templates', $data);
-    }
-
     function upgrade(){
         $userid = $this->session->userdata('userid');
         //Go payment Epay
@@ -193,7 +28,6 @@ class Payment extends MX_Controller {
         $data['merchantnumber'] = $this->merchantnumber;
         $data['currency'] = $this->currency;
         $data['windowstate'] = $this->windowstate;
-        //$data['md5'] = $this->md5;
 
         $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
         $data['accepturl'] = site_url('user/upgradeSuccess');
@@ -201,11 +35,24 @@ class Payment extends MX_Controller {
         $data['callbackurl'] = site_url('user/upgradeCallback');
         $data['orderid'] = randomPassword();
 
-        /*$this->session->set_userdata('payment', true);*/
-        //Update user
-        /*$DB['orderid'] = $data['orderid'];
-        $DB['price'] = $this->config->item('priceuser');
-        $this->user->saveUser($DB,$userid);*/
+        $data['page'] = 'payment/upgrade';
+        $this->load->view('templates', $data);
+    }
+
+    function changeCard(){
+        $userid = $this->session->userdata('userid');
+        //Go payment Epay
+
+        $data['merchantnumber'] = $this->merchantnumber;
+        $data['currency'] = $this->currency;
+        $data['windowstate'] = $this->windowstate;
+
+        $data['amount'] = 0;
+        $data['accepturl'] = site_url('user/changeCardSuccess');
+        $data['cancelurl'] = site_url('user/changeCardCancel');
+        $data['callbackurl'] = site_url('user/changeCardCallback');
+        $data['orderid'] = randomPassword();
+
         $data['page'] = 'payment/upgrade';
         $this->load->view('templates', $data);
     }

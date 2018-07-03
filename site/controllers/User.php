@@ -489,68 +489,7 @@ class User extends MX_Controller
     }
 
     /** PAYMENT*/
-    function success()
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
 
-        $payment = $this->session->userdata('payment');
-        $userId = $this->session->userdata('userid');
-        $name = $this->session->userdata('name');
-        $email = $this->session->userdata('email');
-        $password = $this->session->userdata('password');
-        if ($payment) {
-            //Update payment
-            $DB['subscriptionid'] = $this->input->get('subscriptionid');
-            $DB['orderid'] = $this->input->get('orderid');
-            $DB['price'] = $this->config->item('priceuser');
-            $DB['type'] = 2;
-            $DB['bl_active'] = 1;
-            $DB['paymenttime'] = time();
-            $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
-
-            //Add to log
-            $this->addPaymentLog($userId);
-
-            //Send email
-            $sendEmailInfo['name']      = $name;
-            $sendEmailInfo['email']     = $email;
-            $sendEmailInfo['password']  = $password;
-            $sendEmailInfo['orderId']   = $DB['orderid'];
-            $sendEmailInfo['price']     = $DB['price'].' DKK';
-            $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
-            $emailTo = array($email);
-            sendEmail($emailTo,'registerGoldMember',$sendEmailInfo,'');
-
-        } else {
-            $DB['bl_active'] = 1;
-        }
-        $this->user->saveUser($DB, $userId);
-
-
-        $this->session->unset_userdata('payment');
-        $data['page'] = 'user/success';
-        $this->load->view('templates', $data);
-    }
-
-    function cancel()
-    {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
-
-        $this->session->unset_userdata('userid');
-        $this->session->unset_userdata('payment');
-
-        $data['page'] = 'user/cancel';
-        $this->load->view('templates', $data);
-    }
-
-    function callback()
-    {
-        //Check callback and save
-
-
-    }
 
     /** END PAYMENT*/
     function update(){
@@ -635,11 +574,12 @@ class User extends MX_Controller
         //Update payment
         $DB['subscriptionid'] = $this->input->get('subscriptionid');
         $DB['orderid'] = $this->input->get('orderid');
-        $DB['price'] = $this->config->item('priceuser');
+        $DB['price'] = $this->input->get('amount')/100;
         $DB['type'] = 2;
         $DB['bl_active'] = 1;
         $DB['paymenttime'] = time();
         $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
+        $DB['cardno']    = $this->input->get('cardno');
 
         //Add to log
         $this->addPaymentLog($user->id);
@@ -654,8 +594,6 @@ class User extends MX_Controller
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
         $this->user->saveUser($DB, $user->id);
-        /*$this->session->unset_userdata('userid');
-        $this->session->unset_userdata('payment');*/
         $data['page'] = 'user/upgradeSuccess';
         $this->load->view('templates', $data);
     }
@@ -665,6 +603,23 @@ class User extends MX_Controller
     }
 
     public function upgradeCallback(){
+
+    }
+
+    public function changeCardSuccess(){
+        $user = $this->session->userdata('user');
+
+        //Update card info
+        $DB['subscriptionid'] = $this->input->get('subscriptionid');
+        $DB['cardno']    = $this->input->get('cardno');
+        $this->user->saveUser($DB, $user->id);
+    }
+
+    public function changeCardCancel(){
+        customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne fejler');
+    }
+
+    public function changeCardCallback(){
 
     }
 

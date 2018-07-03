@@ -216,6 +216,31 @@
                                     <label class="radio-inline"><input type="radio" name="chat" value="1" <?php echo $user->chat == 1?'checked':'';?> style="margin-top: 2px;"> On</label>
                                 </div>
                             </div>
+                            <?php if($user->type == 2){?>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Medlem:</label>
+                                        <label for="">Guld</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Abonnement udløber:</label>
+                                        <label for=""><?php echo date('d/m/Y', $user->expired_at);?></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Kortnummer:</label>
+                                        <label for=""><?php echo $user->cardno;?></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <a href="<?php echo site_url('payment/changeCard')?>" class="btn btnadd_friend">Skift kort</a>
+                                    </div>
+                                </div>
+                            <?php }?>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Vælg kodeord (min. 6 karakter):</label>
