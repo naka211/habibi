@@ -2613,6 +2613,7 @@ ul.list_action li a .i_block {
 
 .box_payment .checkbox label {
     line-height: 1.7em;
+    display: block;
 }
 
 .box_payment h4 {

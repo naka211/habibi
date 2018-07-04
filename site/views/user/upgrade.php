@@ -45,3 +45,25 @@
         </div>
     </section>
 </div>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#upgradeForm").validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().after());
+            },
+            rules: {
+                "tos":{
+                    required:true,
+                }
+            },
+            messages: {
+                "tos":{
+                    required: 'Du accepterer vilkår og betingelser for at fortsætte',
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+    });
+</script>
