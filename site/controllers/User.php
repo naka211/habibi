@@ -747,11 +747,9 @@ class User extends MX_Controller
         $user = $this->user->getUser('', $info, $password);
         if ($user) {
             $data['status'] = true;
-            /*$data['b2b'] = false;
-            $user->b2b = false;*/
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);
-            $this->user->updateLogin($user->id, false);
+            $this->user->updateLogin($user->id);
 
             //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
         } else {
@@ -761,44 +759,6 @@ class User extends MX_Controller
         echo json_encode($data);
         return;
     }
-
-    function autoLogin()
-    {
-        $email = $this->session->userdata('email');
-        $password = $this->session->userdata('password');
-        if ($email && $password) {
-            $this->session->unset_userdata('email');
-            $this->session->unset_userdata('password');
-            $b2b = $this->user->getB2b('', $email, $password);
-            if ($b2b) {
-                $b2b->b2b = true;
-                $this->session->set_userdata('isLoginSite', true);
-                $this->session->set_userdata('user', $b2b);
-                $this->user->updateLogin($b2b->id, true);
-                redirect(site_url('user/b2b'));
-                return;
-            }
-            //Login user
-            $user = $this->user->getUser('', $email, $password);
-            if ($user) {
-                $data['status'] = true;
-                $user->b2b = false;
-                $this->session->set_userdata('isLoginSite', true);
-                $this->session->set_userdata('user', $user);
-                $this->user->updateLogin($user->id, false);
-                redirect(site_url('user/index'));
-                return;
-            } else {
-                redirect(site_url(''));
-                return;
-            }
-        } else {
-            redirect(site_url(''));
-            return;
-        }
-    }
-
-
 
     function logout(){
         /** Login*/
@@ -922,6 +882,21 @@ class User extends MX_Controller
         }
     }
 
+    public function reAddFriend($profileId){
+        $user = $this->session->userdata('user');
+
+        if ($user && $profileId) {
+            $id = $this->user->reAddFriend($user->id, $profileId, 0);
+            if($id){
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er sendt');
+            } else {
+                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke gemme din anmodning');
+            }
+        } else {
+            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
+        }
+    }
+
     public function cancelAddFriend($profile_id){
         $user = $this->session->userdata('user');
 
@@ -965,9 +940,11 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         $receivedRequests = $this->user->getReceivedRequests($user->id);
         $sentRequests = $this->user->getSentRequests($user->id);
+        $rejectedRequests = $this->user->getRejectedRequests($user->id);
 
         $data['receivedRequests'] = $receivedRequests;
         $data['sentRequests'] = $sentRequests;
+        $data['rejectedRequests'] = $rejectedRequests;
 
         $data['page'] = 'user/friendrequests';
         $this->load->view('templates', $data);

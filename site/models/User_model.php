@@ -216,25 +216,14 @@ class User_model extends CI_Model{
 
 
 
-    function updateLogin($id=NULL, $b2b=NULL){
-        if($b2b){
-            $this->db->set('login', date('Y-m-d H:i:s'));
-            $this->db->where('id', $id);
-            $query = $this->db->update('user_b2b');
-            if($query){
-                return $id;
-            }else{
-                return false;
-            }
+    function updateLogin($id=NULL){
+        $this->db->set('login', time());
+        $this->db->where('id', $id);
+        $query = $this->db->update('user');
+        if($query){
+            return $id;
         }else{
-            $this->db->set('login', date('Y-m-d H:i:s'));
-            $this->db->where('id', $id);
-            $query = $this->db->update('user');
-            if($query){
-                return $id;
-            }else{
-                return false;
-            }
+            return false;
         }
 	}
 
@@ -922,6 +911,17 @@ class User_model extends CI_Model{
         return $query;
     }
 
+    public function getRejectedRequests($userId){
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_update');
+        $this->db->from('user_friends as uf');
+        $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
+        $this->db->where("uf.user_from", $userId);
+        $this->db->where("uf.status", 2);
+        $this->db->order_by('uf.id','DESC');
+        $result = $this->db->get()->result();
+        return $result;
+    }
+
     public function updateFriendRequest($userId, $profileId, $status){
         $data = array(
             'status' => $status,
@@ -929,6 +929,16 @@ class User_model extends CI_Model{
         );
         $this->db->where('user_from', $profileId);
         $this->db->where('user_to', $userId);
+        return $this->db->update('user_friends', $data);
+    }
+
+    public function reAddFriend($userId, $profileId){
+        $data = array(
+            'status' => 0,
+            'dt_create' => time()
+        );
+        $this->db->where('user_from', $userId);
+        $this->db->where('user_to', $profileId);
         return $this->db->update('user_friends', $data);
     }
 
