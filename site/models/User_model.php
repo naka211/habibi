@@ -1037,7 +1037,7 @@ class User_model extends CI_Model{
         if (!empty($userIdArr)) {
             foreach ($userIdArr as $key => $user) {
                 if(!empty($user->userId)){
-                    $this->db->select('name, id, avatar, region, ethnic_origin, year');
+                    $this->db->select('name, id, avatar, region, ethnic_origin, year, login');
                     $this->db->from('user');
                     $this->db->where("id", $user->userId);
                     $userInfo = $this->db->get()->row();

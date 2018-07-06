@@ -1846,6 +1846,18 @@ ul.list_action li a .i_block {
     border: 1px solid transparent;
 }
 
+.bntStatus {
+    background: #05AE0E;
+    padding: 3px 20px;
+    font-size: 14.23px;
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-right: 15px;
+    border: 1px solid transparent;
+    float: right;
+}
+
 .friend_item_avatar img {
     width: 100%;
 }
