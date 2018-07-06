@@ -749,7 +749,7 @@ class User extends MX_Controller
             $data['status'] = true;
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);
-            $this->user->updateLogin($user->id);
+            $this->user->updateLogin($user->id, 1);
 
             //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
         } else {
@@ -762,10 +762,11 @@ class User extends MX_Controller
 
     function logout(){
         /** Login*/
-        $curMethod = $this->router->fetch_method();
+        $user = $this->session->userdata('user');
+
         $Login = array('isLoginSite', 'user', 'email', 'password', 'lastVisitTime');
         $this->session->unset_userdata($Login);
-
+        $this->user->updateLogin($user->id, 0);
         //setcookie('cc_data', '', -time() + (86400 * 30), "/");
 
         redirect(site_url());

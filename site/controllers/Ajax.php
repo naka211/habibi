@@ -104,8 +104,10 @@ class Ajax extends MX_Controller{
         die('ok');
     }
 
-    function setLastVisitTime(){
-        $this->session->set_userdata('lastVisitTime', time());
+    function setExpireSessionTime(){
+        $user = $this->session->userdata('user');
+        $this->user->setExpireSessionTime($user->id);
+
         die('ok');
     }
 

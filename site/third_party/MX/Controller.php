@@ -59,6 +59,7 @@ class MX_Controller
         $this->_run_middlewares();
 
         //Check session
+        $this->load->model('user_model', 'user');
         $this->_checkSession();
 
         //$this->output->enable_profiler(TRUE);
@@ -116,13 +117,13 @@ class MX_Controller
     }
 
     private function _checkSession(){
-        /*$user = $this->session->userdata('user');
+        $user = $this->session->userdata('user');
         $curMethod = $this->router->fetch_method();
 	    if($user && $curMethod != 'logout' && $curMethod != 'login'){
-            $lastVisitTime = $this->session->userdata('lastVisitTime');var_dump($lastVisitTime);
-            if(time() - $lastVisitTime > 60 && $lastVisitTime != null){
+            $expiredSessionTime = $this->user->getExpiredSessionTime($user->id);
+            if(time() > $expiredSessionTime && $expiredSessionTime != 0){
                 redirect(site_url('user/logout'));
             }
-        }*/
+        }
     }
 }

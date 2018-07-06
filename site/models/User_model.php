@@ -216,16 +216,38 @@ class User_model extends CI_Model{
 
 
 
-    function updateLogin($id=NULL){
-        $this->db->set('login', time());
-        $this->db->where('id', $id);
+    function updateLogin($userId=NULL, $login = 1){
+        if($login == 0){
+            $this->db->set('expiredSessionTime', 0);
+        }
+        $this->db->set('login', $login);
+        $this->db->where('id', $userId);
         $query = $this->db->update('user');
         if($query){
-            return $id;
+            return $query;
         }else{
             return false;
         }
 	}
+
+    function setExpireSessionTime($userId=NULL){
+        $this->db->set('expiredSessionTime', strtotime("+1 minutes"));
+        $this->db->where('id', $userId);
+        $query = $this->db->update('user');
+        if($query){
+            return $query;
+        }else{
+            return false;
+        }
+    }
+
+    function getExpiredSessionTime($userId=NULL){
+        $this->db->select('expiredSessionTime');
+        $this->db->from('user');
+        $this->db->where("id", $userId);
+        $result = $this->db->get()->row();
+        return $result->expiredSessionTime;
+    }
 
     function saveUser($DB=NULL,$id=NULL){
         if($id){

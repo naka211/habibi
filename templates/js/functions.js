@@ -247,14 +247,48 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Set expired session time when close tab
+var validNavigation = false;
+
+wireUpEvents = function() {
+    window.onbeforeunload = function (e) {
+        if (!validNavigation) {
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/setExpireSessionTime",
+                data: { csrf_site_name: token_value }
+            });
+        }
+    };
+
+
+    // Attach the event keypress to exclude the F5 refresh
+    $(document).bind('keypress', function(e) {
+        if (e.keyCode == 116){
+            validNavigation = true;
+        }
+    });
+
+    // Attach the event click for all links in the page
+    $("a").bind("click", function() {
+        validNavigation = true;
+    });
+
+    // Attach the event submit for all forms in the page
+    $("form").bind("submit", function() {
+        validNavigation = true;
+    });
+
+    // Attach the event click for all inputs in the page
+    $("input[type=submit]").bind("click", function() {
+        validNavigation = true;
+    });
+
+}
+
 $(document).ready(function() {
-    /*$(window).on("beforeunload", function(e) {
-        $.ajax({
-            method: "POST",
-            url: base_url+"ajax/setLastVisitTime",
-            data: { csrf_site_name: token_value }
-        });
-    });*/
+    //Capture the close tab event
+    wireUpEvents();
 
     /*$('input[type=radio][name=chat]').change(function() {
         $.ajax({
