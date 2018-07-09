@@ -967,20 +967,22 @@ class User extends MX_Controller
     function friends($offset = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Venner');
+        $keyword = $this->input->get('keyword', true);
 
         $data['user'] = $this->session->userdata('user');
         $ignore = $this->user->getBlockedUserIds($data['user']->id);
 
         $config['base_url'] = base_url() . '/user/friends/';
-        $config['total_rows'] = $this->user->getNumFriends($data['user']->id, $ignore);
+        $config['total_rows'] = $this->user->getNumFriends($data['user']->id, $ignore, $keyword);
         $config['per_page'] = $this->config->item('item_per_page');
         //$config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $list = $this->user->getFriends($data['user']->id, $config['per_page'], (int)$offset, $ignore);
+        $list = $this->user->getFriends($data['user']->id, $config['per_page'], (int)$offset, $ignore, $keyword);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;
+        $data['friendQuantity'] = $config['total_rows'];
 
         $data['page'] = 'user/friends';
         $this->load->view('templates', $data);

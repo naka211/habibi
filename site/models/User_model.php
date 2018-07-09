@@ -986,13 +986,16 @@ class User_model extends CI_Model{
      * @param null $offset
      * @return mixed
      */
-    function getFriends($userId=NULL, $num=NULL, $offset=NULL, $ignore = null){
+    function getFriends($userId=NULL, $num=NULL, $offset=NULL, $ignore = null, $keyword = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time, ul.new');
         $this->db->from('user_friendlist as ul');
         $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
         $this->db->where("ul.user_from", $userId);
         if($ignore){
             $this->db->where_not_in('ul.user_to', $ignore);
+        }
+        if($keyword){
+            $this->db->like('u.name', $keyword);
         }
         $this->db->order_by('ul.id','DESC');
         if($num || $offset){
@@ -1006,12 +1009,16 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    public function getNumFriends($userId = null, $ignore = null){
-        $this->db->select('COUNT(id) as num');
-        $this->db->from('user_friendlist');
-        $this->db->where('user_from', $userId);
+    public function getNumFriends($userId = null, $ignore = null, $keyword = null){
+        $this->db->select('COUNT(ul.id) as num');
+        $this->db->from('user_friendlist as ul');
+        $this->db->where('ul.user_from', $userId);
+        $this->db->join('user as u', 'ul.user_to = u.id', 'inner');
         if($ignore){
-            $this->db->where_not_in('user_to', $ignore);
+            $this->db->where_not_in('ul.user_to', $ignore);
+        }
+        if($keyword){
+            $this->db->like('u.name', $keyword);
         }
         $query = $this->db->get();
         return $query->row()->num;
