@@ -122,7 +122,7 @@ class MX_Controller
 	    if($user && $curMethod != 'logout' && $curMethod != 'login'){
             $expiredSessionTime = $this->user->getExpiredSessionTime($user->id);
             if(time() > $expiredSessionTime && $expiredSessionTime != 0){
-                redirect(site_url('user/logout'));
+                //redirect(site_url('user/logout'));
             }
         }
     }
