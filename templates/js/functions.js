@@ -346,6 +346,9 @@ $(document).ready(function() {
             if(link == 'blockUser'){
                 $(".profile"+profile_id).fadeOut();
             }
+            if(link == 'unblockUser'){
+                $(".profile"+profile_id).fadeOut();
+            }
         });
     }
     sendBlink = function (profile_id) {

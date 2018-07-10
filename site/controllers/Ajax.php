@@ -244,6 +244,16 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function unblockUser(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->removeUserToBlockList($user->id, $profileId);
+        $data['status'] = true;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);

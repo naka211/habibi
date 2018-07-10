@@ -12,7 +12,7 @@
             <div class="row">
                 <?php if(!empty($list)) { ?>
                     <?php foreach ($list as $user) { ?>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 profile<?php echo $user->id;?>">
                             <div class="box_favorites_item">
                                 <div class="favorites_img">
                                     <a href="<?php echo site_url('user/profile/' . $user->id . '/' . $user->name); ?>"><img
@@ -22,7 +22,7 @@
                                         <span><?php echo countImages($user->id); ?></span></div>
                                     <div class="favorites_footer">
                                         <a href="javascript:void(0)" ;
-                                           onclick="confirmRemoveBlock(<?php echo $user->id; ?>)"
+                                           onclick="callAjaxFunction(<?php echo $user->id; ?>, 'unblockUser')"
                                            class="btn btn_addRemove">Fjerne</a>
                                     </div>
                                 </div>
