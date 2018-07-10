@@ -178,6 +178,35 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    function blurAvatar(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $profileId) {
+            $this->user->setBlurAvatar($user->id, $profileId, 0);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+    function removeBlurAvatar(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $profileId) {
+            $this->user->setBlurAvatar($user->id, $profileId, 1);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);

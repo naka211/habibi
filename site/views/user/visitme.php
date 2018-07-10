@@ -24,7 +24,11 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <div class="frend_item_avatar">
-                                    <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
+                                    <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
+                                        <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/raw_thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
+                                    <?php } else {?>
+                                        <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
+                                    <?php }?>
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">

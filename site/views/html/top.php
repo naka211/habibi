@@ -39,7 +39,7 @@ if(!empty($user)){
                         <div class="dropdown dropdown_avatar show clearfix">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="img_avatar_sm">
-                                    <img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive" alt="">
+                                    <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>?<?php echo time();?>" class="img-responsive" alt="">
                                 </div>
                                 <span class="caret"></span>
                             </a>

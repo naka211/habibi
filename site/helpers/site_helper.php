@@ -345,3 +345,22 @@ function inSearch($filter, $value){
     $ci = &get_instance();
     return in_array($value, explode(',', $ci->input->get($filter)));
 }
+
+function allowViewAvatar($profileId){
+    $ci = &get_instance();
+    $userId = $ci->session->userdata('user')->id;
+
+    $query = $ci->db->select("viewAvatar")
+        ->from('tb_user_friendlist')
+        ->where("user_from = $profileId AND user_to = $userId");
+    $result = $query->get()->row();
+    if(empty($result)){
+        return false;
+    } else {
+        if($result->viewAvatar == 0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+}

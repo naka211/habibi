@@ -1275,7 +1275,7 @@ select:not([multiple]) {
     text-transform: uppercase;
     /*margin-top: 20px;*/
     margin-bottom: 15px;
-    font-weight: 700;
+    /*font-weight: 700;*/
     margin-right: 15px;
 }
 
@@ -1290,7 +1290,7 @@ select:not([multiple]) {
     text-transform: uppercase;
     /*margin-top: 20px;*/
     margin-bottom: 15px;
-    font-weight: 700;
+    /*font-weight: 700;*/
     margin-right: 15px;
 }
 

@@ -19,9 +19,9 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
             <div class="row top_infoProfile">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div class="img_avatar">
-                        <?php if($profile->blurIndex == 0) { ?>
+                        <?php if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) { ?>
                             <a data-fancybox="avatarGallery"
-                               href="<?php echo base_url(); ?>uploads/user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $profile->avatar;?>"></a>
+                               href="<?php echo base_url(); ?>uploads/user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $profile->avatar;?>"></a>
                          <?php } else {?>
                             <img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $profile->avatar;?>">
                         <?php }?>
@@ -127,7 +127,7 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php if(!empty($images)){?>
                     <div class="owl-carousel owl-theme owl_gallerys">
-                        <?php if($profile->blurIndex == 0) { ?>
+                        <?php if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) { ?>
                             <?php foreach ($images as $image) { ?>
                                 <div class="item">
                                     <a data-fancybox="gallery"

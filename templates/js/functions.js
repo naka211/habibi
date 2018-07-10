@@ -303,6 +303,23 @@ $(document).ready(function() {
             method: "POST",
             url: base_url+"ajax/"+link,
             data: { csrf_site_name: token_value, profile_id: profile_id }
+        }).done(function() {
+            //handle blur action
+            if(link == 'blurAvatar'){
+                $("#blurBtn"+profile_id).attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'removeBlurAvatar')",
+                    "class" : "btn btnadd_friend"
+                });
+                $("#blurBtn"+profile_id).text('Fjern sløring');
+            }
+            if(link == 'removeBlurAvatar'){
+                $("#blurBtn"+profile_id).attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'blurAvatar')",
+                    "class" : "btn btn_cancel_request"
+                });
+                $("#blurBtn"+profile_id).text('Sløring');
+            }
+            //
         });
     }
     sendBlink = function (profile_id) {
@@ -318,7 +335,6 @@ $(document).ready(function() {
             "class" : "hover"
         });
     }
-
     removeFavorite = function (profile_id) {
         callAjaxFunction(profile_id, 'removeFavorite');
 

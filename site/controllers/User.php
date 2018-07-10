@@ -238,6 +238,7 @@ class User extends MX_Controller
         $thumb_user = './uploads/thumb_user/'.$currentAvatar;
         if(file_put_contents($thumb_user, $image)){
             $this->user->updateBlurIndex($user->id, $blurIndex);
+            $this->updateUserSession($user->id);
             customRedirectWithMessage(site_url('user/index'));
         }
     }
