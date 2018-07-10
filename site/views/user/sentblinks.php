@@ -15,7 +15,7 @@
                 foreach($list as $user){
                     if(!empty($user->id)){
                 ?>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
                     <div class="frend_item">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -31,8 +31,8 @@
                                 <h4><?php echo $user->name; ?></h4>
                                 <p class="age_city"><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                 <p>Sendte: d. <span><?php echo date("d/m/Y", $user->sent_time); ?></span> kl.<span><?php echo date("H:i", $user->sent_time); ?></span></p>
-                                <?php if(isFriend($user->id) == false){?><a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn bntMessage">Tilføj ven</a><?php }?>
-                                <a href="<?php echo site_url('user/blockUser/' . $user->id); ?>" class="btn bntBlock">Blok</a>
+                                <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriend')">Tilføj ven</a><?php }?>
+                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Blok</a>
                             </div>
                         </div>
                     </div>
