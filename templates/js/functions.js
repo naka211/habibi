@@ -334,6 +334,9 @@ $(document).ready(function() {
                     "class" : ""
                 });
             }
+            if(link == 'removeFavoriteInPage'){
+                $(".friend"+profile_id).fadeOut();
+            }
         });
     }
     sendBlink = function (profile_id) {

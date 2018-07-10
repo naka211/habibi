@@ -178,6 +178,10 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    function removeFavoriteInPage(){
+        $this->removeFavorite();
+    }
+
     function blurAvatar(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');

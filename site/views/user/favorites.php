@@ -11,7 +11,7 @@
 
             <div class="row">
                 <?php foreach($list as $user){?>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 friend<?php echo $user->id;?>">
                     <div class="box_favorites_item">
                         <div class="favorites_img">
                             <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
@@ -22,7 +22,7 @@
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <div class="favorites_footer">
                                 <?php if(isFriend($user->id) == false){?><a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn btn_addFriend">Tilføj ven</a><?php }?>
-                                <a href="javascript:void(0)"; onclick="confirmRemoveFavorite(<?php echo $user->id;?>)" class="btn btn_addRemove">Remove</a>
+                                <a href="javascript:void(0)"; onclick="callAjaxFunction(<?php echo $user->id;?>, 'removeFavoriteInPage')" class="btn btn_addRemove">Remove</a>
                             </div>
                         </div>
                         <h5 class="name"><?php echo $user->name;?></h5>
