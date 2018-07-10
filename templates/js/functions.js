@@ -319,31 +319,27 @@ $(document).ready(function() {
                 });
                 $("#blurBtn"+profile_id).text('Sløring');
             }
-            //
+            // Handle favorite
+            if(link == 'addFavorite'){
+                $("#favoriteBtn").attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'removeFavorite')",
+                    "title" : "Fjern favorit",
+                    "class" : "hover"
+                });
+            }
+            if(link == 'removeFavorite'){
+                $("#favoriteBtn").attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'addFavorite')",
+                    "title" : "Tilføj favorit",
+                    "class" : ""
+                });
+            }
         });
     }
     sendBlink = function (profile_id) {
         callAjaxFunction(profile_id, 'sendBlink');
     }
 
-    addFavorite = function (profile_id) {
-        callAjaxFunction(profile_id, 'addFavorite');
-
-        $("#favoriteBtn").attr({
-            "onclick" : "removeFavorite("+profile_id+")",
-            "title" : "Fjern favorit",
-            "class" : "hover"
-        });
-    }
-    removeFavorite = function (profile_id) {
-        callAjaxFunction(profile_id, 'removeFavorite');
-
-        $("#favoriteBtn").attr({
-            "onclick" : "addFavorite("+profile_id+")",
-            "title" : "Tilføj favorit",
-            "class" : ""
-        });
-    }
 
     var checkMessageInterval;
     setCheckMessageInterval = function (profileId) {

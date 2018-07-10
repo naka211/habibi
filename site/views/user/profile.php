@@ -6,9 +6,9 @@ if(isGoldMember()){
     $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
 }
 if($status->isFavorite){
-    $favoriteLink = 'href="javascript:void(0)" class="hover" onclick="removeFavorite('.$profile->id.')" title="Fjern favorit"';
+    $favoriteLink = 'href="javascript:void(0)" class="hover" onclick="callAjaxFunction('.$profile->id.', \'removeFavorite\')" title="Fjern favorit"';
 } else {
-    $favoriteLink = 'href="javascript:void(0)" onclick="addFavorite('.$profile->id.')" title="Tilføj favorit"';
+    $favoriteLink = 'href="javascript:void(0)" onclick="callAjaxFunction('.$profile->id.', \'addFavorite\')" title="Tilføj favorit"';
 }
 $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
 $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
