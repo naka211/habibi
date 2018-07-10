@@ -11,7 +11,7 @@
 
             <div class="row">
                 <?php foreach($list as $user){?>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 friend<?php echo $user->id;?>">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 profile<?php echo $user->id;?>">
                     <div class="box_favorites_item">
                         <div class="favorites_img">
                             <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>

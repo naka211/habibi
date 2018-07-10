@@ -211,6 +211,39 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function requestAddFriend(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+
+        if ($user && $profileId) {
+            $DB['user_from'] = $user->id;
+            $DB['user_to'] = $profileId;
+            $DB['status'] = 0;
+            $DB['dt_create'] = time();
+            $id = $this->user->addRequestAddFriend($DB);
+            if($id){
+                $data['status'] = true;
+            } else {
+                $data['status'] = false;
+            }
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function blockUser(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->addUserToBlockedList($user->id, $profileId);
+        $data['status'] = true;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);

@@ -335,7 +335,16 @@ $(document).ready(function() {
                 });
             }
             if(link == 'removeFavoriteInPage'){
-                $(".friend"+profile_id).fadeOut();
+                $(".profile"+profile_id).fadeOut();
+            }
+            //handle request
+            if(link == 'requestAddFriend'){
+                $("#requestAddFriendBtn"+profile_id).fadeOut();
+            }
+
+            //handle block user
+            if(link == 'blockUser'){
+                $(".profile"+profile_id).fadeOut();
             }
         });
     }
