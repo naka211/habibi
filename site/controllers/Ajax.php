@@ -255,7 +255,10 @@ class Ajax extends MX_Controller{
         return;
     }
 
-    public function requestAddFriendInPage(){
+    public function requestAddFriendInProfile(){
+        $this->requestAddFriend();
+    }
+    public function requestAddFriendInFavorite(){
         $this->requestAddFriend();
     }
 
@@ -281,7 +284,7 @@ class Ajax extends MX_Controller{
         return;
     }
 
-    public function unFriendInPage(){
+    public function unFriendInProfile(){
         $this->unFriend();
     }
 
@@ -296,7 +299,7 @@ class Ajax extends MX_Controller{
         return;
     }
 
-    public function cancelAddFriendInPage(){
+    public function cancelAddFriendInProfile(){
         $this->cancelAddFriend();
     }
 

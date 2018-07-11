@@ -339,26 +339,30 @@ $(document).ready(function() {
                 $(".profile"+profile_id).fadeOut();
             }
             //handle request in page
-            if(link == 'requestAddFriendInPage'){
+            if(link == 'requestAddFriendInProfile'){
                 $("#requestBtn").attr({
-                    "onclick" : "callAjaxFunction("+profile_id+", 'cancelAddFriendInPage')",
+                    "onclick" : "callAjaxFunction("+profile_id+", 'cancelAddFriendInProfile')",
                     "class" : "btn btn_cancel_request",
                 });
                 $("#requestBtn").text('Annuller anmodning');
             }
-            if(link == 'cancelAddFriendInPage'){
+            if(link == 'cancelAddFriendInProfile'){
                 $("#requestBtn").attr({
-                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInPage')",
+                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInProfile')",
                     "class" : "btn btnadd_friend",
                 });
                 $("#requestBtn").text('Tilføj ven');
             }
-            if(link == 'unFriendInPage'){
+            if(link == 'unFriendInProfile'){
                 $("#requestBtn").attr({
-                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInPage')",
+                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInProfile')",
                     "class" : "btn btnadd_friend",
                 });
                 $("#requestBtn").text('Tilføj ven');
+            }
+
+            if(link == 'requestAddFriendInFavorite'){
+                $('#requestAddFriendBtn'+profile_id).fadeOut();
             }
         });
     }

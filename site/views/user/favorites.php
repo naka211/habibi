@@ -21,7 +21,7 @@
                             <?php }?>
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <div class="favorites_footer">
-                                <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_addFriend" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriend')">Tilføj ven</a><?php }?>
+                                <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_addFriend" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Tilføj ven</a><?php }?>
                                 <a href="javascript:void(0)"; onclick="callAjaxFunction(<?php echo $user->id;?>, 'removeFavoriteInPage')" class="btn btn_addRemove">Fjerne</a>
                             </div>
                         </div>
