@@ -940,7 +940,9 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Venneanmodninger');
 
         $user = $this->session->userdata('user');
-        $receivedRequests = $this->user->getReceivedRequests($user->id);
+        $ignore = $this->user->getBlockedUserIds($user->id);
+
+        $receivedRequests = $this->user->getReceivedRequests($user->id, $ignore);
         $sentRequests = $this->user->getSentRequests($user->id);
         $rejectedRequests = $this->user->getRejectedRequests($user->id);
 

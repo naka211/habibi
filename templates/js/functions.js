@@ -334,7 +334,8 @@ $(document).ready(function() {
                     "class" : ""
                 });
             }
-            if(link == 'removeFavoriteInPage'){
+            //handle block user and remove favorite in page
+            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend'){
                 $(".profile"+profile_id).fadeOut();
             }
             //handle request
@@ -342,13 +343,6 @@ $(document).ready(function() {
                 $("#requestAddFriendBtn"+profile_id).fadeOut();
             }
 
-            //handle block user
-            if(link == 'blockUser'){
-                $(".profile"+profile_id).fadeOut();
-            }
-            if(link == 'unblockUser'){
-                $(".profile"+profile_id).fadeOut();
-            }
         });
     }
     sendBlink = function (profile_id) {

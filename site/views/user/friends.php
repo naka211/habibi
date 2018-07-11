@@ -24,7 +24,7 @@
                         $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }
                 ?>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $profile->id;?>">
                     <div class="frend_item <?php if($profile->new == 1) echo 'frend_item_new';?>">
                         <?php if($profile->new == 1){?>
                             <span class="new">Ny</span>
@@ -49,8 +49,8 @@
                                 <p><?php echo printAge($profile->year); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                                <a href="<?php echo site_url('user/unFriend/'.$profile->id);?>" class="btn bntDelete">Unfriend</a>
-                                <a href="<?php echo site_url('user/blockUser/' . $profile->id); ?>" class="btn bntBlock">Blok</a>
+                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriend')" class="btn bntDelete">Unfriend</a>
+                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'blockUser')" class="btn bntBlock">Blok</a>
                             </div>
                         </div>
                     </div>

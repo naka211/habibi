@@ -15,15 +15,15 @@
                                 if(!empty($receivedRequests)) {
                                     foreach ($receivedRequests as $key => $user) {
                                         if(isGoldMember()){
-                                            $acceptLink = 'href="'.site_url('user/acceptAddFriend/'.$user->id).'"';
-                                            $rejectLink = 'href="'.site_url('user/rejectAddFriend/'.$user->id).'"';
-                                            $blockLink = 'href="'.site_url('user/blockUser/'.$user->id).'"';
+                                            $acceptLink = 'onclick="callAjaxFunction('.$user->id.', \'acceptAddFriend\')"';
+                                            $rejectLink = 'onclick="callAjaxFunction('.$user->id.', \'rejectAddFriend\')"';
+                                            $blockLink = 'onclick="callAjaxFunction('.$user->id.', \'blockUser\')"';
                                             $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                                         } else {
-                                            $acceptLink = $rejectLink = $blockLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+                                            $acceptLink = $rejectLink = $blockLink = $profileLink = 'data-fancybox data-src="#modalUpgrade"';
                                         }
                                         ?>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 profile<?php echo $user->id;?>">
                                             <div class="frend_item">
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-3 col-xs-3">
@@ -38,9 +38,9 @@
                                                         <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                                         <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
-                                                        <a <?php echo $acceptLink;?> class="btn bntMessage">Acceptere</a>
-                                                        <a <?php echo $rejectLink;?> class="btn bntReject">Afvise</a>
-                                                        <a <?php echo $blockLink;?> class="btn bntBlock">Blok</a>
+                                                        <a href="javascript:void(0);" <?php echo $acceptLink;?> class="btn bntMessage">Acceptere</a>
+                                                        <a href="javascript:void(0);" <?php echo $rejectLink;?> class="btn bntReject">Afvise</a>
+                                                        <a href="javascript:void(0);" <?php echo $blockLink;?> class="btn bntBlock">Blok</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -55,7 +55,7 @@
                                 <?php
                                 if(!empty($sentRequests)) {
                                     foreach ($sentRequests as $key => $user) { ?>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 profile<?php echo $user->id;?>">
                                             <div class="frend_item">
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-3 col-xs-3">
@@ -68,8 +68,7 @@
                                                         <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                                         <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
-                                                        <a href="<?php echo site_url('user/cancelAddFriend/' . $user->id); ?>"
-                                                           class="btn bntBlock">Annuller anmodning</a>
+                                                        <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn bntBlock">Annuller anmodning</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,13 +84,13 @@
                                 if(!empty($rejectedRequests)) {
                                     foreach ($rejectedRequests as $key => $user) {
                                         if(isGoldMember()){
-                                            $reAddFriendLink = 'href="'.site_url('user/reAddFriend/'.$user->id).'"';
+                                            $reAddFriendLink = 'onclick="callAjaxFunction('.$user->id.', \'reAddFriend\')"';
                                             $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                                         } else {
                                             $reAddFriendLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                                         }
                                         ?>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 profile<?php echo $user->id;?>">
                                             <div class="frend_item">
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-3 col-xs-3">

@@ -211,6 +211,27 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function blockUser(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->addUserToBlockedList($user->id, $profileId);
+        $data['status'] = true;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function unblockUser(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->removeUserToBlockList($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     public function requestAddFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
@@ -234,21 +255,57 @@ class Ajax extends MX_Controller{
         return;
     }
 
-    public function blockUser(){
+    public function reAddFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
-        $this->user->addUserToBlockedList($user->id, $profileId);
+        $this->user->reAddFriend($user->id, $profileId, 0);
         $data['status'] = true;
+
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
     }
 
-    public function unblockUser(){
+    public function unFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
-        $this->user->removeUserToBlockList($user->id, $profileId);
+        $this->user->cancelRequestAddFriend($user->id, $profileId);
         $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function cancelAddFriend(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->cancelRequestAddFriend($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function acceptAddFriend(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->updateFriendRequest($user->id, $profileId, 1);
+        $this->user->insertFriendList($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function rejectAddFriend(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->updateFriendRequest($user->id, $profileId, 2);
+        $data['status'] = true;
+
         header('Content-Type: application/json');
         echo json_encode($data);
         return;

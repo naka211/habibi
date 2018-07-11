@@ -886,11 +886,16 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
-    public function friendRequestQuantity($user_id){
+    public function friendRequestQuantity($userId){
+        $ignore = $this->getBlockedUserIds($userId);
+
         $this->db->select('id');
         $this->db->from('tb_user_friends');
-        $this->db->where('user_to', $user_id);
+        $this->db->where('user_to', $userId);
         $this->db->where('status', 0);
+        if($ignore){
+            $this->db->where_not_in('user_from', $ignore);
+        }
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -918,12 +923,15 @@ class User_model extends CI_Model{
         return true;
     }
 
-    public function getReceivedRequests($userId){
+    public function getReceivedRequests($userId, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
         $this->db->where("uf.status", 0);
+        if($ignore){
+            $this->db->where_not_in('uf.user_from', $ignore);
+        }
         $this->db->order_by('uf.id','DESC');
         $query = $this->db->get()->result();
         return $query;

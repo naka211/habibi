@@ -1747,16 +1747,16 @@ ul.list_action li a .i_block {
     background: #fa3536;
     color: #fff;
     display: inline-block;
-    padding: 15px 90px;
-    font-size: 20px;
+    padding: 12px 90px;
+    font-size: 22px;
     font-weight: 600;
-    -moz-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    -moz-transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    transform: rotate(315deg);
     position: absolute;
-    top: 0px;
+    top: 105px;
     right: -80px;
 }
 
