@@ -865,75 +865,9 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function requestAddFriend($profile_id){
-        $user = $this->session->userdata('user');
 
-        if ($user && $profile_id) {
-            $DB['user_from'] = $user->id;
-            $DB['user_to'] = $profile_id;
-            $DB['status'] = 0;
-            $DB['dt_create'] = time();
-            $id = $this->user->addRequestAddFriend($DB);
-            if($id){
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er sendt');
-            } else {
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke gemme din anmodning');
-            }
-        } else {
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
-        }
-    }
 
-    public function reAddFriend($profileId){
-        $user = $this->session->userdata('user');
 
-        if ($user && $profileId) {
-            $id = $this->user->reAddFriend($user->id, $profileId, 0);
-            if($id){
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er sendt');
-            } else {
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke gemme din anmodning');
-            }
-        } else {
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
-        }
-    }
-
-    public function cancelAddFriend($profile_id){
-        $user = $this->session->userdata('user');
-
-        if ($user && $profile_id) {
-            $this->user->cancelRequestAddFriend($user->id, $profile_id);
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Din anmodning er annulleret');
-        } else {
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
-        }
-    }
-
-    public function unFriend($profileId){
-        $user = $this->session->userdata('user');
-
-        if ($user && $profileId) {
-            $this->user->cancelRequestAddFriend($user->id, $profileId);
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Denne person er fjernet til din venneliste');
-        } else {
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Mangler dit id');
-        }
-    }
-
-    function removeFavorite($profileId){
-        $user = $this->session->userdata('user');
-        if ($user && $profileId) {
-            $id = $this->user->removeFavorite($user->id, $profileId);
-            if ($id) {
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Denne person er blevet fjernet til din favoritliste');
-            } else {
-                customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Kan ikke fjerne');
-            }
-        } else {
-            customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Manglende id');
-        }
-    }
 
     public function friendRequests(){
         $data = array();
@@ -943,8 +877,8 @@ class User extends MX_Controller
         $ignore = $this->user->getBlockedUserIds($user->id);
 
         $receivedRequests = $this->user->getReceivedRequests($user->id, $ignore);
-        $sentRequests = $this->user->getSentRequests($user->id);
-        $rejectedRequests = $this->user->getRejectedRequests($user->id);
+        $sentRequests = $this->user->getSentRequests($user->id, $ignore);
+        $rejectedRequests = $this->user->getRejectedRequests($user->id, $ignore);
 
         $data['receivedRequests'] = $receivedRequests;
         $data['sentRequests'] = $sentRequests;
@@ -954,18 +888,7 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function acceptAddFriend($profileId){
-        $user = $this->session->userdata('user');
-        $this->user->updateFriendRequest($user->id, $profileId, 1);
-        $this->user->insertFriendList($user->id, $profileId);
-        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den person er tilføjet til vennelisten');
-    }
 
-    public function rejectAddFriend($profileId){
-        $user = $this->session->userdata('user');
-        $this->user->updateFriendRequest($user->id, $profileId, 2);
-        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Den pågældende afvises til vennelisten');
-    }
 
     function friends($offset = 0){
         $data = array();

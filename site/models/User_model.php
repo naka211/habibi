@@ -937,23 +937,29 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    public function getSentRequests($userId){
+    public function getSentRequests($userId, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 0);
+        if($ignore){
+            $this->db->where_not_in('uf.user_to', $ignore);
+        }
         $this->db->order_by('uf.id','DESC');
         $query = $this->db->get()->result();
         return $query;
     }
 
-    public function getRejectedRequests($userId){
+    public function getRejectedRequests($userId, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_update');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 2);
+        if($ignore){
+            $this->db->where_not_in('uf.user_to', $ignore);
+        }
         $this->db->order_by('uf.id','DESC');
         $result = $this->db->get()->result();
         return $result;
