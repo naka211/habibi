@@ -255,6 +255,10 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function requestAddFriendInPage(){
+        $this->requestAddFriend();
+    }
+
     public function reAddFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
@@ -277,6 +281,10 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function unFriendInPage(){
+        $this->unFriend();
+    }
+
     public function cancelAddFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
@@ -286,6 +294,10 @@ class Ajax extends MX_Controller{
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
+    }
+
+    public function cancelAddFriendInPage(){
+        $this->cancelAddFriend();
     }
 
     public function acceptAddFriend(){

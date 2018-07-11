@@ -335,14 +335,31 @@ $(document).ready(function() {
                 });
             }
             //handle block user and remove favorite in page
-            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend'){
+            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'requestAddFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend'){
                 $(".profile"+profile_id).fadeOut();
             }
-            //handle request
-            if(link == 'requestAddFriend'){
-                $("#requestAddFriendBtn"+profile_id).fadeOut();
+            //handle request in page
+            if(link == 'requestAddFriendInPage'){
+                $("#requestBtn").attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'cancelAddFriendInPage')",
+                    "class" : "btn btn_cancel_request",
+                });
+                $("#requestBtn").text('Annuller anmodning');
             }
-
+            if(link == 'cancelAddFriendInPage'){
+                $("#requestBtn").attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInPage')",
+                    "class" : "btn btnadd_friend",
+                });
+                $("#requestBtn").text('Tilføj ven');
+            }
+            if(link == 'unFriendInPage'){
+                $("#requestBtn").attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInPage')",
+                    "class" : "btn btnadd_friend",
+                });
+                $("#requestBtn").text('Tilføj ven');
+            }
         });
     }
     sendBlink = function (profile_id) {

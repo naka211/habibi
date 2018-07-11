@@ -38,13 +38,13 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                         <p><?php echo $profile->slogan;?></p>
 
                         <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
-                        <a href="<?php echo site_url('user/requestAddFriend/'.$profile->id);?>" class="btn btnadd_friend">Tilføj ven</a>
+                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'requestAddFriendInPage')" id="requestBtn" class="btn btnadd_friend">Tilføj ven</a>
                         <?php }?>
                         <?php if($status->isFriend == 0){?>
-                            <a href="<?php echo site_url('user/cancelAddFriend/'.$profile->id);?>" class="btn btn_cancel_request">Annuller anmodning</a>
+                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'cancelAddFriendInPage')" id="requestBtn" class="btn btn_cancel_request">Annuller anmodning</a>
                         <?php }?>
                         <?php if($status->isFriend == 1){?>
-                            <a href="<?php echo site_url('user/unFriend/'.$profile->id);?>" class="btn btnUnfriend">Unfriend</a>
+                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriendInPage')" id="requestBtn" class="btn btnUnfriend">Unfriend</a>
                         <?php }?>
                         <div class="w_table_infoProfile">
                             <div class="row">
