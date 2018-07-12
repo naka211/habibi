@@ -931,7 +931,7 @@ class User extends MX_Controller
                         '.$profileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $sent = $this->general_model->sendEmail('trung@mywebcreations.dk', 'Zeduuce.com - Bruger rapport', $content);
+        $sent = $this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Zeduuce.com - Bruger rapport', $content);
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
