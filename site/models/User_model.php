@@ -1052,8 +1052,7 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
-    public function getUserSent($userId, $num, $offset)
-    {
+    public function getUserSent($userId, $num, $offset){
         $this->db->select('DISTINCT (CASE WHEN user_from = ' . $userId . ' THEN user_to WHEN user_to = ' . $userId . ' THEN user_from END) as userId');
         $this->db->from('user_messages');
         $this->db->order_by('id', 'DESC');
@@ -1086,6 +1085,18 @@ class User_model extends CI_Model{
             }
         }
         return $result;
+    }
+
+    public function saveReport($userFrom, $userTo, $reason){
+        $data = array('userFrom'=>$userFrom,
+            'userTo'=>$userTo,
+            'reason'=>$reason,
+            'createdAt'=>time());
+        if($this->db->insert('user_reports', $data)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
     }
     /** The End*/
 }

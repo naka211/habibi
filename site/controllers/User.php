@@ -919,6 +919,25 @@ class User extends MX_Controller
         $this->session->set_userdata('user', $newUser);
     }
 
+    public function report(){
+        $userId = $this->input->post('userId');
+        $profileId = $this->input->post('profileId');
+
+        $userName = $this->input->post('userName');
+        $profileName = $this->input->post('profileName');
+        $reason = $this->input->post('reason');
+
+        $content = 'Hej Admin<br /><br />
+                        '.$profileName.' er rapporteret af '.$userName.'.<br />
+                        Grund: '.$reason.'<br /><br />
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $sent = $this->general_model->sendEmail('trung@mywebcreations.dk', 'Zeduuce.com - Bruger rapport', $content);
+        if($sent){
+            $this->user->saveReport($userId, $profileId, $reason);
+        }
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
     public function testChat(){
         /*print_r($_SESSION);exit();*/
         $data['page'] = 'user/testchat';

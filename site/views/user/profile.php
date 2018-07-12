@@ -12,6 +12,7 @@ if($status->isFavorite){
 }
 $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
 $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
+$reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"';
 ?>
 <div id="content">
     <section class="section_infoProfile">
@@ -115,9 +116,10 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
                             <?php if(($status->isFriend == 1 && $profile->chat == 0) || $profile->chat == 1){?>
                                 <li><a <?php echo $messageLink;?>><i class="i_email"></i></a></li>
                             <?php }?>
-                            <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'style="border:5px solid #000;"'?>><i class="i_blink"></i></a></li>
+                            <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'class="hover"'?>><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
                             <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>
+                            <li><a <?php echo $reportLink;?> title="Anmeld profil"><i class="i_report"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -172,3 +174,36 @@ $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
     </div>
 </div>
 <?php }?>
+<div style="display: none;" id="modalReport" class="animated-modal modalChat">
+    <div class="row">
+        <?php echo form_open('user/report', array('id'=>'reportForm', 'class'=>'frm_register'))?>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Anmeld profil <?php echo $profile->name;?></h4>
+            Årsager til anmeldelse<br><br>
+            For at anmelde en profil skal der være en relevant årsag, som f.eks. stødende profiltekst, en mulig falsk profil, misbrug af billede, stødende i forbindelse med kontakt.<br>
+            Anmeld venligst IKKE en profil på baggrund af manglede svar på dine beskeder og lignende.<br><br>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <label for="">Angiv årsag</label>
+            <select name="reason" class="form-control">
+                <option value="Stødende profiltekst">Stødende profiltekst</option>
+                <option value="Brugernavn">Brugernavn</option>
+                <option value="Kontaktinformation i profiltekst">Kontaktinformation i profiltekst</option>
+                <option value="Falsk profil">Falsk profil</option>
+                <option value="Misbrug af billede">Misbrug af billede</option>
+                <option value="Stødende beskeder">Stødende beskeder</option>
+                <option value="Kontaktinformation i profilnavn">Kontaktinformation i profilnavn</option>
+            </select>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <button type="submit" class="btn btn_viewSearch">Send anmeldelse</button>
+        </div>
+        <?php
+        echo form_hidden('profileId', $profile->id);
+        echo form_hidden('profileName', $profile->name);
+        echo form_hidden('userId', $user->id);
+        echo form_hidden('userName', $user->name);
+        echo form_close();
+        ?>
+    </div>
+</div>
