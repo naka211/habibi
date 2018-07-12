@@ -445,9 +445,9 @@ class User extends MX_Controller
             $DB['land'] = $this->input->post('land');
             $DB['region'] = $this->input->post('region');
             $DB['gender'] = $this->input->post('gender');
-            $DB['ethnic_origin'] = $this->input->post('ethnic_origin');
             $DB['find_gender'] = $this->input->post('find_gender');
-            $DB['find_ethnicity'] = $this->input->post('find_ethnicity');
+            $DB['find_land'] = $this->input->post('find_land');
+            $DB['find_region'] = $this->input->post('find_region');
 
             $DB['type'] = 1;
             $DB['groups'] = 1; //1: register - 2: facebook - 3: google

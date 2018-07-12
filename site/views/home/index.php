@@ -252,6 +252,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Fødselsår</label>
                                 <select name="year" class="form-control">
+                                    <option value="">Vælg</option>
                                     <?php for($i = 1930; $i <= 2010; $i++){?>
                                     <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                     <?php }?>
@@ -269,6 +270,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <label for="">Land</label>
                                 <select name="land" class="form-control">
+                                    <option value="">Vælg</option>
                                     <option value="Tyrkiet">Tyrkiet</option>
                                     <option value="Syrien">Syrien</option>
                                     <option value="Irak">Irak</option>
@@ -293,10 +295,17 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="">Køn</label>
+                            <select name="gender" class="form-control">
+                                <option value="">Vælg</option>
+                                <option value="1">Mænd</option>
+                                <option value="2">Kvinder</option>
+                            </select>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="">Region</label>
                             <select name="region" class="form-control">
+                                <option value="">Vælg</option>
                                 <option value="København">København</option>
                                 <option value="Storkøbenhavn">Storkøbenhavn</option>
                                 <option value="Århus">Århus</option>
@@ -332,7 +341,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <h3>Jeg er</h3>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -355,28 +364,68 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <h3>Jeg søger</h3>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Jeg søger</label>
+                                <label for="">Køn</label>
                                 <select name="find_gender" class="form-control">
+                                    <option value="">Vælg</option>
                                     <option value="1">Mænd</option>
                                     <option value="2">Kvinder</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Etnisk oprindelse</label>
-                                <select name="find_ethnicity" class="form-control">
-                                    <option value="Europæisk">Europæisk</option>
-                                    <option value="Afrikansk">Afrikansk</option>
-                                    <option value="Latinamerikansk">Latinamerikansk</option>
-                                    <option value="Asiatisk">Asiatisk</option>
-                                    <option value="Indisk">Indisk</option>
-                                    <option value="Arabisk">Arabisk</option>
-                                    <option value="Blandet/andet">Blandet/andet</option>
+                                <label for="">Land</label>
+                                <select name="find_land" class="form-control">
+                                    <option value="">Vælg</option>
+                                    <option value="Tyrkiet">Tyrkiet</option>
+                                    <option value="Syrien">Syrien</option>
+                                    <option value="Irak">Irak</option>
+                                    <option value="Libanon">Libanon</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Palæstina">Palæstina</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Bosnien">Bosnien</option>
+                                    <option value="Iran">Iran</option>
+                                    <option value="Marokko">Marokko</option>
+                                    <option value="Albanien">Albanien</option>
+                                    <option value="Algeriet">Algeriet</option>
+                                    <option value="Egypten">Egypten</option>
+                                    <option value="Makedionen">Makedionen</option>
+                                    <option value="Andet">Andet</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="">Region</label>
+                                <select name="find_region" class="form-control">
+                                    <option value="">Vælg</option>
+                                    <option value="København">København</option>
+                                    <option value="Storkøbenhavn">Storkøbenhavn</option>
+                                    <option value="Århus">Århus</option>
+                                    <option value="Aalborg">Aalborg</option>
+                                    <option value="Odense">Odense</option>
+                                    <option value="Nordsjælland">Nordsjælland</option>
+                                    <option value="Midt/Vestsjælland">Midt/Vestsjælland</option>
+                                    <option value="Sydsjælland">Sydsjælland</option>
+                                    <option value="Lolland/Falster">Lolland/Falster</option>
+                                    <option value="Fyn">Fyn</option>
+                                    <option value="Nordjylland">Nordjylland</option>
+                                    <option value="Østjylland">Østjylland</option>
+                                    <option value="Vestjylland">Vestjylland</option>
+                                    <option value="Sydjylland">Sydjylland</option>
+                                    <option value="Midtjylland">Midtjylland</option>
+                                    <option value="Sønderjylland">Sønderjylland</option>
+                                    <option value="Bornholm">Bornholm</option>
                                 </select>
                             </div>
                         </div>

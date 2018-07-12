@@ -130,6 +130,18 @@ $(document).ready(function () {
                     }
                 }
             },
+            "year":{
+                required:true
+            },
+            "gender":{
+                required:true
+            },
+            "land":{
+                required:true
+            },
+            "region":{
+                required:true
+            },
             "password":{
                 required:true,
                 minlength: 6
@@ -138,6 +150,15 @@ $(document).ready(function () {
                 required: true,
                 equalTo: "#password"
             },
+            "find_gender":{
+                required:true
+            },
+            "find_land":{
+                required:true
+            },
+            "find_region":{
+                required:true
+            }
         },
         messages: {
             "email":{
@@ -149,6 +170,18 @@ $(document).ready(function () {
                 required: 'Indtast din navn',
                 remote: 'Denne brugernavn er i brug'
             },
+            "year":{
+                required: 'Vælg dit fødselsår'
+            },
+            "gender":{
+                required: 'Vælg dit køn'
+            },
+            "land":{
+                required: 'Vælg dit land'
+            },
+            "region":{
+                required: 'Vælg dit region'
+            },
             "password":{
                 required: 'Skriv dit kodeord',
                 minlength: "Adgangskoden skal være på mellem {0} tegn."
@@ -157,6 +190,15 @@ $(document).ready(function () {
                 required: 'Indtast dit kodeord igen',
                 equalTo: 'Genadgangskoden er ikke som kodeord'
             },
+            "find_gender":{
+                required:'Vælg det køn, du vil søge'
+            },
+            "find_land":{
+                required:'Vælg det land, du vil søge'
+            },
+            "find_region":{
+                required:'Vælg det region, du vil søge'
+            }
         },
         submitHandler: function(form){
             $.fancybox.close();
