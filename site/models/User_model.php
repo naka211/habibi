@@ -136,7 +136,7 @@ class User_model extends CI_Model{
 
     
     function getList($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL,$inUser=NULL, $type = 'random'){
-        $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region, u.blurIndex');
+        $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region, u.blurIndex, u.login');
         $this->db->from('tb_user as u');
         $this->db->where("u.bl_active",1);
         /*if($search['name']){
@@ -385,7 +385,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFavorites($userId=NULL, $num=NULL, $offset=NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, uf.created_at as added_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uf.created_at as added_time');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -641,7 +641,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, uk.seen, uk.send_at as sent_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.to_user_id = '.$userId.' GROUP BY from_user_id)');
@@ -684,7 +684,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getSentBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, uk.send_at as sent_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.to_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.from_user_id = '.$userId.' GROUP BY to_user_id)');
@@ -713,7 +713,7 @@ class User_model extends CI_Model{
     }
 
     function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex , uv.created_at as seen_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.to_user = '.$userId.' GROUP BY from_user)');
@@ -741,7 +741,7 @@ class User_model extends CI_Model{
     }
 
     function getVisited($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex , uv.created_at as seen_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.from_user = '.$userId.' GROUP BY to_user)');
@@ -924,7 +924,7 @@ class User_model extends CI_Model{
     }
 
     public function getReceivedRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
@@ -938,7 +938,7 @@ class User_model extends CI_Model{
     }
 
     public function getSentRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_create');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -952,7 +952,7 @@ class User_model extends CI_Model{
     }
 
     public function getRejectedRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, uf.dt_update');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_update');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -1008,7 +1008,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFriends($userId=NULL, $num=NULL, $offset=NULL, $ignore = null, $keyword = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, ul.created_at as added_time, ul.new, ul.viewAvatar');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, ul.created_at as added_time, ul.new, ul.viewAvatar');
         $this->db->from('user_friendlist as ul');
         $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
         $this->db->where("ul.user_from", $userId);
