@@ -255,7 +255,7 @@ wireUpEvents = function() {
         if (!validNavigation) {
             $.ajax({
                 method: "POST",
-                url: base_url+"ajax/setExpireSessionTime",
+                url: base_url+"ajax/logout",
                 data: { csrf_site_name: token_value }
             });
         }
