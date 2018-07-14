@@ -30,7 +30,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <div class="box_top_infoProfile">
-                        <h3><?php echo $profile->name;?></h3>
+                        <h3><?php echo $profile->name;?> <?php if($profile->login == 1){?><span class="status"></span><?php }?></h3>
                         <?php if(isGoldMember()){?>
                             <p>Guld medlem</p>
                         <?php } else {?>
