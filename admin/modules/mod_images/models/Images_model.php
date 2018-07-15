@@ -30,26 +30,14 @@ class Images_model extends CI_Model{
             ->get()->num_rows();
 		return $query;
 	}
-	function saveShoutout($data=NULL,$id=NULL){
-        if($id){
-            $this->db->where('id',$id);
-            $this->db->update('user_shoutouts',$data);
-            return $id;
-        }else{
-            if($this->db->insert('user_shoutouts',$data)){
-                return $this->db->insert_id();
-            }else{
-                return false;
-            }
-        }
-	}
-	function getShoutoutByID($id=NULL){
-		 $query = $this->db->where('id',$id)->get('user_shoutouts')->row();
+
+	function getImageName($id=NULL){
+		 $query = $this->db->where('id',$id)->get('user_image')->row();
 		 return $query;
 	}
 	function delete($id=NULL){
 		$this->db->where('id',$id);
-        if($this->db->delete('user_shoutouts')){
+        if($this->db->delete('user_image')){
             return true;
         }else{
             return false;

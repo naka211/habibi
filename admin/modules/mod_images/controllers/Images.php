@@ -26,25 +26,7 @@ class Images extends CI_Controller{
         $data['page'] = 'images/list';
         $this->load->view('templates', $data);
 	}
-    function search(){
-        if($this->input->post()){
-            $name = $this->input->post('name');
-            if($name){
-                $search['name'] = $name;
-            }else{
-                $search['name'] = "";
-            }
-            $this->session->set_userdata('search',$search);
-        }else{
-            $search['name'] = "";
-            $this->session->unset_userdata('search');
-        }
-        $data['message'] = '';
-        $data['status'] = true;
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
-	}
+
     function getContent(){
         if($_GET['limit']){
             $limit = $_GET['limit'];
@@ -74,7 +56,7 @@ class Images extends CI_Controller{
                 $data->action .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
                 $data->action .= '</span>';
                 if($this->check->check('del')){
-                    $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/shoutouts/del/").'"/>';
+                    $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/images/del/").'"/>';
                     $data->action .= icon_delete($row->id);
                 }
                 $rows[] = $data;
@@ -88,34 +70,15 @@ class Images extends CI_Controller{
         echo json_encode($return);
         return;
     }
-	function edit($id,$page=0){
-        $this->check->check('edit','','',base_url());
-		$this->form_validation->set_rules('content','Content','trim|required');
-		if($this->form_validation->run()== FALSE){
-			$this->message = validation_errors();
-		}
-		else{
-            $DB['content'] = $this->input->post('content');
-            $DB['bl_active'] = $this->input->post('bl_active');
-            $id = $this->shoutouts->saveShoutout($DB,$id);
-			if($id){ 
-				$this->session->set_flashdata('message',lang('save_success'));
-				redirect(site_url('mod_shoutouts/shoutouts'));
-			}else{
-                $this->message = lang('admin.save_unsuccessful');
-            }
-		}
-        $data['item'] = $this->shoutouts->getShoutoutByID($id);
-		$data['title'] = lang('admin.edit').': Edit shoutout';
-		$data['message'] = $this->message;
-		$data['page'] = 'shoutouts/edit';
-        $this->load->view('templates', $data);
-	}
+
     function del(){
         $check = $this->check->check('del','','');
         if($check){
             $id = $this->input->post('id',true);
-            if($this->shoutouts->delete($id)){
+            $image = $this->images->getImageName($id);
+            unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."photo".DIRECTORY_SEPARATOR.$image->image);
+            unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_photo".DIRECTORY_SEPARATOR.$image->image);
+            if($this->images->delete($id)){
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
             }else{
@@ -136,7 +99,10 @@ class Images extends CI_Controller{
         if($itemid){
             for($i = 0; $i < sizeof($itemid); $i++){
                 if($itemid[$i]){
-                    if($this->email->delete($itemid[$i])){
+                    $image = $this->images->getImageName($itemid[$i]);
+                    unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."photo".DIRECTORY_SEPARATOR.$image->image);
+                    unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_photo".DIRECTORY_SEPARATOR.$image->image);
+                    if($this->images->delete($itemid[$i])){
                         $data['status'] = true;
                         $data['message'] = lang('admin.delete_successful');
                     }else{
