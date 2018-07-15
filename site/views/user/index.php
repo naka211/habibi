@@ -108,6 +108,7 @@
                                 ?>
                                 <div class="item">
                                     <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
+                                    <?php if($image->status == 0) echo 'Afventer godkendelse';?>
                                 </div>
                             <?php
                             }

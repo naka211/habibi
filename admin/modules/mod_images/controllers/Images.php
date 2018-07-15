@@ -1,5 +1,5 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class Shoutouts extends CI_Controller{
+class Images extends CI_Controller{
     public $module_name = "";
     private $message = "";
     public $language = "";
@@ -7,24 +7,23 @@ class Shoutouts extends CI_Controller{
         parent::__construct();
         $this->module_name = $this->router->fetch_module();
         $this->session->set_userdata(array('url'=>uri_string()));
-        $this->load->model('shoutouts_model','shoutouts');
+        $this->load->model('images_model','images');
         //$this->lang->load('news_static');
         $this->language = $this->lang->lang();
 	}
 	function index($page=0){
         $this->check->check('view','','',base_url());
-        /*if($this->check->check('add')){
-            $data['add'] = $this->module_name.'/shoutouts/add';
-        }*/
-        //Xoa key khi search
-        /*$this->session->unset_userdata('search');
-        if($page > 0){
-            $this->session->set_userdata('offset',$page);
-        }else{
-            $this->session->unset_userdata('offset');
-        }*/
+        if($this->input->get('name') || $this->input->get('status')){
+            $search['name'] = $this->input->get('name');
+            $search['status'] = $this->input->get('status');
+            $this->session->set_userdata('search',$search);
+        } else {
+            $this->session->unset_userdata('search');
+        }
+
+        $data['search'] = $this->session->userdata('search');
         $data['title'] = lang('admin.list');
-        $data['page'] = 'shoutouts/list';
+        $data['page'] = 'images/list';
         $this->load->view('templates', $data);
 	}
     function search(){
@@ -60,20 +59,19 @@ class Shoutouts extends CI_Controller{
         //SEARCH
         $search = $this->session->userdata('search');
         //SEARCH
-        $total = $this->shoutouts->getNumShoutouts($search);
-        $list = $this->shoutouts->getAllShoutouts($limit,$offset,$search);
+        $total = $this->images->getNumImages($search);
+        $list = $this->images->getAllImages($limit,$offset,$search);
         if($list){
             foreach($list as $row){
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                $data->content = $row->content;
-                $data->dt_create = date("d.m.Y K\l.H:i", strtotime($row->dt_create));
+                $data->image = '<img src="'.base_url_site().'uploads/thumb_photo/'.$row->image.'" width="150" \>';;
+                $data->dt_create = date("d.m.Y K\l.H:i", $row->dt_create);
                 //ACTION
                 $data->action = "";
-                $data->action .= ($this->check->check('edit'))?icon_edit($this->module_name.'/shoutouts/edit/'.$row->id.'/'.$offset):"";
                 $data->action .= '<span id="publish'.$row->id.'">';
-                $data->action .= ($this->check->check('edit'))?icon_active("'user_shoutouts'","'id'",$row->id,$row->bl_active):"";
+                $data->action .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
                 $data->action .= '</span>';
                 if($this->check->check('del')){
                     $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/shoutouts/del/").'"/>';

@@ -19,11 +19,16 @@ class Ajax extends CI_Controller{
 		 }else{
 			  $publish = 0;
 		 }
-         $this->db->set('bl_active',$publish);
-         $this->db->set('dt_update',date('Y-m-d H:i:s', time()));
-		 $this->db->where($field,$id);
-		 $this->db->update($table);
-
+		 if($table == 'user_image'){
+             $this->db->set('status',$publish);
+             $this->db->where($field,$id);
+             $this->db->update($table);
+         } else {
+             $this->db->set('bl_active',$publish);
+             $this->db->set('dt_update',date('Y-m-d H:i:s', time()));
+             $this->db->where($field,$id);
+             $this->db->update($table);
+         }
 		 //Sending email if table is user_shoutouts
          if($table == 'user_shoutouts' && $publish == 1){
             $info = $this->ajax->getShoutout($id);

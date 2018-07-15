@@ -22,6 +22,7 @@
                             <div class="favorites_img">
                                 <a href="javascript:void(0);" class="btnClose_img" onclick="confirmRemovePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
                                 <a data-fancybox="gallery" href="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
+                                <?php if($image->status == 0) echo 'Afventer godkendelse';?>
                             </div>
                         </div>
                     </div>
@@ -53,7 +54,13 @@
             url: base_url+'ajax/uploadPhoto',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                location.reload();
+                $.ajax({
+                    method: "POST",
+                    url: base_url+"ajax/sendEmailAdminToApprove",
+                    data: { csrf_site_name: token_value}
+                }).done(function() {
+                    location.reload();
+                });
             }
         });
     });

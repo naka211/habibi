@@ -143,10 +143,10 @@
                                                                 class="site-menu-title"><?php echo lang('menu.user.contact'); ?></span></a>
                                                 </li>
                                             <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_shoutouts', 'shoutouts')) { ?>
+                                            <?php if ($this->check->check('view', 'mod_images', 'images')) { ?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_shoutouts/shoutouts') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.user.shoutouts'); ?></span></a>
+                                                                              href="<?php echo site_url('mod_images/images') ?>"><span
+                                                                class="site-menu-title"><?php echo lang('menu.user.images'); ?></span></a>
                                                 </li>
                                             <?php } ?>
                                             <?php if ($this->check->check('view', 'mod_payments', 'payments')) { ?>

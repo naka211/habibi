@@ -1,12 +1,13 @@
 <div class="panel-body padding-0">
     <div class="padding-left-10 padding-right-10 text-center">
         <div class="example">
-            <form id="searchFrm" class="form-inline" method="post">
+            <form id="searchFrm" class="form-inline" method="get" action="<?php echo site_url($this->module_name.'/images');?>">
                 <div class="form-group">
-                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Search in content" class="form-control"/>
+                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Name" class="form-control" value="<?php echo $search['name'];?>"/>
                 </div>
                 <div class="form-group">
-                    <a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php echo site_url($this->module_name.'/shoutouts/search/');?>')" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></a>
+                    <!--<a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php /*echo site_url($this->module_name.'/images/search/');*/?>')" class="btn btn-primary waves-effect waves-light"><?php /*echo lang('admin.search');*/?></a>-->
+                    <button type="submit" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></button>
                 </div>
             </form>
         </div>
@@ -26,20 +27,20 @@ jQuery(document).ready(function(){
     });
 });
 </script>
-<?php echo form_open($this->module_name.'/shoutouts', array('class' => 'admin', 'id' => 'adminfrm'));?>
+<?php echo form_open($this->module_name.'/images', array('class' => 'admin', 'id' => 'adminfrm'));?>
 <div class="panel-body">
     <div class="row">
         <div class="col-sm-12">
             <div id="toolbar">
                 <?php if($this->check->check('dels')){?>
-                <a class="btn btn-danger" onclick="deleteAllItem('<?php echo site_url($this->module_name."/shoutouts/dels/");?>');" >
+                <a class="btn btn-danger" onclick="deleteAllItem('<?php echo site_url($this->module_name."/images/dels/");?>');" >
                     <?php echo lang('admin.deletes');?>
                 </a>
                 <?php }?>
             </div>
             <table id="list_table"
                 data-toggle="table"
-                data-url="<?php echo site_url($this->module_name.'/shoutouts/getContent');?>"
+                data-url="<?php echo site_url($this->module_name.'/images/getContent');?>"
                 data-toolbar="#toolbar"
                 data-side-pagination="server"
                 data-pagination="true"
@@ -54,7 +55,7 @@ jQuery(document).ready(function(){
                         <th data-field="state" data-checkbox="true"></th>
                         <th data-field="id">ID</th>
                         <th data-field="name">Name</th>
-                        <th data-field="content">Content</th>
+                        <th data-field="image">Image</th>
                         <th data-field="dt_create">Created time</th>
                         <th class="text-center action" data-field="action"><?php echo lang('admin.functions');?></th>
                     </tr>

@@ -1,26 +1,33 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class Shoutouts_model extends CI_Model{
+class Images_model extends CI_Model{
 	function __construct(){
         parent::__construct();
 	}
-	function getAllShoutouts($num=NULL,$offset=NULL,$search=NULL){
+	function getAllImages($num=NULL,$offset=NULL,$search=NULL){
         if($search['name']){
-            $where = "content LIKE '%".$search['name']."%'";
-            $this->db->where($where);
+            $this->db->where('u.name', $search['name']);
         }
-        $result = $this->db->select("us.*, u.name")
-                ->from("user_shoutouts as us")
-                ->join("user as u", "us.userId = u.id")
-                ->order_by('id','DESC')
+        if($search['status'] != null){
+            $this->db->where('ui.status', $search['status']);
+        }
+        $result = $this->db->select("ui.*, u.name")
+                ->from("user_image as ui")
+                ->join("user as u", "ui.userId = u.id", 'inner')
+                ->order_by('ui.id','DESC')
                 ->get()->result();
 		return $result;
 	}
-	function getNumShoutouts($search=NULL){
+	function getNumImages($search=NULL){
         if($search['name']){
-            $where = "content LIKE '%".$search['name']."%'";
-            $this->db->where($where);
+            $this->db->where('u.name', $search['name']);
         }
-        $query = $this->db->get('user_shoutouts')->num_rows();
+        if($search['status'] != null){
+            $this->db->where('ui.status', $search['status']);
+        }
+        $query = $this->db->select('ui.*')
+            ->from('user_image as ui')
+            ->join("user as u", "ui.userId = u.id", 'inner')
+            ->get()->num_rows();
 		return $query;
 	}
 	function saveShoutout($data=NULL,$id=NULL){

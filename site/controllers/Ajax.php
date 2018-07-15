@@ -491,8 +491,9 @@ class Ajax extends MX_Controller{
                 $data = $this->upload->data();
                 //save to db
                 $DB['userId'] = $user->id;
-                $DB['dt_create'] = time();
                 $DB['image'] = $data['file_name'];
+                $DB['dt_create'] = time();
+                $DB['status'] = 0;
                 $this->user->savePhoto($DB);
 
                 //create thumb
@@ -537,6 +538,16 @@ class Ajax extends MX_Controller{
                 exit();
             }
         }
+    }
+
+    function sendEmailAdminToApprove(){
+        $user = $this->session->userdata('user');
+        $link = base_url().'admin/en/mod_images/images?name='.$user->name.'&status=0';
+        $content = 'Hej Admin<br /><br />
+                        Joe har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
+                        Med venlig hilsen<br/>
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Zeduuce.com - '.$user->name.'har uploadet billede', $content);
     }
 
     function uploadAvatar(){

@@ -51,7 +51,7 @@ class User extends MX_Controller
             redirect(site_url(''));
         }
         $data['user'] = $this->session->userdata('user');
-        $data['images'] = $this->user->getPhoto($data['user']->id);
+        $data['images'] = $this->user->getPhoto($data['user']->id, 0);
 
         $data['page'] = 'user/index';
         $this->load->view('templates', $data);
@@ -75,7 +75,7 @@ class User extends MX_Controller
         //Add action to log
         $this->user->addToVisiting($data['user']->id, $id);
 
-        $images = $this->user->getPhoto($id);
+        $images = $this->user->getPhoto($id, 1);
         if ($images) {
             /*$data['avatar'] = $photo[0]->image;*/
             $data['images'] = $images;
@@ -98,7 +98,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
 
         $data['user'] = $this->session->userdata('user');
-        $data['listImages'] = $this->user->getPhoto($data['user']->id);
+        $data['listImages'] = $this->user->getPhoto($data['user']->id, 0);
         //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/uploadphoto';
         $this->load->view('templates', $data);

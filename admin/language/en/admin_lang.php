@@ -61,7 +61,7 @@ $lang['menu.user.manage']           = "Manage member";
 $lang['menu.user.user']             = "Manage user";
 $lang['menu.user.b2b']              = "Manage b2b";
 $lang['menu.user.contact']          = "Manage contact";
-$lang['menu.user.shoutouts']        = "Manage shoutouts";
+$lang['menu.user.images']           = "Manage images";
 $lang['menu.user.payments']         = "Manage payments";
 
 $lang['menu.address.manage']        = "Manage address";
