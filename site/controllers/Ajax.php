@@ -544,7 +544,7 @@ class Ajax extends MX_Controller{
         $user = $this->session->userdata('user');
         $link = base_url().'admin/en/mod_images/images?name='.$user->name.'&status=0';
         $content = 'Hej Admin<br /><br />
-                        Joe har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
+                        '.$user->name.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Zeduuce.com®</a>';
         $this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Zeduuce.com - '.$user->name.'har uploadet billede', $content);
