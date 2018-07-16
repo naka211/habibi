@@ -263,8 +263,8 @@ wireUpEvents = function() {
 
 
     // Attach the event keypress to exclude the F5 refresh
-    $(document).bind('keypress', function(e) {
-        if (e.keyCode == 116){
+    $(document).keydown(function(e) {
+        if ((e.which || e.keyCode) == 116){
             validNavigation = true;
         }
     });
