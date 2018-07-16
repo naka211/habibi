@@ -14,7 +14,13 @@ class Login extends CI_Controller{
         if($this->form_validation->run()){
             if($this->login->checklogin()){
                 $this->session->set_flashdata('message',lang('login.message'));
-                redirect(site_url('admin'));
+                $redirect = $this->input->post('redirect');
+                $redirect = urldecode($redirect);
+                if($redirect){
+                    redirect($redirect);
+                } else {
+                    redirect(site_url('admin'));
+                }
             }else{
                 $this->session->set_flashdata('error',lang('login.error'));
             }

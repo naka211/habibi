@@ -1,11 +1,17 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 class check{
 	function __construct(){
-		$this->CI =& get_instance();    
+		$ci = $this->CI =& get_instance();
 	}
 	function check($type=NULL,$module=NULL,$function=NULL,$url=NULL){
         if(!$this->CI->session->userdata('isAdmin')){
-            redirect(base_url());
+            $params   = $_SERVER['QUERY_STRING'];
+            if($params){
+                $redirectUrl = current_url(). '?' . $params;
+            } else {
+                $redirectUrl = current_url();
+            }
+            redirect(base_url().'?redirect='.urlencode($redirectUrl));
         }
         $loginname = $this->CI->session->userdata('username');
         if($loginname=="leduccuong"){

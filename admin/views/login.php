@@ -82,6 +82,7 @@
                         <label for="inputCheckbox"><?php echo lang('login.remember');?></label>
                     </div>
                 </div>
+            <?php echo form_hidden('redirect', urlencode($this->input->get('redirect')));?>
             <?php echo form_close()?>
         </div>
         <div class="center"></div>
