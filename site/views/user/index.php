@@ -28,10 +28,10 @@
                                                 <th>Forhold:</th>
                                                 <td><?php echo $user->relationship?$user->relationship:'Er ikke angivet';?></td>
                                             </tr>
-                                            <tr>
+                                            <!--<tr>
                                                 <th>Etnisk oprindelse: </th>
-                                                <td><?php echo $user->ethnic_origin?$user->ethnic_origin:'Er ikke angivet';?></td>
-                                            </tr>
+                                                <td><?php /*echo $user->ethnic_origin?$user->ethnic_origin:'Er ikke angivet';*/?></td>
+                                            </tr>-->
                                             <tr>
                                                 <th>Uddannelse:</th>
                                                 <td><?php echo $user->training?$user->training:'Er ikke angivet';?></td>

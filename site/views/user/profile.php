@@ -61,10 +61,10 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 <th>Forhold:</th>
                                                 <td><?php echo $profile->relationship?$profile->relationship:'Er ikke angivet';?></td>
                                             </tr>
-                                            <tr>
+                                            <!--<tr>
                                                 <th>Etnisk oprindelse: </th>
-                                                <td><?php echo $profile->ethnic_origin?$profile->ethnic_origin:'Er ikke angivet';?></td>
-                                            </tr>
+                                                <td><?php /*echo $profile->ethnic_origin?$profile->ethnic_origin:'Er ikke angivet';*/?></td>
+                                            </tr>-->
                                             <tr>
                                                 <th>Uddannelse:</th>
                                                 <td><?php echo $profile->training?$profile->training:'Er ikke angivet';?></td>

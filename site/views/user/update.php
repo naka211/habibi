@@ -25,22 +25,22 @@
                                 <div class="form-group">
                                     <label for="">Land</label>
                                     <select name="land" class="form-control">
-                                        <option value="Tyrkiet" <?php if($user->region == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
-                                        <option value="Syrien" <?php if($user->region == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
-                                        <option value="Irak" <?php if($user->region == 'Irak'){echo 'selected="true"';}?>>Irak</option>
-                                        <option value="Libanon" <?php if($user->region == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
-                                        <option value="Pakistan" <?php if($user->region == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
-                                        <option value="Palæstina" <?php if($user->region == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
-                                        <option value="Somalia" <?php if($user->region == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
-                                        <option value="Afghanistan" <?php if($user->region == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
-                                        <option value="Bosnien" <?php if($user->region == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
-                                        <option value="Iran" <?php if($user->region == 'Iran'){echo 'selected="true"';}?>>Iran</option>
-                                        <option value="Marokko" <?php if($user->region == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
-                                        <option value="Albanien" <?php if($user->region == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
-                                        <option value="Algeriet" <?php if($user->region == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
-                                        <option value="Egypten" <?php if($user->region == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
-                                        <option value="Makedionen" <?php if($user->region == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
-                                        <option value="Andet" <?php if($user->region == 'Andet'){echo 'selected="true"';}?>>Andet</option>
+                                        <option value="Tyrkiet" <?php if($user->land == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
+                                        <option value="Syrien" <?php if($user->land == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
+                                        <option value="Irak" <?php if($user->land == 'Irak'){echo 'selected="true"';}?>>Irak</option>
+                                        <option value="Libanon" <?php if($user->land == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
+                                        <option value="Pakistan" <?php if($user->land == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
+                                        <option value="Palæstina" <?php if($user->land == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
+                                        <option value="Somalia" <?php if($user->land == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
+                                        <option value="Afghanistan" <?php if($user->land == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
+                                        <option value="Bosnien" <?php if($user->land == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
+                                        <option value="Iran" <?php if($user->land == 'Iran'){echo 'selected="true"';}?>>Iran</option>
+                                        <option value="Marokko" <?php if($user->land == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
+                                        <option value="Albanien" <?php if($user->land == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
+                                        <option value="Algeriet" <?php if($user->land == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
+                                        <option value="Egypten" <?php if($user->land == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
+                                        <option value="Makedionen" <?php if($user->land == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
+                                        <option value="Andet" <?php if($user->land == 'Andet'){echo 'selected="true"';}?>>Andet</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,20 +79,6 @@
                                         <option <?php if($user->relationship == 'Skilt'){echo 'selected="true"';}?> value="Skilt">Skilt</option>
                                         <option <?php if($user->relationship == 'Enke/enkemand'){echo 'selected="true"';}?> value="Enke/enkemand">Enke/enkemand</option>
                                         <option <?php if($user->relationship == 'Det får du at vide senere'){echo 'selected="true"';}?> value="Det får du at vide senere">Det får du at vide senere</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label for="">Etnisk oprindelse:</label>
-                                    <select name="ethnic_origin" class="form-control">
-                                        <option <?php if($user->ethnic_origin == 'Europæisk'){echo 'selected="true"';}?> value="Europæisk">Europæisk</option>
-                                        <option <?php if($user->ethnic_origin == 'Afrikansk'){echo 'selected="true"';}?> value="Sort/afrikansk">Afrikansk</option>
-                                        <option <?php if($user->ethnic_origin == 'Latinamerikansk'){echo 'selected="true"';}?> value="Latinamerikansk">Latinamerikansk</option>
-                                        <option <?php if($user->ethnic_origin == 'Asiatisk'){echo 'selected="true"';}?> value="Asiatisk">Asiatisk</option>
-                                        <option <?php if($user->ethnic_origin == 'Indisk'){echo 'selected="true"';}?> value="Indisk">Indisk</option>
-                                        <option <?php if($user->ethnic_origin == 'Arabisk'){echo 'selected="true"';}?> value="Arabisk">Arabisk</option>
-                                        <option <?php if($user->ethnic_origin == 'Blandet/andet'){echo 'selected="true"';}?> value="Blandet/andet">Blandet/andet</option>
                                     </select>
                                 </div>
                             </div>
@@ -197,6 +183,58 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h5>Jeg søger</h5>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Land</label>
+                                    <select name="find_land" class="form-control">
+                                        <option value="Tyrkiet" <?php if($user->find_land == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
+                                        <option value="Syrien" <?php if($user->find_land == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
+                                        <option value="Irak" <?php if($user->find_land == 'Irak'){echo 'selected="true"';}?>>Irak</option>
+                                        <option value="Libanon" <?php if($user->find_land == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
+                                        <option value="Pakistan" <?php if($user->find_land == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
+                                        <option value="Palæstina" <?php if($user->find_land == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
+                                        <option value="Somalia" <?php if($user->find_land == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
+                                        <option value="Afghanistan" <?php if($user->find_land == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
+                                        <option value="Bosnien" <?php if($user->find_land == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
+                                        <option value="Iran" <?php if($user->find_land == 'Iran'){echo 'selected="true"';}?>>Iran</option>
+                                        <option value="Marokko" <?php if($user->find_land == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
+                                        <option value="Albanien" <?php if($user->find_land == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
+                                        <option value="Algeriet" <?php if($user->find_land == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
+                                        <option value="Egypten" <?php if($user->find_land == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
+                                        <option value="Makedionen" <?php if($user->find_land == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
+                                        <option value="Andet" <?php if($user->find_land == 'Andet'){echo 'selected="true"';}?>>Andet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Region</label>
+                                    <select name="find_region" class="form-control">
+                                        <option value="København" <?php if($user->find_region == 'København'){echo 'selected="true"';}?>>København</option>
+                                        <option value="Storkøbenhavn" <?php if($user->find_region == 'Storkøbenhavn'){echo 'selected="true"';}?>>Storkøbenhavn</option>
+                                        <option value="Århus" <?php if($user->find_region == 'Århus'){echo 'selected="true"';}?>>Århus</option>
+                                        <option value="Aalborg" <?php if($user->find_region == 'Aalborg'){echo 'selected="true"';}?>>Aalborg</option>
+                                        <option value="Odense" <?php if($user->find_region == 'Odense'){echo 'selected="true"';}?>>Odense</option>
+                                        <option value="Nordsjælland" <?php if($user->find_region == 'Nordsjælland'){echo 'selected="true"';}?>>Nordsjælland</option>
+                                        <option value="Midt/Vestsjælland" <?php if($user->find_region == 'Midt/Vestsjælland'){echo 'selected="true"';}?>>Midt/Vestsjælland</option>
+                                        <option value="Sydsjælland" <?php if($user->find_region == 'Sydsjælland'){echo 'selected="true"';}?>>Sydsjælland</option>
+                                        <option value="Lolland/Falster" <?php if($user->find_region == 'Lolland/Falster'){echo 'selected="true"';}?>>Lolland/Falster</option>
+                                        <option value="Fyn" <?php if($user->find_region == 'Fyn'){echo 'selected="true"';}?>>Fyn</option>
+                                        <option value="Nordjylland" <?php if($user->find_region == 'Nordjylland'){echo 'selected="true"';}?>>Nordjylland</option>
+                                        <option value="Østjylland" <?php if($user->find_region == 'Østjylland'){echo 'selected="true"';}?>>Østjylland</option>
+                                        <option value="Vestjylland" <?php if($user->find_region == 'Vestjylland'){echo 'selected="true"';}?>>Vestjylland</option>
+                                        <option value="Sydjylland" <?php if($user->find_region == 'Sydjylland'){echo 'selected="true"';}?>>Sydjylland</option>
+                                        <option value="Midtjylland" <?php if($user->find_region == 'Midtjylland'){echo 'selected="true"';}?>>Midtjylland</option>
+                                        <option value="Sønderjylland" <?php if($user->find_region == 'Sønderjylland'){echo 'selected="true"';}?>>Sønderjylland</option>
+                                        <option value="Bornholm" <?php if($user->find_region == 'Bornholm'){echo 'selected="true"';}?>>Bornholm</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Skriv et motto</label>
