@@ -606,6 +606,7 @@ class User_model extends CI_Model{
     function updateAvatar($userId, $avatar){
         $this->db->set('avatar', $avatar);
         $this->db->set('original_avatar', $avatar);
+        $this->db->set('blurIndex', 0);
         $this->db->where('id', $userId);
         return $this->db->update('user');
     }

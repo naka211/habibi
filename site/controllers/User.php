@@ -135,6 +135,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger avatar');
 
         $user = $this->session->userdata('user');
+        $data['listImages'] = $this->user->getPhoto($user->id);
         $data['user'] = $this->user->getUser($user->id);
         $data['page'] = 'user/editavatar';
         $this->load->view('templates', $data);
@@ -935,6 +936,60 @@ class User extends MX_Controller
         $sent = $this->general_model->sendEmail(['inf@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
+        }
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
+    public function selectAvatarFromGallery(){
+        $imageName = $this->input->post('imageName');
+        $user = $this->session->userdata('user');
+        $currentAvatar = $this->user->getAvatar($user->id);
+        if($currentAvatar != 'no-avatar.jpg'){
+            @unlink("./uploads/user/".$currentAvatar);
+            @unlink("./uploads/thumb_user/".$currentAvatar);
+            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
+        }
+        $this->user->updateAvatar($user->id, $imageName);
+        $savedUser = $this->user->getUser($user->id);
+        $this->session->set_userdata('user', $savedUser);
+
+        //create thumb
+        $config_resize['image_library'] = 'gd2';
+        $config_resize['source_image'] = './uploads/photo/'.$imageName;
+        $config_resize['new_image'] = './uploads/thumb_user/'.$imageName;
+        $config_resize['thumb_marker'] = '';
+        $config_resize['create_thumb'] = TRUE;
+        $config_resize['maintain_ratio'] = true;
+        $config_resize['quality'] = "100%";
+        $config_resize['width']         = 500;
+        $config_resize['height']       = 500;
+        list($width, $height) = getimagesize($config_resize['source_image']);
+        $dim = (intval($width) / intval($height)) - ($config_resize['width'] / $config_resize['height']);
+        $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config_resize);
+
+        if(!$this->image_lib->resize()){ //Resize image
+            redirect("errorhandler"); //If error, redirect to an error page
+        }else {
+            $config_crop['image_library'] = 'gd2';
+            $config_crop['source_image'] = './uploads/thumb_user/' . $imageName;
+            $config_crop['new_image'] = './uploads/thumb_user/' . $imageName;
+            $config_crop['quality'] = "100%";
+            $config_crop['maintain_ratio'] = FALSE;
+            $config_crop['width'] = 500;
+            $config_crop['height'] = 500;
+            $config_crop['x_axis'] = '0';
+            $config_crop['y_axis'] = '0';
+
+            $this->image_lib->clear();
+            $this->image_lib->initialize($config_crop);
+
+            $this->image_lib->crop();
+
+            $raw_thumb_user = './uploads/raw_thumb_user/'.$imageName;
+            copy($config_crop['new_image'], $raw_thumb_user);
         }
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }

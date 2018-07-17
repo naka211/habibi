@@ -2772,7 +2772,7 @@ ul.list_action li a .i_report {
 }
 .btnUpload {
     background: #ffa507;
-    margin: 0 auto 30px;
+    /*margin: 0 auto 30px;*/
     padding: 10px 30px;
     font-size: 14.23px;
     text-transform: uppercase;
@@ -2836,7 +2836,7 @@ ul.list_action li a .i_report {
 
 #slider {
     -webkit-appearance: none;
-    width: 80%;
+    width: 100%;
     height: 15px;
     border-radius: 5px;
     background: #d3d3d3;
@@ -2882,4 +2882,16 @@ label.error{
 
 .ms-options-wrap > .ms-options > ul li.selected label{
     background-color: transparent;
+}
+
+#selectAvatrForm label > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+#selectAvatrForm label > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    border:2px solid transparent;
+}
+#selectAvatrForm label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border:2px solid #f00;
 }

@@ -4,7 +4,7 @@
 <div id="content">
     <section class="section_infoProfile">
         <div class="container">
-            <a href="javascript:history.back()" class="btn btnUpload">< Tilbage</a>
+            <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">< Tilbage</a>
             <div class="row top_infoProfile" style="height: 550px;">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <!--<div class="img_avatar" id="imageHolder">
@@ -19,6 +19,12 @@
                         Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
                         Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
                     <input id="file" type="file" name="file"/>
+                    <?php if($listImages){?>
+                        <div class="text-center">
+                            OR<br>
+                            <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg avatar fra galleri</a>
+                        </div>
+                    <?php }?>
                     <?php if($user->avatar != 'no-avatar.jpg'){?>
                     <!--<a href="<?php /*echo site_url('user/blurAvatar');*/?>" class="btn bntMessage">Sløre</a>
                     <a href="<?php /*echo site_url('user/unblurAvatar');*/?>" class="btn bntMessage">Un-sløre</a>-->
@@ -37,6 +43,24 @@
             </div>
         </div>
     </section>
+</div>
+<div style="display: none;" id="modalSelectImage" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2>Galleri</h2>
+            <?php echo form_open('user/selectAvatarFromGallery', array('id'=>'selectAvatrForm'))?>
+            <?php foreach ($listImages as $image){?>
+                <label>
+                    <input type="radio" name="imageName" value="<?php echo $image->image;?>" />
+                    <img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" width="100">
+                </label>
+            <?php }?>
+            <div class="text-center">
+                <button type="submit" class="btn btn_viewSearch">OK</button>
+            </div>
+            <?php echo form_close();?>
+        </div>
+    </div>
 </div>
 <script>
     $(document).ready(function() {
