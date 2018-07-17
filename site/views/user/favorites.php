@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
-                        <p class="nation"><?php echo $user->ethnic_origin;?></p>
+                        <p class="nation"><?php echo $user->land;?></p>
                         <p class="old"><?php echo printAge($user->year);?> – <span class="area"><?php echo $user->region;?></span></p>
                         <p class="old">Tilføjet tid: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></p>
                     </div>

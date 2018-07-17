@@ -136,7 +136,7 @@ class User_model extends CI_Model{
 
     
     function getList($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL,$inUser=NULL, $type = 'random'){
-        $this->db->select('u.id, u.name, u.avatar, u.ethnic_origin, u.year, u.region, u.blurIndex, u.login');
+        $this->db->select('u.id, u.name, u.avatar, u.land, u.year, u.region, u.blurIndex, u.login');
         $this->db->from('tb_user as u');
         $this->db->where("u.bl_active",1);
         /*if($search['name']){
@@ -385,7 +385,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFavorites($userId=NULL, $num=NULL, $offset=NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uf.created_at as added_time');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.land, u.year, u.blurIndex, u.login, uf.created_at as added_time');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
