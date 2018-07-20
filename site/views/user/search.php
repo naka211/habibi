@@ -171,25 +171,9 @@
                     <h3>Fremhævet profil</h3>
                 </div>
                 <div id="profileList"></div>
-                <?php /*foreach($list as $user){?>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
-                        <div class="box_favorites_item">
-                            <div class="favorites_img">
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
-                                <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
-                                <?php if(isFriend($user->id) == false){?>
-                                <div class="favorites_footer">
-                                    <a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn btn_addFriend">Tilføj ven</a>
-                                </div>
-                                <?php }?>
-                            </div>
-                            <h5 class="name"><?php echo $user->name;?></h5>
-                            <p class="nation"><?php echo $user->ethnic_origin;?></p>
-                            <p class="old"><?php echo printAge($user->year);?> – <span class="area"><?php echo $user->region;?></span></p>
-                        </div>
-                    </div>
-                <?php }*/?>
+                <div class="text-center clearfix" style="display: none;" id="loadMore"><img src="<?php echo base_url();?>templates/images/preloader.gif" width="100" /></div>
                 <input type="hidden" value="0" id="offset">
+                <input type="hidden" value="" id="num">
             </div>
 
 
@@ -219,8 +203,9 @@
             method: "POST",
             url: base_url+"ajax/countProfiles",
             data: {csrf_site_name: token_value },
-            success: function (html) {
-                $('#viewResult').text(html);
+            success: function (num) {
+                $('#viewResult').text(num+' profiler fundet');
+                $('#num').val(num);
             }
         });
 
@@ -237,17 +222,46 @@
             });
         });
 
-        $('#viewResult').click(function () {
-            $('#profileList').html('<div class="text-center"><img src="'+base_url+'templates/images/preloader.gif" /></div>');
-            var offset = $('#offset').val();
+        loadSearchResult = function(offset){
             $.ajax({
                 method: "POST",
                 url: base_url+"ajax/loadSearchResult",
                 data: {offset: offset, csrf_site_name: token_value },
+                beforeSend: function(){
+                    $('#loadMore').show();
+                },
+                complete: function(){
+                    $('#loadMore').hide();
+                },
                 success: function (html) {
-                    $('#profileList').html(html);
+                    $('#profileList').append(html);
+                    $('#offset').val(parseInt(offset)+12);
                 }
             });
-        })
+        }
+
+        $('#viewResult').click(function () {
+            var offset = $('#offset').val();
+            loadSearchResult(offset);
+        });
+        $( "#viewResult" ).trigger( "click" );
+
+        $(window).scroll(function() {
+            if(typeof timeout == "number") {
+                window.clearTimeout(timeout);
+                delete timeout;
+            }
+            timeout = window.setTimeout( check, 100);
+        });
+
+        check = function () {
+            if($(window).scrollTop() >= ($(document).height() - $(window).height() - 600)) {
+                var offset = $('#offset').val();
+                var num = $('#num').val();
+                if(parseInt(offset) < parseInt(num)){
+                    loadSearchResult(offset);
+                }
+            }
+        }
     });
 </script>

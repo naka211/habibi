@@ -648,9 +648,9 @@ class Ajax extends MX_Controller{
         }
         $numOfProfiles = $this->user->getNum($searchData, $ignore);
         if($numOfProfiles){
-            echo $numOfProfiles.' profiler fundet';
+            echo $numOfProfiles;
         } else {
-            echo '0 profiler fundet';
+            echo '0';
         }
         exit;
     }
