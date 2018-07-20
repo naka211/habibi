@@ -2658,6 +2658,9 @@ ul.list_action li a .i_report {
     outline: none;
     width: 248px;
 }
+.box_wrap .ms-options-wrap > button:focus, .box_wrap .ms-options-wrap > button {
+    width: 235px;
+}
 .ms-options-wrap > .ms-options {
     border-color: transparent;
     width: 300px;

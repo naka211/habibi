@@ -71,7 +71,7 @@ class Ajax extends MX_Controller{
     function generateToAgeSelection(){
         $fromAge = $this->input->post('fromAge', true);
         $htmlSelection = '';
-        for($i = $fromAge + 1; $i <= 70; $i++){
+        for($i = $fromAge + 1; $i <= 90; $i++){
             $htmlSelection .= '<option value="'.$i.'">'.$i.'</option>';
         }
         echo $htmlSelection;
@@ -622,6 +622,29 @@ class Ajax extends MX_Controller{
                 exit();
             }
         }
+    }
+
+    public function updateSearchDataAndCountResult(){
+        //Update search session
+        $searchKey = $this->input->post('searchKey');
+        $searchValue = $this->input->post('searchValue');
+        $searchData = $this->session->userdata('searchData');
+        $searchData[$searchKey] = $searchValue;
+        $this->session->set_userdata('searchData', $searchData);
+
+        //Count profile
+        $user = $this->session->userdata('user');
+        $ignore = $this->user->getBlockedUserIds($user->id);
+        if ($user) {
+            $ignore[] = $user->id;
+        }
+        $numOfProfiles = $this->user->getNum($searchData, $ignore);
+        if($numOfProfiles){
+            echo $numOfProfiles.' profiler fundet';
+        } else {
+            echo '0 profiler fundet';
+        }
+        exit;
     }
 }
 ?>

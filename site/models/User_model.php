@@ -26,41 +26,38 @@ class User_model extends CI_Model{
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
         //Search
-        if(isset($search['yearFrom']) && !empty($search['yearFrom'])){
-            $this->db->where('u.year >=', $search['yearFrom']);
+        if(isset($search['toAge']) && !empty($search['toAge'])){
+            $this->db->where('u.year >=', date('Y', time()) - $search['toAge']);
         }
-        if(isset($search['yearTo']) && !empty($search['yearTo'])){
-            $this->db->where('u.year <=', $search['yearTo']);
+        if(isset($search['fromAge']) && !empty($search['fromAge'])){
+            $this->db->where('u.year <=', date('Y', time()) - $search['fromAge']);
         }
         if(isset($search['land']) && !empty($search['land'])){
-            $this->db->where_in('land', explode(',',$search['land']));
+            $this->db->where_in('land', $search['land']);
         }
         if(isset($search['region']) && !empty($search['region'])){
-            $this->db->where_in('region', explode(',',$search['region']));
+            $this->db->where_in('region', $search['region']);
         }
         if(isset($search['gender']) && !empty($search['gender'])){
-            $this->db->where_in('gender', explode(',',$search['gender']));
+            $this->db->where_in('gender', $search['gender']);
         }
         if(isset($search['relationship']) && !empty($search['relationship'])){
-            $this->db->where_in('relationship', explode(',',$search['relationship']));
+            $this->db->where_in('relationship', $search['relationship']);
         }
         if(isset($search['children']) && !empty($search['children'])){
-            $this->db->where_in('children', explode(',',$search['children']));
-        }
-        if(isset($search['ethnic']) && !empty($search['ethnic'])){
-            $this->db->where_in('ethnic_origin', explode(',',$search['ethnic']));
+            $this->db->where_in('children', $search['children']);
         }
         if(isset($search['religion']) && !empty($search['religion'])){
-            $this->db->where_in('religion', explode(',',$search['religion']));
+            $this->db->where_in('religion', $search['religion']);
         }
         if(isset($search['training']) && !empty($search['training'])){
-            $this->db->where_in('training', explode(',',$search['training']));
+            $this->db->where_in('training', $search['training']);
         }
         if(isset($search['body']) && !empty($search['body'])){
-            $this->db->where_in('body', explode(',',$search['body']));
+            $this->db->where_in('body', $search['body']);
         }
         if(isset($search['smoking']) && !empty($search['smoking'])){
-            $this->db->where_in('smoking', explode(',',$search['smoking']));
+            $this->db->where_in('smoking', $search['smoking']);
         }
 
         if($ignore){

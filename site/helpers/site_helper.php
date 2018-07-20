@@ -341,9 +341,14 @@ function isFriend($profileId){
     return $query->get()->num_rows()?true:false;
 }
 
-function inSearch($filter, $value){
+function inSearch($filterKey, $value){
     $ci = &get_instance();
-    return in_array($value, explode(',', $ci->input->get($filter)));
+    $searchData = $ci->session->userdata('searchData');
+    if(!empty($searchData[$filterKey])){
+        return in_array($value, $searchData[$filterKey]);
+    } else {
+        return false;
+    }
 }
 
 function allowViewAvatar($profileId){

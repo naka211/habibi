@@ -26,6 +26,7 @@ class User extends MX_Controller
         $data = $ignore = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Start');
         $user = $this->session->userdata('user');
+        $searchData = $this->session->userdata('searchData');
 
         $ignore = $this->user->getBlockedUserIds($user->id);
         $ignore[] = $user->id;
@@ -39,6 +40,7 @@ class User extends MX_Controller
         $data['randomUsers'] = $randomUsers;
         $data['newestUsers'] = $newestUsers;
         $data['popularUsers'] = $popularUsers;
+        $data['searchData'] = $searchData;
         $data['user'] = $user;
         $data['page'] = 'user/start';
         $this->load->view('templates', $data);
@@ -348,19 +350,25 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function searching($offset = 0)
-    {
+    function searching($offset = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Søgeresultat');
+
+        if($this->input->post()){
+            $this->_updateSearchDataFromForm();
+        }
+
+        $searchData = $this->session->userdata('searchData');
+
         $user = $this->session->userdata('user');
 
-        $ignore = $this->user->getBlockedUserIds($user->id);
+        /*$ignore = $this->user->getBlockedUserIds($user->id);
         if ($user) {
             $ignore[] = $user->id;
-        }
+        }*/
         /** Search browsing*/
 
-        $year = date('Y', time());
+        /*$year = date('Y', time());
         $yearFrom       = $this->input->get('toAge')?$year - $this->input->get('toAge'):null;
         $yearTo         = $this->input->get('fromAge')?$year - $this->input->get('fromAge'):null;
         $land           = $this->input->get('land');
@@ -427,8 +435,8 @@ class User extends MX_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         $data['list'] = $list;
-        $data['num'] = $config['total_rows'];
-
+        $data['num'] = $config['total_rows'];*/
+        $data['searchData'] = $searchData;
         $data['page'] = 'user/search';
         $this->load->view('templates', $data);
     }
@@ -753,7 +761,7 @@ class User extends MX_Controller
             $this->session->set_userdata('isLoginSite', true);
             $this->session->set_userdata('user', $user);
             $this->user->updateLogin($user->id, 1);
-
+            $this->_updateSearchDataAfterLogin();
             //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
         } else {
             $data['status'] = false;
@@ -992,6 +1000,26 @@ class User extends MX_Controller
             copy($config_crop['new_image'], $raw_thumb_user);
         }
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
+    private function _updateSearchDataAfterLogin(){
+        $user = $this->session->userdata('user');
+        $searchData = array();
+        $searchData['gender'][] = $user->find_gender;
+        $searchData['order'] = 'newest';
+        $searchData['fromAge'] = 18;
+        $searchData['toAge'] = 90;
+        $searchData['land'][] = $user->find_land;
+        $searchData['region'][] = $user->find_region;
+        $this->session->set_userdata('searchData', $searchData);
+    }
+
+    private function _updateSearchDataFromForm(){
+        $user = $this->session->userdata('user');
+        $searchData = $this->input->post();
+        $searchData['gender'][] = $user->find_gender;
+        $searchData['order'] = 'newest';
+        $this->session->set_userdata('searchData', $searchData);
     }
 
     public function testChat(){

@@ -1,6 +1,3 @@
-<?php
-$filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Børn', 'ethnic'=>'Etnisk oprindelse', 'religion'=>'Religion', 'training'=>'Uddannelse', 'body'=>'Kropsbygning', 'smoking'=>'Ryger');
-?>
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
@@ -8,7 +5,7 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <?php echo form_open('user/searching', array('method'=>'get', 'class'=>'frm_search'))?>
-                            <h3><?php echo $num;?> profiler fundet</h3>
+                            <h3>Søgeresultat</h3>
                             <p>Faste kriterier</p>
 
                             <div class="row_search clearfix">
@@ -58,15 +55,21 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                                 <div class="box_form_group box_form_group_age">
                                     <p for="">Alder:</p>
                                     <select name="fromAge" class="form-control" id="fromAge">
-                                        <?php for($i=18; $i<=90; $i++){?>
-                                            <option value="<?php echo $i;?>" <?php if($this->input->get('fromAge') == $i) echo 'selected';?>><?php echo $i;?></option>
+                                        <?php for($i=18; $i<=90; $i++){
+                                            if($searchData['fromAge']){
+                                                $selected = $searchData['fromAge'] == $i?'selected':'';
+                                            } else {
+                                                $selected = '';
+                                            }
+                                            ?>
+                                            <option value="<?php echo $i;?>" <?php echo $selected;?>><?php echo $i;?></option>
                                         <?php }?>
                                     </select>
                                     <span class="i_line">−</span>
                                     <select name="toAge" class="form-control option_age" id="toAge">
                                         <?php for($i=18; $i<=90; $i++){
-                                            if($this->input->get('toAge')){
-                                                $selected = $this->input->get('toAge') == $i?'selected':'';
+                                            if($searchData['toAge']){
+                                                $selected = $searchData['toAge'] == $i?'selected':'';
                                             } else {
                                                 $selected = $i==90?'selected':'';
                                             }
@@ -78,29 +81,83 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                                 <div class="box_form_group">
                                     <p for="">Sortering:</p>
                                     <select name="order" class="form-control" id="order">
-                                        <option value="newest" <?php if($this->input->get('order') == 'newest') echo 'selected';?> >Nyeste</option>
-                                        <option value="popular" <?php if($this->input->get('order') == 'popular') echo 'selected';?>>Populær</option>
+                                        <option value="newest" <?php if($searchData['order'] == 'newest') echo 'selected';?> >Nyeste</option>
+                                        <option value="popular" <?php if($searchData['order'] == 'popular') echo 'selected';?>>Populær</option>
                                     </select>
                                 </div>
                             </div>
-                            <p>Valgfrie kriterier</p>
-                            <div class="row_search clearfix" id="filter"></div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="box_form_group" style="background-color: #ffa507;">
-                                        <p for="">Tilføj kriterie:</p>
-                                        <select name="criteria" class="form-control" id="criteria">
-                                            <option value="">Vælg</option>
-                                            <?php
-                                            foreach ($filterArr as $filter=>$label){
-                                            ?>
-                                            <option id="<?php echo $filter;?>Option" value="<?php echo $filter;?>" <?php if(!empty($this->input->get($filter))) echo 'style="display:none;"';?>><?php echo $label;?></option>
-                                                <?php
-                                            }
-                                            ?>
+                            <button type="button" class="btn btn_searchResult" style="width: auto; padding-top: 5px; padding-bottom: 5px;" id="seeMoreCriteria">Valgfrie kriterier</button>
+                            <div class="row_search clearfix" id="filter">
+                                <div class="box_wrap">
+                                    <div class="box_form_group">
+                                        <p for="">Køn</p>
+                                        <select class="form-control 3col active regionSelection" name="gender[]" id="gender" multiple="multiple">
+                                            <option value="1" <?php if(inSearch('gender', 1)) echo 'selected';?>>Mand</option>
+                                            <option value="2" <?php if(inSearch('gender', 2)) echo 'selected';?>>Kvinde</option>
                                         </select>
                                     </div>
-                                    <button type="button" class="btn btn_searchResult" style="width: auto;">Se hele søgeresultatet</button>
+                                    <div class="box_form_group">
+                                        <p for="">Forhold</p>
+                                        <select class="form-control 3col active regionSelection" name="relationship[]" id="relationship" multiple="multiple">
+                                            <option value="Aldrig gift" <?php if(inSearch('relationship', 'Aldrig gift')) echo 'selected';?>>Aldrig gift</option>
+                                            <option value="Separeret" <?php if(inSearch('relationship', 'Separeret')) echo 'selected';?>>Separeret</option>
+                                            <option value="Skilt" <?php if(inSearch('relationship', 'Skilt')) echo 'selected';?>>Skilt</option>
+                                            <option value="Enke/enkemand" <?php if(inSearch('relationship', 'Enke/enkemand')) echo 'selected';?>>Enke/enkemand</option>
+                                            <option value="Det får du at vide senere" <?php if(inSearch('relationship', 'Det får du at vide senere')) echo 'selected';?>>Det får du at vide senere</option>
+                                        </select>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Børn</p>
+                                        <select class="form-control 3col active regionSelection" name="children[]" id="children" multiple="multiple">
+                                            <option value="Nej" <?php if(inSearch('children', 'Nej')) echo 'selected';?>>Nej</option>
+                                            <option value="Ja, hjemmeboende" <?php if(inSearch('children', 'Ja, hjemmeboende')) echo 'selected';?>>Ja, hjemmeboende</option>
+                                            <option value="Ja, udeboende" <?php if(inSearch('children', 'Ja, udeboende')) echo 'selected';?>>Ja, udeboende</option>
+                                            <option value="1" <?php if(inSearch('children', '1')) echo 'selected';?>>1</option>
+                                            <option value="2" <?php if(inSearch('children', '2')) echo 'selected';?>>2</option>
+                                            <option value="3" <?php if(inSearch('children', '3')) echo 'selected';?>>3</option>
+                                            <option value="3+" <?php if(inSearch('children', '3+')) echo 'selected';?>>3+</option>
+                                        </select>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Ryger</p>
+                                        <select class="form-control 3col active regionSelection" name="smoking[]" id="smoking" multiple="multiple">
+                                            <option value="Ja" <?php if(inSearch('smoking', 'Ja')) echo 'selected';?>>Ja</option>
+                                            <option value="Nej" <?php if(inSearch('smoking', 'Nej')) echo 'selected';?>>Nej</option>
+                                            <option value="Ja, festryger" <?php if(inSearch('smoking', 'Ja, festryger')) echo 'selected';?>>Ja, festryger</option>
+                                        </select>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Religion</p>
+                                        <select class="form-control 3col active regionSelection" name="religion[]" id="religion" multiple="multiple">
+                                            <option value="Suni" <?php if(inSearch('religion', 'Suni')) echo 'selected';?>>Suni</option>
+                                            <option value="Shia" <?php if(inSearch('religion', 'Shia')) echo 'selected';?>>Shia</option>
+                                            <option value="Andet" <?php if(inSearch('religion', 'Andet')) echo 'selected';?>>Andet</option>
+                                        </select>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Uddannelse</p>
+                                        <select class="form-control 3col active regionSelection" name="training[]" id="training" multiple="multiple">
+                                            <option value="Ingen eksamen" <?php if(inSearch('training', 'Ingen eksamen')) echo 'selected';?>>Ingen eksamen</option>
+                                            <option value="Gymnasium/HF" <?php if(inSearch('training', 'Gymnasium/HF')) echo 'selected';?>>Gymnasium/HF</option>
+                                            <option value="Fagskole" <?php if(inSearch('training', 'Fagskole')) echo 'selected';?>>Fagskole</option>
+                                            <option value="Bachelorgrad" <?php if(inSearch('training', 'Bachelorgrad')) echo 'selected';?>>Bachelorgrad</option>
+                                            <option value="Kandidat/ph.d." <?php if(inSearch('training', 'Kandidat/ph.d.')) echo 'selected';?>>Kandidat/ph.d.</option>
+                                        </select>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Kropsbygning</p>
+                                        <select class="form-control 3col active regionSelection" name="body[]" id="body" multiple="multiple">
+                                            <option value="Slank" <?php if(inSearch('body', 'Slank')) echo 'selected';?>>Slank</option>
+                                            <option value="Atletisk" <?php if(inSearch('body', 'Atletisk')) echo 'selected';?>>Atletisk</option>
+                                            <option value="Gennemsnitlig" <?php if(inSearch('body', 'Gennemsnitlig')) echo 'selected';?>>Gennemsnitlig</option>
+                                            <option value="Buttet" <?php if(inSearch('body', 'Buttet')) echo 'selected';?>>Buttet</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn_searchResult" id="viewResult" style="width: auto;">0 profiler fundet</button>
                                 </div>
                             </div>
 
@@ -109,112 +166,41 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
                 </div>
             </div>
 
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h3>Fremhævet profil</h3>
                 </div>
 
-                <?php foreach($list as $user){?>
+                <?php /*foreach($list as $user){*/?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
-                                <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
-                                <?php if(isFriend($user->id) == false){?>
+                                <a href="<?php /*echo site_url('user/profile/'.$user->id.'/'.$user->name);*/?>"><img src="<?php /*echo base_url();*/?>/uploads/thumb_user/<?php /*echo $user->avatar;*/?>" alt="" class="img-responsive"></a>
+                                <div class="gallery_number"><i class="i_img"></i> <span><?php /*echo countImages($user->id);*/?></span></div>
+                                <?php /*if(isFriend($user->id) == false){*/?>
                                 <div class="favorites_footer">
-                                    <a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn btn_addFriend">Tilføj ven</a>
+                                    <a href="<?php /*echo site_url('user/requestAddFriend/'.$user->id);*/?>" class="btn btn_addFriend">Tilføj ven</a>
                                 </div>
-                                <?php }?>
+                                <?php /*}*/?>
                             </div>
-                            <h5 class="name"><?php echo $user->name;?></h5>
-                            <p class="nation"><?php echo $user->ethnic_origin;?></p>
-                            <p class="old"><?php echo printAge($user->year);?> – <span class="area"><?php echo $user->region;?></span></p>
+                            <h5 class="name"><?php /*echo $user->name;*/?></h5>
+                            <p class="nation"><?php /*echo $user->ethnic_origin;*/?></p>
+                            <p class="old"><?php /*echo printAge($user->year);*/?> – <span class="area"><?php /*echo $user->region;*/?></span></p>
                         </div>
                     </div>
-                <?php }?>
-            </div>
+                <?php /*}*/?>
+            </div>-->
 
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <ul class="pagination friends_pagination">
-                        <?php echo $pagination;?>
-                    </ul>
-                </div>
-            </div>
+
         </div>
     </section>
 </div>
 <script>
     $(document).ready(function() {
         $("#searchMenu").addClass('active');
-
-        $(function() {
-            $(".btn_searchResult").click(function() {
-                var params = {};
-                var getSelect = ['fromAge', 'toAge', 'land', 'region', 'gender', 'relationship', 'children', 'ethnic', 'religion', 'training', 'body', 'smoking', 'order'];
-
-                $.each(getSelect, function(index, value) {
-                    var select = $('#' + value);
-                    if (select.val() != '') {
-                        var selected = select.val();
-                        if (select.attr('multiple'))
-                            selected = selected.join(',');
-                        params[value] = selected;
-                    }
-                });
-                if (!$.isEmptyObject(params)) {
-                    var url = [location.protocol, '//', location.host, location.pathname].join('');
-                    window.location.href = url + '?' + $.param(params);
-                }
-            });
-
-            $("#criteria").change(function () {
-                var type = this.value;
-                var label = $(this).find("option:selected").text();
-                loadMultiFilter(type, label, '');
-            })
+        $("#seeMoreCriteria").click(function(){
+            $(".box_wrap").toggle(500);
         });
-
-        loadMultiFilter = function (type, label, selectedStr) {
-            $.ajax({
-                method: "POST",
-                url: base_url+"ajax/loadMultiFilter",
-                data: { csrf_site_name: token_value, type: type, label: label, selectedStr: selectedStr},
-                success: function (html) {
-                    //adding a filter
-                    $("#filter").append(html);
-                    //hide an option and move to top
-                    $("#"+type+"Option").hide();
-                    $("#criteria").val($("#criteria option:first").val());
-                    //create multiselect style
-                    $('.'+type+'Selection').multiselect({
-                        columns: 2,
-                        texts:{
-                            'selectAll': 'Vælg alle',
-                            'unselectAll': 'Fravælg alle',
-                            'selectedOptions': ' valgt'
-                        },
-                        selectAll: true,
-                        maxPlaceholderOpts: 1
-                    });
-                }
-            });
-        }
-
-        closeFilter = function(type){
-            $("#"+type+"Filter").remove();
-            $("#"+type+"Option").show();
-        }
-        <?php
-        foreach ($filterArr as $filter=>$label){
-            if(!empty($this->input->get($filter)) || $filter == 'gender'){
-        ?>
-        loadMultiFilter('<?php echo $filter?>', '<?php echo $label?>', '<?php echo $this->input->get($filter);?>');
-        <?php
-            }
-        }
-        ?>
-
 
         $('.regionSelection').multiselect({
             columns: 2,
@@ -226,5 +212,18 @@ $filterArr = array('gender'=>'Køn', 'relationship'=>'Forhold', 'children'=>'Bø
             selectAll: true,
             maxPlaceholderOpts: 1
         });
+
+        $(".frm_search select").change( function(){
+            var searchKey = $(this).attr('id');
+            var searchValue = $(this).val();
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/updateSearchDataAndCountResult",
+                data: { searchKey: searchKey, searchValue: searchValue, csrf_site_name: token_value },
+                success: function (html) {
+                    $('#viewResult').text(html);
+                }
+            });
+        })
     });
 </script>

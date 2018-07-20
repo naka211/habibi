@@ -31,71 +31,82 @@
                     <div class="box_trySearch">
                         <h2 class="title">Prøv en søgning</h2>
                         <p>Udfyld de faste søgekriterier og få altid opdaterede profiler her.</p>
-                        <?php echo form_open('user/searching', array('method'=>'get', 'class'=>'frm_trySearch'))?>
+                        <?php echo form_open('user/searching', array('method'=>'post', 'class'=>'frm_trySearch'))?>
                             <div class="form-group">
                                 <label for="">Alder</label>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                         <select name="fromAge" class="form-control" id="fromAge">
-                                            <?php for($i=18; $i<=70; $i++){?>
-                                            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                            <?php for($i=18; $i<=89; $i++){
+                                                if($searchData['fromAge']){
+                                                    $selected = $searchData['fromAge'] == $i?'selected':'';
+                                                } else {
+                                                    $selected = '';
+                                                }
+                                                ?>
+                                            <option value="<?php echo $i;?>" <?php echo $selected;?>><?php echo $i;?></option>
                                             <?php }?>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                         <select name="toAge" class="form-control" id="toAge">
-                                            <?php for($i=19; $i<=90; $i++){?>
-                                                <option value="<?php echo $i;?>" <?php echo $i==90?'selected':'';?> ><?php echo $i;?></option>
+                                            <?php for($i=19; $i<=90; $i++){
+                                                if($searchData['toAge']){
+                                                    $selected = $searchData['toAge'] == $i?'selected':'';
+                                                } else {
+                                                    $selected = $i==90?'selected':'';
+                                                }
+                                                ?>
+                                                <option value="<?php echo $i;?>" <?php echo $selected;?>><?php echo $i;?></option>
                                             <?php }?>
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="form-group">
                                 <label for="">Land</label>
                                 <select name="land[]" id="land" class="form-control 3col active regionSelection" multiple="multiple">
-                                    <option value="Tyrkiet">Tyrkiet</option>
-                                    <option value="Syrien">Syrien</option>
-                                    <option value="Irak">Irak</option>
-                                    <option value="Libanon">Libanon</option>
-                                    <option value="Pakistan">Pakistan</option>
-                                    <option value="Palæstina">Palæstina</option>
-                                    <option value="Somalia">Somalia</option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Bosnien">Bosnien</option>
-                                    <option value="Iran">Iran</option>
-                                    <option value="Marokko">Marokko</option>
-                                    <option value="Albanien">Albanien</option>
-                                    <option value="Algeriet">Algeriet</option>
-                                    <option value="Egypten">Egypten</option>
-                                    <option value="Makedionen">Makedionen</option>
-                                    <option value="Andet">Andet</option>
+                                    <option value="Tyrkiet" <?php if(inSearch('land', 'Tyrkiet')) echo 'selected';?>>Tyrkiet</option>
+                                    <option value="Syrien" <?php if(inSearch('land', 'Syrien')) echo 'selected';?>>Syrien</option>
+                                    <option value="Irak" <?php if(inSearch('land', 'Irak')) echo 'selected';?>>Irak</option>
+                                    <option value="Libanon" <?php if(inSearch('land', 'Libanon')) echo 'selected';?>>Libanon</option>
+                                    <option value="Pakistan" <?php if(inSearch('land', 'Pakistan')) echo 'selected';?>>Pakistan</option>
+                                    <option value="Palæstina" <?php if(inSearch('land', 'Palæstina')) echo 'selected';?>>Palæstina</option>
+                                    <option value="Somalia" <?php if(inSearch('land', 'Somalia')) echo 'selected';?>>Somalia</option>
+                                    <option value="Afghanistan" <?php if(inSearch('land', 'Afghanistan')) echo 'selected';?>>Afghanistan</option>
+                                    <option value="Bosnien" <?php if(inSearch('land', 'Bosnien')) echo 'selected';?>>Bosnien</option>
+                                    <option value="Iran" <?php if(inSearch('land', 'Iran')) echo 'selected';?>>Iran</option>
+                                    <option value="Marokko" <?php if(inSearch('land', 'Marokko')) echo 'selected';?>>Marokko</option>
+                                    <option value="Albanien" <?php if(inSearch('land', 'Albanien')) echo 'selected';?>>Albanien</option>
+                                    <option value="Algeriet" <?php if(inSearch('land', 'Algeriet')) echo 'selected';?>>Algeriet</option>
+                                    <option value="Egypten" <?php if(inSearch('land', 'Egypten')) echo 'selected';?>>Egypten</option>
+                                    <option value="Makedionen" <?php if(inSearch('land', 'Makedionen')) echo 'selected';?>>Makedionen</option>
+                                    <option value="Andet" <?php if(inSearch('land', 'Andet')) echo 'selected';?>>Andet</option>
                                 </select>
                             </div>
                         <div class="form-group">
                             <label for="">Region</label>
                             <select name="region[]" id="region" class="form-control 3col active regionSelection" multiple="multiple">
-                                <option value="København">København</option>
-                                <option value="Storkøbenhavn">Storkøbenhavn</option>
-                                <option value="Århus">Århus</option>
-                                <option value="Aalborg">Aalborg</option>
-                                <option value="Odense">Odense</option>
-                                <option value="Nordsjælland">Nordsjælland</option>
-                                <option value="Midt/Vestsjælland">Midt/Vestsjælland</option>
-                                <option value="Sydsjælland">Sydsjælland</option>
-                                <option value="Lolland/Falster">Lolland/Falster</option>
-                                <option value="Fyn">Fyn</option>
-                                <option value="Nordjylland">Nordjylland</option>
-                                <option value="Østjylland">Østjylland</option>
-                                <option value="Vestjylland">Vestjylland</option>
-                                <option value="Sydjylland">Sydjylland</option>
-                                <option value="Midtjylland">Midtjylland</option>
-                                <option value="Sønderjylland">Sønderjylland</option>
-                                <option value="Bornholm">Bornholm</option>
+                                <option value="København" <?php if(inSearch('region', 'København')) echo 'selected';?>>København</option>
+                                <option value="Storkøbenhavn" <?php if(inSearch('region', 'Storkøbenhavn')) echo 'selected';?>>Storkøbenhavn</option>
+                                <option value="Århus" <?php if(inSearch('region', 'Århus')) echo 'selected';?>>Århus</option>
+                                <option value="Aalborg" <?php if(inSearch('region', 'Aalborg')) echo 'selected';?>>Aalborg</option>
+                                <option value="Odense" <?php if(inSearch('region', 'Odense')) echo 'selected';?>>Odense</option>
+                                <option value="Nordsjælland" <?php if(inSearch('region', 'Nordsjælland')) echo 'selected';?>>Nordsjælland</option>
+                                <option value="Midt/Vestsjælland" <?php if(inSearch('region', 'Midt/Vestsjælland')) echo 'selected';?>>Midt/Vestsjælland</option>
+                                <option value="Sydsjælland" <?php if(inSearch('region', 'Sydsjælland')) echo 'selected';?>>Sydsjælland</option>
+                                <option value="Lolland/Falster" <?php if(inSearch('region', 'Lolland/Falster')) echo 'selected';?>>Lolland/Falster</option>
+                                <option value="Fyn" <?php if(inSearch('region', 'Fyn')) echo 'selected';?>>Fyn</option>
+                                <option value="Nordjylland" <?php if(inSearch('region', 'Nordjylland')) echo 'selected';?>>Nordjylland</option>
+                                <option value="Østjylland" <?php if(inSearch('region', 'Østjylland')) echo 'selected';?>>Østjylland</option>
+                                <option value="Vestjylland" <?php if(inSearch('region', 'Vestjylland')) echo 'selected';?>>Vestjylland</option>
+                                <option value="Sydjylland" <?php if(inSearch('region', 'Sydjylland')) echo 'selected';?>>Sydjylland</option>
+                                <option value="Midtjylland" <?php if(inSearch('region', 'Midtjylland')) echo 'selected';?>>Midtjylland</option>
+                                <option value="Sønderjylland" <?php if(inSearch('region', 'Sønderjylland')) echo 'selected';?>>Sønderjylland</option>
+                                <option value="Bornholm" <?php if(inSearch('region', 'Bornholm')) echo 'selected';?>>Bornholm</option>
                             </select>
                         </div>
-                            <button type="button" class="btn btn_searchResult">Se hele søgeresultatet</button>
+                            <button type="submit" class="btn btn_searchResult">Se hele søgeresultatet</button>
                         <?php echo form_close();?>
                     </div>
                 </div>
@@ -173,25 +184,3 @@
 
     </div>
 </div>
-<script>
-    $(function() {
-        $(".btn_searchResult").click(function() {
-            var params = {};
-            var getSelect = ['fromAge', 'toAge', 'land', 'region'];
-
-            $.each(getSelect, function(index, value) {
-                var select = $('#' + value);
-                if (select.val() != '') {
-                    var selected = select.val();
-                    if (select.attr('multiple'))
-                        selected = selected.join(',');
-                    params[value] = selected;
-                }
-            });
-            if (!$.isEmptyObject(params)) {
-                var url = ['<?php echo base_url();?>', 'user/searching'].join('');
-                window.location.href = url + '?' + $.param(params);
-            }
-        });
-    });
-</script>
