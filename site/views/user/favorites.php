@@ -14,11 +14,15 @@
                 <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 profile<?php echo $user->id;?>">
                     <div class="box_favorites_item">
                         <div class="favorites_img">
-                            <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
-                            <?php } else {?>
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
-                            <?php }?>
+                            <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>">
+                            <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) {
+                                $avatarFolder = 'raw_thumb_user';
+                            } else {
+                                $avatarFolder = 'thumb_user';
+                            }
+                            ?>
+                                <img src="<?php echo base_url();?>/uploads/<?php echo $avatarFolder;?>/<?php echo $user->avatar;?>" class="img-responsive">
+                            </a>
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <div class="favorites_footer">
                                 <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_addFriend" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Tilføj ven</a><?php }?>

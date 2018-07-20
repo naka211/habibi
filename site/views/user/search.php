@@ -166,30 +166,31 @@
                 </div>
             </div>
 
-            <!--<div class="row">
+            <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h3>Fremhævet profil</h3>
                 </div>
-
-                <?php /*foreach($list as $user){*/?>
+                <div id="profileList"></div>
+                <?php /*foreach($list as $user){?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
-                                <a href="<?php /*echo site_url('user/profile/'.$user->id.'/'.$user->name);*/?>"><img src="<?php /*echo base_url();*/?>/uploads/thumb_user/<?php /*echo $user->avatar;*/?>" alt="" class="img-responsive"></a>
-                                <div class="gallery_number"><i class="i_img"></i> <span><?php /*echo countImages($user->id);*/?></span></div>
-                                <?php /*if(isFriend($user->id) == false){*/?>
+                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" alt="" class="img-responsive"></a>
+                                <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
+                                <?php if(isFriend($user->id) == false){?>
                                 <div class="favorites_footer">
-                                    <a href="<?php /*echo site_url('user/requestAddFriend/'.$user->id);*/?>" class="btn btn_addFriend">Tilføj ven</a>
+                                    <a href="<?php echo site_url('user/requestAddFriend/'.$user->id);?>" class="btn btn_addFriend">Tilføj ven</a>
                                 </div>
-                                <?php /*}*/?>
+                                <?php }?>
                             </div>
-                            <h5 class="name"><?php /*echo $user->name;*/?></h5>
-                            <p class="nation"><?php /*echo $user->ethnic_origin;*/?></p>
-                            <p class="old"><?php /*echo printAge($user->year);*/?> – <span class="area"><?php /*echo $user->region;*/?></span></p>
+                            <h5 class="name"><?php echo $user->name;?></h5>
+                            <p class="nation"><?php echo $user->ethnic_origin;?></p>
+                            <p class="old"><?php echo printAge($user->year);?> – <span class="area"><?php echo $user->region;?></span></p>
                         </div>
                     </div>
-                <?php /*}*/?>
-            </div>-->
+                <?php }*/?>
+                <input type="hidden" value="0" id="offset">
+            </div>
 
 
         </div>
@@ -213,6 +214,16 @@
             maxPlaceholderOpts: 1
         });
 
+        //Count number of profile
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/countProfiles",
+            data: {csrf_site_name: token_value },
+            success: function (html) {
+                $('#viewResult').text(html);
+            }
+        });
+
         $(".frm_search select").change( function(){
             var searchKey = $(this).attr('id');
             var searchValue = $(this).val();
@@ -222,6 +233,19 @@
                 data: { searchKey: searchKey, searchValue: searchValue, csrf_site_name: token_value },
                 success: function (html) {
                     $('#viewResult').text(html);
+                }
+            });
+        });
+
+        $('#viewResult').click(function () {
+            $('#profileList').html('<div class="text-center"><img src="'+base_url+'templates/images/preloader.gif" /></div>');
+            var offset = $('#offset').val();
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/loadSearchResult",
+                data: {offset: offset, csrf_site_name: token_value },
+                success: function (html) {
+                    $('#profileList').html(html);
                 }
             });
         })

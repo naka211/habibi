@@ -1998,7 +1998,7 @@ ul.list_action li a .i_report {
 .gallery_number {
     position: absolute;
     z-index: 10;
-    right: 10px;
+    right: 5px;
     bottom: 10px;
     background: #575856;
     padding: 6px 12px 3px;
@@ -2065,7 +2065,7 @@ ul.list_action li a .i_report {
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, .50);
-    padding: 10px;
+    padding: 10px 5px;
     text-align: left;
     opacity: 0;
     transition: .8s;
@@ -2076,7 +2076,7 @@ ul.list_action li a .i_report {
     background: #ffa507;
     text-transform: uppercase;
     color: #fff;
-    padding: 6px 10px;
+    padding: 3px 3px;
     font-size: 13px;
     font-weight: 500;
 }

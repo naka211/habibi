@@ -163,6 +163,10 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function addFavoriteInPage(){
+        $this->addFavorite();
+    }
+
     function removeFavorite(){
         $profile_id = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
@@ -632,8 +636,12 @@ class Ajax extends MX_Controller{
         $searchData[$searchKey] = $searchValue;
         $this->session->set_userdata('searchData', $searchData);
 
-        //Count profile
+        $this->countProfiles();
+    }
+
+    public function countProfiles(){
         $user = $this->session->userdata('user');
+        $searchData = $this->session->userdata('searchData');
         $ignore = $this->user->getBlockedUserIds($user->id);
         if ($user) {
             $ignore[] = $user->id;
@@ -645,6 +653,49 @@ class Ajax extends MX_Controller{
             echo '0 profiler fundet';
         }
         exit;
+    }
+
+    public function loadSearchResult(){
+        $offset = $this->input->post('offset');
+        $user = $this->session->userdata('user');
+        $searchData = $this->session->userdata('searchData');
+        $ignore = $this->user->getBlockedUserIds($user->id);
+        if ($user) {
+            $ignore[] = $user->id;
+        }
+
+        $list = $this->user->getBrowsing(12, $offset, $searchData, $ignore);
+        $html = '';
+        foreach ($list as $profile){
+            if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) {
+                $avatarFolder = 'raw_thumb_user';
+            } else {
+                $avatarFolder = 'thumb_user';
+            }
+            $addFriendBtn = $addFavoriteBtn = '';
+            if(isFriend($profile->id) == false){
+                $addFriendBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" style="margin-right:4px;" onclick="callAjaxFunction('.$profile->id.', \'requestAddFriendInFavorite\')" id="requestAddFriendBtn'.$profile->id.'">Tilføj ven</a>';
+            }
+            if(addedToFavorite($profile->id) == false){
+                $addFavoriteBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" onclick="callAjaxFunction('.$profile->id.', \'addFavoriteInPage\')" id="addFavoriteBtn'.$profile->id.'">Tilføj favorit</a>';
+            }
+
+            $html .= '<div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
+                        <div class="box_favorites_item">
+                            <div class="favorites_img">
+                                <a href="'.site_url('user/profile/'.$profile->id.'/'.$profile->name).'">
+                                <img src="'.base_url().'uploads/'.$avatarFolder.'/'.$profile->avatar.'" alt="" class="img-responsive">
+                                </a>
+                                <div class="gallery_number"><i class="i_img"></i> <span>'.countImages($profile->id).'</span></div>
+                                <div class="favorites_footer">'.$addFriendBtn.$addFavoriteBtn.'</div>
+                            </div>
+                            <h5 class="name">'.$profile->name.'</h5>
+                            <p class="nation">'.$profile->land.'</p>
+                            <p class="old">'.printAge($profile->year).' – <span class="area">'.$profile->region.'</span></p>
+                        </div>
+                    </div>';
+        }
+        echo $html;exit();
     }
 }
 ?>

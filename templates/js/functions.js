@@ -364,6 +364,9 @@ $(document).ready(function() {
             if(link == 'requestAddFriendInFavorite'){
                 $('#requestAddFriendBtn'+profile_id).fadeOut();
             }
+            if(link == 'addFavoriteInPage'){
+                $('#addFavoriteBtn'+profile_id).fadeOut();
+            }
         });
     }
     sendBlink = function (profile_id) {

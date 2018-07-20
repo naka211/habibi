@@ -341,6 +341,17 @@ function isFriend($profileId){
     return $query->get()->num_rows()?true:false;
 }
 
+function addedToFavorite($profileId){
+    $ci = &get_instance();
+    $userId = $ci->session->userdata('user')->id;
+
+    $query = $ci->db->select("id")
+        ->from('tb_user_favorite')
+        ->where("user_from = $userId AND user_to = $profileId");
+
+    return $query->get()->num_rows()?true:false;
+}
+
 function inSearch($filterKey, $value){
     $ci = &get_instance();
     $searchData = $ci->session->userdata('searchData');
