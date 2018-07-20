@@ -254,7 +254,7 @@
                 window.clearTimeout(timeout);
                 delete timeout;
             }
-            timeout = window.setTimeout( check, 100);
+            timeout = window.setTimeout( check, 500);
         });
 
         check = function () {
