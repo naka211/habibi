@@ -216,8 +216,9 @@
                 method: "POST",
                 url: base_url+"ajax/updateSearchDataAndCountResult",
                 data: { searchKey: searchKey, searchValue: searchValue, csrf_site_name: token_value },
-                success: function (html) {
-                    $('#viewResult').text(html);
+                success: function (num) {
+                    $('#viewResult').text(num+' profiler fundet');
+                    $('#num').val(num);
                 }
             });
         });
