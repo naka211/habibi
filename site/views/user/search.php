@@ -242,6 +242,7 @@
         }
 
         $('#viewResult').click(function () {
+            $('#profileList').html('');
             var offset = $('#offset').val();
             loadSearchResult(offset);
         });
