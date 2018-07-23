@@ -3,6 +3,8 @@ class Ajax extends MX_Controller{
 	function __construct(){
         parent::__construct();
         $this->load->model('user_model', 'user');
+        $this->load->library('session');
+        $this->session->set_userdata('last_visited', time());
 	}
 	function index(){
 		//Nothing to do
@@ -96,10 +98,11 @@ class Ajax extends MX_Controller{
 
     function logout(){
         /** Login*/
+        $user = $this->session->userdata('user');
         $Login = array('isLoginSite', 'user', 'email', 'password');
         $this->session->unset_userdata($Login);
-
-        setcookie('cc_data', '', -time() + (86400 * 30), "/");
+        $this->user->updateLogin($user->id, 0);
+        /*setcookie('cc_data', '', -time() + (86400 * 30), "/");*/
 
         die('ok');
     }
@@ -680,6 +683,12 @@ class Ajax extends MX_Controller{
                 $addFavoriteBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" onclick="callAjaxFunction('.$profile->id.', \'addFavoriteInPage\')" id="addFavoriteBtn'.$profile->id.'">Tilføj favorit</a>';
             }
 
+            if($profile->login == 1){
+                $onlineIcon = '<span class="status"></span>';
+            } else {
+                $onlineIcon = '';
+            }
+
             $html .= '<div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
@@ -689,13 +698,21 @@ class Ajax extends MX_Controller{
                                 <div class="gallery_number"><i class="i_img"></i> <span>'.countImages($profile->id).'</span></div>
                                 <div class="favorites_footer">'.$addFriendBtn.$addFavoriteBtn.'</div>
                             </div>
-                            <h5 class="name">'.$profile->name.'</h5>
+                            <h5 class="name">'.$profile->name.' '.$onlineIcon.'</h5>
                             <p class="nation">'.$profile->land.'</p>
                             <p class="old">'.printAge($profile->year).' – <span class="area">'.$profile->region.'</span></p>
                         </div>
                     </div>';
         }
         echo $html;exit();
+    }
+
+    public function checkSession(){
+        //Below last_visited should be updated everytime a page is accessed.
+        $lastVisitTime = $this->session->userdata("last_visited");
+        $oneMinuteBefore = strtotime("-10 minutes");
+
+        echo $lastVisitTime > $oneMinuteBefore ? 1 : 0;
     }
 }
 ?>

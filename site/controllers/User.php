@@ -16,6 +16,9 @@ class User extends MX_Controller
 
         //Get meta data from url
         $this->_meta = $this->general_model->getMetaDataFromUrl();
+
+        $this->load->library('session');
+        $this->session->set_userdata('last_visited', time());
     }
 
     protected function middleware(){

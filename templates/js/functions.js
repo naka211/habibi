@@ -480,28 +480,20 @@ $(document).ready(function() {
     });
     ////
 
-    confirmRemoveFavorite = function (profileId) {
-        $("#confirmText").html("Er du sikker på at fjerne denne person til din favoritliste?");
-        $('.btnYes').attr('href', base_url+'user/removeFavorite/'+profileId);
-        $.fancybox.open({src: '#modalConfirm'});
-    }
-
-    confirmDeleteMessage = function (profileId) {
-        $("#confirmText").html("Er du sikkert på at slette hele chat-beskeden?");
-        $('.btnYes').attr('href', base_url+'user/deleteMessage/'+profileId);
-        $.fancybox.open({src: '#modalConfirm'});
-    }
-
-    confirmRemovePhoto = function (photoId) {
-        $("#confirmText").html("Er du sikker på at slette billedet?");
-        $('.btnYes').attr('href', base_url+'user/deletePhoto/'+photoId);
-        $.fancybox.open({src: '#modalConfirm'});
-    }
-
-    confirmRemoveBlock = function (profileId) {
-        $("#confirmText").html("Er du sikker på at fjerne denne person for at blokere listen?");
-        $('.btnYes').attr('href', base_url+'user/unblockUser/'+profileId);
-        $.fancybox.open({src: '#modalConfirm'});
+    setTimeout(checkSession, 10*60*1000);
+    function checkSession() {
+        $.ajax({
+            url: base_url+"ajax/checkSession",
+            success: function(status) {
+                if (status == 1){
+                    $.ajax({
+                        method: "POST",
+                        url: base_url+"ajax/logout",
+                        data: { csrf_site_name: token_value }
+                    });
+                }
+            }
+        });
     }
 });
 

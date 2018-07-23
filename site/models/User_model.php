@@ -69,7 +69,7 @@ class User_model extends CI_Model{
     }
 
     function getBrowsing($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.blurIndex, u.land, u.year');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.blurIndex, u.land, u.year, u.login');
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
         //Search
