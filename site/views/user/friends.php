@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <h4>
-                                    <?php echo $profile->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?>
+                                    <?php echo $profile->name; ?> <?php if($profile->login == 1){?><span class="status"></span><?php }?>
                                     <?php if($user->blurIndex != 0){
                                         if($profile->viewAvatar == 0){
                                             ?>
