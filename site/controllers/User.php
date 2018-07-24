@@ -1034,6 +1034,7 @@ class User extends MX_Controller
     function testEmail()
     {
         var_dump($this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Test subject '.date('d/m/Y H:i'), 'Test content '.date('d/m/Y H:i')));
+        echo date('d/m/Y H:i');
         exit();
     }
 }
