@@ -55,10 +55,10 @@ jQuery(document).ready(function(){
                         <th data-field="id">ID</th>
                         <th data-field="name">Name</th>
                         <th data-field="avatar">Avatar</th>
-                        <th data-field="birthday">Birthday</th>
-                        <th data-field="type">Account type</th>
+                        <th data-field="age">Age</th>
+                        <th data-field="region">Region</th>
                         <th data-field="membership">Membership</th>
-                        <th data-field="dt_create">Date</th>
+                        <th data-field="dt_create">Register date</th>
                         <th class="text-center action" data-field="action"><?php echo lang('admin.functions');?></th>
                     </tr>
                 </thead>

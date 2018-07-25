@@ -79,10 +79,10 @@
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown site-menu-item has-sub">
+                    <!--<li class="dropdown site-menu-item has-sub">
                         <a class="dropdown-toggle" href="javascript:void(0)" data-dropdown-toggle="false">
                             <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
-                            <span class="site-menu-title"><?php echo lang('menu.image.manage'); ?></span>
+                            <span class="site-menu-title"><?php /*echo lang('menu.image.manage'); */?></span>
                             <span class="site-menu-arrow"></span>
                         </a>
                         <div class="dropdown-menu">
@@ -90,30 +90,30 @@
                                 <div>
                                     <div>
                                         <ul class="site-menu-sub site-menu-normal-list">
-                                            <?php if ($this->check->check('view', 'mod_banner', 'category')) { ?>
+                                            <?php /*if ($this->check->check('view', 'mod_banner', 'category')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_banner/category') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.banner.category'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_banner/category') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.banner.category'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_banner', 'banner')) { ?>
+                                            <?php /*} */?>
+                                            <?php /*if ($this->check->check('view', 'mod_banner', 'banner')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_banner/banner') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.banner.banner'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_banner/banner') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.banner.banner'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_banner', 'gallery')) { ?>
+                                            <?php /*} */?>
+                                            <?php /*if ($this->check->check('view', 'mod_banner', 'gallery')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_banner/gallery') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.banner.gallery'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_banner/gallery') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.banner.gallery'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
+                                            <?php /*} */?>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                     <li class="dropdown site-menu-item has-sub">
                         <a class="dropdown-toggle" href="javascript:void(0)" data-dropdown-toggle="false">
                             <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
@@ -131,18 +131,18 @@
                                                                 class="site-menu-title"><?php echo lang('menu.user.user'); ?></span></a>
                                                 </li>
                                             <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_user', 'b2b')) { ?>
+                                            <?php /*if ($this->check->check('view', 'mod_user', 'b2b')) { ?>
                                                 <li class="site-menu-item"><a class="animsition-link"
                                                                               href="<?php echo site_url('mod_user/b2b') ?>"><span
                                                                 class="site-menu-title"><?php echo lang('menu.user.b2b'); ?></span></a>
                                                 </li>
-                                            <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_contact', 'contact')) { ?>
+                                            <?php } */?>
+                                            <?php /*if ($this->check->check('view', 'mod_contact', 'contact')) { ?>
                                                 <li class="site-menu-item"><a class="animsition-link"
                                                                               href="<?php echo site_url('mod_contact/contact') ?>"><span
                                                                 class="site-menu-title"><?php echo lang('menu.user.contact'); ?></span></a>
                                                 </li>
-                                            <?php } ?>
+                                            <?php }*/ ?>
                                             <?php if ($this->check->check('view', 'mod_images', 'images')) { ?>
                                                 <li class="site-menu-item"><a class="animsition-link"
                                                                               href="<?php echo site_url('mod_images/images') ?>"><span
@@ -161,10 +161,10 @@
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown site-menu-item has-sub">
+                    <!--<li class="dropdown site-menu-item has-sub">
                         <a class="dropdown-toggle" href="javascript:void(0)" data-dropdown-toggle="false">
                             <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
-                            <span class="site-menu-title"><?php echo lang('menu.product.manage'); ?></span>
+                            <span class="site-menu-title"><?php /*echo lang('menu.product.manage'); */?></span>
                             <span class="site-menu-arrow"></span>
                         </a>
                         <div class="dropdown-menu">
@@ -172,30 +172,30 @@
                                 <div>
                                     <div>
                                         <ul class="site-menu-sub site-menu-normal-list">
-                                            <?php if ($this->check->check('view', 'mod_product', 'category')) { ?>
+                                            <?php /*if ($this->check->check('view', 'mod_product', 'category')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_product/category') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.product.category'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_product/category') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.product.category'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_product', 'product')) { ?>
+                                            <?php /*} */?>
+                                            <?php /*if ($this->check->check('view', 'mod_product', 'product')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_product/product') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.product.product'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_product/product') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.product.product'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
-                                            <?php if ($this->check->check('view', 'mod_product', 'order')) { ?>
+                                            <?php /*} */?>
+                                            <?php /*if ($this->check->check('view', 'mod_product', 'order')) { */?>
                                                 <li class="site-menu-item"><a class="animsition-link"
-                                                                              href="<?php echo site_url('mod_product/order') ?>"><span
-                                                                class="site-menu-title"><?php echo lang('menu.product.order'); ?></span></a>
+                                                                              href="<?php /*echo site_url('mod_product/order') */?>"><span
+                                                                class="site-menu-title"><?php /*echo lang('menu.product.order'); */?></span></a>
                                                 </li>
-                                            <?php } ?>
+                                            <?php /*} */?>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
 
 
                 </ul>

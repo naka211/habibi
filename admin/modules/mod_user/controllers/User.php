@@ -70,21 +70,17 @@ class User extends CI_Controller{
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                if($row->avatar){ if($row->facebook){
-                    $data->avatar = '<img src="'.$row->avatar.'" width="150" />';
+                if($row->avatar){
+                    if($row->facebook){
+                        $data->avatar = '<img src="'.$row->avatar.'" width="150" />';
+                    }else{
+                        $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->avatar.'" width="150" />';
+                    }
                 }else{
-                    $data->avatar = '<img src="'.base_url_site()."uploads/user/".$row->avatar.'" width="150" />';
-                }}else{
                     $data->avatar = '';
                 }
-                $data->birthday = $row->birthday;
-                if($row->groups == 3){
-                    $data->type = "Google";
-                }else if($row->groups == 2){
-                    $data->type = "Facebook";
-                }else{
-                    $data->type = "Register";
-                }
+                $data->age = (int)date('Y') - $row->year . ' år';
+                $data->region = $row->region;
                 if($row->type == 2){
                     $data->membership = "Gold";
                 }else{

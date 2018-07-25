@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+delete_data<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 class User_model extends CI_Model{
     function __construct(){
         parent::__construct();
@@ -44,6 +44,60 @@ class User_model extends CI_Model{
         }
     }
     function delete_data($id=NULL){
+        $this->db->where("user_from = $id OR user_to = $id");
+        $this->db->delete('user_blocked');
+        $this->db->reset_query();
+
+        $this->db->where("user_from = $id OR user_to = $id");
+        $this->db->delete('user_favorite');
+        $this->db->reset_query();
+
+        $this->db->where("user_from = $id OR user_to = $id");
+        $this->db->delete('user_friendlist');
+        $this->db->reset_query();
+
+        $this->db->where("user_from = $id OR user_to = $id");
+        $this->db->delete('user_friend');
+        $this->db->reset_query();
+
+        $this->db->where("from_user_id = $id OR to_user_id = $id");
+        $this->db->delete('user_kisses');
+        $this->db->reset_query();
+
+        $this->db->where("user_from = $id OR user_to = $id");
+        $this->db->delete('user_messages');
+        $this->db->reset_query();
+
+        $this->db->where("from_user = $id OR to_user = $id");
+        $this->db->delete('user_visit');
+        $this->db->reset_query();
+
+        $this->db->where("userFrom = $id OR userTo = $id");
+        $this->db->delete('user_reports');
+        $this->db->reset_query();
+
+        $this->db->select('avatar');
+        $this->db->from('user');
+        $this->db->where('id', $id);
+        $avatar = $this->db->get()->row()->avatar;
+
+        @unlink($this->config->item('root')."uploads/user/".$avatar);
+        @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
+        @unlink($this->config->item('root')."uploads/raw_thumb_user/".$avatar);
+        $this->db->reset_query();
+
+        $this->db->select('id, image');
+        $this->db->from('user_image');
+        $this->db->where('userId', $id);
+        $result = $this->db->get()->result();
+        foreach ($result as $image){
+            @unlink($this->config->item('root')."uploads/photo/".$image->image);
+            @unlink($this->config->item('root')."uploads/thumb_photo/".$image->image);
+        }
+        $this->db->where("userId", $id);
+        $this->db->delete('user_image');
+        $this->db->reset_query();
+
         $this->db->where('id',$id);
         if($this->db->delete('user')){
             return true;
