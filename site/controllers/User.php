@@ -19,10 +19,17 @@ class User extends MX_Controller
 
         $this->load->library('session');
         $this->session->set_userdata('last_visited', time());
+        $this->setExpireSessionTime();
+
     }
 
     protected function middleware(){
         return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar,visitMe,start', 'Checkgold|only:visitme');
+    }
+
+    function setExpireSessionTime(){
+        $user = $this->session->userdata('user');
+        $this->user->setExpireSessionTime($user->id);
     }
 
     public function start(){

@@ -225,7 +225,7 @@ class User_model extends CI_Model{
 	}
 
     function setExpireSessionTime($userId=NULL){
-        $this->db->set('expiredSessionTime', strtotime("+1 minutes"));
+        $this->db->set('expiredSessionTime', strtotime("+10 minutes"));
         $this->db->where('id', $userId);
         $query = $this->db->update('user');
         if($query){
@@ -241,6 +241,14 @@ class User_model extends CI_Model{
         $this->db->where("id", $userId);
         $result = $this->db->get()->row();
         return $result->expiredSessionTime;
+    }
+
+    function getLoggedInList(){
+        $this->db->select('id, expiredSessionTime');
+        $this->db->from('user');
+        $this->db->where("login", 1);
+        $result = $this->db->get()->result();
+        return $result;
     }
 
     function saveUser($DB=NULL,$id=NULL){

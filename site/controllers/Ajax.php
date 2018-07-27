@@ -5,6 +5,7 @@ class Ajax extends MX_Controller{
         $this->load->model('user_model', 'user');
         $this->load->library('session');
         $this->session->set_userdata('last_visited', time());
+        $this->setExpireSessionTime();
 	}
 	function index(){
 		//Nothing to do
@@ -110,8 +111,6 @@ class Ajax extends MX_Controller{
     function setExpireSessionTime(){
         $user = $this->session->userdata('user');
         $this->user->setExpireSessionTime($user->id);
-
-        die('ok');
     }
 
     function changeChatStatus(){
@@ -710,9 +709,20 @@ class Ajax extends MX_Controller{
     public function checkSession(){
         //Below last_visited should be updated everytime a page is accessed.
         $lastVisitTime = $this->session->userdata("last_visited");
-        $oneMinuteBefore = strtotime("-10 minutes");
+        $tenMinuteBefore = strtotime("-10 minutes");
 
-        echo $lastVisitTime > $oneMinuteBefore ? 1 : 0;
+        echo $lastVisitTime > $tenMinuteBefore ? 1 : 0;
+    }
+
+    public function checkLoggedInToLogout(){
+        $users = $this->user->getLoggedInList();
+        if(!empty($users)){
+            foreach ($users as $user){
+                if($user->expiredSessionTime < time()){
+                    $this->user->updateLogin($user->id, 0);
+                }
+            }
+        }
     }
 }
 ?>
