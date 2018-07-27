@@ -110,7 +110,9 @@ class Ajax extends MX_Controller{
 
     function setExpireSessionTime(){
         $user = $this->session->userdata('user');
-        $this->user->setExpireSessionTime($user->id);
+        if($user){
+            $this->user->setExpireSessionTime($user->id);
+        }
     }
 
     function changeChatStatus(){
