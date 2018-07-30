@@ -4,7 +4,7 @@
 <div id="content">
     <section class="section_infoProfile">
         <div class="container">
-            <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">< Tilbage</a>
+            <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">&longleftarrow; Tilbage</a>
             <div class="row top_infoProfile" style="height: 550px;">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <!--<div class="img_avatar" id="imageHolder">
@@ -31,12 +31,13 @@
 
                         <br><br>
                         <?php echo form_open('user/saveAvatar', array('method'=>'post'))?>
-                        Sløringsstørrelse
+                        <div>Sløringsstørrelse</div>
                         <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" />
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$user->avatar ));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
                         <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet avatar</a>
+                        <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                         <?php echo form_close();?>
                     <?php }?>
                 </div>
@@ -73,7 +74,7 @@
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                location.reload();
+                $('#reloadPage').click();
             }
         });
 

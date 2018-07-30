@@ -129,21 +129,6 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function deletePhoto($photoId){
-        $this->db->select('image');
-        $this->db->from('user_image');
-        $this->db->where('id', $photoId);
-        $query = $this->db->get();
-        $image = $query->row();
-
-        unlink("./uploads/photo/".$image->image);
-        unlink("./uploads/thumb_photo/".$image->image);
-
-        $this->db->where('id',$photoId)->delete('user_image');
-
-        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
-    }
-
     function editAvatar(){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger avatar');

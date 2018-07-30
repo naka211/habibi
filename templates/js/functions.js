@@ -267,6 +267,9 @@ wireUpEvents = function() {
         if ((e.which || e.keyCode) == 116){
             validNavigation = true;
         }
+        if (e.keyCode == 65 && e.ctrlKey) {
+            validNavigation = true;
+        }
     });
 
     // Attach the event click for all links in the page
@@ -371,6 +374,16 @@ $(document).ready(function() {
     }
     sendBlink = function (profile_id) {
         callAjaxFunction(profile_id, 'sendBlink');
+    }
+
+    deletePhoto = function (photoId) {
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/deletePhoto",
+            data: { csrf_site_name: token_value, photoId: photoId }
+        }).done(function() {
+            $('.photo'+photoId).fadeOut();
+        });
     }
 
 

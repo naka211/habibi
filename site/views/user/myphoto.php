@@ -10,10 +10,10 @@
             </div>
             <div class="row">
                 <?php foreach($listImages as $image){?>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 photo<?php echo $image->id;?>">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
-                                <a href="javascript:void(0);" class="btnClose_img" onclick="confirmRemovePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
+                                <a href="javascript:void(0);" class="btnClose_img" onclick="deletePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
                                 <a data-fancybox="gallery" href="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
                             </div>
                         </div>

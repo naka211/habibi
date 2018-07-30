@@ -3,7 +3,7 @@
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
-            <a href="javascript:history.back()" class="btn btnUpload" style="margin: 20px 0 0 0">< Tilbage</a>
+            <a href="javascript:history.back()" class="btn btnUpload" style="margin: 20px 0 0 0">&longleftarrow; Tilbage</a>
             <div class="friend_list_lead">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -17,10 +17,10 @@
             <input id="file" type="file" name="file" multiple="multiple"/>
             <div class="row">
                 <?php foreach($listImages as $image){?>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 photo<?php echo $image->id;?>">
                         <div class="box_favorites_item">
                             <div class="favorites_img">
-                                <a href="javascript:void(0);" class="btnClose_img" onclick="confirmRemovePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
+                                <a href="javascript:void(0);" class="btnClose_img" onclick="deletePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
                                 <a data-fancybox="gallery" href="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
                                 <?php if($image->status == 0) echo 'Afventer godkendelse';?>
                             </div>
@@ -28,6 +28,7 @@
                     </div>
                 <?php }?>
             </div>
+            <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
         </div>
     </section>
 </div>
@@ -59,7 +60,7 @@
                     url: base_url+"ajax/sendEmailAdminToApprove",
                     data: { csrf_site_name: token_value}
                 }).done(function() {
-                    location.reload();
+                    $('#reloadPage').click();
                 });
             }
         });

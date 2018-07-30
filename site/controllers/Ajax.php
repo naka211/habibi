@@ -622,10 +622,13 @@ class Ajax extends MX_Controller{
 
                     $raw_thumb_user = './uploads/raw_thumb_user/'.$data['file_name'];
                     copy($config_crop['new_image'], $raw_thumb_user);
+
+                    $this->updateUserSession($user->id);
                 }
 
                 $response['success'] = 1;
                 $response['message'] = $this->upload->data();
+                $response['user'] = $user;
                 echo json_encode($response);
                 exit();
             }
@@ -725,6 +728,30 @@ class Ajax extends MX_Controller{
                 }
             }
         }
+    }
+
+    public function updateUserSession($userId){
+        $newUser = $this->user->getUser($userId);
+        $this->session->set_userdata('user', $newUser);
+    }
+
+    public function deletePhoto(){
+        $photoId = $this->input->post('photoId');
+        $this->db->select('image');
+        $this->db->from('user_image');
+        $this->db->where('id', $photoId);
+        $query = $this->db->get();
+        $image = $query->row();
+
+        unlink("./uploads/photo/".$image->image);
+        unlink("./uploads/thumb_photo/".$image->image);
+
+        $this->db->where('id',$photoId)->delete('user_image');
+
+        $data['status'] = true;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
     }
 }
 ?>
