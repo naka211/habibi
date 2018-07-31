@@ -32,7 +32,7 @@
                         <br><br>
                         <?php echo form_open('user/saveAvatar', array('method'=>'post'))?>
                         <div>Sløringsstørrelse</div>
-                        <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" />
+                        <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$user->avatar ));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
                         <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>

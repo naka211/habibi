@@ -2848,6 +2848,7 @@ ul.list_action li a .i_report {
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin-top: 10px;
+    max-height: 15px;
 }
 
 #slider::-webkit-slider-thumb {
@@ -2861,11 +2862,46 @@ ul.list_action li a .i_report {
 }
 
 #slider::-moz-range-thumb {
-    width: 25px;
+     width: 25px;
+     height: 25px;
+     border-radius: 50%;
+     background: #ffa507;
+     cursor: pointer;
+ }
+
+input[type=range]::-ms-track {
+
+
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #d3d3d3;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #d3d3d3;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
     height: 25px;
+    width: 25px;
     border-radius: 50%;
     background: #ffa507;
-    cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #d3d3d3;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #d3d3d3;
 }
 
 .blur {
