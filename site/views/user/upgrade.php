@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="tos" value="1">
+                                        <input type="checkbox" name="tos" value="1" style="position: inherit;">
                                         Accepter <a target="_blank" class="btn-link" href="#" title="">betingelser</a> om et løbende abonnement
                                     </label>
                                 </div>

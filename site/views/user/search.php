@@ -167,9 +167,9 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h3>Fremhævet profil</h3>
-                </div>
+                </div>-->
                 <div id="profileList"></div>
                 <div class="text-center clearfix" style="display: none;" id="loadMore"><img src="<?php echo base_url();?>templates/images/preloader.gif" width="100" /></div>
                 <input type="hidden" value="0" id="offset">
