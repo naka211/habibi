@@ -57,7 +57,7 @@
             onFileSuccess: function (file,data) {
                 $.ajax({
                     method: "POST",
-                    url: base_url+"ajax/sendEmailAdminToApprove",
+                    url: base_url+"ajax/sendEmailAdminToApprovePhoto",
                     data: { csrf_site_name: token_value}
                 }).done(function() {
                     $('#reloadPage').click();

@@ -548,7 +548,7 @@ class Ajax extends MX_Controller{
         }
     }
 
-    function sendEmailAdminToApprove(){
+    function sendEmailAdminToApprovePhoto(){
         $user = $this->session->userdata('user');
         $link = base_url().'admin/en/mod_images/images?name='.$user->name.'&status=0';
         $content = 'Hej Admin<br /><br />
@@ -577,15 +577,15 @@ class Ajax extends MX_Controller{
             } else {
                 $data = $this->upload->data();
                 //save to db
-                $currentAvatar = $this->user->getAvatar($user->id);
-                if($currentAvatar != 'no-avatar.jpg'){
-                    @unlink("./uploads/user/".$currentAvatar);
-                    @unlink("./uploads/thumb_user/".$currentAvatar);
-                    @unlink("./uploads/raw_thumb_user/".$currentAvatar);
+                $newAvatar = $this->user->getNewAvatar($user->id);
+                if($newAvatar != 'no-avatar.jpg'){
+                    @unlink("./uploads/user/".$newAvatar);
+                    @unlink("./uploads/thumb_user/".$newAvatar);
+                    @unlink("./uploads/raw_thumb_user/".$newAvatar);
                 }
-                $this->user->updateAvatar($user->id, $data['file_name']);
-                $savedUser = $this->user->getUser($user->id);
-                $this->session->set_userdata('user', $savedUser);
+                $this->user->updateAvatar($user->id, $data['file_name'], 1);
+                /*$savedUser = $this->user->getUser($user->id);
+                $this->session->set_userdata('user', $savedUser);*/
                 //create thumb
                 $config_resize['image_library'] = 'gd2';
                 $config_resize['source_image'] = $data['full_path'];
@@ -633,6 +633,16 @@ class Ajax extends MX_Controller{
                 exit();
             }
         }
+    }
+
+    function sendEmailAdminToApproveAvatar(){
+        $user = $this->session->userdata('user');
+        $link = base_url().'admin/en/mod_user/user?name='.$user->name;
+        $content = 'Hej Admin<br /><br />
+                        '.$user->name.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
+                        Med venlig hilsen<br/>
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $this->general_model->sendEmail(['info@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet en avatar', $content);
     }
 
     public function updateSearchDataAndCountResult(){

@@ -1,4 +1,4 @@
-delete_data<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 class User_model extends CI_Model{
     function __construct(){
         parent::__construct();
@@ -8,7 +8,7 @@ class User_model extends CI_Model{
     	$this->db->select('*');
         $this->db->where("user.bl_active <> ",-1);
         if($search['name']){
-            $where = "name LIKE '%".$search['name']."%' OR id LIKE '%".$search['name']."%'";
+            $where = "name = '".$search['name']."'";
             $this->db->where($where);
         }
     	$this->db->order_by('user.id','DESC');
@@ -24,7 +24,7 @@ class User_model extends CI_Model{
     	$this->db->select('*');
         $this->db->where("user.bl_active <> ",-1);
         if($search['name']){
-            $where = "name LIKE '%".$search['name']."%' OR id LIKE '%".$search['name']."%'";
+            $where = "name = '".$search['name']."'";
             $this->db->where($where);
         }
     	$result = $this->db->get();
@@ -123,6 +123,37 @@ class User_model extends CI_Model{
         $this->db->order_by('dt_create','DESC');
         $query = $this->db->get('user');
         return $query->result();
+    }
+
+    function updateCurrentAvatarAndDeleteNewAvatar($userId){
+        $this->db->set('avatar', 'new_avatar', false);
+        $this->db->where('id', $userId);
+        $this->db->update('user');
+        $this->db->reset_query();
+
+        $this->deleteNewAvatar($userId);
+    }
+
+    function deleteNewAvatar($userId){
+        $this->db->set('new_avatar', '');
+        $this->db->where('id', $userId);
+        $this->db->update('user');
+    }
+
+    function getNewAvatar($userId){
+        $this->db->select('new_avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
+        $new_avatar = $this->db->get()->row()->new_avatar;
+        return $new_avatar;
+    }
+
+    function getCurrentAvatar($userId){
+        $this->db->select('avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
+        $avatar = $this->db->get()->row()->avatar;
+        return $avatar;
     }
 }
 ?>

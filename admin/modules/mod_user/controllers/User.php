@@ -20,12 +20,21 @@ class User extends CI_Controller{
         if($this->check->check('export')){
             $data['export'] = $this->module_name.'/user/export';
         }
-        $this->session->unset_userdata('search');
+
+        if($this->input->get('name')){
+            $search['name'] = $this->input->get('name');
+            $this->session->set_userdata('search',$search);
+        } else {
+            $this->session->unset_userdata('search');
+        }
+
         if($page > 0){
             $this->session->set_userdata('offset',$page);
         }else{
             $this->session->unset_userdata('offset');
         }
+
+        $data['search'] = $this->session->userdata('search');
         $data['title'] = lang('admin.list');
         $data['page'] = 'user/list';
         $this->load->view('templates', $data);
@@ -70,14 +79,12 @@ class User extends CI_Controller{
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                if($row->avatar){
-                    if($row->facebook){
-                        $data->avatar = '<img src="'.$row->avatar.'" width="150" />';
-                    }else{
-                        $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->avatar.'" width="150" />';
-                    }
+                if($row->new_avatar){
+                    $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->new_avatar.'" width="150" />';
+                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/acceptAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top">Accept</a>';
+                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/rejectAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject">Reject</a>';
                 }else{
-                    $data->avatar = '';
+                    $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->avatar.'" width="150" />';
                 }
                 $data->age = (int)date('Y') - $row->year . ' år';
                 $data->region = $row->region;
@@ -438,6 +445,28 @@ class User extends CI_Controller{
         $data['message'] = $this->pre_message;
         $this->_templates['page'] = 'member/export';
         $this->site_library->load($this->_templates['page'],$data);
+    }
+
+    public function acceptAvatar($userId){
+        $currentAvatar = $this->user->getCurrentAvatar($userId);
+
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$currentAvatar);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+
+        $this->user->updateCurrentAvatarAndDeleteNewAvatar($userId);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    public function rejectAvatar($userId){
+        $newAvatar = $this->user->getNewAvatar($userId);
+
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$newAvatar);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$newAvatar);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$newAvatar);
+
+        $this->user->deleteNewAvatar($userId);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 }
 ?>

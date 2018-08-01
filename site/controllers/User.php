@@ -149,6 +149,14 @@ class User extends MX_Controller
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
         }
+
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        }
+
         $this->user->updateAvatar($user->id, 'no-avatar.jpg');
 
         $this->updateUserSession($user->id);
@@ -228,14 +236,20 @@ class User extends MX_Controller
         $blurIndex = $this->input->post('blurIndex');
 
         $user = $this->session->userdata('user');
-        $currentAvatar = $this->user->getAvatar($user->id);
+
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
         $image = base64_decode($imageData);
 
         /*$image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));*/
-        $thumb_user = './uploads/thumb_user/'.$currentAvatar;
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if(!empty($newAvatar)){
+            $avatar = $newAvatar;
+        } else {
+            $avatar = $this->user->getAvatar($user->id);
+        }
+        $thumb_user = './uploads/thumb_user/'.$avatar;
         if(file_put_contents($thumb_user, $image)){
             $this->user->updateBlurIndex($user->id, $blurIndex);
             $this->updateUserSession($user->id);

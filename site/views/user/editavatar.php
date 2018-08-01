@@ -12,6 +12,7 @@
                     </div>-->
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">
                         <canvas height="500" width="504" style="width: 500px; height: 500px;" id="canvas"></canvas>
+                        <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
@@ -25,7 +26,9 @@
                             <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg avatar fra galleri</a>
                         </div>
                     <?php }?>
-                    <?php if($user->avatar != 'no-avatar.jpg'){?>
+                    <?php if($user->avatar != 'no-avatar.jpg' || ($user->avatar == 'no-avatar.jpg' && $user->new_avatar != '')){
+                        $avatarData = $user->new_avatar?$user->new_avatar:$user->avatar;
+                        ?>
                     <!--<a href="<?php /*echo site_url('user/blurAvatar');*/?>" class="btn bntMessage">Sløre</a>
                     <a href="<?php /*echo site_url('user/unblurAvatar');*/?>" class="btn bntMessage">Un-sløre</a>-->
 
@@ -33,13 +36,13 @@
                         <?php echo form_open('user/saveAvatar', array('method'=>'post'))?>
                         <div>Sløringsstørrelse</div>
                         <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
-                        <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$user->avatar ));?>">
+                        <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
                         <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet avatar</a>
-                        <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                         <?php echo form_close();?>
                     <?php }?>
+                    <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                 </div>
             </div>
         </div>
@@ -74,7 +77,13 @@
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                $('#reloadPage').click();
+                $.ajax({
+                    method: "POST",
+                    url: base_url+"ajax/sendEmailAdminToApproveAvatar",
+                    data: { csrf_site_name: token_value}
+                }).done(function() {
+                    $('#reloadPage').click();
+                });
             }
         });
 
@@ -90,7 +99,7 @@
         // this will make CORS happy because the server is well configured
         imageObj.crossOrigin = 'anonymous';
         // Easiest is to always host your images on your own server
-        imageObj.src = '<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->avatar;?>';
+        imageObj.src = '<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->new_avatar?$user->new_avatar:$user->avatar;?>';
         imageObj.onload = function() {
             canvas.width = imageObj.width;
             canvas.height = imageObj.height;

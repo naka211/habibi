@@ -597,6 +597,14 @@ class User_model extends CI_Model{
         }
     }
 
+    function getNewAvatar($userId){
+        $this->db->select('new_avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
+        $new_avatar = $this->db->get()->row()->new_avatar;
+        return $new_avatar;
+    }
+
     function getAvatar($userId){
         $this->db->select('avatar');
         $this->db->from('user');
@@ -605,9 +613,13 @@ class User_model extends CI_Model{
         return $avatar;
     }
 
-    function updateAvatar($userId, $avatar){
-        $this->db->set('avatar', $avatar);
-        $this->db->set('original_avatar', $avatar);
+    function updateAvatar($userId, $avatar, $new = 0){
+        if($new == 1){
+            $this->db->set('new_avatar', $avatar);
+        } else {
+            $this->db->set('new_avatar', '');
+            $this->db->set('avatar', $avatar);
+        }
         $this->db->set('blurIndex', 0);
         $this->db->where('id', $userId);
         return $this->db->update('user');

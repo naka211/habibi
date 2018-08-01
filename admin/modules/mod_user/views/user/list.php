@@ -1,12 +1,13 @@
 <div class="panel-body padding-0">
     <div class="padding-left-10 padding-right-10 text-center">
         <div class="example">
-            <form id="searchFrm" class="form-inline" method="post">
+            <form id="searchFrm" class="form-inline" method="get"  action="<?php echo site_url($this->module_name.'/user');?>">
                 <div class="form-group">
-                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Name" class="form-control"/>
+                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Name" class="form-control" value="<?php echo $search['name'];?>"/>
                 </div>
                 <div class="form-group">
-                    <a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php echo site_url($this->module_name.'/user/search/');?>')" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></a>
+                    <!--<a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php /*echo site_url($this->module_name.'/user/search/');*/?>')" class="btn btn-primary waves-effect waves-light"><?php /*echo lang('admin.search');*/?></a>-->
+                    <button type="submit" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></button>
                 </div>
             </form>
         </div>
