@@ -35,7 +35,11 @@
                         <br><br>
                         <?php echo form_open('user/saveAvatar', array('method'=>'post'))?>
                         <div>Sløringsstørrelse</div>
-                        <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
+                        <div class="tooltipSlider">
+                            <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
+                            <span class="tooltipText">0</span>
+                        </div>
+
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
                         <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
@@ -113,6 +117,10 @@
             /*StackBlur.canvasRGBA(canvas, 50, 50, 200, 200, this.value);*/
             $("#imageData").val($("#canvas")[0].toDataURL());
             $("#blurIndex").val(this.value);
+        })
+
+        $("#slider").bind('input', function(e) {
+            $(".tooltipText").text(this.value);
         })
     });
 </script>
