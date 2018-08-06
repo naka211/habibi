@@ -550,7 +550,7 @@ class Ajax extends MX_Controller{
 
     function sendEmailAdminToApprovePhoto(){
         $user = $this->session->userdata('user');
-        $link = base_url().'admin/en/mod_images/images?name='.$user->name.'&status=0';
+        $link = '<a href="'.base_url().'admin/en/mod_images/images?name='.$user->name.'&status=0">Link</a>';
         $content = 'Hej Admin<br /><br />
                         '.$user->name.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
@@ -637,7 +637,7 @@ class Ajax extends MX_Controller{
 
     function sendEmailAdminToApproveAvatar(){
         $user = $this->session->userdata('user');
-        $link = base_url().'admin/en/mod_user/user?name='.$user->name;
+        $link = '<a href="'.base_url().'admin/en/mod_user/user?name='.$user->name.'">Link</a>';
         $content = 'Hej Admin<br /><br />
                         '.$user->name.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
