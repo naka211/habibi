@@ -973,9 +973,11 @@ select:not([multiple]) {
     -moz-appearance: none;
     background-position: 95% 50%;
     background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='9px' height='13px'%3e%3cpath fill-rule='evenodd' fill='rgb(179, 179, 179)' d='M0.009,4.985 L4.521,0.000 L9.000,5.000 L-0.000,5.000 L0.009,4.985 ZM4.521,13.000 L0.009,8.015 L-0.000,8.000 L9.000,8.000 L4.521,13.000 Z'/%3e%3c/svg%3e ");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 9 5' style='enable-background:new 0 0 9 5;' xml:space='preserve'%3e%3cstyle type='text/css'%3e .st0%7bfill:%23B3B3B3;%7d %3c/style%3e%3cpolygon class='st0' points='4.5,5 0,0 0,0 9,0 '/%3e%3c/svg%3e ");
     padding: .5em;
     padding-right: 1.5em;
+    -webkit-background-size: 7%;
+    background-size: 7%;
 }
 
 .btn_searchResult {
