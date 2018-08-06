@@ -75,10 +75,7 @@
     <div style="display: none;" id="modalError" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    <img src="<?php echo base_url();?>/templates/images/i_warning.png" alt="" class="img-responsive">
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
                 </div>
                 <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>

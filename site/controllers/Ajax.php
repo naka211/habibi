@@ -555,7 +555,8 @@ class Ajax extends MX_Controller{
                         '.$user->name.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['info@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet billede', $content);
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet billede', $content);
+        $this->session->set_flashdata('message', 'Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice');
     }
 
     function uploadAvatar(){
@@ -642,7 +643,8 @@ class Ajax extends MX_Controller{
                         '.$user->name.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['info@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet en avatar', $content);
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet en avatar', $content);
+        $this->session->set_flashdata('message', 'Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice');
     }
 
     public function updateSearchDataAndCountResult(){

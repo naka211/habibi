@@ -952,11 +952,11 @@ class User extends MX_Controller
                         '.$profileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $sent = $this->general_model->sendEmail(['info@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);
+        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
-        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');
     }
 
     public function selectAvatarFromGallery(){
