@@ -450,9 +450,11 @@ class User extends CI_Controller{
     public function acceptAvatar($userId){
         $currentAvatar = $this->user->getCurrentAvatar($userId);
 
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$currentAvatar);
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+        if($currentAvatar != 'no-avatar.jpg'){
+            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$currentAvatar);
+            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+        }
 
         $this->user->updateCurrentAvatarAndDeleteNewAvatar($userId);
         redirect($_SERVER['HTTP_REFERER']);
