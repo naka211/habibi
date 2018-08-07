@@ -956,7 +956,7 @@ class User extends MX_Controller
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
-        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');
+        /*customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');*/
     }
 
     public function selectAvatarFromGallery(){

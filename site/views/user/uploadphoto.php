@@ -44,6 +44,16 @@
         </div>
     </div>
 </div>
+<div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
+            </div>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">Luk</button>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         $("#file").pekeUpload({
@@ -64,5 +74,10 @@
                 });
             }
         });
+
+        confirmClick = function () {
+            $.fancybox.close();
+            $('#file').click();
+        }
     });
 </script>

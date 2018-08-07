@@ -20,6 +20,9 @@
                         Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
                         Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
                     <input id="file" type="file" name="file"/>
+                    <!--<div class="text-center">
+                        <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>
+                    </div>-->
                     <?php if($listImages){?>
                         <div class="text-center">
                             OR<br>
@@ -67,6 +70,16 @@
                 <button type="submit" class="btn btn_viewSearch">OK</button>
             </div>
             <?php echo form_close();?>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
+            </div>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">Luk</button>
         </div>
     </div>
 </div>
@@ -122,5 +135,10 @@
         $("#slider").bind('input', function(e) {
             $(".tooltipText").text(this.value);
         })
+
+        confirmClick = function () {
+            $.fancybox.close();
+            $('#file').click();
+        }
     });
 </script>
