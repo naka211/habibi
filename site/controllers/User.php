@@ -948,8 +948,10 @@ class User extends MX_Controller
         $profileName = $this->input->post('profileName');
         $reason = $this->input->post('reason');
 
+        $linkProfileName = '<a href="'.base_url().'admin/en/mod_user/user?name='.$profileName.'">'.$profileName.'</a>';
+
         $content = 'Hej Admin<br /><br />
-                        '.$profileName.' er rapporteret af '.$userName.'.<br />
+                        '.$linkProfileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
                         <a href="'.base_url().'">Zeduuce.com®</a>';
         $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);

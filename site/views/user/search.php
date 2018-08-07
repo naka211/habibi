@@ -237,6 +237,9 @@
                 success: function (html) {
                     $('#profileList').append(html);
                     $('#offset').val(parseInt(offset)+12);
+                    $("a").bind("click", function() {
+                        validNavigation = true;
+                    });
                 }
             });
         }
