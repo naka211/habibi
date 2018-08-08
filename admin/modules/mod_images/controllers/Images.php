@@ -48,13 +48,14 @@ class Images extends CI_Controller{
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                $data->image = '<img src="'.base_url_site().'uploads/thumb_photo/'.$row->image.'" width="150" \>';;
+                $data->image = '<img src="'.base_url_site().'uploads/thumb_photo/'.$row->image.'" width="150" \>';
+                $data->image .= ' <span id="publish'.$row->id.'">';
+                $data->image .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
+                $data->image .= '</span>';
+
                 $data->dt_create = date("d.m.Y K\l.H:i", $row->dt_create);
                 //ACTION
                 $data->action = "";
-                $data->action .= '<span id="publish'.$row->id.'">';
-                $data->action .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
-                $data->action .= '</span>';
                 if($this->check->check('del')){
                     $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/images/del/").'"/>';
                     $data->action .= icon_delete($row->id);
