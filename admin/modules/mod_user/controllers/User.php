@@ -81,8 +81,8 @@ class User extends CI_Controller{
                 $data->name = $row->name;
                 if($row->new_avatar){
                     $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->new_avatar.'" width="150" />';
-                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/acceptAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top">Accept</a>';
-                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/rejectAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject">Reject</a>';
+                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/acceptAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Accept"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
+                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/rejectAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
                 }else{
                     $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->avatar.'" width="150" />';
                 }
