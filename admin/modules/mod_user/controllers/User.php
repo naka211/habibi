@@ -457,6 +457,13 @@ class User extends CI_Controller{
         }
 
         $this->user->updateCurrentAvatarAndDeleteNewAvatar($userId);
+
+        $user = $this->user->getUserInfo($userId);
+        $content = 'Hej '.$user->name.'<br /><br />
+                        Din avatar er godkendt.<br /><br />
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Din avatar er godkendt', $content);
+
         redirect($_SERVER['HTTP_REFERER']);
     }
 
@@ -468,6 +475,13 @@ class User extends CI_Controller{
         @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$newAvatar);
 
         $this->user->deleteNewAvatar($userId);
+
+        $user = $this->user->getUserInfo($userId);
+        $content = 'Hej '.$user->name.'<br /><br />
+                        Din avatar er ikke godkendt.<br /><br />
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Din avatar er ikke godkendt', $content);
+
         redirect($_SERVER['HTTP_REFERER']);
     }
 }

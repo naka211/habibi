@@ -155,5 +155,13 @@ class User_model extends CI_Model{
         $avatar = $this->db->get()->row()->avatar;
         return $avatar;
     }
+
+    function getUserInfo($userId){
+        $this->db->select('name, email');
+        $this->db->from('user');
+        $this->db->where("id", $userId);
+        $user = $this->db->get()->row();
+        return $user;
+    }
 }
 ?>
