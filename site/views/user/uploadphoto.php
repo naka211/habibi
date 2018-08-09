@@ -11,7 +11,9 @@
                     </div>
                 </div>
             </div>
-            <p>Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
+                Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
+                Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
             <input id="file" type="file" name="file" multiple="multiple"/>
             <div class="row">
                 <?php foreach($listImages as $image){?>

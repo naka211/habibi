@@ -383,11 +383,16 @@ function allowViewAvatar($profileId){
 
 function getUser(){
     $ci = &get_instance();
-    $userId = $ci->session->userdata('user')->id;
+    $user = $ci->session->userdata('user');
+    if(!empty($user)){
+        $ci->db->select('*')->from('user');
+        $ci->db->where("id",$user->id);
 
-    $ci->db->select('*')->from('user');
-    $ci->db->where("id",$userId);
+        $user = $ci->db->get()->row();
+        return $user;
+    } else {
+        return null;
+    }
 
-    $user = $ci->db->get()->row();
-    return $user;
+
 }

@@ -16,7 +16,9 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                    <p>Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
+                        Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
+                        Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
                     <input id="file" type="file" name="file"/>
                     <!--<div class="text-center">
                         <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>
@@ -34,7 +36,7 @@
                     <a href="<?php /*echo site_url('user/unblurAvatar');*/?>" class="btn bntMessage">Un-sløre</a>-->
 
                         <br><br>
-                        <?php echo form_open('user/saveAvatar', array('method'=>'post'))?>
+                        <?php echo form_open('user/saveAvatar', array('method'=>'post', 'id'=>'blurForm'))?>
                         <div>Sløringsstørrelse</div>
                         <div class="tooltipSlider">
                             <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
@@ -43,7 +45,8 @@
 
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
-                        <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
+                        <!--<button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>-->
+                        <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage" style="margin-top: 30px;">Gem</a>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet avatar</a>
                         <?php echo form_close();?>
                     <?php }?>
@@ -136,7 +139,7 @@
 
         confirmClick = function () {
             $.fancybox.close();
-            $('#file').click();
+            $('#blurForm').submit();
         }
     });
 </script>
