@@ -385,9 +385,9 @@ function getUser(){
     $ci = &get_instance();
     $userId = $ci->session->userdata('user')->id;
 
-    $this->db->select('*')->from('user');
-    $this->db->where("id",$userId);
+    $ci->db->select('*')->from('user');
+    $ci->db->where("id",$userId);
 
-    $user = $this->db->get()->row();
+    $user = $ci->db->get()->row();
     return $user;
 }
