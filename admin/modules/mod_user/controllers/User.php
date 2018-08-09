@@ -462,7 +462,7 @@ class User extends CI_Controller{
         $content = 'Hej '.$user->name.'<br /><br />
                         Din avatar er godkendt.<br /><br />
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Din avatar er godkendt', $content);
+        $this->sendEmail([$user->email], 'Zeduuce.com - Din avatar er godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -480,9 +480,42 @@ class User extends CI_Controller{
         $content = 'Hej '.$user->name.'<br /><br />
                         Din avatar er ikke godkendt.<br /><br />
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Din avatar er ikke godkendt', $content);
+        $this->sendEmail([$user->email], 'Zeduuce.com - Din avatar er ikke godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html'){
+        $configEmail['mailtype'] = $mailType;
+        $configEmail['protocol'] = 'smtp';
+        $configEmail['smtp_host'] = 'smtp.unoeuro.com';
+        $configEmail['smtp_user'] = 'noreply@zeduuce.com';
+        $configEmail['smtp_pass'] = 'mTXz6X=A3y5dE?T6';
+        $configEmail['smtp_port'] = 587;
+        $configEmail['smtp_crypto'] = 'tls';
+        $configEmail['smtp_timeout'] = 30;
+
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+        $this->email->initialize($configEmail);
+        try {
+            foreach($emails as $email){
+                $this->email->clear();
+                $this->email->to($email);
+                if($from == NULL ){
+                    $this->email->from('noreply@zeduuce.com ','Zeduuce.com');
+                }
+                else{
+                    $this->email->from($from,'Zeduuce.com');
+                }
+                $this->email->subject($subject);
+                $this->email->message($content);
+                $this->email->send();
+            }
+        } catch (Exception $e){
+            return false;
+        }
+        return true;
     }
 }
 ?>
