@@ -12,7 +12,7 @@ if($status->isFavorite){
 }
 $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
 $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
-$reportLink = 'data-fancybox data-src="#modalNotification" href="javascript:void(0);"';
+$reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"';
 ?>
 <div id="content">
     <section class="section_infoProfile">
@@ -196,7 +196,7 @@ $reportLink = 'data-fancybox data-src="#modalNotification" href="javascript:void
             </select>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <button type="submit" class="btn btn_viewSearch">Send anmeldelse</button>
+            <button type="button" class="btn btn_viewSearch" onclick="thanksClick();">Send anmeldelse</button>
         </div>
         <?php
         echo form_hidden('profileId', $profile->id);
@@ -213,15 +213,18 @@ $reportLink = 'data-fancybox data-src="#modalNotification" href="javascript:void
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice</p>
             </div>
-            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">Luk</button>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="submitReportForm();">Luk</button>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function() {
-        confirmClick = function () {
+        thanksClick = function () {
             $.fancybox.close();
-            $.fancybox.open({src: '#modalReport'});
+            $.fancybox.open({src: '#modalNotification'});
+        }
+        submitReportForm = function () {
+            $('#reportForm').submit();
         }
     });
 </script>
