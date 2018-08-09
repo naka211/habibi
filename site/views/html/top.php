@@ -1,4 +1,4 @@
-<?php $user = $this->session->userdata('user');
+<?php $user = getUser();
 if(!empty($user)){
     $this->load->model('user_model', 'user');
     $unreadMessageQuantity = $this->user->getUnreadMessageQuantity($user->id);

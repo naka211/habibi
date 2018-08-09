@@ -380,3 +380,14 @@ function allowViewAvatar($profileId){
         }
     }
 }
+
+function getUser(){
+    $ci = &get_instance();
+    $userId = $ci->session->userdata('user')->id;
+
+    $this->db->select('*')->from('user');
+    $this->db->where("id",$userId);
+
+    $user = $this->db->get()->row();
+    return $user;
+}
