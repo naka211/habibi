@@ -45,10 +45,16 @@
 
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
-                        <!--<button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>-->
-                        <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage" style="margin-top: 30px;">Gem</a>
+                        <?php if($user->new_avatar != ''){?>
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage" style="margin-top: 30px;">Gem</a>
+                        <?php } else {?>
+                            <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
+                        <?php }?>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet avatar</a>
-                        <?php echo form_close();?>
+                        <?php
+                        $sendEmail = $user->new_avatar != ''?1:0;
+                        echo form_hidden('sendEmailToApprove', $sendEmail);
+                        echo form_close();?>
                     <?php }?>
                     <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                 </div>
@@ -80,7 +86,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
             </div>
-            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">Luk</button>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
         </div>
     </div>
 </div>
@@ -95,13 +101,14 @@
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                $.ajax({
+                $('#reloadPage').click();
+                /*$.ajax({
                     method: "POST",
                     url: base_url+"ajax/sendEmailAdminToApproveAvatar",
                     data: { csrf_site_name: token_value}
                 }).done(function() {
                     $('#reloadPage').click();
-                });
+                });*/
             }
         });
 

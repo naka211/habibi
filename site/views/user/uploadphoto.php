@@ -15,6 +15,7 @@
                 Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
                 Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
             <input id="file" type="file" name="file" multiple="multiple"/>
+            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>
             <div class="row">
                 <?php foreach($listImages as $image){?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-6 photo<?php echo $image->id;?>">
@@ -27,8 +28,8 @@
                         </div>
                     </div>
                 <?php }?>
+                <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
             </div>
-            <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
         </div>
     </section>
 </div>
@@ -50,7 +51,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
             </div>
-            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">Luk</button>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
         </div>
     </div>
 </div>
@@ -65,19 +66,19 @@
             url: base_url+'ajax/uploadPhoto',
             data: {'csrf_site_name':token_value},
             onFileSuccess: function (file,data) {
-                $.ajax({
-                    method: "POST",
-                    url: base_url+"ajax/sendEmailAdminToApprovePhoto",
-                    data: { csrf_site_name: token_value}
-                }).done(function() {
-                    $('#reloadPage').click();
-                });
+                $('.btn_viewSearch').show();
             }
         });
 
         confirmClick = function () {
-            $.fancybox.close();
-            $('#file').click();
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/sendEmailAdminToApprovePhoto",
+                data: { csrf_site_name: token_value}
+            }).done(function() {
+                $.fancybox.close();
+                $('#reloadPage').click();
+            });
         }
     });
 </script>

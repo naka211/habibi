@@ -1239,6 +1239,7 @@ select:not([multiple]) {
     font-weight: 500;
     font-family: 'Montserrat';
     margin-bottom: 10px;
+    margin-top: 0px;
 }
 
 .top_infoProfile h4 {

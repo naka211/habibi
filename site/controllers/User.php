@@ -233,6 +233,10 @@ class User extends MX_Controller
     }
 
     public function saveAvatar(){
+        $sendEmailToApprove = $this->input->post('sendEmailToApprove');
+        if($sendEmailToApprove){
+            $this->sendEmailAdminToApproveAvatar();
+        }
         $imageData = $this->input->post('imageData');
         $blurIndex = $this->input->post('blurIndex');
 
@@ -256,6 +260,17 @@ class User extends MX_Controller
             $this->updateUserSession($user->id);
             customRedirectWithMessage(site_url('user/index'));
         }
+    }
+
+    function sendEmailAdminToApproveAvatar(){
+        $user = $this->session->userdata('user');
+        $link = '<a href="'.base_url().'admin/en/mod_user/user?name='.$user->name.'">Link</a>';
+        $content = 'Hej Admin<br /><br />
+                        '.$user->name.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
+                        Med venlig hilsen<br/>
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet en avatar', $content);
+        /*$this->session->set_flashdata('message', 'Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice');*/
     }
 
     /** Message*/
