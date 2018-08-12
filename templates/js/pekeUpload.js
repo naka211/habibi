@@ -222,10 +222,10 @@
                   case true:
                     var newRow = $('<div class="row pkrw" rel="' + i + '"></div>').appendTo(this.container);
                     if (options.showPreview) {
-                        var prev = $('<div class="col-lg-2 col-md-2 col-xs-4"></div>').appendTo(newRow);
+                        var prev = $('<div class="col-lg-3 col-md-3 col-xs-4"></div>').appendTo(newRow);
                         this.previewFile(prev, file);
                     }
-                    var finfo = $('<div class="col-lg-10 col-md-10 col-xs-8"></div>').appendTo(newRow);
+                    var finfo = $('<div class="col-lg-9 col-md-9 col-xs-8"></div>').appendTo(newRow);
                     if (options.showFilename) {
                         finfo.append('<div class="filename">' + file.name + "</div>");
                     }
@@ -265,7 +265,7 @@
                 switch (type) {
                   case "image":
                     var fileUrl = window.URL.createObjectURL(file);
-                    var prev = $('<img class="thumbnail" src="' + fileUrl + '" height="64" />').appendTo(container);
+                    var prev = $('<img class="thumbnail" src="' + fileUrl + '" width="100%" />').appendTo(container);
                     break;
 
                   case "video":

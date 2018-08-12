@@ -134,6 +134,21 @@
     width: 100%;
 }
 
+.friend_list .pekeitem_preview {
+    float: left;
+    width: 40%;
+}
+
+.friend_list .pekerow .file {
+    float: left;
+    width: 60%;
+}
+
+.friend_list .pekerow {
+    overflow: hidden;
+    width: 100%;
+}
+
 .pekeupload-drag-area {
     width: 100%;
     text-align: center;
