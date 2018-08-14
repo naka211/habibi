@@ -72,10 +72,10 @@ class Payment extends MX_Controller {
     }
 
     public function getFee(){
-        $users = $this->user->getExpiredUsers();print_r($users);exit();
+        $users = $this->user->getExpiredUsers();
         if($users){
             foreach ($users as $user){
-                if($user->stand_by_payment != 2){
+                if($user->stand_by_payment != 2 && $user->id == 1){
                     $orderId = 'US-'.randomPassword();
 
                     if($user->package == 1){
@@ -92,7 +92,7 @@ class Payment extends MX_Controller {
                         $plusTime = '+1 day';
                     }
 
-                    $expired = strtotime($plusTime, $user->expired_at );
+                    $expired = strtotime($plusTime, $user->expired_at);print_r($expired);exit();
                     //Call payment
                     $epay_params = array();
                     $epay_params['merchantnumber'] = $this->merchantnumber;
