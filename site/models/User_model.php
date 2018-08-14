@@ -832,7 +832,8 @@ class User_model extends CI_Model{
             'expired_at' => 0,
             'subscriptionid' => '',
             'price' => 0,
-            'stand_by_payment' => 0
+            'stand_by_payment' => 0,
+            'cardno' => ''
         );
         $this->db->where('id', $userId);
         $this->db->update('user', $data);
