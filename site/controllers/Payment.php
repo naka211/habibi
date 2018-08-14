@@ -108,7 +108,7 @@ class Payment extends MX_Controller {
 
                     $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
 
-                    $result = $client->authorize($epay_params);print_r($result);exit();
+                    $result = $client->authorize($epay_params);
 
                     if($result->authorizeResult == 1){
                         //Update info in user table
@@ -122,9 +122,9 @@ class Payment extends MX_Controller {
 
                         //Add log
                         $logDb['userId']    = $user->id;
-                        $logDb['txnid']     = $result->txnid;
+                        $logDb['txnid']     = $result->transactionid;
                         $logDb['orderId']   = $orderId;
-                        $logDb['amount']    = $this->config->item('priceuser');
+                        $logDb['amount']    = $this->config->item($packageName);
                         $id = $this->user->addLog($logDb);
 
                         //Send email
