@@ -108,7 +108,7 @@ class Payment extends MX_Controller {
 
                     $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
 
-                    $result = $client->authorize($epay_params);
+                    $result = $client->authorize($epay_params);print_r($result);exit();
 
                     if($result->authorizeResult == 1){
                         //Update info in user table
