@@ -596,7 +596,7 @@ class User extends MX_Controller
      */
     function upgrade(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Opgrader konto');
 
         $data['page'] = 'user/upgrade';
         $this->load->view('templates', $data);
@@ -608,15 +608,23 @@ class User extends MX_Controller
 
         /*$payment = $this->session->userdata('payment');*/
         $user = $this->session->userdata('user');
-
+        $user = $this->user->getUser($user->id);
+        if($user->package == 1){
+            $plusTime = '+1 month';
+        } else if($user->package == 3){
+            $plusTime = '+3 months';
+        } else if($user->package == 6){
+            $plusTime = '+6 months';
+        } else {
+            $plusTime = '+1 day';
+        }
         //Update payment
+        $DB['price'] = $price = $this->input->get('amount')/100;
         $DB['subscriptionid'] = $this->input->get('subscriptionid');
         $DB['orderid'] = $this->input->get('orderid');
-        $DB['price'] = $this->input->get('amount')/100;
         $DB['type'] = 2;
-        $DB['bl_active'] = 1;
         $DB['paymenttime'] = time();
-        $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
+        $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
         $DB['cardno']    = $this->input->get('cardno');
 
         //Add to log

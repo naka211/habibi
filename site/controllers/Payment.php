@@ -22,14 +22,28 @@ class Payment extends MX_Controller {
         $this->md5 = "0c6f4246756c27adf3eaa80b2839484b";
     }
     function upgrade(){
-        $userid = $this->session->userdata('userid');
+        $user = $this->session->userdata('user');
+        $package = $this->input->post('package');
+
+        $db['package'] = $package;
+        $this->user->saveUser($db, $user->id);
+
+        if($package == 1){
+            $packageName = 'price1Month';
+        } else if($package == 3) {
+            $packageName = 'price3Months';
+        } else if($package == 6) {
+            $packageName = 'price6Months';
+        } else {
+            $packageName = 'test';
+        }
         //Go payment Epay
 
         $data['merchantnumber'] = $this->merchantnumber;
         $data['currency'] = $this->currency;
         $data['windowstate'] = $this->windowstate;
 
-        $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
+        $data['amount'] = number_format($this->config->item($packageName)*100, 0, ',', '.');
         $data['accepturl'] = site_url('user/upgradeSuccess');
         $data['cancelurl'] = site_url('user/upgradeCancel');
         $data['callbackurl'] = site_url('user/upgradeCallback');
@@ -57,19 +71,34 @@ class Payment extends MX_Controller {
         $this->load->view('templates', $data);
     }
 
-    public function getMonthlyFee(){
-        $users = $this->user->getExpiredUsers();
+    public function getFee(){
+        $users = $this->user->getExpiredUsers();print_r($users);exit();
         if($users){
             foreach ($users as $user){
-                if($user->stand_by_payment == 0){
+                if($user->stand_by_payment != 2){
                     $orderId = 'US-'.randomPassword();
-                    $expired = strtotime('+1 month', $user->expired_at );
+
+                    if($user->package == 1){
+                        $packageName = 'price1Month';
+                        $plusTime = '+1 month';
+                    } else if($user->package == 3) {
+                        $packageName = 'price3Months';
+                        $plusTime = '+3 months';
+                    } else if($user->package == 6) {
+                        $packageName = 'price6Months';
+                        $plusTime = '+6 months';
+                    } else {
+                        $packageName = 'test';
+                        $plusTime = '+1 day';
+                    }
+
+                    $expired = strtotime($plusTime, $user->expired_at );
                     //Call payment
                     $epay_params = array();
                     $epay_params['merchantnumber'] = $this->merchantnumber;
                     $epay_params['subscriptionid'] = $user->subscriptionid;
                     $epay_params['orderid'] = $orderId;
-                    $epay_params['amount'] = $this->config->item('priceuser')*100;
+                    $epay_params['amount'] = $this->config->item($packageName)*100;
                     $epay_params['currency'] = "208";
                     $epay_params['instantcapture'] = "0";
                     $epay_params['fraud'] = "0";
@@ -86,6 +115,9 @@ class Payment extends MX_Controller {
                         $DB['orderid'] = $orderId;
                         $DB['paymenttime'] = time();
                         $DB['expired_at'] = $expired;
+                        if($user->stand_by_payment == 1){
+                            $DB['stand_by_payment'] = 2;
+                        }
                         $this->user->saveUser($DB, $user->id);
 
                         //Add log

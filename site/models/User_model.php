@@ -809,10 +809,10 @@ class User_model extends CI_Model{
 
 
 
-    //Get monthly fee
+    //Get fee
     public function getExpiredUsers(){
         $time = time()+86400;
-        $result = $this->db->select('id, subscriptionid, expired_at, stand_by_payment, name, email')
+        $result = $this->db->select('id, subscriptionid, expired_at, stand_by_payment, name, email, price, package')
             ->from('user')
             ->where('expired_at <', $time)
             ->where('expired_at <>', 0)
@@ -827,7 +827,7 @@ class User_model extends CI_Model{
         $data = array(
             'type' => 1,
             'orderid' => '',
-            'payment' => 0,
+            'package' => 0,
             'paymenttime' => 0,
             'expired_at' => 0,
             'subscriptionid' => '',

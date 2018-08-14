@@ -24,10 +24,39 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id esse ut suscipit adipisci qui modi, optio velit commodi dolorem voluptatibus? Impedit id minima velit suscipit minus labore architecto ullam nobis, sapiente voluptatem fugit dignissimos perferendis sequi ad porro, rem deleniti nisi doloremque. Harum nihil id ex explicabo totam, consectetur tempora fugit illo, enim inventore, nisi! Hic in assumenda sapiente autem beatae, itaque ad praesentium voluptatem, facere cupiditate omnis officia impedit error amet laborum, ducimus saepe illum vitae voluptates sed. Id.</p>
                     <hr>
                     <div class="box_payment text-center">
-                        <h4>GULD ABONNEMENT 149 kr. / pr.mdr. (Du kan afmelde når som helst.)</h4>
-                        <p>Betal med betalingskort: </p>
-                        <img src="<?php echo base_url();?>templates/images/1x/betaling01.png" alt="" class="img-responsive">
                         <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
+                            <div class="radio-tile-group packages_option">
+                                <div class="input-container">
+                                    <input class="radio-button" name="package" type="radio" value="0">
+                                    <div class="radio-tile">
+                                        <label class="radio-tile-label">1 dag (test)</label>
+                                        <p>Pris: 1 kr</p>
+                                    </div>
+                                </div>
+                                <div class="input-container">
+                                    <input class="radio-button" name="package" checked type="radio" value="1">
+                                    <div class="radio-tile">
+                                        <label class="radio-tile-label">1 måned</label>
+                                        <p>Pris: <?php echo number_format($this->config->item('price1Month'), 0,',', '.')?> kr</p>
+                                    </div>
+                                </div>
+                                <div class="input-container">
+                                    <input class="radio-button" name="package" type="radio" value="3">
+                                    <div class="radio-tile">
+                                        <label class="radio-tile-label">3 måneder</label>
+                                        <p>Pris: <?php echo number_format($this->config->item('price3Months'), 0,',', '.')?> kr</p>
+                                    </div>
+                                </div>
+                                <div class="input-container">
+                                    <input class="radio-button" name="package" type="radio" value="6">
+                                    <div class="radio-tile">
+                                        <label class="radio-tile-label">6 måneder</label>
+                                        <p>Pris: <?php echo number_format($this->config->item('price6Months'), 0,',', '.')?> kr</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Betal med betalingskort: </p>
+                            <img src="<?php echo base_url();?>templates/images/1x/betaling01.png" alt="" class="img-responsive">
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
