@@ -92,7 +92,7 @@ class Payment extends MX_Controller {
                         $plusTime = '+1 day';
                     }
 
-                    $expired = strtotime($plusTime, $user->expired_at);print_r($expired);exit();
+                    $expired = strtotime($plusTime, $user->expired_at);
                     //Call payment
                     $epay_params = array();
                     $epay_params['merchantnumber'] = $this->merchantnumber;
