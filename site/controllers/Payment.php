@@ -130,7 +130,7 @@ class Payment extends MX_Controller {
                         //Send email
                         $sendEmailInfo['name']      = $user->name;
                         $sendEmailInfo['email']     = $user->email;
-                        $sendEmailInfo['orderId']   = $logDb['orderid'];
+                        $sendEmailInfo['orderId']   = $orderId;
                         $sendEmailInfo['price']     = $logDb['amount'].' DKK';
                         $sendEmailInfo['expired']   = date('d/m/Y', $expired);
 
