@@ -530,7 +530,7 @@ class User extends MX_Controller
 
     /** END PAYMENT*/
     function update(){
-        $user = $this->session->userdata['user'];
+        $user = $this->session->userdata('user');
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Rediger profil - '.$user->name);
 
@@ -1070,6 +1070,16 @@ class User extends MX_Controller
         var_dump($this->general_model->sendEmail(['trung@zeduuce.com'], 'Test subject '.date('d/m/Y H:i'), 'Test content '.date('d/m/Y H:i')));
         echo date('d/m/Y H:i');
         exit();
+    }
+
+    function setStandByStatus($status){
+        $user = $this->session->userdata('user');
+
+        $db['stand_by_payment'] = $status;
+        $this->user->saveUser($db, $user->id);
+        $this->updateUserSession($user->id);
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 }
 

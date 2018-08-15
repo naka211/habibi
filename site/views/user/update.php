@@ -299,6 +299,15 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btnadd_friend">Opdateret</button>
+                    <hr>
+                    <h3 style="margin: 0;">Stå ved guld medlem</h3>
+                    <?php if($user->type == 2){
+                        if($user->stand_by_payment == 0){
+                        ?>
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn btn_viewSearch">Stå ved betaling</a>
+                            <?php } else {?>
+                            <a href="<?php echo site_url('user/setStandByStatus/0')?>" class="btn btn_viewSearch">Jeg vil stoppe med at stå ved betaling</a>
+                    <?php }}?>
                     <?php echo form_close();?>
                 </div>
             </div>
@@ -308,6 +317,18 @@
             </div>
         </div>
     </section>
+</div>
+<div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
+                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+            </div>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
+            <a href="<?php echo site_url('user/setStandByStatus/1')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+        </div>
+    </div>
 </div>
 <script type="application/javascript">
     $(document).ready(function () {
@@ -378,5 +399,6 @@
         isPasswordPresent = function () {
             return $('#password').val().length > 0;
         }
+
     });
 </script>
