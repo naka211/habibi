@@ -43,7 +43,7 @@ class Payment extends MX_Controller {
         $data['currency'] = $this->currency;
         $data['windowstate'] = $this->windowstate;
 
-        $data['amount'] = number_format($this->config->item($packageName)*100, 0, ',', '.');
+        $data['amount'] = $this->config->item($packageName)*100;
         $data['accepturl'] = site_url('user/upgradeSuccess');
         $data['cancelurl'] = site_url('user/upgradeCancel');
         $data['callbackurl'] = site_url('user/upgradeCallback');
@@ -54,7 +54,7 @@ class Payment extends MX_Controller {
     }
 
     function changeCard(){
-        $userid = $this->session->userdata('userid');
+        //$userid = $this->session->userdata('userid');
         //Go payment Epay
 
         $data['merchantnumber'] = $this->merchantnumber;
@@ -156,7 +156,6 @@ class Payment extends MX_Controller {
             echo 'Nobody';
         }
     }
-
 }
 
 /* End of file welcome.php */
