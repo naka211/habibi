@@ -1081,6 +1081,25 @@ class User extends MX_Controller
 
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
+
+    function setDeactivation($status){
+        $user = $this->session->userdata('user');
+
+        $db['deactivation'] = $status;
+        $this->user->saveUser($db, $user->id);
+        $this->updateUserSession($user->id);
+
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
+    function deleteAccount(){
+        $user = $this->session->userdata('user');
+
+        $db['deleted'] = time();
+        $this->user->saveUser($db, $user->id);
+
+        redirect(site_url('/user/logout'));
+    }
 }
 
 /* End of file welcome.php */

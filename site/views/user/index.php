@@ -80,7 +80,9 @@
                             </div>
                             <a class="btn_edit" href="<?php echo site_url('user/update');?>"><i class="i_edit"></i> <span>Redigere</span></a>
                         </div>
-
+                        <?php if($user->deactivation == 1){?>
+                            <a href="<?php echo site_url('user/setDeactivation/0')?>" class="btn btn_viewSearch">Aktivér</a>
+                        <?php }?>
                         <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="switch-field">
                                 <div class="switch-title">Chat</div>

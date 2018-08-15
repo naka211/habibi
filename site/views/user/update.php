@@ -304,10 +304,20 @@
                     <?php if($user->type == 2){
                         if($user->stand_by_payment == 0){
                         ?>
-                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn btn_viewSearch">Stå ved betaling</a>
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalStandBy" class="btn btn_viewSearch">Stå ved betaling</a>
                             <?php } else {?>
                             <a href="<?php echo site_url('user/setStandByStatus/0')?>" class="btn btn_viewSearch">Jeg vil stoppe med at stå ved betaling</a>
                     <?php }}?>
+
+                    <hr>
+                    <h3 style="margin: 0;">Konto</h3>
+                    <?php if($user->deactivation == 0){?>
+                        <a href="javascript:void(0);" data-fancybox data-src="#modalDeactivate" class="btn btn_viewSearch">Deaktiver</a>
+                    <?php } else {?>
+                        <a href="<?php echo site_url('user/setDeactivation/0')?>" class="btn btn_viewSearch">Aktivér</a>
+                    <?php }?>
+
+                    <a href="javascript:void(0);" data-fancybox data-src="#modalDelete" class="btn btnDeleteAcc">Slet konto</a>
                     <?php echo form_close();?>
                 </div>
             </div>
@@ -318,7 +328,7 @@
         </div>
     </section>
 </div>
-<div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
+<div style="display: none;" id="modalStandBy" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -327,6 +337,32 @@
             </div>
             <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
             <a href="<?php echo site_url('user/setStandByStatus/1')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+        </div>
+    </div>
+</div>
+
+<div style="display: none;" id="modalDeactivate" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
+                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+            </div>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
+            <a href="<?php echo site_url('user/setDeactivation/1')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+        </div>
+    </div>
+</div>
+
+<div style="display: none;" id="modalDelete" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
+                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+            </div>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
+            <a href="<?php echo site_url('user/deleteAccount')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
         </div>
     </div>
 </div>
