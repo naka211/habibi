@@ -57,7 +57,7 @@ $(document).ready(function () {
                         location.reload();
                     } else {
                         $('.se-pre-con').fadeOut();
-                        $('#error-content').html('E-mail / Brugernavn eller adgangskode er forkert, prøv igen!');
+                        $('#error-content').html(data.message);
                         $.fancybox.open({src: '#modalError'});
                     }
                 }

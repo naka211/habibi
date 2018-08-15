@@ -792,14 +792,20 @@ class User extends MX_Controller
         //Login user
         $user = $this->user->getUser('', $info, $password);
         if ($user) {
-            $data['status'] = true;
-            $this->session->set_userdata('isLoginSite', true);
-            $this->session->set_userdata('user', $user);
-            $this->user->updateLogin($user->id, 1);
-            $this->_updateSearchDataAfterLogin();
-            //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
+            if($user->deleted != null){
+                $data['status'] = false;
+                $data['message'] = 'Denne konto er blevet slettet';
+            } else {
+                $data['status'] = true;
+                $this->session->set_userdata('isLoginSite', true);
+                $this->session->set_userdata('user', $user);
+                $this->user->updateLogin($user->id, 1);
+                $this->_updateSearchDataAfterLogin();
+                //setcookie('cc_data', $user->id, time() + (86400 * 30), "/");
+            }
         } else {
             $data['status'] = false;
+            $data['message'] = 'E-mail / Brugernavn eller adgangskode er forkert, prøv igen!';
         }
         header('Content-Type: application/json');
         echo json_encode($data);
