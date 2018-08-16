@@ -25,6 +25,8 @@ class User_model extends CI_Model{
         $this->db->select('u.id');
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         //Search
         if(isset($search['toAge']) && !empty($search['toAge'])){
             $this->db->where('u.year >=', date('Y', time()) - $search['toAge']);
@@ -72,6 +74,8 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.blurIndex, u.land, u.year, u.login');
         $this->db->from('user as u');
         $this->db->where("u.bl_active",1);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         //Search
         if(isset($search['toAge']) && !empty($search['toAge'])){
             $this->db->where('u.year >=', date('Y', time()) - $search['toAge']);
@@ -133,6 +137,8 @@ class User_model extends CI_Model{
         $this->db->select('u.id, u.name, u.avatar, u.land, u.year, u.region, u.blurIndex, u.login');
         $this->db->from('tb_user as u');
         $this->db->where("u.bl_active",1);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         /*if($search['name']){
             $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
         }*/
@@ -288,6 +294,8 @@ class User_model extends CI_Model{
 		$this->db->from('user_messages m');
         $this->db->join('user u', 'm.user_from = u.id','inner');
         $this->db->where('(m.user_from='.$user.' AND m.user_to='.$userID.') OR (m.user_from='.$userID.' AND m.user_to='.$user.')');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         $this->db->order_by('m.id DESC');
         if($num || $offset){
             $this->db->limit($num, $offset);
@@ -297,9 +305,12 @@ class User_model extends CI_Model{
     }
 
     function getNumMessages($user=NULL,$userID=NULL){
-        $this->db->select('COUNT(id) as num');
-        $this->db->from('user_messages');
-        $this->db->where('(user_from='.$user.' AND user_to='.$userID.') OR (user_from='.$userID.' AND user_to='.$user.')');
+        $this->db->select('COUNT(m.id) as num');
+        $this->db->from('user_messages m');
+        $this->db->join('user u', 'm.user_from = u.id','inner');
+        $this->db->where('(m.user_from='.$user.' AND m.user_to='.$userID.') OR (m.user_from='.$userID.' AND m.user_to='.$user.')');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         $query = $this->db->get();
         return $query->row()->num;
     }
@@ -391,6 +402,8 @@ class User_model extends CI_Model{
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uf.user_to', $ignore);
         }
@@ -409,7 +422,10 @@ class User_model extends CI_Model{
     function getNumFavorite($user=NULL, $ignore = null){
         $this->db->select('uf.*');
         $this->db->from('user_favorite as uf');
+        $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from",$user);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uf.user_to', $ignore);
         }
@@ -641,11 +657,14 @@ class User_model extends CI_Model{
      */
     function getNumReceivedBlinks($user_id = NULL, $ignore = null){
         $this->db->distinct();
-        $this->db->select('from_user_id');
-        $this->db->from('user_kisses');
-        $this->db->where("to_user_id",$user_id);
+        $this->db->select('uk.from_user_id');
+        $this->db->from('user_kisses uk');
+        $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
+        $this->db->where("uk.to_user_id",$user_id);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
-            $this->db->where_not_in('from_user_id', $ignore);
+            $this->db->where_not_in('uk.from_user_id', $ignore);
         }
         $query = $this->db->get()->num_rows();
         return $query;
@@ -663,6 +682,8 @@ class User_model extends CI_Model{
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.to_user_id = '.$userId.' GROUP BY from_user_id)');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uk.from_user_id', $ignore);
         }
@@ -684,11 +705,14 @@ class User_model extends CI_Model{
      */
     function getNumSentBlinks($user_id = NULL, $ignore = null){
         $this->db->distinct();
-        $this->db->select('to_user_id');
-        $this->db->from('user_kisses');
-        $this->db->where("from_user_id",$user_id);
+        $this->db->select('uk.to_user_id');
+        $this->db->from('user_kisses uk');
+        $this->db->join('user as u', 'u.id = uk.to_user_id', 'inner');
+        $this->db->where("uk.from_user_id",$user_id);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
-            $this->db->where_not_in('to_user_id', $ignore);
+            $this->db->where_not_in('uk.to_user_id', $ignore);
         }
         $query = $this->db->get()->num_rows();
         return $query;
@@ -706,6 +730,8 @@ class User_model extends CI_Model{
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.to_user_id', 'inner');
         $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.from_user_id = '.$userId.' GROUP BY to_user_id)');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uk.to_user_id', $ignore);
         }
@@ -720,11 +746,14 @@ class User_model extends CI_Model{
     /* Visit*/
     function getNumVisitMe($user_id = NULL, $ignore = null){
         $this->db->distinct();
-        $this->db->select('from_user');
-        $this->db->from('user_visit');
-        $this->db->where("to_user",$user_id);
+        $this->db->select('uv.from_user');
+        $this->db->from('user_visit uv');
+        $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
+        $this->db->where("uv.to_user",$user_id);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
-            $this->db->where_not_in('from_user', $ignore);
+            $this->db->where_not_in('uv.from_user', $ignore);
         }
         $query = $this->db->get()->num_rows();
         return $query;
@@ -735,6 +764,8 @@ class User_model extends CI_Model{
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.to_user = '.$userId.' GROUP BY from_user)');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uv.from_user', $ignore);
         }
@@ -748,11 +779,14 @@ class User_model extends CI_Model{
 
     function getNumVisited($user_id = NULL, $ignore = null){
         $this->db->distinct();
-        $this->db->select('to_user');
-        $this->db->from('user_visit');
-        $this->db->where("from_user",$user_id);
+        $this->db->select('uv.to_user');
+        $this->db->from('user_visit uv');
+        $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
+        $this->db->where("uv.from_user",$user_id);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
-            $this->db->where_not_in('to_user', $ignore);
+            $this->db->where_not_in('uv.to_user', $ignore);
         }
         $query = $this->db->get()->num_rows();
         return $query;
@@ -763,6 +797,8 @@ class User_model extends CI_Model{
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
         $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.from_user = '.$userId.' GROUP BY to_user)');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uv.to_user', $ignore);
         }
@@ -948,6 +984,8 @@ class User_model extends CI_Model{
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
         $this->db->where("uf.status", 0);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uf.user_from', $ignore);
         }
@@ -962,6 +1000,8 @@ class User_model extends CI_Model{
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 0);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uf.user_to', $ignore);
         }
@@ -976,6 +1016,8 @@ class User_model extends CI_Model{
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 2);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('uf.user_to', $ignore);
         }
@@ -1031,6 +1073,8 @@ class User_model extends CI_Model{
         $this->db->from('user_friendlist as ul');
         $this->db->join('user as u', 'u.id = ul.user_to', 'inner');
         $this->db->where("ul.user_from", $userId);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('ul.user_to', $ignore);
         }
@@ -1054,6 +1098,8 @@ class User_model extends CI_Model{
         $this->db->from('user_friendlist as ul');
         $this->db->where('ul.user_from', $userId);
         $this->db->join('user as u', 'ul.user_to = u.id', 'inner');
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
         if($ignore){
             $this->db->where_not_in('ul.user_to', $ignore);
         }
@@ -1086,6 +1132,8 @@ class User_model extends CI_Model{
                     $this->db->select('name, id, avatar, region, ethnic_origin, year, login, blurIndex');
                     $this->db->from('user');
                     $this->db->where("id", $user->userId);
+                    $this->db->where("deactivation", 0);
+                    $this->db->where("deleted", null);
                     $userInfo = $this->db->get()->row();
                     if($userInfo){
                         $result[$key] = $userInfo;
