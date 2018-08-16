@@ -110,7 +110,7 @@ class User extends MX_Controller
     /** Photo*/
     function uploadPhoto(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Mine billeder');
 
         $data['user'] = $this->session->userdata('user');
         $data['listImages'] = $this->user->getPhoto($data['user']->id, 0);
@@ -121,7 +121,7 @@ class User extends MX_Controller
 
     function myPhoto(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data, 'Habibi - Min foto');
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Mine billeder');
 
         $data['user'] = $this->session->userdata('user');
         $data['listImages'] = $this->user->getPhoto($data['user']->id);
