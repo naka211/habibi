@@ -4,7 +4,7 @@
             <div class="friend_list_lead">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <h3>FAVORITTER LIST</h3>
+                        <h3>FARVORIT LISTE</h3>
                     </div>
                 </div>
             </div>

@@ -298,8 +298,8 @@
                             <label for="">Køn</label>
                             <select name="gender" class="form-control">
                                 <option value="">Vælg</option>
-                                <option value="1">Mænd</option>
-                                <option value="2">Kvinder</option>
+                                <option value="1">Mand</option>
+                                <option value="2">Kvinde</option>
                             </select>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -373,8 +373,8 @@
                                 <label for="">Køn</label>
                                 <select name="find_gender" class="form-control">
                                     <option value="">Vælg</option>
-                                    <option value="1">Mænd</option>
-                                    <option value="2">Kvinder</option>
+                                    <option value="1">Mand</option>
+                                    <option value="2">Kvinde</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

@@ -31,7 +31,7 @@ if(!empty($user)){
                         <div class="box_user_content">
                             <h4 class="media-heading"><?php echo $user->name;?></h4>
                             <?php if(isGoldMember()){?>
-                                <a>Guld abonnement udløber: <?php echo @date('d/m/Y', $user)?></a>
+                                <a>Abonnement udløber: <?php echo @date('d/m/Y', $user->expired_at)?></a>
                             <?php } else {?>
                                 <a>Gratis medlem: Ubegrænset</a>
                             <?php }?>
@@ -46,8 +46,8 @@ if(!empty($user)){
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="<?php echo site_url('user/index');?>">Min profil</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/update');?>">Rediger profil</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Min foto</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Bloker liste</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Mine billeder</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Blokerede</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/logout');?>">Log ud</a>
                             </div>
                         </div>

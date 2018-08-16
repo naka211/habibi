@@ -43,7 +43,7 @@
                             <?php if(isGoldMember() === true){?>
                             <p class="gray_friend_item"><?php echo word_limiter($user->message, 8);?></p>
                             <?php }?>
-                            <a <?php echo $messageLink;?> class="btn bntMessage">Se chatbesked</a>
+                            <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                             <a onclick="confirmDeleteMessage(<?php echo $user->id;?>)" href="javascript:;" class="btn bntBlock">SLET</a>
                         </div>
                     </div>

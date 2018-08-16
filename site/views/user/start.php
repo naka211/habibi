@@ -159,7 +159,7 @@
 
         <section class="section_mostvisitedProfiles" style="border-bottom: none;">
             <div class="row">
-                <h2 class="title">Populær profiler</h2>
+                <h2 class="title">Populære profiler</h2>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="owl-carousel owl-theme owl_mostvisitedProfiles">
                         <?php foreach ($popularUsers as $user){?>

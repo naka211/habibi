@@ -7,7 +7,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#receivedSection">Venneanmodninger</a></li>
                             <li><a data-toggle="tab" href="#sentSection">Sendte</a></li>
-                            <li><a data-toggle="tab" href="#rejectedSection">Afvist</a></li>
+                            <li><a data-toggle="tab" href="#rejectedSection">Afviste</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="receivedSection" class="tab-pane fade in active">
@@ -40,7 +40,7 @@
                                                         </p>
                                                         <a href="javascript:void(0);" <?php echo $acceptLink;?> class="btn bntMessage">Acceptere</a>
                                                         <a href="javascript:void(0);" <?php echo $rejectLink;?> class="btn bntReject">Afvise</a>
-                                                        <a href="javascript:void(0);" <?php echo $blockLink;?> class="btn bntBlock">Blok</a>
+                                                        <a href="javascript:void(0);" <?php echo $blockLink;?> class="btn bntBlock">Bloker</a>
                                                     </div>
                                                 </div>
                                             </div>
