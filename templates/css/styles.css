@@ -2160,6 +2160,7 @@ ul.list_action li a .i_report {
 
 .box_form_group_age .form-control {
     width: 90px;
+    background-size: 15%;
 }
 
 .i_line {
