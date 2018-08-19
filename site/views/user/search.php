@@ -119,11 +119,13 @@
                                         </select>
                                     </div>
                                     <div class="box_form_group">
-                                        <p for="">Ryger</p>
+                                        <p for="">Rygning</p>
                                         <select class="form-control 3col active regionSelection" name="smoking[]" id="smoking" multiple="multiple">
-                                            <option value="Ja" <?php if(inSearch('smoking', 'Ja')) echo 'selected';?>>Ja</option>
-                                            <option value="Nej" <?php if(inSearch('smoking', 'Nej')) echo 'selected';?>>Nej</option>
-                                            <option value="Ja, festryger" <?php if(inSearch('smoking', 'Ja, festryger')) echo 'selected';?>>Ja, festryger</option>
+                                            <option value="Ikke angivet" <?php if(inSearch('smoking', 'Ikke angivet')) echo 'selected';?>>Ikke angivet</option>
+                                            <option value="Ikke riger" <?php if(inSearch('smoking', 'Ikke riger')) echo 'selected';?>>Ikke riger</option>
+                                            <option value="Festryger" <?php if(inSearch('smoking', 'Festryger')) echo 'selected';?>>Festryger</option>
+                                            <option value="Ryger" <?php if(inSearch('smoking', 'Ryger')) echo 'selected';?>>Ryger</option>
+                                            <option value="Ryger E-cigaret" <?php if(inSearch('smoking', 'Ryger E-cigaret')) echo 'selected';?>>Ryger E-cigaret</option>
                                         </select>
                                     </div>
                                     <div class="box_form_group">
@@ -137,11 +139,19 @@
                                     <div class="box_form_group">
                                         <p for="">Uddannelse</p>
                                         <select class="form-control 3col active regionSelection" name="training[]" id="training" multiple="multiple">
-                                            <option value="Ingen eksamen" <?php if(inSearch('training', 'Ingen eksamen')) echo 'selected';?>>Ingen eksamen</option>
-                                            <option value="Gymnasium/HF" <?php if(inSearch('training', 'Gymnasium/HF')) echo 'selected';?>>Gymnasium/HF</option>
-                                            <option value="Fagskole" <?php if(inSearch('training', 'Fagskole')) echo 'selected';?>>Fagskole</option>
-                                            <option value="Bachelorgrad" <?php if(inSearch('training', 'Bachelorgrad')) echo 'selected';?>>Bachelorgrad</option>
-                                            <option value="Kandidat/ph.d." <?php if(inSearch('training', 'Kandidat/ph.d.')) echo 'selected';?>>Kandidat/ph.d.</option>
+                                            <option value="Ikke angivet" <?php if(inSearch('training', 'Ikke angivet')) echo 'selected';?>>Ikke angivet</option>
+                                            <option value="Faglært" <?php if(inSearch('training', 'Faglært')) echo 'selected';?>>Faglært</option>
+                                            <option value="Folkeskole/10.klasse" <?php if(inSearch('training', 'Folkeskole/10.klasse')) echo 'selected';?>>Folkeskole/10.klasse</option>
+                                            <option value="Gymnasie/HF" <?php if(inSearch('training', 'Gymnasie/HF')) echo 'selected';?>>Gymnasie/HF</option>
+                                            <option value="Handelsskole/HH" <?php if(inSearch('training', 'Handelsskole/HH')) echo 'selected';?>>Handelsskole/HH</option>
+                                            <option value="Kortere videregående" <?php if(inSearch('training', 'Kortere videregående')) echo 'selected';?>>Kortere videregående</option>
+                                            <option value="Mellemlang videregående" <?php if(inSearch('training', 'Mellemlang videregående')) echo 'selected';?>>Mellemlang videregående</option>
+                                            <option value="Længere videregående" <?php if(inSearch('training', 'Længere videregående')) echo 'selected';?>>Længere videregående</option>
+                                            <option value="Lærling/elev" <?php if(inSearch('training', 'Lærling/elev')) echo 'selected';?>>Lærling/elev</option>
+                                            <option value="Ph.D" <?php if(inSearch('training', 'Ph.D')) echo 'selected';?>>Ph.D</option>
+                                            <option value="Teknisk skole/HTX" <?php if(inSearch('training', 'Teknisk skole/HTX')) echo 'selected';?>>Teknisk skole/HTX</option>
+                                            <option value="Akademisk" <?php if(inSearch('training', 'Akademisk')) echo 'selected';?>>Akademisk</option>
+                                            <option value="Kandidat" <?php if(inSearch('training', 'Kandidat')) echo 'selected';?>>Kandidat</option>
                                         </select>
                                     </div>
                                     <div class="box_form_group">

@@ -70,7 +70,7 @@
                                                 <td><?php echo $user->body?$user->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Ryger:</th>
+                                                <th>Rygning:</th>
                                                 <td><?php echo $user->smoking?$user->smoking:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>

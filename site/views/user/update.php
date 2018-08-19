@@ -86,11 +86,19 @@
                                 <div class="form-group">
                                     <label for="">Uddannelse:</label>
                                     <select name="training" class="form-control">
-                                        <option <?php if($user->training == 'Ingen eksamen'){echo 'selected="true"';}?> value="Ingen eksamen">Ingen eksamen</option>
-                                        <option <?php if($user->training == 'Gymnasium/HF'){echo 'selected="true"';}?> value="Gymnasium/HF">Gymnasium/HF</option>
-                                        <option <?php if($user->training == 'Fagskole'){echo 'selected="true"';}?> value="Fagskole">Fagskole</option>
-                                        <option <?php if($user->training == 'Bachelorgrad'){echo 'selected="true"';}?> value="Bachelorgrad">Bachelorgrad</option>
-                                        <option <?php if($user->training == 'Kandidat/ph.d.'){echo 'selected="true"';}?> value="Kandidat/ph.d.">Kandidat/ph.d.</option>
+                                        <option <?php if($user->training == 'Ikke angivet'){echo 'selected="true"';}?> value="Ikke angivet">Ikke angivet</option>
+                                        <option <?php if($user->training == 'Faglært'){echo 'selected="true"';}?> value="Faglært">Faglært</option>
+                                        <option <?php if($user->training == 'Folkeskole/10.klasse'){echo 'selected="true"';}?> value="Folkeskole/10.klasse">Folkeskole/10.klasse</option>
+                                        <option <?php if($user->training == 'Gymnasie/HF'){echo 'selected="true"';}?> value="Gymnasie/HF">Gymnasie/HF</option>
+                                        <option <?php if($user->training == 'Handelsskole/HH'){echo 'selected="true"';}?> value="Handelsskole/HH">Handelsskole/HH</option>
+                                        <option <?php if($user->training == 'Kortere videregående'){echo 'selected="true"';}?> value="Kortere videregående">Kortere videregående</option>
+                                        <option <?php if($user->training == 'Mellemlang videregående'){echo 'selected="true"';}?> value="Mellemlang videregående">Mellemlang videregående</option>
+                                        <option <?php if($user->training == 'Længere videregående'){echo 'selected="true"';}?> value="Længere videregående">Længere videregående</option>
+                                        <option <?php if($user->training == 'Lærling/elev'){echo 'selected="true"';}?> value="Lærling/elev">Lærling/elev</option>
+                                        <option <?php if($user->training == 'Ph.D'){echo 'selected="true"';}?> value="Ph.D">Ph.D</option>
+                                        <option <?php if($user->training == 'Teknisk skole/HTX'){echo 'selected="true"';}?> value="Teknisk skole/HTX">Teknisk skole/HTX</option>
+                                        <option <?php if($user->training == 'Akademisk'){echo 'selected="true"';}?> value="Akademisk">Akademisk</option>
+                                        <option <?php if($user->training == 'Kandidat'){echo 'selected="true"';}?> value="Kandidat">Kandidat</option>
                                     </select>
                                 </div>
                             </div>
@@ -141,11 +149,13 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="">Ryger:</label>
+                                    <label for="">Rygning:</label>
                                     <select name="smoking" class="form-control">
-                                        <option <?php if($user->smoking == 'Ja'){echo 'selected="true"';}?> value="Ja">Ja</option>
-                                        <option <?php if($user->smoking == 'Nej'){echo 'selected="true"';}?> value="Nej">Nej</option>
-                                        <option <?php if($user->smoking == 'Ja, festryger'){echo 'selected="true"';}?> value="Ja, festryger">Ja, festryger</option>
+                                        <option <?php if($user->smoking == 'Ikke angivet'){echo 'selected="true"';}?> value="Ikke angivet">Ikke angivet</option>
+                                        <option <?php if($user->smoking == 'Ikke riger'){echo 'selected="true"';}?> value="Ikke riger">Ikke riger</option>
+                                        <option <?php if($user->smoking == 'Festryger'){echo 'selected="true"';}?> value="Festryger">Festryger</option>
+                                        <option <?php if($user->smoking == 'Ryger'){echo 'selected="true"';}?> value="Ryger">Ryger</option>
+                                        <option <?php if($user->smoking == 'Ryger E-cigaret'){echo 'selected="true"';}?> value="Ryger E-cigaret">Ryger E-cigaret</option>
                                     </select>
                                 </div>
                             </div>

@@ -45,7 +45,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                             <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'cancelAddFriendInProfile')" id="requestBtn" class="btn btn_cancel_request">Annuller anmodning</a>
                         <?php }?>
                         <?php if($status->isFriend == 1){?>
-                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriendInProfile')" id="requestBtn" class="btn btnUnfriend">Unfriend</a>
+                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriendInProfile')" id="requestBtn" class="btn btnUnfriend">Fjern ven</a>
                         <?php }?>
                         <div class="w_table_infoProfile">
                             <div class="row">
@@ -102,7 +102,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 <td><?php echo $profile->body?$profile->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Ryger:</th>
+                                                <th>Rygning:</th>
                                                 <td><?php echo $profile->smoking?$profile->smoking:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>

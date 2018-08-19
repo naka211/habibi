@@ -2681,11 +2681,11 @@ ul.list_action li a .i_report {
     width: 248px;
 }
 .box_wrap .ms-options-wrap > button:focus, .box_wrap .ms-options-wrap > button {
-    width: 235px;
+    width: 231px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;
-    width: 300px;
+    width: 400px;
 }
 .ms-options-wrap > .ms-options > .ms-selectall.global {
     color: #333;
