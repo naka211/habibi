@@ -11,72 +11,17 @@
                             <div class="row_search clearfix">
                                 <div class="box_form_group">
                                     <p for="">Land:</p>
-                                    <select class="form-control 3col active regionSelection" name="land[]" id="land" multiple="multiple">
-                                        <option value="Tyrkiet" <?php if(inSearch('land', 'Tyrkiet')) echo 'selected';?>>Tyrkiet</option>
-                                        <option value="Syrien" <?php if(inSearch('land', 'Syrien')) echo 'selected';?>>Syrien</option>
-                                        <option value="Irak" <?php if(inSearch('land', 'Irak')) echo 'selected';?>>Irak</option>
-                                        <option value="Libanon" <?php if(inSearch('land', 'Libanon')) echo 'selected';?>>Libanon</option>
-                                        <option value="Pakistan" <?php if(inSearch('land', 'Pakistan')) echo 'selected';?>>Pakistan</option>
-                                        <option value="Palæstina" <?php if(inSearch('land', 'Palæstina')) echo 'selected';?>>Palæstina</option>
-                                        <option value="Somalia" <?php if(inSearch('land', 'Somalia')) echo 'selected';?>>Somalia</option>
-                                        <option value="Afghanistan" <?php if(inSearch('land', 'Afghanistan')) echo 'selected';?>>Afghanistan</option>
-                                        <option value="Bosnien" <?php if(inSearch('land', 'Bosnien')) echo 'selected';?>>Bosnien</option>
-                                        <option value="Iran" <?php if(inSearch('land', 'Iran')) echo 'selected';?>>Iran</option>
-                                        <option value="Marokko" <?php if(inSearch('land', 'Marokko')) echo 'selected';?>>Marokko</option>
-                                        <option value="Albanien" <?php if(inSearch('land', 'Albanien')) echo 'selected';?>>Albanien</option>
-                                        <option value="Algeriet" <?php if(inSearch('land', 'Algeriet')) echo 'selected';?>>Algeriet</option>
-                                        <option value="Egypten" <?php if(inSearch('land', 'Egypten')) echo 'selected';?>>Egypten</option>
-                                        <option value="Makedionen" <?php if(inSearch('land', 'Makedionen')) echo 'selected';?>>Makedionen</option>
-                                        <option value="Andet" <?php if(inSearch('land', 'Andet')) echo 'selected';?>>Andet</option>
-                                    </select>
+                                    <?php echo generateSelectInSearch('land');?>
                                 </div>
                                 <div class="box_form_group">
                                     <p for="">Region:</p>
-                                    <select class="form-control 3col active regionSelection" name="region[]" id="region" multiple="multiple">
-                                        <option value="København" <?php if(inSearch('region', 'København')) echo 'selected';?>>København</option>
-                                        <option value="Storkøbenhavn" <?php if(inSearch('region', 'Storkøbenhavn')) echo 'selected';?>>Storkøbenhavn</option>
-                                        <option value="Århus" <?php if(inSearch('region', 'Århus')) echo 'selected';?>>Århus</option>
-                                        <option value="Aalborg" <?php if(inSearch('region', 'Aalborg')) echo 'selected';?>>Aalborg</option>
-                                        <option value="Odense" <?php if(inSearch('region', 'Odense')) echo 'selected';?>>Odense</option>
-                                        <option value="Nordsjælland" <?php if(inSearch('region', 'Nordsjælland')) echo 'selected';?>>Nordsjælland</option>
-                                        <option value="Midt/Vestsjælland" <?php if(inSearch('region', 'Midt/Vestsjælland')) echo 'selected';?>>Midt/Vestsjælland</option>
-                                        <option value="Sydsjælland" <?php if(inSearch('region', 'Sydsjælland')) echo 'selected';?>>Sydsjælland</option>
-                                        <option value="Lolland/Falster" <?php if(inSearch('region', 'Lolland/Falster')) echo 'selected';?>>Lolland/Falster</option>
-                                        <option value="Fyn" <?php if(inSearch('region', 'Fyn')) echo 'selected';?>>Fyn</option>
-                                        <option value="Nordjylland" <?php if(inSearch('region', 'Nordjylland')) echo 'selected';?>>Nordjylland</option>
-                                        <option value="Østjylland" <?php if(inSearch('region', 'Østjylland')) echo 'selected';?>>Østjylland</option>
-                                        <option value="Vestjylland" <?php if(inSearch('region', 'Vestjylland')) echo 'selected';?>>Vestjylland</option>
-                                        <option value="Sydjylland" <?php if(inSearch('region', 'Sydjylland')) echo 'selected';?>>Sydjylland</option>
-                                        <option value="Midtjylland" <?php if(inSearch('region', 'Midtjylland')) echo 'selected';?>>Midtjylland</option>
-                                        <option value="Sønderjylland" <?php if(inSearch('region', 'Sønderjylland')) echo 'selected';?>>Sønderjylland</option>
-                                        <option value="Bornholm" <?php if(inSearch('region', 'Bornholm')) echo 'selected';?>>Bornholm</option>
-                                    </select>
+                                    <?php echo generateSelectInSearch('region');?>
                                 </div>
                                 <div class="box_form_group box_form_group_age">
                                     <p for="">Alder:</p>
-                                    <select name="fromAge" class="form-control" id="fromAge">
-                                        <?php for($i=18; $i<=90; $i++){
-                                            if($searchData['fromAge']){
-                                                $selected = $searchData['fromAge'] == $i?'selected':'';
-                                            } else {
-                                                $selected = '';
-                                            }
-                                            ?>
-                                            <option value="<?php echo $i;?>" <?php echo $selected;?>><?php echo $i;?></option>
-                                        <?php }?>
-                                    </select>
+                                    <?php echo generateOptionsInRangeHTML('fromAge', 18, 90, $searchData['fromAge'], 'år');?>
                                     <span class="i_line">−</span>
-                                    <select name="toAge" class="form-control option_age" id="toAge">
-                                        <?php for($i=18; $i<=90; $i++){
-                                            if($searchData['toAge']){
-                                                $selected = $searchData['toAge'] == $i?'selected':'';
-                                            } else {
-                                                $selected = $i==90?'selected':'';
-                                            }
-                                            ?>
-                                            <option value="<?php echo $i;?>" <?php echo $selected;?>><?php echo $i;?></option>
-                                        <?php }?>
-                                    </select>
+                                    <?php echo generateOptionsInRangeHTML('toAge', 18, 90, $searchData['toAge'], 'år');?>
                                 </div>
                                 <div class="box_form_group">
                                     <p for="">Sortering:</p>
@@ -89,6 +34,18 @@
                             <button type="button" class="btn btn_searchResult" style="width: auto; padding-top: 5px; padding-bottom: 5px;" id="seeMoreCriteria">Valgfrie kriterier</button>
                             <div class="row_search clearfix" id="filter">
                                 <div class="box_wrap">
+                                    <div class="box_form_group box_form_group_age">
+                                        <p for="">Højde:</p>
+                                        <?php echo generateOptionsInRangeHTML('fromHeight', 100, 230, $searchData['fromHeight'], 'cm');?>
+                                        <span class="i_line">−</span>
+                                        <?php echo generateOptionsInRangeHTML('toHeight', 100, 230, $searchData['toHeight'], 'cm');?>
+                                    </div>
+                                    <div class="box_form_group box_form_group_age">
+                                        <p for="">Vægt:</p>
+                                        <?php echo generateOptionsInRangeHTML('fromWeight', 40, 220, $searchData['fromWeight'], 'kg');?>
+                                        <span class="i_line">−</span>
+                                        <?php echo generateOptionsInRangeHTML('toWeight', 40, 220, $searchData['toWeight'], 'kg');?>
+                                    </div>
                                     <div class="box_form_group">
                                         <p for="">Køn</p>
                                         <select class="form-control 3col active regionSelection" name="gender[]" id="gender" multiple="multiple">
@@ -98,70 +55,47 @@
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Forhold</p>
-                                        <select class="form-control 3col active regionSelection" name="relationship[]" id="relationship" multiple="multiple">
-                                            <option value="Aldrig gift" <?php if(inSearch('relationship', 'Aldrig gift')) echo 'selected';?>>Aldrig gift</option>
-                                            <option value="Separeret" <?php if(inSearch('relationship', 'Separeret')) echo 'selected';?>>Separeret</option>
-                                            <option value="Skilt" <?php if(inSearch('relationship', 'Skilt')) echo 'selected';?>>Skilt</option>
-                                            <option value="Enke/enkemand" <?php if(inSearch('relationship', 'Enke/enkemand')) echo 'selected';?>>Enke/enkemand</option>
-                                            <option value="Det får du at vide senere" <?php if(inSearch('relationship', 'Det får du at vide senere')) echo 'selected';?>>Det får du at vide senere</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('relationship');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Børn</p>
-                                        <select class="form-control 3col active regionSelection" name="children[]" id="children" multiple="multiple">
-                                            <option value="Nej" <?php if(inSearch('children', 'Nej')) echo 'selected';?>>Nej</option>
-                                            <option value="Ja, hjemmeboende" <?php if(inSearch('children', 'Ja, hjemmeboende')) echo 'selected';?>>Ja, hjemmeboende</option>
-                                            <option value="Ja, udeboende" <?php if(inSearch('children', 'Ja, udeboende')) echo 'selected';?>>Ja, udeboende</option>
-                                            <option value="1" <?php if(inSearch('children', '1')) echo 'selected';?>>1</option>
-                                            <option value="2" <?php if(inSearch('children', '2')) echo 'selected';?>>2</option>
-                                            <option value="3" <?php if(inSearch('children', '3')) echo 'selected';?>>3</option>
-                                            <option value="3+" <?php if(inSearch('children', '3+')) echo 'selected';?>>3+</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('children');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Rygning</p>
-                                        <select class="form-control 3col active regionSelection" name="smoking[]" id="smoking" multiple="multiple">
-                                            <option value="Ikke angivet" <?php if(inSearch('smoking', 'Ikke angivet')) echo 'selected';?>>Ikke angivet</option>
-                                            <option value="Ikke riger" <?php if(inSearch('smoking', 'Ikke riger')) echo 'selected';?>>Ikke riger</option>
-                                            <option value="Festryger" <?php if(inSearch('smoking', 'Festryger')) echo 'selected';?>>Festryger</option>
-                                            <option value="Ryger" <?php if(inSearch('smoking', 'Ryger')) echo 'selected';?>>Ryger</option>
-                                            <option value="Ryger E-cigaret" <?php if(inSearch('smoking', 'Ryger E-cigaret')) echo 'selected';?>>Ryger E-cigaret</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('smoking');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Religion</p>
-                                        <select class="form-control 3col active regionSelection" name="religion[]" id="religion" multiple="multiple">
-                                            <option value="Suni" <?php if(inSearch('religion', 'Suni')) echo 'selected';?>>Suni</option>
-                                            <option value="Shia" <?php if(inSearch('religion', 'Shia')) echo 'selected';?>>Shia</option>
-                                            <option value="Andet" <?php if(inSearch('religion', 'Andet')) echo 'selected';?>>Andet</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('religion');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Uddannelse</p>
-                                        <select class="form-control 3col active regionSelection" name="training[]" id="training" multiple="multiple">
-                                            <option value="Ikke angivet" <?php if(inSearch('training', 'Ikke angivet')) echo 'selected';?>>Ikke angivet</option>
-                                            <option value="Faglært" <?php if(inSearch('training', 'Faglært')) echo 'selected';?>>Faglært</option>
-                                            <option value="Folkeskole/10.klasse" <?php if(inSearch('training', 'Folkeskole/10.klasse')) echo 'selected';?>>Folkeskole/10.klasse</option>
-                                            <option value="Gymnasie/HF" <?php if(inSearch('training', 'Gymnasie/HF')) echo 'selected';?>>Gymnasie/HF</option>
-                                            <option value="Handelsskole/HH" <?php if(inSearch('training', 'Handelsskole/HH')) echo 'selected';?>>Handelsskole/HH</option>
-                                            <option value="Kortere videregående" <?php if(inSearch('training', 'Kortere videregående')) echo 'selected';?>>Kortere videregående</option>
-                                            <option value="Mellemlang videregående" <?php if(inSearch('training', 'Mellemlang videregående')) echo 'selected';?>>Mellemlang videregående</option>
-                                            <option value="Længere videregående" <?php if(inSearch('training', 'Længere videregående')) echo 'selected';?>>Længere videregående</option>
-                                            <option value="Lærling/elev" <?php if(inSearch('training', 'Lærling/elev')) echo 'selected';?>>Lærling/elev</option>
-                                            <option value="Ph.D" <?php if(inSearch('training', 'Ph.D')) echo 'selected';?>>Ph.D</option>
-                                            <option value="Teknisk skole/HTX" <?php if(inSearch('training', 'Teknisk skole/HTX')) echo 'selected';?>>Teknisk skole/HTX</option>
-                                            <option value="Akademisk" <?php if(inSearch('training', 'Akademisk')) echo 'selected';?>>Akademisk</option>
-                                            <option value="Kandidat" <?php if(inSearch('training', 'Kandidat')) echo 'selected';?>>Kandidat</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('training');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Kropsbygning</p>
-                                        <select class="form-control 3col active regionSelection" name="body[]" id="body" multiple="multiple">
-                                            <option value="Slank" <?php if(inSearch('body', 'Slank')) echo 'selected';?>>Slank</option>
-                                            <option value="Atletisk" <?php if(inSearch('body', 'Atletisk')) echo 'selected';?>>Atletisk</option>
-                                            <option value="Gennemsnitlig" <?php if(inSearch('body', 'Gennemsnitlig')) echo 'selected';?>>Gennemsnitlig</option>
-                                            <option value="Buttet" <?php if(inSearch('body', 'Buttet')) echo 'selected';?>>Buttet</option>
-                                        </select>
+                                        <?php echo generateSelectInSearch('body');?>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Branche</p>
+                                        <?php echo generateSelectInSearch('business');?>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Job type</p>
+                                        <?php echo generateSelectInSearch('job_type');?>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Hårfarve</p>
+                                        <?php echo generateSelectInSearch('hair_color');?>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Øjenfarve</p>
+                                        <?php echo generateSelectInSearch('eye_color');?>
+                                    </div>
+                                    <div class="box_form_group">
+                                        <p for="">Stjernetegn</p>
+                                        <?php echo generateSelectInSearch('zodiac');?>
                                     </div>
                                 </div>
                             </div>

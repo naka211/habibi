@@ -58,24 +58,36 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 <td><?php echo printAge($profile->year);?></td>
                                             </tr>
                                             <tr>
-                                                <th>Forhold:</th>
-                                                <td><?php echo $profile->relationship?$profile->relationship:'Er ikke angivet';?></td>
+                                                <th>Højde: </th>
+                                                <td><?php echo $profile->height?$profile->height.' cm':'Er ikke angivet';?></td>
                                             </tr>
-                                            <!--<tr>
-                                                <th>Etnisk oprindelse: </th>
-                                                <td><?php /*echo $profile->ethnic_origin?$profile->ethnic_origin:'Er ikke angivet';*/?></td>
-                                            </tr>-->
                                             <tr>
-                                                <th>Uddannelse:</th>
-                                                <td><?php echo $profile->training?$profile->training:'Er ikke angivet';?></td>
+                                                <th>Hårfarve: </th>
+                                                <td><?php echo $profile->hair_color?$profile->hair_color:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Land:</th>
                                                 <td><?php echo $profile->land?$profile->land:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Region:</th>
-                                                <td><?php echo $profile->region?$profile->region:'Er ikke angivet';?></td>
+                                                <th>Branche: </th>
+                                                <td><?php echo $profile->business?$profile->business:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Forhold:</th>
+                                                <td><?php echo $profile->relationship?$profile->relationship:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Uddannelse:</th>
+                                                <td><?php echo $profile->training?$profile->training:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kropsbygning:</th>
+                                                <td><?php echo $profile->body?$profile->body:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Stjernetegn:</th>
+                                                <td><?php echo $profile->zodiac?$profile->zodiac:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -90,16 +102,28 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 <td><?php echo $profile->gender==1?'Mand':'Kvinde';?></td>
                                             </tr>
                                             <tr>
+                                                <th>Vægt: </th>
+                                                <td><?php echo $profile->weight?$profile->weight.' kg':'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Øjenfarve: </th>
+                                                <td><?php echo $profile->eye_color?$profile->eye_color:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Region:</th>
+                                                <td><?php echo $profile->region?$profile->region:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jobtype: </th>
+                                                <td><?php echo $profile->job_type?$profile->job_type:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
                                                 <th>Born:</th>
                                                 <td><?php echo $profile->children?$profile->children:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Religion: </th>
+                                                <th>Religion:</th>
                                                 <td><?php echo $profile->religion?$profile->religion:'Er ikke angivet';?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Kropsbygning:</th>
-                                                <td><?php echo $profile->body?$profile->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Rygning:</th>

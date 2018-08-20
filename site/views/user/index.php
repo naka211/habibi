@@ -26,24 +26,36 @@
                                                 <td><?php echo printAge($user->year);?></td>
                                             </tr>
                                             <tr>
-                                                <th>Forhold:</th>
-                                                <td><?php echo $user->relationship?$user->relationship:'Er ikke angivet';?></td>
+                                                <th>Højde: </th>
+                                                <td><?php echo $user->height?$user->height.' cm':'Er ikke angivet';?></td>
                                             </tr>
-                                            <!--<tr>
-                                                <th>Etnisk oprindelse: </th>
-                                                <td><?php /*echo $user->ethnic_origin?$user->ethnic_origin:'Er ikke angivet';*/?></td>
-                                            </tr>-->
                                             <tr>
-                                                <th>Uddannelse:</th>
-                                                <td><?php echo $user->training?$user->training:'Er ikke angivet';?></td>
+                                                <th>Hårfarve: </th>
+                                                <td><?php echo $user->hair_color?$user->hair_color:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Land:</th>
                                                 <td><?php echo $user->land?$user->land:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Region:</th>
-                                                <td><?php echo $user->region?$user->region:'Er ikke angivet';?></td>
+                                                <th>Branche: </th>
+                                                <td><?php echo $user->business?$user->business:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Forhold:</th>
+                                                <td><?php echo $user->relationship?$user->relationship:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Uddannelse:</th>
+                                                <td><?php echo $user->training?$user->training:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kropsbygning:</th>
+                                                <td><?php echo $user->body?$user->body:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Stjernetegn:</th>
+                                                <td><?php echo $user->zodiac?$user->zodiac:'Er ikke angivet';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -58,16 +70,28 @@
                                                 <td><?php echo $user->gender==1?'Mand':'Kvinde';?></td>
                                             </tr>
                                             <tr>
+                                                <th>Vægt: </th>
+                                                <td><?php echo $user->weight?$user->weight.' kg':'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Øjenfarve: </th>
+                                                <td><?php echo $user->eye_color?$user->eye_color:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Region:</th>
+                                                <td><?php echo $user->region?$user->region:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jobtype: </th>
+                                                <td><?php echo $user->job_type?$user->job_type:'Er ikke angivet';?></td>
+                                            </tr>
+                                            <tr>
                                                 <th>Born:</th>
                                                 <td><?php echo $user->children?$user->children:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Religion:</th>
                                                 <td><?php echo $user->religion?$user->religion:'Er ikke angivet';?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Kropsbygning:</th>
-                                                <td><?php echo $user->body?$user->body:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Rygning:</th>

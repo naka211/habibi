@@ -977,7 +977,7 @@ select:not([multiple]) {
     padding: .5em;
     padding-right: 1.5em;
     -webkit-background-size: 7%;
-    background-size: 7%;
+    background-size: 12px;
 }
 
 .btn_searchResult {
@@ -2160,7 +2160,6 @@ ul.list_action li a .i_report {
 
 .box_form_group_age .form-control {
     width: 90px;
-    background-size: 15%;
 }
 
 .i_line {
@@ -2629,6 +2628,8 @@ ul.list_action li a .i_report {
     border: none;
     box-shadow: none;
     background-color: #eee;
+    background-size: 12px;
+    background-position-x: calc(100% - 10px);
 }
 
 .btnPayment {
@@ -2681,7 +2682,7 @@ ul.list_action li a .i_report {
     width: 248px;
 }
 .box_wrap .ms-options-wrap > button:focus, .box_wrap .ms-options-wrap > button {
-    width: 231px;
+    width: 205px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;

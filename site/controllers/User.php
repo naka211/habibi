@@ -550,6 +550,8 @@ class User extends MX_Controller
             $DB['month']            = $this->input->post('month');
             $DB['year']             = $this->input->post('year');
             $DB['birthday']         = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
+            $DB['height']           = $this->input->post('height');
+            $DB['weight']           = $this->input->post('weight');
             $DB['region']           = $this->input->post('region');
             $DB['land']             = $this->input->post('land');
             $DB['gender']           = $this->input->post('gender');
@@ -561,6 +563,11 @@ class User extends MX_Controller
             $DB['training']         = $this->input->post('training');
             $DB['body']             = $this->input->post('body');
             $DB['smoking']          = $this->input->post('smoking');
+            $DB['business']         = $this->input->post('business');
+            $DB['job_type']         = $this->input->post('job_type');
+            $DB['hair_color']       = $this->input->post('hair_color');
+            $DB['eye_color']        = $this->input->post('eye_color');
+            $DB['zodiac']           = $this->input->post('zodiac');
             $DB['slogan']           = $this->input->post('slogan');
             $DB['description']      = $this->input->post('description');
             $DB['chat']             = $this->input->post('chat');
@@ -1052,6 +1059,10 @@ class User extends MX_Controller
         $searchData['order'] = 'newest';
         $searchData['fromAge'] = 18;
         $searchData['toAge'] = 90;
+        $searchData['fromHeight'] = 100;
+        $searchData['toHeight'] = 230;
+        $searchData['fromWeight'] = 40;
+        $searchData['toWeight'] = 220;
         $searchData['land'][] = $user->find_land;
         $searchData['region'][] = $user->find_region;
         $this->session->set_userdata('searchData', $searchData);

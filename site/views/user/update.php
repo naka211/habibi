@@ -19,180 +19,125 @@
                                     <input type="text" name="email" class="form-control" value="<?php echo $user->email;?>">
                                 </div>
                             </div>
-
-
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Dag:</label>
+                                            <?php echo generateOptionsInRangeHTML('day', 1, 31, $user->day);?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Måned:</label>
+                                            <?php echo generateOptionsInRangeHTML('month', 1, 12, $user->month);?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">År:</label>
+                                            <?php echo generateOptionsInRangeHTML('year', 1930, 2010, $user->year);?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Højde (cm):</label>
+                                            <?php echo generateOptionsInRangeHTML('height', 100, 230, $user->height);?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Vægt (kg):</label>
+                                            <?php echo generateOptionsInRangeHTML('weight', 40, 220, $user->weight);?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <select name="land" class="form-control">
-                                        <option value="Tyrkiet" <?php if($user->land == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
-                                        <option value="Syrien" <?php if($user->land == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
-                                        <option value="Irak" <?php if($user->land == 'Irak'){echo 'selected="true"';}?>>Irak</option>
-                                        <option value="Libanon" <?php if($user->land == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
-                                        <option value="Pakistan" <?php if($user->land == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
-                                        <option value="Palæstina" <?php if($user->land == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
-                                        <option value="Somalia" <?php if($user->land == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
-                                        <option value="Afghanistan" <?php if($user->land == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
-                                        <option value="Bosnien" <?php if($user->land == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
-                                        <option value="Iran" <?php if($user->land == 'Iran'){echo 'selected="true"';}?>>Iran</option>
-                                        <option value="Marokko" <?php if($user->land == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
-                                        <option value="Albanien" <?php if($user->land == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
-                                        <option value="Algeriet" <?php if($user->land == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
-                                        <option value="Egypten" <?php if($user->land == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
-                                        <option value="Makedionen" <?php if($user->land == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
-                                        <option value="Andet" <?php if($user->land == 'Andet'){echo 'selected="true"';}?>>Andet</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('land', 'land', $user->land);?>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <select name="region" class="form-control">
-                                        <option value="København" <?php if($user->region == 'København'){echo 'selected="true"';}?>>København</option>
-                                        <option value="Storkøbenhavn" <?php if($user->region == 'Storkøbenhavn'){echo 'selected="true"';}?>>Storkøbenhavn</option>
-                                        <option value="Århus" <?php if($user->region == 'Århus'){echo 'selected="true"';}?>>Århus</option>
-                                        <option value="Aalborg" <?php if($user->region == 'Aalborg'){echo 'selected="true"';}?>>Aalborg</option>
-                                        <option value="Odense" <?php if($user->region == 'Odense'){echo 'selected="true"';}?>>Odense</option>
-                                        <option value="Nordsjælland" <?php if($user->region == 'Nordsjælland'){echo 'selected="true"';}?>>Nordsjælland</option>
-                                        <option value="Midt/Vestsjælland" <?php if($user->region == 'Midt/Vestsjælland'){echo 'selected="true"';}?>>Midt/Vestsjælland</option>
-                                        <option value="Sydsjælland" <?php if($user->region == 'Sydsjælland'){echo 'selected="true"';}?>>Sydsjælland</option>
-                                        <option value="Lolland/Falster" <?php if($user->region == 'Lolland/Falster'){echo 'selected="true"';}?>>Lolland/Falster</option>
-                                        <option value="Fyn" <?php if($user->region == 'Fyn'){echo 'selected="true"';}?>>Fyn</option>
-                                        <option value="Nordjylland" <?php if($user->region == 'Nordjylland'){echo 'selected="true"';}?>>Nordjylland</option>
-                                        <option value="Østjylland" <?php if($user->region == 'Østjylland'){echo 'selected="true"';}?>>Østjylland</option>
-                                        <option value="Vestjylland" <?php if($user->region == 'Vestjylland'){echo 'selected="true"';}?>>Vestjylland</option>
-                                        <option value="Sydjylland" <?php if($user->region == 'Sydjylland'){echo 'selected="true"';}?>>Sydjylland</option>
-                                        <option value="Midtjylland" <?php if($user->region == 'Midtjylland'){echo 'selected="true"';}?>>Midtjylland</option>
-                                        <option value="Sønderjylland" <?php if($user->region == 'Sønderjylland'){echo 'selected="true"';}?>>Sønderjylland</option>
-                                        <option value="Bornholm" <?php if($user->region == 'Bornholm'){echo 'selected="true"';}?>>Bornholm</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('region', 'region', $user->region);?>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Forhold:</label>
-                                    <select name="relationship" class="form-control">
-                                        <option <?php if($user->relationship == 'Aldrig gift'){echo 'selected="true"';}?> value="Aldrig gift">Aldrig gift</option>
-                                        <option <?php if($user->relationship == 'Separeret'){echo 'selected="true"';}?> value="Separeret">Separeret</option>
-                                        <option <?php if($user->relationship == 'Skilt'){echo 'selected="true"';}?> value="Skilt">Skilt</option>
-                                        <option <?php if($user->relationship == 'Enke/enkemand'){echo 'selected="true"';}?> value="Enke/enkemand">Enke/enkemand</option>
-                                        <option <?php if($user->relationship == 'Det får du at vide senere'){echo 'selected="true"';}?> value="Det får du at vide senere">Det får du at vide senere</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('relationship', 'relationship', $user->relationship);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Uddannelse:</label>
-                                    <select name="training" class="form-control">
-                                        <option <?php if($user->training == 'Ikke angivet'){echo 'selected="true"';}?> value="Ikke angivet">Ikke angivet</option>
-                                        <option <?php if($user->training == 'Faglært'){echo 'selected="true"';}?> value="Faglært">Faglært</option>
-                                        <option <?php if($user->training == 'Folkeskole/10.klasse'){echo 'selected="true"';}?> value="Folkeskole/10.klasse">Folkeskole/10.klasse</option>
-                                        <option <?php if($user->training == 'Gymnasie/HF'){echo 'selected="true"';}?> value="Gymnasie/HF">Gymnasie/HF</option>
-                                        <option <?php if($user->training == 'Handelsskole/HH'){echo 'selected="true"';}?> value="Handelsskole/HH">Handelsskole/HH</option>
-                                        <option <?php if($user->training == 'Kortere videregående'){echo 'selected="true"';}?> value="Kortere videregående">Kortere videregående</option>
-                                        <option <?php if($user->training == 'Mellemlang videregående'){echo 'selected="true"';}?> value="Mellemlang videregående">Mellemlang videregående</option>
-                                        <option <?php if($user->training == 'Længere videregående'){echo 'selected="true"';}?> value="Længere videregående">Længere videregående</option>
-                                        <option <?php if($user->training == 'Lærling/elev'){echo 'selected="true"';}?> value="Lærling/elev">Lærling/elev</option>
-                                        <option <?php if($user->training == 'Ph.D'){echo 'selected="true"';}?> value="Ph.D">Ph.D</option>
-                                        <option <?php if($user->training == 'Teknisk skole/HTX'){echo 'selected="true"';}?> value="Teknisk skole/HTX">Teknisk skole/HTX</option>
-                                        <option <?php if($user->training == 'Akademisk'){echo 'selected="true"';}?> value="Akademisk">Akademisk</option>
-                                        <option <?php if($user->training == 'Kandidat'){echo 'selected="true"';}?> value="Kandidat">Kandidat</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('training', 'training', $user->training);?>
                                 </div>
                             </div>
-
-                            <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label for="">Køn:</label>
-                                    <select name="gender" class="form-control">
-                                        <option <?php /*if($user->gender == 1){echo 'selected="true"';}*/?> value="1">Mand</option>
-                                        <option <?php /*if($user->gender == 2){echo 'selected="true"';}*/?> value="2">Kvinde</option>
-                                    </select>
-                                </div>
-                            </div>-->
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Børn:</label>
-                                    <select name="children" class="form-control">
-                                        <option <?php if($user->children == 'Nej'){echo 'selected="true"';}?> value="Nej">Nej</option>
-                                        <option <?php if($user->children == 'Ja, hjemmeboende'){echo 'selected="true"';}?> value="Ja, hjemmeboende">Ja, hjemmeboende</option>
-                                        <option <?php if($user->children == 'Ja, udeboende'){echo 'selected="true"';}?> value="Ja, udeboende">Ja, udeboende</option>
-                                        <option <?php if($user->children == '1'){echo 'selected="true"';}?> value="1">1</option>
-                                        <option <?php if($user->children == '2'){echo 'selected="true"';}?> value="2">2</option>
-                                        <option <?php if($user->children == '3'){echo 'selected="true"';}?> value="3">3</option>
-                                        <option <?php if($user->children == '3+'){echo 'selected="true"';}?> value="3+">3+</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('children', 'children', $user->children);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Religion:</label>
-                                    <select name="religion" class="form-control">
-                                        <option <?php if($user->religion == 'Suni'){echo 'selected="true"';}?> value="Suni">Suni</option>
-                                        <option <?php if($user->religion == 'Shia'){echo 'selected="true"';}?> value="Shia">Shia</option>
-                                        <option <?php if($user->religion == 'Andet'){echo 'selected="true"';}?> value="Andet">Andet</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('religion', 'religion', $user->religion);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Kropsbygning:</label>
-                                    <select name="body" class="form-control">
-                                        <option <?php if($user->body == 'Slank'){echo 'selected="true"';}?> value="Slank">Slank</option>
-                                        <option <?php if($user->body == 'Atletisk'){echo 'selected="true"';}?> value="Atletisk">Atletisk</option>
-                                        <option <?php if($user->body == 'Gennemsnitlig'){echo 'selected="true"';}?> value="Gennemsnitlig">Gennemsnitlig</option>
-                                        <option <?php if($user->body == 'Buttet'){echo 'selected="true"';}?> value="Buttet">Buttet</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('body', 'body', $user->body);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Rygning:</label>
-                                    <select name="smoking" class="form-control">
-                                        <option <?php if($user->smoking == 'Ikke angivet'){echo 'selected="true"';}?> value="Ikke angivet">Ikke angivet</option>
-                                        <option <?php if($user->smoking == 'Ikke riger'){echo 'selected="true"';}?> value="Ikke riger">Ikke riger</option>
-                                        <option <?php if($user->smoking == 'Festryger'){echo 'selected="true"';}?> value="Festryger">Festryger</option>
-                                        <option <?php if($user->smoking == 'Ryger'){echo 'selected="true"';}?> value="Ryger">Ryger</option>
-                                        <option <?php if($user->smoking == 'Ryger E-cigaret'){echo 'selected="true"';}?> value="Ryger E-cigaret">Ryger E-cigaret</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('smoking', 'smoking', $user->smoking);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">Dag:</label>
-                                            <select name="day" class="form-control">
-                                                <?php for($i = 1; $i <= 31; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->day) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">Måned:</label>
-                                            <select name="month" class="form-control">
-                                                <?php for($i = 1; $i <= 12; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->month) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">År:</label>
-                                            <select name="year" class="form-control">
-                                                <?php for($i = 1930; $i <= 2010; $i++){?>
-                                                    <option value="<?php echo $i;?>" <?php if($i == $user->year) echo 'selected'?>><?php echo $i;?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="">Branche:</label>
+                                    <?php echo generateOptionsHTMLInUpdate('business', 'business', $user->business);?>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Job type:</label>
+                                    <?php echo generateOptionsHTMLInUpdate('job_type', 'job_type', $user->job_type);?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Hårfarve:</label>
+                                    <?php echo generateOptionsHTMLInUpdate('hair_color', 'hair_color', $user->hair_color);?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Øjenfarve:</label>
+                                    <?php echo generateOptionsHTMLInUpdate('eye_color', 'eye_color', $user->eye_color);?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Stjernetegn:</label>
+                                    <?php echo generateOptionsHTMLInUpdate('zodiac', 'zodiac', $user->zodiac);?>
+                                </div>
+                            </div>
+
                             <div class="clearfix"></div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h5>Jeg søger</h5>
@@ -200,48 +145,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <select name="find_land" class="form-control">
-                                        <option value="Tyrkiet" <?php if($user->find_land == 'Tyrkiet'){echo 'selected="true"';}?>>Tyrkiet</option>
-                                        <option value="Syrien" <?php if($user->find_land == 'Syrien'){echo 'selected="true"';}?>>Syrien</option>
-                                        <option value="Irak" <?php if($user->find_land == 'Irak'){echo 'selected="true"';}?>>Irak</option>
-                                        <option value="Libanon" <?php if($user->find_land == 'Libanon'){echo 'selected="true"';}?>>Libanon</option>
-                                        <option value="Pakistan" <?php if($user->find_land == 'Pakistan'){echo 'selected="true"';}?>>Pakistan</option>
-                                        <option value="Palæstina" <?php if($user->find_land == 'Palæstina'){echo 'selected="true"';}?>>Palæstina</option>
-                                        <option value="Somalia" <?php if($user->find_land == 'Somalia'){echo 'selected="true"';}?>>Somalia</option>
-                                        <option value="Afghanistan" <?php if($user->find_land == 'Afghanistan'){echo 'selected="true"';}?>>Afghanistan</option>
-                                        <option value="Bosnien" <?php if($user->find_land == 'Bosnien'){echo 'selected="true"';}?>>Bosnien</option>
-                                        <option value="Iran" <?php if($user->find_land == 'Iran'){echo 'selected="true"';}?>>Iran</option>
-                                        <option value="Marokko" <?php if($user->find_land == 'Marokko'){echo 'selected="true"';}?>>Marokko</option>
-                                        <option value="Albanien" <?php if($user->find_land == 'Albanien'){echo 'selected="true"';}?>>Albanien</option>
-                                        <option value="Algeriet" <?php if($user->find_land == 'Algeriet'){echo 'selected="true"';}?>>Algeriet</option>
-                                        <option value="Egypten" <?php if($user->find_land == 'Egypten'){echo 'selected="true"';}?>>Egypten</option>
-                                        <option value="Makedionen" <?php if($user->find_land == 'Makedionen'){echo 'selected="true"';}?>>Makedionen</option>
-                                        <option value="Andet" <?php if($user->find_land == 'Andet'){echo 'selected="true"';}?>>Andet</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('land', 'find_land', $user->find_land);?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <select name="find_region" class="form-control">
-                                        <option value="København" <?php if($user->find_region == 'København'){echo 'selected="true"';}?>>København</option>
-                                        <option value="Storkøbenhavn" <?php if($user->find_region == 'Storkøbenhavn'){echo 'selected="true"';}?>>Storkøbenhavn</option>
-                                        <option value="Århus" <?php if($user->find_region == 'Århus'){echo 'selected="true"';}?>>Århus</option>
-                                        <option value="Aalborg" <?php if($user->find_region == 'Aalborg'){echo 'selected="true"';}?>>Aalborg</option>
-                                        <option value="Odense" <?php if($user->find_region == 'Odense'){echo 'selected="true"';}?>>Odense</option>
-                                        <option value="Nordsjælland" <?php if($user->find_region == 'Nordsjælland'){echo 'selected="true"';}?>>Nordsjælland</option>
-                                        <option value="Midt/Vestsjælland" <?php if($user->find_region == 'Midt/Vestsjælland'){echo 'selected="true"';}?>>Midt/Vestsjælland</option>
-                                        <option value="Sydsjælland" <?php if($user->find_region == 'Sydsjælland'){echo 'selected="true"';}?>>Sydsjælland</option>
-                                        <option value="Lolland/Falster" <?php if($user->find_region == 'Lolland/Falster'){echo 'selected="true"';}?>>Lolland/Falster</option>
-                                        <option value="Fyn" <?php if($user->find_region == 'Fyn'){echo 'selected="true"';}?>>Fyn</option>
-                                        <option value="Nordjylland" <?php if($user->find_region == 'Nordjylland'){echo 'selected="true"';}?>>Nordjylland</option>
-                                        <option value="Østjylland" <?php if($user->find_region == 'Østjylland'){echo 'selected="true"';}?>>Østjylland</option>
-                                        <option value="Vestjylland" <?php if($user->find_region == 'Vestjylland'){echo 'selected="true"';}?>>Vestjylland</option>
-                                        <option value="Sydjylland" <?php if($user->find_region == 'Sydjylland'){echo 'selected="true"';}?>>Sydjylland</option>
-                                        <option value="Midtjylland" <?php if($user->find_region == 'Midtjylland'){echo 'selected="true"';}?>>Midtjylland</option>
-                                        <option value="Sønderjylland" <?php if($user->find_region == 'Sønderjylland'){echo 'selected="true"';}?>>Sønderjylland</option>
-                                        <option value="Bornholm" <?php if($user->find_region == 'Bornholm'){echo 'selected="true"';}?>>Bornholm</option>
-                                    </select>
+                                    <?php echo generateOptionsHTMLInUpdate('region', 'find_region', $user->find_region);?>
                                 </div>
                             </div>
 

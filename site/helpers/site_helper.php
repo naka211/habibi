@@ -393,6 +393,45 @@ function getUser(){
     } else {
         return null;
     }
+}
 
+function generateOptionsHTMLInUpdate($type, $name, $selectedValue){
+    $ci = &get_instance();
+    $typeArr = $ci->config->item($type);
+    $html = '<select name="'.$name.'" class="form-control">';
+    $html .= '<option value="0">Vælg</option>';
+    foreach($typeArr as $i=>$item){
+        $selected = $selectedValue==$item?'selected':'';
+        $html .= '<option '.$selected.' value="'.$item.'">'.$item.'</option>';
+    }
+    $html .= '</select>';
+    return $html;
+}
 
+function generateOptionsInRangeHTML($name, $from, $to, $selectedValue, $unit = ''){
+    $html = '<select name="'.$name.'" class="form-control" id="'.$name.'">';
+    for($i = $from; $i <= $to; $i++){
+        $selected = $selectedValue==$i?'selected':'';
+        $html .= '<option '.$selected.' value="'.$i.'">'.$i.' '.$unit.'</option>';
+    }
+    $html .= '</select>';
+    return $html;
+}
+
+function generateSelectInSearch($name){
+    $ci = &get_instance();
+    $searchData = $ci->session->userdata('searchData');
+    $typeArr = $ci->config->item($name);
+
+    $html = '<select class="form-control 3col active regionSelection" name="'.$name.'[]" id="'.$name.'" multiple="multiple">';
+    foreach($typeArr as $i=>$item){
+        if(!empty($searchData[$name]) && in_array($item, $searchData[$name])){
+            $selected = 'selected';
+        } else {
+            $selected = '';
+        }
+        $html .= '<option '.$selected.' value="'.$item.'">'.$item.'</option>';
+    }
+    $html .= '</select>';
+    return $html;
 }
