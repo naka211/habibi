@@ -1091,6 +1091,15 @@ class User extends MX_Controller
 
     function setStandByStatus($status){
         $user = $this->session->userdata('user');
+        if($status == 1){
+            $currentPassword = md5($this->input->post('currentPassword', true));
+            //Login user
+            $correctUser = $this->user->getUser($user->id, null, $currentPassword);
+            if(empty($correctUser)){
+                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                redirect(site_url('user/update'));
+            }
+        }
 
         $db['stand_by_payment'] = $status;
         $this->user->saveUser($db, $user->id);
@@ -1101,6 +1110,15 @@ class User extends MX_Controller
 
     function setDeactivation($status){
         $user = $this->session->userdata('user');
+        if($status == 1){
+            $currentPassword = md5($this->input->post('currentPassword', true));
+            //Login user
+            $correctUser = $this->user->getUser($user->id, null, $currentPassword);
+            if(empty($correctUser)){
+                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                redirect(site_url('user/update'));
+            }
+        }
 
         $db['deactivation'] = $status;
         $this->user->saveUser($db, $user->id);
@@ -1111,6 +1129,13 @@ class User extends MX_Controller
 
     function deleteAccount(){
         $user = $this->session->userdata('user');
+        $currentPassword = md5($this->input->post('currentPassword', true));
+        //Login user
+        $correctUser = $this->user->getUser($user->id, null, $currentPassword);
+        if(empty($correctUser)){
+            $this->session->set_flashdata('message', "Adgangskoden er forkert");
+            redirect(site_url('user/update'));
+        }
 
         $db['deleted'] = time();
         $this->user->saveUser($db, $user->id);

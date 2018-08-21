@@ -251,12 +251,20 @@
 <div style="display: none;" id="modalStandBy" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <?php echo form_open('user/setStandByStatus/1', array('class'=>'standByForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
                     Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Indtast venligst adgangskoden</label>
+                        <input type="password" name="currentPassword" class="form-control">
+                    </div>
+                </div>
             </div>
-            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
-            <a href="<?php echo site_url('user/setStandByStatus/1')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin: 0px auto;" onclick="$.fancybox.close();">Nej</a>
+            <button type="submit" class="btn btn_viewSearch" style="margin: 0px auto;">Ja</button>
+            <?php echo form_close();?>
         </div>
     </div>
 </div>
@@ -264,12 +272,20 @@
 <div style="display: none;" id="modalDeactivate" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <?php echo form_open('user/setDeactivation/1', array('class'=>'deactivateForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
                     Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Indtast venligst adgangskoden</label>
+                        <input type="password" name="currentPassword" class="form-control">
+                    </div>
+                </div>
             </div>
-            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
-            <a href="<?php echo site_url('user/setDeactivation/1')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin: 0px auto;" onclick="$.fancybox.close();">Nej</a>
+            <button type="submit" class="btn btn_viewSearch" style="margin: 0px auto;">Ja</button>
+            <?php echo form_close();?>
         </div>
     </div>
 </div>
@@ -277,12 +293,20 @@
 <div style="display: none;" id="modalDelete" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <?php echo form_open('user/deleteAccount', array('class'=>'deleteForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
                     Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Indtast venligst adgangskoden</label>
+                        <input type="password" name="currentPassword" class="form-control">
+                    </div>
+                </div>
             </div>
-            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Nej</a>
-            <a href="<?php echo site_url('user/deleteAccount')?>" class="btn btn_viewSearch" style="margin-bottom: 0px;">Ja</a>
+            <a href="javascript:void(0);" class="btn btn_viewSearch" style="margin: 0px auto;" onclick="$.fancybox.close();">Nej</a>
+            <button type="submit" class="btn btn_viewSearch" style="margin: 0px auto;">Ja</button>
+            <?php echo form_close();?>
         </div>
     </div>
 </div>
@@ -345,6 +369,69 @@
                 },*/
                 "currentPassword": {
                     required: 'Indtast din nuværende adgangskode',
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+
+        $('.standByForm').validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().after());
+            },
+            rules: {
+                "currentPassword": {
+                    required:true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                "currentPassword": {
+                    required: 'Indtast din nuværende adgangskode',
+                    minlength: "Adgangskoden skal være på mellem {0} tegn."
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+
+        $('.deactivateForm').validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().after());
+            },
+            rules: {
+                "currentPassword": {
+                    required:true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                "currentPassword": {
+                    required: 'Indtast din nuværende adgangskode',
+                    minlength: "Adgangskoden skal være på mellem {0} tegn."
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+
+        $('.deleteForm').validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().after());
+            },
+            rules: {
+                "currentPassword": {
+                    required:true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                "currentPassword": {
+                    required: 'Indtast din nuværende adgangskode',
+                    minlength: "Adgangskoden skal være på mellem {0} tegn."
                 }
             },
             submitHandler: function(form){
