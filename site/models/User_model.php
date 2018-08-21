@@ -34,6 +34,18 @@ class User_model extends CI_Model{
         if(isset($search['fromAge']) && !empty($search['fromAge'])){
             $this->db->where('u.year <=', date('Y', time()) - $search['fromAge']);
         }
+        if(isset($search['toHeight']) && !empty($search['toHeight'])){
+            $this->db->where('u.height <=', $search['toHeight']);
+        }
+        if(isset($search['fromHeight']) && !empty($search['fromHeight'])){
+            $this->db->where('u.height >=', $search['fromHeight']);
+        }
+        if(isset($search['toWeight']) && !empty($search['toWeight'])){
+            $this->db->where('u.weight <=', $search['toWeight']);
+        }
+        if(isset($search['fromWeight']) && !empty($search['fromWeight'])){
+            $this->db->where('u.weight >=', $search['fromWeight']);
+        }
         if(isset($search['land']) && !empty($search['land'])){
             $this->db->where_in('land', $search['land']);
         }
@@ -60,6 +72,21 @@ class User_model extends CI_Model{
         }
         if(isset($search['smoking']) && !empty($search['smoking'])){
             $this->db->where_in('smoking', $search['smoking']);
+        }
+        if(isset($search['business']) && !empty($search['business'])){
+            $this->db->where_in('business', $search['business']);
+        }
+        if(isset($search['job_type']) && !empty($search['job_type'])){
+            $this->db->where_in('job_type', $search['job_type']);
+        }
+        if(isset($search['hair_color']) && !empty($search['hair_color'])){
+            $this->db->where_in('hair_color', $search['hair_color']);
+        }
+        if(isset($search['eye_color']) && !empty($search['eye_color'])){
+            $this->db->where_in('eye_color', $search['eye_color']);
+        }
+        if(isset($search['zodiac']) && !empty($search['zodiac'])){
+            $this->db->where_in('zodiac', $search['zodiac']);
         }
 
         if($ignore){
@@ -83,6 +110,18 @@ class User_model extends CI_Model{
         if(isset($search['fromAge']) && !empty($search['fromAge'])){
             $this->db->where('u.year <=', date('Y', time()) - $search['fromAge']);
         }
+        if(isset($search['toHeight']) && !empty($search['toHeight'])){
+            $this->db->where('u.height <=', $search['toHeight']);
+        }
+        if(isset($search['fromHeight']) && !empty($search['fromHeight'])){
+            $this->db->where('u.height >=', $search['fromHeight']);
+        }
+        if(isset($search['toWeight']) && !empty($search['toWeight'])){
+            $this->db->where('u.weight <=', $search['toWeight']);
+        }
+        if(isset($search['fromWeight']) && !empty($search['fromWeight'])){
+            $this->db->where('u.weight >=', $search['fromWeight']);
+        }
         if(isset($search['land']) && !empty($search['land'])){
             $this->db->where_in('land', $search['land']);
         }
@@ -109,6 +148,21 @@ class User_model extends CI_Model{
         }
         if(isset($search['smoking']) && !empty($search['smoking'])){
             $this->db->where_in('smoking', $search['smoking']);
+        }
+        if(isset($search['business']) && !empty($search['business'])){
+            $this->db->where_in('business', $search['business']);
+        }
+        if(isset($search['job_type']) && !empty($search['job_type'])){
+            $this->db->where_in('job_type', $search['job_type']);
+        }
+        if(isset($search['hair_color']) && !empty($search['hair_color'])){
+            $this->db->where_in('hair_color', $search['hair_color']);
+        }
+        if(isset($search['eye_color']) && !empty($search['eye_color'])){
+            $this->db->where_in('eye_color', $search['eye_color']);
+        }
+        if(isset($search['zodiac']) && !empty($search['zodiac'])){
+            $this->db->where_in('zodiac', $search['zodiac']);
         }
 
 

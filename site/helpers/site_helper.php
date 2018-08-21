@@ -410,6 +410,7 @@ function generateOptionsHTMLInUpdate($type, $name, $selectedValue){
 
 function generateOptionsInRangeHTML($name, $from, $to, $selectedValue, $unit = ''){
     $html = '<select name="'.$name.'" class="form-control" id="'.$name.'">';
+    $html .= '<option value="0">Vælg</option>';
     for($i = $from; $i <= $to; $i++){
         $selected = $selectedValue==$i?'selected':'';
         $html .= '<option '.$selected.' value="'.$i.'">'.$i.' '.$unit.'</option>';

@@ -1059,10 +1059,10 @@ class User extends MX_Controller
         $searchData['order'] = 'newest';
         $searchData['fromAge'] = 18;
         $searchData['toAge'] = 90;
-        $searchData['fromHeight'] = 100;
+        /*$searchData['fromHeight'] = 100;
         $searchData['toHeight'] = 230;
         $searchData['fromWeight'] = 40;
-        $searchData['toWeight'] = 220;
+        $searchData['toWeight'] = 220;*/
         $searchData['land'][] = $user->find_land;
         $searchData['region'][] = $user->find_region;
         $this->session->set_userdata('searchData', $searchData);

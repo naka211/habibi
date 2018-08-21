@@ -36,15 +36,15 @@
                                 <div class="box_wrap">
                                     <div class="box_form_group box_form_group_age">
                                         <p for="">Højde:</p>
-                                        <?php echo generateOptionsInRangeHTML('fromHeight', 100, 230, $searchData['fromHeight'], 'cm');?>
+                                        <?php echo generateOptionsInRangeHTML('fromHeight', 100, 230, !empty($searchData['fromHeight'])?$searchData['fromHeight']:'', 'cm');?>
                                         <span class="i_line">−</span>
-                                        <?php echo generateOptionsInRangeHTML('toHeight', 100, 230, $searchData['toHeight'], 'cm');?>
+                                        <?php echo generateOptionsInRangeHTML('toHeight', 100, 230, !empty($searchData['toHeight'])?$searchData['toHeight']:'', 'cm');?>
                                     </div>
                                     <div class="box_form_group box_form_group_age">
                                         <p for="">Vægt:</p>
-                                        <?php echo generateOptionsInRangeHTML('fromWeight', 40, 220, $searchData['fromWeight'], 'kg');?>
+                                        <?php echo generateOptionsInRangeHTML('fromWeight', 40, 220, !empty($searchData['fromWeight'])?$searchData['fromWeight']:'', 'kg');?>
                                         <span class="i_line">−</span>
-                                        <?php echo generateOptionsInRangeHTML('toWeight', 40, 220, $searchData['toWeight'], 'kg');?>
+                                        <?php echo generateOptionsInRangeHTML('toWeight', 40, 220, !empty($searchData['toWeight'])?$searchData['toWeight']:'', 'kg');?>
                                     </div>
                                     <div class="box_form_group">
                                         <p for="">Køn</p>
