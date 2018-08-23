@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btnadd_friend">Opdateret</button>
+                        <button type="submit" class="btn btnadd_friend">Opdatere</button>
                     <hr>
                     <h3 style="margin: 0;">Stå ved guld medlem</h3>
                     <?php if($user->type == 2){

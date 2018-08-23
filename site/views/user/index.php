@@ -86,7 +86,7 @@
                                                 <td><?php echo $user->job_type?$user->job_type:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Born:</th>
+                                                <th>Børn:</th>
                                                 <td><?php echo $user->children?$user->children:'Er ikke angivet';?></td>
                                             </tr>
                                             <tr>
