@@ -158,7 +158,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Skriv et motto</label>
-                                    <input type="text" name="slogan" class="form-control" value="<?php echo $user->slogan;?>" placeholder="Postnr.">
+                                    <input type="text" name="slogan" class="form-control" value="<?php echo $user->slogan;?>" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

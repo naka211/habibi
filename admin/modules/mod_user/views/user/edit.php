@@ -75,8 +75,8 @@
             <div class="form-material">
                 <select name="gender" id="gender" class="form-control">
                     <option value=""><?php echo lang('admin.select');?></option>
-                    <option <?php if($item->gender == 1){echo 'selected="true"';}?> value="1">Female</option>
-                    <option <?php if($item->gender == 2){echo 'selected="true"';}?> value="2">Male</option>
+                    <option <?php if($item->gender == 2){echo 'selected="true"';}?> value="2">Female</option>
+                    <option <?php if($item->gender == 1){echo 'selected="true"';}?> value="1">Male</option>
                 </select>
             </div>
         </div>
