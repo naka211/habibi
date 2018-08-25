@@ -554,7 +554,6 @@ class User extends MX_Controller
             $DB['weight']           = $this->input->post('weight');
             $DB['region']           = $this->input->post('region');
             $DB['land']             = $this->input->post('land');
-            $DB['gender']           = $this->input->post('gender');
             $DB['relationship']     = $this->input->post('relationship');
             $DB['children']         = $this->input->post('children');
             $DB['find_land']        = $this->input->post('find_land');
