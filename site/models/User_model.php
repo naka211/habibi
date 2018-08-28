@@ -667,6 +667,13 @@ class User_model extends CI_Model{
         }
     }
 
+    function getPhotoDetail($photoId){
+        $this->db->select('*')->from('user_image');
+        $this->db->where("id", $photoId);
+        $result = $this->db->get()->row();
+        return $result;
+    }
+
     function getNewAvatar($userId){
         $this->db->select('new_avatar');
         $this->db->from('user');
@@ -699,6 +706,12 @@ class User_model extends CI_Model{
         $this->db->set('blurIndex', $blurIndex);
         $this->db->where('id', $userId);
         return $this->db->update('user');
+    }
+
+    function updateBlurIndexForPhoto($imageName, $blurIndex){
+        $this->db->set('blurIndex', $blurIndex);
+        $this->db->where('image', $imageName);
+        return $this->db->update('user_image');
     }
     
     //T.Trung

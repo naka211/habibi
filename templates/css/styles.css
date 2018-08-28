@@ -1955,7 +1955,7 @@ ul.list_action li a .i_report {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 30px;
-    min-height: 382px;
+    min-height: 307px;
 }
 
 .box_favorites_item:hover .favorites_footer, .box_favorites_item:hover .favorites_top {
@@ -2796,6 +2796,22 @@ ul.list_action li a .i_report {
 .favorites_img a.btnClose_img:hover {
     color: #ffa507;
 }
+
+.favorites_img a.btnEdit_img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    z-index: 100;
+    right: 45px;
+    top: 10px;
+    background: transparent;
+    color: #ccc;
+}
+.favorites_img a.btnEdit_img:hover {
+    color: #ffa507;
+}
+
 .btnUpload {
     background: #ffa507;
     /*margin: 0 auto 30px;*/

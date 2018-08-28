@@ -504,6 +504,9 @@ class Ajax extends MX_Controller{
                 $DB['status'] = 0;
                 $this->user->savePhoto($DB);
 
+                $raw_photo = './uploads/raw_photo/'.$data['file_name'];
+                copy($data['full_path'], $raw_photo);
+
                 //create thumb
                 $config_resize['image_library'] = 'gd2';
                 $config_resize['source_image'] = $data['full_path'];

@@ -24,7 +24,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,friendRequests,myphoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar,visitMe,start', 'Checkgold|only:visitme');
+        return array('Checklogin|only:profile,friendRequests,myPhoto,uploadPhoto,friends,sentBlinks,messages,receivedBlinks,favorites,update,addFavorite,removeFavorite,upgrade,blocked,searching,editAvatar,visitMe,start,editphoto', 'Checkgold|only:visitme');
     }
 
     function setExpireSessionTime(){
@@ -124,9 +124,20 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Mine billeder');
 
         $data['user'] = $this->session->userdata('user');
-        $data['listImages'] = $this->user->getPhoto($data['user']->id);
+        $data['listImages'] = $this->user->getPhoto($data['user']->id, 0);
         //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
+        $this->load->view('templates', $data);
+    }
+
+    function editphoto($imageId){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger billede');
+
+        $data['user'] = $this->session->userdata('user');
+        $data['image'] = $this->user->getPhotoDetail($imageId);
+
+        $data['page'] = 'user/editphoto';
         $this->load->view('templates', $data);
     }
 
@@ -259,6 +270,64 @@ class User extends MX_Controller
             $this->user->updateBlurIndex($user->id, $blurIndex);
             $this->updateUserSession($user->id);
             customRedirectWithMessage(site_url('user/index'));
+        }
+    }
+
+    public function saveEditedPhoto(){
+        $imageData = $this->input->post('imageData');
+        $blurIndex = $this->input->post('blurIndex');
+        $imageName = $this->input->post('imageName');
+
+        $user = $this->session->userdata('user');
+
+
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $imageData = str_replace(' ', '+', $imageData);
+        $image = base64_decode($imageData);
+
+        $photoLink = './uploads/photo/'.$imageName;
+        if(file_put_contents($photoLink, $image)){
+            $this->user->updateBlurIndexForPhoto($imageName, $blurIndex);
+
+            //create thumb
+            list($imgWidth, $imgHeight) = getimagesize($photoLink);
+
+            $config_resize['image_library'] = 'gd2';
+            $config_resize['source_image'] = $photoLink;
+            $config_resize['new_image'] = './uploads/thumb_photo/'.$imageName;
+            $config_resize['thumb_marker'] = '';
+            $config_resize['create_thumb'] = TRUE;
+            $config_resize['maintain_ratio'] = true;
+            $config_resize['quality'] = "100%";
+            $config_resize['width']         = 270;
+            $config_resize['height']       = 270;
+            $dim = (intval($imgWidth) / intval($imgHeight)) - ($config_resize['width'] / $config_resize['height']);
+            $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($config_resize);
+
+            if(!$this->image_lib->resize()){ //Resize image
+                redirect("errorhandler"); //If error, redirect to an error page
+            }else {
+                $config_crop['image_library'] = 'gd2';
+                $config_crop['source_image'] = './uploads/thumb_photo/' . $imageName;
+                $config_crop['new_image'] = './uploads/thumb_photo/' . $imageName;
+                $config_crop['quality'] = "100%";
+                $config_crop['maintain_ratio'] = FALSE;
+                $config_crop['width'] = 270;
+                $config_crop['height'] = 270;
+                $config_crop['x_axis'] = '0';
+                $config_crop['y_axis'] = '0';
+
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config_crop);
+
+                $this->image_lib->crop();
+
+            }
+
+            customRedirectWithMessage($_SERVER['HTTP_REFERER']);
         }
     }
 
