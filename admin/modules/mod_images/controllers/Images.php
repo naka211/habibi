@@ -48,7 +48,7 @@ class Images extends CI_Controller{
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                $data->image = '<img src="'.base_url_site().'uploads/thumb_photo/'.$row->image.'" width="150" \>';
+                $data->image = '<img src="'.base_url_site().'uploads/raw_photo/'.$row->image.'" height="150" \>';
                 $data->image .= ' <span id="publish'.$row->id.'">';
                 $data->image .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
                 $data->image .= '</span>';

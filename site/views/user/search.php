@@ -33,7 +33,7 @@
                             </div>
                             <button type="button" class="btn btn_searchResult" style="width: auto; padding-top: 5px; padding-bottom: 5px;" id="seeMoreCriteria">Valgfrie kriterier</button>
                             <div class="row_search clearfix" id="filter">
-                                <div class="box_wrap">
+                                <div class="box_wrap" style="display: none;">
                                     <div class="box_form_group box_form_group_age">
                                         <p for="">Højde:</p>
                                         <?php echo generateOptionsInRangeHTML('fromHeight', 100, 230, !empty($searchData['fromHeight'])?$searchData['fromHeight']:'', 'cm');?>
