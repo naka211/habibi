@@ -59,7 +59,7 @@ class User extends CI_Controller{
         return;
 	}
     function getContent(){
-        if($_GET['limit']){
+        if($this->input->get('limit')){
             $limit = $_GET['limit'];
         }else{
             $limit = 10;
@@ -67,7 +67,7 @@ class User extends CI_Controller{
         if($this->session->userdata('offset')){
             $offset = $this->session->userdata('offset');
         }else{
-            $offset = $_GET['offset'];
+            $offset = $this->input->get('offset');
         }
         //SEARCH
         $search = $this->session->userdata('search');
