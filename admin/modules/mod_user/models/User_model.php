@@ -57,7 +57,7 @@ class User_model extends CI_Model{
         $this->db->reset_query();
 
         $this->db->where("user_from = $id OR user_to = $id");
-        $this->db->delete('user_friend');
+        $this->db->delete('user_friends');
         $this->db->reset_query();
 
         $this->db->where("from_user_id = $id OR to_user_id = $id");
@@ -93,6 +93,7 @@ class User_model extends CI_Model{
         foreach ($result as $image){
             @unlink($this->config->item('root')."uploads/photo/".$image->image);
             @unlink($this->config->item('root')."uploads/thumb_photo/".$image->image);
+            @unlink($this->config->item('root')."uploads/raw_photo/".$image->image);
         }
         $this->db->where("userId", $id);
         $this->db->delete('user_image');
