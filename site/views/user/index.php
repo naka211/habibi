@@ -5,7 +5,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div class="img_avatar">
                         <img class="img-responsive" src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->new_avatar?$user->new_avatar:$user->avatar;?>?<?php echo time();?>">
-                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Skift din avatar</span></a>
+                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Skift profilbilled</span></a>
                     </div>
                     <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                 </div>
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn_edit" href="<?php echo site_url('user/update');?>"><i class="i_edit"></i> <span>Redigere</span></a>
+                            <a class="btn_edit" href="<?php echo site_url('user/update');?>"><i class="i_edit"></i> <span>Rediger</span></a>
                         </div>
                         <?php if($user->deactivation == 1){?>
                             <a href="<?php echo site_url('user/setDeactivation/0')?>" class="btn btn_viewSearch">Aktivér</a>
@@ -127,7 +127,7 @@
                         <div class="item">
                             <a class="btn_editGallery" href="<?php echo site_url('user/uploadPhoto');?>">
                                 <i class="i_plus"></i>
-                                <span>Uploade billede</span>
+                                <span>Upload billede</span>
                             </a>
                         </div>
                         <?php if(!empty($images)) {

@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="nav nav-tabs" style="margin-bottom: 0; border: none;">
-                            <li><a href="<?php echo site_url('user/visitme');?>">Besøgte mig</a></li>
-                            <li class="active"><a href="javascript:void();">Medlemmer jeg har besøgt</a></li>
+                            <li><a href="<?php echo site_url('user/visitme');?>">Besøgende</a></li>
+                            <li class="active"><a href="javascript:void();">Jeg har besøgt</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1366,7 +1366,7 @@ select:not([multiple]) {
 }
 
 .owl_gallerys {
-    padding: 0 50px;
+    /*padding: 0 50px;*/
 }
 
 blockquote {

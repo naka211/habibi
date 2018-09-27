@@ -46,7 +46,7 @@ if(!empty($user)){
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="<?php echo site_url('user/index');?>">Min profil</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/update');?>">Rediger profil</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Mine billeder</a>
+                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Album</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Blokerede</a>
                                 <a class="dropdown-item" href="<?php echo site_url('user/logout');?>">Log ud</a>
                             </div>
@@ -73,7 +73,7 @@ if(!empty($user)){
                         <ul class="nav navbar-nav">
                             <li id="searchMenu"><a href="<?php echo site_url('user/searching')?>">Søg</a></li>
                             <li id="favoriteMenu"><a href="<?php echo site_url('user/favorites')?>">Favoritter</a></li>
-                            <li id="messageMenu"><a <?php echo $messageLink;?>>Besked <?php echo $unreadMessageQuantityHTML?></a></li>
+                            <li id="messageMenu"><a <?php echo $messageLink;?>>Beskeder <?php echo $unreadMessageQuantityHTML?></a></li>
                             <li id="visitMenu"><a <?php echo $visitingLink;?>>Besøg</a></li>
                             <li id="blinkMenu"><a <?php echo $blinkLink;?>>Blink <?php echo $blinkingQuantityHTML?></a></li>
                             <li id="friendMenu"><a <?php echo $friendLink;?>>Venner <?php echo $newFriendQuantityHTML;?></a></li>

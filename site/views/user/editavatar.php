@@ -26,7 +26,7 @@
                     <?php if($listImages){?>
                         <div class="text-center">
                             OR<br>
-                            <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg avatar fra galleri</a>
+                            <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
                         </div>
                     <?php }?>
                     <?php if($user->avatar != 'no-avatar.jpg' || ($user->avatar == 'no-avatar.jpg' && $user->new_avatar != '')){
@@ -50,7 +50,7 @@
                         <?php } else {?>
                             <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
                         <?php }?>
-                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet avatar</a>
+                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet profilbilled</a>
                         <?php
                         $sendEmail = $user->new_avatar != ''?1:0;
                         echo form_hidden('sendEmailToApprove', $sendEmail);

@@ -34,7 +34,7 @@
                         </div>
                     <?php }
                 } else {?>
-                    Ingen i blokliste
+                    Ingen blokeret
                 <?php }?>
             </div>
             <div class="row">
