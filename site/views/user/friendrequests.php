@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#receivedSection">Venneanmodninger</a></li>
+                            <li class="active"><a data-toggle="tab" href="#receivedSection">Modtagne</a></li>
                             <li><a data-toggle="tab" href="#sentSection">Sendte</a></li>
                             <li><a data-toggle="tab" href="#rejectedSection">Afviste</a></li>
                         </ul>
