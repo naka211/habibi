@@ -39,7 +39,7 @@
                     <?php if($item->image){ ?>
        					<img src="<?php echo base_url_site()."uploads/content/".$item->image;?>" width="150" />
                         <span id="image-view">
-                            <a onclick="deleteimage('tb_news_static','id','<?php echo $item->id;?>','image','image-show')" href="javascript:void(0);" class="btn btn-icon btn-xs btn-danger waves-effect waves-light"
+                            <a onclick="deleteimage('tb_content_static','id','<?php echo $item->id;?>','image','image-show')" href="javascript:void(0);" class="btn btn-icon btn-xs btn-danger waves-effect waves-light"
                             data-toggle="tooltip" data-original-title="Remove"><i class="icon glyphicon glyphicon-trash" aria-hidden="true"></i></a>
                         </span>
                     <?php }?>
