@@ -253,9 +253,25 @@ html, body {
 }
 
 section.section_intro {
-    padding: 140px 0;
+    padding: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+}
+
+.w_customerServices_content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: stretch;
 }
 
 .display_table {
@@ -510,6 +526,10 @@ header .navbar-brand {
 }
 
 .swiper_banner .swiper-slide img {
+    height: auto;
+}
+
+.swiper_banner .swiper-slide:first-of-type img {
     height: 100%;
 }
 
