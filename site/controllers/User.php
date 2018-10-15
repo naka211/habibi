@@ -991,10 +991,6 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-
-
-
-
     public function friendRequests(){
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Venneanmodninger');

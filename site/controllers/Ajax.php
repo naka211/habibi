@@ -741,16 +741,7 @@ class Ajax extends MX_Controller{
 
     public function deletePhoto(){
         $photoId = $this->input->post('photoId');
-        $this->db->select('image');
-        $this->db->from('user_image');
-        $this->db->where('id', $photoId);
-        $query = $this->db->get();
-        $image = $query->row();
-
-        unlink("./uploads/photo/".$image->image);
-        unlink("./uploads/thumb_photo/".$image->image);
-
-        $this->db->where('id',$photoId)->delete('user_image');
+        $this->user->deletePhoto($photoId);
 
         $data['status'] = true;
         header('Content-Type: application/json');

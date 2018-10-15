@@ -314,8 +314,7 @@ class User_model extends CI_Model{
     function saveUser($DB=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);
-            $this->db->update('user',$DB);
-            return $id;
+            return $this->db->update('user',$DB);
         }else{
             if($this->db->insert('user',$DB)){
                 return $this->db->insert_id();
@@ -1046,7 +1045,7 @@ class User_model extends CI_Model{
     }
 
     public function getReceivedRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_create');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, u.blurIndex, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
@@ -1062,7 +1061,7 @@ class User_model extends CI_Model{
     }
 
     public function getSentRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_create');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, u.blurIndex, uf.dt_create');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -1078,7 +1077,7 @@ class User_model extends CI_Model{
     }
 
     public function getRejectedRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, uf.dt_update');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, u.blurIndex, uf.dt_update');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -1231,6 +1230,19 @@ class User_model extends CI_Model{
         }else{
             return false;
         }
+    }
+
+    public function deletePhoto($photoId){
+        $this->db->select('image');
+        $this->db->from('user_image');
+        $this->db->where('id', $photoId);
+        $query = $this->db->get();
+        $image = $query->row();
+
+        unlink("./uploads/photo/".$image->image);
+        unlink("./uploads/thumb_photo/".$image->image);
+
+        return $this->db->where('id',$photoId)->delete('user_image');
     }
     /** The End*/
 }
