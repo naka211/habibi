@@ -81,9 +81,11 @@ class User_model extends CI_Model{
         $this->db->where('id', $id);
         $avatar = $this->db->get()->row()->avatar;
 
-        @unlink($this->config->item('root')."uploads/user/".$avatar);
-        @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
-        @unlink($this->config->item('root')."uploads/raw_thumb_user/".$avatar);
+        if($avatar != 'no-avatar.jpg'){
+            @unlink($this->config->item('root')."uploads/user/".$avatar);
+            @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
+            @unlink($this->config->item('root')."uploads/raw_thumb_user/".$avatar);
+        }
         $this->db->reset_query();
 
         $this->db->select('id, image');

@@ -23,7 +23,7 @@
                                     <div class="favorites_footer">
                                         <a href="javascript:void(0)" ;
                                            onclick="callAjaxFunction(<?php echo $user->id; ?>, 'unblockUser')"
-                                           class="btn btn_addRemove">Fjerne</a>
+                                           class="btn btn_addRemove">Slet blokeringen</a>
                                     </div>
                                 </div>
                                 <h5 class="name"><?php echo $user->name; ?></h5>

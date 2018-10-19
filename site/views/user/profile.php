@@ -138,11 +138,11 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                         <a href="#" class="btnShowlist">...</a>
                         <ul class="list_action">
                             <?php if(($status->isFriend == 1 && $profile->chat == 0) || $profile->chat == 1){?>
-                                <li><a <?php echo $messageLink;?>><i class="i_email"></i></a></li>
+                                <li><a <?php echo $messageLink;?> title="Send besked"><i class="i_email"></i></a></li>
                             <?php }?>
-                            <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'class="hover"'?>><i class="i_blink"></i></a></li>
+                            <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'class="hover"'?>  title="Send blink"><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
-                            <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>
+                            <li><a <?php echo $blockLink;?>  title="Blokere profil"><i class="i_block"></i></a></li>
                             <li><a <?php echo $reportLink;?> title="Anmeld profil"><i class="i_report"></i></a></li>
                         </ul>
                     </div>
@@ -203,7 +203,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
         <?php echo form_open('user/report', array('id'=>'reportForm', 'class'=>'frm_register'))?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h4>Anmeld profil <?php echo $profile->name;?></h4>
-            Årsager til anmeldelse<br><br>
+            Årsag til anmeldelse<br><br>
             For at anmelde en profil skal der være en relevant årsag, som f.eks. stødende profiltekst, en mulig falsk profil, misbrug af billede, stødende i forbindelse med kontakt.<br>
             Anmeld venligst IKKE en profil på baggrund af manglede svar på dine beskeder og lignende.<br><br>
         </div>
