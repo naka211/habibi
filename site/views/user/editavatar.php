@@ -16,9 +16,18 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
-                        Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
-                        Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
+                    <p>Her kan du uoloade dit personlige profilbilled, det må kun være dig selv på billedet,   når du har uploadet det så skal det valideres, der kan gå optil 24 timer  inden det er valideret.<br>
+                        1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billed.<br>
+                        2: Du kan gemme billedet eller uploade et nyt.<br>
+                        3: Når billedet er uploadet  kan du vælge at slørre det hvis du vil det,  derefter klikker   du på  gem og det blir sendt til validering.<br><br>
+
+                        Regler for profilbilleder:<br>
+                        <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man ska ku se hele dit ansigt<br>
+                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der må ik være seksuelle undertoner på billedet<br>
+                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der må ikke være andre end dig på billedet<br>
+                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der må ikke være skrevet tekst eller lignede på billedet<br>
+                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der må ikke være rammer rundt om billedet<br>
+                    </p>
                     <input id="file" type="file" name="file"/>
                     <!--<div class="text-center">
                         <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>

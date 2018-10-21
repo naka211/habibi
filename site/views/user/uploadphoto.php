@@ -11,9 +11,18 @@
                     </div>
                 </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
-                Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.<br><br>
-                Aenean vitae commodo odio, a pharetra diam. Sed at nisl fermentum, porttitor augue et, imperdiet nunc. Duis feugiat nisi quis malesuada auctor.</p>
+            <p>Her kan du uploade billeder til dit album<br>
+                1: Du klikker på upload og dit bibliotek åbner op her vælger du et billed<br>
+                2: Du kan gemme billedet eller du kan uploade et nyt.<br>
+                3: Derefter klikker du på gem.<br>
+                4: Så kan du klikke på billedet som du lige har gemt,  oppe i hjørnet er der en markering  som du kan trykke på for at slørre dit billed<br>
+                5: Her slørre du det og klikker på gem igen så er det  slørret<br><br>
+
+                Regler for album billeder:<br>
+                <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre end dig på billed f.esk børn dyr eller noget andet.<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der  må der  ikke være seksuelle undertoner på billedet<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Dem som er på skal ha godkendt det, det vil sige at for f.eks et selfie med en kendt blir ikke godkendt<br>
+            </p>
             <input id="file" type="file" name="file" multiple="multiple"/>
             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>
             <div class="row">
