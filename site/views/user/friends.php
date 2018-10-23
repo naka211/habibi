@@ -26,9 +26,6 @@
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $profile->id;?>">
                     <div class="frend_item <?php if($profile->new == 1) echo 'frend_item_new';?>">
-                        <?php if($profile->new == 1){?>
-                            <span class="new">Ny</span>
-                        <?php } ?>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <div class="frend_item_avatar">
@@ -50,6 +47,9 @@
                                             <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="float: right">Sløring</a>
                                         <?php }}?>
                                 </h4>
+                                <?php if($profile->new == 1){?>
+                                    <span class="new">Ny</span>
+                                <?php } ?>
                                 <p><?php echo printAge($profile->year); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>

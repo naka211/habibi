@@ -17,11 +17,8 @@
                         $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }
             ?>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                <div class="frend_item <?php if($user->seen == 0) echo 'frend_item_new';?> friend<?php echo $user->id;?>">
-                    <?php if($user->seen == 0){?>
-                        <span class="new">Ny</span>
-                    <?php } ?>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
+                <div class="frend_item">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="friend_item_avatar">
@@ -38,13 +35,16 @@
                             <?php if(isGoldMember()){?>
                                 <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
                             <?php }?>
+                            <?php if($user->seen == 0){?>
+                                <span class="new">Ny</span>
+                            <?php } ?>
                             <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                             <p>Sendt: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></span></p>
                             <?php if(isGoldMember() === true){?>
                             <p class="gray_friend_item"><?php echo word_limiter($user->message, 8);?></p>
                             <?php }?>
                             <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                            <a onclick="confirmDeleteMessage(<?php echo $user->id;?>)" href="javascript:;" class="btn bntBlock">SLET</a>
+                            <a onclick="confirmDeleteMessage(<?php echo $user->id;?>, 'Er du sikker på at slette al besked?')" href="javascript:;" class="btn bntBlock">SLET</a>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <p id="confirmText"></p>
             <div class="text-center">
-                <a href="#" class="btn btnYes">JA</a>
+                <a href="javascript:void(0);" class="btn btnYes">JA</a>
                 <a href="javascript:void(0);" onclick="$.fancybox.close();" class="btn btnNo">NEJ</a>
             </div>
         </div>
@@ -92,5 +92,16 @@
 <script>
     $(document).ready(function() {
         $("#messageMenu").addClass('active');
+
+        confirmDeleteMessage = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'deleteMessage('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
+
+        deleteMessage = function (profileId) {
+            $.fancybox.close();
+            callAjaxFunction(profileId, 'deleteMessage');
+        }
     });
 </script>

@@ -11,17 +11,17 @@
                     </div>
                 </div>
             </div>
-            <p>Her kan du uploade billeder til dit album<br>
-                1: Du klikker på upload og dit bibliotek åbner op her vælger du et billed<br>
+            <h4>Her kan du uploade billeder til dit album</h4>
+            <p> 1: Du klikker på upload og dit bibliotek åbner op her vælger du et billed<br>
                 2: Du kan gemme billedet eller du kan uploade et nyt.<br>
                 3: Derefter klikker du på gem.<br>
-                4: Så kan du klikke på billedet som du lige har gemt,  oppe i hjørnet er der en markering  som du kan trykke på for at slørre dit billed<br>
-                5: Her slørre du det og klikker på gem igen så er det  slørret<br><br>
+                4: Hvis du vil slørre dit billed, er der en en markering oppe i hjørnet du skal klikke på for at gøre det.<br>
+                5: Her slørre du det og klikker på gem igen så er det  slørret
 
-                Regler for album billeder:<br>
+            <h4>Regler for album billeder:</h4>
                 <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre end dig på billed f.esk børn dyr eller noget andet.<br>
-                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Der  må der  ikke være seksuelle undertoner på billedet<br>
-                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px; height: 13px;"> &nbsp;Dem som er på skal ha godkendt det, det vil sige at for f.eks et selfie med en kendt blir ikke godkendt<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må der ikke være seksuelle undertoner på billedet<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal ha godkendt det, det vil sige at for f.eks et selfie med en kendt blir ikke godkendt<br>
             </p>
             <input id="file" type="file" name="file" multiple="multiple"/>
             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>

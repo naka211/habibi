@@ -1794,17 +1794,17 @@ ul.list_action li a .i_report {
     background: #fa3536;
     color: #fff;
     display: inline-block;
-    padding: 12px 90px;
+    padding: 10px 20px;
     font-size: 22px;
     font-weight: 600;
-    -moz-transform: rotate(315deg);
-    -webkit-transform: rotate(315deg);
-    -o-transform: rotate(315deg);
-    -ms-transform: rotate(315deg);
-    transform: rotate(315deg);
     position: absolute;
-    top: 105px;
-    right: -80px;
+    top: 0px;
+    right: 15px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .frend_item h4 {

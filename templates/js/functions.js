@@ -338,7 +338,7 @@ $(document).ready(function() {
                 });
             }
             //handle block user and remove favorite in page
-            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'requestAddFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend'){
+            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'requestAddFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend' || link == 'deleteMessage'){
                 $(".profile"+profile_id).fadeOut();
             }
             //handle request in page
