@@ -1794,17 +1794,21 @@ ul.list_action li a .i_report {
     background: #fa3536;
     color: #fff;
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 22px;
-    font-weight: 600;
     position: absolute;
     top: 0px;
     right: 15px;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    background: #fa3536;
+    padding: 3px 20px;
+    font-size: 14.23px;
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: 1px solid transparent;
 }
 
 .frend_item h4 {
