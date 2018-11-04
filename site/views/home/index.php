@@ -27,14 +27,123 @@
                     <section class="section_intro section_customerServices">
                         <div class="container">
                             <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="main_img_customerServices">
+                                        <img src="<?php echo base_url().'uploads/content/'.getContent(18, 'image');?>" alt="" class="img-responsive img-circle">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="row list_img_small_blur">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/2.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/3.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/4.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="swiper-slide">
+                    <section class="section_intro section_blurring">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
+                                    <h2>Slørring af billed</h2>
+                                    <div class="box_img_blurring">
+                                        <div class="w_box_img_blurring_item">
+                                            <div class="box_img_blurring_item">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                            </div>
+                                            <p>0% Slørret</p>
+                                        </div>
+                                        <div class="w_box_img_blurring_item">
+                                            <div class="box_img_blurring_item">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                            </div>
+                                            <p>50% Slørret</p>
+                                        </div>
+                                        <div class="w_box_img_blurring_item">
+                                            <div class="box_img_blurring_item">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                            </div>
+                                            <p>100% Slørret</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-8 col-sm-offset-2">
+                                            <ul class="list_blurring">
+                                                <li>Du kan slørret dit billede.</li>
+                                                <li>Du kan selv vælge hvor krafig en slørring du vil sætte på dit bilede.</li>
+                                                <li>Du vælge selv hvomår du vil fjeme slørringen.</li>
+                                                <li>Du kan vælge om du vil vise dif offentligt eller om du kun vil vise dig for enkelte profiler.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a data-fancybox data-src="#modalBlur" href="javascript:;" class="btn btnMore">Læs mere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="swiper-slide">
+                    <section class="section_intro section_block_history">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
+                                    <h2>Blokering</h2>
+                                    <div class="box_img_blocking">
+                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive"></a>
+                                        <p>Bloker</p>
+                                    </div>
+                                    <p>Ønsker du ikke at være synlig overfor  enkelte profiler så kan du via blokering skjule dig så du ikke er synlig på deres søgning.</p>
+                                    <a data-fancybox data-src="#modalBlokering" href="javascript:;" class="btn btnMore">Læs mere</a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
+                                    <h2>Slet chat historik</h2>
+                                    <div class="box_img_chat">
+                                        <img src="<?php echo base_url().'templates/';?>images/1x/img_chat.png" alt="" class="img-responsive">
+                                    </div>
+                                    <p>Du kan slette din chat historik, gores dette slettes historikken hos begge parter i chatten.</p>
+                                    <a data-fancybox data-src="#modalChat" href="javascript:;" class="btn btnMore">Læs mere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!--<div class="swiper-slide">
+                    <section class="section_intro section_customerServices">
+                        <div class="container">
+                            <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php echo base_url().'uploads/content/'.getContent(18, 'image');?>" alt="" class="img-responsive">
+                                    <img src="<?php /*echo base_url().'uploads/content/'.getContent(18, 'image');*/?>" alt="" class="img-responsive">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                     <div class="customerServices_content">
-                                        <h2><?php echo getContent(18, 'title');?></h2>
+                                        <h2><?php /*echo getContent(18, 'title');*/?></h2>
                                         <div class="description">
-                                            <?php echo getContent(18, 'content');?>
+                                            <?php /*echo getContent(18, 'content');*/?>
                                         </div>
                                     </div>
                                 </div>
@@ -49,39 +158,21 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                     <div class="relationships_content">
-                                        <h2><?php echo getContent(19, 'title');?></h2>
+                                        <h2><?php /*echo getContent(19, 'title');*/?></h2>
                                         <div class="description">
-                                            <?php echo getContent(19, 'content');?>
+                                            <?php /*echo getContent(19, 'content');*/?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php echo base_url().'uploads/content/'.getContent(19, 'image');?>" alt="" class="img-responsive">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <!--<div class="swiper-slide">
-                    <section class="section_intro section_delivers">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php /*echo base_url().'templates/';*/?>images/1x/img_deliver.png" alt="" class="img-responsive">
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <div class="delivers_content">
-                                        <h2>HAbib<br>
-                                            Dating Delivers</h2>
-                                        <p class="description">We cater to people who are aware of the finer things in life and understand that good living is not a luxury, but a necessity. Sugardaddie.com's dating personals makes every effort for you to attain your relationship with the comforts of a lifestyle that you desire.</p>
-                                        <p class="description">Are you a sugar babe that wants to date a millionaire / sugar daddy? Second best is not an option and we understand the needs of single people when delivering an unrivaled matchmaking service that is admired by many, but equaled by none.</p>
-                                    </div>
+                                    <img src="<?php /*echo base_url().'uploads/content/'.getContent(19, 'image');*/?>" alt="" class="img-responsive">
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>-->
+
+
 
                 <div class="swiper-slide">
 
@@ -172,6 +263,72 @@
         </script>
 
     </section>
+
+    <div style="display: none;" id="modalBlur" class="animated-modal modalBlur">
+        <div class="overlay"></div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="w_box_modalBlur_img">
+                    <div class="box_modalBlur_img">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="w_box_modalBlur_content">
+                    <div class="box_modalBlur_content">
+                        <h4>Slørring:</h4>
+                        <p>Eks 1: når du slørre dit billed til at starte med så bestemmer du hvor meget du vil slørres og det kan ændres semer hen</p>
+                        <p>Eks 2: når du har fået en venneanmoding og kommer i kontakt med en anden bruger of føler dig sikker så kan du fjerne slørringen hos den enktle bruger ved et enkelt klik</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;" id="modalBlokering" class="animated-modal modalBlur">
+        <div class="overlay"></div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="w_box_modalBlur_img">
+                    <div class="box_modalBlur_img">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="w_box_modalBlur_content">
+                    <div class="box_modalBlur_content">
+                        <h4>Blokering:</h4>
+                        <p>Eks 1: hvis du mener der er en bruger på siden some ik ska se du har en profil her så kan du blokere vedkommende og så er du ik på vedkommendes søgning</p>
+                        <p>Eks 2: hvis du blver generet ell føler dig overvåget kan du blokere de profiler og du er ik på deres søgning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;" id="modalChat" class="animated-modal modalBlur">
+        <div class="overlay"></div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="w_box_modalBlur_img">
+                    <div class="box_modalBlur_img">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="w_box_modalBlur_content">
+                    <div class="box_modalBlur_content">
+                        <h4>Chat:</h4>
+                        <p>Eks 1: Du som enten mand og kvinde har den sikkerhed at Sletning af chatten betyder at hvis du er i gang med at chatte med en anden bruger og du bliver stødt eller ik finder personen værdig så kan du slette historiken ved et enkelt klik og den bliver slettet hos begge parter så det ik kan misbruges efterfølgende</p>
+                        <p>Eks 2: hvis din chat er slået fra så kan den åbnes hos enkelte bruger ved at modparten sender en venneadmodning og der er deren åben chat funktion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div style="display: none;" id="modalError" class="animated-modal modalLogin">
         <div class="row">
@@ -340,31 +497,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--<div class="form-group">
-                        <h3>Jeg er</h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Køn</label>
-                                <select name="gender" class="form-control">
-                                    <option value="1">Mænd</option>
-                                    <option value="2">Kvinder</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="">Etnisk oprindelse</label>
-                                <select name="ethnic_origin" class="form-control">
-                                    <option value="Europæisk">Europæisk</option>
-                                    <option value="Afrikansk">Afrikansk</option>
-                                    <option value="Latinamerikansk">Latinamerikansk</option>
-                                    <option value="Asiatisk">Asiatisk</option>
-                                    <option value="Indisk">Indisk</option>
-                                    <option value="Arabisk">Arabisk</option>
-                                    <option value="Blandet/andet">Blandet/andet</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>-->
 
                     <div class="form-group">
                         <h3>Jeg søger</h3>

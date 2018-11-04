@@ -1,0 +1,214 @@
+body {
+	font-smooth: always;
+	-webkit-font-smoothing: always;
+	-moz-osx-font-smoothing: always;
+}
+.swiper_banner .swiper-slide {
+	background: #16191f;
+}
+.banner .swiper-pagination-bullet-active {
+	border-color: #F5A623;
+}
+.img_blur {
+    overflow: hidden;
+    height: 183px;
+    background: #FFF;
+    box-shadow: 3px 2px 24px 0 rgba(0,0,0,0.30);
+}
+.swiper_banner .swiper-slide .img_blur img {
+    filter: blur(5px);
+    object-fit: cover;
+    height: 183px;
+}
+.swiper_banner .swiper-slide .main_img_customerServices img {
+	object-fit: cover;
+	height: 397px;
+	border: 20px solid #CDAF80;
+}
+.list_img_small_blur {
+	margin-top: 100px;
+}
+.section_blurring {
+	background: url('../images/1x/bg_blurring.png') no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.section_blurring h2 {
+	font-family: 'gotham_nvvbold';
+	font-size: 40px;
+	color: #FFF;
+	letter-spacing: 0;
+	text-align: center;
+}
+.box_img_blurring {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.w_box_img_blurring_item {
+	display: inline-block;
+	margin: 0 5px;
+}
+.w_box_img_blurring_item p {
+	color: #fff;
+	margin-top: 30px;
+}
+.box_img_blurring_item {
+	width: 170px;
+	height: 170px;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 3px 2px 24px 0 rgba(0,0,0,0.30);
+	border-radius: 50%;
+	border: 10px solid #D8D8D8;
+}
+.swiper_banner .swiper-slide .box_img_blurring_item img {
+    object-fit: cover;
+    height: 170px;
+}
+.w_box_img_blurring_item:nth-child(2) {
+	top: 80px;
+	position: relative;
+}
+.w_box_img_blurring_item:nth-child(2) img {
+	filter: blur(5px);
+}
+.w_box_img_blurring_item:nth-child(3) img {
+	filter: blur(10px);
+}
+ul.list_blurring {
+	list-style: none;
+	counter-reset: my-awesome-counter;
+  	list-style: none;
+  	padding-left: 40px;
+	margin: 50px 0 0;
+}
+ul.list_blurring li {
+	display: block;
+	color: #fff;
+	text-align: left;
+	margin-bottom: 20px;
+	line-height: 1.3em;
+	counter-increment: my-awesome-counter;
+	position: relative;
+}
+ul.list_blurring li::before {
+  	content: counter(my-awesome-counter);
+  	font-size: 1.5rem;
+  	font-weight: bold;
+  	position: absolute;
+	color: #F5A623;
+	letter-spacing: 0;
+  	--size: 30px;
+  	left: calc(-1 * var(--size) - 10px);
+  	line-height: var(--size);
+  	width: var(--size);
+  	height: var(--size);
+  	top: -5px;
+  	background: transparent;
+  	border-radius: 50%;
+  	border: 1px solid #F5A623;
+  	text-align: center;
+}
+.btnMore {
+	background-image: linear-gradient(90deg, #D07C24 0%, #A7532F 100%);
+	border: 1px solid #F8A509;
+	font-family: 'gotham_nvvbold';
+	font-size: 16px;
+	color: #FFF;
+	letter-spacing: 0;
+	padding: 13px 60px;
+	margin-top: 30px;
+	text-transform: uppercase;
+}
+.btnMore:hover {
+	background-image: linear-gradient(90deg, #FF7800 0%, #A7532F 100%);
+}
+.section_block_history {
+	background-image: linear-gradient(-180deg, #D3C3B3 0%, #FFFFFF 49%, #D8C1AD 100%);
+}
+.section_block_history p {
+	line-height: 1.5em;
+}
+.section_block_history h2 {
+	margin-bottom: 50px;
+	font-family: 'gotham_nvvbold';
+	font-size: 40px;
+	color: #000;
+	letter-spacing: 0;
+	text-align: center;
+}
+.box_img_blocking {
+	width: 290px;
+	height: 290px;
+	margin: 0 auto 30px;
+	position: relative;
+	box-shadow: 3px 2px 24px 0 rgba(0,0,0,0.30);
+}
+.swiper_banner .swiper-slide .box_img_blocking img {
+	object-fit: cover;
+    height: 290px;
+}
+.box_img_blocking p {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	margin-bottom: 0;
+	padding: 15px 15px;
+	background: rgba(0, 0, 0, .8);
+	color: #fff;
+}
+.box_img_chat {
+	margin-bottom: 10px;
+}
+.swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet:last-child {
+	opacity: 0;
+}
+
+.modalBlur {
+    width: 600px;
+    height: 487px;
+    padding: 40px 30px 30px;
+    background: url('../images/1x/bg_popup.png') no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    box-shadow: 1px 12px 24px 0 rgba(0,0,0,0.50);
+}
+.modalBlur h4 {
+	color: #fff;
+}
+.modalBlur p {
+	color: #fff;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+.overlay {
+	background: rgba(0, 0, 0, .78);
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+}
+.w_box_modalBlur_img, .w_box_modalBlur_content {
+	height: 400px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
+.modalBlur .fancybox-close-small:after {
+	background: url('../images/1x/i_close_white.png');
+}
+.box_modalBlur_img {
+	width: 113px;
+	height: 113px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.box_modalBlur_img img {
+	object-fit: cover;
+    height: 113px;
+}

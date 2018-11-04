@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/jquery.multiselect.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/component.css">
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/styles.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/styles_new.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/mobile.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
