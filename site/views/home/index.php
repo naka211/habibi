@@ -278,8 +278,14 @@
                 <div class="w_box_modalBlur_content">
                     <div class="box_modalBlur_content">
                         <h4>Slørring:</h4>
-                        <p>Eks 1: når du slørre dit billed til at starte med så bestemmer du hvor meget du vil slørres og det kan ændres semer hen</p>
-                        <p>Eks 2: når du har fået en venneanmoding og kommer i kontakt med en anden bruger of føler dig sikker så kan du fjerne slørringen hos den enktle bruger ved et enkelt klik</p>
+                        <ul class="list_blurring">
+                            <li>Du kan slørret dit billede.</li>
+                            <li>Du kan selv vælge hvor krafig en slørring du vil sætte på dit bilede.</li>
+                            <li>Du vælge selv hvomår du vil fjeme slørringen.</li>
+                            <li>Du kan vælge om du vil vise dif offentligt eller om du kun vil vise dig for enkelte profiler.</li>
+                        </ul>
+                        <p>Eks 1: Når du slørre dit billed til at starte med så bestemmer du hvor meget du vil slørres og det kan ændres semer hen</p>
+                        <p>Eks 2: Når du har fået en venneanmoding og kommer i kontakt med en anden bruger of føler dig sikker så kan du fjerne slørringen hos den enktle bruger ved et enkelt klik</p>
                     </div>
                 </div>
             </div>
@@ -300,8 +306,9 @@
                 <div class="w_box_modalBlur_content">
                     <div class="box_modalBlur_content">
                         <h4>Blokering:</h4>
-                        <p>Eks 1: hvis du mener der er en bruger på siden some ik ska se du har en profil her så kan du blokere vedkommende og så er du ik på vedkommendes søgning</p>
-                        <p>Eks 2: hvis du blver generet ell føler dig overvåget kan du blokere de profiler og du er ik på deres søgning</p>
+                        <p>Ønsker du ikke at være synlig overfor  enkelte profiler så kan du via blokering skjule dig så du ikke er synlig på deres søgning.</p>
+                        <p>Eks 1: hvis du mener der er en bruger på siden som ikke ska se du har en profil her så kan du blokere vedkommende og så er du ikke på vedkommendes søgning</p>
+                        <p>Eks 2: hvis du blver generet ell føler dig overvåget kan du blokere de profiler og du er ikke på deres søgning</p>
                     </div>
                 </div>
             </div>
@@ -322,8 +329,9 @@
                 <div class="w_box_modalBlur_content">
                     <div class="box_modalBlur_content">
                         <h4>Chat:</h4>
-                        <p>Eks 1: Du som enten mand og kvinde har den sikkerhed at Sletning af chatten betyder at hvis du er i gang med at chatte med en anden bruger og du bliver stødt eller ik finder personen værdig så kan du slette historiken ved et enkelt klik og den bliver slettet hos begge parter så det ik kan misbruges efterfølgende</p>
-                        <p>Eks 2: hvis din chat er slået fra så kan den åbnes hos enkelte bruger ved at modparten sender en venneadmodning og der er deren åben chat funktion</p>
+                        <p>Du kan slette din chat historik, gores dette slettes historikken hos begge parter i chatten.</p>
+                        <p>Eks 1: Du som enten mand og kvinde har den sikkerhed at Sletning af chatten betyder at hvis du er i gang med at chatte med en anden bruger og du bliver stødt eller ikke finder personen værdig så kan du slette historiken ved et enkelt klik og den bliver slettet hos begge parter så det ikke kan misbruges efterfølgende</p>
+                        <p>Eks 2: hvis din chat er slået fra så kan den åbnes hos enkelte bruger ved at modparten sender en venneadmodning og der er en åben chat funktion</p>
                     </div>
                 </div>
             </div>
