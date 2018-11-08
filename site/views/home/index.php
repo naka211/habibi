@@ -132,48 +132,6 @@
                     </section>
                 </div>
 
-                <!--<div class="swiper-slide">
-                    <section class="section_intro section_customerServices">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php /*echo base_url().'uploads/content/'.getContent(18, 'image');*/?>" alt="" class="img-responsive">
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <div class="customerServices_content">
-                                        <h2><?php /*echo getContent(18, 'title');*/?></h2>
-                                        <div class="description">
-                                            <?php /*echo getContent(18, 'content');*/?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="swiper-slide">
-                    <section class="section_intro section_relationships">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <div class="relationships_content">
-                                        <h2><?php /*echo getContent(19, 'title');*/?></h2>
-                                        <div class="description">
-                                            <?php /*echo getContent(19, 'content');*/?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                    <img src="<?php /*echo base_url().'uploads/content/'.getContent(19, 'image');*/?>" alt="" class="img-responsive">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>-->
-
-
-
                 <div class="swiper-slide">
 
                     <div class="w_footer">
@@ -234,12 +192,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
-
                 </div>
 
             </div>
