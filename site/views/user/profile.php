@@ -59,35 +59,35 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                             </tr>
                                             <tr>
                                                 <th>Højde: </th>
-                                                <td><?php echo $profile->height?$profile->height.' cm':'Ej oblyst';?></td>
+                                                <td><?php echo $profile->height?$profile->height.' cm':'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Hårfarve: </th>
-                                                <td><?php echo $profile->hair_color?$profile->hair_color:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->hair_color?$profile->hair_color:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Land:</th>
-                                                <td><?php echo $profile->land?$profile->land:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->land?$profile->land:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Branche: </th>
-                                                <td><?php echo $profile->business?$profile->business:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->business?$profile->business:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Forhold:</th>
-                                                <td><?php echo $profile->relationship?$profile->relationship:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->relationship?$profile->relationship:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Uddannelse:</th>
-                                                <td><?php echo $profile->training?$profile->training:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->training?$profile->training:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Kropsbygning:</th>
-                                                <td><?php echo $profile->body?$profile->body:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->body?$profile->body:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Stjernetegn:</th>
-                                                <td><?php echo $profile->zodiac?$profile->zodiac:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->zodiac?$profile->zodiac:'Ej oplyst';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -103,31 +103,31 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                             </tr>
                                             <tr>
                                                 <th>Vægt: </th>
-                                                <td><?php echo $profile->weight?$profile->weight.' kg':'Ej oblyst';?></td>
+                                                <td><?php echo $profile->weight?$profile->weight.' kg':'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Øjenfarve: </th>
-                                                <td><?php echo $profile->eye_color?$profile->eye_color:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->eye_color?$profile->eye_color:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Region:</th>
-                                                <td><?php echo $profile->region?$profile->region:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->region?$profile->region:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Jobtype: </th>
-                                                <td><?php echo $profile->job_type?$profile->job_type:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->job_type?$profile->job_type:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Born:</th>
-                                                <td><?php echo $profile->children?$profile->children:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->children?$profile->children:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Religion:</th>
-                                                <td><?php echo $profile->religion?$profile->religion:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->religion?$profile->religion:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
                                                 <th>Rygning:</th>
-                                                <td><?php echo $profile->smoking?$profile->smoking:'Ej oblyst';?></td>
+                                                <td><?php echo $profile->smoking?$profile->smoking:'Ej oplyst';?></td>
                                             </tr>
                                             </tbody>
                                         </table>
