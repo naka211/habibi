@@ -647,9 +647,9 @@ class User extends MX_Controller
                     $DB['password'] = md5($this->input->post('password'));
                 }
             }
-            $id = $this->user->saveUser($DB, $user->id);
-            if ($id) {
-                $savedUser = $this->user->getUser($id);
+            $status = $this->user->saveUser($DB, $user->id);
+            if ($status) {
+                $savedUser = $this->user->getUser($user->id);
                 $this->session->set_userdata('user', $savedUser);
                 /*$this->session->set_flashdata('message', "Opdater succesfuldt");*/
                 redirect(site_url('user/index'));
@@ -1059,7 +1059,7 @@ class User extends MX_Controller
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
-        /*customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');*/
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');
     }
 
     public function selectAvatarFromGallery(){

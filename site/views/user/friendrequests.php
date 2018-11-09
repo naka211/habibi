@@ -39,7 +39,7 @@
                                                         <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
                                                         <a href="javascript:void(0);" <?php echo $acceptLink;?> class="btn bntMessage">Acceptere</a>
-                                                        <a href="javascript:void(0);" <?php echo $rejectLink;?> class="btn bntReject">Afvise</a>
+                                                        <a href="javascript:void(0);" <?php echo $rejectLink;?> class="btn bntReject">Afvis</a>
                                                         <a href="javascript:void(0);" <?php echo $blockLink;?> class="btn bntBlock">Bloker</a>
                                                     </div>
                                                 </div>

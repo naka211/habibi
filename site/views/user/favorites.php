@@ -26,13 +26,13 @@
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <div class="favorites_footer">
                                 <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_addFriend" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Tilføj ven</a><?php }?>
-                                <a href="javascript:void(0)"; onclick="callAjaxFunction(<?php echo $user->id;?>, 'removeFavoriteInPage')" class="btn btn_addRemove">Fjerne</a>
+                                <a href="javascript:void(0)"; onclick="callAjaxFunction(<?php echo $user->id;?>, 'removeFavoriteInPage')" class="btn btn_addRemove">Fjern favorit</a>
                             </div>
                         </div>
                         <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
                         <p class="nation"><?php echo $user->land;?></p>
                         <p class="old"><?php echo printAge($user->year);?> – <span class="area"><?php echo $user->region;?></span></p>
-                        <p class="old">Tilføjet tid: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></p>
+                        <p class="old">Tilføjet: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></p>
                     </div>
                 </div>
                 <?php }?>
