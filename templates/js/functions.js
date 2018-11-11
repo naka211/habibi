@@ -262,6 +262,10 @@ wireUpEvents = function() {
     };
 
 
+    //Detect click refresh on browser navigation
+    if(performance.navigation.type == 1){
+        validNavigation = true;
+    }
     // Attach the event keypress to exclude the F5 refresh
     $(document).keydown(function(e) {
         if ((e.which || e.keyCode) == 116){
