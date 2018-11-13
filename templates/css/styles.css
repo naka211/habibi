@@ -2153,6 +2153,14 @@ ul.list_action li a .i_report {
 }
 #filter .box_form_group{
     margin-top: 10px;
+    width: 32%;
+}
+#filter .box_form_group p{
+    width: 30%;
+}
+
+#filter .box_form_group_age .form-control {
+    width: 110px;
 }
 
 .box_form_group {
@@ -2706,7 +2714,7 @@ ul.list_action li a .i_report {
     width: 248px;
 }
 .box_wrap .ms-options-wrap > button:focus, .box_wrap .ms-options-wrap > button {
-    width: 205px;
+    width: 250px;
 }
 .ms-options-wrap > .ms-options {
     border-color: transparent;
