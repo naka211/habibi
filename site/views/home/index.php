@@ -23,6 +23,46 @@
                     </div>
                 </div>
 
+                <!--<div class="swiper-slide">
+                    <section class="section_intro section_customerServices">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="main_img_customerServices">
+                                        <img src="<?php /*echo base_url().'uploads/content/'.getContent(18, 'image');*/?>" alt="" class="img-responsive img-circle">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="row list_img_small_blur">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/1.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/2.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/3.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/4.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </section>
+                </div>-->
+
                 <div class="swiper-slide">
                     <section class="section_intro section_customerServices">
                         <div class="container">
@@ -36,28 +76,57 @@
                                     <div class="row list_img_small_blur">
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                             <div class="img_blur">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                             <div class="img_blur">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/2.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_62754775.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                             <div class="img_blur">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/3.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_36966483.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                             <div class="img_blur">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/4.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_12300646.jpg" alt="" class="img-responsive">
                                             </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_29983841.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_24031527.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_20168337.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="img_blur">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <ul class="list_intro">
+                                                <li>Hurtig oprettelse og nem framelding</li>
+                                                <li>Gratis medlemskab uden binding</li>
+                                                <li>Garanteret privat og diskret</li>
+                                                <li>Høj sikkerhed med 256 bit SSL kryptering</li>
+                                                <li>Gør din profil anonym med vores sløringsværktøj</li>
+                                            </ul>
+                                            <a data-fancybox data-src="#modalRegister" href="javascript:;" class="btn btnsignup_member">OPRET GRATIS MEDLEMSKAB HER</a>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </section>
@@ -72,19 +141,19 @@
                                     <div class="box_img_blurring">
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>0% Slørret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>50% Slørret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>100% Slørret</p>
                                         </div>
@@ -113,7 +182,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
                                     <h2>Blokering</h2>
                                     <div class="box_img_blocking">
-                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="" class="img-responsive"></a>
+                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436.jpg" alt="" class="img-responsive"></a>
                                         <p>Bloker</p>
                                     </div>
                                     <p>Ønsker du ikke at være synlig overfor  enkelte profiler så kan du via blokering skjule dig så du ikke er synlig på deres søgning.</p>
