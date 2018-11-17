@@ -13,10 +13,8 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mh">
-                <div class="display_table">
-                    <div class="table_content">
-                        <img src="<?php echo base_url();?>/templates/images/1x/premium.png" alt="" class="img-responsive premium_img">
-                    </div>
+                <div class="box_label_member">
+                    <img src="<?php echo base_url();?>/templates/images/1x/premium.png" alt="" class="img-responsive">
                 </div>
             </div>
         </div>
