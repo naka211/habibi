@@ -293,7 +293,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="w_box_modalBlur_img">
                     <div class="box_modalBlur_img">
-                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/popup1.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -321,7 +321,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="w_box_modalBlur_img">
                     <div class="box_modalBlur_img">
-                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/popup2.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -344,7 +344,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="w_box_modalBlur_img">
                     <div class="box_modalBlur_img">
-                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/1.jpg" alt="">
+                        <img class="img-responsive" src="<?php echo base_url().'templates/';?>images/1x/popup2.jpg" alt="">
                     </div>
                 </div>
             </div>
