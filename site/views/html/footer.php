@@ -1,5 +1,5 @@
-<?php $user = $this->session->userdata('user');?>
-<?php if(!empty($user)){?>
+<?php $user = $this->session->userdata('user'); ?>
+<?php if(!empty($user) || $page == 'home/register'){?>
     <div id="footer" class="cf"></div>
     <section class="section_app">
         <div class="container">

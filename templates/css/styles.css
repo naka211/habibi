@@ -2699,7 +2699,7 @@ ul.list_action li a .i_report {
 }
 
 .error{
-    border: 1px solid red !important;
+    border-bottom: 1px solid red !important;
 }
 /** Multi select **/
 .ms-options-wrap {
@@ -2992,6 +2992,12 @@ label.error{
     border: none !important;
     font-size: 12px;
     color: red;
+    font-weight: normal;
+}
+
+label label.error{
+    display: block;
+    padding-left: 0px;
 }
 
 .ms-options-wrap > .ms-options > ul li.selected label{

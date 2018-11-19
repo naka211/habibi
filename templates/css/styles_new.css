@@ -170,7 +170,7 @@ ul.list_blurring li::before {
 	margin-bottom: 10px;
 }
 .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet:last-child {
-	opacity: 0;
+	opacity: 1;
 }
 
 .modalBlur {

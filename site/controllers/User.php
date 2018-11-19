@@ -539,6 +539,29 @@ class User extends MX_Controller
 
     /** User*/
     function register(){
+        //Check recaptcha
+        $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            'secret' => '6LfOWysUAAAAAGK3jSpOghyJD-x4FHStA_DE2cks',
+            'response' => $recaptchaResponse,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ));
+
+        $resp = json_decode(curl_exec($ch));
+        curl_close($ch);
+
+        if ($resp->success == false) {
+            customRedirectWithMessage('register', 'Ugyldig Google Recaptcha');
+        }
+
+        //
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if ($this->input->post()) {
@@ -566,14 +589,16 @@ class User extends MX_Controller
             }
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
-            $this->session->set_userdata('name', $DB['name']);
-            $this->session->set_userdata('email', $DB['email']);
-            $this->session->set_userdata('password', $this->input->post('password'));
+
             $id = $this->user->saveUser($DB);
-            $user = $this->user->getUser('', $DB['email'], $DB['password']);
-            $this->session->set_userdata('user', $user);
-            $this->session->set_userdata('isLoginSite', true);
+
             if ($id) {
+                $this->session->set_userdata('name', $DB['name']);
+                $this->session->set_userdata('email', $DB['email']);
+                $this->session->set_userdata('password', $this->input->post('password'));
+                $user = $this->user->getUser('', $DB['email'], $DB['password']);
+                $this->session->set_userdata('user', $user);
+                $this->session->set_userdata('isLoginSite', true);
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
                 $sendEmailInfo['email'] = $DB['email'];
@@ -581,16 +606,14 @@ class User extends MX_Controller
                 $emailTo = array($DB['email']);
                 sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
 
-                $data['status'] = true;
-                $data['message'] = '';
+                redirect(site_url('user/start'));
             } else {
-                $data['status'] = false;
-                $data['message'] = 'Fejl-system, skal du handling igen!';
+                customRedirectWithMessage('register', 'Fejl-system, skal du handling igen!');
             }
-            $data['payment'] = false;
+            /*$data['payment'] = false;
             header('Content-Type: application/json');
             echo json_encode($data);
-            return;
+            return;*/
         }
     }
 

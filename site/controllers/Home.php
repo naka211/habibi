@@ -94,6 +94,14 @@ class Home extends MX_Controller {
 		$data['page'] = 'home/news';
 		$this->load->view('templates', $data);
     }
+
+    function register(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Register');
+
+        $data['page'] = 'home/register';
+        $this->load->view('templates', $data);
+    }
 }
 
 /* End of file welcome.php */

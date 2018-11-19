@@ -7,7 +7,7 @@
                     <nav class="navbar navbar-light nav_top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
-                                <a class="navbar-brand" href="index.php">Habibi</a>
+                                <a class="navbar-brand" href="">Habibi</a>
                             </div>
                             <div class="box_login">
                                 <p class="hidden-xs">Er du allerede medlem?</p>
@@ -399,7 +399,7 @@
                     </div>
                     <button type="submit" class="btn btnSeefull">Log ind</button>
                     <div class="clearfix text-center">
-                        <a data-fancybox data-src="#modalRegister" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Register</a>
+                        <a href="<?php echo site_url('register');?>" class="btn btn-link">Register</a>
                         <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
                     </div>
                 <?php echo form_close();?>
