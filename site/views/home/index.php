@@ -19,7 +19,7 @@
                     <div class="caption">
                         <h2><?php echo getContent(13, 'title');?></h2>
                         <?php echo getContent(13, 'content');?>
-                        <a data-fancybox data-src="#modalRegister" href="javascript:;" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
+                        <a href="<?php echo site_url('register');?>" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
                     </div>
                 </div>
 
@@ -123,7 +123,7 @@
                                                 <li>Høj sikkerhed med 256 bit SSL kryptering</li>
                                                 <li>Gør din profil anonym med vores sløringsværktøj</li>
                                             </ul>
-                                            <a data-fancybox data-src="#modalRegister" href="javascript:;" class="btn btnsignup_member">OPRET GRATIS MEDLEMSKAB HER</a>
+                                            <a href="<?php echo site_url('register');?>" class="btn btnsignup_member">OPRET GRATIS MEDLEMSKAB HER</a>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive"></a>
-                                        <h2><a class="link_register" data-fancybox data-src="#modalRegister" href="javascript:;" title="">ELLER TILMELD DIG ONLINE</a></h2>
+                                        <h2><a class="link_register" href="<?php echo site_url('register');?>">ELLER TILMELD DIG ONLINE</a></h2>
                                     </div>
                                 </div>
                             </div>
