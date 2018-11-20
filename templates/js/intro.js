@@ -21,6 +21,10 @@ $(function ($) {
         },
 
     });
+
+    $('.btnMovetop').click(function (e) {
+        swiper.slideTo( 0, 1000, false );
+    });
 });
 
 

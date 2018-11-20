@@ -258,6 +258,7 @@
                                 <div class="row footer_bottom">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
+                                        <a href="javascript:;" class="btnMovetop">Tilbage til top <i class="i_up"></i></a>
                                     </div>
                                 </div>
                             </div>
