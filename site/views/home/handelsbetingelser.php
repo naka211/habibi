@@ -1,19 +1,19 @@
-<section class="breadcrumb-custom">
-    <div class="container">
-      <div class="row">
-        <ul class="breadcrumb">
-          <li><a href="<?php echo base_url();?>">Forside</a></li>
-          <li class="active"><?php echo $item->title;?></a></li>
-        </ul>
-      </div>
-    </div>
-</section>
-<section class="contact">
-    <div class="container">
-      <div class="row mt30 mb30">
-        <div class="col-md-12">
-          <?php echo $item->content;?>
+<div class="create_profile">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="logo_sub" href="<?php echo base_url();?>"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-respsonsive"></a>
+            </div>
         </div>
-      </div>
     </div>
-</section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="frm_createprofile">
+                    <h3><?php echo $item->title;?></h3>
+                    <?php echo $item->content;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

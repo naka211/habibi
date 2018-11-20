@@ -1,5 +1,5 @@
 <?php $user = $this->session->userdata('user'); ?>
-<?php if(!empty($user) || $page == 'home/register'){?>
+<?php if(!empty($user) || $page == 'home/register'|| $page == 'home/cookie' || $page == 'home/handelsbetingelser' || $page == 'home/persondatapolitikken'){?>
     <div id="footer" class="cf"></div>
     <section class="section_app">
         <div class="container">

@@ -71,11 +71,19 @@ class Home extends MX_Controller {
     
     function handelsbetingelser(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Handelsbetingelser');
         
         $data['item'] = $this->general_model->getNewsStatic('handelsbetingelser');
 		$data['page'] = 'home/handelsbetingelser';
 		$this->load->view('templates', $data);
+    }
+    function persondatapolitikken(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Vilkår for brug af cookies og persondatapolitikken');
+
+        $data['item'] = $this->general_model->getNewsStatic('persondatapolitikken');
+        $data['page'] = 'home/persondatapolitikken';
+        $this->load->view('templates', $data);
     }
     function betingelser(){
         $data = array();

@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <a class="logo_sub" href="index.php"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-respsonsive"></a>
+                <a class="logo_sub" href="<?php echo base_url();?>"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-respsonsive"></a>
             </div>
         </div>
     </div>
@@ -175,12 +175,12 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="term"> Jeg accepterer brugerbetingelserne
+                                <input type="checkbox" name="term"> Jeg accepterer <a href="<?php echo site_url('home/handelsbetingelser');?>" target="_blank" style="color: #f19906;">brugerbetingelserne</a>
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="personaldata"> Jeg accepterer vilkår for brug af cookies og persondatapolitikken
+                                <input type="checkbox" name="personaldata"> Jeg accepterer <a href="<?php echo site_url('home/persondatapolitikken');?>" target="_blank" style="color: #f19906;">vilkår for brug af cookies og persondatapolitikken</a>
                             </label>
                         </div>
                     </div>
