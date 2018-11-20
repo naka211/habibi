@@ -102,6 +102,15 @@ class Home extends MX_Controller {
         $data['page'] = 'home/register';
         $this->load->view('templates', $data);
     }
+
+    function cookie(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Cookie');
+
+        $data['item'] = $this->general_model->getNewsStatic('cookie');
+        $data['page'] = 'home/cookie';
+        $this->load->view('templates', $data);
+    }
 }
 
 /* End of file welcome.php */
