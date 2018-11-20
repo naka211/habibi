@@ -25,6 +25,18 @@ $(function ($) {
     $('.btnMovetop').click(function (e) {
         swiper.slideTo( 0, 1000, false );
     });
+
+    $(".btnCookie").click(function (event) {
+        event.preventDefault();
+        $(".cookie").hide('slow/400/fast', function () {
+        });
+
+        $.ajax({
+            method: "POST",
+            url: base_url+"ajax/setCookie",
+            data: { csrf_site_name: token_value }
+        });
+    });
 });
 
 

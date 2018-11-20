@@ -264,7 +264,7 @@
                     remote: 'Denne email er i brug'
                 },
                 "name":{
-                    required: 'Indtast din navn',
+                    required: 'Vælg dit brugernavn',
                     remote: 'Denne brugernavn er i brug'
                 },
                 "year":{
