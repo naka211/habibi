@@ -1,5 +1,6 @@
+<?php $pageArr = array('home/register', 'home/cookie', 'home/handelsbetingelser', 'home/persondatapolitikken');?>
 <?php $user = $this->session->userdata('user'); ?>
-<?php if(!empty($user) || $page == 'home/register'|| $page == 'home/cookie' || $page == 'home/handelsbetingelser' || $page == 'home/persondatapolitikken'){?>
+<?php if(!empty($user) || in_array($page, $pageArr)){?>
     <div id="footer" class="cf"></div>
     <section class="section_app">
         <div class="container">
@@ -64,14 +65,15 @@
         <i class="fas fa-long-arrow-alt-up"></i>
     </div>
 
-    <?php if(!isset($_COOKIE['ha_panik_cookie'])){?>
+    <?php if(!isset($_COOKIE['ha_panik_cookie']) && !(in_array($page, $pageArr))){?>
     <div class="box_notify">
         <i class="far fa-comment fa-lg"></i> Lorem ipsum dolor sit amet.
         <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
     <?php }?>
+    <?php if(!(in_array($page, $pageArr))){?>
     <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
-
+    <?php }?>
     <div style="display: none;" id="modalError" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
