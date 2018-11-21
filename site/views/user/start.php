@@ -8,7 +8,7 @@
                     <div class="table_content">
                         <h2><?php echo getContent(20, 'title');?></h2>
                         <?php echo getContent(20, 'content');?>
-                        <a data-fancybox data-src="#modalUpgrade" href="javascript:;" class="btn btn_Upgrade">Opgrader nu</a>
+                        <a href="<?php echo site_url('user/upgrade');?>" class="btn btn_Upgrade">Opgrader nu</a>
                     </div>
                 </div>
             </div>
