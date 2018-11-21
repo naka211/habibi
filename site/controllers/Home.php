@@ -52,12 +52,12 @@ class Home extends MX_Controller {
 		$data['page'] = 'home/kontakt';
 		$this->load->view('templates', $data);
     }
-    function om(){
+    function abonnement(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Betingelser for abonnement');
         
-        $data['item'] = $this->general_model->getNewsStatic('omzeeduce');
-		$data['page'] = 'home/om';
+        $data['item'] = $this->general_model->getNewsStatic('abonnement');
+		$data['page'] = 'home/abonnement';
 		$this->load->view('templates', $data);
     }
     function faq(){
@@ -77,12 +77,12 @@ class Home extends MX_Controller {
 		$data['page'] = 'home/handelsbetingelser';
 		$this->load->view('templates', $data);
     }
-    function persondatapolitikken(){
+    function guldmedlemskab(){
         $data = array();
-        $this->user->addMeta($this->_meta, $data, 'Habibi - Vilkår for brug af cookies og persondatapolitikken');
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Fordele guld medlemskab');
 
-        $data['item'] = $this->general_model->getNewsStatic('persondatapolitikken');
-        $data['page'] = 'home/persondatapolitikken';
+        $data['item'] = $this->general_model->getNewsStatic('guldmedlemskab');
+        $data['page'] = 'home/guldmedlemskab';
         $this->load->view('templates', $data);
     }
     function betingelser(){
@@ -115,7 +115,7 @@ class Home extends MX_Controller {
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Cookie');
 
-        $data['item'] = $this->general_model->getNewsStatic('cookie');
+        $data['item'] = $this->general_model->getNewsStatic('cookiesogpersondatapolitikken');
         $data['page'] = 'home/cookie';
         $this->load->view('templates', $data);
     }

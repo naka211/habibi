@@ -180,7 +180,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="personaldata"> Jeg accepterer <a href="<?php echo site_url('home/persondatapolitikken');?>" target="_blank" style="color: #f19906;">vilkår for brug af cookies og persondatapolitikken</a>
+                                <input type="checkbox" name="personaldata"> Jeg accepterer <a href="<?php echo site_url('home/cookie');?>" target="_blank" style="color: #f19906;">vilkår for brug af cookies og persondatapolitikken</a>
                             </label>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
-<?php $pageArr = array('home/register', 'home/cookie', 'home/handelsbetingelser', 'home/persondatapolitikken');?>
+<?php $pageArr = array('home/index');?>
 <?php $user = $this->session->userdata('user'); ?>
-<?php if(!empty($user) || in_array($page, $pageArr)){?>
+<?php if(!in_array($page, $pageArr)){?>
     <div id="footer" class="cf"></div>
     <section class="section_app">
         <div class="container">
@@ -39,8 +39,8 @@
                         <li>- Internet dating, der fjerner den første forhindring</li>
                         <li>- En Eksklusiv Dating Website</li>
                         <li>- Zeduuce.dk er en livsstil</li>
-                        <li>- Tilslutning mennesker gennem eksklusive internet dating</li>
-                        <li>- Zeduuce.dk - Selektiv Online Dating</li>
+                        <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
+                        <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
@@ -65,13 +65,13 @@
         <i class="fas fa-long-arrow-alt-up"></i>
     </div>
 
-    <?php if(!isset($_COOKIE['ha_panik_cookie']) && !(in_array($page, $pageArr))){?>
+    <?php if(!isset($_COOKIE['ha_panik_cookie']) && !empty($user)){?>
     <div class="box_notify">
         <i class="far fa-comment fa-lg"></i> Lorem ipsum dolor sit amet.
         <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
     <?php }?>
-    <?php if(!(in_array($page, $pageArr))){?>
+    <?php if(!empty($user)){?>
     <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
     <?php }?>
     <div style="display: none;" id="modalError" class="animated-modal modalLogin">

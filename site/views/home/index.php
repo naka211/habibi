@@ -241,8 +241,8 @@
                                             <li>- Internet dating, der fjerner den første forhindring</li>
                                             <li>- En Eksklusiv Dating Website</li>
                                             <li>- Zeduuce.dk er en livsstil</li>
-                                            <li>- Tilslutning mennesker gennem eksklusive internet dating</li>
-                                            <li>- Zeduuce.dk - Selektiv Online Dating</li>
+                                            <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
+                                            <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">

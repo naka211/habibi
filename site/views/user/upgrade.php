@@ -10,18 +10,8 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rerum maxime consequuntur non odit optio, minima perferendis quibusdam recusandae veniam?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos omnis blanditiis, voluptas non modi pariatur, nihil laudantium cum repellat ab assumenda maxime, dolorem, nostrum odit quaerat eius dolor autem aliquam necessitatibus impedit soluta consequatur! Veniam maxime dolorum delectus nemo corporis nulla ab. Quo error, eligendi enim tempora recusandae officia.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, dolor.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste laboriosam repellat velit commodi inventore quidem voluptatibus facere quam nemo, assumenda voluptas ea dolor deserunt ut error debitis, fuga dolore, quod, magni culpa odio fugiat fugit nulla! Soluta, repudiandae. Quisquam neque ab, quasi cupiditate commodi maiores. Ea tenetur doloremque similique ullam tempora voluptates culpa praesentium repellendus nesciunt, rerum pariatur facere incidunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas explicabo maiores amet. Maxime beatae, commodi molestiae est nostrum laboriosam reprehenderit ab, cupiditate possimus eaque maiores hic odit. Unde fuga fugiat architecto sapiente, impedit, animi ducimus odio optio delectus molestiae nesciunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id esse ut suscipit adipisci qui modi, optio velit commodi dolorem voluptatibus? Impedit id minima velit suscipit minus labore architecto ullam nobis, sapiente voluptatem fugit dignissimos perferendis sequi ad porro, rem deleniti nisi doloremque. Harum nihil id ex explicabo totam, consectetur tempora fugit illo, enim inventore, nisi! Hic in assumenda sapiente autem beatae, itaque ad praesentium voluptatem, facere cupiditate omnis officia impedit error amet laborum, ducimus saepe illum vitae voluptates sed. Id.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rerum maxime consequuntur non odit optio, minima perferendis quibusdam recusandae veniam?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos omnis blanditiis, voluptas non modi pariatur, nihil laudantium cum repellat ab assumenda maxime, dolorem, nostrum odit quaerat eius dolor autem aliquam necessitatibus impedit soluta consequatur! Veniam maxime dolorum delectus nemo corporis nulla ab. Quo error, eligendi enim tempora recusandae officia.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, dolor.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste laboriosam repellat velit commodi inventore quidem voluptatibus facere quam nemo, assumenda voluptas ea dolor deserunt ut error debitis, fuga dolore, quod, magni culpa odio fugiat fugit nulla! Soluta, repudiandae. Quisquam neque ab, quasi cupiditate commodi maiores. Ea tenetur doloremque similique ullam tempora voluptates culpa praesentium repellendus nesciunt, rerum pariatur facere incidunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas explicabo maiores amet. Maxime beatae, commodi molestiae est nostrum laboriosam reprehenderit ab, cupiditate possimus eaque maiores hic odit. Unde fuga fugiat architecto sapiente, impedit, animi ducimus odio optio delectus molestiae nesciunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id esse ut suscipit adipisci qui modi, optio velit commodi dolorem voluptatibus? Impedit id minima velit suscipit minus labore architecto ullam nobis, sapiente voluptatem fugit dignissimos perferendis sequi ad porro, rem deleniti nisi doloremque. Harum nihil id ex explicabo totam, consectetur tempora fugit illo, enim inventore, nisi! Hic in assumenda sapiente autem beatae, itaque ad praesentium voluptatem, facere cupiditate omnis officia impedit error amet laborum, ducimus saepe illum vitae voluptates sed. Id.</p>
+                    <?php echo getContent(20, 'title');?>
+                    <?php echo getContent(20, 'content');?>
                     <hr>
                     <div class="box_payment text-center">
                         <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
@@ -33,13 +23,13 @@
                                         <p>Pris: 1 kr</p>
                                     </div>
                                 </div>
-                                <div class="input-container">
+                                <!--<div class="input-container">
                                     <input class="radio-button" name="package" checked type="radio" value="1">
                                     <div class="radio-tile">
                                         <label class="radio-tile-label">1 måned</label>
-                                        <p>Pris: <?php echo number_format($this->config->item('price1Month'), 0,',', '.')?> kr</p>
+                                        <p>Pris: <?php /*echo number_format($this->config->item('price1Month'), 0,',', '.')*/?> kr</p>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="input-container">
                                     <input class="radio-button" name="package" type="radio" value="3">
                                     <div class="radio-tile">
@@ -61,7 +51,7 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="tos" value="1" style="position: inherit;">
-                                        Accepter <a target="_blank" class="btn-link" href="#" title="">betingelser</a> om et løbende abonnement
+                                        Jeg accepterer <a target="_blank" class="btn-link" href="<?php echo site_url('user/abonnement');?>">betingelser for abonnement</a>
                                     </label>
                                 </div>
                             </div>
