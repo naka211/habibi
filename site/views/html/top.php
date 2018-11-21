@@ -1,4 +1,5 @@
 <?php $user = getUser();
+$class = $this->router->fetch_class();
 if(!empty($user)){
     $this->load->model('user_model', 'user');
     $unreadMessageQuantity = $this->user->getUnreadMessageQuantity($user->id);
@@ -18,9 +19,7 @@ if(!empty($user)){
 }
 ?>
 
-<?php if(!$user){?>
-
-<?php }else{?>
+<?php if(!empty($user) && $class != 'home'){?>
     <script src="<?php echo base_url().'templates/';?>js/functions.js"></script>
     <header>
         <div class="container">

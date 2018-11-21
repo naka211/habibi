@@ -51,7 +51,7 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="tos" value="1" style="position: inherit;">
-                                        Jeg accepterer <a target="_blank" class="btn-link" href="<?php echo site_url('user/abonnement');?>">betingelser for abonnement</a>
+                                        Jeg accepterer <a target="_blank" class="btn-link" href="<?php echo site_url('home/abonnement');?>">betingelser for abonnement</a>
                                     </label>
                                 </div>
                             </div>
