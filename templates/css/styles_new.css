@@ -354,3 +354,81 @@ ul.list_intro li {
 .displaynone {
 	display: none;
 }
+
+.cookie {
+	background: rgba(0, 0, 0, 0.8);
+	padding: 30px 60px 30px 0;
+	position: fixed;
+	z-index: 20;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.cookie p {
+	color: #fff;
+	font-size: 14px;
+	margin-bottom: 0;
+	padding-right: 100px;
+}
+.btnCookie {
+	color: #fff;
+	position: absolute;
+	right: -15px;
+	top: 20px;
+	background: #FFA507;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 3px;
+}
+.btnCookie:hover {
+	color: #fff;
+	background: #A86F0B;
+}
+.cookie .btnMore2{
+	color: #FFA507;
+	font-size: 14px;
+	font-weight: normal;
+}
+.cookie .btnMore2:hover {
+	text-decoration: underline;
+}
+.footer_bottom {
+	position: relative;
+}
+.btnMovetop {
+	position: absolute;
+	z-index: 200;
+	right: 0;
+	bottom: 60px;
+	font-size: 14px;
+	font-weight: 500;
+}
+.i_up {
+	background: url('../images/1x/i_up.png') no-repeat;
+	width: 18px;
+	height: 10px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.w_login2 {
+	position: relative;
+	top: -120px;
+}
+.btnBack {
+	text-align: center;
+	border-radius: 3px;
+	background-image: -moz-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
+	background-image: -webkit-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
+	background-image: -ms-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
+	border: 1px solid #FFA707;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+}
+.btnBack:hover {
+	background: rgb(255, 165, 7);
+}

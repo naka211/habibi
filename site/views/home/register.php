@@ -11,6 +11,19 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <?php echo form_open('user/register', array('id'=>'frm_register', 'class'=>'frm_createprofile'))?>
+                    <div class="w_login2">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <a class="btn btnBack" href="javascript:history.back();">« Tilbage</a>
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <div class="box_login">
+                                    <p class="hidden-xs">Er du allerede medlem?</p>
+                                    <a data-fancybox="" data-src="#modalLogin" href="javascript:;" class="btn btnLogin">Log ind</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <h2>Opret din profil</h2>
                     <p class="description">Det er hurtigt og helt gratis at tilmelde sig</p>
                     <div class="row">
@@ -193,6 +206,43 @@
         </div>
     </div>
 </div>
+<div style="display: none;" id="modalLogin" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2>Log ind</h2>
+            <?php echo form_open('user/login', array('id'=>'frm_login', 'class'=>'frm_login'))?>
+            <div class="form-group">
+                <label for="">E-mail / Brugernavn</label>
+                <input type="text" class="form-control" name="info">
+            </div>
+            <div class="form-group">
+                <label for="">Kodeord</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btnSeefull">Log ind</button>
+            <div class="clearfix text-center">
+                <a href="<?php echo site_url('register');?>" class="btn btn-link">Register</a>
+                <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
+            </div>
+            <?php echo form_close();?>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalFP" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2>GLEMT DIN ADGANGSKODE?</h2>
+            <p>Angiv venligst emailadressen til din konto. En verificeringskode vli blive sendt til dig. Når du har modtaget verificeringskoden vil du kunne vælge en ny adgangskode til din konto.</p>
+            <?php echo form_open('', array('id'=>'frm_forgotPassword', 'class'=>'frm_login'))?>
+            <div class="form-group">
+                <label for="">E-mail</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <button type="submit" class="btn btnSeefull">Send</button>
+            <?php echo form_close();?>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         $("#frm_register").validate({
@@ -302,32 +352,7 @@
                 "personaldata":{
                     required:'Accepterer vilkår for brug af cookies og persondatapolitikken'
                 }
-            }/*,
-            submitHandler: function(form){
-                $.fancybox.close();
-                var formData = new FormData(form);
-                $('.se-pre-con').show();
-                $.ajax({
-                    type: "POST",
-                    url: base_url+"user/register",
-                    data: formData,
-                    dataType: 'json',
-                    mimeType:"multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData:false,
-                    success: function(data){
-                        if(data.status === false){
-                            $('.se-pre-con').fadeOut();
-                            $('#error-content').html(data.message);
-                            $.fancybox.open({src: '#modalError'});
-                        } else {
-                            location.reload();
-                        }
-                    }
-                });
-                return false;
-            }*/
+            }
         });
     });
 </script>
