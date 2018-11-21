@@ -16,20 +16,20 @@
                     <div class="box_payment text-center">
                         <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
                             <div class="radio-tile-group packages_option">
-                                <div class="input-container">
+                                <!--<div class="input-container">
                                     <input class="radio-button" name="package" type="radio" value="0">
                                     <div class="radio-tile">
                                         <label class="radio-tile-label">1 dag (test)</label>
                                         <p>Pris: 1 kr</p>
                                     </div>
-                                </div>
-                                <!--<div class="input-container">
+                                </div>-->
+                                <div class="input-container">
                                     <input class="radio-button" name="package" checked type="radio" value="1">
                                     <div class="radio-tile">
                                         <label class="radio-tile-label">1 måned</label>
-                                        <p>Pris: <?php /*echo number_format($this->config->item('price1Month'), 0,',', '.')*/?> kr</p>
+                                        <p>Pris: <?php echo number_format($this->config->item('price1Month'), 0,',', '.')?> kr</p>
                                     </div>
-                                </div>-->
+                                </div>
                                 <div class="input-container">
                                     <input class="radio-button" name="package" type="radio" value="3">
                                     <div class="radio-tile">
