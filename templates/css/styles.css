@@ -3115,6 +3115,7 @@ label label.error{
     letter-spacing: 1px;
     color: #ffa507;
     margin-bottom: 15px;
+    line-height: 30px;
 }
 .radio-tile-group .input-container .radio-button:checked + .radio-tile {
     background-color: #ffa507;

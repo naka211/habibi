@@ -16,13 +16,12 @@
                     <div class="box_payment text-center">
                         <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
                             <div class="radio-tile-group packages_option">
-                                <!--<div class="input-container">
-                                    <input class="radio-button" name="package" type="radio" value="0">
+                                <div class="input-container">
+                                    <input class="radio-button" name="free" checked type="radio" value="1">
                                     <div class="radio-tile">
-                                        <label class="radio-tile-label">1 dag (test)</label>
-                                        <p>Pris: 1 kr</p>
+                                        <label class="radio-tile-label">3 første måneder er gratis</label>
                                     </div>
-                                </div>-->
+                                </div>
                                 <div class="input-container">
                                     <input class="radio-button" name="package" checked type="radio" value="1">
                                     <div class="radio-tile">
@@ -30,20 +29,20 @@
                                         <p>Pris: <?php echo number_format($this->config->item('price1Month'), 0,',', '.')?> kr</p>
                                     </div>
                                 </div>
-                                <div class="input-container">
+                                <!--<div class="input-container">
                                     <input class="radio-button" name="package" type="radio" value="3">
                                     <div class="radio-tile">
                                         <label class="radio-tile-label">3 måneder</label>
-                                        <p>Pris: <?php echo number_format($this->config->item('price3Months'), 0,',', '.')?> kr</p>
+                                        <p>Pris: <?php /*echo number_format($this->config->item('price3Months'), 0,',', '.')*/?> kr</p>
                                     </div>
                                 </div>
                                 <div class="input-container">
                                     <input class="radio-button" name="package" type="radio" value="6">
                                     <div class="radio-tile">
                                         <label class="radio-tile-label">6 måneder</label>
-                                        <p>Pris: <?php echo number_format($this->config->item('price6Months'), 0,',', '.')?> kr</p>
+                                        <p>Pris: <?php /*echo number_format($this->config->item('price6Months'), 0,',', '.')*/?> kr</p>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <p>Betal med betalingskort: </p>
                             <img src="<?php echo base_url();?>templates/images/1x/betaling01.png" alt="" class="img-responsive">
