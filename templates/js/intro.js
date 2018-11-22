@@ -14,7 +14,10 @@ $(function ($) {
 
     var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',
+        slidesPerView: 1,
         mousewheel: true,
+        mousewheelControl: true,
+        speed: 600,
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
