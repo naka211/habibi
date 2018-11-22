@@ -68,29 +68,6 @@ $(function ($) {
         });
     });
 
-    $('.btnClose_xs').click(function (event) {
-        event.preventDefault();
-        $('.box_notify').hide('slow/400/fast', function () {
-        });
-
-        $.ajax({
-            method: "POST",
-            url: base_url+"ajax/setCookiePanik",
-            data: { csrf_site_name: token_value }
-        });
-    });
-
-    $('.btnPennic').click(function (event) {
-        $.ajax({
-            method: "POST",
-            url: base_url+"ajax/logout",
-            data: { csrf_site_name: token_value },
-            success: function () {
-                window.open('https://www.youtube.com', '_self');
-            }
-        });
-    });
-
     /*var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',
         // effect: 'fade',
