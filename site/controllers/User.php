@@ -1235,8 +1235,9 @@ class User extends MX_Controller
         $DB['phone'] = $this->input->post('phone');
         $DB['email'] = $this->input->post('email');
         $DB['besked'] = $this->input->post('besked');
-        $admin = $this->config->item('email');
-        $emailTo = array($admin);
+        //$admin = $this->config->item('email');
+        //$emailTo = array($admin);
+        $emailTo = array('trung@mywebcreations.dk');
         if(sendEmail($emailTo,'contact',$DB,'')){
             $data['status'] = true;
             $data['message'] = 'Tak for din henvendelse. Jeg vender hurtigst muligt tilbage til dig.';
