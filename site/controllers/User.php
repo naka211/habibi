@@ -1246,9 +1246,9 @@ class User extends MX_Controller
             $data['message'] = 'E-mailen sendes ikke';
         }
         //Save DB
-        $DB['dt_create'] = date('Y-m-d H:i:s');
+        /*$DB['dt_create'] = date('Y-m-d H:i:s');
         $DB['bl_active'] = 1;
-        $this->general_model->saveContact($DB);
+        $this->general_model->saveContact($DB);*/
 
         header('Content-Type: application/json');
         echo json_encode($data);
