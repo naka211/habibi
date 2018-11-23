@@ -482,6 +482,7 @@ header .navbar-brand {
 
 .banner .swiper-container-vertical > .swiper-pagination-bullets {
     left: 20px;
+    right: auto;
 }
 
 .banner .swiper-pagination-bullet {
