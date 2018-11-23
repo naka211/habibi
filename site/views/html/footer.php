@@ -23,7 +23,7 @@
                     <img src="<?php echo base_url().'templates/';?>images/1x/logo.svg" alt="" class="img-responsive logo_footer">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                    <p class="text_follow">Følg os på Facebook og Instagram</p>
+                    <p class="text_follow">Følg os på Facebook</p>
                     <div class="box_socail">
                         <a href="#" class="btn btn_fb"></a>
                     </div>
@@ -33,21 +33,21 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                     <ul class="list">
-                        <li>- Online dating udelukkende til <a href="index.php">Zeduuce.dk</a></li>
-                        <li>- Internet dating, der fjerner den første forhindring</li>
-                        <li>- En Eksklusiv Dating Website</li>
-                        <li>- Zeduuce.dk er en livsstil</li>
+                        <li>- <a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
+                        <li>- <a href="index.php">Om os</a></li>
+                        <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
+                        <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
                         <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
                         <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
-                    <p class="f14"><a href="index.php">Derfor Zeduuce.dk</a></p>
-                    <ul class="list_Therefore">
-                        <li>Danmarks hurtigt voksende datingsite.</li>
-                        <li>Finder din næste kærlighed, partner eller ven her.</li>
-                        <li>Nemt at finde det rigtige match.</li>
-                        <li>Masser af arrangementer, events og gode deals</li>
+                    <ul class="list_intro intro_footer">
+                        <li>Hurtig oprettelse og nem framelding</li>
+                        <li>Gratis medlemskab uden binding</li>
+                        <li>Garanteret privat og diskret</li>
+                        <li>Høj sikkerhed med 256 bit SSL kryptering</li>
+                        <li>Gør din profil anonym med vores sløringsværktøj</li>
                     </ul>
                 </div>
             </div>
@@ -72,25 +72,6 @@
     <?php if(!empty($user)){?>
     <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
     <?php }?>
-    <div style="display: none;" id="modalError" class="animated-modal modalLogin">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
-                </div>
-                <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
-            </div>
-        </div>
-    </div>
-    <div style="display: none;" id="modalMessage" class="animated-modal modalLogin">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="message-content"></p>
-                <button type="submit" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
-            </div>
-        </div>
-    </div>
-
     <div style="display: none;" id="modalUpgrade" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -107,6 +88,51 @@
         </div>
     </div>
 <?php }?>
+<div style="display: none;" id="modalError" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
+            </div>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalMessage" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <p class="f19" id="message-content"></p>
+            <button type="submit" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalContact" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2>Kontakt os</h2>
+            <?php echo form_open('user/contact', array('id'=>'frm_contact', 'class'=>'frm_login'))?>
+            <div class="form-group">
+                <label for="">Navn *</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <label for="">E-mail *</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="">Telefon *</label>
+                <input type="text" class="form-control" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="">Besked *</label>
+                <textarea name="message" class="form-control"></textarea>
+            </div>
+            <p><i>Felter markeret med * skal udfyldes</i></p>
+            <button type="submit" class="btn btnSeefull">Send</button>
+            <?php echo form_close();?>
+        </div>
+    </div>
+</div>
 <?php if(!isset($_COOKIE['ha_cookie'])){?>
     <section class="cookie">
         <div class="container">

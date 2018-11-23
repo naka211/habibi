@@ -255,6 +255,10 @@ ul.list_intro li {
 	background: url('../images/1x/i_checked.svg') no-repeat top left;
 	padding: 5px 0 5px 50px;
 }
+ul.list_intro.intro_footer li {
+	font-size: 14px;
+	font-weight: normal;
+}
 .btnsignup_member {
 	background-image: linear-gradient(227deg, #FFA507 0%, #832F35 100%);
 	border: 1px solid #FFA707;

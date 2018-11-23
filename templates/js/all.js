@@ -198,4 +198,45 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    $("#frm_contact").validate({
+        errorPlacement: function(error, element) {
+            return false;
+        },
+        rules: {
+            'name': 'required',
+            "email":{
+                required:true,
+                email: true
+            },
+            'phone': 'required',
+            'message': 'required'
+        },
+        submitHandler: function(form){
+            $.fancybox.close();
+            var formData = new FormData(form);
+            $('.se-pre-con').show();
+            $.ajax({
+                type: "POST",
+                url: base_url+"user/contact",
+                data: formData,
+                dataType: 'json',
+                mimeType:"multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data){
+                    $('.se-pre-con').fadeOut();
+                    if(data.status === true){
+                        $('#message-content').html(data.message);
+                        $.fancybox.open({src: '#modalMessage'});
+                    } else {
+                        $('#error-content').html(data.message);
+                        $.fancybox.open({src: '#modalError'});
+                    }
+                }
+            });
+            return false;
+        }
+    });
 });

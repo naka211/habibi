@@ -830,10 +830,10 @@ class User extends MX_Controller
                 $new_password = $this->randomPassword(12, 1, "lower_case,upper_case,numbers");
                 $content = 'Kære ' . $user->name . '<br /><br />
                         Din nye adgangskode er: <b>'.$new_password[0].'</b><br /><br />
-                        Har du spørgsmål kontakt info@zeduuce.com<br /><br />
+                        Har du spørgsmål kontakt info@habibidating.dk<br /><br />
                         Med venlig hilsen<br/>
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-                $sent = $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Glemt adgangskode', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+                $sent = $this->general_model->sendEmail([$user->email], 'Habibidating.dk - Glemt adgangskode', $content);
                 if($sent === true){
                     $data['password'] = md5($new_password[0]);
                     $this->user->saveUser($data, $user->id);
@@ -1228,6 +1228,30 @@ class User extends MX_Controller
         $this->user->saveUser($db, $user->id);
 
         redirect(site_url('/user/logout'));
+    }
+
+    function contact(){
+        $DB['name'] = $this->input->post('name');
+        $DB['phone'] = $this->input->post('phone');
+        $DB['email'] = $this->input->post('email');
+        $DB['besked'] = $this->input->post('besked');
+        $admin = $this->config->item('email');
+        $emailTo = array($admin);
+        if(sendEmail($emailTo,'contact',$DB,'')){
+            $data['status'] = true;
+            $data['message'] = 'Tak for din henvendelse. Jeg vender hurtigst muligt tilbage til dig.';
+        } else {
+            $data['status'] = false;
+            $data['message'] = 'E-mailen sendes ikke';
+        }
+        //Save DB
+        $DB['dt_create'] = date('Y-m-d H:i:s');
+        $DB['bl_active'] = 1;
+        $this->general_model->saveContact($DB);
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
     }
 }
 
