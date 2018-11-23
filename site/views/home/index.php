@@ -263,8 +263,8 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                                         <ul class="list">
-                                            <li>- <a  data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
-                                            <li>- <a href="index.php">Om os</a></li>
+                                            <li>- <a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
+                                            <li>- <a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a></li>
                                             <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
                                             <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
                                             <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>

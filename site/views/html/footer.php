@@ -34,7 +34,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                     <ul class="list">
                         <li>- <a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
-                        <li>- <a href="index.php">Om os</a></li>
+                        <li>- <a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a></li>
                         <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
                         <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
                         <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
@@ -130,6 +130,24 @@
             <p><i>Felter markeret med * skal udfyldes</i></p>
             <button type="submit" class="btn btnSeefull">Send</button>
             <?php echo form_close();?>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalAbout" class="animated-modal modalBlur">
+    <div class="overlay"></div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="w_box_modalBlur_content">
+                <div class="box_modalBlur_content">
+                    <h4>Om os</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Nascetur ridiculus mus mauris vitae ultricies leo. Nulla pharetra diam sit amet nisl.</p>
+                    <p>Cursus in hac habitasse platea dictumst quisque sagittis purus. Eget arcu dictum varius duis at consectetur lorem donec massa. Ornare massa eget egestas purus viverra accumsan in. Velit laoreet id donec ultrices tincidunt. Turpis egestas sed tempus urna et pharetra pharetra. Lectus sit amet est placerat. Sed cras ornare arcu dui vivamus. Magna ac placerat vestibulum lectus mauris. Suspendisse sed nisi lacus sed viverra tellus. Adipiscing elit ut aliquam purus sit amet luctus. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. In nisl nisi scelerisque eu ultrices vitae auctor.</p>
+
+                    <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
+
+                    <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
