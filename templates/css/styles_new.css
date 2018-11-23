@@ -439,7 +439,8 @@ ul.list_intro li {
 	/*color: #468966;
 	font-size: 15px;*/
 }
-.table_membership.table > tbody > tr > td:nth-child(2), .table_membership.table > tbody > tr > td:nth-child(3) {
+.table_membership.table > tbody > tr > td:nth-child(2), .table_membership.table > tbody > tr > td:nth-child(3),
+.table_membership.table > thead > tr > th:nth-child(2), .table_membership.table > thead > tr > th:nth-child(3) {
 	text-align: center;
 }
 .table_membership.table>thead>tr>th {
