@@ -224,6 +224,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
     ob_start();
     extract($data);
     $str = $query->content;
+    $str = str_replace('"', "'", $str);
     eval("\$str = \"$str\";");
     @ob_end_clean();
     /** Send mail */
