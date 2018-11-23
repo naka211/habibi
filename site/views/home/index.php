@@ -257,8 +257,6 @@
                                         <p class="text_follow">Følg os på Facebook og Instagram</p>
                                         <div class="box_socail">
                                             <a href="#" class="btn btn_fb"></a>
-                                            <a href="#" class="btn btn_tw"></a>
-                                            <a href="#" class="btn btn_in"></a>
                                         </div>
                                     </div>
                                 </div>

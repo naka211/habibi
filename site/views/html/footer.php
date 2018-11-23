@@ -26,8 +26,6 @@
                     <p class="text_follow">Følg os på Facebook og Instagram</p>
                     <div class="box_socail">
                         <a href="#" class="btn btn_fb"></a>
-                        <a href="#" class="btn btn_tw"></a>
-                        <a href="#" class="btn btn_in"></a>
                     </div>
                 </div>
             </div>
@@ -67,7 +65,7 @@
 
     <?php if(!isset($_COOKIE['ha_panik_cookie']) && !empty($user)){?>
     <div class="box_notify">
-        <i class="far fa-comment fa-lg"></i> Lorem ipsum dolor sit amet.
+        <i class="far fa-comment fa-lg"></i> Benyttes denne knap logges du automatisk af.
         <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
     <?php }?>
