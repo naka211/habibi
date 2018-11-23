@@ -235,7 +235,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
             if($from){
                 $ci->email->from($from, 'Habibidating.dk');
             }else{
-                $ci->email->from('info@habibidating.dk', 'Habibidating.dk');
+                $ci->email->from('info@zeduuce.com', 'Habibidating.dk');
             }
             $ci->email->subject($query->subject);
             $ci->email->message($str);
