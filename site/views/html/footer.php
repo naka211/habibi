@@ -141,8 +141,6 @@
                 <div class="box_modalBlur_content">
                     <h4>Om os</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Nascetur ridiculus mus mauris vitae ultricies leo. Nulla pharetra diam sit amet nisl.</p>
-                    <p>Cursus in hac habitasse platea dictumst quisque sagittis purus. Eget arcu dictum varius duis at consectetur lorem donec massa. Ornare massa eget egestas purus viverra accumsan in. Velit laoreet id donec ultrices tincidunt. Turpis egestas sed tempus urna et pharetra pharetra. Lectus sit amet est placerat. Sed cras ornare arcu dui vivamus. Magna ac placerat vestibulum lectus mauris. Suspendisse sed nisi lacus sed viverra tellus. Adipiscing elit ut aliquam purus sit amet luctus. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. In nisl nisi scelerisque eu ultrices vitae auctor.</p>
-
                     <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
 
                     <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
