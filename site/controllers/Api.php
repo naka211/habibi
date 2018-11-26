@@ -217,6 +217,11 @@ class Api extends REST_Controller {
         }
         $data->password = md5($data->password);
         unset($data->confirmPassword);
+        if($data->gender == 1){
+            $data->avatar = 'no-avatar1.png';
+        } else {
+            $data->avatar = 'no-avatar2.png';
+        }
         $data->type = 1;
         $data->groups = 1;
         $data->os = $this->agent->platform();
@@ -744,7 +749,7 @@ class Api extends REST_Controller {
         $avatarPath = './uploads/user/'.$avatarName;
         if(file_put_contents($avatarPath, $image)){
             $newAvatar = $this->user->getNewAvatar($userId);
-            if($newAvatar != 'no-avatar.jpg'){
+            if($newAvatar != 'no-avatar1.png' && $newAvatar != 'no-avatar2.png'){
                 @unlink("./uploads/user/".$newAvatar);
                 @unlink("./uploads/thumb_user/".$newAvatar);
                 @unlink("./uploads/raw_thumb_user/".$newAvatar);
@@ -827,7 +832,7 @@ class Api extends REST_Controller {
         $imageName = $this->post('imageName');
 
         $currentAvatar = $this->user->getAvatar($userId);
-        if($currentAvatar != 'no-avatar.jpg'){
+        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -880,7 +885,7 @@ class Api extends REST_Controller {
         $userId = $this->delete('userId');
 
         $currentAvatar = $this->user->getAvatar($userId);
-        if($currentAvatar != 'no-avatar.jpg'){
+        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -893,7 +898,13 @@ class Api extends REST_Controller {
             @unlink("./uploads/raw_thumb_user/".$newAvatar);
         }
 
-        $this->user->updateAvatar($userId, 'no-avatar.jpg');
+        $user = $this->user->getUser($userId);
+        if($user->gender == 1){
+            $noAvatarName = 'no-avatar1.png';
+        } else {
+            $noAvatarName = 'no-avatar2.png';
+        }
+        $this->user->updateAvatar($userId, $noAvatarName);
 
         $this->_return(true, 'The avatar is deleted.');
     }

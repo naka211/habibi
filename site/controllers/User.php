@@ -156,7 +156,7 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
 
         $currentAvatar = $this->user->getAvatar($user->id);
-        if($currentAvatar != 'no-avatar.jpg'){
+        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -169,7 +169,12 @@ class User extends MX_Controller
             @unlink("./uploads/raw_thumb_user/".$newAvatar);
         }
 
-        $this->user->updateAvatar($user->id, 'no-avatar.jpg');
+        if($user->gender == 1){
+            $noAvatarName = 'no-avatar1.png';
+        } else {
+            $noAvatarName = 'no-avatar2.png';
+        }
+        $this->user->updateAvatar($user->id, $noAvatarName);
 
         $this->updateUserSession($user->id);
 
@@ -576,6 +581,12 @@ class User extends MX_Controller
             $DB['find_gender'] = $this->input->post('find_gender');
             $DB['find_land'] = $this->input->post('find_land');
             $DB['find_region'] = $this->input->post('find_region');
+
+            if($this->input->post('gender') == 1){
+                $DB['avatar'] = 'no-avatar1.png';
+            } else {
+                $DB['avatar'] = 'no-avatar2.png';
+            }
 
             $DB['type'] = 1;
             $DB['groups'] = 1; //1: register - 2: facebook - 3: google
@@ -1089,7 +1100,7 @@ class User extends MX_Controller
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
         $currentAvatar = $this->user->getAvatar($user->id);
-        if($currentAvatar != 'no-avatar.jpg'){
+        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -1253,6 +1264,17 @@ class User extends MX_Controller
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
+    }
+
+    function setNoAvatar(){
+        $query = $this->db->query('SELECT id, gender FROM tb_user WHERE avatar = "no-avatar.jpg"');
+        $users = $query->result();
+
+        foreach ($users as $key => $user){
+            $this->db->set('avatar', '"no-avatar'.$user->gender.'.png"', FALSE);
+            $this->db->where('id', $user->id);
+            $this->db->update('user');
+        }
     }
 }
 

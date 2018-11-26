@@ -39,7 +39,7 @@
                             <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
                         </div>
                     <?php }?>
-                    <?php if($user->avatar != 'no-avatar.jpg' || ($user->avatar == 'no-avatar.jpg' && $user->new_avatar != '')){
+                    <?php if(($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') || (($user->avatar == 'no-avatar1.png' || $user->avatar == 'no-avatar2.png') && $user->new_avatar != '')){
                         $avatarData = $user->new_avatar?$user->new_avatar:$user->avatar;
                         ?>
                     <!--<a href="<?php /*echo site_url('user/blurAvatar');*/?>" class="btn bntMessage">Sløre</a>

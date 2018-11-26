@@ -582,7 +582,7 @@ class Ajax extends MX_Controller{
                 $data = $this->upload->data();
                 //save to db
                 $newAvatar = $this->user->getNewAvatar($user->id);
-                if($newAvatar != 'no-avatar.jpg'){
+                if($newAvatar != 'no-avatar1.png' && $newAvatar != 'no-avatar2.png'){
                     @unlink("./uploads/user/".$newAvatar);
                     @unlink("./uploads/thumb_user/".$newAvatar);
                     @unlink("./uploads/raw_thumb_user/".$newAvatar);

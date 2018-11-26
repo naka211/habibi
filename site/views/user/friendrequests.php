@@ -28,7 +28,9 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-3 col-xs-3">
                                                         <div class="frend_item_avatar">
-                                                            <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar.jpg') echo 'blur'?>"></a>
+                                                            <a <?php echo $profileLink;?>>
+                                                                <img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
+                                                            </a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-ms-9 col-xs-9">
