@@ -450,7 +450,7 @@ class User extends CI_Controller{
     public function acceptAvatar($userId){
         $currentAvatar = $this->user->getCurrentAvatar($userId);
 
-        if($currentAvatar != 'no-avatar.jpg'){
+        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png' ){
             @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$currentAvatar);
             @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
             @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
