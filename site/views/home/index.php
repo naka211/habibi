@@ -395,8 +395,8 @@
                     </div>
                     <button type="submit" class="btn btnSeefull">Log ind</button>
                     <div class="clearfix text-center">
-                        <a href="<?php echo site_url('register');?>" class="btn btn-link">Register</a>
-                        <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
+                        <a href="<?php echo site_url('register');?>" class="btn btn-link">Opret medlemskab</a>
+                        <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Glemt kodeord?</a>
                     </div>
                 <?php echo form_close();?>
             </div>
