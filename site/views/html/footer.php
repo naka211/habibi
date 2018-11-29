@@ -139,11 +139,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="w_box_modalBlur_content">
                 <div class="box_modalBlur_content">
-                    <h4>Om os</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Nascetur ridiculus mus mauris vitae ultricies leo. Nulla pharetra diam sit amet nisl.</p>
-                    <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
-
-                    <p>Tellus integer feugiat scelerisque varius morbi enim nunc. Dolor morbi non arcu risus quis varius quam. Quam nulla porttitor massa id. Amet luctus venenatis lectus magna fringilla. Amet consectetur adipiscing elit pellentesque habitant.</p>
+                    <h4>Habibidating.dk</h4>
+                    <p>Habibidating.dk har en mission, vi vil være Danmarks største og mest fortrukne datingsite for etniske Danskere.</p>
+                    <p>Grundlagt i 2018, men undervejs i lang tid før. Habibidating vil bygge det største samfund for etniske singler på udkig efter kærlighed, relationer, venskab eller dates.</p>
+                    <p>Dating har aldrig været nemmere. Habibidating.dk giver jer en enkel, sikker og sjov side, der gør det nemt og hurtigt at se og kontakte ligesindede singler i dit område.</p>
+                    <p>Har du aldrig har oplevet "Poweren" i internet dating så er det nu du skal tilmelde dig Habibidating.</p>
+                    <p>Velkommen ombord og held og lykke med din søgning</p>
                 </div>
             </div>
         </div>
