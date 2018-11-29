@@ -25,7 +25,7 @@ $(function ($) {
 
     });
 
-    $('.btnMovetop').click(function (e) {
+    $('.back-to-top-intro').click(function (e) {
         swiper.slideTo( 0, 1000, false );
     });
 });

@@ -30,46 +30,6 @@
                     </div>
                 </div>
 
-                <!--<div class="swiper-slide">
-                    <section class="section_intro section_customerServices">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-xs-12">
-                                    <div class="main_img_customerServices">
-                                        <img src="<?php /*echo base_url().'uploads/content/'.getContent(18, 'image');*/?>" alt="" class="img-responsive img-circle">
-                                    </div>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-6 col-md-6 col-xs-12">
-                                    <div class="row list_img_small_blur">
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                            <div class="img_blur">
-                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/1.jpg" alt="" class="img-responsive">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                            <div class="img_blur">
-                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/2.jpg" alt="" class="img-responsive">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                            <div class="img_blur">
-                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/3.jpg" alt="" class="img-responsive">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                            <div class="img_blur">
-                                                <img src="<?php /*echo base_url().'templates/';*/?>images/1x/4.jpg" alt="" class="img-responsive">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </section>
-                </div>-->
-
                 <div class="swiper-slide">
                     <section class="section_intro section_customerServices">
                         <div class="container">
@@ -143,6 +103,9 @@
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
                         </div>
+                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </div>
                     </section>
                 </div>
 
@@ -193,6 +156,9 @@
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
                         </div>
+                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </div>
                     </section>
                 </div>
 
@@ -225,6 +191,9 @@
                                 <polyline id="arrow1" points="26.948,58.5 17.136,68.313   7.323,58.5 "/>
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
+                        </div>
+                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                            <i class="fas fa-long-arrow-alt-up"></i>
                         </div>
                     </section>
                 </div>
@@ -284,11 +253,14 @@
                                 <div class="row footer_bottom">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
-                                        <a href="javascript:;" class="btnMovetop">Tilbage til top <i class="i_up"></i></a>
+                                        <!--<a href="javascript:;" class="btnMovetop">Tilbage til top <i class="i_up"></i></a>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                        <i class="fas fa-long-arrow-alt-up"></i>
                     </div>
                 </div>
 

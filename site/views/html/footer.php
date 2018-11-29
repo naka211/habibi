@@ -59,19 +59,6 @@
             </div>
         </div>
     </footer>
-    <div class='back-to-top' id='back-to-top' title='Back to top'>
-        <i class="fas fa-long-arrow-alt-up"></i>
-    </div>
-
-    <?php if(!isset($_COOKIE['ha_panik_cookie']) && !empty($user)){?>
-    <div class="box_notify">
-        <i class="far fa-comment fa-lg"></i> Benyttes denne knap logges du automatisk af.
-        <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
-    </div>
-    <?php }?>
-    <?php if(!empty($user)){?>
-    <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
-    <?php }?>
     <div style="display: none;" id="modalUpgrade" class="animated-modal modalLogin">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -87,6 +74,8 @@
             <a href="<?php echo site_url('user/upgrade');?>" class="btn btn_Upgrade">Opgrader nu</a>
         </div>
     </div>
+<?php } else {?>
+
 <?php }?>
 <div style="display: none;" id="modalError" class="animated-modal modalLogin">
     <div class="row">
@@ -149,6 +138,16 @@
             </div>
         </div>
     </div>
+</div>
+<?php if(!isset($_COOKIE['ha_panik_cookie'])){?>
+    <div class="box_notify">
+        <i class="far fa-comment fa-lg"></i> Benyttes denne knap logges du automatisk af.
+        <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
+    </div>
+<?php }?>
+<a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
+<div class='back-to-top' id='back-to-top' title='Back to top'>
+    <i class="fas fa-long-arrow-alt-up"></i>
 </div>
 <?php if(!isset($_COOKIE['ha_cookie'])){?>
     <section class="cookie">

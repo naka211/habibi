@@ -384,7 +384,9 @@ section.section_intro {
     bottom: 8px;
     opacity: 1;
 }
-
+.back-to-top-intro{
+    position: absolute;
+}
 .animated-modal {
     max-width: 1142px;
     overflow: hidden;
