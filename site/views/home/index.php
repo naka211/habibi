@@ -103,9 +103,9 @@
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
                         </div>
-                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                        <!--<div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
                             <i class="fas fa-long-arrow-alt-up"></i>
-                        </div>
+                        </div>-->
                     </section>
                 </div>
 
@@ -156,9 +156,9 @@
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
                         </div>
-                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                        <!--<div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
                             <i class="fas fa-long-arrow-alt-up"></i>
-                        </div>
+                        </div>-->
                     </section>
                 </div>
 
@@ -192,9 +192,9 @@
                                 <polyline id="arrow2" points="26.948,65.25 17.136,75.063   7.323,65.25 "/>
                             </svg>
                         </div>
-                        <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                        <!--<div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
                             <i class="fas fa-long-arrow-alt-up"></i>
-                        </div>
+                        </div>-->
                     </section>
                 </div>
 
@@ -259,9 +259,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
+                    <!--<div class='back-to-top show back-to-top-intro' title='Tilbage til toppen'>
                         <i class="fas fa-long-arrow-alt-up"></i>
-                    </div>
+                    </div>-->
                 </div>
 
             </div>
@@ -277,6 +277,10 @@
         </script>
 
     </section>
+
+    <div class='back-to-top back-to-top-intro' title='Tilbage til toppen' id="back-to-top-intro">
+        <i class="fas fa-long-arrow-alt-up"></i>
+    </div>
 
     <div style="display: none;" id="modalBlur" class="animated-modal modalBlur">
         <div class="overlay"></div>

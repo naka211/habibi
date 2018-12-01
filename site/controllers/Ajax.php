@@ -100,9 +100,11 @@ class Ajax extends MX_Controller{
     function logout(){
         /** Login*/
         $user = $this->session->userdata('user');
-        $Login = array('isLoginSite', 'user', 'email', 'password');
-        $this->session->unset_userdata($Login);
-        $this->user->updateLogin($user->id, 0);
+        if($user){
+            $Login = array('isLoginSite', 'user', 'email', 'password');
+            $this->session->unset_userdata($Login);
+            $this->user->updateLogin($user->id, 0);
+        }
         /*setcookie('cc_data', '', -time() + (86400 * 30), "/");*/
 
         die('ok');

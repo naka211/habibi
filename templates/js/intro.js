@@ -21,8 +21,11 @@ $(function ($) {
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
-        },
+        }
+    });
 
+    swiper.on('slideChange', function () {
+        swiper.activeIndex > 0 ? $("#back-to-top-intro").addClass("show") : $("#back-to-top-intro").removeClass("show")
     });
 
     $('.back-to-top-intro').click(function (e) {
