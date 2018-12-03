@@ -450,3 +450,84 @@ ul.list_intro.intro_footer li {
 .table_membership.table>thead>tr>th {
 	border-color: #000;
 }
+
+
+.frm_newsletter {
+	background: rgba(255, 255, 255, .8);
+	padding: 50px 30px;
+	margin: 100px auto 200px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	width: 900px;
+}
+.frm_newsletter h2 {
+	font-size: 28px;
+	color: #000000;
+	letter-spacing: 0;
+	line-height: 34px;
+}
+.frm_newsletter h2 span {
+	color: #E9A600;
+}
+.frm_newsletter .description {
+	font-size: 16px;
+	margin-bottom: 30px;
+}
+.frm_newsletter .form-control {
+	height: 56px;
+	border: none;
+	box-shadow: none;
+}
+.note_giftcard {
+	padding-left: 30px;
+	background: url('../images/1x/i_note.png') no-repeat 0 0;
+	font-size: 15px;
+	line-height: 1.5em;
+	margin-top: 20px;
+}
+ul.list_infoNewsletter {
+	list-style: none;
+	padding: 0;
+	margin-top: 30px;
+}
+ul.list_infoNewsletter li {
+	display: inline-block;
+	width: 49%;
+	font-size: 14px;
+	font-weight: 600;
+	background: url('../images/1x/i_checked.png') no-repeat 0 0;
+	padding-left: 40px;
+	line-height: 2em;
+
+}
+.checkbox label {
+	font-size: 14px;
+}
+.checkbox a {
+	color: #000;
+	text-decoration: underline;
+}
+.btnSendPost {
+	display: block;
+	height: 56px;
+	background-image: linear-gradient(-227deg, #FFA507 0%, #832F35 100%);
+	border: 1px solid #FFA707;
+	color: #fff;
+	width: 100%;
+	font-weight: 800;
+	font-size: 16px;
+	margin-bottom: 30px;
+}
+.img_newsletter {
+	height: 350px;
+	width: 350px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: auto;
+	border: 15px solid #CDAF80;
+}
+.img_newsletter img {
+	height: 350px;
+	object-fit: cover;
+}

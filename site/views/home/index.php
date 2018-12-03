@@ -216,44 +216,46 @@
                             </div>
                         </div>
 
-                        <div class="footer">
-                            <div class="container">
-                                <div class="row footer_top">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                        <img src="<?php echo base_url().'templates/';?>images/1x/logo.svg" alt="" class="img-responsive logo_footer">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                        <p class="text_follow">Følg os på Facebook</p>
-                                        <div class="box_socail">
-                                            <a href="#" class="btn btn_fb"></a>
+                        <div class="w_mainFooter">
+                            <div class="footer">
+                                <div class="container">
+                                    <div class="row footer_top">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
+                                            <img src="<?php echo base_url().'templates/';?>images/1x/logo.svg" alt="" class="img-responsive logo_footer">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
+                                            <p class="text_follow">Følg os på Facebook</p>
+                                            <div class="box_socail">
+                                                <a href="#" class="btn btn_fb"></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                        <ul class="list">
-                                            <li>- <a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
-                                            <li>- <a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a></li>
-                                            <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
-                                            <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
-                                            <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
-                                            <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
-                                        </ul>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
+                                            <ul class="list">
+                                                <li>- <a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
+                                                <li>- <a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a></li>
+                                                <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
+                                                <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
+                                                <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
+                                                <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
+                                            <ul class="list_intro intro_footer">
+                                                <li>Hurtig oprettelse og nem framelding</li>
+                                                <li>Gratis medlemskab uden binding</li>
+                                                <li>Garanteret privat og diskret</li>
+                                                <li>Høj sikkerhed med 256 bit SSL kryptering</li>
+                                                <li>Gør din profil anonym med vores sløringsværktøj</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
-                                        <ul class="list_intro intro_footer">
-                                            <li>Hurtig oprettelse og nem framelding</li>
-                                            <li>Gratis medlemskab uden binding</li>
-                                            <li>Garanteret privat og diskret</li>
-                                            <li>Høj sikkerhed med 256 bit SSL kryptering</li>
-                                            <li>Gør din profil anonym med vores sløringsværktøj</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="row footer_bottom">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
-                                        <!--<a href="javascript:;" class="btnMovetop">Tilbage til top <i class="i_up"></i></a>-->
+                                    <div class="row footer_bottom">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
+                                            <!--<a href="javascript:;" class="btnMovetop">Tilbage til top <i class="i_up"></i></a>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>

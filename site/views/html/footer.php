@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
+                <p class="f19" id="error-content"></p>
             </div>
             <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
         </div>
@@ -91,7 +91,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <p class="f19" id="message-content"></p>
-            <button type="submit" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
         </div>
     </div>
 </div>
@@ -163,10 +163,15 @@
     </section>
 <?php }?>
 <script>
-    <?php if($this->session->flashdata('message')){?>
     $( document ).ready(function() {
-        $('#error-content').html(<?php $this->session->flashdata('message');?>);
+        <?php if($this->session->flashdata('message')){?>
+        $('#message-content').html('<?php echo $this->session->flashdata('message');?>');
+        $.fancybox.open({src: '#modalMessage'});
+        <?php }?>
+
+        <?php if($this->session->flashdata('error')){?>
+        $('#error-content').html('<?php echo $this->session->flashdata('error');?>');
         $.fancybox.open({src: '#modalError'});
+        <?php }?>
     });
-    <?php }?>
 </script>

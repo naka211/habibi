@@ -119,6 +119,14 @@ class Home extends MX_Controller {
         $data['page'] = 'home/cookie';
         $this->load->view('templates', $data);
     }
+
+    function newsletter(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Newsletter');
+
+        $data['page'] = 'home/newsletter';
+        $this->load->view('templates', $data);
+    }
 }
 
 /* End of file welcome.php */

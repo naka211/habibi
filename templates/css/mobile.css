@@ -437,6 +437,13 @@
         top: -90px;
     }
 
+    .frm_newsletter {
+        width: 100%;
+    }
+
+    ul.list_infoNewsletter li {
+        width: 100%;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {

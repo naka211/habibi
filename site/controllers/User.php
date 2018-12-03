@@ -1276,6 +1276,70 @@ class User extends MX_Controller
             $this->db->update('user');
         }
     }
+
+    function newsletter(){
+        $email = $this->input->post('email');
+        $apiKey = 'b20fa321487477d080e7d55bbc9276a3-us19';
+        $listId = 'a1fdc33626';
+        $memberId = md5(strtolower($email));
+        $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
+
+        //Checking
+        $auth = base64_encode( 'user:'. $apiKey );
+
+        $url = 'https://'.$dataCenter.'.api.mailchimp.com/3.0/lists/'.$listId.'/members/' . $memberId;
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+            'Authorization: Basic '. $auth));
+        curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $result = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if($httpCode == 200){
+            $this->session->set_flashdata('error', 'Denne email findes i vores system.');
+            redirect(site_url('newsletter'));
+        } else {
+            //Creating
+            $data = [
+                'email' => $email,
+                'status' => 'subscribed'
+            ];
+
+            $url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/';
+
+            $json = json_encode([
+                'email_address' => $data['email'],
+                'status' => $data['status']
+            ]);
+
+            $ch = curl_init($url);
+
+            curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+
+            $result = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if($httpCode == 200) {
+                $this->session->set_flashdata('message', 'Tak for tilmelding vores nyhedsbrev.');
+                redirect(site_url('newsletter'));
+            } else {
+                $this->session->set_flashdata('error', 'En fejl ved at tilføje e-mail til Mailchimp.');
+                redirect(site_url('newsletter'));
+            }
+        }
+    }
 }
 
 /* End of file welcome.php */

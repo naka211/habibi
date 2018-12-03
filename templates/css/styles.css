@@ -784,11 +784,21 @@ header .navbar-brand {
     height: 100%;
 }
 
+.w_mainFooter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    height: 100%;
+}
+
 .footer {
     background: #16191f;
     color: #fff;
-    padding-top: 120px;
-    padding-bottom: 125px;
+    padding-top: 0;
+    padding-bottom: 80px;
     width: 100%;
     text-align: left;
 }
@@ -798,7 +808,7 @@ header .navbar-brand {
 }
 
 .footer_top {
-    padding-bottom: 80px;
+    padding-bottom: 50px;
 }
 
 .text_follow {
