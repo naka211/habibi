@@ -1279,8 +1279,8 @@ class User extends MX_Controller
 
     function newsletter(){
         $email = $this->input->post('email');
-        $apiKey = 'b20fa321487477d080e7d55bbc9276a3-us19';
-        $listId = 'a1fdc33626';
+        $apiKey = $this->config->item('mailchimpApiKey');
+        $listId = $this->config->item('listId');
         $memberId = md5(strtolower($email));
         $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
 
