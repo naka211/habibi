@@ -5,7 +5,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div class="img_avatar">
                         <img class="img-responsive" src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->new_avatar?$user->new_avatar:$user->avatar;?>?<?php echo time();?>">
-                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Skift profilbilled</span></a>
+                        <a href="<?php echo site_url('user/editAvatar');?>" class="btn btnEidt_avatar"><i class="i_image"></i> <span>Skift profilbillede</span></a>
                     </div>
                     <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                 </div>

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
-                    <h2>HENT APPÉN</h2>
+                    <h2>APP´EN</h2>
                     <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive"></a>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
@@ -38,12 +38,12 @@
                         <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
                         <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
                         <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
-                        <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
+                        <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele ved et guld medlemskab</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
                     <ul class="list_intro intro_footer">
-                        <li>Hurtig oprettelse og nem framelding</li>
+                        <li>Hurtig oprettelse og nem frameldelse</li>
                         <li>Gratis medlemskab uden binding</li>
                         <li>Garanteret privat og diskret</li>
                         <li>Høj sikkerhed med 256 bit SSL kryptering</li>

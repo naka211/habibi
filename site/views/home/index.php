@@ -84,7 +84,7 @@
 
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list_intro">
-                                                <li>Hurtig oprettelse og nem framelding</li>
+                                                <li>Hurtig oprettelse og nem frameldelse</li>
                                                 <li>Gratis medlemskab uden binding</li>
                                                 <li>Garanteret privat og diskret</li>
                                                 <li>Høj sikkerhed med 256 bit SSL kryptering</li>
@@ -114,34 +114,34 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
-                                    <h2>Slørring af billed</h2>
+                                    <h2>Sløring af billede</h2>
                                     <div class="box_img_blurring">
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
-                                            <p>0% Slørret</p>
+                                            <p>0% sløret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
-                                            <p>50% Slørret</p>
+                                            <p>50% sløret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
-                                            <p>100% Slørret</p>
+                                            <p>100% sløret</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-8 col-sm-offset-2">
                                             <ul class="list_blurring">
-                                                <li>Du kan slørret dit billede.</li>
-                                                <li>Du kan selv vælge hvor krafig en slørring du vil sætte på dit bilede.</li>
-                                                <li>Du vælge selv hvomår du vil fjeme slørringen.</li>
-                                                <li>Du kan vælge om du vil vise dif offentligt eller om du kun vil vise dig for enkelte profiler.</li>
+                                                <li>Du kan sløre dit billede.</li>
+                                                <li>Du kan selv vælge hvor kraftig en sløring du vil sætte på dit billede.</li>
+                                                <li>Du vælger selv hvomår du vil fjeme sløringen.</li>
+                                                <li>Du kan selv vælge om du vil vise dig offentligt, eller kun for enkelte profiler.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436.jpg" alt="" class="img-responsive"></a>
                                         <p>Bloker</p>
                                     </div>
-                                    <p>Ønsker du ikke at være synlig overfor  enkelte profiler så kan du via blokering skjule dig så du ikke er synlig på deres søgning.</p>
+                                    <p>Ønsker du ikke at være synlig overfor enkelte profiler, så kan du via blokering skjule dig, så du ikke er synlig på deres søgning.</p>
                                     <a data-fancybox data-src="#modalBlokering" href="javascript:;" class="btn btnMore">Læs mere</a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
@@ -180,7 +180,7 @@
                                     <div class="box_img_chat">
                                         <img src="<?php echo base_url().'templates/';?>images/1x/img_chat.png" alt="" class="img-responsive">
                                     </div>
-                                    <p>Du kan slette din chat historik, gores dette slettes historikken hos begge parter i chatten.</p>
+                                    <p>Du kan slette din chat historik, gøres dette, slettes historikken hos begge parter i chatten.</p>
                                     <a data-fancybox data-src="#modalChat" href="javascript:;" class="btn btnMore">Læs mere</a>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
-                                        <h2>HENT APPÉN</h2>
+                                        <h2>APP´EN</h2>
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive"></a>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
@@ -238,12 +238,12 @@
                                                 <li>- <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
                                                 <li>- <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
                                                 <li>- <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
-                                                <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele guld medlemskab</a></li>
+                                                <li>- <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele ved et guld medlemskab</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6  col-ms-6 col-xs-12">
                                             <ul class="list_intro intro_footer">
-                                                <li>Hurtig oprettelse og nem framelding</li>
+                                                <li>Hurtig oprettelse og nem frameldelse</li>
                                                 <li>Gratis medlemskab uden binding</li>
                                                 <li>Garanteret privat og diskret</li>
                                                 <li>Høj sikkerhed med 256 bit SSL kryptering</li>

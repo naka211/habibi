@@ -906,7 +906,7 @@ header .navbar-brand {
     padding-top: 40px;
     color: #fff;
     font-size: 32px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     margin-top: 0;
     margin-bottom: 15px;
 }
@@ -915,7 +915,7 @@ header .navbar-brand {
     content: '';
     display: block;
     width: 205px;
-    border-bottom: 1px solid #fff;
+    /*border-bottom: 1px solid #fff;*/
     margin-top: 15px;
 }
 

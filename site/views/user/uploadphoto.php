@@ -12,16 +12,16 @@
                 </div>
             </div>
             <h4>Her kan du uploade billeder til dit album</h4>
-            <p> 1: Du klikker på upload og dit bibliotek åbner op her vælger du et billed<br>
-                2: Du kan gemme billedet eller du kan uploade et nyt.<br>
+            <p> 1: Du klikker på upload og dit bibliotek åbner op her vælger du et billede<br>
+                2: Du kan gemme billedet, eller du kan uploade et nyt.<br>
                 3: Derefter klikker du på gem.<br>
-                4: Hvis du vil slørre dit billed, er der en en markering oppe i hjørnet du skal klikke på for at gøre det.<br>
-                5: Her slørre du det og klikker på gem igen så er det  slørret
+                4: Hvis du vil sløre dit billede, er der en en markering oppe i hjørnet du skal klikke på.<br>
+                5: Her sløre du det og klikker på gem igen så er det sløret
 
             <h4>Regler for album billeder:</h4>
-                <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre end dig på billed f.esk børn dyr eller noget andet.<br>
+                <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre personer end dig på billederne. F. eks Børn, dyr eller noget andet.<br>
                 <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må der ikke være seksuelle undertoner på billedet<br>
-                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal ha godkendt det, det vil sige at for f.eks et selfie med en kendt blir ikke godkendt<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal have godkendt det, det vil sige at for f.eks et selfie med en kendt bliver ikke godkendt<br>
             </p>
             <input id="file" type="file" name="file" multiple="multiple"/>
             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>
@@ -59,7 +59,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice</p>
+                <p class="f19" id="error-content">Billedet er sendt til validering, det bliver gjordt indefor 24 timer M.V.H Kundeservice</p>
             </div>
             <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
         </div>

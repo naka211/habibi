@@ -7,6 +7,7 @@
                 <div class="display_table">
                     <div class="table_content">
                         <h2><?php echo getContent(20, 'title');?></h2>
+                        <p>Ved guldmedlemskab:</p>
                         <?php echo getContent(20, 'content');?>
                         <a href="<?php echo site_url('user/upgrade');?>" class="btn btn_Upgrade">Opgrader nu</a>
                     </div>

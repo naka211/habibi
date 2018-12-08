@@ -925,9 +925,11 @@ class User extends MX_Controller
         /** Login*/
         $user = $this->session->userdata('user');
 
-        $Login = array('isLoginSite', 'user', 'email', 'password', 'lastVisitTime');
-        $this->session->unset_userdata($Login);
-        $this->user->updateLogin($user->id, 0);
+        if($user){
+            $Login = array('isLoginSite', 'user', 'email', 'password', 'lastVisitTime');
+            $this->session->unset_userdata($Login);
+            $this->user->updateLogin($user->id, 0);
+        }
         //setcookie('cc_data', '', -time() + (86400 * 30), "/");
 
         redirect(site_url());

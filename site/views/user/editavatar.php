@@ -16,15 +16,15 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                    <h4>Her kan du uoloade dit personlige profilbilled</h4>
-                    <p>Må kun være dig selv på billedet,   når du har uploadet det så skal det valideres, der kan gå optil 24 timer  inden det er valideret.<br>
-                        1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billed.<br>
-                        2: Du kan gemme billedet eller uploade et nyt.<br>
-                        3: Når billedet er uploadet  kan du vælge at slørre det hvis du vil det,  derefter klikker   du på  gem og det blir sendt til validering.
+                    <h4>Her kan du uploade dit personlige profilbillede</h4>
+                    <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
+                        1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
+                        2: Du kan gemme billedet, eller uploade et nyt.<br>
+                        3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
 
                     <h4>Regler for profilbilleder:</h4>
-                        <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man ska ku se hele dit ansigt<br>
-                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ik være seksuelle undertoner på billedet<br>
+                        <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man ska kunne se hele dit ansigt<br>
+                        <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
@@ -60,7 +60,7 @@
                         <?php } else {?>
                             <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
                         <?php }?>
-                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet profilbilled</a>
+                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet profilbillede</a>
                         <?php
                         $sendEmail = $user->new_avatar != ''?1:0;
                         echo form_hidden('sendEmailToApprove', $sendEmail);
