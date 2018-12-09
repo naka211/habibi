@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php echo getContent(20, 'title');?>
+                    <div class="upgrade_content"><?php echo getContent(20, 'title');?></div>
                     <br>
                     <?php echo getContent(20, 'content');?>
                     <hr>

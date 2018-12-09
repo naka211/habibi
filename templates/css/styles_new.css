@@ -531,3 +531,6 @@ ul.list_infoNewsletter li {
 	height: 350px;
 	object-fit: cover;
 }
+.upgrade_content{
+	font-size: 15px;
+}

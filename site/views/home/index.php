@@ -141,7 +141,7 @@
                                                 <li>Du kan sløre dit billede.</li>
                                                 <li>Du kan selv vælge hvor kraftig en sløring du vil sætte på dit billede.</li>
                                                 <li>Du vælger selv hvomår du vil fjeme sløringen.</li>
-                                                <li>Du kan selv vælge om du vil vise dig offentligt, eller kun for enkelte profiler.</li>
+                                                <li>Du kan selv vælge om du vil vise dit billed offentligt, eller kun for enkelte profiler.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
-                                        <h2>APP´EN</h2>
+                                        <h2>HENT APP´EN</h2>
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive"></a>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
