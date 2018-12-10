@@ -1,6 +1,6 @@
 $(function ($) {
 
-    $(function () {
+    /*$(function () {
         $('.hider').click(function () {
             return $(this).parent('.message').removeClass('blur');
         });
@@ -18,7 +18,7 @@ $(function ($) {
             url: base_url+"ajax/setCookie",
             data: { csrf_site_name: token_value }
         });
-    });
+    });*/
 
 
     // sticky menu
@@ -62,11 +62,11 @@ $(function ($) {
         return false;
     });
 
-    $('.btnShowlist').click(function (event) {
+    /*$('.btnShowlist').click(function (event) {
         event.preventDefault();
         $('.list_action').fadeToggle("fast", function () {
         });
-    });
+    });*/
 
     /*var swiper = new Swiper('.swiper_banner.swiper-container', {
         direction: 'vertical',

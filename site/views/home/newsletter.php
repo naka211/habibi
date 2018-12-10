@@ -13,9 +13,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <a href="<?php echo base_url();?>"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-responsive"></a>
-                            <h2>Få din <span>10%</span><br>
-                                velkomstkode</h2>
-                            <p class="description">… tilmeld dig gode tibud og få 10% velkomstrabat.</p>
+                            <h3>Tilmeld dig Habibi´s nyheds brev og vær med i lodtrækningen om 5 gavekort til en værdi af 500,- til Magasin du Nord.</h3>
+                            <p class="description">Der trækkes lod i blandt de første 1000 tilmeldte</p>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Indtast din e-mail…" name="email">
                             </div>
@@ -42,10 +41,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12">
-                            <p class="note_giftcard">* Gæelder ikke gavekort. Minimumsbeløbet er 499 kr.<br>
-                                Koden gælder i 7 dage ikke anvendes sammen med andre kode er personlig, og må ikke deles videre eller publicerers.<br>
-                                Ved at registrere dig accepterer du at modtage email og smser fra Boozt med eksklusive tilbud, inspriration og personlige anbefailinger. <br>
-                                Maks 2 sms’er om måbeden. Du kan altid afmelde dig.</p>
+                            <p>Når du har tilmeldt dig vores nyhedsbrev vil du blive informeret om vores launch dato via mail.<br><br>
+                                Alle brugere vil få 3 første måneders gratis Guld medlemskab af Danmarks nye etniske dating side.</p>
                             <ul class="list_infoNewsletter">
                                 <li>Hurtig oprettelse og nem framelding</li>
                                 <li>Høj sikkerhed med 256 bit SSL kryptering</li>

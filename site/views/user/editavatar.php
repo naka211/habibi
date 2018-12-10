@@ -23,7 +23,7 @@
                         3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
 
                     <h4>Regler for profilbilleder:</h4>
-                        <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man ska kunne se hele dit ansigt<br>
+                        <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man skal kunne se hele dit ansigt<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
@@ -94,7 +94,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Billedet er sendt til validering, det bliver gjordt indefor 24 timer M.V.H Kundeservice</p>
+                <p class="f19" id="error-content">Billedet er sendt til validering, det bliver gjort indefor 24 timer Mvh Kundeservice</p>
             </div>
             <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
         </div>
