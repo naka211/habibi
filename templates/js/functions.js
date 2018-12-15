@@ -483,7 +483,7 @@ $(document).ready(function() {
                     $.ajax({
                         method: "POST",
                         url: base_url+"ajax/logout",
-                        data: { csrf_site_name: token_value }
+                        data: { csrf_site_name: token_value, message: 'Du er blevet logget af automatisk, da der ikke har været aktivitet i en periode.' }
                     });
                 }
             }

@@ -99,13 +99,16 @@ class Ajax extends MX_Controller{
 
     function logout(){
         /** Login*/
+        $message = $this->input->post('message');
+        if(!empty($message)){
+            setcookie('ha_message', $message, time() + (86400 * 300), "/");
+        }
         $user = $this->session->userdata('user');
         if($user){
             $Login = array('isLoginSite', 'user', 'email', 'password');
             $this->session->unset_userdata($Login);
             $this->user->updateLogin($user->id, 0);
         }
-        /*setcookie('cc_data', '', -time() + (86400 * 30), "/");*/
 
         die('ok');
     }

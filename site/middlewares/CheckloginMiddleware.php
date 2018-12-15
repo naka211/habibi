@@ -17,7 +17,11 @@ class CheckloginMiddleware {
 
     public function run(){
         if (!checkLogin()) {
-            //$this->ci->session->set_flashdata('message', 'Du skal logge ind for at se det !!');
+            if(!empty($_COOKIE['ha_message'])){
+                $message = $_COOKIE['ha_message'];
+                setcookie('ha_message', '', -time() + (86400 * 300), "/");
+                $this->ci->session->set_flashdata('message', $message);
+            }
             redirect(site_url(''));
         }
     }
