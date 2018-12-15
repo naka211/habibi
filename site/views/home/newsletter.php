@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> Born: Eksklusivt nyhedsbrev med tilbud &amp; nyheder.
+                                        <input type="checkbox"> Eksklusivt nyhedsbrev med tilbud &amp; nyheder.
                                     </label>
                                 </div>
                                 <div class="checkbox">
