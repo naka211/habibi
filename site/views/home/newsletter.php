@@ -41,7 +41,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12">
-                            <p>Når du har tilmeldt dig vores nyhedsbrev vil du blive informeret om vores launch dato via mail.<br><br>
+                            <p class="description">Når du har tilmeldt dig vores nyhedsbrev vil du blive informeret om vores launch dato via mail.<br><br>
                                 Alle brugere vil få 3 første måneders gratis Guld medlemskab af Danmarks nye etniske dating side.</p>
                             <ul class="list_infoNewsletter">
                                 <li>Hurtig oprettelse og nem framelding</li>
