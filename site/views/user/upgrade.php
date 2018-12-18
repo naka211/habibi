@@ -8,57 +8,123 @@
                     </div>
                 </div>
             </div>
+            <div class="banner_upgrade">
+                <div class="col-12">
+                    <img src="<?php echo base_url().'templates/';?>images/1x/banner_upgrade.jpg" alt="" class="img-responsive">
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="upgrade_content"><?php echo getContent(20, 'title');?></div>
-                    <?php echo getContent(20, 'content');?>
-                    <hr>
-                    <div class="box_payment text-center">
-                        <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
-                            <div class="radio-tile-group packages_option">
-                                <div class="input-container">
-                                    <input class="radio-button" name="free" checked type="radio" value="1">
-                                    <div class="radio-tile">
-                                        <label class="radio-tile-label">3 første måneder er gratis</label>
-                                    </div>
-                                </div>
-                                <div class="input-container">
-                                    <input class="radio-button" name="package" checked type="radio" value="1">
-                                    <div class="radio-tile">
-                                        <label class="radio-tile-label">1 måned</label>
-                                        <p>Pris: <?php echo number_format($this->config->item('price1Month'), 0,',', '.')?> kr</p>
-                                    </div>
-                                </div>
-                                <!--<div class="input-container">
-                                    <input class="radio-button" name="package" type="radio" value="3">
-                                    <div class="radio-tile">
-                                        <label class="radio-tile-label">3 måneder</label>
-                                        <p>Pris: <?php /*echo number_format($this->config->item('price3Months'), 0,',', '.')*/?> kr</p>
-                                    </div>
-                                </div>
-                                <div class="input-container">
-                                    <input class="radio-button" name="package" type="radio" value="6">
-                                    <div class="radio-tile">
-                                        <label class="radio-tile-label">6 måneder</label>
-                                        <p>Pris: <?php /*echo number_format($this->config->item('price6Months'), 0,',', '.')*/?> kr</p>
-                                    </div>
-                                </div>-->
-                            </div>
-                            <p>Betal med betalingskort: </p>
-                            <img src="<?php echo base_url();?>templates/images/1x/betaling01.png" alt="" class="img-responsive">
+                <div class="col-12 col-sm-6">
+                    <div class="w_table_upgradeMembership">
+                        <h3>Fordele guld medlemskab</h3>
+                        <table class="table table-condensed mt30 table_membership table_upgradeMembership">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center">Sølv</th>
+                                <th class="text-center">Guld</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Personlig profilside</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Upload profil billed</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Upload billeder til album</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Unik personlig log in </td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Søgning mellem alle profiler på siden</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Sende venneanmodninger</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Se modtaget venneanmodninger</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_noOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Sende besked</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_noOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Læse modtaget besked</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_noOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Sende blink</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Se modtaget blink</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_noOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Tilføj favorit</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Se besøgende</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_noOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>Tilføj ven</td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                                <td><img src="<?php echo base_url().'templates/';?>images/1x/i_checkOption.png" alt=""></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <div class="box_gopayment text-center">
+                        <h4>3 første måneder er gratis<br>
+                            1 MÅNED PRIS 99 kr.</h4>
+                        <div class="box_gopayment_mid">
+                            <p>Betal med betalingskort:</p>
+                            <img src="<?php echo base_url().'templates/';?>images/1x/betaling01.png" alt="" class="img-responsive>
+                <form action="" method="POST" role="form">
+                            <?php echo form_open(site_url('payment/upgrade'), array('id'=>'upgradeForm'))?>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="tos" value="1" style="position: inherit;">
-                                        Jeg accepterer <a target="_blank" class="btn-link" href="<?php echo site_url('home/abonnement');?>">betingelser for abonnement</a>
+                                        <input type="checkbox" name="tos" value="1">
+                                        Jeg accepterer <a target="_blank" class="btn-link" href="<?php echo site_url('home/abonnement');?>" title="">betingelser for abonnement</a>
                                     </label>
                                 </div>
                             </div>
                             <button type="submit" class="btn btnPayment">GÅ TIL BETALING</button>
-                        <?php echo form_close();?>
+                            <input type="hidden" name="package" value="1">
+                            <?php echo form_close();?>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>

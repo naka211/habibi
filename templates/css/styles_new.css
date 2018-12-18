@@ -535,3 +535,61 @@ ul.list_infoNewsletter li {
 	font-size: 15px;
     line-height: 25px;
 }
+
+.table_upgradeMembership.table_membership.table > tbody > tr > td, .table_upgradeMembership.table_membership.table > tbody > tr > th,
+.table_upgradeMembership.table_membership.table > tfoot > tr > td, .table_upgradeMembership.table_membership.table > tfoot > tr > th,
+.table_upgradeMembership.table_membership.table > thead > tr > td, .table_upgradeMembership.table_membership.table > thead > tr > th {
+	border-color: rgba(151, 151, 151, .5);
+	border-width: 2px;
+	color: #000;
+}
+
+.w_table_upgradeMembership {
+	margin-top: 60px;
+}
+.w_table_upgradeMembership h3 {
+	font-size: 18px;
+	color: #F5A623;
+}
+
+.box_gopayment {
+	width: 505px;
+	margin: auto;
+	text-align: center;
+	margin-top: 160px;
+	background: #FFFFFF;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.07);
+}
+.box_gopayment h4 {
+	padding: 30px;
+	background: #468966;
+	color: #fff;
+	line-height: 1.5em;
+	font-size: 22px;
+}
+.box_gopayment p {
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 47px;
+	margin-bottom: 23px;
+}
+.box_gopayment img {
+	margin: 0 auto 10px;
+}
+.box_gopayment .btnPayment {
+	background: #468966;
+	color: #fff;
+	font-size: 18px;
+	text-transform: uppercase;
+	display: block;
+	border-radius: 0;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.box_gopayment .btnPayment:hover {
+	background: #FFA707;
+}
+.box_gopayment .btn-link {
+	color: #FFA707;
+}
