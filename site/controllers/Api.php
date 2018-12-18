@@ -749,7 +749,7 @@ class Api extends REST_Controller {
         $avatarPath = './uploads/user/'.$avatarName;
         if(file_put_contents($avatarPath, $image)){
             $newAvatar = $this->user->getNewAvatar($userId);
-            if($newAvatar != 'no-avatar1.png' && $newAvatar != 'no-avatar2.png'){
+            if($newAvatar != ''){
                 @unlink("./uploads/user/".$newAvatar);
                 @unlink("./uploads/thumb_user/".$newAvatar);
                 @unlink("./uploads/raw_thumb_user/".$newAvatar);
