@@ -473,7 +473,7 @@ header {
 }
 
 header .navbar-brand {
-    /*background: url('../images/1x/logo_black.svg') no-repeat;*/
+    background: url('../images/1x/logo_black.svg') no-repeat;
 }
 
 .banner {
