@@ -118,19 +118,19 @@
                                     <div class="box_img_blurring">
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645_0.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>0% sløret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645_50.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>50% sløret</p>
                                         </div>
                                         <div class="w_box_img_blurring_item">
                                             <div class="box_img_blurring_item">
-                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
+                                                <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645_100.jpg" alt="" class="img-responsive">
                                             </div>
                                             <p>100% sløret</p>
                                         </div>
@@ -169,7 +169,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
                                     <h2>Blokering</h2>
                                     <div class="box_img_blocking">
-                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436.jpg" alt="" class="img-responsive"></a>
+                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436_0.jpg" alt="" class="img-responsive"></a>
                                         <p>Bloker</p>
                                     </div>
                                     <p>Ønsker du ikke at være synlig overfor enkelte profiler, så kan du via blokering skjule dig, så du ikke er synlig på deres søgning.</p>

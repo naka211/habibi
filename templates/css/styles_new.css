@@ -17,7 +17,7 @@ body {
 	margin-bottom: 30px;
 }
 .swiper_banner .swiper-slide .img_blur img {
-	filter: blur(10px);
+	/*filter: blur(10px);*/
 	object-fit: cover;
 	height: 183px;
 }
@@ -72,17 +72,17 @@ body {
 	z-index: 9;
 	left: -30px;
 }
-.w_box_img_blurring_item:nth-child(2) img {
+/*.w_box_img_blurring_item:nth-child(2) img {
 	filter: blur(5px);
-}
+}*/
 .w_box_img_blurring_item:nth-child(3) {
 	position: relative;
 	z-index: 8;
 	left: -60px;
 }
-.w_box_img_blurring_item:nth-child(3) img {
+/*.w_box_img_blurring_item:nth-child(3) img {
 	filter: blur(10px);
-}
+}*/
 ul.list_blurring {
 	list-style: none;
 	counter-reset: my-awesome-counter;
