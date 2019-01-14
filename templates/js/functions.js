@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 var validNavigation = false;
 
 wireUpEvents = function() {
-    window.onbeforeunload = function (e) {
+    /*window.onbeforeunload = function (e) {
         if (!validNavigation) {
             $.ajax({
                 method: "POST",
@@ -236,18 +236,11 @@ wireUpEvents = function() {
                 data: { csrf_site_name: token_value }
             });
         }
-    };
+    };*/
 
 
-    //Detect back button pressed
-    if (window.history && window.history.pushState) {
-        $(window).on('popstate', function() {
-            validNavigation = true;
-        });
-    }
-
-    //Detect click refresh on browser navigation
-    if(performance.navigation.type == 1){
+    //Detect click refresh and back on browser navigation
+    if(performance.navigation.type == 1 || performance.navigation.type == 2){
         validNavigation = true;
     }
     // Attach the event keypress to exclude the F5 refresh

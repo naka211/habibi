@@ -259,7 +259,7 @@ section.section_intro {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
     align-content: stretch;
 }
