@@ -219,8 +219,9 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btnadd_friend">Opdatere</button>
-                    <hr>
+
                     <?php if($user->type == 2){?>
+                        <hr>
                         <h3 style="margin: 0;">Standby af dit medlemskab</h3>
                         <?php if($user->stand_by_payment == 0){
                         ?>
