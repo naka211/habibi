@@ -8,6 +8,14 @@
     .container {
         width: 1280px;
     }
+
+}
+
+@media (max-width: 1200px) {
+    .owl_gallerys .item a{
+        width: 125px;
+        height: 125px;
+    }
 }
 
 @media (max-width: 1024px) {
