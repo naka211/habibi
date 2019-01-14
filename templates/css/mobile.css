@@ -2,6 +2,10 @@
     .swiper_banner.swiper-container {
         height: 100%;
     }
+    /* section 2*/
+    .section_customerServices .img_blur{
+        height: 150px;
+    }
 }
 
 @media (min-width: 1200px) {
