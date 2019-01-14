@@ -14,7 +14,7 @@
                     <div class="w_login2">
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 col-md-4">
-                                <a class="btn btnBack" href="javascript:history.back();">« Tilbage</a>
+                                <a class="btnBack" href="javascript:history.back();">« Tilbage</a>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <div class="box_login">
@@ -188,12 +188,12 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="term"> Jeg accepterer <a href="<?php echo site_url('home/handelsbetingelser');?>" target="_blank" style="color: #f19906;">brugerbetingelserne</a>
+                                <input type="checkbox" name="term"> Jeg accepterer <a href="<?php echo site_url('home/handelsbetingelser');?>" style="color: #f19906;">brugerbetingelserne</a>
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="personaldata"> Jeg accepterer <a href="<?php echo site_url('home/cookie');?>" target="_blank" style="color: #f19906;">vilkår for brug af cookies og persondatapolitikken</a>
+                                <input type="checkbox" name="personaldata"> Jeg accepterer <a href="<?php echo site_url('home/cookie');?>" style="color: #f19906;">vilkår for brug af cookies og persondatapolitikken</a>
                             </label>
                         </div>
                     </div>

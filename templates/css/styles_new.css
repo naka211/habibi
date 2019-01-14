@@ -423,18 +423,19 @@ ul.list_intro.intro_footer li {
 	top: -120px;
 }
 .btnBack {
-	text-align: center;
+	/*text-align: center;
 	border-radius: 3px;
 	background-image: -moz-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
 	background-image: -webkit-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
 	background-image: -ms-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
 	border: 1px solid #FFA707;
-	padding: 10px 20px;
+	padding: 10px 20px;*/
 	font-size: 16px;
 	color: #fff;
+	line-height: 40px;
 }
 .btnBack:hover {
-	background: rgb(255, 165, 7);
+	color: rgb(255, 165, 7);
 }
 
 .table_membership.table > tbody > tr > td, .table_membership.table > tbody > tr > th, .table_membership.table > tfoot > tr > td, .table_membership.table > tfoot > tr > th, .table_membership.table > thead > tr > td, .table_membership.table > thead > tr > th {

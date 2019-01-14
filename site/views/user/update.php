@@ -220,9 +220,9 @@
                         </div>
                         <button type="submit" class="btn btnadd_friend">Opdatere</button>
                     <hr>
-                    <h3 style="margin: 0;">Standby af dit medlemskab</h3>
-                    <?php if($user->type == 2){
-                        if($user->stand_by_payment == 0){
+                    <?php if($user->type == 2){?>
+                        <h3 style="margin: 0;">Standby af dit medlemskab</h3>
+                        <?php if($user->stand_by_payment == 0){
                         ?>
                             <a href="javascript:void(0);" data-fancybox data-src="#modalStandBy" class="btn btn_viewSearch">Sæt medlemskab I bero</a>
                             <?php } else {?>
