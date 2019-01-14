@@ -239,6 +239,13 @@ wireUpEvents = function() {
     };
 
 
+    //Detect back button pressed
+    if (window.history && window.history.pushState) {
+        $(window).on('popstate', function() {
+            validNavigation = true;
+        });
+    }
+
     //Detect click refresh on browser navigation
     if(performance.navigation.type == 1){
         validNavigation = true;
