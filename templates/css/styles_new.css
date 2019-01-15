@@ -280,7 +280,7 @@ ul.list_intro.intro_footer li {
 
 .frm_createprofile {
 	background: rgba(255, 255, 255, .8);
-	padding: 50px 30px;
+	padding: 0px 30px 50px;
 	width: 800px;
 	margin: 100px auto 200px;
 	border-radius: 3px;
@@ -302,6 +302,7 @@ ul.list_intro.intro_footer li {
 	letter-spacing: 0;
 	border-bottom: 1px solid #979797;
 	padding-bottom: 10px;
+    margin-top: 0px;
 }
 .frm_createprofile .description {
 	font-family: Poppins-Light;
@@ -420,7 +421,7 @@ ul.list_intro.intro_footer li {
 
 .w_login2 {
 	position: relative;
-	top: -120px;
+	top: -55px;
 }
 .btnBack {
 	/*text-align: center;

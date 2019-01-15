@@ -2323,14 +2323,14 @@ ul.list_action li a .i_report {
     text-transform: uppercase;
     width: 100%;
     padding: 10px 20px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .frm_login .btn-link {
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 15px;
     font-style: italic;
-    padding: 0 20px;
+    padding: 0 25px;
 }
 
 .btn-link:focus {

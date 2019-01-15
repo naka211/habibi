@@ -10,6 +10,13 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <div class="frm_createprofile">
+                    <div class="w_login2">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <a class="btnBack" href="javascript:history.back();">« Tilbage</a>
+                            </div>
+                        </div>
+                    </div>
                     <h3><?php echo $item->title;?></h3>
                     <?php echo $item->content;?>
                 </div>
