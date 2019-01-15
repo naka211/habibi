@@ -35,21 +35,71 @@ if(!empty($user)){
                                 <a>Gratis medlem: Ubegrænset</a>
                             <?php }?>
                         </div>
-                        <div class="dropdown dropdown_avatar show clearfix">
+                        <!--<div class="dropdown dropdown_avatar show clearfix">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="img_avatar_sm">
+                                    <img src="<?php /*echo base_url();*/?>uploads/thumb_user/<?php /*echo $user->avatar;*/?>?<?php /*echo time();*/?>" class="img-responsive" alt="">
+                                </div>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="<?php /*echo site_url('user/index');*/?>">Min profil</a>
+                                <a class="dropdown-item" href="<?php /*echo site_url('user/update');*/?>">Rediger profil</a>
+                                <a class="dropdown-item" href="<?php /*echo site_url('user/myPhoto');*/?>">Album</a>
+                                <a class="dropdown-item" href="<?php /*echo site_url('user/blockList');*/?>">Blokerede</a>
+                                <a class="dropdown-item" href="<?php /*echo site_url('user/logout');*/?>">Log ud</a>
+                            </div>
+                        </div>-->
+                        <div class="dropdown_avatar clearfix">
+                            <a href="#" href="#menu_sub" id="toggle" class="btntoggle">
                                 <div class="img_avatar_sm">
                                     <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>?<?php echo time();?>" class="img-responsive" alt="">
                                 </div>
                                 <span class="caret"></span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="<?php echo site_url('user/index');?>">Min profil</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/update');?>">Rediger profil</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/myPhoto');?>">Album</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/blockList');?>">Blokerede</a>
-                                <a class="dropdown-item" href="<?php echo site_url('user/logout');?>">Log ud</a>
+                            <div id="menu_sub">
+                                <div class="box_editProfile">
+                                    <h3>
+                                        <?php if(isGoldMember()){?>
+                                            Abonnement udløber: <?php echo @date('d/m/Y', $user->expired_at)?>
+                                        <?php } else {?>
+                                            Gratis medlem: Ubegrænset
+                                        <?php }?>
+                                    </h3>
+                                    <ul class="clearfix">
+                                        <!--<li><a href="#"><i class="i_01"></i> Profilinfo</a></li>-->
+                                        <li><a href="<?php echo site_url('user/index');?>"><i class="i_02"></i> Min profil</a></li>
+                                        <li><a href="<?php echo site_url('user/update');?>"><i class="i_08"></i> Rediger profil</a></li>
+                                        <!--<li><a href=""><i class="i_03"></i> Om mig</a></li>-->
+                                        <li><a href="<?php echo site_url('user/myPhoto');?>"><i class="i_04"></i> Album</a></li>
+                                        <!--<li><a href=""><i class="i_05"></i> Værdier og interesser</a></li>
+                                        <li><a href=""><i class="i_06"></i> Matchprofil</a></li>-->
+                                        <li><a href="<?php echo site_url('user/blockList');?>"><i class="i_07"></i> Blokerede</a></li>
+                                    </ul>
+                                </div>
+                                <div class="that_profile">
+                                    <p><span></span></p>
+                                    <div class="avatar">
+                                        <a href="<?php echo site_url('user/index');?>">
+                                            <div class="avatar__icon avatar__icon--big">
+                                                <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>?<?php echo time();?>" class="avatar__image" alt="">
+                                            </div>
+                                            <div class="avatar__name">Se profil</div>
+                                        </a>
+                                    </div>
+                                    <ul class="clearfix">
+                                        <li><a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a></li>
+                                        <li><a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a></li>
+                                        <li><a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a></li>
+                                        <li><a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a></li>
+                                        <li><a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a></li>
+                                        <li><a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele ved et guld medlemskab</a></li>
+                                    </ul>
+                                    <p class="text-center"><a href="<?php echo site_url('user/logout');?>" class="btn btnLogout">Log af</a></p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
