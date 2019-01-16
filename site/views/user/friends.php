@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <h4>
-                                    <?php echo $profile->name; ?> <?php if($profile->login == 1){?><span class="status"></span><?php }?>
+                                    <?php echo $profile->name; ?> <?php if($profile->login == 1){?><span class="status"></span><?php }?><?php if($profile->new == 1){?><span class="new">Ny</span><?php } ?>
                                     <?php if($user->blurIndex != 0){
                                         if($profile->viewAvatar == 0){
                                             ?>
@@ -47,9 +47,6 @@
                                             <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="float: right">Sløring</a>
                                         <?php }}?>
                                 </h4>
-                                <?php if($profile->new == 1){?>
-                                    <span class="new">Ny</span>
-                                <?php } ?>
                                 <p><?php echo printAge($profile->year); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
