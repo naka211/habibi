@@ -24,7 +24,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile, friendRequests, myPhoto, uploadPhoto, friends, sentBlinks, messages, receivedBlinks, favorites, update, addFavorite, removeFavorite, upgrade, blocked, searching, editAvatar, visitMe, visited, start, editphoto', 'Checkgold|only:visitme');
+        return array('Checklogin|only:profile, friendRequests, myPhoto, uploadPhoto, friends, sentBlinks, messages, receivedBlinks, favorites, update, addFavorite, removeFavorite, upgrade, blocked, searching, editAvatar, visitMe, visited, start, editphoto, blockList', 'Checkgold|only:visitme');
     }
 
     function setExpireSessionTime(){
