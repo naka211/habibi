@@ -63,7 +63,7 @@ class General_model extends CI_Model{
         $configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.unoeuro.com';
         $configEmail['smtp_user'] = 'noreply@zeduuce.com';
-        $configEmail['smtp_pass'] = 'mTXz6X=A3y5dE?T6';
+        $configEmail['smtp_pass'] = 'pabe98midobe';
         $configEmail['smtp_port'] = 587;
         $configEmail['smtp_crypto'] = 'tls';
         $configEmail['smtp_timeout'] = 30;
