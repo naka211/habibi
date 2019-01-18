@@ -22,9 +22,6 @@
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
                     <div class="frend_item <?php if($user->seen == 0) echo 'frend_item_new"';?>">
-                        <?php if($user->seen == 0){?>
-                            <span class="new">Ny</span>
-                        <?php } ?>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <div class="frend_item_avatar">
@@ -37,7 +34,7 @@
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <?php if(isGoldMember()){?>
-                                    <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
+                                    <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?><?php if($user->seen == 0){?><span class="new">Ny</span><?php } ?></h4>
                                 <?php }?>
                                 <p class="age_city"><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                 <p>Modtaget: d. <span><?php echo date("d/m/Y", $user->sent_time); ?></span> kl.<span><?php echo date("H:i", $user->sent_time); ?></span></p>
