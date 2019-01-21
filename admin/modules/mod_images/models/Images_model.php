@@ -43,5 +43,11 @@ class Images_model extends CI_Model{
             return false;
         }
 	}
+
+	function updateImageStatus($imageId, $status){
+        $this->db->set('status', $status, false);
+        $this->db->where('id', $imageId);
+        $this->db->update('user_image');
+    }
 }
 ?>

@@ -126,7 +126,7 @@ class Images extends CI_Controller{
 	}
 
     public function acceptPhoto($photoId, $userId){
-        $this->images->updatePhotoStatus($photoId, 1);
+        $this->images->updateImageStatus($photoId, 1);
 
         $user = $this->user->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
