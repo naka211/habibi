@@ -461,8 +461,8 @@ class User extends CI_Controller{
         $user = $this->user->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
                         Din avatar er godkendt.<br /><br />
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->sendEmail([$user->email], 'Zeduuce.com - Din avatar er godkendt', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -479,8 +479,8 @@ class User extends CI_Controller{
         $user = $this->user->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
                         Din avatar er ikke godkendt.<br /><br />
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->sendEmail([$user->email], 'Zeduuce.com - Din avatar er ikke godkendt', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er ikke godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }

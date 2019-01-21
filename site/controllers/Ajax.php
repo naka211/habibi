@@ -562,8 +562,8 @@ class Ajax extends MX_Controller{
         $content = 'Hej Admin<br /><br />
                         '.$user->name.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet billede', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$user->name.'har uploadet billede', $content);
         /*$this->session->set_flashdata('message', 'Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice');*/
     }
 

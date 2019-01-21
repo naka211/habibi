@@ -49,14 +49,18 @@ class Images extends CI_Controller{
                 $data->id = $row->id;
                 $data->name = $row->name;
                 $data->image = '<img src="'.base_url_site().'uploads/raw_photo/'.$row->image.'" height="150" \>';
-                $data->image .= ' <span id="publish'.$row->id.'">';
+                if($row->status == 0){
+                    $data->image .= ' <a href="'.site_url($this->module_name.'/images/acceptPhoto/'.$row->id.'/'.$row->userId).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Accept"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
+                    $data->image .= ' <a href="'.site_url($this->module_name.'/images/rejectPhoto/'.$row->id.'/'.$row->userId).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                }
+                /*$data->image .= ' <span id="publish'.$row->id.'">';
                 $data->image .= ($this->check->check('edit'))?icon_active("'user_image'","'id'",$row->id,$row->status):"";
-                $data->image .= '</span>';
+                $data->image .= '</span>';*/
 
                 $data->dt_create = date("d.m.Y K\l.H:i", $row->dt_create);
                 //ACTION
                 $data->action = "";
-                if($this->check->check('del')){
+                if($this->check->check('del') && $row->status == 1){
                     $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/images/del/").'"/>';
                     $data->action .= icon_delete($row->id);
                 }
@@ -120,5 +124,68 @@ class Images extends CI_Controller{
         echo json_encode($data);
         return;
 	}
+
+    public function acceptAvatar($photoId, $userId){
+        $this->images->updatePhotoStatus($photoId, 1);
+
+        $user = $this->user->getUserInfo($userId);
+        $content = 'Hej '.$user->name.'<br /><br />
+                        Din billede er godkendt.<br /><br />
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->sendEmail([$user->email], 'Habibidating.dk - Din billede er godkendt', $content);
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    public function rejectAvatar($photoId, $userId){
+        $photoName = $this->user->getImageName($photoId);
+
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."photo".DIRECTORY_SEPARATOR.$photoName);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_photo".DIRECTORY_SEPARATOR.$photoName);
+        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_photo".DIRECTORY_SEPARATOR.$photoName);
+
+        $this->user->delete($photoId);
+
+        $user = $this->user->getUserInfo($userId);
+        $content = 'Hej '.$user->name.'<br /><br />
+                        Din billede er ikke godkendt.<br /><br />
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->sendEmail([$user->email], 'Habibidating.dk - Din billede er ikke godkendt', $content);
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html'){
+        $configEmail['mailtype'] = $mailType;
+        $configEmail['protocol'] = 'smtp';
+        $configEmail['smtp_host'] = 'smtp.unoeuro.com';
+        $configEmail['smtp_user'] = 'noreply@zeduuce.com';
+        $configEmail['smtp_pass'] = 'pabe98midobe';
+        $configEmail['smtp_port'] = 587;
+        $configEmail['smtp_crypto'] = 'tls';
+        $configEmail['smtp_timeout'] = 30;
+
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+        $this->email->initialize($configEmail);
+        try {
+            foreach($emails as $email){
+                $this->email->clear();
+                $this->email->to($email);
+                if($from == NULL ){
+                    $this->email->from('noreply@zeduuce.com ','Zeduuce.com');
+                }
+                else{
+                    $this->email->from($from,'Zeduuce.com');
+                }
+                $this->email->subject($subject);
+                $this->email->message($content);
+                $this->email->send();
+            }
+        } catch (Exception $e){
+            return false;
+        }
+        return true;
+    }
 }
 ?>

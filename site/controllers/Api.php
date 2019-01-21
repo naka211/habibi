@@ -44,7 +44,7 @@ class Api extends REST_Controller {
     }
 
     // Intro
-    public function login_post(){
+    public function login_post(){print_r($_POST);exit();
         $data = json_decode($this->post('data'));
         $info = $data->info;
         $password = md5($data->password);
@@ -148,7 +148,7 @@ class Api extends REST_Controller {
         curl_close($ch);
     }
 
-    public function forgotPassword_post(){
+    public function forgotPassword_post(){print_r($_REQUEST);exit();
         $data = json_decode($this->post('data'));
 
         $user = $this->user->getUser('', $data->email);
@@ -161,8 +161,8 @@ class Api extends REST_Controller {
                     Din nye adgangskode er: <b>'.$new_password[0].'</b><br /><br />
                     Har du spørgsmål kontakt info@zeduuce.com<br /><br />
                     Med venlig hilsen<br/>
-                    <a href="'.base_url().'">Zeduuce.com®</a>';
-            $sent = $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Glemt adgangskode', $content);
+                    <a href="'.base_url().'">Habibidating.dk®</a>';
+            $sent = $this->general_model->sendEmail([$user->email], 'Habibidating.dk - Glemt adgangskode', $content);
             if($sent === true){
                 $update['password'] = md5($new_password[0]);
                 $this->user->saveUser($update, $user->id);
@@ -673,8 +673,8 @@ class Api extends REST_Controller {
         $content = 'Hej Admin<br /><br />
                         '.$linkProfileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Habibidating.dk - Bruger rapport', $content);
         if($sent){
             $id = $this->user->saveReport($userId, $profileId, $reason);
             if($id == false){
@@ -1190,8 +1190,8 @@ class Api extends REST_Controller {
         $content = 'Hej Admin<br /><br />
                         '.$userName.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$userName.'har uploadet en avatar', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$userName.'har uploadet en avatar', $content);
     }
 
     private function _sendEmailAdminToApprovePhoto($userName){
@@ -1199,8 +1199,8 @@ class Api extends REST_Controller {
         $content = 'Hej Admin<br /><br />
                         '.$userName.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$userName.'har uploadet billede', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$userName.'har uploadet billede', $content);
     }
     private function _checkPassword($userId, $password){
         $correctUser = $this->user->getUser($userId, null, md5($password));

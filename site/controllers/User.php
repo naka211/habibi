@@ -342,8 +342,8 @@ class User extends MX_Controller
         $content = 'Hej Admin<br /><br />
                         '.$user->name.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Zeduuce.com - '.$user->name.'har uploadet en avatar', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$user->name.'har uploadet en avatar', $content);
         /*$this->session->set_flashdata('message', 'Billedet er sendt til validering og det blir gjordt indenfor 24 timer mvh kundeservice');*/
     }
 
@@ -1090,8 +1090,8 @@ class User extends MX_Controller
         $content = 'Hej Admin<br /><br />
                         '.$linkProfileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
-                        <a href="'.base_url().'">Zeduuce.com®</a>';
-        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Zeduuce.com - Bruger rapport', $content);
+                        <a href="'.base_url().'">Habibidating.dk®</a>';
+        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Habibidating.dk - Bruger rapport', $content);
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
