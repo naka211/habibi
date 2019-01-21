@@ -125,7 +125,7 @@ class Images extends CI_Controller{
         return;
 	}
 
-    public function acceptAvatar($photoId, $userId){
+    public function acceptPhoto($photoId, $userId){
         $this->images->updatePhotoStatus($photoId, 1);
 
         $user = $this->user->getUserInfo($userId);
@@ -137,7 +137,7 @@ class Images extends CI_Controller{
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    public function rejectAvatar($photoId, $userId){
+    public function rejectPhoto($photoId, $userId){
         $photoName = $this->user->getImageName($photoId);
 
         @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."photo".DIRECTORY_SEPARATOR.$photoName);
