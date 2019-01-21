@@ -173,10 +173,10 @@ class Images extends CI_Controller{
                 $this->email->clear();
                 $this->email->to($email);
                 if($from == NULL ){
-                    $this->email->from('noreply@zeduuce.com ','Zeduuce.com');
+                    $this->email->from('noreply@zeduuce.com ','Habibidating.dk');
                 }
                 else{
-                    $this->email->from($from,'Zeduuce.com');
+                    $this->email->from($from,'Habibidating.dk');
                 }
                 $this->email->subject($subject);
                 $this->email->message($content);
