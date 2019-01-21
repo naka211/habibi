@@ -128,7 +128,7 @@ class Images extends CI_Controller{
     public function acceptPhoto($photoId, $userId){
         $this->images->updateImageStatus($photoId, 1);
 
-        $user = $this->user->getUserInfo($userId);
+        $user = $this->images->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
                         Din billede er godkendt.<br /><br />
                         <a href="'.base_url().'">Habibidating.dk®</a>';
@@ -138,15 +138,15 @@ class Images extends CI_Controller{
     }
 
     public function rejectPhoto($photoId, $userId){
-        $photoName = $this->user->getImageName($photoId);
+        $photoName = $this->images->getImageName($photoId);
 
         @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."photo".DIRECTORY_SEPARATOR.$photoName);
         @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_photo".DIRECTORY_SEPARATOR.$photoName);
         @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_photo".DIRECTORY_SEPARATOR.$photoName);
 
-        $this->user->delete($photoId);
+        $this->images->delete($photoId);
 
-        $user = $this->user->getUserInfo($userId);
+        $user = $this->images->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
                         Din billede er ikke godkendt.<br /><br />
                         <a href="'.base_url().'">Habibidating.dk®</a>';

@@ -49,5 +49,13 @@ class Images_model extends CI_Model{
         $this->db->where('id', $imageId);
         $this->db->update('user_image');
     }
+
+    function getUserInfo($userId){
+        $this->db->select('name, email');
+        $this->db->from('user');
+        $this->db->where("id", $userId);
+        $user = $this->db->get()->row();
+        return $user;
+    }
 }
 ?>
