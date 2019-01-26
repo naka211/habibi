@@ -1279,7 +1279,7 @@ class User extends MX_Controller
         }
     }
 
-    function newsletter(){
+    /*function newsletter(){
         $email = $this->input->post('email');
         $apiKey = $this->config->item('mailchimpApiKey');
         $listId = $this->config->item('listId');
@@ -1341,6 +1341,54 @@ class User extends MX_Controller
                 redirect(site_url('newsletter'));
             }
         }
+    }*/
+
+    function newsletter(){
+        $email = $this->input->post('email');
+        $pubKey = $this->config->item('mailJetPublicKey');
+        $secKey = $this->config->item('mailJetSecretKey');
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contact/'.urlencode($email));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+        $result = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close ($ch);
+        if($httpCode == 200){
+            $this->session->set_flashdata('error', 'Denne email findes i vores system.');
+        } else {
+            $data = array("Action" => "addnoforce", "Email" => $email);
+            $dataStr = json_encode($data);
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contactslist/27066/managecontact');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataStr);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+            $headers = array();
+            $headers[] = 'Content-Type: application/json';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            $result = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if($httpCode == 400){
+                $this->session->set_flashdata('error', 'En fejl ved at tilføje e-mail til system.');
+            } else {
+                $this->session->set_flashdata('message', 'Tak for tilmelding vores nyhedsbrev.');
+            }
+            curl_close ($ch);
+        }
+        redirect(site_url('newsletter'));
     }
 }
 
