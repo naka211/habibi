@@ -3003,7 +3003,7 @@ input[type=range]::-ms-tooltip {
 
 label.error{
     border: none !important;
-    font-size: 12px;
+    font-size: 12px !important;
     color: red;
     font-weight: normal;
 }

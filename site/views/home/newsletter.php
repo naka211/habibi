@@ -18,19 +18,19 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Indtast din e-mail…" name="email">
                             </div>
-                            <button class="btn btnSendPost">SEND AFSTED</button>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> Eksklusivt nyhedsbrev med tilbud &amp; nyheder.
+                                        <input type="checkbox" name="newsletter"> Eksklusivt nyhedsbrev med tilbud &amp; nyheder.
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> Accepter vores <a href="#">salgs - og leveringsbetingelser</a>
+                                        <input type="checkbox" name="term"> Accepter vores <a href="#">salgs - og leveringsbetingelser</a>
                                     </label>
                                 </div>
                             </div>
+                            <button class="btn btnSendPost">SEND AFSTED</button>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="img_newsletter">
@@ -66,12 +66,24 @@
                 "email":{
                     required:true,
                     email: true
+                },
+                "newsletter": {
+                    required:true
+                },
+                "term": {
+                    required:true
                 }
             },
             messages: {
                 "email":{
                     required: 'Indtast din email',
                     email: 'Indtast venligst en gyldig e-mailadresse'
+                },
+                "newsletter":{
+                    required:'Acceptere dette felt'
+                },
+                "term":{
+                    required:'Acceptere dette felt'
                 }
             }
         });
