@@ -1347,6 +1347,7 @@ class User extends MX_Controller
         $email = $this->input->post('email');
         $pubKey = $this->config->item('mailJetPublicKey');
         $secKey = $this->config->item('mailJetSecretKey');
+        $contactListId = $this->config->item('contactListId');
 
         $ch = curl_init();
 
@@ -1367,7 +1368,7 @@ class User extends MX_Controller
             $dataStr = json_encode($data);
             $ch = curl_init();
 
-            curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contactslist/27066/managecontact');
+            curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contactslist/'.$contactListId.'/managecontact');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $dataStr);
             curl_setopt($ch, CURLOPT_POST, 1);
