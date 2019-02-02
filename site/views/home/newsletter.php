@@ -51,6 +51,11 @@
                             </ul>
                         </div>
                     </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <p class="description box_login"><a href="http://www.habibidating.dk" style="color: #000; font-weight: bold;">www.habibidating.dk</a> </p>
+                    </div>
+                </div>
                 </form>
             </div>
         </div>
