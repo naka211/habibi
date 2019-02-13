@@ -62,8 +62,8 @@ class General_model extends CI_Model{
         $configEmail['mailtype'] = $mailType;
         $configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.unoeuro.com';
-        $configEmail['smtp_user'] = 'noreply@zeduuce.com';
-        $configEmail['smtp_pass'] = 'sewa41bixeba';
+        $configEmail['smtp_user'] = 'noreply@habibidating.dk';
+        $configEmail['smtp_pass'] = 'bicihi53vato';
         $configEmail['smtp_port'] = 587;
         $configEmail['smtp_crypto'] = 'tls';
         $configEmail['smtp_timeout'] = 30;
@@ -76,7 +76,7 @@ class General_model extends CI_Model{
                 $this->email->clear();
                 $this->email->to($email);
                 if($from == NULL ){
-                    $this->email->from('noreply@zeduuce.com ','Habibidating.dk');
+                    $this->email->from('noreply@habibidating.dk','Habibidating.dk');
                 }
                 else{
                     $this->email->from($from,'Habibidating.dk');
