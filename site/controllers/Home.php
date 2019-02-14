@@ -125,6 +125,8 @@ class Home extends MX_Controller {
         $this->user->addMeta($this->_meta, $data, 'Habibi - Newsletter');
 
         $data['page'] = 'home/newsletter';
+        $data['title'] = $data['meta_title'] = 'Habibidating.dk - Newsletter';
+        $data['og_image'] = 'https://www.habibidating.dk/habibi2019/templates/images/1x/section2_photo.jpg';
         $this->load->view('templates', $data);
     }
 }

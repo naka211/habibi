@@ -11,7 +11,7 @@
     <meta name="description" content="<?php if (!empty($meta_description)) echo $meta_description; ?>"/>
     <meta name="robots" content="noodp, index, follow"/>
     <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2016), see www.w3.org"/>
-    <meta name="copyright" content="Copyright © 2018 by NTT"/>
+    <meta name="copyright" content="Copyright © 2019 by NTT"/>
     <meta name="abstract" content="<?php if (!empty($title)) echo $title; ?>"/>
 
 
@@ -22,7 +22,7 @@
     <meta property="og:type"          content="website"/>
     <meta property="og:title"         content="<?php if(!empty($title)) echo $title;?>"/>
     <meta property="og:description"   content="<?php if(!empty($meta_description)) echo $meta_description;?>"/>
-    <meta property="og:image"         content=""/>
+    <meta property="og:image"         content="<?php if(!empty($og_image)) echo $og_image;?>"/>
 
     <link rel="apple-touch-icon" sizes="152x152" href="<?php echo base_url().'templates/';?>favicon_package_v0.16/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url().'templates/';?>favicon_package_v0.16/favicon-32x32.png">
