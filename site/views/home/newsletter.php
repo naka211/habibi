@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <a class="logo_sub" href="<?php echo base_url();?>"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-respsonsive"></a>
+                <a class="logo_sub" href="https://www.habibidating.dk"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-respsonsive"></a>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                     </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                        <p class="description box_login"><a href="http://www.habibidating.dk" style="color: #000; font-weight: bold;">www.habibidating.dk</a> </p>
+                        <p class="description box_login"><a href="https://www.habibidating.dk" style="color: #000; font-weight: bold;">www.habibidating.dk</a> </p>
                     </div>
                 </div>
                 </form>
