@@ -1,4 +1,4 @@
-<?php $pageArr = array('home/index');?>
+<?php $pageArr = array('home/index', 'home/newsletter');?>
 <?php $user = $this->session->userdata('user'); ?>
 <?php if(!in_array($page, $pageArr)){?>
     <div id="footer" class="cf"></div>
@@ -30,7 +30,6 @@
                 </div>
             </div>
 
-            <?php if($page != 'home/newsletter'){?>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
                     <ul class="list">
@@ -58,7 +57,6 @@
                     <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
                 </div>
             </div>
-            <?php }?>
         </div>
     </footer>
     <div style="display: none;" id="modalUpgrade" class="animated-modal modalLogin">
