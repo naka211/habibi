@@ -1385,7 +1385,8 @@ class User extends MX_Controller
             if($httpCode == 400){
                 $this->session->set_flashdata('error', 'En fejl ved at tilføje e-mail til system.');
             } else {
-                $this->session->set_flashdata('message', 'Tak for tilmelding vores nyhedsbrev.');
+                $this->session->set_flashdata('message', "Tak fordi du har tilmeldt dig vores nyhedsbrev.<br>
+Det er vi glade for, derfor vil vi  sende dig en mail når vi går i luften så du kan få dine 3 måneders gratis prøve og samtidig være med i lodtrækningen om gavekort til Magasin du Nord");
             }
             curl_close ($ch);
         }
