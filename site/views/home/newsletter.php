@@ -12,7 +12,7 @@
                 <?php echo form_open('user/newsletter', array('id'=>'frm_newsletter', 'class'=>'frm_newsletter'))?>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            <a href="<?php echo base_url();?>"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-responsive"></a>
+                            <a href="https://www.habibidating.dk"><img src="<?php echo base_url().'templates/';?>images/1x/logo.png" alt="" class="img-responsive"></a>
                             <h3>Tilmeld dig Habibi´s nyheds brev og vær med i lodtrækningen om 5 gavekort til en værdi af 500,- til Magasin du Nord.</h3>
                             <p class="description">Der trækkes lod i blandt de første 1000 tilmeldte</p>
                             <div class="form-group">

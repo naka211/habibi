@@ -139,17 +139,19 @@
         </div>
     </div>
 </div>
-<?php if(!isset($_COOKIE['ha_panik_cookie'])){?>
+<?php if(!isset($_COOKIE['ha_panik_cookie']) && $page != 'home/newsletter'){?>
     <div class="box_notify">
         <i class="far fa-comment fa-lg"></i> Benyttes denne knap logges du automatisk af.
         <a href="javascript:void(0);" class="btnClose_xs"><i class="fas fa-times"></i></a>
     </div>
 <?php }?>
+<?php if($page != 'home/newsletter'){?>
 <a href="javascript:void(0);" class="btn btnPennic"><i class="fas fa-sign-out-alt fa-lg"></i> PANIK</a>
 <div class='back-to-top' id='back-to-top' title='Back to top'>
     <i class="fas fa-long-arrow-alt-up"></i>
 </div>
-<?php if(!isset($_COOKIE['ha_cookie'])){?>
+<?php }?>
+<?php if(!isset($_COOKIE['ha_cookie']) && $page != 'home/newsletter'){?>
     <section class="cookie">
         <div class="container">
             <div class="row">
