@@ -224,9 +224,10 @@
                                             <img src="<?php echo base_url().'templates/';?>images/1x/logo.svg" alt="" class="img-responsive logo_footer">
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12">
-                                            <p class="text_follow">Følg os på Facebook</p>
+                                            <p class="text_follow">Følg os på Facebook / Instagram</p>
                                             <div class="box_socail">
-                                                <a href="#" class="btn btn_fb"></a>
+                                                <a href="https://www.facebook.com/Habibidating-748451042173578/" class="btn btn_fb"></a>
+                                                <a href="https://www.facebook.com/Habibidating-748451042173578/" class="btn btn_in"></a>
                                             </div>
                                         </div>
                                     </div>
