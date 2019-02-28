@@ -139,6 +139,8 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                         <ul class="list_action">
                             <?php if(($status->isFriend == 1 && $profile->chat == 0) || $profile->chat == 1){?>
                                 <li><a <?php echo $messageLink;?> title="Send besked"><i class="i_email"></i></a></li>
+                            <?php } else {?>
+                                <li><a href="javascript:void(0);" title="Deaktiveret" style="background-color: red;"><i class="i_email"></i></a></li>
                             <?php }?>
                             <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'class="hover"'?>  title="Send blink"><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>

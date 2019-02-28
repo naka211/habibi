@@ -55,7 +55,13 @@
 
             <div class="row footer_bottom">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p><a href="#">Om Zeeduce</a> - <a href="#">hjælp / FAQ</a> - <a href="#">Kontakt</a> - <a href="#">Succeshistorier</a> - <a href="#">Karriere</a> - <a href="#">Presse</a> - <a href="#">Onlinedating-apps</a> - <a href="#">iPhone dating app</a> - <a href="#">Android dating app</a> - <a href="#">Følg Zeeduce.</a></p>
+                    <p><a data-fancybox data-src="#modalContact" href="javascript:;">Kontakt os</a>
+                        - <a data-fancybox data-src="#modalAbout" href="javascript:;">Om os</a>
+                        - <a href="<?php echo site_url('home/handelsbetingelser');?>">Brugerbetingelser</a>
+                        - <a href="<?php echo site_url('home/abonnement');?>">Betingelser for abonnement</a>
+                        - <a href="<?php echo site_url('home/cookie');?>">Cookie & persondatapolitik</a>
+                        - <a href="<?php echo site_url('home/guldmedlemskab');?>">Fordele ved et guld medlemskab</a>
+                    </p>
                 </div>
             </div>
         </div>
