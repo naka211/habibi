@@ -44,8 +44,8 @@ class Api extends REST_Controller {
     }
 
     // Intro
-    public function login_post(){print_r($_POST);exit();
-        $data = json_decode($this->post('data'));
+    public function login_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
         $info = $data->info;
         $password = md5($data->password);
         //Login user
@@ -84,8 +84,9 @@ class Api extends REST_Controller {
     }
 
     public function logout_post(){
-        $userId = $this->post('userId');
-        $hwId = $this->post('hwId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $hwId = $data->hwId;
 
         $this->api->deleteToken($userId, $hwId);
 
@@ -148,8 +149,8 @@ class Api extends REST_Controller {
         curl_close($ch);
     }
 
-    public function forgotPassword_post(){print_r($_REQUEST);exit();
-        $data = json_decode($this->post('data'));
+    public function forgotPassword_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
 
         $user = $this->user->getUser('', $data->email);
 
@@ -208,7 +209,7 @@ class Api extends REST_Controller {
     }
 
     public function register_post(){
-        $data = json_decode($this->post('data'));
+        $data = (object)json_decode(file_get_contents("php://input"));
 
         if($data->password != $data->confirmPassword){
             $returnData['status'] = false;
@@ -318,8 +319,10 @@ class Api extends REST_Controller {
     }
 
     public function removeFavorite_delete(){
-        $userId = $this->delete('userId');
-        $profileId = $this->delete('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $this->user->removeFavorite($userId, $profileId);
 
@@ -327,8 +330,9 @@ class Api extends REST_Controller {
     }
 
     public function sendRequest_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
         $user = $this->user->getUser($userId);
         if ($userId && $profileId) {
             $DB['user_from'] = $userId;
@@ -363,8 +367,9 @@ class Api extends REST_Controller {
     }
 
     public function deleteMessage_delete(){
-        $userId = $this->delete('userId');
-        $profileId = $this->delete('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
         $this->user->deleteMessage($userId, $profileId);
         $this->_return(true);
     }
@@ -381,9 +386,10 @@ class Api extends REST_Controller {
     }
 
     public function sendMessage_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->profileId('profileId');
-        $message = $this->post('message');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+        $message = $data->message;
 
         $user = $this->user->getUser($userId);
         $DB['user_from'] = $userId;
@@ -419,16 +425,18 @@ class Api extends REST_Controller {
     }
 
     public function unFriend_delete(){
-        $userId = $this->delete('userId');
-        $profileId = $this->delete('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $this->user->cancelRequestAddFriend($userId, $profileId);
         $this->_return(true);
     }
 
     public function blockUser_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $status = $this->user->addUserToBlockedList($userId, $profileId);
         if($status == true){
@@ -439,13 +447,18 @@ class Api extends REST_Controller {
     }
 
     public function unBlockUser_delete(){
-        $userId = $this->delete('userId');
-        $profileId = $this->delete('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
         $this->user->removeUserToBlockList($userId, $profileId);
         $this->_return(true);
     }
 
-    public function getReceivedRequests_get($userId){
+    public function getReceivedRequests_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getReceivedRequests($userId, $ignore);
 
@@ -457,7 +470,10 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getSentRequests_get($userId){
+    public function getSentRequests_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getSentRequests($userId, $ignore);
 
@@ -469,7 +485,10 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getRejectedRequests_get($userId){
+    public function getRejectedRequests_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getRejectedRequests($userId, $ignore);
 
@@ -482,8 +501,9 @@ class Api extends REST_Controller {
     }
 
     public function acceptRequest_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $this->user->updateFriendRequest($userId, $profileId, 1);
         $this->user->insertFriendList($userId, $profileId);
@@ -492,8 +512,9 @@ class Api extends REST_Controller {
     }
 
     public function rejectRequest_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $this->user->updateFriendRequest($userId, $profileId, 2);
 
@@ -501,8 +522,9 @@ class Api extends REST_Controller {
     }
 
     public function deleteRequest_delete(){
-        $userId = $this->delete('userId');
-        $profileId = $this->delete('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         $this->user->cancelRequestAddFriend($userId, $profileId);
 
@@ -569,21 +591,25 @@ class Api extends REST_Controller {
     }
 
     public function blurAvatar_put(){
-        $userId = $this->put('userId');
-        $profileId = $this->put('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
         $this->user->setBlurAvatar($userId, $profileId, 0);
         $this->_return(true);
     }
 
     public function removeBlurAvatar_put(){
-        $userId = $this->put('userId');
-        $profileId = $this->put('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
         $this->user->setBlurAvatar($userId, $profileId, 1);
         $this->_return(true);
     }
 
     public function getSearchResult_post($userId, $page = 1, $perPage = 10){
-        $searchData = (array)json_decode($this->post('searchData'));
+        $searchData = (array)json_decode(file_get_contents("php://input"));
         $offset = ($page - 1)*$perPage;
         $ignore = $this->user->getBlockedUserIds($userId);
         $ignore[] = $userId;
@@ -616,8 +642,9 @@ class Api extends REST_Controller {
     }
 
     public function addFavorite_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
 
         if ($userId && $profileId) {
             $DB['user_from'] = $userId;
@@ -635,8 +662,9 @@ class Api extends REST_Controller {
     }
 
     public function sendBlink_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
         $user = $this->user->getUser($userId);
 
         if ($userId && $profileId) {
@@ -661,12 +689,12 @@ class Api extends REST_Controller {
     }
 
     public function reportProfile_post(){
-        $userId = $this->post('userId');
-        $profileId = $this->post('profileId');
-
-        $userName = $this->post('userName');
-        $profileName = $this->post('profileName');
-        $reason = $this->post('reason');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+        $userName = $data->userName;
+        $profileName = $data->profileName;
+        $reason = $data->reason;
 
         $linkProfileName = '<a href="'.base_url().'admin/en/mod_user/user?name='.$profileName.'">'.$profileName.'</a>';
 
@@ -688,8 +716,8 @@ class Api extends REST_Controller {
     }
 
     public function upgradeSuccess_put(){
-        $userId = $this->put('userId');
-        $data = json_decode($this->put('data'));
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
 
         $user = $this->user->getUser($userId);
         if($user->package == 1){
@@ -728,7 +756,8 @@ class Api extends REST_Controller {
     }
 
     public function deletePhotos_delete(){
-        $photoIds = $this->delete('photoIds');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $photoIds = $data->photoIds;
 
         foreach($photoIds as $key=>$photoId){
             $this->user->deletePhoto($photoId);
@@ -738,8 +767,9 @@ class Api extends REST_Controller {
     }
 
     public function uploadAvatar_post(){
-        $userId = $this->post('userId');
-        $imageData = $this->post('imageData');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $imageData = $data->imageData;
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
@@ -804,9 +834,10 @@ class Api extends REST_Controller {
     }
 
     public function saveAvatar_put(){
-        $userId = $this->put('userId');
-        $imageData = $this->put('imageData');
-        $blurIndex = $this->put('blurIndex');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $blurIndex = $data->blurIndex;
+        $imageData = $data->imageData;
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
@@ -828,8 +859,9 @@ class Api extends REST_Controller {
     }
 
     public function selectAvatarFromGallery_post(){
-        $userId = $this->post('userId');
-        $imageName = $this->post('imageName');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $imageName = $data->imageName;
 
         $currentAvatar = $this->user->getAvatar($userId);
         if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
@@ -882,7 +914,8 @@ class Api extends REST_Controller {
     }
 
     public function deleteAvatar_delete(){
-        $userId = $this->delete('userId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
 
         $currentAvatar = $this->user->getAvatar($userId);
         if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
@@ -910,8 +943,9 @@ class Api extends REST_Controller {
     }
 
     public function uploadPhoto_post(){
-        $userId = $this->post('userId');
-        $imageData = $this->post('imageData');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $imageData = $data->imageData;
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
@@ -975,9 +1009,10 @@ class Api extends REST_Controller {
     }
 
     public function savePhoto_put(){
-        $imageData = $this->put('imageData');
-        $blurIndex = $this->put('blurIndex');
-        $imageName = $this->put('imageName');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $imageName = $data->imageName;
+        $blurIndex = $data->blurIndex;
+        $imageData = $data->imageData;
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
@@ -1031,8 +1066,9 @@ class Api extends REST_Controller {
     }
 
     public function checkName_post(){
-        $userId = $this->post('userId');
-        $name = $this->post('name');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $name = $data->name;
 
         $exist = $this->user->checkUser($userId, $name);
         if ($exist) {
@@ -1043,8 +1079,9 @@ class Api extends REST_Controller {
     }
 
     public function checkEmail_post(){
-        $userId = $this->post('userId');
-        $email = $this->post('email');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $email = $data->email;
 
         $exist = $this->user->checkUser($userId, null, $email);
         if ($exist) {
@@ -1055,7 +1092,7 @@ class Api extends REST_Controller {
     }
 
     public function updateBasicInfo_put(){
-        $data = json_decode($this->put('data'));
+        $data = (object)json_decode(file_get_contents("php://input"));
         if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
             $this->_return(false, 'The password is not match.');
         }
@@ -1072,7 +1109,7 @@ class Api extends REST_Controller {
     }
 
     public function updateExtraInfo_put(){
-        $data = json_decode($this->put('data'));
+        $data = (object)json_decode(file_get_contents("php://input"));
         if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
             $this->_return(false, 'The password is not match.');
         }
@@ -1088,10 +1125,13 @@ class Api extends REST_Controller {
     }
 
     public function changeCardSuccess_put(){
-        $userId = $this->put('userId');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $subscriptionid = $data->subscriptionid;
+        $cardno = $data->cardno;
         //Update card info
-        $DB['subscriptionid'] = $this->put('subscriptionid');
-        $DB['cardno']    = $this->put('cardno');
+        $DB['subscriptionid'] = $subscriptionid;
+        $DB['cardno']    = $cardno;
         if($this->user->saveUser($DB, $userId)){
             $this->_return(true);
         } else {
@@ -1100,9 +1140,10 @@ class Api extends REST_Controller {
     }
 
     public function changePassword_put(){
-        $userId = $this->put('userId');
-        $password = $this->put('password');
-        $newPassword = $this->put('newPassword');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $password = $data->password;
+        $newPassword = $data->newPassword;
 
         if(empty($password) || $this->_checkPassword($userId, $password) == false){
             $this->_return(false, 'The password is not match.');
@@ -1118,8 +1159,9 @@ class Api extends REST_Controller {
     }
 
     public function changeChatStatus_put(){
-        $userId = $this->put('userId');
-        $status = $this->put('status');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $status = $data->status;
 
         $result = $this->db->set('chat', $status)
             ->where("id", $userId)
@@ -1132,9 +1174,10 @@ class Api extends REST_Controller {
     }
 
     public function setWithdrawStatus_put(){
-        $userId = $this->put('userId');
-        $password = $this->put('password');
-        $status = $this->put('status');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $password = $data->password;
+        $status = $data->status;
 
         if($status == 1){
             if(empty($password) || $this->_checkPassword($userId, $password) == false){
@@ -1151,9 +1194,10 @@ class Api extends REST_Controller {
     }
 
     public function setDeactivationStatus_put(){
-        $userId = $this->put('userId');
-        $password = $this->put('password');
-        $status = $this->put('status');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $password = $data->password;
+        $status = $data->status;
 
         if($status == 1){
             if(empty($password) || $this->_checkPassword($userId, $password) == false){
@@ -1170,8 +1214,9 @@ class Api extends REST_Controller {
     }
 
     public function deleteAccount_put(){
-        $userId = $this->put('userId');
-        $password = $this->put('password');
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $password = $data->password;
 
         if(empty($password) || $this->_checkPassword($userId, $password) == false){
             $this->_return(false, 'The password is not match.');
