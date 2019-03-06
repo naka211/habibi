@@ -227,7 +227,7 @@
                                             <p class="text_follow">Følg os på Facebook / Instagram</p>
                                             <div class="box_socail">
                                                 <a href="https://www.facebook.com/Habibidating-748451042173578/" class="btn btn_fb"></a>
-                                                <a href="https://www.facebook.com/Habibidating-748451042173578/" class="btn btn_in"></a>
+                                                <a href="https://www.instagram.com/habibidating.dk/" class="btn btn_in"></a>
                                             </div>
                                         </div>
                                     </div>
