@@ -18,6 +18,7 @@ class Api extends REST_Controller {
 
     public $application = "A70CD-9DCD8";
     public $auth = "0eoIIdq8ixloOBB8nc0LzpIJwd4NVWSJriNrWWNbD0waW4rYNzkk2yItg1bIesJHEiNFulbWBLwFBjLtJ4uQ";
+    public $server_key = 'AAAAHlyQ7Nw:APA91bFqbBT-aCYfBMTCl2egU7f77x1eOgVVqPdNqYcBUjsOnISSZ3D2-EP7MEb3XWERBJr_WDPmu3Gc4NQfi8Hy9UPpZZoOGynXTQJMs-SuHvIfT412YpBVUxJo-fkGiTgg8WKyJhZI';
     function __construct(){
         // Construct the parent class
         parent::__construct();
@@ -54,29 +55,25 @@ class Api extends REST_Controller {
             if($user->deleted != null){
                 $this->_return(false, 'Denne konto er blevet slettet');
             } else {
-                //create token in JWT
+                //create key in JWT
                 $token['id'] = $user->id;
                 $token['username'] = $user->name;
                 $token['iat'] = time();
                 $token['exp'] = time() + 60*60*24;
-                $returnToken = $this->jwt->encode($token, $this->config->item('encryption_key'));
+                $returnKey = $this->jwt->encode($token, $this->config->item('encryption_key'));
                 //$this->jwt->decode($data['token'], $this->config->item('encryption_key'), array('HS256'));
 
-                //save token to database
+                //save key and token to database
                 $insertData['user_id'] = $user->id;
-                $insertData['key'] = $returnToken;
+                $insertData['key'] = $returnKey;
                 $insertData['date_created'] = date('Y-m-d H:i:s');
-                $insertData['hwId'] = $data->hwId;
-                $insertData['type'] = $data->type;
+                $insertData['token'] = $data->token;
                 $this->api->saveToken($insertData);
 
                 //set login status
                 $this->user->updateLogin($user->id, 1);
 
-                //add device to pushwoosh
-                $this->_addDevice($returnToken, $data->hwId, $user->id, $data->type);
-
-                $this->_return(true, '', array('user'=>$user, 'token'=>$returnToken));
+                $this->_return(true, '', array('user'=>$user, 'key'=>$returnKey));
             }
         } else {
             $this->_return(false, 'E-mail / Brugernavn eller adgangskode er forkert, prøv igen!');
@@ -86,67 +83,12 @@ class Api extends REST_Controller {
     public function logout_post(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
-        $hwId = $data->hwId;
+        $token = $data->token;
 
-        $this->api->deleteToken($userId, $hwId);
-
-        //unregister device
-        $url = 'https://cp.pushwoosh.com/json/1.3/unregisterDevice';
-        $send['request'] = array('application' => $this->application, 'hwid'=>$hwId);
-        $request = json_encode($send);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
+        $this->api->deleteToken($userId, $token);
 
         $this->_return(true);
 
-    }
-
-    private function _addDevice($token, $hwId, $userId, $type){
-        //register device
-        $url = 'https://cp.pushwoosh.com/json/1.3/registerDevice';
-        $send['request'] = array('application' => $this->application, 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
-        $request = json_encode($send);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-        //$return["api_register_device"] = $response;
-
-        //set tags
-
-        $url = 'https://cp.pushwoosh.com/json/1.3/setTags';
-        $send['request'] = array('application' => $this->application, 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
-        $request = json_encode($send);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
     }
 
     public function forgotPassword_post(){
@@ -1275,9 +1217,10 @@ class Api extends REST_Controller {
         curl_close($ch);
 
         return $response;
-        //print "[PW] request: $request\n";
-        //print "[PW] response: $response\n";
-        //print "[PW] info: " . print_r($info, true);
+    }
+
+    public function testSendPush_get($profileId, $msg, $data){
+
     }
 
 }

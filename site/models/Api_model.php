@@ -18,8 +18,8 @@ class Api_model extends CI_Model{
         return $this->db->insert('user_keys', $data);
     }
 
-    function deleteToken($userId, $hwId){
-        return $this->db->where('user_id',$userId)->where('hwId', $hwId)->delete('user_keys');
+    function deleteToken($userId, $token){
+        return $this->db->where('user_id',$userId)->where('token', $token)->delete('user_keys');
     }
 
     function checkFriend($userId, $profileId){
