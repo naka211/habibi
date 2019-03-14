@@ -44,7 +44,7 @@ class User_model extends CI_Model{
         }
     }
     function delete_data($id=NULL){
-        /*$this->db->where("user_from = $id OR user_to = $id");
+        $this->db->where("user_from = $id OR user_to = $id");
         $this->db->delete('user_blocked');
         $this->db->reset_query();
 
@@ -74,14 +74,13 @@ class User_model extends CI_Model{
 
         $this->db->where("userFrom = $id OR userTo = $id");
         $this->db->delete('user_reports');
-        $this->db->reset_query();*/
+        $this->db->reset_query();
 
         $this->db->select('avatar');
         $this->db->from('user');
         $this->db->where('id', $id);
         $avatar = $this->db->get()->row()->avatar;
-        echo $this->config->item('root')."uploads/user/".$avatar;
-        print_r(file_exists($this->config->item('root')."uploads/user/".$avatar));exit();
+
         if($avatar != 'no-avatar1.png' && $avatar != 'no-avatar2.png'){
             @unlink($this->config->item('root')."uploads/user/".$avatar);
             @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
