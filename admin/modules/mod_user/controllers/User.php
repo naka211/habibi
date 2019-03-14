@@ -13,6 +13,7 @@ class User extends CI_Controller{
     }
 
     function index($page=0){
+        var_dump(file_exists($this->config->item('root')."uploads/raw_thumb_user/9ed447485a4c92e8ed8e9c2da050c55a.JPG"));exit();
         unlink($this->config->item('root')."uploads/raw_thumb_user/9ed447485a4c92e8ed8e9c2da050c55a.JPG");
         $this->check->check('view','','',base_url());
         if($this->check->check('add')){
