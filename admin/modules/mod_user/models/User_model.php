@@ -43,7 +43,7 @@ class User_model extends CI_Model{
             }
         }
     }
-    function delete_data($id=NULL){print_r($this->config->item('root'));exit();
+    function delete_data($id=NULL){
         /*$this->db->where("user_from = $id OR user_to = $id");
         $this->db->delete('user_blocked');
         $this->db->reset_query();
