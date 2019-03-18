@@ -12,8 +12,8 @@ class Payment extends MX_Controller {
         $this->session->set_userdata(array('url'=>uri_string()));
         //$this->load->library('user_agent');
         $this->load->model('user_model', 'user');
-        $this->load->model('tilbud_model','tilbud');
-        $this->load->model('invita_model','invita');
+        /*$this->load->model('tilbud_model','tilbud');
+        $this->load->model('invita_model','invita');*/
         $this->language = $this->lang->lang();
 
         /*$this->version = "v10";
@@ -43,9 +43,9 @@ class Payment extends MX_Controller {
 
         $data['orderid'] = randomPassword();
         $data['amount'] = $this->config->item($packageName)*100;
-        $data['continueurl'] = site_url('user/upgradeSuccess/'.$user->id);
-        $data['cancelurl'] = site_url('user/upgradeCancel');
-        $data['callbackurl'] = site_url('user/upgradeCallback/'.$user->id);
+        $data['continueurl'] = site_url('payment/upgradeSuccess/'.$user->id);
+        $data['cancelurl'] = site_url('payment/upgradeCancel');
+        $data['callbackurl'] = site_url('payment/upgradeCallback/'.$user->id);
 
         $data['page'] = 'payment/upgrade';
         $this->load->view('templates', $data);
@@ -152,6 +152,109 @@ class Payment extends MX_Controller {
             print_r($users);exit();
         } else {
             echo 'Nobody';
+        }
+    }
+
+    public function upgradeSuccess($userId){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
+        $user = $this->user->getUser($userId);
+        if($user->package == 1){
+            $plusTime = '+1 month';
+        } else if($user->package == 3){
+            $plusTime = '+3 months';
+        } else if($user->package == 6){
+            $plusTime = '+6 months';
+        } else {
+            $plusTime = '+1 day';
+        }
+
+        $DB['type'] = 2;
+        $DB['paymenttime'] = time();
+        $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
+        $this->user->saveUser($DB, $userId);
+
+        $data['page'] = 'user/upgradeSuccess';
+        $this->load->view('templates', $data);
+    }
+
+    public function upgradeCancel(){
+        customRedirectWithMessage(site_url('user/index'), 'Din betaling mislykkedes');
+    }
+
+    public function upgradeCallback($userId){
+        $requestBody = file_get_contents("php://input");
+        $request = json_decode($requestBody);
+
+        // Check checksum
+        /*$key = '196543afab47e2f8552ee61d99f658562937118aaa709d458943e20c110764e3';
+        $checksum = hash_hmac("sha256", $requestBody, $key);
+        if ($checksum != $_SERVER["HTTP_QUICKPAY_CHECKSUM_SHA256"]) {
+            return null;
+        }*/
+
+        $user = $this->user->getUser($userId);
+        $link = $request->link;
+        $metadata = $request->metadata;
+        //Update payment
+        $DB['price'] = $link->amount/100;
+        $DB['subscriptionid'] = $request->id;
+        $DB['orderid'] = $request->order_id;
+        $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
+        $this->user->saveUser($DB, $userId);
+        //Add to log
+        //$this->addPaymentLog($userId);
+
+        //Send email
+        $sendEmailInfo['name']      = $user->name;
+        $sendEmailInfo['email']     = $user->email;
+        $sendEmailInfo['orderId']   = $DB['orderid'];
+        $sendEmailInfo['price']     = $DB['price'].' DKK';
+        $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
+        $emailTo = array($user->email);
+        sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
+
+        return true;
+    }
+
+    public function changeCardSuccess(){
+        $user = $this->session->userdata('user');
+
+        //Update card info
+        $DB['subscriptionid'] = $this->input->get('subscriptionid');
+        $DB['cardno']    = $this->input->get('cardno');
+        $this->user->saveUser($DB, $user->id);
+
+        customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne');
+    }
+
+    public function changeCardCancel(){
+        customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne fejler');
+    }
+
+    public function changeCardCallback(){
+
+    }
+
+    public function addPaymentLog($userId){
+        if($this->input->get('txnid')){
+            $logDb['userId']    = $userId;
+            $logDb['txnid']     = $this->input->get('txnid');
+            $logDb['orderId']   = $this->input->get('orderid');
+            $logDb['amount']    = $this->input->get('amount')/100;
+            $logDb['currency']  = $this->input->get('currency');
+            $logDb['date']      = $this->input->get('date');
+            $logDb['time']      = $this->input->get('time');
+            $logDb['hash']      = $this->input->get('hash');
+            $logDb['txnfee']    = $this->input->get('txnfee');
+            $logDb['cardno']    = $this->input->get('cardno');
+            $id = $this->user->addLog($logDb);
+            if($id == false){
+                customRedirectWithMessage(site_url('user/index'), 'Fejl ved lagring af log');
+            }
+        } else {
+            customRedirectWithMessage(site_url('user/index'), 'Kan ikke finde betalingsoplysninger');
         }
     }
 }
