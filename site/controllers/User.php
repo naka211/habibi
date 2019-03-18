@@ -715,11 +715,21 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data);
 
-        /*$payment = $this->session->userdata('payment');*/
-        $user = $this->session->userdata('user');
-        $user = $this->user->getUser($user->id);
+        $data['page'] = 'user/upgradeSuccess';
+        $this->load->view('templates', $data);
+    }
+
+    public function upgradeCancel(){
+        customRedirectWithMessage(site_url('user/index'), 'Din betaling mislykkedes');
+    }
+
+    public function upgradeCallback($userId){
+        $requestBody = file_get_contents("php://input");
+        $request = json_decode($requestBody);
+
+        $user = $this->user->getUser($userId);
         if($user->package == 1){
-            $plusTime = '+4 months';
+            $plusTime = '+1 month';
         } else if($user->package == 3){
             $plusTime = '+3 months';
         } else if($user->package == 6){
@@ -727,17 +737,19 @@ class User extends MX_Controller
         } else {
             $plusTime = '+1 day';
         }
+        $link = $request->link;
+        $metadata = $request->metadata;
         //Update payment
-        $DB['price'] = $price = $this->input->get('amount')/100;
-        $DB['subscriptionid'] = $this->input->get('subscriptionid');
-        $DB['orderid'] = $this->input->get('orderid');
+        $DB['price'] = $link->amount/100;
+        $DB['subscriptionid'] = $request->id;
+        $DB['orderid'] = $request->order_id;
         $DB['type'] = 2;
         $DB['paymenttime'] = time();
         $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
-        $DB['cardno']    = $this->input->get('cardno');
+        $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
 
         //Add to log
-        $this->addPaymentLog($user->id);
+        $this->addPaymentLog($userId);
 
         //Send email
         $sendEmailInfo['name']      = $user->name;
@@ -748,17 +760,7 @@ class User extends MX_Controller
         $emailTo = array($user->email);
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
-        $this->user->saveUser($DB, $user->id);
-        $data['page'] = 'user/upgradeSuccess';
-        $this->load->view('templates', $data);
-    }
-
-    public function upgradeCancel(){
-        customRedirectWithMessage(site_url('user/index'), 'Din betaling mislykkedes');
-    }
-
-    public function upgradeCallback(){
-
+        $this->user->saveUser($DB, $userId);
     }
 
     public function changeCardSuccess(){

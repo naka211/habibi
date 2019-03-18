@@ -15,11 +15,13 @@ class Payment extends MX_Controller {
         $this->load->model('tilbud_model','tilbud');
         $this->load->model('invita_model','invita');
         $this->language = $this->lang->lang();
-        $this->action = "https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx";
-        $this->merchantnumber = "8016239";
+
+        /*$this->version = "v10";
+        $this->merchant_id = "83338";
+        $this->agreement_id = "290680";
         $this->currency = "DKK";
         $this->windowstate = "3";
-        $this->md5 = "0c6f4246756c27adf3eaa80b2839484b";
+        $this->md5 = "0c6f4246756c27adf3eaa80b2839484b";*/
     }
     function upgrade(){
         $user = $this->session->userdata('user');
@@ -37,17 +39,13 @@ class Payment extends MX_Controller {
         } else {
             $packageName = 'test';
         }
-        //Go payment Epay
+        //Go payment Quickpay
 
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
-
-        $data['amount'] = $this->config->item($packageName)*100;
-        $data['accepturl'] = site_url('user/upgradeSuccess');
-        $data['cancelurl'] = site_url('user/upgradeCancel');
-        $data['callbackurl'] = site_url('user/upgradeCallback');
         $data['orderid'] = randomPassword();
+        $data['amount'] = $this->config->item($packageName)*100;
+        $data['continueurl'] = site_url('user/upgradeSuccess');
+        $data['cancelurl'] = site_url('user/upgradeCancel');
+        $data['callbackurl'] = site_url('user/upgradeCallback/'.$user->id);
 
         $data['page'] = 'payment/upgrade';
         $this->load->view('templates', $data);
