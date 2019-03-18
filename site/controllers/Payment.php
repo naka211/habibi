@@ -43,7 +43,7 @@ class Payment extends MX_Controller {
 
         $data['orderid'] = randomPassword();
         $data['amount'] = $this->config->item($packageName)*100;
-        $data['continueurl'] = site_url('user/upgradeSuccess');
+        $data['continueurl'] = site_url('user/upgradeSuccess/'.$user->id);
         $data['cancelurl'] = site_url('user/upgradeCancel');
         $data['callbackurl'] = site_url('user/upgradeCallback/'.$user->id);
 

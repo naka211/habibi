@@ -711,9 +711,25 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function upgradeSuccess(){
+    public function upgradeSuccess($userId){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
+
+        $user = $this->user->getUser($userId);
+        if($user->package == 1){
+            $plusTime = '+1 month';
+        } else if($user->package == 3){
+            $plusTime = '+3 months';
+        } else if($user->package == 6){
+            $plusTime = '+6 months';
+        } else {
+            $plusTime = '+1 day';
+        }
+
+        $DB['type'] = 2;
+        $DB['paymenttime'] = time();
+        $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
+        $this->user->saveUser($DB, $userId);
 
         $data['page'] = 'user/upgradeSuccess';
         $this->load->view('templates', $data);
@@ -728,26 +744,14 @@ class User extends MX_Controller
         $request = json_decode($requestBody);
 
         $user = $this->user->getUser($userId);
-        if($user->package == 1){
-            $plusTime = '+1 month';
-        } else if($user->package == 3){
-            $plusTime = '+3 months';
-        } else if($user->package == 6){
-            $plusTime = '+6 months';
-        } else {
-            $plusTime = '+1 day';
-        }
         $link = $request->link;
         $metadata = $request->metadata;
         //Update payment
         $DB['price'] = $link->amount/100;
         $DB['subscriptionid'] = $request->id;
         $DB['orderid'] = $request->order_id;
-        $DB['type'] = 2;
-        $DB['paymenttime'] = time();
-        $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
         $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
-
+        $this->user->saveUser($DB, $userId);
         //Add to log
         $this->addPaymentLog($userId);
 
@@ -760,7 +764,7 @@ class User extends MX_Controller
         $emailTo = array($user->email);
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
-        $this->user->saveUser($DB, $userId);
+
     }
 
     public function changeCardSuccess(){
