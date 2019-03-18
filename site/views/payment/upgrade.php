@@ -58,7 +58,7 @@ $checksum = sign($params, "614402e644103754ed00e9450a2b7f7cb20b809b860f8bd5a9a76
             <div>
                 <script type="text/javascript">
                     $(document).ready(function(){
-                        //$("#quickpayForm").submit();
+                        $("#quickpayForm").submit();
                     });
                     /*function sendPayment(){
                         $("#epayForm").submit();
@@ -81,7 +81,7 @@ $checksum = sign($params, "614402e644103754ed00e9450a2b7f7cb20b809b860f8bd5a9a76
                     <input type="hidden" name="cancelurl" value="<?php echo $cancelurl?>">
                     <input type="hidden" name="callbackurl" value="<?php echo $callbackurl?>">
                     <input type="hidden" name="checksum" value="<?php echo $checksum?>">
-                    <input type="submit" value="Continue to payment...">
+                    <!--<input type="submit" value="Continue to payment...">-->
                 </form>
             </div>
         </div>
