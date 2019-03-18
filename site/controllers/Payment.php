@@ -2,11 +2,7 @@
 class Payment extends MX_Controller {
 	private $language = "";
     private $message = "";
-    private $action = "";
-    private $merchantnumber = "";
-    private $currency = "";
-    private $windowstate = "";
-    private $md5 = "";
+    private $_meta = null;
     function __construct(){
         parent::__construct();
         $this->session->set_userdata(array('url'=>uri_string()));
@@ -16,12 +12,7 @@ class Payment extends MX_Controller {
         $this->load->model('invita_model','invita');*/
         $this->language = $this->lang->lang();
 
-        /*$this->version = "v10";
-        $this->merchant_id = "83338";
-        $this->agreement_id = "290680";
-        $this->currency = "DKK";
-        $this->windowstate = "3";
-        $this->md5 = "0c6f4246756c27adf3eaa80b2839484b";*/
+        $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
     function upgrade(){
         $user = $this->session->userdata('user');
