@@ -743,6 +743,13 @@ class User extends MX_Controller
         $requestBody = file_get_contents("php://input");
         $request = json_decode($requestBody);
 
+        // Check checksum
+        $key = '196543afab47e2f8552ee61d99f658562937118aaa709d458943e20c110764e3';
+        $checksum = hash_hmac("sha256", $requestBody, $key);
+        if ($checksum != $_SERVER["HTTP_QUICKPAY_CHECKSUM_SHA256"]) {
+            return null;
+        }
+
         $user = $this->user->getUser($userId);
         $link = $request->link;
         $metadata = $request->metadata;
@@ -764,7 +771,7 @@ class User extends MX_Controller
         $emailTo = array($user->email);
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
-
+        return true;
     }
 
     public function changeCardSuccess(){
