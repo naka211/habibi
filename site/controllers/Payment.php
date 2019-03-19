@@ -186,10 +186,10 @@ class Payment extends MX_Controller {
         }*/
 
         $user = $this->user->getUser($userId);
-        $link = $request->link;
+        $operation = end($request->operations);
         $metadata = $request->metadata;
         //Update payment
-        $DB['price'] = $link->amount/100;
+        $DB['price'] = $operation->amount/100;
         $DB['subscriptionid'] = $request->id;
         $DB['orderid'] = $request->order_id;
         $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
