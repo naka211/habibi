@@ -106,17 +106,12 @@ class Payment extends MX_Controller {
     }
 
     function changeCard(){
-        //$userid = $this->session->userdata('userid');
-        //Go payment Epay
-
-        $data['merchantnumber'] = $this->merchantnumber;
-        $data['currency'] = $this->currency;
-        $data['windowstate'] = $this->windowstate;
+        $user = $this->session->userdata('user');
 
         $data['amount'] = 0;
         $data['accepturl'] = site_url('user/changeCardSuccess');
         $data['cancelurl'] = site_url('user/changeCardCancel');
-        $data['callbackurl'] = site_url('user/changeCardCallback');
+        $data['callbackurl'] = site_url('user/changeCardCallback/'.$user->id);
         $data['orderid'] = randomPassword();
 
         $data['page'] = 'payment/upgrade';
@@ -124,13 +119,6 @@ class Payment extends MX_Controller {
     }
 
     public function changeCardSuccess(){
-        $user = $this->session->userdata('user');
-
-        //Update card info
-        $DB['subscriptionid'] = $this->input->get('subscriptionid');
-        $DB['cardno']    = $this->input->get('cardno');
-        $this->user->saveUser($DB, $user->id);
-
         customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne');
     }
 
@@ -138,8 +126,16 @@ class Payment extends MX_Controller {
         customRedirectWithMessage(site_url('user/update'), 'Ændring af kortoplysningerne fejler');
     }
 
-    public function changeCardCallback(){
+    public function changeCardCallback($userId){
+        $requestBody = file_get_contents("php://input");
+        $request = json_decode($requestBody);
 
+        $user = $this->user->getUser($userId);
+        $metadata = $request->metadata;
+        //Update card info
+        $DB['subscriptionid'] = $request->id;
+        $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
+        $this->user->saveUser($DB, $user->id);
     }
 
     public function addPaymentLog($userId, $request){
