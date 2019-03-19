@@ -192,11 +192,11 @@ class Payment extends MX_Controller {
                     $headers[] = 'Accept-Version: v10';
                     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-                    $request = curl_exec($ch);
+                    $result = curl_exec($ch);
                     if (curl_errno($ch)) {
                         echo 'Error:' . curl_error($ch);
                     } else {
-                        $request = json_decode($request);
+                        $request = json_decode($result);
                         $expired = strtotime($plusTime, $user->expired_at);
 
                         //Update info in user table
@@ -207,7 +207,7 @@ class Payment extends MX_Controller {
                             $DB['stand_by_payment'] = 2;
                         }
                         $this->user->saveUser($DB, $user->id);
-
+                        print_r($request);exit();
                         //Add log
                         $id = $this->user->addLog($user->id, $request);
 
