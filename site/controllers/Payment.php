@@ -196,6 +196,7 @@ class Payment extends MX_Controller {
                     if (curl_errno($ch)) {
                         echo 'Error:' . curl_error($ch);
                     } else {
+                        $request = json_decode($request);
                         $expired = strtotime($plusTime, $user->expired_at);
 
                         //Update info in user table
