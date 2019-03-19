@@ -34,7 +34,8 @@ class Payment extends MX_Controller {
 
         $data['orderid'] = randomPassword();
         $data['description'] = 'gold-member';
-        $data['amount'] = $this->config->item($packageName)*100;
+        //$data['amount'] = $this->config->item($packageName)*100;
+        $data['amount'] = 0;
         $data['continueurl'] = site_url('payment/upgradeSuccess/'.$user->id);
         $data['cancelurl'] = site_url('payment/upgradeCancel');
         $data['callbackurl'] = site_url('payment/upgradeCallback/'.$user->id);
@@ -49,7 +50,7 @@ class Payment extends MX_Controller {
 
         $user = $this->user->getUser($userId);
         if($user->package == 1){
-            $plusTime = '+4 months';
+            $plusTime = '+3 months';
         } else if($user->package == 3){
             $plusTime = '+3 months';
         } else if($user->package == 6){
@@ -99,7 +100,7 @@ class Payment extends MX_Controller {
         $sendEmailInfo['email']     = $user->email;
         $sendEmailInfo['orderId']   = $DB['orderid'];
         $sendEmailInfo['price']     = $DB['price'].' DKK';
-        $sendEmailInfo['expired']   = date('d/m/Y', strtotime('+4 months', time()));
+        $sendEmailInfo['expired']   = date('d/m/Y', strtotime('+3 months', time()));
         $emailTo = array($user->email);
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
