@@ -147,7 +147,7 @@ class Payment extends MX_Controller {
         $metadata = $request->metadata;
 
         $logDb['userId']    = $userId;
-        $logDb['payment_id']     = $request->order_id;
+        $logDb['payment_id']     = $request->id;
         $logDb['orderId']   = $request->order_id;
         $logDb['amount']    = $operation->amount/100;
         $logDb['currency']  = 'DKK';
@@ -168,68 +168,33 @@ class Payment extends MX_Controller {
             foreach ($users as $user){
                 if($user->stand_by_payment != 2){
                     $orderId = randomPassword();
-
                     if($user->package == 1){
                         $packageName = 'price1Month';
-                        $plusTime = '+1 month';
                     } else if($user->package == 3) {
                         $packageName = 'price3Months';
-                        $plusTime = '+3 months';
                     } else if($user->package == 6) {
                         $packageName = 'price6Months';
-                        $plusTime = '+6 months';
-                    } else {
-                        $packageName = 'test';
-                        $plusTime = '+1 day';
                     }
-
-                    $expired = strtotime($plusTime, $user->expired_at);
                     //Call payment
-                    $epay_params = array();
-                    $epay_params['merchantnumber'] = $this->merchantnumber;
-                    $epay_params['subscriptionid'] = $user->subscriptionid;
-                    $epay_params['orderid'] = $orderId;
-                    $epay_params['amount'] = $this->config->item($packageName)*100;
-                    $epay_params['currency'] = "208";
-                    $epay_params['instantcapture'] = "0";
-                    $epay_params['fraud'] = "0";
-                    $epay_params['transactionid'] = "-1";
-                    $epay_params['pbsresponse'] = "-1";
-                    $epay_params['epayresponse'] = "-1";
+                    $ch = curl_init();
 
-                    $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
+                    curl_setopt($ch, CURLOPT_URL, 'https://api.quickpay.net/subscriptions/'.$user->subscriptionid.'/recurring');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"amount\":".($this->config->item($packageName)*100).",\"order_id\":\"".$orderId."\", \"auto_capture\":\"true\"}");
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_USERPWD, '' . ':' . 'c9150af0dff909ed414cc9373239be48288b3e4aabe8b60d7674a2832159d45f');
 
-                    $result = $client->authorize($epay_params);
+                    $headers = array();
+                    $headers[] = 'Content-Type: application/json';
+                    $headers[] = 'Accept-Version: v10';
+                    $headers[] = 'QuickPay-Callback-Url: '.site_url('payment/recurringCallback/'.$user->id);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-                    if($result->authorizeResult == 1){
-                        //Update info in user table
-                        $DB['orderid'] = $orderId;
-                        $DB['paymenttime'] = time();
-                        $DB['expired_at'] = $expired;
-                        if($user->stand_by_payment == 1){
-                            $DB['stand_by_payment'] = 2;
-                        }
-                        $this->user->saveUser($DB, $user->id);
-
-                        //Add log
-                        $logDb['userId']    = $user->id;
-                        $logDb['txnid']     = $result->transactionid;
-                        $logDb['orderId']   = $orderId;
-                        $logDb['amount']    = $this->config->item($packageName);
-                        $id = $this->user->addLog($logDb);
-
-                        //Send email
-                        $sendEmailInfo['name']      = $user->name;
-                        $sendEmailInfo['email']     = $user->email;
-                        $sendEmailInfo['orderId']   = $orderId;
-                        $sendEmailInfo['price']     = $logDb['amount'].' DKK';
-                        $sendEmailInfo['expired']   = date('d/m/Y', $expired);
-
-                        $emailTo = array($user->email);
-                        sendEmail($emailTo, 'withdrawMonthly',$sendEmailInfo,'');
-                    } else {
-                        echo($user->id.': is failed');
+                    $result = curl_exec($ch);
+                    if (curl_errno($ch)) {
+                        echo 'Error:' . curl_error($ch);
                     }
+                    curl_close ($ch);
                 } else {
                     $this->user->downgradeUser($user->id);
 
@@ -248,10 +213,45 @@ class Payment extends MX_Controller {
         }
     }
 
-    public function recurringCallback(){
+    public function recurringCallback($userId){
         $requestBody = file_get_contents("php://input");
         $request = json_decode($requestBody);
-        log_message('debug', $request);
+        $user = $this->user->getUser($userId);
+
+        if($user->package == 1){
+            $packageName = 'price1Month';
+            $plusTime = '+1 month';
+        } else if($user->package == 3) {
+            $packageName = 'price3Months';
+            $plusTime = '+3 months';
+        } else if($user->package == 6) {
+            $packageName = 'price6Months';
+            $plusTime = '+6 months';
+        }
+
+        $expired = strtotime($plusTime, $user->expired_at);
+
+        //Update info in user table
+        $DB['orderid'] = $request->order_id;
+        $DB['paymenttime'] = time();
+        $DB['expired_at'] = $expired;
+        if($user->stand_by_payment == 1){
+            $DB['stand_by_payment'] = 2;
+        }
+        $this->user->saveUser($DB, $userId);
+
+        //Add log
+        $id = $this->user->addLog($userId, $request);
+
+        //Send email
+        $sendEmailInfo['name']      = $user->name;
+        $sendEmailInfo['email']     = $user->email;
+        $sendEmailInfo['orderId']   = $request->order_id;
+        $sendEmailInfo['price']     = $this->config->item($packageName).' DKK';
+        $sendEmailInfo['expired']   = date('d/m/Y', $expired);
+
+        $emailTo = array($user->email);
+        sendEmail($emailTo, 'withdrawMonthly',$sendEmailInfo,'');
     }
 
     public function testRecurring(){
@@ -270,7 +270,7 @@ class Payment extends MX_Controller {
         $headers[] = 'QuickPay-Callback-Url: '.site_url('payment/recurringCallback');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result = curl_exec($ch);print_r($result);exit();
+        $result = curl_exec($ch);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
