@@ -215,7 +215,7 @@ class Payment extends MX_Controller {
 
     public function recurringCallback($userId){
         $requestBody = file_get_contents("php://input");
-        $request = json_decode($requestBody);
+        $request = json_decode($requestBody);print_r($request);exit();
         $user = $this->user->getUser($userId);
 
         if($user->package == 1){
