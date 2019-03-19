@@ -48,7 +48,7 @@ class Payment extends MX_Controller {
 
         $user = $this->user->getUser($userId);
         if($user->package == 1){
-            $plusTime = '+1 month';
+            $plusTime = '+4 months';
         } else if($user->package == 3){
             $plusTime = '+3 months';
         } else if($user->package == 6){
