@@ -209,13 +209,19 @@ class Api extends REST_Controller {
         $randomUsers = $newestUsers = $popularUsers = array();
 
         $randomUsers = $this->user->getList(4, 0, $user->find_gender, $ignore, null, 'random');
-        $this->_setAvatarPath($userId, $randomUsers);
+        if(!empty($randomUsers)){
+            $this->_setAvatarPath($userId, $randomUsers);
+        }
 
         $newestUsers = $this->user->getList(4, 0, $user->find_gender, $ignore, null, 'newest');
-        $this->_setAvatarPath($userId, $newestUsers);
+        if(!empty($newestUsers)) {
+            $this->_setAvatarPath($userId, $newestUsers);
+        }
 
         $popularUsers = $this->user->getList(4, 0, $user->find_gender, $ignore, null, 'popular');
-        $this->_setAvatarPath($userId, $popularUsers);
+        if(!empty($popularUsers)) {
+            $this->_setAvatarPath($userId, $popularUsers);
+        }
 
         $this->_return(true, '', array('randomUsers'=>$randomUsers, 'newestUsers'=>$newestUsers, 'popularUsers'=>$popularUsers));
     }
