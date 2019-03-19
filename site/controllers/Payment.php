@@ -170,10 +170,13 @@ class Payment extends MX_Controller {
                     $orderId = randomPassword();
                     if($user->package == 1){
                         $packageName = 'price1Month';
+                        $plusTime = '+1 month';
                     } else if($user->package == 3) {
                         $packageName = 'price3Months';
+                        $plusTime = '+3 months';
                     } else if($user->package == 6) {
                         $packageName = 'price6Months';
+                        $plusTime = '+6 months';
                     }
                     //Call payment
                     $ch = curl_init();
@@ -187,12 +190,35 @@ class Payment extends MX_Controller {
                     $headers = array();
                     $headers[] = 'Content-Type: application/json';
                     $headers[] = 'Accept-Version: v10';
-                    $headers[] = 'QuickPay-Callback-Url: '.site_url('payment/recurringCallback/'.$user->id);
                     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-                    $result = curl_exec($ch);
+                    $request = curl_exec($ch);
                     if (curl_errno($ch)) {
                         echo 'Error:' . curl_error($ch);
+                    } else {
+                        $expired = strtotime($plusTime, $user->expired_at);
+
+                        //Update info in user table
+                        $DB['orderid'] = $request->order_id;
+                        $DB['paymenttime'] = time();
+                        $DB['expired_at'] = $expired;
+                        if($user->stand_by_payment == 1){
+                            $DB['stand_by_payment'] = 2;
+                        }
+                        $this->user->saveUser($DB, $user->id);
+
+                        //Add log
+                        $id = $this->user->addLog($user->id, $request);
+
+                        //Send email
+                        $sendEmailInfo['name']      = $user->name;
+                        $sendEmailInfo['email']     = $user->email;
+                        $sendEmailInfo['orderId']   = $request->order_id;
+                        $sendEmailInfo['price']     = $this->config->item($packageName).' DKK';
+                        $sendEmailInfo['expired']   = date('d/m/Y', $expired);
+
+                        $emailTo = array($user->email);
+                        sendEmail($emailTo, 'withdrawMonthly',$sendEmailInfo,'');
                     }
                     curl_close ($ch);
                 } else {
@@ -211,47 +237,6 @@ class Payment extends MX_Controller {
         } else {
             echo 'Nobody';
         }
-    }
-
-    public function recurringCallback($userId){
-        $requestBody = file_get_contents("php://input");
-        $request = json_decode($requestBody);print_r($request);exit();
-        $user = $this->user->getUser($userId);
-
-        if($user->package == 1){
-            $packageName = 'price1Month';
-            $plusTime = '+1 month';
-        } else if($user->package == 3) {
-            $packageName = 'price3Months';
-            $plusTime = '+3 months';
-        } else if($user->package == 6) {
-            $packageName = 'price6Months';
-            $plusTime = '+6 months';
-        }
-
-        $expired = strtotime($plusTime, $user->expired_at);
-
-        //Update info in user table
-        $DB['orderid'] = $request->order_id;
-        $DB['paymenttime'] = time();
-        $DB['expired_at'] = $expired;
-        if($user->stand_by_payment == 1){
-            $DB['stand_by_payment'] = 2;
-        }
-        $this->user->saveUser($DB, $userId);
-
-        //Add log
-        $id = $this->user->addLog($userId, $request);
-
-        //Send email
-        $sendEmailInfo['name']      = $user->name;
-        $sendEmailInfo['email']     = $user->email;
-        $sendEmailInfo['orderId']   = $request->order_id;
-        $sendEmailInfo['price']     = $this->config->item($packageName).' DKK';
-        $sendEmailInfo['expired']   = date('d/m/Y', $expired);
-
-        $emailTo = array($user->email);
-        sendEmail($emailTo, 'withdrawMonthly',$sendEmailInfo,'');
     }
 
     public function testRecurring(){
