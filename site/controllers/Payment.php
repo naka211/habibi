@@ -248,6 +248,29 @@ class Payment extends MX_Controller {
             customRedirectWithMessage(site_url('user/index'), 'Kan ikke finde betalingsoplysninger');
         }
     }
+
+    public function testRecurring(){
+        $order_id = randomPassword();
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.quickpay.net/subscriptions/142737268/recurring');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"amount\":9900,\"order_id\":\"".$order_id."\"}");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_USERPWD, '' . ':' . 'c9150af0dff909ed414cc9373239be48288b3e4aabe8b60d7674a2832159d45f');
+
+        $headers = array();
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Accept-Version: v10';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);print_r($result);exit();
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close ($ch);
+
+    }
 }
 
 /* End of file welcome.php */
