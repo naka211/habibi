@@ -33,6 +33,7 @@ class Payment extends MX_Controller {
         //Go payment Quickpay
 
         $data['orderid'] = randomPassword();
+        $data['description'] = 'gold-member';
         $data['amount'] = $this->config->item($packageName)*100;
         $data['continueurl'] = site_url('payment/upgradeSuccess/'.$user->id);
         $data['cancelurl'] = site_url('payment/upgradeCancel');
@@ -109,7 +110,8 @@ class Payment extends MX_Controller {
         $user = $this->session->userdata('user');
 
         $data['amount'] = 0;
-        $data['accepturl'] = site_url('user/changeCardSuccess');
+        $data['description'] = 'change-card';
+        $data['continueurl'] = site_url('user/changeCardSuccess');
         $data['cancelurl'] = site_url('user/changeCardCancel');
         $data['callbackurl'] = site_url('user/changeCardCallback/'.$user->id);
         $data['orderid'] = randomPassword();

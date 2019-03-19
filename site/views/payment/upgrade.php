@@ -25,7 +25,6 @@ $currency = "DKK";
 $language = "da";
 $autocapture = 1;
 $subscription = 1;
-$description = 'vip-member';
 $params = array(
     "version"      => $version,
     "merchant_id"  => $merchant_id,
