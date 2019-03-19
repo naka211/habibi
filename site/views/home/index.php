@@ -312,7 +312,7 @@
                             <li>Du kan vælge om du vil vise dig offentligt eller om du kun vil vise dig for enkelte profiler.</li>
                         </ul>
                         <p>Eks 1: Når du slørre dit billed til at starte med så bestemmer du hvor meget du vil slørres og det kan ændres senere hen</p>
-                        <p>Eks 2: Når du har fået en venneanmoding og kommer i kontakt med en anden bruger og føler dig sikker så kan du fjerne slørringen hos den enktle bruger ved et enkelt klik</p>
+                        <p>Eks 2: Når du har fået en venneanmoding og kommer i kontakt med en anden bruger og føler dig sikker så kan du fjerne slørringen hos den enkelte bruger ved et enkelt klik</p>
                     </div>
                 </div>
             </div>
