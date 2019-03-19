@@ -208,7 +208,7 @@ class Payment extends MX_Controller {
                         }
                         $this->user->saveUser($DB, $user->id);
                         //Add log
-                        $id = $this->addPaymentLog($user->id, $request);
+                        $this->addPaymentLog($user->id, $request);
 
                         //Send email
                         $sendEmailInfo['name']      = $user->name;
