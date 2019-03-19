@@ -194,7 +194,14 @@ class Api extends REST_Controller {
     }
 
     public function getOptions_get($type){
-        $typeArr = $this->config->item($type);
+        if($type == 'all'){
+            $keyArr = array('land', 'region', 'relationship', 'training', 'children', 'religion', 'body', 'smoking', 'business', 'hair_color', 'eye_color', 'job_type', 'zodiac');
+            foreach ($keyArr as $keyVal){
+                $typeArr[$keyVal] = $this->config->item($keyVal);
+            }
+        } else {
+            $typeArr = $this->config->item($type);
+        }
 
         $this->_return(true, '', array('options'=>$typeArr));
     }
