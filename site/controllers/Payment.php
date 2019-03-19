@@ -207,9 +207,8 @@ class Payment extends MX_Controller {
                             $DB['stand_by_payment'] = 2;
                         }
                         $this->user->saveUser($DB, $user->id);
-                        print_r($request);exit();
                         //Add log
-                        $id = $this->user->addLog($user->id, $request);
+                        $id = $this->addPaymentLog($user->id, $request);
 
                         //Send email
                         $sendEmailInfo['name']      = $user->name;
