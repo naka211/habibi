@@ -138,7 +138,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-8 col-sm-offset-2">
                                             <ul class="list_blurring">
-                                                <li>Du kan sløre dit billede.</li>
+                                                <li>Du kan slørre dit billede.</li>
                                                 <li>Du kan selv vælge hvor kraftig en sløring du vil sætte på dit billede.</li>
                                                 <li>Du vælger selv hvornår du vil fjerne sløringen.</li>
                                                 <li>Du kan selv vælge om du vil vise dit billed offentligt, eller kun for enkelte profiler.</li>
