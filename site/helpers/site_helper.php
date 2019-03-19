@@ -205,12 +205,12 @@ function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
 function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailType='html'){
    	$ci = &get_instance();
     $config['mailtype'] = $mailType;
-    /*$config['protocol'] = 'smtp';
-    $config['smtp_host'] = 'smtp.gmail.com';
-    $config['smtp_user'] = 'cuongld0205@gmail.com';
-    $config['smtp_pass'] = '0976465090';
-    $config['smtp_port'] = 465;
-    $config['smtp_crypto'] = 'ssl';*/
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'smtp.unoeuro.com';
+    $config['smtp_user'] = 'noreply@habibidating.dk';
+    $config['smtp_pass'] = 'kyKhtv5BPTSXm9QZ';
+    $config['smtp_port'] = 587;
+    $config['smtp_crypto'] = 'tls';
     $ci->load->library('email', $config);
     $ci->email->set_newline("\r\n");
     $ci->email->initialize($config);
@@ -235,7 +235,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
             if($from){
                 $ci->email->from($from, 'Habibidating.dk');
             }else{
-                $ci->email->from('info@zeduuce.com', 'Habibidating.dk');
+                $ci->email->from('noreply@habibidating.dk', 'Habibidating.dk');
             }
             $ci->email->subject($query->subject);
             $ci->email->message($str);

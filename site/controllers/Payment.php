@@ -59,7 +59,7 @@ class Payment extends MX_Controller {
 
         $DB['type'] = 2;
         $DB['paymenttime'] = time();
-        $DB['expired_at'] = strtotime($plusTime, $DB['paymenttime']);
+        $DB['expired_at'] = strtotime($plusTime, time());
         $this->user->saveUser($DB, $userId);
 
         $data['page'] = 'user/upgradeSuccess';
@@ -98,7 +98,7 @@ class Payment extends MX_Controller {
         $sendEmailInfo['email']     = $user->email;
         $sendEmailInfo['orderId']   = $DB['orderid'];
         $sendEmailInfo['price']     = $DB['price'].' DKK';
-        $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
+        $sendEmailInfo['expired']   = date('d/m/Y', strtotime('+4 months', time()));
         $emailTo = array($user->email);
         sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
 
