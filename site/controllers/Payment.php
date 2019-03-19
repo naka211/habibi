@@ -91,7 +91,7 @@ class Payment extends MX_Controller {
         $DB['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
         $this->user->saveUser($DB, $userId);
         //Add to log
-        //$this->addPaymentLog($userId);
+        $this->addPaymentLog($userId, $request);
 
         //Send email
         $sendEmailInfo['name']      = $user->name;
@@ -142,24 +142,23 @@ class Payment extends MX_Controller {
 
     }
 
-    public function addPaymentLog($userId){
-        if($this->input->get('txnid')){
-            $logDb['userId']    = $userId;
-            $logDb['txnid']     = $this->input->get('txnid');
-            $logDb['orderId']   = $this->input->get('orderid');
-            $logDb['amount']    = $this->input->get('amount')/100;
-            $logDb['currency']  = $this->input->get('currency');
-            $logDb['date']      = $this->input->get('date');
-            $logDb['time']      = $this->input->get('time');
-            $logDb['hash']      = $this->input->get('hash');
-            $logDb['txnfee']    = $this->input->get('txnfee');
-            $logDb['cardno']    = $this->input->get('cardno');
-            $id = $this->user->addLog($logDb);
-            if($id == false){
-                customRedirectWithMessage(site_url('user/index'), 'Fejl ved lagring af log');
-            }
-        } else {
-            customRedirectWithMessage(site_url('user/index'), 'Kan ikke finde betalingsoplysninger');
+    public function addPaymentLog($userId, $request){
+        $operation = end($request->operations);
+        $metadata = $request->metadata;
+
+        $logDb['userId']    = $userId;
+        $logDb['payment_id']     = $request->order_id;
+        $logDb['orderId']   = $request->order_id;
+        $logDb['amount']    = $operation->amount/100;
+        $logDb['currency']  = 'DKK';
+        $logDb['created_at']      = time();
+        $logDb['hash']      = $metadata->hash;
+        $logDb['customer_ip']    = $metadata->customer_ip;
+        $logDb['customer_country']    = $metadata->customer_country;
+        $logDb['cardno']    = $metadata->bin.'XXXXXX'.$metadata->last4;
+        $id = $this->user->addLog($logDb);
+        if($id == false){
+            customRedirectWithMessage(site_url('user/index'), 'Fejl ved lagring af log');
         }
     }
 
@@ -259,7 +258,7 @@ class Payment extends MX_Controller {
         $order_id = randomPassword();
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.quickpay.net/subscriptions/142737269/recurring');
+        curl_setopt($ch, CURLOPT_URL, 'https://api.quickpay.net/subscriptions/142737268/recurring');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"amount\":9900,\"order_id\":\"".$order_id."\", \"auto_capture\":\"true\"}");
         curl_setopt($ch, CURLOPT_POST, 1);
