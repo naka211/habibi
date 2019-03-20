@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive"></a>
-                    <!--<h2><a class="link_register" data-fancybox data-src="#modalRegister" href="javascript:;" title="">ELLER TILMELD DIG ONLINE</a></h2>-->
+                    <h2>Kommer snart</h2>
                 </div>
             </div>
         </div>
