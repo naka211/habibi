@@ -476,6 +476,32 @@
     .checkbox label span {
         top: 3px;
     }
+    /* 22/03 */
+    .navbar-brand {
+        width: 100%;
+        float: none;
+        display: block;
+    }
+    .caption {
+        top: 35%;
+    }
+    .caption p {
+        margin-bottom: 0;
+    }
+    .caption p span {
+        font-size: 14px !important;
+        line-height: 0em;
+    }
+    .caption h2::after {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .caption h2, .modalLogin h2 {
+        font-size: 14px;
+    }
+    .swiper_banner .swiper-slide:first-child {
+        height: 420px !important;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
