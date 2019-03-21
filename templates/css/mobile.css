@@ -502,6 +502,15 @@
     .swiper_banner .swiper-slide:first-child {
         height: 420px !important;
     }
+    .cookie p {
+        padding-right: 0;
+    }
+    .btnCookie {
+        position: inherit;
+        right: 0;
+        top: 0;
+        margin-top: 15px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
