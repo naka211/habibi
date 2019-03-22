@@ -208,7 +208,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'smtp.unoeuro.com';
     $config['smtp_user'] = 'noreply@habibidating.dk';
-    $config['smtp_pass'] = 'kyKhtv5BPTSXm9QZ';
+    $config['smtp_pass'] = '36wakimeyuha';
     $config['smtp_port'] = 587;
     $config['smtp_crypto'] = 'tls';
     $ci->load->library('email', $config);

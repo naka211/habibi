@@ -160,7 +160,7 @@ class Images extends CI_Controller{
         $configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.unoeuro.com';
         $configEmail['smtp_user'] = 'noreply@habibidating.dk';
-        $configEmail['smtp_pass'] = 'kyKhtv5BPTSXm9QZ';
+        $configEmail['smtp_pass'] = '36wakimeyuha';
         $configEmail['smtp_port'] = 587;
         $configEmail['smtp_crypto'] = 'tls';
         $configEmail['smtp_timeout'] = 30;
