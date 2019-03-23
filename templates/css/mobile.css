@@ -511,6 +511,29 @@
         top: 0;
         margin-top: 15px;
     }
+
+    .btnCreate_membership {
+        margin-top: 10px;
+    }
+    .btnsignup_member {
+        width: 100%;
+        padding: 15px;
+        float: none;
+    }
+    .w_mouse {
+        display: none;
+    }
+    ul.list_intro li {
+        font-size: 14px;
+        line-height: 1.5em;
+    }
+    .box_img_blurring_item {
+        width: 110px;
+        height: 110px;
+    }
+    .w_box_img_blurring_item p {
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
