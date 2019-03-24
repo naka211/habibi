@@ -198,11 +198,11 @@ class Api extends REST_Controller {
             $keyArr = array('land', 'region', 'relationship', 'training', 'children', 'religion', 'body', 'smoking', 'business', 'hair_color', 'eye_color', 'job_type', 'zodiac');
             foreach ($keyArr as $keyVal){
                 $typeArr[$keyVal] = $this->config->item($keyVal);
-                $typeArrTmp = array();
+                /*$typeArrTmp = array();
                 foreach ($typeArr[$keyVal] as $key=>$val){
                     $typeArrTmp[$keyVal][$val] = $val;
                 }
-                $typeArr[$keyVal] = $typeArrTmp[$keyVal];
+                $typeArr[$keyVal] = $typeArrTmp[$keyVal];*/
             }
         } else {
             $typeArr = $this->config->item($type);
