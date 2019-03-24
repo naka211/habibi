@@ -40,7 +40,7 @@ class Api extends REST_Controller {
         if($status == true){
             $this->response($returnData, REST_Controller::HTTP_OK);
         } else {
-            $this->response($returnData, REST_Controller::HTTP_NOT_FOUND);
+            $this->response($returnData, REST_Controller::HTTP_OK);
         }
     }
 
