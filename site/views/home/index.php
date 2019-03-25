@@ -3,7 +3,7 @@
     <section class="banner">
         <div class="swiper_banner swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div class="swiper-slide section_top">
                     <nav class="navbar navbar-light nav_top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
