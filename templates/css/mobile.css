@@ -2,10 +2,6 @@
     .swiper_banner.swiper-container {
         height: 100%;
     }
-    /* section 2*/
-    .section_customerServices .img_blur{
-        height: 150px;
-    }
 }
 
 @media (min-width: 1200px) {
@@ -94,7 +90,7 @@
     }
 
     .swiper_banner .swiper-slide {
-        height: auto !important;
+        /*height: auto !important;*/
     }
 
     .swiper_banner.swiper-container, .swiper_banner .swiper-slide img {
@@ -113,7 +109,7 @@
     .section_app h2 {
         display: block;
         text-align: center;
-        font-size: 16px;
+        font-size: 8px;
     }
 
     .section_app img {
@@ -285,7 +281,6 @@
     }
 
     .btnCreate_membership {
-        margin-top: 0;
         font-size: 13px;
     }
 
@@ -318,10 +313,6 @@
         line-height: 1.5em;
     }
 
-    .btnCookie {
-        right: -30px;
-    }
-
     .frm_search_custom {
         position: relative;
         top: -20px;
@@ -333,11 +324,11 @@
 
     .img_blur {
         margin-bottom: 15px;
-        height: 138px;
+        height: 60px;
     }
 
     section.section_intro {
-        height: auto;
+        /*height: auto;*/
     }
 
     .list_img_small_blur {
@@ -345,10 +336,9 @@
     }
 
     .swiper_banner .swiper-slide .main_img_customerServices img {
-        /* height: auto; */
-        border-width: 10px;
-        width: 200px;
-        height: 200px;
+        border-width: 3px;
+        width: 100px;
+        height: 100px;
     }
 
     .main_img_customerServices {
@@ -360,8 +350,8 @@
     }
 
     .box_img_blurring_item {
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
         border-width: 5px;
     }
 
@@ -406,8 +396,7 @@
 
     .section_block_history h2 {
         font-size: 25px;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin: 15px 0;
     }
 
     .section_block_history p {
@@ -423,17 +412,17 @@
     }
 
     .box_img_blocking {
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
         margin-bottom: 15px;
     }
 
     .swiper_banner .swiper-slide .box_img_blocking img {
-        height: 200px;
+        height: 100px;
     }
 
     .swiper_banner .swiper-slide.section_top {
-        height: 327px !important;
+        /*height: 327px !important;*/
     }
 
     .modalBlur {
@@ -476,63 +465,17 @@
     .checkbox label span {
         top: 3px;
     }
-    /* 22/03 */
-    .navbar-brand {
-        width: 100%;
-        float: none;
-        display: block;
-    }
-    .caption {
-        top: 35%;
-    }
-    .caption p {
-        margin-bottom: 0;
-    }
-    .caption p span {
-        font-size: 14px !important;
-        line-height: 0em;
-    }
-    .caption h2::after {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    .caption h2, .modalLogin h2 {
-        font-size: 14px;
-    }
-    .swiper_banner .swiper-slide:first-child {
-        height: 420px !important;
-    }
-    .cookie p {
-        padding-right: 0;
-    }
-    .btnCookie {
-        position: inherit;
-        right: 0;
-        top: 0;
-        margin-top: 15px;
+
+    .section_block_history p {
+        font-size: 12px;
+        line-height: 1.3em;
     }
 
-    .btnCreate_membership {
-        margin-top: 10px;
+    .box_modalBlur_img {
+        margin: auto;
     }
-    .btnsignup_member {
-        width: 100%;
-        padding: 15px;
-        float: none;
-    }
-    .w_mouse {
-        display: none;
-    }
-    ul.list_intro li {
-        font-size: 14px;
-        line-height: 1.5em;
-    }
-    .box_img_blurring_item {
-        width: 110px;
-        height: 110px;
-    }
-    .w_box_img_blurring_item p {
-        font-size: 14px;
+    .w_box_modalBlur_img, .w_box_modalBlur_content {
+        height: auto;
     }
 }
 

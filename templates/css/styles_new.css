@@ -8,6 +8,7 @@ body {
 }
 .banner .swiper-pagination-bullet-active {
 	border-color: #F5A623;
+	outline: none;
 }
 .img_blur {
 	overflow: hidden;
@@ -121,7 +122,7 @@ ul.list_blurring li::before {
 	background-image: linear-gradient(90deg, #D07C24 0%, #A7532F 100%);
 	border: 1px solid #F8A509;
 	font-family: 'gotham_nvvbold';
-	font-size: 16px;
+	font-size: 12px;
 	color: #FFF;
 	letter-spacing: 0;
 	padding: 13px 60px;
@@ -253,7 +254,7 @@ ul.list_intro li {
 	line-height: 1.8em;
 	font-weight: 500;
 	background: url('../images/1x/i_checked.svg') no-repeat top left;
-	padding: 5px 0 5px 50px;
+	padding: 8px 0 5px 50px;
 }
 ul.list_intro.intro_footer li {
 	font-size: 14px;
@@ -362,7 +363,7 @@ ul.list_intro.intro_footer li {
 
 .cookie {
 	background: rgba(0, 0, 0, 0.8);
-	padding: 30px 60px 30px 0;
+	padding: 15px;
 	position: fixed;
 	z-index: 20;
 	bottom: 0;
@@ -851,3 +852,91 @@ ul.list_infoNewsletter li {
 .btntoggle {
     display: inline-block;
 }
+
+
+@media (max-width: 768px) {
+	.navbar-brand {
+		width: 100%;
+	    float: none;
+	    display: block;
+	}
+	.caption {
+		top: 35%;
+	}
+	.caption p {
+		margin-bottom: 0;
+	}
+	.caption p span {
+		font-size: 14px !important;
+		line-height: 0em;
+	}
+	.caption h2::after {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.caption h2, .modalLogin h2 {
+		font-size: 14px;
+	}
+	.cookie p {
+		padding-right: 0;
+	}
+	.btnCookie {
+		position: inherit;
+		right: 0;
+		top: 0;
+		margin-top: 15px;
+	}
+	.btnCreate_membership {
+		margin-top: 10px;
+	}
+	.btnsignup_member {
+		width: 100%;
+		padding: 15px;
+		float: none;
+	}
+	.w_mouse {
+		display: none;
+	}
+	ul.list_intro li {
+		font-size: 14px;
+		line-height: 1.5em;
+	}
+	.box_img_blurring_item {
+		width: 110px;
+		height: 110px;
+	}
+	.w_box_img_blurring_item p {
+		font-size: 14px;
+	}
+
+
+	section.section_intro {
+		height: 100%;
+	}
+
+	.cookie_content {
+		text-align: center;
+	}
+
+	.banner .swiper-pagination-bullet:focus {
+		outline: none;
+	}
+	.swiper_banner .swiper-slide img.img_app {
+		height: auto;
+	}
+	.section_app h2.w_register_xs {
+		display: block;
+	}
+}
+
+
+.swiper_banner .swiper-slide.section_top {
+	background: url('../images/1x/bigstockphoto_116902091_4.jpg') no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+}
+.section_app h2.w_register_sm {
+	display: none;
+}
+
