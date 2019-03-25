@@ -481,6 +481,10 @@
     .w_mainFooter {
         height: auto;
     }
+
+    .modalBlur p {
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
