@@ -46,37 +46,37 @@
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_9224436.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_62754775.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_36966483.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_12300646.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_29983841.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_24031527.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_20168337.jpg" alt="" class="img-responsive">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
                                                 <img src="<?php echo base_url().'templates/';?>images/1x/depositphoto_18568645.jpg" alt="" class="img-responsive">
                                             </div>
