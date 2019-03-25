@@ -209,9 +209,9 @@
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                                        <h2 class="w_register_xs"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>
                                         <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
                                         <!--<h2><a class="link_register" href="<?php /*echo site_url('register');*/?>">ELLER TILMELD DIG ONLINE</a></h2>-->
+                                        <h2 class="w_register_xs"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>
                                         <h2 class="w_register_sm"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>
                                     </div>
                                     <!--<div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12" style="text-align: right;">
