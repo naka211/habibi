@@ -134,7 +134,7 @@
     }
 
     .footer ul li {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1em;
         margin-bottom: 5px;
     }
@@ -484,6 +484,15 @@
 
     .modalBlur p {
         font-size: 14px;
+    }
+
+    ul.list_intro li{
+        background-size: 30px;
+        padding-left: 35px;
+    }
+
+    .footer ul{
+        margin-bottom: 10px;
     }
 }
 
