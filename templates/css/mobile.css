@@ -71,10 +71,15 @@
 
     .navbar-brand {
         margin: 0 auto 15px 15px;
+        position: relative;
+        top: 30px;
+        background-size: 50%;
     }
 
     .box_user_top {
         margin-top: 10px;
+        float: none;
+        width: 100%;
     }
 
     section.section_delivers {
@@ -134,13 +139,14 @@
     }
 
     .footer ul li {
-        font-size: 14px;
-        line-height: 1em;
+        font-size: 12px;
+        line-height: 1.3em;
         margin-bottom: 5px;
     }
 
     .section_app {
         padding-top: 10px;
+        padding-bottom: 15px;
     }
 
     .footer {
@@ -153,7 +159,7 @@
     }
 
     .footer_top {
-        padding-bottom: 15px;
+        padding-bottom: 5px;
     }
 
     .text_follow {
@@ -167,10 +173,12 @@
 
     .logo_footer {
         margin: 0 auto;
+        width: 113px;
     }
 
     .footer_bottom {
         margin-top: 0;
+        padding-top: 10px;
     }
 
     .friend_list h3 {
@@ -181,56 +189,46 @@
     .row_frend_item {
         padding: 0;
     }
-
     .frend_item .btn {
         margin-right: 0;
     }
-
     .box_top_infoProfile {
         padding: 0;
+        margin-top: 30px;
     }
-
     .navbar-toggle .icon-bar {
         background: #fff;
     }
-
     .navbar-nav > li:first-child > a {
         padding-left: 0;
     }
-
     .w_table_infoProfile {
         margin-right: 0;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-
     .content_profile .owl_trySearch.owl-theme .item a, .content_profile .owl_latestProfiles.owl-theme .item a, .content_profile .owl_mostvisitedProfiles.owl-theme .item a {
         height: auto;
     }
-
     .frm_search .form-control {
         width: 155px;
     }
-
     .box_form_group {
         margin-bottom: 10px;
         width: 100%;
     }
-
     .box_favorites_item {
         min-height: 250px;
     }
-
     .box_form_group_age .form-control {
         width: 90px;
     }
-
     .row_friend_item {
         padding: 0;
     }
-
     .frm_trySearch select.form-control {
         margin-bottom: 15px;
     }
-
     .modalLogin, .modalRegister {
         width: 90%;
     }
@@ -245,118 +243,106 @@
 
     .modalRegister h2 {
         margin-top: 30px;
-        font-size: 30px;
+        font-size: 20px;
     }
-
+    .modalRegister p {
+        font-size: 14px;
+        line-height: 1.3em;
+    }
     .modalChat {
         width: 90%;
     }
-
     .bntMessage, .bntBlock, .bntRemove, .bntReject {
         font-size: 10px;
     }
-
     .send_number {
         margin-left: 10px;
     }
-
     .frend_item {
         margin-bottom: 15px;
         padding-bottom: 15px;
     }
-
     .caption {
         top: 20%;
         width: 90%;
         left: auto;
         right: auto;
     }
-
     .caption h2, .modalLogin h2 {
         font-size: 20px;
+        margin-bottom: 15px;
     }
-
     .caption p {
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 500;
     }
-
     .btnCreate_membership {
         font-size: 13px;
     }
-
     .fancybox-slide--current .animated-modal .frm_register {
         margin-top: 15px;
     }
-
     .description {
-        font-size: 11px;
+        font-size: 14px;
+        margin-bottom: 15px;
     }
-
     .box_socail {
         margin-top: 10px;
     }
-
     .footer ul.list_Therefore li {
-        line-height: 2.3em;
+        line-height: 1.3em;
+        font-size: 12px;
+        -webkit-background-size: 14px;
+        background-size: 14px;
+        padding-left: 20px;
     }
-
     .f14 {
         font-size: 11px;
     }
-
     .cookie {
         padding-right: 30px;
     }
-
     .cookie p {
         font-size: 12px;
         line-height: 1.5em;
     }
-
     .frm_search_custom {
         position: relative;
         top: -20px;
     }
-
     .swiper_banner .swiper-slide .img_blur img {
         height: auto;
     }
-
     .img_blur {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         height: 60px;
     }
-
     section.section_intro {
         /*height: auto;*/
     }
-
     .list_img_small_blur {
         margin-top: 0;
     }
-
     .swiper_banner .swiper-slide .main_img_customerServices img {
         border-width: 3px;
         width: 100px;
         height: 100px;
     }
-
     .main_img_customerServices {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
-
     .w_box_img_blurring_item:nth-child(2) {
         top: 0;
     }
 
     .box_img_blurring_item {
-        width: 110px;
-        height: 110px;
+        width: 90px;
+        height: 90px;
         border-width: 5px;
     }
 
     .swiper_banner .swiper-slide .box_img_blurring_item img {
-        height: 130px;
+        height: 90px;
     }
 
     .w_box_img_blurring_item p {
@@ -368,8 +354,8 @@
     }
 
     .section_blurring h2 {
-        font-size: 25px;
-        margin-bottom: 30px;
+        font-size: 20px;
+        margin-bottom: 15px;
     }
 
     ul.list_blurring {
@@ -388,6 +374,7 @@
 
     .btnMore {
         margin-top: 15px;
+        padding: 9px 40px;
     }
 
     .section_block_history {
@@ -395,12 +382,15 @@
     }
 
     .section_block_history h2 {
-        font-size: 25px;
-        margin: 15px 0;
+        font-size: 20px;
+        margin: 10px 0;
     }
 
     .section_block_history p {
         font-size: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 0;
     }
 
     .section_block_history .btnMore {
@@ -429,23 +419,21 @@
         width: 90%;
         padding: 15px;
     }
-
     .frm_createprofile {
         width: 100%;
         margin: 90px 0;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .w_login2 {
         top: -90px;
     }
-
     .frm_newsletter {
         width: 100%;
     }
-
     ul.list_infoNewsletter li {
         width: 100%;
     }
-
     .box_gopayment {
         width: 100%;
         margin-top: 30px;
@@ -460,40 +448,84 @@
     }
 
     .checkbox label {
-        font-size: 14px;
+        font-size: 11px;
     }
     .checkbox label span {
         top: 3px;
     }
-
     .section_block_history p {
         font-size: 12px;
         line-height: 1.3em;
     }
-
     .box_modalBlur_img {
         margin: auto;
     }
     .w_box_modalBlur_img, .w_box_modalBlur_content {
         height: auto;
     }
-
     .w_mainFooter {
         height: auto;
     }
-
     .modalBlur p {
         font-size: 14px;
     }
-
     ul.list_intro li{
         background-size: 30px;
         padding-left: 35px;
     }
-
     .footer ul{
         margin-bottom: 10px;
     }
+    .frm_createprofile h2 {
+        font-size: 20px;
+    }
+    .frm_createprofile h3 {
+        font-size: 18px;
+    }
+    .btnCreateprofile {
+        padding: 15px 30px;
+        font-size: 14px;
+    }
+    .frm_createprofile .form-control {
+        font-size: 13px;
+    }
+    .content_profile .owl-theme {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    header {
+        padding-bottom: 15px;
+    }
+    .box_editProfile {
+        width: 100%;
+        float: none;
+        padding: 0 15px;
+    }
+    #menu_sub {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid #f1f1f1;
+    }
+    .that_profile {
+        float: none;
+        width: 100%;
+        height: auto;
+        padding: 20px 15px;
+    }
+    .box_editProfile h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .content_profile section {
+        margin-bottom: 30px;
+    }
+    .table_infoProfile tr th {
+        width: 50%;
+        font-weight: 500;
+    }
+
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
@@ -727,4 +759,7 @@
 }
 
 @media (max-width: 320px) {
+    .section_app h2 {
+        font-size: 6px;
+    }
 }

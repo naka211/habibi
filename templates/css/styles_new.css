@@ -267,7 +267,7 @@ ul.list_intro.intro_footer li {
 	padding: 15px 40px;
 	font-size: 16px;
 	float: left;
-	margin-top: 15px;
+	margin-top: 10px;
 	font-weight: 600;
 }
 .btnsignup_member:hover {
@@ -871,7 +871,7 @@ ul.list_infoNewsletter li {
 		line-height: 0em;
 	}
 	.caption h2::after {
-		margin-top: 5px;
+		margin-top: 15px;
 		margin-bottom: 5px;
 	}
 	.caption h2, .modalLogin h2 {
@@ -893,20 +893,21 @@ ul.list_infoNewsletter li {
 		width: 100%;
 		padding: 15px;
 		float: none;
+		font-size: 14px;
 	}
 	.w_mouse {
 		display: none;
 	}
 	ul.list_intro li {
-		font-size: 14px;
-		line-height: 1.5em;
+		font-size: 12px;
+		line-height: 1.3em;
 	}
 	.box_img_blurring_item {
 		width: 110px;
 		height: 110px;
 	}
 	.w_box_img_blurring_item p {
-		font-size: 14px;
+		font-size: 10px;
 	}
 
 
