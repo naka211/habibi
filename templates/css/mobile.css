@@ -525,6 +525,9 @@
         width: 50%;
         font-weight: 500;
     }
+    .banner .swiper-container-vertical > .swiper-pagination-bullets {
+        display: none;
+    }
 
 }
 
