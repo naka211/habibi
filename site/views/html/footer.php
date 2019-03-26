@@ -5,13 +5,14 @@
     <section class="section_app">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-6">
                     <h2>HENT APP´EN</h2>
-                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive"></a>
+                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive"></a>
-                    <h2>Kommer snart</h2>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-6">
+                    <h2 class="w_register_xs"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>
+                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
+                    <h2 class="w_register_sm"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>
                 </div>
             </div>
         </div>
