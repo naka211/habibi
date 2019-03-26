@@ -470,8 +470,9 @@
         font-size: 14px;
     }
     ul.list_intro li{
-        background-size: 30px;
-        padding-left: 35px;
+        background-size: 20px;
+        padding-left: 25px;
+        background-position-y: 5px;
     }
     .footer ul{
         margin-bottom: 10px;
