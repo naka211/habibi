@@ -257,7 +257,7 @@ ul.list_intro li {
 	padding: 8px 0 5px 50px;
 }
 ul.list_intro.intro_footer li {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 }
 .btnsignup_member {
@@ -608,6 +608,8 @@ ul.list_infoNewsletter li {
 #toggle.on + #menu_sub {
     opacity: 1;
     visibility: visible;
+    transition: visibility 0s linear 0s, opacity 300ms;
+    display: block;
 }
 
 /* menu appearance */
@@ -625,6 +627,7 @@ ul.list_infoNewsletter li {
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
+    transition: visibility 0s linear 300ms, opacity 300ms;
 }
 #menu_sub:after {
     position: absolute;
@@ -909,8 +912,6 @@ ul.list_infoNewsletter li {
 	.w_box_img_blurring_item p {
 		font-size: 10px;
 	}
-
-
 	section.section_intro {
 		height: 100%;
 	}
@@ -940,4 +941,7 @@ ul.list_infoNewsletter li {
 .section_app h2.w_register_sm {
 	display: none;
 }
-
+.box_form_group label {
+	margin-top: 10px;
+	margin-left: 10px;
+}

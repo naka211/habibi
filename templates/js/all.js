@@ -74,8 +74,11 @@ $(function ($) {
             el: '.swiper-pagination',
             clickable: true,
         },
-
     });
+
+    var width = $(window).width();
+    if(width <= 768)
+        swiper.destroy(false,false);
 
     //matchHeight columm
     $('.mh').matchHeight();
