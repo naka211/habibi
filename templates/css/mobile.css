@@ -266,7 +266,7 @@
         padding-bottom: 15px;
     }
     .caption {
-        top: 20%;
+        top: 30%;
         width: 90%;
         left: auto;
         right: auto;
@@ -415,7 +415,7 @@
     }
 
     .swiper_banner .swiper-slide.section_top {
-        height: 400px !important;
+        height: 700px !important;
     }
 
     .modalBlur {
@@ -473,8 +473,9 @@
         font-size: 14px;
     }
     ul.list_intro li{
-        background-size: 30px;
-        padding-left: 35px;
+        background-size: 20px;
+        padding-left: 25px;
+        background-position-y: 5px;
     }
     .footer ul{
         margin-bottom: 10px;
@@ -554,6 +555,9 @@
     .box_label_member {
         height: auto;
         margin-top: 15px;
+    }
+    ul.list_intro.intro_footer li{
+        font-size: 12px;
     }
 
 }
