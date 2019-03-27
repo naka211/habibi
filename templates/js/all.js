@@ -76,10 +76,6 @@ $(function ($) {
         },
     });
 
-    var width = $(window).width();
-    if(width <= 768)
-        swiper.destroy(false,false);
-
     //matchHeight columm
     $('.mh').matchHeight();
 
@@ -123,6 +119,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 $(document).ready(function () {
+    var width = $(window).width();
+    if(width <= 768){
+        swiper.destroy(false,false);
+    }
+
     $("#frm_login").validate({
         errorPlacement: function(error, element) {
             return false;
