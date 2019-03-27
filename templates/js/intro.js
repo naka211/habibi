@@ -31,6 +31,10 @@ $(function ($) {
     $('.back-to-top-intro').click(function (e) {
         swiper.slideTo( 0, 1000, false );
     });
+
+    if(jQuery.browser.mobile == true){
+        swiper.destroy(false,false);
+    }
 });
 
 

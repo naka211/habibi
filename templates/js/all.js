@@ -76,8 +76,7 @@ $(function ($) {
         },
     });
 
-    var width = $(window).width();
-    if(width <= 900){
+    if(jQuery.browser.mobile == true){
         swiper.destroy(false,false);
     }
 
