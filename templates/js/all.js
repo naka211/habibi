@@ -77,7 +77,7 @@ $(function ($) {
     });
 
     var width = $(window).width();
-    if(width <= 768){
+    if(width <= 812){
         swiper.destroy(false,false);
     }
 
