@@ -499,6 +499,7 @@
     }
     header {
         padding-bottom: 15px;
+        padding-top: 0;
     }
     .box_editProfile {
         width: 100%;
@@ -558,6 +559,42 @@
     }
     ul.list_intro.intro_footer li{
         font-size: 12px;
+    }
+    .that_profile ul li a, .box_editProfile ul li a {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #filter .box_form_group {
+        width: 48%;
+    }
+    #filter .box_form_group_age .form-control, #filter .box_form_group p {
+        width: 100%;
+    }
+    .box_wrap .ms-options-wrap > button:focus, .box_wrap .ms-options-wrap > button {
+        width: 100%;
+    }
+    .ms-options-wrap > button:focus, .ms-options-wrap > button {
+        width: auto;
+    }
+    .ms-options-wrap {
+        width: 120px;
+    }
+    .btn_searchResult {
+        margin-bottom: 15px;
+    }
+    .frend_item h4 {
+        margin-top: 15px;
+    }
+    .chat ul {
+        height: auto;
+        min-height: 200px;
+    }
+    .frm_Chat .form-control {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .modalChat h4 {
+        margin-top: 20px;
     }
 
 }

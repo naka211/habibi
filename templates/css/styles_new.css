@@ -945,3 +945,10 @@ ul.list_infoNewsletter li {
 	margin-top: 10px;
 	margin-left: 10px;
 }
+.frend_item textarea {
+    margin-bottom: 15px;
+    background: #ededed;
+    font-size: 13px;
+    font-weight: 400;
+    min-height: 78px;
+}
