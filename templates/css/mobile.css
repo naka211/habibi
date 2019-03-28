@@ -72,7 +72,7 @@
     .navbar-brand {
         margin: 0 auto 15px 15px;
         position: relative;
-        top: 30px;
+        top: 0;
         background-size: 50%;
     }
 
@@ -499,7 +499,6 @@
     }
     header {
         padding-bottom: 15px;
-        padding-top: 0;
     }
     .box_editProfile {
         width: 100%;
