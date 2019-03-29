@@ -169,7 +169,7 @@
     }
 
     .text_follow:after {
-        width: 320px;
+        width: 310px;
     }
 
     .logo_footer {
@@ -192,6 +192,8 @@
     }
     .frend_item .btn {
         margin-right: 0;
+        font-size: 10px;
+        padding: 3px 10px;
     }
     .box_top_infoProfile {
         padding: 0;
@@ -576,7 +578,11 @@
         width: auto;
     }
     .ms-options-wrap {
-        width: 120px;
+        width: 100%;
+    }
+    .ms-options-wrap > .ms-options {
+        width: 320px;
+        left: -60px;
     }
     .btn_searchResult {
         margin-bottom: 15px;
@@ -594,6 +600,11 @@
     }
     .modalChat h4 {
         margin-top: 20px;
+    }
+    .btnLogout {
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
     }
 
 }

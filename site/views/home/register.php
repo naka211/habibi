@@ -151,11 +151,6 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <span class="filled">Alle felter skal udfyldes</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="form-group">
                                 <select class="form-control"  name="find_region">
                                     <option value="">Region</option>
                                     <option value="København">København</option>
@@ -176,6 +171,11 @@
                                     <option value="Sønderjylland">Sønderjylland</option>
                                     <option value="Bornholm">Bornholm</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <span class="filled">Alle felter skal udfyldes</span>
                             </div>
                         </div>
                     </div>

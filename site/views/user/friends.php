@@ -27,7 +27,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $profile->id;?>">
                     <div class="frend_item <?php if($profile->new == 1) echo 'frend_item_new';?>">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="frend_item_avatar">
                                     <?php if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) { ?>
                                         <a href="<?php echo site_url('user/profile/'.$profile->id.'/'.$profile->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $profile->avatar;?>" class="img-responsive"></a>
@@ -36,7 +36,7 @@
                                     <?php }?>
                                 </div>
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 <h4>
                                     <?php echo $profile->name; ?> <?php if($profile->login == 1){?><span class="status"></span><?php }?><?php if($profile->new == 1){?><span class="new">Ny</span><?php } ?>
                                     <?php if($user->blurIndex != 0){
