@@ -70,10 +70,11 @@
     }
 
     .navbar-brand {
-        margin: 0 auto 15px 15px;
+        margin: 0 auto 15px 0;
         position: relative;
         top: 0;
         background-size: 50%;
+        background-position: 50% 0;
     }
 
     .box_user_top {
@@ -233,6 +234,9 @@
     }
     .frm_trySearch select.form-control {
         margin-bottom: 15px;
+    }
+    .box_trySearch .ms-options-wrap > .ms-options {
+        left: 0;
     }
     .modalLogin, .modalRegister {
         width: 90%;
@@ -581,7 +585,7 @@
         width: 100%;
     }
     .ms-options-wrap > .ms-options {
-        width: 320px;
+        width: 290px;
         left: -60px;
     }
     .btn_searchResult {
@@ -605,6 +609,12 @@
         padding: 10px;
         font-size: 14px;
         width: 100%;
+    }
+    .ms-options-wrap > .ms-options > ul label {
+        font-size: 13px;
+    }
+    .frm_search .ms-options-wrap > button {
+        width: 137px;
     }
 
 }
