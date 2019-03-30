@@ -76,6 +76,11 @@
         background-size: 50%;
         background-position: 50% 0;
     }
+    .section_top .navbar-brand {
+        margin-left: 15px;
+        background-position: 0 0;
+        top: 19px;
+    }
 
     .box_user_top {
         margin-top: 10px;
@@ -568,9 +573,10 @@
     .that_profile ul li a, .box_editProfile ul li a {
         padding-top: 5px;
         padding-bottom: 5px;
+        font-size: 13px;
     }
     #filter .box_form_group {
-        width: 48%;
+        width: 100%;
     }
     #filter .box_form_group_age .form-control, #filter .box_form_group p {
         width: 100%;
@@ -586,7 +592,8 @@
     }
     .ms-options-wrap > .ms-options {
         width: 290px;
-        left: -60px;
+        left: -10px;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     }
     .btn_searchResult {
         margin-bottom: 15px;
@@ -611,12 +618,14 @@
         width: 100%;
     }
     .ms-options-wrap > .ms-options > ul label {
+        font-size: 12px;
+    }
+    .nav-tabs > li > a {
         font-size: 13px;
     }
     .frm_search .ms-options-wrap > button {
-        width: 137px;
+        width: 100%;
     }
-
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
