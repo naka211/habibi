@@ -23,7 +23,7 @@
                 <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må der ikke være seksuelle undertoner på billedet<br>
                 <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal have godkendt det, det vil sige at for f.eks et selfie med en kendt bliver ikke godkendt<br>
             </p>
-            <input id="file" type="file" name="file" multiple="multiple"/>
+            <input id="file" type="file" name="file" multiple="multiple" accept="image/*"/>
             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>
             <div class="row">
                 <?php foreach($listImages as $image){?>
