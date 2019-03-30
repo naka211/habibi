@@ -154,6 +154,7 @@
     .section_app {
         padding-top: 10px;
         padding-bottom: 15px;
+        margin-top: 15px;
     }
 
     .footer {
@@ -628,6 +629,21 @@
     }
     .btn_editGallery{
         padding-top: 15px;
+    }
+    .m_fz13{
+        font-size: 13px;
+    }
+    .m_fz14{
+        font-size: 14px;
+    }
+    .m_mr0{
+        margin-right: 0px;
+    }
+    .m_mr10{
+        margin-right: 10px;
+    }
+    .btnClose_img, .btnEdit_img {
+        color: #000 !important;
     }
 }
 

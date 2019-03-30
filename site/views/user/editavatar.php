@@ -6,7 +6,7 @@
         <div class="container">
             <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">&longleftarrow; Tilbage</a>
             <div class="row top_infoProfile" style="height: 550px;">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12" style="min-height: 500px;">
                     <!--<div class="img_avatar" id="imageHolder">
                         <img class="img-responsive" src="<?php /*echo base_url();*/?>/uploads/raw_thumb_user/<?php /*echo $user->avatar;*/?>">
                     </div>-->
@@ -36,7 +36,7 @@
                     <?php if($listImages){?>
                         <div class="text-center">
                             OR<br>
-                            <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
+                            <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage m_fz13" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
                         </div>
                     <?php }?>
                     <?php if(($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') || (($user->avatar == 'no-avatar1.png' || $user->avatar == 'no-avatar2.png') && $user->new_avatar != '')){
@@ -56,11 +56,11 @@
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
                         <?php if($user->new_avatar != ''){?>
-                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage" style="margin-top: 30px;">Gem</a>
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage  m_fz14 m_mr10" style="margin-top: 30px;">Gem</a>
                         <?php } else {?>
-                            <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
+                            <button type="submit" class="btn bntMessage m_fz14 m_mr10" style="margin-top: 30px;">Gem</button>
                         <?php }?>
-                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete" style="margin-top: 30px;">Slet profilbillede</a>
+                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet profilbillede</a>
                         <?php
                         $sendEmail = $user->new_avatar != ''?1:0;
                         echo form_hidden('sendEmailToApprove', $sendEmail);

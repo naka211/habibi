@@ -12,7 +12,7 @@
             <div class="row top_infoProfile" style="height: 550px;">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">
-                        <canvas height="500" width="504" style="width: 500px; height: 500px;" id="canvas"></canvas>
+                        <canvas style="width: 500px; height: 500px;" id="canvas"></canvas>
                         <?php if($image->status == 0){?>Afventer godkendelse<?php }?>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_photo/'.$image->image));?>">
                     <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $image->blurIndex;?>">
                     <input type="hidden" id="imageName" name="imageName" value="<?php echo $image->image;?>">
-                    <button type="submit" class="btn bntMessage" style="margin-top: 30px;">Gem</button>
+                    <button type="submit" class="btn bntMessage m_fz14" style="margin-top: 30px;">Gem</button>
                     <?php
                     echo form_close();?>
                 </div>
@@ -47,6 +47,7 @@
         imageObj.crossOrigin = 'anonymous';
         // Easiest is to always host your images on your own server
         imageObj.src = '<?php echo base_url();?>uploads/raw_photo/<?php echo $image->image;?>';
+
         if(imageObj.width <= 500){
             var widthCan = imageObj.width;
             var heightCan = imageObj.height;
