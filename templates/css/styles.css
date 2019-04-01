@@ -452,7 +452,8 @@ section.section_intro {
     background: transparent;
 }
 
-.navbar-nav > li > a > span {
+.navbar-nav > li > a > span,
+.text_menu > span {
     display: inline-block;
     background: #fe0707;
     padding: 0 6px;
@@ -2619,7 +2620,7 @@ ul.list_action li a .i_report {
     color: #fff;
     position: absolute;
     top: 9px;
-    right: -40px;
+    left: 40px;
 }
 
 .cookie {
@@ -2862,7 +2863,7 @@ ul.list_action li a .i_report {
     /*margin: 0 auto 30px;*/
     padding: 10px 30px;
     font-size: 14.23px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     min-width: 160px;
 }
 .btnUpload:hover {

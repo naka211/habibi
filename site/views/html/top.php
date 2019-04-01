@@ -11,6 +11,13 @@ if(!empty($user)){
     $newFriendQuantity = $this->user->newFriendQuantity($user->id);
     $newFriendQuantityHTML = !empty($newFriendQuantity) ? '<span>' . $newFriendQuantity . '</span>' : '';
 
+    if(!empty($unreadMessageQuantity) || !empty($blinkingQuantity) || !empty($friendRequestQuantity) || !empty($newFriendQuantity)){
+        $notificationTotal = $unreadMessageQuantity + $blinkingQuantity + $friendRequestQuantity + $newFriendQuantity;
+        $mark = '<span>'.$notificationTotal.'</span>';
+    } else {
+        $mark = '';
+    }
+
     $visitingLink = 'href="'.site_url('user/visitMe').'"';
     $friendRequestLink = 'href="'.site_url('user/friendRequests').'"';
     $messageLink = 'href="'.site_url('user/messages').'"';
@@ -35,21 +42,6 @@ if(!empty($user)){
                                 <a>Gratis medlem: Ubegrænset</a>
                             <?php }?>
                         </div>
-                        <!--<div class="dropdown dropdown_avatar show clearfix">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="img_avatar_sm">
-                                    <img src="<?php /*echo base_url();*/?>uploads/thumb_user/<?php /*echo $user->avatar;*/?>?<?php /*echo time();*/?>" class="img-responsive" alt="">
-                                </div>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="<?php /*echo site_url('user/index');*/?>">Min profil</a>
-                                <a class="dropdown-item" href="<?php /*echo site_url('user/update');*/?>">Rediger profil</a>
-                                <a class="dropdown-item" href="<?php /*echo site_url('user/myPhoto');*/?>">Album</a>
-                                <a class="dropdown-item" href="<?php /*echo site_url('user/blockList');*/?>">Blokerede</a>
-                                <a class="dropdown-item" href="<?php /*echo site_url('user/logout');*/?>">Log ud</a>
-                            </div>
-                        </div>-->
                         <div class="dropdown_avatar clearfix">
                             <a href="#" href="#menu_sub" id="toggle" class="btntoggle">
                                 <div class="img_avatar_sm">
@@ -115,7 +107,7 @@ if(!empty($user)){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="text_menu">MENU</span>
+                            <span class="text_menu">MENU <?php echo $mark;?></span>
                         </button>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
