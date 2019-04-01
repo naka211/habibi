@@ -645,6 +645,10 @@
     .btnClose_img, .btnEdit_img {
         color: #000 !important;
     }
+
+    .table_membership.table > tbody > tr > td, .table_membership.table > tbody > tr > th, .table_membership.table > tfoot > tr > td, .table_membership.table > tfoot > tr > th, .table_membership.table > thead > tr > td, .table_membership.table > thead > tr > th {
+        padding: 8px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
