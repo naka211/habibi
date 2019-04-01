@@ -123,6 +123,12 @@
 
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <?php if($isMobile == true && empty($images)){?>
+                        <a class="btn_editGallery btn_editGallery_custom" href="<?php echo site_url('user/uploadPhoto');?>">
+                            <i class="i_plus"></i>
+                            <span>Upload billede</span>
+                        </a>
+                    <?php } else {?>
                     <div class="owl-carousel owl-theme owl_gallerys">
                         <div class="item">
                             <a class="btn_editGallery" href="<?php echo site_url('user/uploadPhoto');?>">
@@ -142,6 +148,7 @@
                         }
                         ?>
                     </div>
+                    <?php }?>
 
                     <blockquote class="quote-card">
                         <p><?php echo nl2br($user->description);?></p>

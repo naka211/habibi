@@ -67,6 +67,7 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         $data['user'] = $this->user->getUser($user->id);
         $data['images'] = $this->user->getPhoto($data['user']->id, 0);
+        $data['isMobile'] = $this->agent->is_mobile();
 
         $data['page'] = 'user/index';
         $this->load->view('templates', $data);
