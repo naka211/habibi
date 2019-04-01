@@ -121,7 +121,7 @@
     .section_app h2 {
         display: block;
         text-align: center;
-        font-size: 8px;
+        font-size: 12px;
     }
 
     .section_app img {
@@ -886,7 +886,7 @@
 }
 
 @media (max-width: 320px) {
-    .section_app h2 {
+    /*.section_app h2 {
         font-size: 6px;
-    }
+    }*/
 }

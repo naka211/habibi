@@ -148,8 +148,12 @@
             url: base_url+"ajax/countProfiles",
             data: {csrf_site_name: token_value },
             success: function (num) {
-                $('#viewResult').text(num+' profiler fundet');
-                $('#num').val(num);
+                if(parseInt(num) > 1){
+                    var txt = num+' profiler fundet';
+                } else {
+                    var txt = num+' profil fundet';
+                }
+                $('#viewResult').text(txt);
             }
         });
 
