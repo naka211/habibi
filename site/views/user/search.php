@@ -161,7 +161,12 @@
                 url: base_url+"ajax/updateSearchDataAndCountResult",
                 data: { searchKey: searchKey, searchValue: searchValue, csrf_site_name: token_value },
                 success: function (num) {
-                    $('#viewResult').text(num+' profiler fundet');
+                    if(parseInt(num) > 1){
+                        var txt = num+' profiler fundet';
+                    } else {
+                        var txt = num+' profil fundet';
+                    }
+                    $('#viewResult').text(txt);
                     $('#num').val(num);
                 }
             });
