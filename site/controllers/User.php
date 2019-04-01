@@ -115,7 +115,7 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
         $data['listImages'] = $this->user->getPhoto($data['user']->id, 0);
-        //$data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['page'] = 'user/uploadphoto';
         $this->load->view('templates', $data);
     }
@@ -147,6 +147,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger avatar');
 
         $user = $this->session->userdata('user');
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['listImages'] = $this->user->getPhoto($user->id);
         $data['user'] = $this->user->getUser($user->id);
         $data['page'] = 'user/editavatar';

@@ -952,3 +952,13 @@ ul.list_infoNewsletter li {
     font-weight: 400;
     min-height: 78px;
 }
+
+#modal_moretext p {
+	line-height: 1.8em;
+}
+.btn_moretext {
+	padding: 10px 30px;
+	background: #ffa507;
+	font-size: 14px;
+	margin: 15px 0;
+}

@@ -1298,6 +1298,7 @@ select:not([multiple]) {
     font-size: 16px;
     font-family: 'Montserrat';
     color: #808080;
+    line-height: 25px;
 }
 
 .top_infoProfile h4:after {
@@ -1784,7 +1785,7 @@ ul.list_action li a .i_report {
 .friend_list h3 {
     text-transform: uppercase;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin: 20px 0px;
 }
 
 .send_number {
@@ -2694,7 +2695,7 @@ ul.list_action li a .i_report {
     margin: 0 auto;
 }
 
-.box_payment .btn-link {
+.box_payment .btn-link, .system_link {
     color: #ffa507;
 }
 

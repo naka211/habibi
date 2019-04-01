@@ -16,19 +16,45 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
+                    <?php if($isMobile == false){?>
                     <h4>Her kan du uploade dit personlige profilbillede</h4>
                     <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
                         1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
                         2: Du kan gemme billedet, eller uploade et nyt.<br>
                         3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
 
-                    <h4>Regler for profilbilleder:</h4>
+                        <h4>Regler for profilbilleder:</h4>
                         <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man skal kunne se hele dit ansigt<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
                     </p>
+                    <?php } else {?>
+                        <h4>Her kan du uploade dit personlige profilbillede <a href="#modal_moretext" data-toggle="modal" class="system_link">Læs mere</a></h4>
+                        <div id="modal_moretext" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.</p>
+                                        <p>1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
+                                            2: Du kan gemme billedet, eller uploade et nyt.<br>
+                                            3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på gem og det bliver sendt til validering.</p>
+
+                                        <h4>Regler for profilbilleder:</h4>
+                                        <p><img src="<?php echo base_url();?>templates/images/green.png" alt=""> Man skal kunne se hele dit ansigt<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være seksuelle undertoner på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være andre end dig på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være skrevet tekst eller lignede på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være rammer rundt om billedet</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }?>
                     <input id="file" type="file" name="file"/>
                     <!--<div class="text-center">
                         <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>
