@@ -56,7 +56,7 @@
             var scaleHeight = canvas.height = imageObj.height*ratio;
 
             $('.wrap_canvas').css('width', scaleWidth+'px');
-            $('.wrap_canvas').css('height', scaleHeight+'px');
+            $('.wrap_canvas').css('height', scaleHeight+15+'px');
             <?php }?>
             //StackBlur.image(imageObj, canvas, $("#slider").val(), false);
             StackBlur.image(imageObj, canvas, $("#slider").val(), false, scaleWidth, scaleHeight);
