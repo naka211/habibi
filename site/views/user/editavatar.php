@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     <?php }?>
-                    <input id="file" type="file" name="file"/>
+                    <input id="file" type="file" name="file" accept="image/*"/>
                     <!--<div class="text-center">
                         <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>
                     </div>-->
