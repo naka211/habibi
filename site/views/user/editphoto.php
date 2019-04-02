@@ -1,18 +1,12 @@
 <script src="<?php echo base_url();?>templates/js/StackBlur.js" type="text/javascript"></script>
-<style>
-    #canvas{
-        max-width: 500px !important;
-        height: auto !important;
-    }
-</style>
 <div id="content">
     <section class="section_infoProfile">
         <div class="container">
             <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">« Tilbage</a>
             <div class="row top_infoProfile" style="height: 550px;">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12 wrap_canvas">
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">
-                        <canvas style="width: 500px; height: 500px;" id="canvas"></canvas>
+                        <canvas id="canvas"></canvas>
                         <?php if($image->status == 0){?>Afventer godkendelse<?php }?>
                     </div>
                 </div>
@@ -48,30 +42,50 @@
         // Easiest is to always host your images on your own server
         imageObj.src = '<?php echo base_url();?>uploads/raw_photo/<?php echo $image->image;?>';
 
-        if(imageObj.width <= 500){
-            var widthCan = imageObj.width;
-            var heightCan = imageObj.height;
-        } else {
-            var widthCan = imageObj.width;
-            var ratio = imageObj.width/500;
-            var heightCan = imageObj.height*ratio;
-        }
         imageObj.onload = function() {
-            canvas.width = widthCan;
-            canvas.height = heightCan;
-            cctx.drawImage(imageObj, 0, 0, 200, 100);
-            StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+            <?php if($isMobile == false){?>
+            canvas.width = imageObj.width;
+            canvas.height = imageObj.height;
+
+            $('.wrap_canvas').css('width', '500px');
+            $('.wrap_canvas').css('height', '500px');
+            <?php } else {?>
+            var screenWidth = $(window).width();
+            var scaleWidth = canvas.width = screenWidth - 30;
+            var ratio = canvas.width/imageObj.width;
+            var scaleHeight = canvas.height = imageObj.height*ratio;
+
+            $('.wrap_canvas').css('width', scaleWidth+'px');
+            $('.wrap_canvas').css('height', scaleHeight+'px');
+            <?php }?>
+            //StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+            StackBlur.image(imageObj, canvas, $("#slider").val(), false, scaleWidth, scaleHeight);
+
+            //set width and height to canvas
+            <?php if($isMobile == false){?>
+            $('#canvas').css('width', '500px');
+            $('#canvas').css('height', '500px');
+            <?php } else {?>
+            $('#canvas').css('width', scaleWidth+'px');
+            $('#canvas').css('height', scaleHeight+'px');
+            <?php }?>
+
+            // slider onchange
+            $("#slider").on("change", function () {
+                StackBlur.image(imageObj, canvas, this.value, false, scaleWidth, scaleHeight);
+                <?php if($isMobile == true){?>
+                $('#canvas').css('width', scaleWidth+'px');
+                $('#canvas').css('height', scaleHeight+'px');
+                <?php }?>
+                $("#imageData").val($("#canvas")[0].toDataURL());
+                $("#blurIndex").val(this.value);
+            })
+
+            $("#slider").bind('input', function(e) {
+                $(".tooltipText").text(this.value);
+            })
         };
 
-        // slider onchange
-        $("#slider").on("change", function () {
-            StackBlur.image(imageObj, canvas, this.value, false);
-            $("#imageData").val($("#canvas")[0].toDataURL());
-            $("#blurIndex").val(this.value);
-        })
 
-        $("#slider").bind('input', function(e) {
-            $(".tooltipText").text(this.value);
-        })
     });
 </script>

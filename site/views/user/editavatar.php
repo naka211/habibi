@@ -5,18 +5,15 @@
     <section class="section_infoProfile">
         <div class="container">
             <a href="javascript:history.back()" class="btn btnUpload" style="margin-bottom: 20px;">« Tilbage</a>
-            <div class="row top_infoProfile" style="height: 550px;">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12" style="min-height: 500px;">
-                    <!--<div class="img_avatar" id="imageHolder">
-                        <img class="img-responsive" src="<?php /*echo base_url();*/?>/uploads/raw_thumb_user/<?php /*echo $user->avatar;*/?>">
-                    </div>-->
+            <div class="row top_infoProfile">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12 wrap_canvas">
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">
-                        <canvas height="500" width="504" style="width: 500px; height: 500px;" id="canvas"></canvas>
+                        <canvas id="canvas"></canvas>
                         <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
-                    <?php if($isMobile == false){?>
+                    <?php if($isMobile != true){?>
                     <h4>Her kan du uploade dit personlige profilbillede</h4>
                     <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
                         1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
@@ -151,7 +148,7 @@
 
         // Canvas
         var canvas = $("#canvas")[0];
-        var cctx = canvas.getContext("2d");
+        //var cctx = canvas.getContext("2d");
         /*var buff = document.createElement("canvas");
         buff.width = canvas.width;
         buff.height = canvas.height;*/
@@ -161,24 +158,50 @@
         imageObj.crossOrigin = 'anonymous';
         // Easiest is to always host your images on your own server
         imageObj.src = '<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->new_avatar?$user->new_avatar:$user->avatar;?>';
+
         imageObj.onload = function() {
+            <?php if($isMobile == false){?>
             canvas.width = imageObj.width;
             canvas.height = imageObj.height;
-            cctx.drawImage(imageObj, 0, 0);
+
+            $('.wrap_canvas').css('width', '500px');
+            $('.wrap_canvas').css('height', '500px');
+            <?php } else {?>
+            var screenWidth = $(window).width();
+            var scaleWidth = canvas.width = screenWidth - 30;
+            var ratio = canvas.width/imageObj.width;
+            var scaleHeight = canvas.height = imageObj.height*ratio;
+
+            $('.wrap_canvas').css('width', scaleWidth+'px');
+            $('.wrap_canvas').css('height', scaleHeight+'px');
+            <?php }?>
+            //Draw canvas
             StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+
+            //set width and height to canvas
+            <?php if($isMobile == false){?>
+            $('#canvas').css('width', '500px');
+            $('#canvas').css('height', '500px');
+            <?php } else {?>
+            $('#canvas').css('width', scaleWidth+'px');
+            $('#canvas').css('height', scaleHeight+'px');
+            <?php }?>
+
+            // slider onchange
+            $("#slider").on("change", function () {
+                StackBlur.image(imageObj, canvas, this.value, false);
+                <?php if($isMobile == true){?>
+                $('#canvas').css('width', scaleWidth+'px');
+                $('#canvas').css('height', scaleHeight+'px');
+                <?php }?>
+                $("#imageData").val($("#canvas")[0].toDataURL());
+                $("#blurIndex").val(this.value);
+            })
+
+            $("#slider").bind('input', function(e) {
+                $(".tooltipText").text(this.value);
+            })
         };
-
-        // slider onchange
-        $("#slider").on("change", function () {
-            StackBlur.image(imageObj, canvas, this.value, false);
-            /*StackBlur.canvasRGBA(canvas, 50, 50, 200, 200, this.value);*/
-            $("#imageData").val($("#canvas")[0].toDataURL());
-            $("#blurIndex").val(this.value);
-        })
-
-        $("#slider").bind('input', function(e) {
-            $(".tooltipText").text(this.value);
-        })
 
         confirmClick = function () {
             $.fancybox.close();

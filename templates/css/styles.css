@@ -763,6 +763,7 @@ header .navbar-brand {
     background-image: -webkit-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
     background-image: -ms-linear-gradient(83deg, rgb(131, 47, 53) 0%, rgb(255, 165, 7) 100%);
     width: 100%;
+    text-align: center;
 }
 
 .section_app img {

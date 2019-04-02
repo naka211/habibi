@@ -137,7 +137,7 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
         $data['image'] = $this->user->getPhotoDetail($imageId);
-
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['page'] = 'user/editphoto';
         $this->load->view('templates', $data);
     }
