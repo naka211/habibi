@@ -291,7 +291,7 @@ class Api extends REST_Controller {
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
         $profileId = $data->profileId;
-        $user = $this->user->getUser($userId);
+        //$user = $this->user->getUser($userId);
         if ($userId && $profileId) {
             $DB['user_from'] = $userId;
             $DB['user_to'] = $profileId;
@@ -300,11 +300,11 @@ class Api extends REST_Controller {
             $id = $this->user->addRequestAddFriend($DB);
             if($id){
                 //send push notification
-                $data['type'] = 'request';
+               /* $data['type'] = 'request';
                 $data = json_encode($data);
-                $this->_pushNotification($profileId, 'You have received a request from '.$user->name, $data);
+                $this->_pushNotification($profileId, 'You have received a request from '.$user->name, $data);*/
 
-                $this->_return(true);
+                $this->_return(true, 'Your request is sent.');
             } else {
                 $this->_return(false, 'Can not save to database');
             }
@@ -359,8 +359,8 @@ class Api extends REST_Controller {
 
         if($id){
             $data['type'] = 'message';
-            $data = json_encode($data);
-            $this->_pushNotification($profileId, 'You have received a message from '.$user->name, $data);
+            //$data = json_encode($data);
+            //$this->_pushNotification($profileId, 'You have received a message from '.$user->name, $data);
 
             $this->_return(true);
         } else {
@@ -633,9 +633,9 @@ class Api extends REST_Controller {
             $id = $this->user->sendBlink($DB);
             if($id){
                 //add push notification
-                $data['type'] = 'blink';
+                /*$data['type'] = 'blink';
                 $data = json_encode($data);
-                $this->_pushNotification($profileId, 'You have received a blink from '.$user->name, $data);
+                $this->_pushNotification($profileId, 'You have received a blink from '.$user->name, $data);*/
 
                 $this->_return(true);
             } else {
