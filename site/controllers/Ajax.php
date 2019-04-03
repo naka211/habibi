@@ -610,8 +610,7 @@ class Ajax extends MX_Controller{
                 $config_resize['width']         = 500;
                 $config_resize['height']       = 500;
                 $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config_resize['width'] / $config_resize['height']);
-                //$config_resize['master_dim'] = ($dim > 0)? "height" : "width";
-                $config_resize['master_dim'] = "auto";
+                $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
 
                 $this->load->library('image_lib');
                 $this->image_lib->initialize($config_resize);
