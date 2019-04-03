@@ -156,7 +156,7 @@ class Api extends REST_Controller {
         if($data->password != $data->confirmPassword){
             $returnData['status'] = false;
             $returnData['message'] = 'Genadgangskoden er ikke som kodeord.';
-            $this->response($returnData, REST_Controller::HTTP_NOT_FOUND);
+            $this->response($returnData, REST_Controller::HTTP_OK);
         }
         $data->password = md5($data->password);
         unset($data->confirmPassword);
