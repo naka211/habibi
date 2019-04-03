@@ -1107,10 +1107,10 @@ class Api extends REST_Controller {
             $this->_return(false, 'The password is not match.');
         }
 
-        $data = stdClass();
+        $data = new stdClass();
         $data->password = md5($newPassword);
         if($this->user->saveUser($data, $userId)){
-            $this->_return(true);
+            $this->_return(true, 'The new password is changed');
         } else {
             $this->_return(false, 'Can not update new password');
         }
