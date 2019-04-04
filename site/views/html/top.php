@@ -107,7 +107,7 @@ if(!empty($user)){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="text_menu">MENU <span>1</span><?php echo $mark;?></span>
+                            <span class="text_menu">MENU <?php echo $mark;?></span>
                         </button>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
