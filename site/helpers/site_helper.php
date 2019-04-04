@@ -331,9 +331,11 @@ function countImages($profileId){
     return $imageQuantity;
 }
 
-function isFriend($profileId){
+function isFriend($profileId, $userId = null){
     $ci = &get_instance();
-    $userId = $ci->session->userdata('user')->id;
+    if($userId == null){
+        $userId = $ci->session->userdata('user')->id;
+    }
 
     $query = $ci->db->select("id")
         ->from('tb_user_friends')

@@ -236,40 +236,17 @@ class Api extends REST_Controller {
         $this->_return(true, '', array('randomUsers'=>$randomUsers, 'newestUsers'=>$newestUsers, 'popularUsers'=>$popularUsers));
     }
 
-    private function _allowViewAvatar($userId, $profileId){
-        $result = $this->api->checkFriend($userId, $profileId);
-
-        if(empty($result)){
-            return false;
-        } else {
-            if($result->viewAvatar == 0){
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
-    private function _setAvatarPath($userId, &$profiles){
-        foreach($profiles as $i => $profile){
-            if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && $this->_allowViewAvatar($userId, $profile->id))){
-                $profiles[$i]->avatarPath = base_url().'uploads/raw_thumb_user/'.$profile->avatar;
-            } else {
-                $profiles[$i]->avatarPath = base_url().'uploads/thumb_user/'.$profile->avatar;
-            }
-        }
-    }
-
     public function getFavorites_get($userId, $page = 1, $perPage = 10){
         $ignore = $this->user->getBlockedUserIds($userId);
         $offset = ($page - 1)*$perPage;
         $users = $this->user->getFavorites($userId, $perPage, $offset, $ignore);
         $this->_setAvatarPath($userId, $users);
+        $this->_checkShowingRequestButton($userId, $users);
         if($users){
-            $returnData['status'] = true;
+            /*$returnData['status'] = true;
             $returnData['message'] = '';
             $returnData['users'] = $users;
-            $this->response($returnData, REST_Controller::HTTP_OK);
+            $this->response($returnData, REST_Controller::HTTP_OK);*/
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
@@ -495,6 +472,7 @@ class Api extends REST_Controller {
         $users = $this->user->getVisitMe($userId, $perPage, (int)$offset, $ignore);
         if($users){
             $this->_setAvatarPath($userId, $users);
+            $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
@@ -507,6 +485,7 @@ class Api extends REST_Controller {
         $users = $this->user->getVisited($userId, $perPage, (int)$offset, $ignore);
         if($users){
             $this->_setAvatarPath($userId, $users);
+            $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
@@ -519,6 +498,7 @@ class Api extends REST_Controller {
         $users = $this->user->getReceivedBlinks($userId, $perPage, (int)$offset, $ignore);
         if($users){
             $this->_setAvatarPath($userId, $users);
+            $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'No blink');
@@ -531,6 +511,7 @@ class Api extends REST_Controller {
         $users = $this->user->getSentBlinks($userId, $perPage, (int)$offset, $ignore);
         if($users){
             $this->_setAvatarPath($userId, $users);
+            $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'No blink');
@@ -1188,6 +1169,30 @@ class Api extends REST_Controller {
         }
     }
 
+    private function _allowViewAvatar($userId, $profileId){
+        $result = $this->api->checkFriend($userId, $profileId);
+
+        if(empty($result)){
+            return false;
+        } else {
+            if($result->viewAvatar == 0){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    private function _setAvatarPath($userId, &$profiles){
+        foreach($profiles as $i => $profile){
+            if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && $this->_allowViewAvatar($userId, $profile->id))){
+                $profiles[$i]->avatarPath = base_url().'uploads/raw_thumb_user/'.$profile->avatar;
+            } else {
+                $profiles[$i]->avatarPath = base_url().'uploads/thumb_user/'.$profile->avatar;
+            }
+        }
+    }
+
     private function _sendEmailAdminToApproveAvatar($userName){
         $link = '<a href="'.base_url().'admin/en/mod_user/user?name='.$userName.'">Link</a>';
         $content = 'Hej Admin<br /><br />
@@ -1211,6 +1216,12 @@ class Api extends REST_Controller {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private function _checkShowingRequestButton($userId, &$profiles){
+        foreach ($profiles as $key => $profile){
+            $profiles[$key]->showRequestButton = isFriend($profiles[$key]->id, $userId);
         }
     }
 
