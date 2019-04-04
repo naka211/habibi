@@ -4,6 +4,7 @@ class Ajax extends MX_Controller{
         parent::__construct();
         $this->load->model('user_model', 'user');
         $this->load->library('session');
+        $this->load->library('user_agent');
         $this->session->set_userdata('last_visited', time());
         $this->setExpireSessionTime();
 	}
@@ -692,13 +693,20 @@ class Ajax extends MX_Controller{
             } else {
                 $avatarFolder = 'thumb_user';
             }
-            $addFriendBtn = $addFavoriteBtn = '';
-            if(isFriend($profile->id) == false){
-                $addFriendBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" style="margin-right:4px;" onclick="callAjaxFunction('.$profile->id.', \'requestAddFriendInFavorite\')" id="requestAddFriendBtn'.$profile->id.'">Tilføj ven</a>';
+
+            if($this->agent->is_mobile()){
+                $footer = '';
+            } else {
+                $addFriendBtn = $addFavoriteBtn = '';
+                if(isFriend($profile->id) == false){
+                    $addFriendBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" style="margin-right:4px;" onclick="callAjaxFunction('.$profile->id.', \'requestAddFriendInFavorite\')" id="requestAddFriendBtn'.$profile->id.'">Tilføj ven</a>';
+                }
+                if(addedToFavorite($profile->id) == false){
+                    $addFavoriteBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" onclick="callAjaxFunction('.$profile->id.', \'addFavoriteInPage\')" id="addFavoriteBtn'.$profile->id.'">Tilføj favorit</a>';
+                }
+                $footer = '<div class="favorites_footer">'.$addFriendBtn.$addFavoriteBtn.'</div>';
             }
-            if(addedToFavorite($profile->id) == false){
-                $addFavoriteBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" onclick="callAjaxFunction('.$profile->id.', \'addFavoriteInPage\')" id="addFavoriteBtn'.$profile->id.'">Tilføj favorit</a>';
-            }
+
 
             if($profile->login == 1){
                 $onlineIcon = '<span class="status"></span>';
@@ -713,7 +721,7 @@ class Ajax extends MX_Controller{
                                 <img src="'.base_url().'uploads/'.$avatarFolder.'/'.$profile->avatar.'" alt="" class="img-responsive">
                                 </a>
                                 <div class="gallery_number"><i class="i_img"></i> <span>'.countImages($profile->id).'</span></div>
-                                <div class="favorites_footer">'.$addFriendBtn.$addFavoriteBtn.'</div>
+                                '.$footer.'
                             </div>
                             <h5 class="name">'.$profile->name.' '.$onlineIcon.'</h5>
                             <p class="nation">'.$profile->land.'</p>

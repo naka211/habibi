@@ -104,8 +104,8 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="box_gopayment text-center">
-                        <h4>3 første måneder er gratis<br>
-                            1 MÅNED PRIS 99 kr.</h4>
+                        <h4>De første 3 måneder er gratis<br>
+                            Herefter koster det 99,- om måneden</h4>
                         <div class="box_gopayment_mid">
                             <p>Betal med betalingskort:</p>
                             <img src="<?php echo base_url().'templates/';?>images/1x/betaling01.png" alt="" class="img-responsive>

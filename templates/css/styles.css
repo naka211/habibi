@@ -2623,6 +2623,7 @@ ul.list_action li a .i_report {
     position: absolute;
     top: 9px;
     left: 40px;
+    width: 63px;
 }
 
 .cookie {
@@ -2835,7 +2836,7 @@ ul.list_action li a .i_report {
     width: 26px;
     height: 26px;
     position: absolute;
-    z-index: 100;
+    /*z-index: 100;*/
     right: 10px;
     top: 10px;
     background: transparent;
@@ -2850,7 +2851,7 @@ ul.list_action li a .i_report {
     width: 26px;
     height: 26px;
     position: absolute;
-    z-index: 100;
+    /*z-index: 100;*/
     right: 45px;
     top: 10px;
     background: transparent;
@@ -3159,4 +3160,10 @@ label label.error{
 }
 .btn_editGallery_custom span {
     color: #000;
+}
+
+.backLink, .backLink:hover{
+    color: #ffa507;
+    font-size: 16px;
+    margin-bottom: 10px;
 }

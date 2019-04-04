@@ -3,7 +3,7 @@
 <div id="content">
     <section class="friend_list mt52">
         <div class="container top_infoProfile">
-            <a href="javascript:history.back()" class="btn btnUpload" style="margin: 20px 0 0 0">« Tilbage</a>
+            <a href="javascript:history.back()" class="btn backLink">« Tilbage</a>
             <div class="friend_list_lead">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

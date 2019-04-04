@@ -10,7 +10,7 @@
                         <?php echo form_open('user/friends', array('method'=>'get', 'class'=>'frm_searchFriend'))?>
                             <button type="submit" class="btn btnSearch"></button>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Tape navn her for at søge..." type="text" name="keyword" value="<?php echo $this->input->get('keyword', true)?>">
+                                <input class="form-control" placeholder="Skriv navn for at søge..." type="text" name="keyword" value="<?php echo $this->input->get('keyword', true)?>">
                             </div>
                         <?php echo form_close();?>
                     </div>
