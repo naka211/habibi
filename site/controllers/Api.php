@@ -1221,7 +1221,7 @@ class Api extends REST_Controller {
 
     private function _checkShowingRequestButton($userId, &$profiles){
         foreach ($profiles as $key => $profile){
-            $profiles[$key]->showRequestButton = isFriend($profiles[$key]->id, $userId);
+            $profiles[$key]->showRequestButton = isFriend($profiles[$key]->id, $userId) ? false : true;
         }
     }
 
