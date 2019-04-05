@@ -2836,7 +2836,7 @@ ul.list_action li a .i_report {
     width: 26px;
     height: 26px;
     position: absolute;
-    /*z-index: 100;*/
+    z-index: 100;
     right: 10px;
     top: 10px;
     background: transparent;
@@ -2851,7 +2851,7 @@ ul.list_action li a .i_report {
     width: 26px;
     height: 26px;
     position: absolute;
-    /*z-index: 100;*/
+    z-index: 100;
     right: 45px;
     top: 10px;
     background: transparent;

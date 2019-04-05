@@ -47,8 +47,8 @@
             canvas.width = imageObj.width;
             canvas.height = imageObj.height;
 
-            $('.wrap_canvas').css('width', '500px');
-            $('.wrap_canvas').css('height', '500px');
+            /*$('.wrap_canvas').css('width', '500px');
+            $('.wrap_canvas').css('height', '500px');*/
             <?php } else {?>
             var screenWidth = $(window).width();
             var scaleWidth = canvas.width = screenWidth - 30;
@@ -59,7 +59,7 @@
             $('.wrap_canvas').css('height', scaleHeight+15+'px');
             <?php }?>
             //StackBlur.image(imageObj, canvas, $("#slider").val(), false);
-            StackBlur.image(imageObj, canvas, $("#slider").val(), false, scaleWidth, scaleHeight);
+            StackBlur.image(imageObj, canvas, $("#slider").val(), false);
 
             //set width and height to canvas
             <?php if($isMobile == false){?>
@@ -72,7 +72,7 @@
 
             // slider onchange
             $("#slider").on("change", function () {
-                StackBlur.image(imageObj, canvas, this.value, false, scaleWidth, scaleHeight);
+                StackBlur.image(imageObj, canvas, this.value, false);
                 <?php if($isMobile == true){?>
                 $('#canvas').css('width', scaleWidth+'px');
                 $('#canvas').css('height', scaleHeight+'px');
