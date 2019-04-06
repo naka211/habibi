@@ -164,8 +164,8 @@
             canvas.width = imageObj.width;
             canvas.height = imageObj.height;
 
-            /*$('.wrap_canvas').css('width', '500px');
-            $('.wrap_canvas').css('height', '500px');*/
+            /*$('.wrap_canvas').css('width', '500px');*/
+            $('.wrap_canvas').css('height', '500px');
             <?php } else {?>
             var screenWidth = $(window).width();
             var scaleWidth = canvas.width = screenWidth - 30;
