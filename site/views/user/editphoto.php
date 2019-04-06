@@ -15,7 +15,7 @@
                     <?php echo form_open('user/saveEditedPhoto', array('method'=>'post', 'id'=>'blurForm'))?>
                     <div>Sløringsstørrelse</div>
                     <div class="tooltipSlider">
-                        <input type="range" min="0" max="50" value="<?php echo $image->blurIndex;?>" id="slider" style="padding: 0px;" />
+                        <input type="range" min="0" max="100" value="<?php echo $image->blurIndex;?>" id="slider" style="padding: 0px;" />
                         <span class="tooltipText">0</span>
                     </div>
 
@@ -44,11 +44,15 @@
 
         imageObj.onload = function() {
             <?php if($isMobile == false){?>
-            canvas.width = imageObj.width;
-            canvas.height = imageObj.height;
+            /*canvas.width = imageObj.width;
+            canvas.height = imageObj.height;*/
+
+            var scaleWidth = canvas.width = 500;
+            var ratio = canvas.width/imageObj.width;
+            var scaleHeight = canvas.height = imageObj.height*ratio;
 
             /*$('.wrap_canvas').css('width', '500px');*/
-            $('.wrap_canvas').css('height', '500px');
+            $('.wrap_canvas').css('height', canvas.height+50+'px');
             <?php } else {?>
             var screenWidth = $(window).width();
             var scaleWidth = canvas.width = screenWidth - 30;
@@ -59,24 +63,21 @@
             $('.wrap_canvas').css('height', scaleHeight+15+'px');
             <?php }?>
             //StackBlur.image(imageObj, canvas, $("#slider").val(), false);
-            StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+            StackBlur.image(imageObj, canvas, $("#slider").val()/2, false);
 
             //set width and height to canvas
-            <?php if($isMobile == false){?>
-            $('#canvas').css('width', '500px');
-            $('#canvas').css('height', '500px');
-            <?php } else {?>
+
             $('#canvas').css('width', scaleWidth+'px');
             $('#canvas').css('height', scaleHeight+'px');
-            <?php }?>
+
 
             // slider onchange
             $("#slider").on("change", function () {
-                StackBlur.image(imageObj, canvas, this.value, false);
-                <?php if($isMobile == true){?>
+                StackBlur.image(imageObj, canvas, this.value/2, false);
+
                 $('#canvas').css('width', scaleWidth+'px');
                 $('#canvas').css('height', scaleHeight+'px');
-                <?php }?>
+
                 $("#imageData").val($("#canvas")[0].toDataURL());
                 $("#blurIndex").val(this.value);
             })

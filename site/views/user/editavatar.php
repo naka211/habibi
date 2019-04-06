@@ -72,7 +72,7 @@
                         <?php echo form_open('user/saveAvatar', array('method'=>'post', 'id'=>'blurForm'))?>
                         <div>Sløringsstørrelse</div>
                         <div class="tooltipSlider">
-                            <input type="range" min="0" max="50" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
+                            <input type="range" min="0" max="100" value="<?php echo $user->blurIndex;?>" id="slider" style="padding: 0px;" />
                             <span class="tooltipText">0</span>
                         </div>
 
@@ -176,7 +176,7 @@
             $('.wrap_canvas').css('height', scaleHeight+15+'px');
             <?php }?>
             //Draw canvas
-            StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+            StackBlur.image(imageObj, canvas, $("#slider").val()/2, false);
 
             //set width and height to canvas
             <?php if($isMobile == false){?>
@@ -189,7 +189,7 @@
 
             // slider onchange
             $("#slider").on("change", function () {
-                StackBlur.image(imageObj, canvas, this.value, false);
+                StackBlur.image(imageObj, canvas, this.value/2, false);
                 <?php if($isMobile == true){?>
                 $('#canvas').css('width', scaleWidth+'px');
                 $('#canvas').css('height', scaleHeight+'px');
