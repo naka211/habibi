@@ -349,6 +349,7 @@ class Api extends REST_Controller {
     public function getFriends_get($userId, $keyword = '', $page = 1, $perPage = 10){
         $ignore = $this->user->getBlockedUserIds($userId);
         $offset = ($page - 1)*$perPage;
+        $keyword = $keyword == 'all' ? '' : $keyword;
         $total = $this->user->getNumFriends($userId, $ignore, $keyword);
         if($total){
             $users = $this->user->getFriends($userId, $perPage, (int)$offset, $ignore, $keyword);
