@@ -154,6 +154,7 @@
                     var txt = num+' profil fundet';
                 }
                 $('#viewResult').text(txt);
+                $('#num').val(num);
             }
         });
 
