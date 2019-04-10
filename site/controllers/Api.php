@@ -185,7 +185,7 @@ class Api extends REST_Controller {
             $emailTo = array($data->email);
             sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
 
-            $this->_return(true, 'Tilmeld dig med succes');
+            $this->_return(true, 'Oprettelsen er gennemført');
         } else {
             $this->_return(false, 'Fejl-system, skal du handling igen!');
         }
