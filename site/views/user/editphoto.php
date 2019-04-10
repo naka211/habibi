@@ -63,7 +63,7 @@
             $('.wrap_canvas').css('height', scaleHeight+15+'px');
             <?php }?>
             //StackBlur.image(imageObj, canvas, $("#slider").val(), false);
-            StackBlur.image(imageObj, canvas, $("#slider").val(), false);
+            StackBlur.image(imageObj, canvas, $("#slider").val()*0.75, false);
 
             //set width and height to canvas
 
@@ -73,7 +73,7 @@
 
             // slider onchange
             $("#slider").on("change", function () {
-                StackBlur.image(imageObj, canvas, this.value, false);
+                StackBlur.image(imageObj, canvas, this.value*0.75, false);
 
                 $('#canvas').css('width', scaleWidth+'px');
                 $('#canvas').css('height', scaleHeight+'px');
