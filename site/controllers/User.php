@@ -1013,13 +1013,24 @@ class User extends MX_Controller
     public function selectAvatarFromGallery(){
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
-        $currentAvatar = $this->user->getAvatar($user->id);
+        /*$currentAvatar = $this->user->getAvatar($user->id);
         if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
         }
-        $this->user->updateAvatar($user->id, $imageName);
+        $this->user->updateAvatar($user->id, $imageName);*/
+
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        }
+        $this->user->updateAvatar($user->id, $imageName, 1);
+        //Sending approve email
+        $this->sendEmailAdminToApproveAvatar();
+
         $savedUser = $this->user->getUser($user->id);
         $this->session->set_userdata('user', $savedUser);
 
