@@ -100,13 +100,12 @@
     <div class="row margin-bottom-10">
         <div class="col-sm-3">
             <div class="form-material">
-                <label class="control-label margin-top-10" for="">Account type:</label>
+                <label class="control-label margin-top-10" for="">Expired date <span class="text-danger">*</span>:</label>
             </div>
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <input type="text" class="form-control" id="code" name="code" value="<?php if($item->groups == 3){ echo "Google";}else if($item->groups == 2){echo "Facebook";}else{echo "Register";}?>"
-                placeholder="9999" readonly="true" autocomplete="off" />
+                <input type="text" class="form-control" id="expired_at" name="expired_at" value="<?php echo date('d/m/Y', $item->expired_at);?>" autocomplete="off" />
             </div>
         </div>
     </div>
@@ -176,17 +175,17 @@
         }
     ?>
     var max = '<?php echo date('Y/m/d',time());?>';
-    var language = '<?php echo $language;?>';
+    var language = '<?php echo 'da';?>';
     if(language){
         $.datetimepicker.setLocale(language);
     }
-    $('#birthday').datetimepicker({
+    $('#birthday, #expired_at').datetimepicker({
         //dayOfWeekStart : 1,
         lang:language,
         timepicker:false,
     	format:'d/m/Y',
     	formatDate:'Y/m/d',
         //minDate:'-1970/01/2',
-        maxDate:max,
+        /*maxDate:max,*/
     });
 </script>

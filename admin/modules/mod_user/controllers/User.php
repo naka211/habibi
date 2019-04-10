@@ -211,6 +211,8 @@ class User extends CI_Controller{
             $DB['birthday'] = $this->input->post('birthday');
             $DB['gender'] = $this->input->post('gender');
             $DB['type'] = $this->input->post('type');
+            $expired_at = explode('/', $this->input->post('expired_at'));
+            $DB['expired_at'] = mktime('0', '0', '0', $expired_at[1], $expired_at[0], $expired_at[2]);
             $DB['description'] = $this->input->post('description');
             $DB['dt_update'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = $this->input->post('bl_active');;
