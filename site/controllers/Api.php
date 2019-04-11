@@ -73,6 +73,9 @@ class Api extends REST_Controller {
                 //set login status
                 $this->user->updateLogin($user->id, 1);
 
+                //To update the avatar path
+                $user->avatar = base_url().'uploads/thumb_user/'.$user->avatar;
+
                 $this->_return(true, '', array('user'=>$user, 'key'=>$returnKey));
             }
         } else {
