@@ -615,7 +615,7 @@ ul.list_infoNewsletter li {
 /* menu appearance */
 #menu_sub {
     position: absolute;
-    z-index: 101;
+    z-index: 1001;
     right: 0;
     top: 73px;
     color: #999;
