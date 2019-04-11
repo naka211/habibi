@@ -408,7 +408,7 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getSentRequests_post(){
+    public function getSentRequests_get(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
 
@@ -423,7 +423,7 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getRejectedRequests_post(){
+    public function getRejectedRequests_get(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
 
