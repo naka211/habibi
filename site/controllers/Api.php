@@ -393,9 +393,9 @@ class Api extends REST_Controller {
         $this->_return(true);
     }
 
-    public function getReceivedRequests_post(){
-        $data = (object)json_decode(file_get_contents("php://input"));
-        $userId = $data->userId;
+    public function getReceivedRequests_get($userId){
+        /*$data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;*/
 
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getReceivedRequests($userId, $ignore);
@@ -408,9 +408,9 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getSentRequests_get(){
-        $data = (object)json_decode(file_get_contents("php://input"));
-        $userId = $data->userId;
+    public function getSentRequests_get($userId){
+        /*$data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;*/
 
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getSentRequests($userId, $ignore);
@@ -423,9 +423,9 @@ class Api extends REST_Controller {
         }
     }
 
-    public function getRejectedRequests_get(){
-        $data = (object)json_decode(file_get_contents("php://input"));
-        $userId = $data->userId;
+    public function getRejectedRequests_get($userId){
+        /*$data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;*/
 
         $ignore = $this->user->getBlockedUserIds($userId);
         $requests = $this->user->getRejectedRequests($userId, $ignore);
