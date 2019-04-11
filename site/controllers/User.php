@@ -1036,7 +1036,7 @@ class User extends MX_Controller
 
         //create thumb
         $config_resize['image_library'] = 'gd2';
-        $config_resize['source_image'] = './uploads/photo/'.$imageName;
+        $config_resize['source_image'] = './uploads/raw_photo/'.$imageName;
         $config_resize['new_image'] = './uploads/thumb_user/'.$imageName;
         $config_resize['thumb_marker'] = '';
         $config_resize['create_thumb'] = TRUE;
