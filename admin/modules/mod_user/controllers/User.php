@@ -180,7 +180,6 @@ class User extends CI_Controller{
             $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passwordconfirm]');
             $this->form_validation->set_rules('passwordconfirm', 'Password confirmation', 'trim|required');
         }
-        $this->form_validation->set_rules('birthday',"Birthday",'trim|required');
         $this->form_validation->set_rules('gender',"Gender",'trim|required');
 		if($this->form_validation->run()== FALSE){
 			$this->message = validation_errors();
