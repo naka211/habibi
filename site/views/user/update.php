@@ -363,7 +363,7 @@
                 },
                 "name":{
                     required: 'Indtast din navn',
-                    remote: 'Denne brugernavn er i brug'
+                    remote: 'Dette brugernavn er i brug'
                 },/*
                 "password":{
                     minlength: "Adgangskoden skal være på mellem {0} tegn."

@@ -402,7 +402,7 @@ function generateOptionsHTMLInUpdate($type, $name, $selectedValue){
     $ci = &get_instance();
     $typeArr = $ci->config->item($type);
     $html = '<select name="'.$name.'" class="form-control">';
-    $html .= '<option value="">Vælg</option>';
+    $html .= '<option value="">Ej oplyst</option>';
     foreach($typeArr as $i=>$item){
         $selected = $selectedValue==$item?'selected':'';
         $html .= '<option '.$selected.' value="'.$item.'">'.$item.'</option>';
@@ -413,7 +413,7 @@ function generateOptionsHTMLInUpdate($type, $name, $selectedValue){
 
 function generateOptionsInRangeHTML($name, $from, $to, $selectedValue, $unit = ''){
     $html = '<select name="'.$name.'" class="form-control" id="'.$name.'">';
-    $html .= '<option value="">Vælg</option>';
+    $html .= '<option value="">Ej oplyst</option>';
     for($i = $from; $i <= $to; $i++){
         $selected = $selectedValue==$i?'selected':'';
         $html .= '<option '.$selected.' value="'.$i.'">'.$i.' '.$unit.'</option>';
