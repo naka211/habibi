@@ -55,7 +55,7 @@
     <div class="row margin-bottom-10">
         <div class="col-sm-3">
             <div class="form-material">
-                <label class="control-label margin-top-10" for="">Birthday <span class="text-danger">*</span>:</label>
+                <label class="control-label margin-top-10" for="">Birthday:</label>
             </div>
         </div>
         <div class="col-sm-9">
