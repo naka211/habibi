@@ -2,7 +2,7 @@
 <div id="content">
     <section class="section_infoProfile">
         <div class="container">
-            <a href="javascript:history.back()" class="btn backLink">« Tilbage</a>
+            <a href="<?php echo site_url('user/myPhoto');?>" class="btn backLink">« Tilbage</a>
             <div class="row top_infoProfile" style="height: 550px;">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12 wrap_canvas">
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">

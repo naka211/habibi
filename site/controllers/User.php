@@ -612,6 +612,7 @@ class User extends MX_Controller
                 $user = $this->user->getUser('', $DB['email'], $DB['password']);
                 $this->session->set_userdata('user', $user);
                 $this->session->set_userdata('isLoginSite', true);
+                $this->_updateSearchDataAfterLogin();
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
                 $sendEmailInfo['email'] = $DB['email'];
