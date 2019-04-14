@@ -506,9 +506,7 @@ class Ajax extends MX_Controller{
                 //Correct the image orientation
                 $this->correctImageOrientation($data['full_path']);
                 //Update image size
-                $data = getimagesize($data['full_path']);
-                $data["image_width"] = $data[0];
-                $data["image_height"] = $data[1];
+                list($data["image_width"], $data["image_height"]) = getimagesize($data['full_path']);
                 //save to db
                 $DB['userId'] = $user->id;
                 $DB['image'] = $data['file_name'];
