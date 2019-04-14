@@ -345,7 +345,7 @@ section.section_intro {
 #menu.fixed {
     position: fixed;
     top: 0;
-    z-index: 99
+    z-index: 1000
 }
 
 .back-to-top {
