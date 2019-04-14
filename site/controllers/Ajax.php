@@ -505,6 +505,10 @@ class Ajax extends MX_Controller{
                 $data = $this->upload->data();
                 //Correct the image orientation
                 $this->correctImageOrientation($data['full_path']);
+                //Update image size
+                $data = getimagesize($data['full_path']);
+                $data["image_width"] = $data[0];
+                $data["image_height"] = $data[1];
                 //save to db
                 $DB['userId'] = $user->id;
                 $DB['image'] = $data['file_name'];
@@ -590,6 +594,8 @@ class Ajax extends MX_Controller{
                 $data = $this->upload->data();
                 //Correct the image orientation
                 $this->correctImageOrientation($data['full_path']);
+                //Update image size
+                list($data["image_width"], $data["image_height"]) = getimagesize($data['full_path']);
                 //save to db
                 $newAvatar = $this->user->getNewAvatar($user->id);
                 if($newAvatar != ''){
