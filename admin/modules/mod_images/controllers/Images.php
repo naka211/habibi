@@ -130,9 +130,9 @@ class Images extends CI_Controller{
 
         $user = $this->images->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
-                        Din billede er godkendt.<br /><br />
+                        Dit billede er godkendt.<br /><br />
                         <a href="'.base_url().'">Habibidating.dk®</a>';
-        $this->sendEmail([$user->email], 'Habibidating.dk - Din billede er godkendt', $content);
+        $this->sendEmail([$user->email], 'Habibidating.dk - Dit billede er godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -148,9 +148,9 @@ class Images extends CI_Controller{
 
         $user = $this->images->getUserInfo($userId);
         $content = 'Hej '.$user->name.'<br /><br />
-                        Din billede er ikke godkendt.<br /><br />
+                        Dit billede er ikke godkendt.<br /><br />
                         <a href="'.base_url().'">Habibidating.dk®</a>';
-        $this->sendEmail([$user->email], 'Habibidating.dk - Din billede er ikke godkendt', $content);
+        $this->sendEmail([$user->email], 'Habibidating.dk - Dit billede er ikke godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -173,7 +173,7 @@ class Images extends CI_Controller{
                 $this->email->clear();
                 $this->email->to($email);
                 if($from == NULL ){
-                    $this->email->from('noreply@zeduuce.com ','Habibidating.dk');
+                    $this->email->from('noreply@habibidating.dk ','Habibidating.dk');
                 }
                 else{
                     $this->email->from($from,'Habibidating.dk');
