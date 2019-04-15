@@ -186,7 +186,7 @@ $(function ($) {
     });
 
     $('.owl_gallerys').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         items: 7,
         nav: true,
