@@ -551,6 +551,8 @@ class Ajax extends MX_Controller{
 
                     $this->image_lib->crop();
 
+                    //save the raw thumb photo
+                    copy('./uploads/thumb_photo/'.$data['file_name'], './uploads/raw_thumb_photo/'.$data['file_name']);
                 }
 
                 $response['success'] = 1;
