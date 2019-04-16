@@ -203,8 +203,8 @@ class User extends CI_Controller{
             if($this->input->post('password')){
                 $DB['password'] = md5($this->input->post('password'));
             }
-            $birthday = explode("/", $this->input->post('birthday'));
-            if(!empty($birthday)){
+            if(!empty($this->input->post('birthday'))){
+                $birthday = explode("/", $this->input->post('birthday'));
                 $DB['day'] = $birthday[0];
                 $DB['month'] = $birthday[1];
                 $DB['year'] = $birthday[2];
