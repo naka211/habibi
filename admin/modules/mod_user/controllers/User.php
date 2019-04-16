@@ -204,10 +204,12 @@ class User extends CI_Controller{
                 $DB['password'] = md5($this->input->post('password'));
             }
             $birthday = explode("/", $this->input->post('birthday'));
-            $DB['day'] = $birthday[0];
-            $DB['month'] = $birthday[1];
-            $DB['year'] = $birthday[2];
-            $DB['birthday'] = $this->input->post('birthday');
+            if(!empty($birthday)){
+                $DB['day'] = $birthday[0];
+                $DB['month'] = $birthday[1];
+                $DB['year'] = $birthday[2];
+                $DB['birthday'] = $this->input->post('birthday');
+            }
             $DB['gender'] = $this->input->post('gender');
             $DB['type'] = $this->input->post('type');
             $expired_at = explode('/', $this->input->post('expired_at'));
