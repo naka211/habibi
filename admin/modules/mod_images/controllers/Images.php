@@ -48,7 +48,7 @@ class Images extends CI_Controller{
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                $data->image = '<img src="'.base_url_site().'uploads/raw_photo/'.$row->image.'" height="150" \>';
+                $data->image = '<img src="'.base_url_site().'uploads/raw_thumb_photo/'.$row->image.'" height="150" \>';
                 if($row->status == 0){
                     $data->image .= ' <a href="'.site_url($this->module_name.'/images/acceptPhoto/'.$row->id.'/'.$row->userId).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Accept"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
                     $data->image .= ' <a href="'.site_url($this->module_name.'/images/rejectPhoto/'.$row->id.'/'.$row->userId).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
