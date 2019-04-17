@@ -69,10 +69,22 @@
         </div>
     </section>
 </div>
+<div style="display: none;" id="modalConfirm" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p id="confirmText"></p>
+            <div class="text-center">
+                <a href="javascript:void(0);" class="btn btnYes">JA</a>
+                <a href="javascript:void(0);" onclick="$.fancybox.close();" class="btn btnNo">NEJ</a>
+            </div>
+        </div>
+    </div>
+</div>
 <?php if(isGoldMember()){?>
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <a href="javascript:;" class="btn bntBlock">Slet historik</a>
                 <h4></h4>
                 <div class="chat">
                     <ul>
@@ -90,6 +102,15 @@
     $(document).ready(function() {
         $("#friendMenu").addClass('active');
 
+        confirmDeleteMessage = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'deleteMessage('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
 
+        deleteMessage = function (profileId) {
+            $.fancybox.destroy();
+            callAjaxFunction(profileId, 'deleteMessage', false);
+        }
     });
 </script>

@@ -42,7 +42,7 @@
                             <p class="gray_friend_item"><?php echo word_limiter($user->message, 8);?></p>
                             <?php }?>
                             <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                            <a onclick="confirmDeleteMessage(<?php echo $user->id;?>, 'Er du sikker på at slette al besked?')" href="javascript:;" class="btn bntBlock">SLET</a>
+                            <a onclick="confirmDeleteMessage(<?php echo $user->id;?>, 'Er du sikker på du vil slette chat historik?')" href="javascript:;" class="btn bntBlock">Slet historik</a>
                         </div>
                     </div>
                 </div>
@@ -63,6 +63,7 @@
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <a href="javascript:;" class="btn bntBlock">Slet historik</a>
                 <h4></h4>
                 <div class="chat">
                     <ul>
@@ -98,7 +99,7 @@
         }
 
         deleteMessage = function (profileId) {
-            $.fancybox.close();
+            $.fancybox.destroy();
             callAjaxFunction(profileId, 'deleteMessage');
         }
     });

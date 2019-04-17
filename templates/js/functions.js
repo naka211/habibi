@@ -282,7 +282,10 @@ $(document).ready(function() {
         });
     });*/
 
-    callAjaxFunction = function (profile_id, link) {
+    callAjaxFunction = function (profile_id, link, fadeOut) {
+        if (fadeOut === undefined) {
+            fadeOut = true;
+        }
         $.ajax({
             method: "POST",
             url: base_url+"ajax/"+link,
@@ -319,7 +322,7 @@ $(document).ready(function() {
                 });
             }
             //handle block user and remove favorite in page
-            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'requestAddFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend' || link == 'deleteMessage'){
+            if(link == 'removeFavoriteInPage' || link == 'blockUser' || link == 'unblockUser' || link == 'unFriend' || link == 'requestAddFriend' || link == 'cancelAddFriend' || link == 'acceptAddFriend' || link == 'rejectAddFriend' || link == 'reAddFriend' || (link == 'deleteMessage' && fadeOut == true)){
                 $(".profile"+profile_id).fadeOut();
             }
             //handle request in page
@@ -377,6 +380,7 @@ $(document).ready(function() {
     }
 
     loadMoreMessages = function (profileId, num, first, profileName) {
+        $('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');
         $("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
         if(first == true){
