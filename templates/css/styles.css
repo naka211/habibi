@@ -1596,7 +1596,7 @@ ul.list_action li a .i_report {
 
 .box_user_top h4 {
     font-weight: 300;
-    font-size: 13px;
+    font-size: 15px;
     margin: 12px 0 0;
 }
 
@@ -1633,7 +1633,7 @@ ul.list_action li a .i_report {
 
 .box_user_content a {
     color: #000;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .box_user_content a:hover {
