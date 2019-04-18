@@ -22,7 +22,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
                     <div class="frend_item">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="frend_item_avatar">
                                     <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
                                         <a <?php echo $profileLink;?>><img src="<?php echo base_url(); ?>/uploads/raw_thumb_user/<?php echo $user->avatar; ?>" alt="" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>"></a>
@@ -31,7 +31,7 @@
                                     <?php }?>
                                 </div>
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 <?php if(isGoldMember()){?>
                                     <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
                                 <?php }?>
