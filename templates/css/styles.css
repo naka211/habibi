@@ -102,7 +102,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.3em;
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 500;
     -webkit-font-smoothing: subpixel-antialiased;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale;
@@ -1094,15 +1094,15 @@ select:not([multiple]) {
 
 .content_profile .owl-theme .item .nation {
     font-size: 13px;
-    color: #7e7e7e;
-    font-weight: 400;
+    color: #000;
+    font-weight: 500;
     margin-bottom: 0;
 }
 
 .content_profile .owl-theme .item .old {
     font-size: 13px;
-    color: #7e7e7e;
-    font-weight: 400;
+    color: #000;
+    font-weight: 500;
     margin-bottom: 0;
 }
 
@@ -1627,12 +1627,12 @@ ul.list_action li a .i_report {
 
 .box_user_content {
     float: left;
-    color: #8c8c8c;
+    color: #000;
     line-height: 1.5em;
 }
 
 .box_user_content a {
-    color: #8c8c8c;
+    color: #000;
     font-size: 11px;
 }
 
@@ -1830,11 +1830,11 @@ ul.list_action li a .i_report {
 .frend_item h4 {
     font-size: 16px;
     margin-top: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .frend_item .age_city {
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 
 .bntMessage {
@@ -2020,15 +2020,15 @@ ul.list_action li a .i_report {
 
 .box_favorites_item .nation {
     font-size: 13px;
-    color: #7e7e7e;
-    font-weight: 400;
+    color: #000;
+    font-weight: 500;
     margin-bottom: 0;
 }
 
 .box_favorites_item .old {
     font-size: 13px;
-    color: #7e7e7e;
-    font-weight: 400;
+    color: #000;
+    font-weight: 500;
     margin-bottom: 0;
 }
 
@@ -2158,10 +2158,9 @@ ul.list_action li a .i_report {
 .gray_friend_item {
     background: #ededed;
     font-size: 13px;
-    font-weight: 400;
     border-radius: 5px;
     padding: 15px;
-    color: #7e7e7e;
+    color: #000;
 }
 
 .frm_search {
@@ -2378,7 +2377,7 @@ ul.list_action li a .i_report {
 
 .chat ul li {
     margin: 40px 0 0 0;
-    font-weight: 400;
+    /*font-weight: 400;*/
 }
 
 .chat ul li.you {
@@ -2406,14 +2405,14 @@ ul.list_action li a .i_report {
 
 .chat ul li .date {
     font-size: 12px;
-    color: #7e7e7e;
+    color: #000;
 }
 
 .chat ul li .message {
     display: block;
     padding: 10px;
     position: relative;
-    color: #7e7e7e;
+    color: #000;
     font-size: 13px;
     background-color: #ededed;
     border-radius: 3px;
