@@ -340,7 +340,7 @@ class Api extends REST_Controller {
         $id = $this->user->saveMessage($DB);
 
         if($id){
-            $data['type'] = 'message';
+            //$data['type'] = 'message';
             //$data = json_encode($data);
             //$this->_pushNotification($profileId, 'You have received a message from '.$user->name, $data);
 
