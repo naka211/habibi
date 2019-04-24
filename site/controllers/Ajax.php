@@ -514,6 +514,32 @@ class Ajax extends MX_Controller{
                 $DB['status'] = 0;
                 $this->user->savePhoto($DB);
 
+                //resize big image
+                if($data["image_width"] > 1200 || $data["image_height"] > 1200){
+                    if($data["image_width"] > $data["image_height"]){
+                        $scaleIndex = 1200 / $data["image_width"];
+                    } else {
+                        $scaleIndex = 1200 / $data["image_height"];
+                    }
+
+                    $config_resize['image_library'] = 'gd2';
+                    $config_resize['source_image'] = $data['full_path'];
+                    $config_resize['new_image'] = $data['full_path'];
+                    $config_resize['thumb_marker'] = '';
+                    $config_resize['create_thumb'] = TRUE;
+                    $config_resize['maintain_ratio'] = true;
+                    $config_resize['quality'] = "100%";
+                    $config_resize['width']         = $data["image_width"] * $scaleIndex;
+                    $config_resize['height']       = $data["image_height"] * $scaleIndex;
+                    $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config_resize['width'] / $config_resize['height']);
+                    $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+                    $this->load->library('image_lib');
+                    $this->image_lib->initialize($config_resize);
+
+                    $this->image_lib->resize();
+                }
+
                 $raw_photo = './uploads/raw_photo/'.$data['file_name'];
                 copy($data['full_path'], $raw_photo);
 
