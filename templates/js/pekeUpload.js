@@ -265,7 +265,7 @@
                 switch (type) {
                   case "image":
                     var fileUrl = window.URL.createObjectURL(file);
-                    var prev = $('<img class="thumbnail" src="' + fileUrl + '" width="100%" />').appendTo(container);
+                    var prev = $('<img class="thumbnail" src="' + fileUrl + '" height="75" />').appendTo(container);
                     break;
 
                   case "video":
