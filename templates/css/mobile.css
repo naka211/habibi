@@ -197,7 +197,7 @@
     .row_frend_item {
         padding: 0;
     }
-    .frend_item .btn {
+    .frend_item .btn, .frend_item .new {
         margin-right: 0;
         font-size: 10px;
         padding: 3px 10px;
@@ -657,6 +657,12 @@
     .box_favorites_item .nation,
     .box_favorites_item .old{
         font-size: 11px;
+    }
+    .thumbnail{
+        margin-bottom: 0px;
+    }
+    .progress{
+        margin: 45px 0 0;
     }
 }
 

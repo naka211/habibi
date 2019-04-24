@@ -1298,7 +1298,7 @@ select:not([multiple]) {
     margin: 5px 0 0;
     font-size: 16px;
     font-family: 'Montserrat';
-    color: #808080;
+    /*color: #808080;*/
     line-height: 25px;
 }
 
@@ -1312,8 +1312,8 @@ select:not([multiple]) {
 }
 
 .top_infoProfile p {
-    color: #808080;
-    font-weight: 400;
+    /*color: #808080;
+    font-weight: 400;*/
     margin: 0 0 15px;
 }
 
@@ -1739,7 +1739,7 @@ ul.list_action li a .i_report {
 
 .owl_gallerys .item a span {
     font-size: 13px;
-    color: #878787;
+    color: #000;
 }
 
 .owl_gallerys .item img:hover {
@@ -3169,4 +3169,8 @@ label label.error{
 
 .fancybox-container{
     font-family: inherit;
+}
+
+.modal-header .close{
+    opacity: 1;
 }

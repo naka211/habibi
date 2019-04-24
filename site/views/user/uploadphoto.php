@@ -41,7 +41,7 @@
 
                                 <h4>Regler for album billeder:</h4>
                                 <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre personer end dig på billederne. F. eks Børn, dyr eller noget andet.<br>
-                                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må der ikke være seksuelle undertoner på billedet<br>
+                                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                                 <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal have godkendt det, det vil sige at for f.eks et selfie med en kendt bliver ikke godkendt<br>
                                 </p>
                             </div>
