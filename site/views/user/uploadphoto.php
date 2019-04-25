@@ -21,7 +21,7 @@
 
                 <h4>Regler for album billeder:</h4>
                 <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Her må der godt være andre personer end dig på billederne. F. eks Børn, dyr eller noget andet.<br>
-                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må der ikke være seksuelle undertoner på billedet<br>
+                <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                 <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Dem som er på skal have godkendt det, det vil sige at for f.eks et selfie med en kendt bliver ikke godkendt<br>
             </p>
             <?php } else {?>
@@ -70,17 +70,6 @@
     </section>
 </div>
 
-<div style="display: none;" id="modalConfirm" class="animated-modal modalLogin">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p id="confirmText"></p>
-            <div class="text-center">
-                <a href="#" class="btn btnYes">JA</a>
-                <a href="javascript:void(0);" onclick="$.fancybox.close();" class="btn btnNo">NEJ</a>
-            </div>
-        </div>
-    </div>
-</div>
 <div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">

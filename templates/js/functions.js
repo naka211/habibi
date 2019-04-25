@@ -404,7 +404,7 @@ $(document).ready(function() {
         } else {
             $(".chat ul").html("");
             $(".chat ul").append('<li style="text-align: center;" id="messageLoading">\n' +
-                '                        <img src="'+base_url+'templates/images/preloader.gif">\n' +
+                '                        <img src="'+base_url+'templates/images/preloader.gif" width="64">\n' +
                 '                    </li>');
         }
 

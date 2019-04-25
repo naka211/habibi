@@ -39,19 +39,19 @@
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 <h4>
                                     <?php echo $profile->name; ?> <?php if($profile->login == 1){?><span class="status"></span><?php }?><?php if($profile->new == 1){?><span class="new">Ny</span><?php } ?>
-                                    <?php if($user->blurIndex != 0){
-                                        if($profile->viewAvatar == 0){
-                                            ?>
-                                            <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'removeBlurAvatar')" class="btn btnadd_friend" style="float: right">Fjern sløring</a>
-                                        <?php } else {?>
-                                            <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="float: right">Sløring</a>
-                                        <?php }}?>
                                 </h4>
                                 <p><?php echo printAge($profile->year); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriend')" class="btn bntDelete">Fjern ven</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
+                                <?php if($user->blurIndex != 0){
+                                if($profile->viewAvatar == 0){
+                                    ?>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'removeBlurAvatar')" class="btn bntMessage" style="margin-top: 10px">Fjern sløring</a>
+                                <?php } else {?>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="margin-top: 10px">Sløring</a>
+                                <?php }}?>
                             </div>
                         </div>
                     </div>
@@ -68,17 +68,6 @@
             </div>
         </div>
     </section>
-</div>
-<div style="display: none;" id="modalConfirm" class="animated-modal modalLogin">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p id="confirmText"></p>
-            <div class="text-center">
-                <a href="javascript:void(0);" class="btn btnYes">JA</a>
-                <a href="javascript:void(0);" onclick="$.fancybox.close();" class="btn btnNo">NEJ</a>
-            </div>
-        </div>
-    </div>
 </div>
 <?php if(isGoldMember()){?>
     <div style="display: none;" id="modalChat" class="animated-modal modalChat">
