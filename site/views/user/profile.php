@@ -155,7 +155,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php if(!empty($images)){?>
                     <div class="owl-carousel owl-theme owl_gallerys">
-                        <?php /*if($profile->blurIndex != 0 && allowViewAvatar($profile->id)) { ?>
+                        <?php if($profile->blurIndex != 0 && allowViewAvatar($profile->id)) { ?>
                             <?php foreach ($images as $image) {
                                 if(file_exists($this->config->item('root').'uploads/raw_thumb_photo/'.$image->image)){
                                     $fileFolder = 'raw_thumb_photo';
@@ -168,7 +168,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                        href="<?php echo base_url(); ?>uploads/raw_photo/<?php echo $image->image; ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $fileFolder.'/'.$image->image; ?>" class="img-responsive"></a>
                                 </div>
                             <?php }
-                        } else {*/?>
+                        } else {?>
                             <?php foreach ($images as $image) { ?>
                                 <div class="item">
                                     <a data-fancybox="gallery"
@@ -177,7 +177,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 class="img-responsive"></a>
                                 </div>
                             <?php }
-                        //}?>
+                        }?>
                     </div>
                     <?php }?>
                     <blockquote class="quote-card">
