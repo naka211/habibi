@@ -1216,7 +1216,7 @@ class User_model extends CI_Model{
                 }
             }
         }
-        return $result;
+        return array_values($result);
     }
 
     public function saveReport($userFrom, $userTo, $reason){
