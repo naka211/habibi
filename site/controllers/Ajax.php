@@ -731,7 +731,7 @@ class Ajax extends MX_Controller{
             } else {
                 $addFriendBtn = $addFavoriteBtn = '';
                 if(isFriend($profile->id) == false){
-                    $addFriendBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" style="margin-right:4px;" onclick="callAjaxFunction('.$profile->id.', \'requestAddFriendInFavorite\')" id="requestAddFriendBtn'.$profile->id.'">Tilføj ven</a>';
+                    $addFriendBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" style="margin-right:4px;" onclick="callAjaxFunction('.$profile->id.', \'requestAddFriendInFavorite\')" id="requestAddFriendBtn'.$profile->id.'">Venneanmodning</a>';
                 }
                 if(addedToFavorite($profile->id) == false){
                     $addFavoriteBtn = '<a href="javascript:void(0);" class="btn btn_addFriend" onclick="callAjaxFunction('.$profile->id.', \'addFavoriteInPage\')" id="addFavoriteBtn'.$profile->id.'">Tilføj favorit</a>';

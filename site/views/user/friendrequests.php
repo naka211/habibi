@@ -105,7 +105,7 @@
                                                         <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
                                                         <p>Afvist: d.<span><?php echo date("d/m/Y", $user->dt_update); ?></span> kl.<span><?php echo date("H:i", $user->dt_update); ?></span>
                                                         </p>
-                                                        <a <?php echo $reAddFriendLink;?> class="btn btnadd_friend" style="margin-bottom: 0px;">Tilføj ven</a>
+                                                        <a <?php echo $reAddFriendLink;?> class="btn btnadd_friend" style="margin-bottom: 0px;">Venneanmodning</a>
                                                     </div>
                                                 </div>
                                             </div>
