@@ -45,13 +45,15 @@
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriend')" class="btn bntDelete">Fjern ven</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
+                                <div style="text-align: center;">
                                 <?php if($user->blurIndex != 0){
                                 if($profile->viewAvatar == 0){
                                     ?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'removeBlurAvatar')" class="btn bntMessage" style="margin-top: 10px">Fjern sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'removeBlurAvatar')" class="btn bntMessage" style="margin-top: 15px">Fjern sløring</a>
                                 <?php } else {?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="margin-top: 10px">Sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="margin-top: 15px">Sløring</a>
                                 <?php }}?>
+                                </div>
                             </div>
                         </div>
                     </div>
