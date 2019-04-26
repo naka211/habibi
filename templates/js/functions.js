@@ -340,14 +340,14 @@ $(document).ready(function() {
                     "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInProfile')",
                     "class" : "btn btnadd_friend",
                 });
-                $("#requestBtn").text('Tilføj ven');
+                $("#requestBtn").text('Venneanmodning');
             }
             if(link == 'unFriendInProfile'){
                 $("#requestBtn").attr({
                     "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInProfile')",
                     "class" : "btn btnadd_friend",
                 });
-                $("#requestBtn").text('Tilføj ven');
+                $("#requestBtn").text('Venneanmodning');
             }
 
             if(link == 'requestAddFriendInFavorite'){
