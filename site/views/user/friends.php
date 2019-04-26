@@ -45,7 +45,7 @@
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriend')" class="btn bntDelete">Fjern ven</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
-                                <div style="text-align: center;">
+                                <div class="alignBtn">
                                 <?php if($user->blurIndex != 0){
                                 if($profile->viewAvatar == 0){
                                     ?>

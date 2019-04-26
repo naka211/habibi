@@ -39,7 +39,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                         <p><?php echo $profile->slogan;?></p>
 
                         <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
-                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'requestAddFriendInProfile')" id="requestBtn" class="btn btnadd_friend">Tilføj ven</a>
+                            <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'requestAddFriendInProfile')" id="requestBtn" class="btn btnadd_friend">Venneanmodning</a>
                         <?php }?>
                         <?php if($status->isFriend == 0){?>
                             <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'cancelAddFriendInProfile')" id="requestBtn" class="btn btn_cancel_request">Annuller anmodning</a>

@@ -962,3 +962,19 @@ ul.list_infoNewsletter li {
 	font-size: 14px;
 	margin: 15px 0;
 }
+
+.frm_searchFriend input::-webkit-input-placeholder {
+	color: #000 !important;
+}
+
+.frm_searchFriend input:-moz-placeholder { /* Firefox 18- */
+	color: #000 !important;
+}
+
+.frm_searchFriend input::-moz-placeholder { /* Firefox 19+ */
+	color: #000 !important;
+}
+
+.frm_searchFriend input:-ms-input-placeholder {
+	color: #000 !important;
+}
