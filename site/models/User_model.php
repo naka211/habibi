@@ -1215,7 +1215,7 @@ class User_model extends CI_Model{
                     }
                 }
             }
-        }print_r(array_values($result));exit();
+        }
         return $result;
     }
 
