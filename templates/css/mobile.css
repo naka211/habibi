@@ -664,8 +664,8 @@
     .progress{
         margin: 45px 0 0;
     }
-    .alignBtn{
-        text-align: center;
+    .marginOnMobile{
+        margin-left: 68px;
     }
 }
 

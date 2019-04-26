@@ -295,14 +295,14 @@ $(document).ready(function() {
             if(link == 'blurAvatar'){
                 $("#blurBtn"+profile_id).attr({
                     "onclick" : "confirmRemoveBlur("+profile_id+", 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')",
-                    "class" : "btn bntMessage"
+                    "class" : "btn bntMessage marginOnMobile"
                 });
                 $("#blurBtn"+profile_id).text('Fjern sløring');
             }
             if(link == 'removeBlurAvatar'){
                 $("#blurBtn"+profile_id).attr({
                     "onclick" : "confirmBlur("+profile_id+", 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')",
-                    "class" : "btn btn_cancel_request mb0"
+                    "class" : "btn btn_cancel_request mb0 marginOnMobile"
                 });
                 $("#blurBtn"+profile_id).text('Sløring');
             }
