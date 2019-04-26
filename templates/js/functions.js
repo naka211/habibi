@@ -294,15 +294,15 @@ $(document).ready(function() {
             //handle blur action
             if(link == 'blurAvatar'){
                 $("#blurBtn"+profile_id).attr({
-                    "onclick" : "callAjaxFunction("+profile_id+", 'removeBlurAvatar')",
-                    "class" : "btn btnadd_friend"
+                    "onclick" : "confirmRemoveBlur("+profile_id+", 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')",
+                    "class" : "btn bntMessage"
                 });
                 $("#blurBtn"+profile_id).text('Fjern sløring');
             }
             if(link == 'removeBlurAvatar'){
                 $("#blurBtn"+profile_id).attr({
-                    "onclick" : "callAjaxFunction("+profile_id+", 'blurAvatar')",
-                    "class" : "btn btn_cancel_request"
+                    "onclick" : "confirmBlur("+profile_id+", 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')",
+                    "class" : "btn btn_cancel_request mb0"
                 });
                 $("#blurBtn"+profile_id).text('Sløring');
             }
@@ -313,6 +313,8 @@ $(document).ready(function() {
                     "title" : "Fjern favorit",
                     "class" : "hover"
                 });
+                $('#message-content').html('Du har tilføjet profilen som favorit');
+                $.fancybox.open({src: '#modalMessage'});
             }
             if(link == 'removeFavorite'){
                 $("#favoriteBtn").attr({
@@ -358,6 +360,8 @@ $(document).ready(function() {
     }
     sendBlink = function (profile_id) {
         callAjaxFunction(profile_id, 'sendBlink');
+        $('#message-content').html('Du har sendt et blink');
+        $.fancybox.open({src: '#modalMessage'});
     }
 
     deletePhoto = function (photoId) {
@@ -492,6 +496,10 @@ $(document).ready(function() {
                 }
             }
         });
+    }
+    
+    function getConfirmAndAction() {
+        
     }
 
     //Dropdown menu

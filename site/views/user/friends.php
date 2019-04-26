@@ -43,15 +43,15 @@
                                 <p><?php echo printAge($profile->year); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'unFriend')" class="btn bntDelete">Fjern ven</a>
-                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $profile->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
+                                <a href="javascript:void(0);" onclick="confirmRemoveFriend(<?php echo $profile->id;?>, 'Er du sikker på at du vil fjerne pågældende profil for din venneliste ?')"class="btn bntDelete">Fjern ven</a>
+                                <a href="javascript:void(0);" onclick="confirmBlockUser(<?php echo $profile->id;?>, 'Er du sikker på du vil blokere den pågældende profil ?')" class="btn bntBlock">Bloker</a>
                                 <div class="alignBtn">
                                 <?php if($user->blurIndex != 0){
                                 if($profile->viewAvatar == 0){
                                     ?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'removeBlurAvatar')" class="btn bntMessage" style="margin-top: 15px">Fjern sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmRemoveBlur(<?php echo $profile->id?>, 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')" class="btn bntMessage" style="margin-top: 15px">Fjern sløring</a>
                                 <?php } else {?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="callAjaxFunction(<?php echo $profile->id?>, 'blurAvatar')" class="btn btn_cancel_request" style="margin-top: 15px">Sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmBlur(<?php echo $profile->id?>, 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')" class="btn btn_cancel_request mb0" style="margin-top: 15px">Sløring</a>
                                 <?php }}?>
                                 </div>
                             </div>
@@ -102,6 +102,50 @@
         deleteMessage = function (profileId) {
             $.fancybox.destroy();
             callAjaxFunction(profileId, 'deleteMessage', false);
+        }
+
+        confirmBlockUser = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'blockUser('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
+
+        blockUser = function (profileId) {
+            $.fancybox.destroy();
+            callAjaxFunction(profileId, 'blockUser');
+        }
+
+        confirmRemoveFriend = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'removeFriend('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
+
+        removeFriend = function (profileId) {
+            $.fancybox.destroy();
+            callAjaxFunction(profileId, 'unFriend');
+        }
+
+        confirmRemoveBlur = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'removeBlur('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
+
+        removeBlur = function (profileId) {
+            $.fancybox.destroy();
+            callAjaxFunction(profileId, 'removeBlurAvatar');
+        }
+
+        confirmBlur = function (profileId, text) {
+            $('#confirmText').html(text);
+            $('#modalConfirm .btnYes').attr('onclick', 'blurAvatar('+profileId+')');
+            $.fancybox.open({src: '#modalConfirm'});
+        }
+
+        blurAvatar = function (profileId) {
+            $.fancybox.destroy();
+            callAjaxFunction(profileId, 'blurAvatar');
         }
     });
 </script>
