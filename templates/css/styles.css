@@ -1328,11 +1328,11 @@ select:not([multiple]) {
 .btnadd_friend {
     padding: 5px 30px;
     background: #ffa507;
-    font-size: 14.23px;
+    font-size: 14px;
     text-transform: uppercase;
-    /*margin-top: 20px;*/
+    width: 245px;
     margin-bottom: 15px;
-    /*font-weight: 700;*/
+    font-weight: 500;
     margin-right: 15px;
 }
 
@@ -1341,14 +1341,15 @@ select:not([multiple]) {
 }
 
 .btn_cancel_request {
-    padding: 3px 30px;
+    padding: 5px 30px;
     background: #b3b3b3;
-    font-size: 14.23px;
+    font-size: 14px;
     text-transform: uppercase;
     /*margin-top: 20px;*/
     margin-bottom: 15px;
     font-weight: 500;
     margin-right: 15px;
+    width: 245px;
 }
 
 .btn_cancel_request:hover {
@@ -1358,7 +1359,7 @@ select:not([multiple]) {
 .btnUnfriend {
     padding: 5px 30px;
     background: #fa3536;
-    font-size: 14.23px;
+    font-size: 14px;
     text-transform: uppercase;
     /*margin-top: 20px;*/
     margin-bottom: 15px;
@@ -1373,7 +1374,7 @@ select:not([multiple]) {
 .btnadd_block {
     padding: 5px 30px;
     background: #b3b3b3;
-    font-size: 14.23px;
+    font-size: 14px;
     text-transform: uppercase;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -1831,6 +1832,7 @@ ul.list_action li a .i_report {
     font-size: 16px;
     margin-top: 0px;
     margin-bottom: 10px;
+    height: 18px;
 }
 
 .frend_item .age_city {
@@ -1839,8 +1841,8 @@ ul.list_action li a .i_report {
 
 .bntMessage {
     background: #ffa507;
-    padding: 3px 20px;
-    font-size: 14.23px;
+    padding: 3px 13px;
+    font-size: 14px;
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
@@ -2140,6 +2142,7 @@ ul.list_action li a .i_report {
     padding: 3px 3px;
     font-size: 13px;
     font-weight: 500;
+    margin-bottom: 5px;
 }
 
 .btn_addFriend:hover {
@@ -2302,7 +2305,7 @@ ul.list_action li a .i_report {
 
 .frm_login label {
     text-align: left;
-    font-weight: 400;
+    /*font-weight: 400;*/
 }
 
 .frm_login .form-control {
@@ -2332,7 +2335,8 @@ ul.list_action li a .i_report {
     text-decoration: underline;
     font-size: 15px;
     font-style: italic;
-    padding: 0 14px;
+    padding: 0 13px;
+    font-weight: 500;
 }
 
 .btn-link:focus {
