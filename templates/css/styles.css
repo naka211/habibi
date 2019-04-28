@@ -1029,6 +1029,11 @@ select:not([multiple]) {
     background: #2f2f2f;
 }
 
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
 .content_profile .owl-theme {
     padding: 0 40px;
 }
@@ -1341,7 +1346,7 @@ select:not([multiple]) {
 }
 
 .btn_cancel_request {
-    padding: 5px 30px;
+    padding: 3px 30px;
     background: #b3b3b3;
     font-size: 14px;
     text-transform: uppercase;
@@ -3177,4 +3182,8 @@ label label.error{
 
 .modal-header .close{
     opacity: 1;
+}
+
+.widthAuto{
+    width: auto;
 }

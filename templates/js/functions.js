@@ -302,7 +302,7 @@ $(document).ready(function() {
             if(link == 'removeBlurAvatar'){
                 $("#blurBtn"+profile_id).attr({
                     "onclick" : "confirmBlur("+profile_id+", 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')",
-                    "class" : "btn btn_cancel_request mb0 marginOnMobile"
+                    "class" : "btn btn_cancel_request mb0 marginOnMobile widthAuto"
                 });
                 $("#blurBtn"+profile_id).text('Sløring');
             }
