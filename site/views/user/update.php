@@ -230,7 +230,7 @@
                         ?>
                             <a href="javascript:void(0);" data-fancybox data-src="#modalStandBy" class="btn btn_viewSearch">Sæt medlemskab I bero</a>
                             <?php } else {?>
-                            <a href="<?php echo site_url('user/setStandByStatus/0')?>" class="btn btn_viewSearch">Jeg vil stoppe med at stå ved betaling</a>
+                            <a href="<?php echo site_url('user/setStandByStatus/0')?>" class="btn btn_viewSearch">Start medlemskab igen</a>
                     <?php }}?>
 
                     <hr>
