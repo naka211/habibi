@@ -670,8 +670,8 @@
     .btn_addFriend{
         font-size: 10px;
     }
-    .chat ul li.other .date{
-        margin-top: -5px;
+    .chat ul li{
+        margin-top: 50px;
     }
 }
 
