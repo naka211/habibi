@@ -2310,7 +2310,7 @@ ul.list_action li a .i_report {
 
 .frm_login label {
     text-align: left;
-    /*font-weight: 400;*/
+    font-weight: 500;
 }
 
 .frm_login .form-control {
@@ -2338,7 +2338,7 @@ ul.list_action li a .i_report {
 
 .frm_login .btn-link {
     text-decoration: underline;
-    font-size: 15px;
+    font-size: 13px;
     font-style: italic;
     padding: 0 13px;
     font-weight: 500;

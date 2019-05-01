@@ -257,8 +257,10 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?php echo form_open('user/setStandByStatus/1', array('class'=>'standByForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
-                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <p class="f19" id="error-content">Hvis du vælger at sætte dit medlemskab i bero så sker følgende.:<br><br>
+                    Den dag du sætter dit medlemskab i bero, vil du ikke længere have de fordele som Guldmedlemskabet giver dig, men du må nøjes med ”gratis” medlemskabsfunktionerne. Den dag du genaktivere vil du have samme fordel som tidligere.<br><br>
+                    Hvorfor sætte medlemskab i bero!<br><br>
+                    Det kunne f.eks. være at du skal på ferie, men du har lige betalt for en ny måned, du vælger derfor at sætte dit medlemskab i bero indtil du kommer hjem. Når du er hjemme igen, genaktivere du medlemskabet, du vil herefter have din fulde måned til gode.</p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label for="">Indtast venligst adgangskoden</label>

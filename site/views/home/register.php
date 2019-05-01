@@ -105,12 +105,12 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Kodeord" name="password" id="password">
+                                <input type="password" class="form-control" placeholder="Adgangskode" name="password" id="password">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Gentag Kodeord" name="confirmPassword">
+                                <input type="password" class="form-control" placeholder="Gentag adgangskode" name="confirmPassword">
                             </div>
                         </div>
 
@@ -216,13 +216,13 @@
                 <input type="text" class="form-control" name="info">
             </div>
             <div class="form-group">
-                <label for="">Kodeord</label>
+                <label for="">Adgangskode</label>
                 <input type="password" class="form-control" name="password">
             </div>
             <button type="submit" class="btn btnSeefull">Log ind</button>
             <div class="clearfix text-center">
-                <a href="<?php echo site_url('register');?>" class="btn btn-link">Register</a>
-                <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Forgot password?</a>
+                <a href="<?php echo site_url('register');?>" class="btn btn-link">Opret medlemskab</a>
+                <a data-fancybox data-src="#modalFP" onclick="$.fancybox.close();" href="javascript:;" class="btn btn-link">Glemt adgangskode?</a>
             </div>
             <?php echo form_close();?>
         </div>
@@ -311,7 +311,7 @@
                 "email":{
                     required: 'Indtast din email',
                     email: 'Indtast venligst en gyldig e-mailadresse',
-                    remote: 'Denne email er i brug'
+                    remote: 'Dette email er i brug'
                 },
                 "name":{
                     required: 'Vælg dit brugernavn',
