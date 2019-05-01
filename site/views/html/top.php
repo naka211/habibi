@@ -53,7 +53,7 @@ if(!empty($user)){
                                 <div class="box_editProfile">
                                     <h3>
                                         <?php if(isGoldMember()){?>
-                                            Abonnement udløber: <?php echo @date('d/m/Y', $user->expired_at)?>
+                                            Guld medlem udløber: <?php echo @date('d/m/Y', $user->expired_at)?>
                                         <?php } else {?>
                                             Gratis medlem: Ubegrænset
                                         <?php }?>

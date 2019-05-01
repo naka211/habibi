@@ -280,8 +280,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?php echo form_open('user/setDeactivation/1', array('class'=>'deactivateForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
-                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <p class="f19" id="error-content">Deaktiver din konto.:<br><br>
+                    Vælger du at deaktivere din konto så sker følgende.<br><br>
+                    Din profil vil ikke længere være at finde for andre bruger.<br><br>
+                    Hvis du genaktiver din konto så vil du igen være synlig for andre brugere og dine favoritter, venner, beskeder og besøg vil være intakte.
+                </p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label for="">Indtast venligst adgangskoden</label>
@@ -301,8 +304,9 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?php echo form_open('user/deleteAccount', array('class'=>'deleteForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim a arcu et rutrum. Phasellus vel fringilla mi. Nunc convallis sapien sit amet pretium aliquam. Integer nec pharetra elit, nec aliquam justo.<br><br>
-                    Quisque est massa, lobortis eu efficitur sed, tempus scelerisque orci. Suspendisse interdum massa non nisl mollis mollis. Nullam lacinia, metus interdum accumsan feugiat, arcu mi venenatis neque, quis tristique dui arcu ut lectus.</p>
+                <p class="f19" id="error-content">Slet konto.:<br><br>
+                    Vælger du at slette din konto så slettes alt, herunder billeder og al historik som du har haft på siden.<br><br>
+                    Det betyder at hvis du vil benytte siden igen så skal du starte helt forfra med en ny profil samt billeder.</p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label for="">Indtast venligst adgangskoden</label>
