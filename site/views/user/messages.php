@@ -70,7 +70,8 @@
                     <ul>
                     </ul>
                     <form class="frm_Chat" action="" method="POST" role="form">
-                        <input type="text" class="form-control" id="message" placeholder="Skriv en besked her.........">
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........."></textarea>
+                        <!--<input type="text" class="form-control" id="message" placeholder="Skriv en besked her.........">-->
                         <button type="button" class="btn btnSend">SEND</button>
                     </form>
                 </div>
