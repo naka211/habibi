@@ -703,6 +703,23 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
+    function changePassword(){
+        $user = $this->session->userdata('user');
+        if ($this->input->post('password') && $this->input->post('repassword')) {
+            if ($this->input->post('password') != $this->input->post('repassword')) {
+                $this->session->set_flashdata('message', "Genadgangskode er forkert");
+                redirect(site_url('user/update'));
+            } else {
+                $DB['password'] = md5($this->input->post('password'));
+            }
+        }
+        $this->user->saveUser($DB, $user->id);
+        $savedUser = $this->user->getUser($user->id);
+        $this->session->set_userdata('user', $savedUser);
+        $this->session->set_flashdata('message', "Dit nye kodeord er ændret");
+        redirect(site_url('user/update'));
+    }
+
     /**
      *upgrade to gold member
      */

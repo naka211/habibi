@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label for="">Abonnement udløber:</label>
+                                        <label for="">Guld medlem udløber:</label>
                                         <label for=""><?php echo date('d/m/Y', $user->expired_at);?></label>
                                     </div>
                                 </div>
@@ -202,18 +202,7 @@
                                     </div>
                                 </div>
                             <?php }?>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label for="">Vælg kodeord (min. 6 karakter):</label>
-                                    <input type="password" name="password" class="form-control" id="password">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label for="">Gentag Kodeord:</label>
-                                    <input type="password" name="repassword" class="form-control">
-                                </div>
-                            </div>
+
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Indtast venligst adgangskoden for at opdatere din profil</label>
@@ -222,7 +211,25 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btnadd_friend">Opdatere</button>
-
+                    <?php echo form_close();?>
+                    <?php echo form_open('user/changePassword', array('id'=>'frm_changePass', 'class'=>'frm_efitProfile'));?>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Ændre adgangskode (min. 6 karakter):</label>
+                                <input type="password" name="password" class="form-control" id="password">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Gentag ny adgangskode:</label>
+                                <input type="password" name="repassword" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btnadd_friend">Opdatere</button>
+                    <?php echo form_close();?>
                     <?php if($user->type == 2){?>
                         <hr>
                         <h3 style="margin: 0;">Standby af dit medlemskab</h3>
@@ -242,7 +249,7 @@
                     <?php }?>
 
                     <a href="javascript:void(0);" data-fancybox data-src="#modalDelete" class="btn btnDeleteAcc">Slet konto</a>
-                    <?php echo form_close();?>
+
                 </div>
             </div>
 
@@ -347,16 +354,7 @@
                             csrf_site_name: token_value
                         }
                     }
-                },/*
-                "password":{
-                    required:true,
                 },
-                "repassword": {
-                    equalTo: {
-                        depends: isPasswordPresent,
-                        param: "#password"
-                    }
-                },*/
                 "currentPassword": {
                     required:true
                 }
@@ -370,15 +368,36 @@
                 "name":{
                     required: 'Indtast din navn',
                     remote: 'Dette brugernavn er i brug'
-                },/*
-                "password":{
-                    minlength: "Adgangskoden skal være på mellem {0} tegn."
                 },
-                "repassword": {
-                    equalTo: 'Genadgangskoden er ikke som kodeord'
-                },*/
                 "currentPassword": {
                     required: 'Indtast din nuværende adgangskode',
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        });
+
+        $("#frm_changePass").validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().after());
+            },
+            rules: {
+                "password":{
+                    required:true,
+                    minlength: 6
+                },
+                "repassword": {
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                "password":{
+                    required: "Indtast din ny adgangskode",
+                    minlength: "Ny adgangskoden skal være på mellem {0} tegn."
+                },
+                "repassword": {
+                    equalTo: 'Genadgangskoden er ikke som adgangskoden'
                 }
             },
             submitHandler: function(form){
