@@ -362,7 +362,7 @@ class Ajax extends MX_Controller{
                 $html .= '<li class="other">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
                             <div class="message">
-                                <p>'.$message->message.'</p>
+                                <p>'.nl2br($message->message).'</p>
                             </div>
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
                         </li>';
@@ -370,7 +370,7 @@ class Ajax extends MX_Controller{
                 $html .= '<li class="you">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
                             <div class="message">
-                                <p>'.$message->message.'</p>
+                                <p>'.nl2br($message->message).'</p>
                             </div>
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
                         </li>';
