@@ -37,7 +37,7 @@ if(!empty($user)){
                         <div class="box_user_content">
                             <h4 class="media-heading"><?php echo $user->name;?></h4>
                             <?php if(isGoldMember()){?>
-                                <a>Abonnement udløber: <?php echo @date('d/m/Y', $user->expired_at)?></a>
+                                <a>Guld medlem udløber: <?php echo @date('d/m/Y', $user->expired_at)?></a>
                             <?php } else {?>
                                 <a>Gratis medlem: Ubegrænset</a>
                             <?php }?>

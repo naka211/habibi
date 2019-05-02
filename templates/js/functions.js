@@ -455,19 +455,24 @@ $(document).ready(function() {
 
     sendMessage = function (profileId) {
         var message = $("#message").val();
-        $.ajax({
-            type: "post",
-            url: base_url+"ajax/sendMessage",
-            dataType: 'html',
-            data: {message: message, user_to: profileId,'csrf_site_name':token_value}
-        }).done(function(html){
-            $(".chat ul").append(html);
-            //Scroll to bottom of ul
-            $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-            $("#message").val("");
-            
-            $('.friend'+profileId).find('gray_friend_item').html(message);
-        });
+        if(message == ''){
+            $('#message-content').html('Indtast venligst en besked');
+            $.fancybox.open({src: '#modalMessage'});
+        } else {
+            $.ajax({
+                type: "post",
+                url: base_url+"ajax/sendMessage",
+                dataType: 'html',
+                data: {message: message, user_to: profileId,'csrf_site_name':token_value}
+            }).done(function(html){
+                $(".chat ul").append(html);
+                //Scroll to bottom of ul
+                $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
+                $("#message").val("");
+
+                $('.friend'+profileId).find('gray_friend_item').html(message);
+            });
+        }
     }
 
     //Handle enter key in message
