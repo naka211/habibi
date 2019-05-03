@@ -505,6 +505,7 @@
     }
     .frm_createprofile .form-control {
         font-size: 13px;
+        padding-left: 5px;
     }
     .content_profile .owl-theme {
         padding-left: 15px;
@@ -896,7 +897,7 @@
 
 }
 
-@media (max-width: 667px) {
+@media (max-width: 480px) {
 
 }
 

@@ -315,7 +315,7 @@
                 },
                 "name":{
                     required: 'Vælg dit brugernavn',
-                    remote: 'Denne brugernavn er i brug'
+                    remote: 'Dette brugernavn er i brug'
                 },
                 "year":{
                     required: 'Vælg dit fødselsår'
