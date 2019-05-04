@@ -605,15 +605,21 @@
         margin-top: 15px;
     }
     .chat ul {
-        height: auto;
-        min-height: 200px;
+        height: 240px;
+        /*min-height: 200px;*/
     }
     .frm_Chat .form-control {
         width: 100%;
         margin-bottom: 15px;
+        height: 100px;
+        padding: 5px 10px;
     }
     .modalChat h4 {
         margin-top: 20px;
+    }
+    .modalChat{
+        padding: 15px 10px 10px;
+        margin-top: 25px;
     }
     .btnLogout {
         padding: 10px;
@@ -674,6 +680,10 @@
     }
     .chat ul li{
         margin-top: 50px;
+    }
+    .gray_friend_item{
+        padding: 8px;
+        height: 35px;
     }
 }
 
