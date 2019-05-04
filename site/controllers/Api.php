@@ -730,6 +730,8 @@ class Api extends REST_Controller {
                 @unlink("./uploads/raw_thumb_user/".$newAvatar);
             }
             $this->user->updateAvatar($userId, $avatarName, 1);
+            //Correct the image orientation
+            $this->correctImageOrientation($avatarPath);
             //create thumb
             list($imgWidth, $imgHeight) = getimagesize($avatarPath);
             $config_resize['image_library'] = 'gd2';
@@ -905,11 +907,41 @@ class Api extends REST_Controller {
             $DB['status'] = 0;
             $this->user->savePhoto($DB);
 
+            //Correct the image orientation
+            $this->correctImageOrientation($photoPath);
+
+            list($imgWidth, $imgHeight) = getimagesize($photoPath);
+            //resize big image
+            if($imgWidth > 1200 || $imgHeight > 1200){
+                if($imgWidth > $imgHeight){
+                    $scaleIndex = 1200 / $imgWidth;
+                } else {
+                    $scaleIndex = 1200 / $imgHeight;
+                }
+
+                $config_resize['image_library'] = 'gd2';
+                $config_resize['source_image'] = $photoPath;
+                $config_resize['new_image'] = $photoPath;
+                $config_resize['thumb_marker'] = '';
+                $config_resize['create_thumb'] = TRUE;
+                $config_resize['maintain_ratio'] = true;
+                $config_resize['quality'] = "100%";
+                $config_resize['width']         = $imgWidth * $scaleIndex;
+                $config_resize['height']       = $imgHeight * $scaleIndex;
+                $dim = (intval($imgWidth) / intval($imgHeight)) - ($config_resize['width'] / $config_resize['height']);
+                $config_resize['master_dim'] = ($dim > 0)? "height" : "width";
+
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config_resize);
+
+                $this->image_lib->resize();
+            }
+
             $raw_photo = './uploads/raw_photo/'.$photoName;
             copy($photoPath, $raw_photo);
 
             //create thumb
-            list($imgWidth, $imgHeight) = getimagesize($photoPath);
+
             $config_resize['image_library'] = 'gd2';
             $config_resize['source_image'] = $photoPath;
             $config_resize['new_image'] = './uploads/thumb_user/'.$photoName;
@@ -942,6 +974,9 @@ class Api extends REST_Controller {
                 $this->image_lib->initialize($config_crop);
 
                 $this->image_lib->crop();
+
+                //save the raw thumb photo
+                copy('./uploads/thumb_photo/'.$photoName, './uploads/raw_thumb_photo/'.$photoName);
 
                 $user = $this->user->getUser($userId);
                 $this->_sendEmailAdminToApprovePhoto($user->name);
