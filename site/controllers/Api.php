@@ -941,7 +941,7 @@ class Api extends REST_Controller {
             copy($photoPath, $raw_photo);
 
             //create thumb
-
+            list($imgWidth, $imgHeight) = getimagesize($photoPath);
             $config_resize['image_library'] = 'gd2';
             $config_resize['source_image'] = $photoPath;
             $config_resize['new_image'] = './uploads/thumb_user/'.$photoName;
