@@ -2370,7 +2370,7 @@ ul.list_action li a .i_report {
 .chat ul {
     list-style: none;
     padding: 0;
-    margin: 15px 0 30px;
+    margin: 15px 0 15px;
     height: 500px;
     overflow: auto;
     border-bottom: 1px solid #f4f4f4;
