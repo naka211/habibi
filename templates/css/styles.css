@@ -2514,6 +2514,8 @@ ul.list_action li a .i_report {
     float: left;
     font-size: 13px;
     font-style: italic;
+    height: 35px;
+    max-height: 90px;
 }
 
 .frm_Chat .btnSend {

@@ -70,7 +70,7 @@
                     <ul>
                     </ul>
                     <form class="frm_Chat" action="" method="POST" role="form">
-                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........."></textarea>
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
                         <!--<input type="text" class="form-control" id="message" placeholder="Skriv en besked her.........">-->
                         <button type="button" class="btn btnSend">SEND</button>
                     </form>
@@ -92,6 +92,11 @@
         deleteMessage = function (profileId) {
             $.fancybox.destroy();
             callAjaxFunction(profileId, 'deleteMessage');
+        }
+
+        textAreaAdjust = function (o) {
+            o.style.height = "1px";
+            o.style.height = (5+o.scrollHeight)+"px";
         }
     });
 </script>

@@ -611,7 +611,8 @@
     .frm_Chat .form-control {
         width: 100%;
         margin-bottom: 15px;
-        height: 100px;
+        max-height: 90px;
+        height: 35px;
         padding: 5px 10px;
     }
     .modalChat h4 {

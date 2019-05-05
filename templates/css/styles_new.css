@@ -329,6 +329,7 @@ ul.list_intro.intro_footer li {
 	border-radius: 0;
 	box-shadow: none;
 	color: #000;
+	padding-left: 10px;
 }
 .frm_createprofile *::-webkit-input-placeholder {
 	color: #000!important;
