@@ -79,7 +79,7 @@
                     <ul>
                     </ul>
                     <form class="frm_Chat" action="" method="POST" role="form">
-                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........."></textarea>
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
                         <button type="button" class="btn btnSend">SEND</button>
                     </form>
                 </div>
@@ -144,6 +144,11 @@
         blurAvatar = function (profileId) {
             $.fancybox.destroy();
             callAjaxFunction(profileId, 'blurAvatar');
+        }
+
+        textAreaAdjust = function (o) {
+            o.style.height = "1px";
+            o.style.height = (5+o.scrollHeight)+"px";
         }
     });
 </script>
