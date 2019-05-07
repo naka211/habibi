@@ -2512,11 +2512,12 @@ ul.list_action li a .i_report {
     box-shadow: none;
     display: inline-block;
     float: left;
-    font-size: 13px;
+    font-size: 14px;
     /*font-style: italic;*/
     height: 35px;
     max-height: 90px;
     color: #000;
+    font-weight: 600;
 }
 
 .frm_Chat .btnSend {
