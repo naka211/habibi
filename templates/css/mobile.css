@@ -230,7 +230,7 @@
     }
     
     .box_favorites_item {
-        min-height: 230px;
+        min-height: 250px;
     }
     .box_form_group_age .form-control {
         width: 90px;
@@ -685,6 +685,9 @@
     .gray_friend_item{
         padding: 8px;
         height: 35px;
+    }
+    .col-xs-6{
+        padding: 0 5px;
     }
 }
 
