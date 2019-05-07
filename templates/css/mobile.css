@@ -231,6 +231,7 @@
     
     .box_favorites_item {
         min-height: 270px;
+        margin-bottom: 10px;
     }
     .box_form_group_age .form-control {
         width: 90px;
