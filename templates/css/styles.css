@@ -2423,7 +2423,7 @@ ul.list_action li a .i_report {
     padding: 10px;
     position: relative;
     color: #000;
-    font-size: 13px;
+    font-size: 14px;
     background-color: #ededed;
     border-radius: 3px;
 }
@@ -2517,7 +2517,6 @@ ul.list_action li a .i_report {
     height: 35px;
     max-height: 90px;
     color: #000;
-    font-weight: 600;
 }
 
 .frm_Chat .btnSend {
