@@ -117,7 +117,9 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Billedet er sendt til validering, det bliver gjort indefor 24 timer Mvh Kundeservice</p>
+                <p class="f19" id="error-content">Billedet er sendt til validering.<br><br>
+                    Der kan gå optil 24 timer før det bliver valideret.<br><br>
+                    Mvh. Habibidating.dk</p>
             </div>
             <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
         </div>

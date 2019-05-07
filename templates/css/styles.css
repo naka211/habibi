@@ -1604,6 +1604,8 @@ ul.list_action li a .i_report {
     font-weight: 300;
     font-size: 15px;
     margin: 12px 0 0;
+    font-weight: 500;
+    font-family: inherit;
 }
 
 .box_user_top .img_avatar_sm {
@@ -1834,10 +1836,11 @@ ul.list_action li a .i_report {
 }
 
 .frend_item h4 {
-    font-size: 16px;
+    font-size: 15px;
     margin-top: 0px;
     margin-bottom: 10px;
     height: 18px;
+    font-family: inherit;
 }
 
 .frend_item .age_city {
@@ -1987,9 +1990,8 @@ ul.list_action li a .i_report {
 
 .frm_searchFriend .form-control {
     border: none;
-    font-style: italic;
     box-shadow: none;
-    font-size: 13px;
+    font-size: 14px;
     padding-left: 40px;
     background-color: transparent;
     color: #000;
@@ -2018,11 +2020,12 @@ ul.list_action li a .i_report {
 }
 
 .box_favorites_item .name {
-    font-size: 13px;
+    font-size: 15px;
     text-transform: none;
     font-weight: 500;
     margin-top: 20px;
     margin-bottom: 7px;
+    font-family: inherit;
 }
 
 .box_favorites_item .nation {
