@@ -165,7 +165,7 @@ class Payment extends MX_Controller {
         $users = $this->user->getExpiredUsers();
         if($users){
             foreach ($users as $user){
-                if($user->stand_by_payment != 2){
+                if($user->stand_by_payment != 2 || $user->deactivation == 0){
                     $orderId = randomPassword();
                     if($user->package == 1){
                         $packageName = 'price1Month';

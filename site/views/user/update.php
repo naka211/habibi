@@ -232,10 +232,10 @@
                     <?php echo form_close();?>
                     <?php if($user->type == 2){?>
                         <hr>
-                        <h3 style="margin: 0;">Standby af dit medlemskab</h3>
+                        <h3 style="margin: 0;">Opsig dit Guld medlemskab</h3>
                         <?php if($user->stand_by_payment == 0){
                         ?>
-                            <a href="javascript:void(0);" data-fancybox data-src="#modalStandBy" class="btn btn_viewSearch">Sæt medlemskab I bero</a>
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalStandBy" class="btn btn_viewSearch">Nedgrader</a>
                             <?php } else {?>
                             <a href="<?php echo site_url('user/setStandByStatus/0')?>" class="btn btn_viewSearch">Start medlemskab igen</a>
                     <?php }}?>
@@ -264,10 +264,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?php echo form_open('user/setStandByStatus/1', array('class'=>'standByForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Hvis du vælger at sætte dit medlemskab i bero så sker følgende.:<br><br>
-                    Den dag du sætter dit medlemskab i bero, vil du ikke længere have de fordele som Guldmedlemskabet giver dig, men du må nøjes med ”gratis” medlemskabsfunktionerne. Den dag du genaktivere vil du have samme fordel som tidligere.<br><br>
-                    Hvorfor sætte medlemskab i bero!<br><br>
-                    Det kunne f.eks. være at du skal på ferie, men du har lige betalt for en ny måned, du vælger derfor at sætte dit medlemskab i bero indtil du kommer hjem. Når du er hjemme igen, genaktivere du medlemskabet, du vil herefter have din fulde måned til gode.</p>
+                <p class="f19" id="error-content">Når du nedgrader dit Guldmedlemskab bliver du efterfølgende gratismedlem.<br><br>
+                    Betalingsperioden kan være som følgende.:<br><br>
+                    Du har betalt den 1. i en måned og f.eks. nedgradere du den 12 i samme måned.<br><br>
+                    Ved udløbet af måneden bliver du automatisk nedgraderet til gratismedlem
+                    og du vil ikke længere blive opkrævet beløb for Guldmedlemskab.
+                </p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label for="">Indtast venligst adgangskoden</label>
@@ -287,10 +289,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?php echo form_open('user/setDeactivation/1', array('class'=>'deactivateForm'));?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Deaktiver din konto.:<br><br>
-                    Vælger du at deaktivere din konto så sker følgende.<br><br>
-                    Din profil vil ikke længere være at finde for andre bruger.<br><br>
-                    Hvis du genaktiver din konto så vil du igen være synlig for andre brugere og dine favoritter, venner, beskeder og besøg vil være intakte.
+                <p class="f19" id="error-content">Når du deaktiver din konto så sker følgende.<br><br>
+                    Din profil er ikke længere synlig for andre brugere.<br><br>
+                    Genaktiver du din profil så vil alle dine kontakter, beskeder, blink og favoritter være genskabt som de var tidligere.<br><br>
+                    Når du deaktiverer din profil vil din automatiske betaling stoppe med at blive trukket ved udgangen af betalingsperioden.<br><br>
+                    Vælger du at genaktivere din profil efter udløbet af betalingsperioden må du opgradere dig selv på ny til guldmedlem.
                 </p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
