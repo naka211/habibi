@@ -2422,11 +2422,10 @@ ul.list_action li a .i_report {
     display: block;
     padding: 10px;
     position: relative;
-    color: #555;
+    color: #000;
     font-size: 13px;
     background-color: #ededed;
     border-radius: 3px;
-    font-style: italic;
 }
 
 .chat ul li .message.blur p {
@@ -2514,9 +2513,10 @@ ul.list_action li a .i_report {
     display: inline-block;
     float: left;
     font-size: 13px;
-    font-style: italic;
+    /*font-style: italic;*/
     height: 35px;
     max-height: 90px;
+    color: #000;
 }
 
 .frm_Chat .btnSend {
