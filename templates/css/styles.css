@@ -2422,10 +2422,11 @@ ul.list_action li a .i_report {
     display: block;
     padding: 10px;
     position: relative;
-    color: #000;
+    color: #555;
     font-size: 13px;
     background-color: #ededed;
     border-radius: 3px;
+    font-style: italic;
 }
 
 .chat ul li .message.blur p {
