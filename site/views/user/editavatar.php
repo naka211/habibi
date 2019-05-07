@@ -58,7 +58,7 @@
                     </div>-->
                     <?php if($listImages){?>
                         <div class="text-center">
-                            Eller<br>
+                            <!--Eller<br>-->
                             <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage m_fz13" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
                         </div>
                     <?php }?>
