@@ -198,7 +198,7 @@ class Api extends REST_Controller {
 
     public function getOptions_get($type){
         if($type == 'all'){
-            $keyArr = array('land', 'region', 'relationship', 'training', 'children', 'religion', 'body', 'smoking', 'business', 'hair_color', 'eye_color', 'job_type', 'zodiac');
+            $keyArr = array('land', 'region', 'relationship', 'training', 'children', 'religion', 'body', 'smoking', 'business', 'hair_color', 'eye_color', 'job_type', 'zodiac', 'reason');
             foreach ($keyArr as $keyVal){
                 $typeArr[$keyVal] = $this->config->item($keyVal);
                 /*$typeArrTmp = array();
