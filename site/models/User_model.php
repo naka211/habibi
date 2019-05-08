@@ -1020,6 +1020,20 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
+    public function rejectRequestQuantity($userId){
+        $ignore = $this->getBlockedUserIds($userId);
+
+        $this->db->select('id');
+        $this->db->from('tb_user_friends');
+        $this->db->where('user_from', $userId);
+        $this->db->where('status', 2);
+        if($ignore){
+            $this->db->where_not_in('user_to', $ignore);
+        }
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     public function newFriendQuantity($user_id){
         $this->db->select('id');
         $this->db->from('tb_user_friendlist');

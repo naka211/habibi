@@ -106,6 +106,7 @@
                                                         <p>Afvist: d.<span><?php echo date("d/m/Y", $user->dt_update); ?></span> kl.<span><?php echo date("H:i", $user->dt_update); ?></span>
                                                         </p>
                                                         <a <?php echo $reAddFriendLink;?> class="btn btnadd_friend" style="margin-bottom: 0px;">Venneanmodning</a>
+                                                        <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn btn_cancel_request" style="margin: 10px 0 0">Annuller</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1331,7 +1331,7 @@ select:not([multiple]) {
 }
 
 .btnadd_friend {
-    padding: 5px 30px;
+    padding: 3px 30px;
     background: #ffa507;
     font-size: 14px;
     text-transform: uppercase;
