@@ -716,11 +716,16 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $imageData = $data->imageData;
 
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $tmp = explode(',', $imageData);
+        $imageData = $tmp[1];
         $imageData = str_replace(' ', '+', $imageData);
         $image = base64_decode($imageData);
 
-        $avatarName = random_string('md5').'.jpg';
+        $ini = substr($tmp[0], 11);
+        $type = explode(';', $ini);
+        $imageExtension = $type[0];
+
+        $avatarName = random_string('md5').'.'.$imageExtension;
         $avatarPath = './uploads/user/'.$avatarName;
         if(file_put_contents($avatarPath, $image)){
             $newAvatar = $this->user->getNewAvatar($userId);
@@ -894,11 +899,16 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $imageData = $data->imageData;
 
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $tmp = explode(',', $imageData);
+        $imageData = $tmp[1];
         $imageData = str_replace(' ', '+', $imageData);
         $image = base64_decode($imageData);
 
-        $photoName = random_string('md5').'.jpg';
+        $ini = substr($tmp[0], 11);
+        $type = explode(';', $ini);
+        $imageExtension = $type[0];
+
+        $photoName = random_string('md5').'.'.$imageExtension;
         $photoPath = './uploads/photo/'.$photoName;
         if(file_put_contents($photoPath, $image)){
             $DB['userId'] = $userId;
@@ -944,7 +954,7 @@ class Api extends REST_Controller {
             list($imgWidth, $imgHeight) = getimagesize($photoPath);
             $config_resize['image_library'] = 'gd2';
             $config_resize['source_image'] = $photoPath;
-            $config_resize['new_image'] = './uploads/thumb_user/'.$photoName;
+            $config_resize['new_image'] = './uploads/thumb_photo/'.$photoName;
             $config_resize['thumb_marker'] = '';
             $config_resize['create_thumb'] = TRUE;
             $config_resize['maintain_ratio'] = true;
