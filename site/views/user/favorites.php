@@ -24,10 +24,12 @@
                                 <img src="<?php echo base_url();?>/uploads/<?php echo $avatarFolder;?>/<?php echo $user->avatar;?>" class="img-responsive">
                             </a>
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
+                            <?php if($isMobile == false){?>
                             <div class="favorites_footer">
                                 <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_addFriend" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a><?php }?>
                                 <a href="javascript:void(0)"; onclick="callAjaxFunction(<?php echo $user->id;?>, 'removeFavoriteInPage')" class="btn btn_addFriend">Fjern favorit</a>
                             </div>
+                            <?php }?>
                         </div>
                         <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
                         <p class="nation"><?php echo $user->land;?></p>

@@ -402,6 +402,7 @@ class User extends MX_Controller
 
         $data['list'] = $list;
 
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['page'] = 'user/favorites';
         $this->load->view('templates', $data);
     }
