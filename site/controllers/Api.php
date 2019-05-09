@@ -581,7 +581,10 @@ class Api extends REST_Controller {
     public function getPhotos_get($userId){
         $photos = $this->user->getPhoto($userId, 0);
         foreach($photos as $key=>$photo){
-            $photos[$key]->imagePath = base_url().'uploads/thumb_photo/'.$photos[$key]->image;
+            $photos[$key]->rawPhotoPath = base_url().'uploads/raw_photo/'.$photos[$key]->image;
+            $photos[$key]->photoPath = base_url().'uploads/photo/'.$photos[$key]->image;
+            $photos[$key]->rawThumbPhotoPath = base_url().'uploads/raw_thumb_photo/'.$photos[$key]->image;
+            $photos[$key]->thumbPhotoPath = base_url().'uploads/thumb_photo/'.$photos[$key]->image;
         }
         $this->_return(true, '', array('photos'=>$photos));
     }
