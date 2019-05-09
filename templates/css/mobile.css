@@ -678,7 +678,7 @@
         margin-left: 68px;
     }
     .btn_addFriend{
-        font-size: 10px;
+        font-size: 11px;
     }
     .chat ul li{
         margin-top: 50px;
@@ -694,9 +694,7 @@
         opacity: 1;
         padding: 5px;
         text-align: center;
-    }
-    .favorites_footer a{
-        padding: 0;
+        background: none;
     }
 }
 
