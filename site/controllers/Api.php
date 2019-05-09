@@ -922,11 +922,11 @@ class Api extends REST_Controller {
 
             list($imgWidth, $imgHeight) = getimagesize($photoPath);
             //resize big image
-            if($imgWidth > 1200 || $imgHeight > 1200){
+            if($imgWidth > 1500 || $imgHeight > 1500){
                 if($imgWidth > $imgHeight){
-                    $scaleIndex = 1200 / $imgWidth;
+                    $scaleIndex = 1500 / $imgWidth;
                 } else {
-                    $scaleIndex = 1200 / $imgHeight;
+                    $scaleIndex = 1500 / $imgHeight;
                 }
 
                 $config_resize['image_library'] = 'gd2';
