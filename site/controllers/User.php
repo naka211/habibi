@@ -449,6 +449,7 @@ class User extends MX_Controller
 
         $data['list'] = $userList;
 
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['page'] = 'user/blocklist';
         $this->load->view('templates', $data);
     }
