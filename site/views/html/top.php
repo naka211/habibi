@@ -13,8 +13,8 @@ if(!empty($user)){
     $newFriendQuantity = $this->user->newFriendQuantity($user->id);
     $newFriendQuantityHTML = !empty($newFriendQuantity) ? '<span>' . $newFriendQuantity . '</span>' : '';
 
-    if(!empty($unreadMessageQuantity) || !empty($blinkingQuantity) || !empty($friendRequestQuantity) || !empty($newFriendQuantity)){
-        $notificationTotal = $unreadMessageQuantity + $blinkingQuantity + $friendRequestQuantity + $newFriendQuantity;
+    if(!empty($unreadMessageQuantity) || !empty($blinkingQuantity) || !empty($friendRequestQuantity) || !empty($rejectRequestQuantity) || !empty($newFriendQuantity)){
+        $notificationTotal = $unreadMessageQuantity + $blinkingQuantity + $friendRequestQuantity + $rejectRequestQuantity + $newFriendQuantity;
         $mark = '<span>'.$notificationTotal.'</span>';
     } else {
         $mark = '';
