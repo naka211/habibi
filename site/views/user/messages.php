@@ -13,8 +13,9 @@
                     if(!in_array($user->id, $ignore)){
                     if(isGoldMember()){
                         $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true, \''.$user->name.'\')"';
+                        $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                     } else {
-                        $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+                        $messageLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }
             ?>
             <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
@@ -22,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="friend_item_avatar">
-                                <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>">
+                                <a <?php echo $profileLink;?>>
                                 <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
                                     <img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
                                 <?php } else {?>
