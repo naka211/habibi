@@ -796,7 +796,8 @@ class Api extends REST_Controller {
         $blurIndex = $data->blurIndex;
         $imageData = $data->imageData;
 
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $tmp = explode(',', $imageData);
+        $imageData = $tmp[1];
         $imageData = str_replace(' ', '+', $imageData);
         $image = base64_decode($imageData);
 
@@ -1009,7 +1010,8 @@ class Api extends REST_Controller {
         $blurIndex = $data->blurIndex;
         $imageData = $data->imageData;
 
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $tmp = explode(',', $imageData);
+        $imageData = $tmp[1];
         $imageData = str_replace(' ', '+', $imageData);
         $image = base64_decode($imageData);
 
