@@ -327,8 +327,8 @@
         top: -20px;
     }
     .swiper_banner .swiper-slide .img_blur img {
-        height: 60px;
-        width: 77px;
+        height: 11vh;
+        width: 15vh;
     }
     .img_blur {
         margin-bottom: 10px;
