@@ -23,7 +23,7 @@
                                             <tbody>
                                             <tr>
                                                 <th>Alder:</th>
-                                                <td><?php echo printAge($user->year);?></td>
+                                                <td><?php echo printAge($user->id);?></td>
                                             </tr>
                                             <tr>
                                                 <th>Højde: </th>

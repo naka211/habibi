@@ -313,9 +313,21 @@ function getContent($id, $type = 'content'){
     }
 }
 
-function printAge($year){
-    if(!empty($year)){
-        $age = (int)date('Y') - $year;
+function printAge($userId){
+    $ci = &get_instance();
+    if(!empty($userId)){
+        $ci->db->select('day, month, year, birthday')->from('user');
+        $ci->db->where("id",$userId);
+        $user = $ci->db->get()->row();
+        if(!empty($user->birthday)){
+            $birthDate = explode("/", $user->birthday);
+        } else {
+            $birthday = '1/1/'.$user->year;
+            $birthDate = explode("/", $birthday);
+        }
+        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+            ? ((date("Y") - $birthDate[2]) - 1)
+            : (date("Y") - $birthDate[2]));
         return $age.' år';
     } else {
         return '';

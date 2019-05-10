@@ -36,7 +36,7 @@
                                 <?php if(isGoldMember()){?>
                                     <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?><?php if($user->seen == 0){?><span class="new">Ny</span><?php } ?></h4>
                                 <?php }?>
-                                <p class="age_city"><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
+                                <p class="age_city"><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                 <p>Modtaget: d. <span><?php echo date("d/m/Y", $user->sent_time); ?></span> kl.<span><?php echo date("H:i", $user->sent_time); ?></span></p>
                                 <?php if(isFriend($user->id) == false){?><a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a><?php }?>
                                 <a <?php echo $sendBlinkLink;?> class="btn bntMessage">Send blink</a>

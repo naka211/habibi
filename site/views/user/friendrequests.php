@@ -37,7 +37,7 @@
                                                         <?php if(isGoldMember()){?>
                                                             <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?><span class="new">Ny</span></h4>
                                                         <?php }?>
-                                                        <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
+                                                        <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                                         <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
                                                         <a href="javascript:void(0);" <?php echo $acceptLink;?> class="btn bntMessage">Acceptere</a>
@@ -67,7 +67,7 @@
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-ms-9 col-xs-12">
                                                         <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
-                                                        <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
+                                                        <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                                         <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
                                                         <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn bntBlock">Annuller anmodning</a>
@@ -102,7 +102,7 @@
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-ms-9 col-xs-12">
                                                         <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
-                                                        <p><?php echo printAge($user->year); ?> – <?php echo $user->region; ?></p>
+                                                        <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                                         <p>Afvist: d.<span><?php echo date("d/m/Y", $user->dt_update); ?></span> kl.<span><?php echo date("H:i", $user->dt_update); ?></span>
                                                         </p>
                                                         <a <?php echo $reAddFriendLink;?> class="btn btnadd_friend" style="margin-bottom: 0px;">Venneanmodning</a>
