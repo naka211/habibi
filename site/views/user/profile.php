@@ -118,7 +118,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                                 <td><?php echo $profile->job_type?$profile->job_type:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
-                                                <th>Born:</th>
+                                                <th>Børn:</th>
                                                 <td><?php echo $profile->children?$profile->children:'Ej oplyst';?></td>
                                             </tr>
                                             <tr>
