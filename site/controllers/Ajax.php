@@ -757,7 +757,7 @@ class Ajax extends MX_Controller{
                             </div>
                             <h5 class="name">'.$profile->name.' '.$onlineIcon.'</h5>
                             <p class="nation">'.$profile->land.'</p>
-                            <p class="old">'.printAge($profile->year).' – <span class="area">'.$profile->region.'</span></p>
+                            <p class="old">'.printAge($profile->id).' – <span class="area">'.$profile->region.'</span></p>
                         </div>
                     </div>';
         }

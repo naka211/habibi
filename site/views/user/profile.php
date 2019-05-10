@@ -55,7 +55,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                             <tbody>
                                             <tr>
                                                 <th>Alder:</th>
-                                                <td><?php echo printAge($profile->year);?></td>
+                                                <td><?php echo printAge($profile->id);?></td>
                                             </tr>
                                             <tr>
                                                 <th>Højde: </th>
