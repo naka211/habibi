@@ -74,9 +74,7 @@ class Api extends REST_Controller {
                 $this->user->updateLogin($user->id, 1);
 
                 //To update the avatar path
-                $user->avatarPath = base_url().'uploads/user/'.$user->avatar;
-                $user->rawThumbAvatarPath = base_url().'uploads/raw_thumb_user/'.$user->avatar;
-                $user->thumbAvatarPath = base_url().'uploads/thumb_user/'.$user->avatar;
+                $user->avatar = base_url().'uploads/thumb_user/'.$user->avatar;
 
                 $this->_return(true, '', array('user'=>$user, 'key'=>$returnKey));
             }
@@ -573,9 +571,13 @@ class Api extends REST_Controller {
     public function getInfo_get($userId){
         $user = $this->user->getUser($userId);
         if(!empty($user->new_avatar)){
-            $user->avatarPath = base_url().'uploads/thumb_user/'.$user->new_avatar;
+            $user->avatarPath = base_url().'uploads/user/'.$user->avatar;
+            $user->rawThumbAvatarPath = base_url().'uploads/raw_thumb_user/'.$user->avatar;
+            $user->thumbAvatarPath = base_url().'uploads/thumb_user/'.$user->avatar;
         } else {
-            $user->avatarPath = base_url().'uploads/thumb_user/'.$user->avatar;
+            $user->avatarPath = base_url().'uploads/user/'.$user->avatar;
+            $user->rawThumbAvatarPath = base_url().'uploads/raw_thumb_user/'.$user->avatar;
+            $user->thumbAvatarPath = base_url().'uploads/thumb_user/'.$user->avatar;
         }
         $this->_return(true, '', array('user'=>$user));
     }
