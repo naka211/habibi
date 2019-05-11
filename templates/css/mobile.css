@@ -198,9 +198,10 @@
         padding: 0;
     }
     .frend_item .btn, .frend_item .new {
-        margin-right: 0;
+        margin-right: 3px;
         font-size: 12px;
         padding: 5px 10px;
+        margin-top: 5px;
     }
     .box_top_infoProfile {
         padding: 0;
@@ -380,13 +381,14 @@
     }
 
     ul.list_blurring li {
-        font-size: 13px;
+        font-size: 11px;
         line-height: 1.5em;
         margin-bottom: 10px;
     }
 
     ul.list_blurring li::before {
-        font-size: 20px;
+        font-size: 14px;
+        --size: 20px;
     }
 
     .btnMore {
@@ -484,7 +486,10 @@
         height: auto;
     }
     .modalBlur p {
-        font-size: 14px;
+        font-size: 11px;
+    }
+    .modalBlur h4{
+        font-size: 16px;
     }
     ul.list_intro li{
         background-size: 20px;
