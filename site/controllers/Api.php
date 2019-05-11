@@ -105,7 +105,7 @@ class Api extends REST_Controller {
             $new_password = $this->randomPassword(12, 1, "lower_case,upper_case,numbers");
             $content = 'Kære ' . $user->name . '<br /><br />
                     Din nye adgangskode er: <b>'.$new_password[0].'</b><br /><br />
-                    Har du spørgsmål kontakt info@zeduuce.com<br /><br />
+                    Har du spørgsmål kontakt info@habibidating.dk<br /><br />
                     Med venlig hilsen<br/>
                     <a href="'.base_url().'">Habibidating.dk®</a>';
             $sent = $this->general_model->sendEmail([$user->email], 'Habibidating.dk - Glemt adgangskode', $content);
@@ -654,7 +654,7 @@ class Api extends REST_Controller {
                         '.$linkProfileName.' er rapporteret af '.$userName.'.<br />
                         Grund: '.$reason.'<br /><br />
                         <a href="'.base_url().'">Habibidating.dk®</a>';
-        $sent = $this->general_model->sendEmail(['reportprofile@zeduuce.com'], 'Habibidating.dk - Bruger rapport', $content);
+        $sent = $this->general_model->sendEmail(['reportprofile@habibidating.dk'], 'Habibidating.dk - Bruger rapport', $content);
         if($sent){
             $id = $this->user->saveReport($userId, $profileId, $reason);
             if($id == false){
@@ -1259,7 +1259,7 @@ class Api extends REST_Controller {
                         '.$userName.' har uploadet en avatar, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Habibidating.dk®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$userName.'har uploadet en avatar', $content);
+        $this->general_model->sendEmail(['approvepicture@habibidating.dk'], 'Habibidating.dk - '.$userName.'har uploadet en avatar', $content);
     }
 
     private function _sendEmailAdminToApprovePhoto($userName){
@@ -1268,7 +1268,7 @@ class Api extends REST_Controller {
                         '.$userName.' har uploadet billede, se venligst dette link for at tjekke det: '.$link.'<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Habibidating.dk®</a>';
-        $this->general_model->sendEmail(['approvepicture@zeduuce.com'], 'Habibidating.dk - '.$userName.'har uploadet billede', $content);
+        $this->general_model->sendEmail(['approvepicture@habibidating.dk'], 'Habibidating.dk - '.$userName.'har uploadet billede', $content);
     }
     private function _checkPassword($userId, $password){
         $correctUser = $this->user->getUser($userId, null, md5($password));

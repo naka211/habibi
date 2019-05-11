@@ -156,7 +156,7 @@
         </div>
         <div class="panel-body">
           <h1>Information contact</h1>
-          <p><label>Email:</label> admin@zeduuce.com</p>
+          <p><label>Email:</label> admin@habibidating.dk</p>
         </div>
         </div>
         <!-- End Panel Projects Stats -->
