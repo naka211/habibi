@@ -1027,7 +1027,7 @@ class User extends MX_Controller
         if($sent){
             $this->user->saveReport($userId, $profileId, $reason);
         }
-        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice');
+        customRedirectWithMessage($_SERVER['HTTP_REFERER'], 'Tak for anmeldelsen, vi undersøger den inden for 24 timer<br><br>Mvh. Habibidating.dk');
     }
 
     public function selectAvatarFromGallery(){
@@ -1196,7 +1196,7 @@ class User extends MX_Controller
         $emailTo = array('info@habibidating.dk');
         if(sendEmail($emailTo, 'contact', $DB, '')){
             $data['status'] = true;
-            $data['message'] = 'Tak for din henvendelse. Jeg vender hurtigst muligt tilbage til dig.';
+            $data['message'] = 'Tak for din henvendelse. Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
         } else {
             $data['status'] = false;
             $data['message'] = 'E-mailen sendes ikke';

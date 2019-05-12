@@ -90,5 +90,15 @@
         <!--<script type="text/javascript" charset="utf-8" src="<?php /*echo base_url();*/?>cometchat/js.php"></script>
         <link type="text/css" rel="stylesheet" media="all" href="<?php /*echo base_url();*/?>cometchat/css.php" />-->
     <?php }?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136865070-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136865070-1');
+    </script>
+
 
 </head>
