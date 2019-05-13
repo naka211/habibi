@@ -34,8 +34,11 @@ class Payment extends MX_Controller {
 
         $data['orderid'] = randomPassword();
         $data['description'] = 'gold-member';
-        //$data['amount'] = $this->config->item($packageName)*100;
-        $data['amount'] = 0;
+        if($user->first_payment == 0){
+            $data['amount'] = 0;
+        } else {
+            $data['amount'] = $this->config->item($packageName)*100;
+        }
         $data['continueurl'] = site_url('payment/upgradeSuccess/'.$user->id);
         $data['cancelurl'] = site_url('payment/upgradeCancel');
         $data['callbackurl'] = site_url('payment/upgradeCallback/'.$user->id);
@@ -60,6 +63,7 @@ class Payment extends MX_Controller {
         }
 
         $DB['type'] = 2;
+        $DB['first_payment'] = 1;
         $DB['paymenttime'] = time();
         $DB['expired_at'] = strtotime($plusTime, time());
         $this->user->saveUser($DB, $userId);
