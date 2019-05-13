@@ -229,7 +229,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
             </select>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <button type="button" class="btn btn_viewSearch" onclick="thanksClick();">Send anmeldelse</button>
+            <button type="submit" class="btn btn_viewSearch">Send anmeldelse</button>
         </div>
         <?php
         echo form_hidden('profileId', $profile->id);
@@ -240,26 +240,8 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
         ?>
     </div>
 </div>
-<div style="display: none;" id="modalNotification" class="animated-modal modalLogin">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p class="f19" id="error-content">Tak for anmeldesen vi undersøger den så hurtigt som muligt mvh kundeservice</p>
-            </div>
-            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="submitReportForm();">Luk</button>
-        </div>
-    </div>
-</div>
 <script>
     $(document).ready(function() {
-        thanksClick = function () {
-            $.fancybox.close();
-            $.fancybox.open({src: '#modalNotification'});
-        }
-        submitReportForm = function () {
-            $('#reportForm').submit();
-        }
-
         confirmDeleteMessage = function (profileId, text) {
             $('#confirmText').html(text);
             $('#modalConfirm .btnYes').attr('onclick', 'deleteMessage('+profileId+')');

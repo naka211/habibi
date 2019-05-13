@@ -1196,7 +1196,7 @@ class User extends MX_Controller
         $emailTo = array('info@habibidating.dk');
         if(sendEmail($emailTo, 'contact', $DB, '')){
             $data['status'] = true;
-            $data['message'] = 'Tak for din henvendelse. Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
+            $data['message'] = 'Tak for din henvendelse.<br>Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
         } else {
             $data['status'] = false;
             $data['message'] = 'E-mailen sendes ikke';

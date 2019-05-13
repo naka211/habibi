@@ -173,7 +173,7 @@
                                     <label class="radio-inline"><input type="radio" name="chat" value="0" <?php echo $user->chat == 0?'checked':'';?> style="margin-top: 2px;"> Off</label>
                                     <label class="radio-inline"><input type="radio" name="chat" value="1" <?php echo $user->chat == 1?'checked':'';?> style="margin-top: 2px;"> On</label>
                                     <span style="margin-left: 10px; font-weight: 500;">
-                                        (Her kan du slå din chat til og fra efter ønske.)
+                                        (Her kan du slå din chat til og fra efter ønske.) <a href="javascript:void(0);" data-fancybox data-src="#modalReadmore" class="btn bntMessage">Læs mere</a>
                                     </span>
                                 </div>
                             </div>
@@ -258,6 +258,14 @@
             </div>
         </div>
     </section>
+</div>
+<div style="display: none;" id="modalReadmore" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <p class="f19" id="message-content">Her kan du slå din chat til og fra efter eget ønske, accepteres en venneanmodning fra en anden bruger åbner chatten for vedkommende og chatten vil stadigvæk være lukket for andre bruger.</p>
+            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
+        </div>
+    </div>
 </div>
 <div style="display: none;" id="modalStandBy" class="animated-modal modalLogin">
     <div class="row">
