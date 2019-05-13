@@ -856,7 +856,10 @@ ul.list_infoNewsletter li {
 .btntoggle {
     display: inline-block;
 }
-
+.readmore, .readmore:hover{
+	color: #F5A623;
+	text-decoration: underline;
+}
 
 @media (max-width: 768px) {
 	.navbar-brand {

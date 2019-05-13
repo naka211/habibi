@@ -173,7 +173,7 @@
                                     <label class="radio-inline"><input type="radio" name="chat" value="0" <?php echo $user->chat == 0?'checked':'';?> style="margin-top: 2px;"> Off</label>
                                     <label class="radio-inline"><input type="radio" name="chat" value="1" <?php echo $user->chat == 1?'checked':'';?> style="margin-top: 2px;"> On</label>
                                     <span style="margin-left: 10px; font-weight: 500;">
-                                        (Her kan du slå din chat til og fra efter ønske.) <a href="javascript:void(0);" data-fancybox data-src="#modalReadmore" class="btn bntMessage">Læs mere</a>
+                                        (Her kan du slå din chat til og fra efter ønske.) <a href="javascript:void(0);" data-fancybox data-src="#modalReadmore" class="readmore">Læs mere</a>
                                     </span>
                                 </div>
                             </div>
