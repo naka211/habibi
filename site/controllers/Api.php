@@ -667,6 +667,15 @@ class Api extends REST_Controller {
         }
     }
 
+    public function getAmount_get($userId){
+        $user = $this->user->getUser($userId);
+        if($user->first_payment == 0){
+            return 0;
+        } else {
+            return $this->config->item('price1Month')*100;
+        }
+    }
+
     public function upgradeSuccess_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
@@ -682,6 +691,7 @@ class Api extends REST_Controller {
             $plusTime = '+1 day';
         }
         //Update payment
+        $DB['first_payment'] = 1;
         $DB['price'] = $data->amount/100;
         $DB['subscriptionid'] = $data->subscriptionid;
         $DB['orderid'] = $data->orderid;
