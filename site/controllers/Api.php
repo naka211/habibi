@@ -670,10 +670,12 @@ class Api extends REST_Controller {
     public function getAmount_get($userId){
         $user = $this->user->getUser($userId);
         if($user->first_payment == 0){
-            return 0;
+            $amount = 0;
         } else {
-            return $this->config->item('price1Month')*100;
+            $amount = $this->config->item('price1Month')*100;
         }
+
+        $this->_return(true, '', array('amount'=>$amount));
     }
 
     public function upgradeSuccess_put(){
