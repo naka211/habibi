@@ -921,6 +921,16 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    //Get fee
+    public function getDeletedAccount(){
+        $time = time() - (60*60*24*15);
+        $result = $this->db->select('id')
+            ->from('user')
+            ->where('deleted <', $time)
+            ->get()->result();
+        return $result;
+    }
+
     /**
      * @param $userId
      */

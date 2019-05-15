@@ -96,6 +96,7 @@ class User_model extends CI_Model{
             @unlink($this->config->item('root')."uploads/photo/".$image->image);
             @unlink($this->config->item('root')."uploads/thumb_photo/".$image->image);
             @unlink($this->config->item('root')."uploads/raw_photo/".$image->image);
+            @unlink($this->config->item('root')."uploads/raw_thumb_photo/".$image->image);
         }
         $this->db->where("userId", $id);
         $this->db->delete('user_image');

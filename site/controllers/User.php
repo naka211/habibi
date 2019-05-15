@@ -1334,6 +1334,84 @@ class User extends MX_Controller
         }
         redirect(site_url('newsletter'));
     }
+
+    public function checkAndDeleteAccount(){
+        $users = $this->user->getDeletedAccount();
+        if($users){
+            foreach ($users as $user){
+                $id = $user->id;
+
+                //
+                $this->db->where("user_from = $id OR user_to = $id");
+                $this->db->delete('user_blocked');
+                $this->db->reset_query();
+
+                $this->db->where("user_from = $id OR user_to = $id");
+                $this->db->delete('user_favorite');
+                $this->db->reset_query();
+
+                $this->db->where("user_from = $id OR user_to = $id");
+                $this->db->delete('user_friendlist');
+                $this->db->reset_query();
+
+                $this->db->where("user_from = $id OR user_to = $id");
+                $this->db->delete('user_friends');
+                $this->db->reset_query();
+
+                $this->db->where("from_user_id = $id OR to_user_id = $id");
+                $this->db->delete('user_kisses');
+                $this->db->reset_query();
+
+                $this->db->where("user_from = $id OR user_to = $id");
+                $this->db->delete('user_messages');
+                $this->db->reset_query();
+
+                $this->db->where("from_user = $id OR to_user = $id");
+                $this->db->delete('user_visit');
+                $this->db->reset_query();
+
+                $this->db->where("userFrom = $id OR userTo = $id");
+                $this->db->delete('user_reports');
+                $this->db->reset_query();
+
+                $this->db->select('avatar');
+                $this->db->from('user');
+                $this->db->where('id', $id);
+                $avatar = $this->db->get()->row()->avatar;
+
+                if($avatar != 'no-avatar1.png' && $avatar != 'no-avatar2.png'){
+                    @unlink($this->config->item('root')."uploads/user/".$avatar);
+                    @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
+                    @unlink($this->config->item('root')."uploads/raw_thumb_user/".$avatar);
+                }
+                $this->db->reset_query();
+
+                $this->db->select('id, image');
+                $this->db->from('user_image');
+                $this->db->where('userId', $id);
+                $result = $this->db->get()->result();
+                foreach ($result as $image){
+                    @unlink($this->config->item('root')."uploads/photo/".$image->image);
+                    @unlink($this->config->item('root')."uploads/thumb_photo/".$image->image);
+                    @unlink($this->config->item('root')."uploads/raw_photo/".$image->image);
+                    @unlink($this->config->item('root')."uploads/raw_thumb_photo/".$image->image);
+                }
+                $this->db->where("userId", $id);
+                $this->db->delete('user_image');
+                $this->db->reset_query();
+
+                $this->db->where('id',$id);
+                if($this->db->delete('user')){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            print_r($users);exit();
+        } else {
+            echo 'Nobody';
+        }
+    }
 }
 
 /* End of file welcome.php */
