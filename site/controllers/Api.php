@@ -1347,4 +1347,15 @@ class Api extends REST_Controller {
         } // if function exists
     }
 
+    public function setToFree_put(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+
+        $db['type'] = 1;
+        if($this->user->saveUser($db, $userId)){
+            $this->_return(true);
+        } else {
+            $this->_return(false, 'Can not set the status');
+        }
+    }
 }
