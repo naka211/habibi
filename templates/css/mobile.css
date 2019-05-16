@@ -328,12 +328,11 @@
         top: -20px;
     }
     .swiper_banner .swiper-slide .img_blur img {
-        height: 12vh;
-        width: 15vh;
+        height: auto;
     }
     .img_blur {
         margin-bottom: 10px;
-        height: 60px;
+        height: auto;
     }
     section.section_intro {
         /*height: auto;*/
