@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvbold';
     src: url('../css/fonts/nvv_gotham-bold-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-bold-webfont.woff') format("woff");
     font-weight: 400;
@@ -8,6 +9,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvbold_italic';
     src: url('../css/fonts/nvv_gotham-bolditalic-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-bolditalic-webfont.woff') format("woff");
     font-weight: 400;
@@ -15,6 +17,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvregular';
     src: url('../css/fonts/nvv_gotham-book-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-book-webfont.woff') format("woff");
     font-weight: 400;
@@ -22,6 +25,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvitalic';
     src: url('../css/fonts/nvv_gotham-bookitalic-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-bookitalic-webfont.woff') format("woff");
     font-weight: 400;
@@ -29,6 +33,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvregular';
     src: url('../css/fonts/nvv_gotham-thin-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-thin-webfont.woff') format("woff");
     font-weight: 400;
@@ -36,6 +41,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'gotham_nvvitalic';
     src: url('../css/fonts/nvv_gotham-thinitalic-webfont.woff2') format("woff2"), url('../css/fonts/nvv_gotham-thinitalic-webfont.woff') format("woff");
     font-weight: 400;
@@ -43,6 +49,7 @@
 }
 
 @font-face {
+    font-display: auto;
     font-family: 'svn-helgaregular';
     src: url('../css/fonts/svn-helga-webfont.woff2') format("woff2"), url('../css/fonts/svn-helga-webfont.woff') format("woff");
     font-weight: 400;
