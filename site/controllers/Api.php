@@ -703,7 +703,7 @@ class Api extends REST_Controller {
         $DB['cardno']    = $data->cardno;
 
         //Add to log
-        $this->addPaymentLog($user->id);
+        //$this->addPaymentLog($user->id);
 
         //Send email
         $sendEmailInfo['name']      = $user->name;
