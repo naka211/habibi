@@ -120,13 +120,14 @@ ul.list_blurring li::before {
 .btnMore {
 	background-image: linear-gradient(90deg, #D07C24 0%, #A7532F 100%);
 	border: 1px solid #F8A509;
-	font-family: 'gotham_nvvbold';
-	font-size: 12px;
+	/*font-family: 'gotham_nvvbold';*/
+	font-size: 14px;
 	color: #FFF;
 	letter-spacing: 0;
-	padding: 13px 60px;
+	padding: 10px 60px;
 	margin-top: 30px;
 	text-transform: uppercase;
+	font-weight: 500;
 }
 .btnMore:hover {
 	background-image: linear-gradient(90deg, #FF7800 0%, #A7532F 100%);

@@ -17,6 +17,7 @@ class Home extends MX_Controller {
     public function index(){
         $data = $ignore = array();
         $this->user->addMeta($this->_meta, $data);
+        $this->load->library('minify');
 
         $user = $this->session->userdata('user');
         if($user){
