@@ -1,4 +1,4 @@
-<!--<script src="<?php /*echo base_url().'templates/';*/?>js/intro.js"></script>-->
+<script src="<?php echo base_url().'templates/';?>js/intro.js"></script>
 <div id="page">
     <section class="banner">
         <div class="swiper_banner swiper-container">

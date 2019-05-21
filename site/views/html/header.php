@@ -44,14 +44,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">
 
     <?php
-    $this->minify->css('component.css, jquery.multiselect.css, mobile.css, peke.css, styles.css, styles_new.css');
-    echo $this->minify->deploy_css();
+    //$this->minify->css('component.css, jquery.multiselect.css, mobile.css, peke.css, styles.css, styles_new.css');
+    //echo $this->minify->deploy_css();
     ?>
-    <!--<link rel="stylesheet" href="<?php /*echo base_url().'templates/';*/?>css/jquery.multiselect.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php /*echo base_url().'templates/';*/?>css/component.css">
-    <link rel="stylesheet" href="<?php /*echo base_url().'templates/';*/?>css/styles.css" type="text/css">
-    <link rel="stylesheet" href="<?php /*echo base_url().'templates/';*/?>css/styles_new.css" type="text/css">
-    <link rel="stylesheet" href="<?php /*echo base_url().'templates/';*/?>css/mobile.css" type="text/css">-->
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/jquery.multiselect.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/component.css">
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/styles.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/styles_new.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url().'templates/';?>css/mobile.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,11 +76,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <?php
-    $this->minify->js('jquery.multiselect.js, all.js, intro.js');
-    echo $this->minify->deploy_js(FALSE);
+    //$this->minify->js('jquery.multiselect.js, all.js, intro.js');
+    //echo $this->minify->deploy_js(FALSE);
     ?>
-    <!--<script src="<?php /*echo base_url().'templates/';*/?>js/jquery.multiselect.js"></script>
-    <script src="<?php /*echo base_url().'templates/';*/?>js/all.js"></script>-->
+    <script src="<?php echo base_url().'templates/';?>js/jquery.multiselect.js"></script>
+    <script src="<?php echo base_url().'templates/';?>js/all.js"></script>
 
     <script type="text/javascript">
         $(window).on('load', function() {
