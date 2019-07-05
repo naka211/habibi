@@ -487,7 +487,7 @@ $(document).ready(function() {
     });
     ////
 
-    setInterval(checkSession, 10*60*1000);
+    //setInterval(checkSession, 10*60*1000);
     function checkSession() {
         $.ajax({
             url: base_url+"ajax/checkSession",
