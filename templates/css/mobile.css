@@ -699,6 +699,15 @@
         padding: 5px;
         background: none;
     }
+
+    .img_guldmedlem {
+        display: block;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .img_guldmedlem img {
+        width: 150px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {

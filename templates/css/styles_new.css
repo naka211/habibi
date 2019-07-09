@@ -983,3 +983,12 @@ ul.list_infoNewsletter li {
 .frm_searchFriend input:-ms-input-placeholder {
 	color: #000 !important;
 }
+
+
+.img_guldmedlem {
+	display: inline-block;
+	margin-left: 15px;
+}
+.img_guldmedlem img {
+	width: 200px;
+}
