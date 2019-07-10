@@ -20,7 +20,7 @@
                         <h2><?php echo getContent(13, 'title');?></h2>
                         <?php echo getContent(13, 'content');?>
                         <a href="<?php echo site_url('register');?>" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
-                        <span class="img_guldmedlem"><img src="<?php echo base_url().'templates/';?>images/1x/guldmedlem.png" alt="" class="img-fluid"></span>
+                        <span class="img_guldmedlem"><img src="<?php echo base_url().'templates/';?>images/1x/guldmedlem.gif" alt="" class="img-fluid"></span>
                     </div>
                     <div class="w_mouse">
                         <svg class="svg_mouseScroll" xmlns="http://www.w3.org/2000/svg" width="16" height="37" viewBox="0 0 34.375 80.375">
