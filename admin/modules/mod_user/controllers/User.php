@@ -1,36 +1,41 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class User extends CI_Controller{
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class User extends CI_Controller
+{
     public $module_name = "";
     private $message = "";
     public $language = "";
-    function __construct(){
+
+    function __construct()
+    {
         parent::__construct();
         $this->module_name = $this->router->fetch_module();
-        $this->session->set_userdata(array('url'=>uri_string()));
-        $this->load->model('user_model','user');
+        $this->session->set_userdata(array('url' => uri_string()));
+        $this->load->model('user_model', 'user');
         //$this->lang->load('user');
         $this->language = $this->lang->lang();
     }
 
-    function index($page=0){
-        $this->check->check('view','','',base_url());
-        if($this->check->check('add')){
-            $data['add'] = $this->module_name.'/user/add';
+    function index($page = 0)
+    {
+        $this->check->check('view', '', '', base_url());
+        if ($this->check->check('add')) {
+            $data['add'] = $this->module_name . '/user/add';
         }
-        if($this->check->check('export')){
-            $data['export'] = $this->module_name.'/user/export';
+        if ($this->check->check('export')) {
+            $data['export'] = $this->module_name . '/user/export';
         }
 
-        if($this->input->get('name')){
+        if ($this->input->get('name')) {
             $search['name'] = $this->input->get('name');
-            $this->session->set_userdata('search',$search);
+            $this->session->set_userdata('search', $search);
         } else {
             $this->session->unset_userdata('search');
         }
 
-        if($page > 0){
-            $this->session->set_userdata('offset',$page);
-        }else{
+        if ($page > 0) {
+            $this->session->set_userdata('offset', $page);
+        } else {
             $this->session->unset_userdata('offset');
         }
 
@@ -39,16 +44,18 @@ class User extends CI_Controller{
         $data['page'] = 'user/list';
         $this->load->view('templates', $data);
     }
-    function search(){
-        if($this->input->post()){
+
+    function search()
+    {
+        if ($this->input->post()) {
             $name = $this->input->post('name');
-            if($name){
+            if ($name) {
                 $search['name'] = $name;
-            }else{
+            } else {
                 $search['name'] = "";
             }
-            $this->session->set_userdata('search',$search);
-        }else{
+            $this->session->set_userdata('search', $search);
+        } else {
             $search['name'] = "";
             $this->session->unset_userdata('search');
         }
@@ -57,56 +64,59 @@ class User extends CI_Controller{
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
-	}
-    function getContent(){
-        if($this->input->get('limit')){
+    }
+
+    function getContent()
+    {
+        if ($this->input->get('limit')) {
             $limit = $_GET['limit'];
-        }else{
+        } else {
             $limit = 10;
         }
-        if($this->session->userdata('offset')){
+        if ($this->session->userdata('offset')) {
             $offset = $this->session->userdata('offset');
-        }else{
+        } else {
             $offset = $this->input->get('offset');
         }
         //SEARCH
         $search = $this->session->userdata('search');
         //SEARCH
         $total = $this->user->get_num_data($search);
-        $list = $this->user->get_all_data($limit,$offset,$search);
-        if($list){
-            foreach($list as $row){
+        $list = $this->user->get_all_data($limit, $offset, $search);
+        if ($list) {
+            foreach ($list as $row) {
                 $data = new stdClass();
                 $data->id = $row->id;
                 $data->name = $row->name;
-                if($row->new_avatar){
-                    $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->new_avatar.'" width="150" />';
-                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/acceptAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Accept"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
-                    $data->avatar .= ' <a href="'.site_url($this->module_name.'/user/rejectAvatar/'.$row->id).'" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
-                }else{
-                    $data->avatar = '<img src="'.base_url_site()."uploads/raw_thumb_user/".$row->avatar.'" width="150" />';
+                if ($row->new_avatar) {
+                    $data->avatar = '<img src="' . base_url_site() . "uploads/raw_thumb_user/" . $row->new_avatar . '" width="150" />';
+                    $data->avatar .= ' <a href="' . site_url($this->module_name . '/user/acceptAvatar/' . $row->id) . '" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Accept"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
+                    $data->avatar .= ' <a href="' . site_url($this->module_name . '/user/rejectAvatar/' . $row->id) . '" class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                } else {
+                    $data->avatar = '<img src="' . base_url_site() . "uploads/raw_thumb_user/" . $row->avatar . '" width="150" />';
                 }
-                $data->age = (int)date('Y') - $row->year . ' år';
+                /*$data->age = (int)date('Y') - $row->year . ' år';*/
+                $data->age = $this->printAge($row->birthday, $row->year);
                 $data->region = $row->region;
-                if($row->type == 2){
+                if ($row->type == 2) {
                     $data->membership = "Gold";
-                }else{
+                } else {
                     $data->membership = "Silver";
                 }
                 $data->dt_create = $row->dt_create;
                 //ACTION
                 $data->action = "";
-                $data->action .= ($this->check->check('edit'))?icon_edit($this->module_name.'/user/edit/'.$row->id.'/'.$offset):"";
-                $data->action .= '<span id="publish'.$row->id.'">';
-                $data->action .= ($this->check->check('edit'))?icon_active("'user'","'id'",$row->id,$row->bl_active):"";
+                $data->action .= ($this->check->check('edit')) ? icon_edit($this->module_name . '/user/edit/' . $row->id . '/' . $offset) : "";
+                $data->action .= '<span id="publish' . $row->id . '">';
+                $data->action .= ($this->check->check('edit')) ? icon_active("'user'", "'id'", $row->id, $row->bl_active) : "";
                 $data->action .= '</span>';
-                if($this->check->check('del')){
-                    $data->action .= '<input type="hidden" id="linkDelete-'.$row->id.'" name="linkDelete-'.$row->id.'" value="'.site_url($this->module_name."/user/del/").'"/>';
+                if ($this->check->check('del')) {
+                    $data->action .= '<input type="hidden" id="linkDelete-' . $row->id . '" name="linkDelete-' . $row->id . '" value="' . site_url($this->module_name . "/user/del/") . '"/>';
                     $data->action .= icon_delete($row->id);
                 }
                 $rows[] = $data;
             }
-        }else{
+        } else {
             $rows = array();
         }
         $return['rows'] = $rows;
@@ -115,38 +125,40 @@ class User extends CI_Controller{
         echo json_encode($return);
         return;
     }
-    function add(){
-        $this->check->check('add','','',base_url());
-		$this->form_validation->set_rules('name',"Name",'trim|required');
-        $this->form_validation->set_rules('email',"Email",'trim|required|valid_email');
-        if($this->input->post('password')){
+
+    function add()
+    {
+        $this->check->check('add', '', '', base_url());
+        $this->form_validation->set_rules('name', "Name", 'trim|required');
+        $this->form_validation->set_rules('email', "Email", 'trim|required|valid_email');
+        if ($this->input->post('password')) {
             $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passwordconfirm]');
             $this->form_validation->set_rules('passwordconfirm', 'Password confirmation', 'trim|required');
         }
-        $this->form_validation->set_rules('birthday',"Birthday",'trim|required');
-        $this->form_validation->set_rules('gender',"Gender",'trim|required');
-		if($this->form_validation->run()== FALSE){
-			$this->message = validation_errors();
-		}else{
-            $config['upload_path'] = $this->config->item('root')."uploads/user/";
-    		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-    		$config['max_size']	= $this->config->item('maxupload');
-    		$config['encrypt_name']	= TRUE;  //rename to random string image
+        $this->form_validation->set_rules('birthday', "Birthday", 'trim|required');
+        $this->form_validation->set_rules('gender', "Gender", 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->message = validation_errors();
+        } else {
+            $config['upload_path'] = $this->config->item('root') . "uploads/user/";
+            $config['allowed_types'] = 'gif|jpg|jpeg|png';
+            $config['max_size'] = $this->config->item('maxupload');
+            $config['encrypt_name'] = TRUE;  //rename to random string image
             $this->load->library('upload', $config);
-    		if(isset($_FILES['avatar']['name'])&&$_FILES['avatar']['name']!=""){
-    			if ($this->upload->do_upload('avatar')){	
-    				$data_img = $this->upload->data();
-    			} else {
-    				$this->session->set_flashdata('message',"Upload image failed");
-                    redirect(site_url($this->module_name.'/user/add'));
-    			}
-    		}else {
-    			$data_img['file_name'] = NULL;
-    		}
+            if (isset($_FILES['avatar']['name']) && $_FILES['avatar']['name'] != "") {
+                if ($this->upload->do_upload('avatar')) {
+                    $data_img = $this->upload->data();
+                } else {
+                    $this->session->set_flashdata('message', "Upload image failed");
+                    redirect(site_url($this->module_name . '/user/add'));
+                }
+            } else {
+                $data_img['file_name'] = NULL;
+            }
             $DB['avatar'] = $data_img['file_name'];
             $DB['name'] = $this->input->post('name');
             $DB['email'] = $this->input->post('email');
-            if($this->input->post('password')){
+            if ($this->input->post('password')) {
                 $DB['password'] = md5($this->input->post('password'));
             }
             $birthday = explode("/", $this->input->post('birthday'));
@@ -160,10 +172,10 @@ class User extends CI_Controller{
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
             $id = $this->user->save_data($DB);
-            if($id){                  
-                $this->session->set_flashdata('message',lang('admin.save_successful'));
-                redirect(site_url($this->module_name.'/user/index'));
-            }else{
+            if ($id) {
+                $this->session->set_flashdata('message', lang('admin.save_successful'));
+                redirect(site_url($this->module_name . '/user/index'));
+            } else {
                 $this->message = lang('admin.save_unsuccessful');
             }
         }
@@ -172,38 +184,40 @@ class User extends CI_Controller{
         $data['page'] = 'user/add';
         $this->load->view('templates', $data);
     }
-    function edit($id,$page = 0){
-        $this->check->check('add','','',base_url());
-		$this->form_validation->set_rules('name',"Name",'trim|required');
-        $this->form_validation->set_rules('email',"Email",'trim|required|valid_email');
-        if($this->input->post('password')){
+
+    function edit($id, $page = 0)
+    {
+        $this->check->check('add', '', '', base_url());
+        $this->form_validation->set_rules('name', "Name", 'trim|required');
+        $this->form_validation->set_rules('email', "Email", 'trim|required|valid_email');
+        if ($this->input->post('password')) {
             $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passwordconfirm]');
             $this->form_validation->set_rules('passwordconfirm', 'Password confirmation', 'trim|required');
         }
-        $this->form_validation->set_rules('gender',"Gender",'trim|required');
-		if($this->form_validation->run()== FALSE){
-			$this->message = validation_errors();
-		}else{
-            $config['upload_path'] = $this->config->item('root')."uploads/user/";
-    		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-    		$config['max_size']	= $this->config->item('maxupload');
-    		$config['encrypt_name']	= TRUE;  //rename to random string image
+        $this->form_validation->set_rules('gender', "Gender", 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->message = validation_errors();
+        } else {
+            $config['upload_path'] = $this->config->item('root') . "uploads/user/";
+            $config['allowed_types'] = 'gif|jpg|jpeg|png';
+            $config['max_size'] = $this->config->item('maxupload');
+            $config['encrypt_name'] = TRUE;  //rename to random string image
             $this->load->library('upload', $config);
-    		if(isset($_FILES['avatar']['name'])&&$_FILES['avatar']['name']!=""){
-    			if ($this->upload->do_upload('avatar')){	
-    				$data_img = $this->upload->data();
+            if (isset($_FILES['avatar']['name']) && $_FILES['avatar']['name'] != "") {
+                if ($this->upload->do_upload('avatar')) {
+                    $data_img = $this->upload->data();
                     $DB['avatar'] = $data_img['file_name'];
-    			} else {
-    				$this->session->set_flashdata('message',"Upload image failed");
-                    redirect(site_url($this->module_name.'/user/edit/'.$id.'/'.$page));
-    			}
-    		}
+                } else {
+                    $this->session->set_flashdata('message', "Upload image failed");
+                    redirect(site_url($this->module_name . '/user/edit/' . $id . '/' . $page));
+                }
+            }
             $DB['name'] = $this->input->post('name');
             $DB['email'] = $this->input->post('email');
-            if($this->input->post('password')){
+            if ($this->input->post('password')) {
                 $DB['password'] = md5($this->input->post('password'));
             }
-            if(!empty($this->input->post('birthday'))){
+            if (!empty($this->input->post('birthday'))) {
                 $birthday = explode("/", $this->input->post('birthday'));
                 $DB['day'] = $birthday[0];
                 $DB['month'] = $birthday[1];
@@ -217,11 +231,11 @@ class User extends CI_Controller{
             $DB['description'] = $this->input->post('description');
             $DB['dt_update'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = $this->input->post('bl_active');;
-            $id = $this->user->save_data($DB,$id);
-            if($id){                  
-                $this->session->set_flashdata('message',lang('admin.save_successful'));
-                redirect(site_url($this->module_name.'/user/index/'.$page));
-            }else{
+            $id = $this->user->save_data($DB, $id);
+            if ($id) {
+                $this->session->set_flashdata('message', lang('admin.save_successful'));
+                redirect(site_url($this->module_name . '/user/index/' . $page));
+            } else {
                 $this->message = lang('admin.save_unsuccessful');
             }
         }
@@ -231,18 +245,20 @@ class User extends CI_Controller{
         $data['page'] = 'user/edit';
         $this->load->view('templates', $data);
     }
-    function del(){
-        $check = $this->check->check('del','','');
-        if($check){
-            $id = $this->input->post('id',true);
-            if($this->user->delete_data($id)){
+
+    function del()
+    {
+        $check = $this->check->check('del', '', '');
+        if ($check) {
+            $id = $this->input->post('id', true);
+            if ($this->user->delete_data($id)) {
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
-            }else{
+            } else {
                 $data['status'] = false;
                 $data['message'] = lang('admin.delete_unsuccessful');
             }
-        }else{
+        } else {
             $data['status'] = false;
             $data['message'] = lang('admin.delete_unsuccessful');
         }
@@ -250,57 +266,61 @@ class User extends CI_Controller{
         echo json_encode($data);
         return;
     }
-    function dels(){
-        $this->check->check('dels','','');
-        $itemid = $this->input->post('id',true);
-        if($itemid){
-            for($i = 0; $i < sizeof($itemid); $i++){
-                if($itemid[$i]){
-                    if($this->user->delete_data($itemid[$i])){
+
+    function dels()
+    {
+        $this->check->check('dels', '', '');
+        $itemid = $this->input->post('id', true);
+        if ($itemid) {
+            for ($i = 0; $i < sizeof($itemid); $i++) {
+                if ($itemid[$i]) {
+                    if ($this->user->delete_data($itemid[$i])) {
                         $data['status'] = true;
                         $data['message'] = lang('admin.delete_successful');
-                    }else{
+                    } else {
                         $data['status'] = false;
                         $data['message'] = lang('admin.delete_unsuccessful');
                     }
                 }
             }
-        }else{
+        } else {
             $data['status'] = false;
             $data['message'] = lang('admin.delete_unsuccessful');
-        }	
+        }
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
     }
-    function export(){
-        $this->check->check('export','','',base_url());
+
+    function export()
+    {
+        $this->check->check('export', '', '', base_url());
         $data['title'] = 'Xuất thông tin thành viên';
-        $this->form_validation->set_rules('tungay','Ngày bắt đầu','required');
-        $this->form_validation->set_rules('denngay','Ngày kết thúc','required');
-        if($this->form_validation->run() == false){
+        $this->form_validation->set_rules('tungay', 'Ngày bắt đầu', 'required');
+        $this->form_validation->set_rules('denngay', 'Ngày kết thúc', 'required');
+        if ($this->form_validation->run() == false) {
             $this->pre_message = validation_errors();
-        }else{
-            $from = $this->input->post('tungay')." 00:00:00";
-            $to = $this->input->post('denngay')." 23:59:59";
-            $list = $this->member->export_user($from,$to);
+        } else {
+            $from = $this->input->post('tungay') . " 00:00:00";
+            $to = $this->input->post('denngay') . " 23:59:59";
+            $list = $this->member->export_user($from, $to);
             ini_set('memory_limit', '10000M');
             memory_get_peak_usage(true);
-            require $this->config->item('phpexcel').'PHPExcel.php';
+            require $this->config->item('phpexcel') . 'PHPExcel.php';
             // Create new PHPExcel object
             $this->phpexcel = new PHPExcel();
             $this->phpexcel->getProperties()->setCreator("Viet Tien Phong Advertising Company Ltd.")
-							 ->setLastModifiedBy("Viet Tien Phong Advertising Company Ltd.")
-							 ->setTitle("Thong Ke")
-							 ->setSubject("Thong Ke")
-							 ->setDescription("File Thong Ke. Author: VietBuzzAD.")
-							 ->setKeywords("office 2007 openxml php")
-							 ->setCategory("Thong Ke");
+                ->setLastModifiedBy("Viet Tien Phong Advertising Company Ltd.")
+                ->setTitle("Thong Ke")
+                ->setSubject("Thong Ke")
+                ->setDescription("File Thong Ke. Author: VietBuzzAD.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Thong Ke");
             // Set properties
             $this->phpexcel->getDefaultStyle()->getFont()->setName('Arial');
             $this->phpexcel->getDefaultStyle()->getFont()->setSize(13);
             // SET HEADER FILE EXCEL
-            $this->phpexcel->setActiveSheetIndex(0)->setCellValue('A1', 'Danh sách thành viên từ: '.date("d/m/Y",strtotime($this->input->post('tungay'))).' đến ngày '.date("d/m/Y",strtotime($this->input->post('denngay'))));
+            $this->phpexcel->setActiveSheetIndex(0)->setCellValue('A1', 'Danh sách thành viên từ: ' . date("d/m/Y", strtotime($this->input->post('tungay'))) . ' đến ngày ' . date("d/m/Y", strtotime($this->input->post('denngay'))));
             //STT
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('A3', 'STT');
             $this->phpexcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
@@ -353,15 +373,15 @@ class User extends CI_Controller{
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('Q3', 'Loại Phản Hồi');
             $this->phpexcel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
             */
-            $i=4;
-            foreach($list as $key=>$rs):
-                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('A'.$i, $key+1);
-                
-                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('B'.$i, $rs->name);
-                
-                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('C'.$i, $rs->avatar);
-                
-                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('D'.$i, $rs->password);
+            $i = 4;
+            foreach ($list as $key => $rs):
+                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('A' . $i, $key + 1);
+
+                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('B' . $i, $rs->name);
+
+                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('C' . $i, $rs->avatar);
+
+                $this->phpexcel->setActiveSheetIndex(0)->setCellValue('D' . $i, $rs->password);
                 /*
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('E'.$i, $rs->province);
                 
@@ -426,69 +446,72 @@ class User extends CI_Controller{
             $this->phpexcel->getActiveSheet()->setTitle('Thongke');
             // Set active sheet index to the first sheet, so Excel opens this as the first sheet
             $this->phpexcel->setActiveSheetIndex(0);
-            
-            $date = date('H_i_s_d_m_Y',time());
+
+            $date = date('H_i_s_d_m_Y', time());
             // Redirect output to a client's web browser (Excel5)
             header('Content-Type: application/vnd.ms-excel');
             #header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="thanh_vien_'.$date.'.xls"');
+            header('Content-Disposition: attachment;filename="thanh_vien_' . $date . '.xls"');
             header('Cache-Control: max-age=0');
             // If you're serving to IE 9, then the following may be needed
             header('Cache-Control: max-age=1');
             // If you're serving to IE over SSL, then the following may be needed
-            header ('Expires: Mon, 26 Jul 2020 05:00:00 GMT'); // Date in the past
-            header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-            header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-            header ('Pragma: public'); // HTTP/1.0
-            $objWriter = PHPExcel_IOFactory::createWriter( $this->phpexcel, 'Excel5');
+            header('Expires: Mon, 26 Jul 2020 05:00:00 GMT'); // Date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+            $objWriter = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel5');
             #$objWriter = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel2007');
             $objWriter->save('php://output');
             exit;
         }
         $data['message'] = $this->pre_message;
         $this->_templates['page'] = 'member/export';
-        $this->site_library->load($this->_templates['page'],$data);
+        $this->site_library->load($this->_templates['page'], $data);
     }
 
-    public function acceptAvatar($userId){
+    public function acceptAvatar($userId)
+    {
         $currentAvatar = $this->user->getCurrentAvatar($userId);
 
-        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png' ){
-            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$currentAvatar);
-            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
-            @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$currentAvatar);
+        if ($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png') {
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $currentAvatar);
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
         }
 
         $this->user->updateCurrentAvatarAndDeleteNewAvatar($userId);
 
         $user = $this->user->getUserInfo($userId);
-        $content = 'Hej '.$user->name.'<br /><br />
+        $content = 'Hej ' . $user->name . '<br /><br />
                         Din avatar er godkendt.<br /><br />
-                        <a href="'.base_url().'">Habibidating.dk®</a>';
+                        <a href="' . base_url() . '">Habibidating.dk®</a>';
         $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    public function rejectAvatar($userId){
+    public function rejectAvatar($userId)
+    {
         $newAvatar = $this->user->getNewAvatar($userId);
 
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."user".DIRECTORY_SEPARATOR.$newAvatar);
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."thumb_user".DIRECTORY_SEPARATOR.$newAvatar);
-        @unlink($this->config->item('root')."uploads".DIRECTORY_SEPARATOR."raw_thumb_user".DIRECTORY_SEPARATOR.$newAvatar);
+        @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $newAvatar);
+        @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $newAvatar);
+        @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $newAvatar);
 
         $this->user->deleteNewAvatar($userId);
 
         $user = $this->user->getUserInfo($userId);
-        $content = 'Hej '.$user->name.'<br /><br />
+        $content = 'Hej ' . $user->name . '<br /><br />
                         Din avatar er ikke godkendt.<br /><br />
-                        <a href="'.base_url().'">Habibidating.dk®</a>';
+                        <a href="' . base_url() . '">Habibidating.dk®</a>';
         $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er ikke godkendt', $content);
 
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html'){
+    function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html')
+    {
         $configEmail['mailtype'] = $mailType;
         $configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.unoeuro.com';
@@ -502,23 +525,37 @@ class User extends CI_Controller{
         $this->email->set_newline("\r\n");
         $this->email->initialize($configEmail);
         try {
-            foreach($emails as $email){
+            foreach ($emails as $email) {
                 $this->email->clear();
                 $this->email->to($email);
-                if($from == NULL ){
-                    $this->email->from('noreply@habibidating.dk ','Habibidating.dk');
-                }
-                else{
-                    $this->email->from($from,'Habibidating.dk');
+                if ($from == NULL) {
+                    $this->email->from('noreply@habibidating.dk ', 'Habibidating.dk');
+                } else {
+                    $this->email->from($from, 'Habibidating.dk');
                 }
                 $this->email->subject($subject);
                 $this->email->message($content);
                 $this->email->send();
             }
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
         return true;
     }
+
+    function printAge($birthday, $year)
+    {
+        if (!empty($birthday)) {
+            $birthDate = explode("/", $birthday);
+        } else {
+            $birthday = '1/1/' . $year;
+            $birthDate = explode("/", $birthday);
+        }
+        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[1], $birthDate[0], $birthDate[2]))) > date("md")
+            ? ((date("Y") - $birthDate[2]) - 1)
+            : (date("Y") - $birthDate[2]));
+        return $age . ' år';
+    }
 }
+
 ?>
