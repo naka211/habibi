@@ -60,8 +60,7 @@
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <input type="text" class="form-control" id="birthday" name="birthday" value="<?php echo $item->birthday;?>"
-                placeholder="01/01/1985" autocomplete="off" />
+                <input type="text" class="form-control" id="birthday" name="birthday" value="<?php echo $item->birthday;?>" autocomplete="off" />
             </div>
         </div>
     </div>
