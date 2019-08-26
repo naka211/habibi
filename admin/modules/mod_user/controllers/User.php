@@ -104,6 +104,11 @@ class User extends CI_Controller
                     $data->membership = "Silver";
                 }
                 $data->dt_create = $row->dt_create;
+                if($row->deactivation == 0){
+                    $data->active = ' <a class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
+                } else {
+                    $data->active = ' <a class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                }
                 //ACTION
                 $data->action = "";
                 $data->action .= ($this->check->check('edit')) ? icon_edit($this->module_name . '/user/edit/' . $row->id . '/' . $offset) : "";
