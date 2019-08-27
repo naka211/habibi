@@ -67,6 +67,18 @@
     <div class="row margin-bottom-10">
         <div class="col-sm-3">
             <div class="form-material">
+                <label class="control-label margin-top-10" for="">Year of birth:</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-material">
+                <input type="text" class="form-control" id="year" name="year" value="<?php echo $item->year;?>" autocomplete="off" />
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-sm-3">
+            <div class="form-material">
                 <label class="control-label margin-top-10" for="">Gender <span class="text-danger">*</span>:</label>
             </div>
         </div>
