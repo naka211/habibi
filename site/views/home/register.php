@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <select class="form-control" name="year">
                                     <option value="">Fødselsår</option>
-                                    <?php for($i = 1930; $i <= 2010; $i++){?>
+                                    <?php for($i = 1930; $i <= date('Y')-18; $i++){?>
                                         <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                     <?php }?>
                                 </select>
