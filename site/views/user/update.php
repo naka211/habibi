@@ -36,7 +36,7 @@
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label for="">År:</label>
-                                            <?php echo generateOptionsInRangeHTML('year', 1930, 2010, $user->year);?>
+                                            <?php echo generateOptionsInRangeHTML('year', 1930, date('Y')-18, $user->year);?>
                                         </div>
                                     </div>
                                 </div>
