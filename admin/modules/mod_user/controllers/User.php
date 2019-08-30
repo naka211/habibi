@@ -68,11 +68,17 @@ class User extends CI_Controller
 
     function getContent()
     {
-        if ($this->input->get('limit')) {
+        if($_GET['limit'] != 10){
             $limit = $_GET['limit'];
+            $this->session->set_userdata('limit', $limit);
         } else {
-            $limit = 10;
+            if($this->session->userdata('limit')){
+                $limit = $this->session->userdata('limit');
+            } else {
+                $limit = 10;
+            }
         }
+
         if ($this->session->userdata('offset')) {
             $offset = $this->session->userdata('offset');
         } else {

@@ -48,7 +48,7 @@ jQuery(document).ready(function(){
                 data-show-toggle="true"
                 data-show-columns="true"
                 data-show-export="true"
-                data-page-list="[5,10,20,50,100,200,ALL]"
+                data-page-list="[5,11,20,50,100,200,ALL]"
                 data-mobile-responsive="true">
                 <thead>
                     <tr>
