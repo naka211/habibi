@@ -461,86 +461,15 @@ class User extends MX_Controller
 
         if($this->input->post()){
             $this->_updateSearchDataFromForm();
+            //Prevent the resubmit message
+            redirect(site_url('user/searching'));
         }
 
         $searchData = $this->session->userdata('searchData');
 
         $user = $this->session->userdata('user');
 
-        /*$ignore = $this->user->getBlockedUserIds($user->id);
-        if ($user) {
-            $ignore[] = $user->id;
-        }*/
-        /** Search browsing*/
 
-        /*$year = date('Y', time());
-        $yearFrom       = $this->input->get('toAge')?$year - $this->input->get('toAge'):null;
-        $yearTo         = $this->input->get('fromAge')?$year - $this->input->get('fromAge'):null;
-        $land           = $this->input->get('land');
-        $region         = $this->input->get('region');
-        $gender         = $this->input->get('gender')?$this->input->get('gender'):(string)$user->find_gender;
-        $relationship   = $this->input->get('relationship');
-        $children       = $this->input->get('children');
-        $ethnic         = $this->input->get('ethnic');
-        $religion       = $this->input->get('religion');
-        $training       = $this->input->get('training');
-        $body           = $this->input->get('body');
-        $smoking        = $this->input->get('smoking');
-
-        $search = array();
-        if ($yearFrom) {
-            $search['yearFrom'] = $yearFrom;
-        }
-        if ($yearTo) {
-            $search['yearTo'] = $yearTo;
-        }
-        if ($land) {
-            $search['land'] = $land;
-        }
-        if ($region) {
-            $search['region'] = $region;
-        }
-        if ($gender) {
-            $search['gender'] = $gender;
-        }
-        if ($relationship) {
-            $search['relationship'] = $relationship;
-        }
-        if ($children) {
-            $search['children'] = $children;
-        }
-        if ($ethnic) {
-            $search['ethnic'] = $ethnic;
-        }
-        if ($religion) {
-            $search['religion'] = $religion;
-        }
-        if ($training) {
-            $search['training'] = $training;
-        }
-        if ($body) {
-            $search['body'] = $body;
-        }
-        if ($smoking) {
-            $search['smoking'] = $smoking;
-        }
-
-
-        $config['base_url'] = base_url() . '/user/searching';
-        $config['total_rows'] = $this->user->getNum($search, $ignore);
-        $config['per_page'] = $this->config->item('item_per_page');
-        $config['num_links'] = 2;
-        $config['uri_segment'] = $this->uri->total_segments();
-        //Get parameter for pagination
-        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-
-        $this->pagination->initialize($config);
-        $list = $this->user->getBrowsing($config['per_page'], (int)$offset, $search, $ignore);
-        $data['pagination'] = $this->pagination->create_links();
-
-        $data['list'] = $list;
-        $data['num'] = $config['total_rows'];*/
         $data['searchData'] = $searchData;
         $data['page'] = 'user/search';
         $this->load->view('templates', $data);
