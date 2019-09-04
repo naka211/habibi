@@ -992,17 +992,3 @@ ul.list_infoNewsletter li {
 .img_guldmedlem img {
 	width: 200px;
 }
-
-/* Remove the swiper*/
-.swiper_banner .swiper-slide.section_top {
-	padding: 445px 0;
-}
-.swiper_banner .swiper-slide, .swiper_banner.swiper-container {
-	height: auto !important;
-}
-section.section_intro {
-	padding: 100px 0;
-}
-.footer {
-	padding-bottom: 0;
-}

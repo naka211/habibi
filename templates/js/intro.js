@@ -36,8 +36,6 @@ $(function ($) {
     if(width <= 768){
         swiper.destroy(false,false);
     }
-
-    swiper.destroy(false,false);
 });
 
 
