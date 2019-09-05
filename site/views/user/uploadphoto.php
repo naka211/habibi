@@ -58,7 +58,7 @@
                             <div class="favorites_img">
                                 <a href="javascript:void(0);" class="btnClose_img" onclick="deletePhoto(<?php echo $image->id;?>)"><i class="fas fa-times-circle fa-2x"></i></a>
                                 <a href="<?php echo site_url('user/editphoto/'.$image->id)?>" class="btnEdit_img"><i class="far fa-edit fa-2x"></i></a>
-                                <a data-fancybox="gallery" href="<?php echo base_url();?>/uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
+                                <a data-fancybox="gallery" href="<?php echo base_url();?>uploads/photo/<?php echo $image->image;?>"><img src="<?php echo base_url();?>uploads/thumb_photo/<?php echo $image->image;?>" alt="" class="img-responsive"></a>
                                 <?php if($image->status == 0) echo 'Afventer godkendelse';?>
                             </div>
                         </div>
