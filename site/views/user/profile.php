@@ -165,7 +165,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                 ?>
                                 <div class="item">
                                     <a data-fancybox="gallery"
-                                       href="<?php echo base_url(); ?>uploads/raw_photo/<?php echo $image->image; ?>?<?php echo filemtime($image->image) ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $fileFolder.'/'.$image->image; ?>" class="img-responsive"></a>
+                                       href="<?php echo base_url(); ?>uploads/raw_photo/<?php echo $image->image; ?>?<?php echo time(); ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $fileFolder.'/'.$image->image; ?>" class="img-responsive"></a>
                                 </div>
                             <?php }
                         } else {?>
@@ -173,7 +173,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                 <div class="item">
                                     <a data-fancybox="gallery"
                                        href="<?php echo base_url(); ?>uploads/photo/<?php echo $image->image; ?>"><img
-                                                src="<?php echo base_url(); ?>uploads/thumb_photo/<?php echo $image->image; ?>?<?php echo filemtime($image->image) ?>"
+                                                src="<?php echo base_url(); ?>uploads/thumb_photo/<?php echo $image->image; ?>?<?php echo time(); ?>"
                                                 class="img-responsive"></a>
                                 </div>
                             <?php }
