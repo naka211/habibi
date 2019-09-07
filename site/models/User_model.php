@@ -1019,7 +1019,7 @@ class User_model extends CI_Model{
     public function friendRequestQuantity($userId){
         $ignore = $this->getBlockedUserIds($userId);
 
-        $this->db->select('id');
+        $this->db->select('uf.id');
         $this->db->from('tb_user_friends uf');
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
@@ -1036,7 +1036,7 @@ class User_model extends CI_Model{
     public function rejectRequestQuantity($userId){
         $ignore = $this->getBlockedUserIds($userId);
 
-        $this->db->select('id');
+        $this->db->select('uf.id');
         $this->db->from('tb_user_friends uf');
         $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
         $this->db->where("uf.user_to", $userId);
