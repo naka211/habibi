@@ -1020,9 +1020,12 @@ class User_model extends CI_Model{
         $ignore = $this->getBlockedUserIds($userId);
 
         $this->db->select('id');
-        $this->db->from('tb_user_friends');
-        $this->db->where('user_to', $userId);
-        $this->db->where('status', 0);
+        $this->db->from('tb_user_friends uf');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
+        $this->db->where("uf.user_to", $userId);
+        $this->db->where("uf.status", 0);
+        $this->db->where("u.deleted", null);
+
         if($ignore){
             $this->db->where_not_in('user_from', $ignore);
         }
@@ -1034,9 +1037,12 @@ class User_model extends CI_Model{
         $ignore = $this->getBlockedUserIds($userId);
 
         $this->db->select('id');
-        $this->db->from('tb_user_friends');
-        $this->db->where('user_from', $userId);
-        $this->db->where('status', 2);
+        $this->db->from('tb_user_friends uf');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
+        $this->db->where("uf.user_to", $userId);
+        $this->db->where("uf.status", 2);
+        $this->db->where("u.deleted", null);
+
         if($ignore){
             $this->db->where_not_in('user_to', $ignore);
         }
