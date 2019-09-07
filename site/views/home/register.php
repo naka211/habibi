@@ -73,7 +73,6 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <select class="form-control" name="gender">
-                                    <option value="">Køn</option>
                                     <option value="1">Mand</option>
                                     <option value="2">Kvinde</option>
                                 </select>
@@ -120,9 +119,8 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <select class="form-control" name="find_gender">
-                                    <option value="">Køn</option>
                                     <option value="1">Mand</option>
-                                    <option value="2">Kvinde</option>
+                                    <option value="2" selected>Kvinde</option>
                                 </select>
                             </div>
                         </div>
