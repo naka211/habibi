@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select class="form-control" name="gender">
+                                <select class="form-control" name="gender" id="gender">
                                     <option value="1">Mand</option>
                                     <option value="2">Kvinde</option>
                                 </select>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select class="form-control" name="find_gender">
+                                <select class="form-control" name="find_gender" id="find_gender" disabled>
                                     <option value="1">Mand</option>
                                     <option value="2" selected>Kvinde</option>
                                 </select>
@@ -352,5 +352,13 @@
                 }
             }
         });
+
+        $('#gender').change(function () {
+            if($('#gender').val() == 1){
+                $("#find_gender").val(2);
+            } else {
+                $("#find_gender").val(1);
+            }
+        })
     });
 </script>
