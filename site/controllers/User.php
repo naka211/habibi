@@ -1027,7 +1027,7 @@ class User extends MX_Controller
     private function _updateSearchDataAfterLogin(){
         $user = $this->session->userdata('user');
         $searchData = array();
-        /*$searchData['gender'][] = $user->find_gender;*/
+        $searchData['gender'][] = $user->find_gender;
         $searchData['order'] = 'newest';
         $searchData['fromAge'] = 18;
         $searchData['toAge'] = 90;

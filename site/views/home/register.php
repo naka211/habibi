@@ -73,6 +73,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <select class="form-control" name="gender" id="gender">
+                                    <option value="">Køn</option>
                                     <option value="1">Mand</option>
                                     <option value="2">Kvinde</option>
                                 </select>
@@ -118,7 +119,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select class="form-control" name="find_gender" id="find_gender" disabled>
+                                <select class="form-control" name="find_gender" id="find_gender" disabled style="background-image: none;">
                                     <option value="1">Mand</option>
                                     <option value="2" selected>Kvinde</option>
                                 </select>
