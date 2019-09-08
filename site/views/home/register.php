@@ -351,6 +351,10 @@
                 "personaldata":{
                     required:'Accepterer vilkår for brug af cookies og persondatapolitikken'
                 }
+            },
+            submitHandler: function(form) {
+                $('#find_gender').prop('disabled', false);
+                form.submit();
             }
         });
 
