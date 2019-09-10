@@ -1135,6 +1135,23 @@ class Api extends REST_Controller {
         }
     }
 
+    public function updateInfo_put(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
+            $this->_return(false, 'The password is not match.');
+        }
+        $userId = $data->userId;
+        unset($data->password);
+        unset($data->userId);
+        $data->birthday = $data->day . '/' . $data->month . '/' . $data->year;
+        $status = $this->user->saveUser($data, $userId);
+        if($status != false){
+            $this->_return(true);
+        } else {
+            $this->_return(false, 'Can not update information');
+        }
+    }
+
     public function changeCardSuccess_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
