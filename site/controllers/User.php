@@ -503,6 +503,12 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if ($this->input->post()) {
+            //Check created user
+            $user = $this->user->getUser('', $this->input->post('email'));
+            if (!empty($user)) {
+                customRedirectWithMessage('register', 'Dette email er i brug');
+            }
+            /////
 
             $DB['name'] = $this->input->post('name');
             $DB['email'] = $this->input->post('email');
