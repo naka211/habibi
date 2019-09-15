@@ -96,11 +96,36 @@ class Ajax extends CI_Controller{
 		 $field = $this->input->post('field');
 		 $id = $this->input->post('id');
          $fielddelete = $this->input->post('fielddelete');
-         $this->db->set($fielddelete,"");
-		 $this->db->where($field,$id);
-		 $this->db->update($table);
-		 echo true;
-         return;
+        if($table == 'tb_user' && $fielddelete == 'avatar'){
+            $this->db->select('gender, avatar');
+            $this->db->from('user');
+            $this->db->where("id", $id);
+            $user = $this->db->get()->row();
+            $avatar = $user->avatar;
+
+            if ($avatar != 'no-avatar1.png' && $avatar != 'no-avatar2.png') {
+                @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $avatar);
+                @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $avatar);
+                @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $avatar);
+            }
+            if($user->gender == 1){
+                $noAvatarName = 'no-avatar1.png';
+            } else {
+                $noAvatarName = 'no-avatar2.png';
+            }
+
+            $this->db->set('new_avatar', '');
+            $this->db->set('avatar', $noAvatarName);
+            $this->db->set('blurIndex', 0);
+            $this->db->where('id', $id);
+            $this->db->update('user');
+        } else {
+            $this->db->set($fielddelete,"");
+            $this->db->where($field,$id);
+            $this->db->update($table);
+        }
+        echo true;
+        return;
 	}
     function deletedata(){
         $table = $this->input->post('table');
