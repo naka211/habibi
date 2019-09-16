@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select class="form-control" name="gender">
+                                <select class="form-control" name="gender" id="gender">
                                     <option value="">Køn</option>
                                     <option value="1">Mand</option>
                                     <option value="2">Kvinde</option>
@@ -119,10 +119,9 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select class="form-control" name="find_gender">
-                                    <option value="">Køn</option>
+                                <select class="form-control" name="find_gender" id="find_gender" disabled style="background-image: none;">
                                     <option value="1">Mand</option>
-                                    <option value="2">Kvinde</option>
+                                    <option value="2" selected>Kvinde</option>
                                 </select>
                             </div>
                         </div>
@@ -352,7 +351,19 @@
                 "personaldata":{
                     required:'Accepterer vilkår for brug af cookies og persondatapolitikken'
                 }
+            },
+            submitHandler: function(form) {
+                $('#find_gender').prop('disabled', false);
+                form.submit();
             }
         });
+
+        $('#gender').change(function () {
+            if($('#gender').val() == 1){
+                $("#find_gender").val(2);
+            } else {
+                $("#find_gender").val(1);
+            }
+        })
     });
 </script>

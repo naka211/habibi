@@ -46,13 +46,13 @@
                                         <span class="i_line">−</span>
                                         <?php echo generateOptionsInRangeHTML('toWeight', 40, 220, !empty($searchData['toWeight'])?$searchData['toWeight']:'', 'kg');?>
                                     </div>
-                                    <div class="box_form_group">
+                                    <!--<div class="box_form_group">
                                         <p for="">Køn</p>
                                         <select class="form-control 3col active regionSelection" name="gender[]" id="gender" multiple="multiple">
-                                            <option value="1" <?php if(inSearch('gender', 1)) echo 'selected';?>>Mand</option>
-                                            <option value="2" <?php if(inSearch('gender', 2)) echo 'selected';?>>Kvinde</option>
+                                            <option value="1" <?php /*if(inSearch('gender', 1)) echo 'selected';*/?>>Mand</option>
+                                            <option value="2" <?php /*if(inSearch('gender', 2)) echo 'selected';*/?>>Kvinde</option>
                                         </select>
-                                    </div>
+                                    </div>-->
                                     <div class="box_form_group">
                                         <p for="">Forhold</p>
                                         <?php echo generateSelectInSearch('relationship');?>

@@ -1019,10 +1019,13 @@ class User_model extends CI_Model{
     public function friendRequestQuantity($userId){
         $ignore = $this->getBlockedUserIds($userId);
 
-        $this->db->select('id');
-        $this->db->from('tb_user_friends');
-        $this->db->where('user_to', $userId);
-        $this->db->where('status', 0);
+        $this->db->select('uf.id');
+        $this->db->from('tb_user_friends uf');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
+        $this->db->where("uf.user_to", $userId);
+        $this->db->where("uf.status", 0);
+        $this->db->where("u.deleted", null);
+
         if($ignore){
             $this->db->where_not_in('user_from', $ignore);
         }
@@ -1033,10 +1036,13 @@ class User_model extends CI_Model{
     public function rejectRequestQuantity($userId){
         $ignore = $this->getBlockedUserIds($userId);
 
-        $this->db->select('id');
-        $this->db->from('tb_user_friends');
-        $this->db->where('user_from', $userId);
-        $this->db->where('status', 2);
+        $this->db->select('uf.id');
+        $this->db->from('tb_user_friends uf');
+        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
+        $this->db->where("uf.user_to", $userId);
+        $this->db->where("uf.status", 2);
+        $this->db->where("u.deleted", null);
+
         if($ignore){
             $this->db->where_not_in('user_to', $ignore);
         }
