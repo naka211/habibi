@@ -1038,8 +1038,8 @@ class User_model extends CI_Model{
 
         $this->db->select('uf.id');
         $this->db->from('tb_user_friends uf');
-        $this->db->join('user as u', 'u.id = uf.user_from', 'inner');
-        $this->db->where("uf.user_to", $userId);
+        $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
+        $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 2);
         $this->db->where("u.deleted", null);
 
