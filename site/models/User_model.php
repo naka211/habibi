@@ -861,7 +861,7 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
-        $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE uv.from_user = '.$userId.' GROUP BY to_user)');
+        $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE from_user = '.$userId.' GROUP BY to_user)');
         $this->db->where("u.deactivation", 0);
         $this->db->where("u.deleted", null);
         if($ignore){
