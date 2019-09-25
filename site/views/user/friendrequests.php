@@ -68,7 +68,7 @@
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-ms-9 col-xs-12">
                                                         <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
                                                         <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
-                                                        <p>Modtaget: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
+                                                        <p>Sendt: d.<span><?php echo date("d/m/Y", $user->dt_create); ?></span> kl.<span><?php echo date("H:i", $user->dt_create); ?></span>
                                                         </p>
                                                         <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn bntBlock">Annuller anmodning</a>
                                                     </div>
