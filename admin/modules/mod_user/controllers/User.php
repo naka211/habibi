@@ -115,6 +115,12 @@ class User extends CI_Controller
                 } else {
                     $data->active = ' <a class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
                 }
+
+                if($row->deleted != null){
+                    $data->deleted = ' <a class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top"><i class="icon glyphicon glyphicon-ok" aria-hidden="true"></i></a>';
+                } else {
+                    $data->deleted = ' <a class="btn btn-icon btn-xs btn-danger waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top"><i class="icon glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                }
                 //ACTION
                 $data->action = "";
                 $data->action .= ($this->check->check('edit')) ? icon_edit($this->module_name . '/user/edit/' . $row->id . '/' . $offset) : "";

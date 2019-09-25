@@ -61,6 +61,7 @@ jQuery(document).ready(function(){
                         <th data-field="membership">Membership</th>
                         <th data-field="dt_create">Register date</th>
                         <th data-field="active">Active</th>
+                        <th data-field="deleted">Deleted</th>
                         <th class="text-center action" data-field="action"><?php echo lang('admin.functions');?></th>
                     </tr>
                 </thead>
