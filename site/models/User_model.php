@@ -1235,7 +1235,7 @@ class User_model extends CI_Model{
 
                         $this->db->select('message, seen, dt_create');
                         $this->db->from('user_messages');
-                        $this->db->where("user_from = $user->userId OR user_to = $user->userId");
+                        $this->db->where("(user_from = $user->userId AND user_to = $userId) OR (user_from = $userId AND user_to = $user->userId)");
                         $this->db->order_by('id', 'DESC');
                         $this->db->limit(1, 0);
                         $query = $this->db->get()->row();
