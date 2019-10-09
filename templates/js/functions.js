@@ -351,7 +351,18 @@ $(document).ready(function() {
             }
 
             if(link == 'requestAddFriendInFavorite'){
-                $('#requestAddFriendBtn'+profile_id).fadeOut();
+                $('#requestAddFriendBtn'+profile_id).attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'cancelAddFriendInFavorite')",
+                    "class" : "btn btn_cancel_request mb0",
+                });
+                $('#requestAddFriendBtn'+profile_id).text('Annuller anmodning');
+            }
+            if(link == 'cancelAddFriendInFavorite'){
+                $('#requestAddFriendBtn'+profile_id).attr({
+                    "onclick" : "callAjaxFunction("+profile_id+", 'requestAddFriendInFavorite')",
+                    "class" : "btn bntMessage",
+                });
+                $('#requestAddFriendBtn'+profile_id).text('Venneanmodning');
             }
             if(link == 'addFavoriteInPage'){
                 $('#addFavoriteBtn'+profile_id).fadeOut();

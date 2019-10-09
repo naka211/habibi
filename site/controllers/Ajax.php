@@ -317,6 +317,10 @@ class Ajax extends MX_Controller{
         $this->cancelAddFriend();
     }
 
+    public function cancelAddFriendInFavorite(){
+        $this->cancelAddFriend();
+    }
+
     public function acceptAddFriend(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
