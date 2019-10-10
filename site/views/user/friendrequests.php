@@ -93,10 +93,10 @@ $rejectRequestQuantityHTML = $rejectRequestQuantity != 0 ? '<span>' . $rejectReq
                                 if(!empty($rejectedRequests)) {
                                     foreach ($rejectedRequests as $key => $user) {
                                         if(isGoldMember()){
-                                            $reAddFriendLink = 'onclick="callAjaxFunction('.$user->id.', \'reAddFriend\')"';
+                                            //$reAddFriendLink = 'onclick="callAjaxFunction('.$user->id.', \'reAddFriend\')"';
                                             $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                                         } else {
-                                            $reAddFriendLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
+                                            //$reAddFriendLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                                         }
                                         ?>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 profile<?php echo $user->id;?>">
@@ -112,8 +112,8 @@ $rejectRequestQuantityHTML = $rejectRequestQuantity != 0 ? '<span>' . $rejectReq
                                                         <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                                         <p>Afvist: d.<span><?php echo date("d/m/Y", $user->dt_update); ?></span> kl.<span><?php echo date("H:i", $user->dt_update); ?></span>
                                                         </p>
-                                                        <a <?php echo $reAddFriendLink;?> class="btn btnadd_friend" style="margin-bottom: 0px;">Venneanmodning</a>
-                                                        <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn btn_cancel_request" style="margin: 10px 0 0">Annuller</a>
+                                                        <!--<a <?php /*echo $reAddFriendLink;*/?> class="btn btnadd_friend" style="margin-bottom: 0px;">Venneanmodning</a>-->
+                                                        <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriend')" class="btn btnUnfriend" style="margin: 10px 0 0">Slet</a>
                                                     </div>
                                                 </div>
                                             </div>
