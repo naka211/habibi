@@ -863,11 +863,6 @@ ul.list_infoNewsletter li {
 }
 
 @media (max-width: 768px) {
-	.navbar-brand {
-		width: 100%;
-	    float: none;
-	    display: block;
-	}
 	.caption {
 		top: 35%;
 	}

@@ -35,12 +35,12 @@
                     <section class="section_intro section_customerServices">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-md-4 col-xs-12">
                                     <div class="main_img_customerServices">
                                         <img src="<?php echo base_url().'uploads/content/'.getContent(18, 'image');?>" alt="" class="img-responsive img-circle">
                                     </div>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-6 col-md-6 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-md-8 col-xs-12">
                                     <div class="row list_img_small_blur">
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                             <div class="img_blur">
