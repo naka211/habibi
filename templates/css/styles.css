@@ -460,7 +460,8 @@ section.section_intro {
 }
 
 .navbar-nav > li > a > span,
-.text_menu > span {
+.text_menu > span,
+.nav-tabs span{
     display: inline-block;
     background: #fe0707;
     padding: 0 6px;
@@ -468,6 +469,7 @@ section.section_intro {
     font-size: 13px;
     font-family: 'Montserrat';
     font-weight: 500;
+    color: #fff;
 }
 
 .navbar-nav > li > a:hover > span, .nav > li.active > a > span{

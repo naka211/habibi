@@ -1,3 +1,10 @@
+<?php
+$user = getUser();
+$friendRequestQuantity = $this->user->friendRequestQuantity($user->id);
+$rejectRequestQuantity = $this->user->rejectRequestQuantity($user->id);
+$friendRequestQuantityHTML = $friendRequestQuantity != 0 ? '<span>' . $friendRequestQuantity . '</span>' : '';
+$rejectRequestQuantityHTML = $rejectRequestQuantity != 0 ? '<span>' . $rejectRequestQuantity . '</span>' : '';
+?>
 <div id="content">
     <section class="friend_list mt52">
         <div class="container">
@@ -5,9 +12,9 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#receivedSection">Modtagne</a></li>
+                            <li class="active"><a data-toggle="tab" href="#receivedSection">Modtagne <?php echo $friendRequestQuantityHTML;?></a></li>
                             <li><a data-toggle="tab" href="#sentSection">Sendte</a></li>
-                            <li><a data-toggle="tab" href="#rejectedSection">Afviste</a></li>
+                            <li><a data-toggle="tab" href="#rejectedSection">Afviste <?php echo $rejectRequestQuantityHTML;?></a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="receivedSection" class="tab-pane fade in active">
