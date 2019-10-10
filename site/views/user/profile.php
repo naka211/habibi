@@ -22,9 +22,9 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     <div class="img_avatar">
                         <?php if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) { ?>
                             <a data-fancybox="avatarGallery"
-                               href="<?php echo base_url(); ?>uploads/user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $profile->avatar;?>"></a>
+                               href="<?php echo base_url(); ?>uploads/user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $profile->avatar;?>"></a>
                          <?php } else {?>
-                            <img class="img-responsive" src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $profile->avatar;?>">
+                            <img class="img-responsive" src="<?php echo base_url();?>uploads/thumb_user/<?php echo $profile->avatar;?>">
                         <?php }?>
                     </div>
                 </div>
