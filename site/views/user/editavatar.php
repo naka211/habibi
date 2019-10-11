@@ -103,7 +103,7 @@
             <?php foreach ($listImages as $image){?>
                 <label>
                     <input type="radio" name="imageName" value="<?php echo $image->image;?>" />
-                    <img src="<?php echo base_url();?>/uploads/thumb_photo/<?php echo $image->image;?>" width="100">
+                    <img src="<?php echo base_url();?>uploads/thumb_photo/<?php echo $image->image;?>" width="100">
                 </label>
             <?php }?>
             <div class="text-center">

@@ -25,9 +25,9 @@
                             <div class="friend_item_avatar">
                                 <a <?php echo $profileLink;?>>
                                 <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
-                                    <img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
+                                    <img src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
                                 <?php } else {?>
-                                    <img src="<?php echo base_url(); ?>/uploads/thumb_user/<?php echo $user->avatar; ?>" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
+                                    <img src="<?php echo base_url(); ?>uploads/thumb_user/<?php echo $user->avatar; ?>" class="img-responsive <?php if(!isGoldMember() && $user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') echo 'blur'?>">
                                 <?php }?>
                                 </a>
                             </div>

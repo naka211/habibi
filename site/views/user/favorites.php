@@ -21,7 +21,7 @@
                                 $avatarFolder = 'thumb_user';
                             }
                             ?>
-                                <img src="<?php echo base_url();?>/uploads/<?php echo $avatarFolder;?>/<?php echo $user->avatar;?>" class="img-responsive">
+                                <img src="<?php echo base_url();?>uploads/<?php echo $avatarFolder;?>/<?php echo $user->avatar;?>" class="img-responsive">
                             </a>
                             <div class="gallery_number"><i class="i_img"></i> <span><?php echo countImages($user->id);?></span></div>
                             <?php if($isMobile == false){?>

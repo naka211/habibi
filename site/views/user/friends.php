@@ -30,9 +30,9 @@
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="frend_item_avatar">
                                     <?php if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id))) { ?>
-                                        <a href="<?php echo site_url('user/profile/'.$profile->id.'/'.$profile->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $profile->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$profile->id.'/'.$profile->name);?>"><img src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $profile->avatar;?>" class="img-responsive"></a>
                                     <?php } else {?>
-                                        <a href="<?php echo site_url('user/profile/'.$profile->id.'/'.$profile->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $profile->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$profile->id.'/'.$profile->name);?>"><img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $profile->avatar;?>" class="img-responsive"></a>
                                     <?php }?>
                                 </div>
                             </div>

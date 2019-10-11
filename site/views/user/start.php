@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mh">
                 <div class="box_label_member">
-                    <img src="<?php echo base_url();?>/templates/images/1x/premium.png" alt="" class="img-responsive">
+                    <img src="<?php echo base_url();?>templates/images/1x/premium.png" alt="" class="img-responsive">
                 </div>
             </div>
         </div>
@@ -82,9 +82,9 @@
                         <div class="item">
                             <div class="box_user">
                                 <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
-                                    <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                    <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                 <?php } else {?>
-                                    <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                    <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                 <?php }?>
                                 <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
                                 <p class="nation"><?php echo $user->land;?></p>
@@ -107,9 +107,9 @@
                             <div class="item">
                                 <div class="box_user">
                                     <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
-                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                     <?php } else {?>
-                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                     <?php }?>
                                     <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
                                     <p class="nation"><?php echo $user->land;?></p>
@@ -130,9 +130,9 @@
                             <div class="item">
                                 <div class="box_user">
                                     <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
-                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                     <?php } else {?>
-                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>/uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
+                                        <a href="<?php echo site_url('user/profile/'.$user->id.'/'.$user->name);?>"><img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $user->avatar;?>" class="img-responsive"></a>
                                     <?php }?>
                                     <h5 class="name"><?php echo $user->name;?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h5>
                                     <p class="nation"><?php echo $user->land;?></p>
