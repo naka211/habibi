@@ -40,6 +40,7 @@
                                 <?php }?>
                                 <?php /*if(isFriend($user->id) == false){*/?><!--<a href="javascript:void(0);" id="requestAddFriendBtn<?php /*echo $user->id;*/?>" class="btn bntMessage" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'requestAddFriendInFavorite')">Venneanmodning</a>--><?php /*}*/?>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
+                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'deleteVisited')" class="btn bntDelete">Slet</a>
                             </div>
                         </div>
                     </div>

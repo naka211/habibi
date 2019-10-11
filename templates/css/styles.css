@@ -1863,7 +1863,7 @@ ul.list_action li a .i_report {
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
-    margin-right: 15px;
+    margin-right: 10px;
     border: 1px solid transparent;
 }
 
@@ -1925,6 +1925,7 @@ ul.list_action li a .i_report {
     font-weight: 500;
     text-transform: uppercase;
     border: 1px solid transparent;
+    margin-right: 10px;
 }
 
 .bntBlock:hover {

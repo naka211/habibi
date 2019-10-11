@@ -1276,5 +1276,10 @@ class User_model extends CI_Model{
 
         return $this->db->where('id',$photoId)->delete('user_image');
     }
+
+    function deleteVisited($userId = NULL, $profileId = NULL){
+        $this->db->where("from_user = $userId AND to_user = $profileId")->delete('user_visit');
+        return true;
+    }
     /** The End*/
 }
