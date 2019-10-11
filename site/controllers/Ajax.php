@@ -813,6 +813,17 @@ class Ajax extends MX_Controller{
         return;
     }
 
+    public function deleteVisited(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->deleteVisited($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function correctImageOrientation($filename) {
         if (function_exists('exif_read_data')) {
             $exif = exif_read_data($filename);
