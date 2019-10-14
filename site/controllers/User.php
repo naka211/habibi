@@ -811,6 +811,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Modtagne blinks');
 
         $data['user'] = $this->session->userdata('user');
+        $data['userId'] = $data['user']->id;
 
         $ignore = $this->user->getBlockedUserIds($data['user']->id);
 
