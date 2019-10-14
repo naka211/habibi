@@ -291,6 +291,17 @@ class Ajax extends MX_Controller{
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
         $this->user->cancelRequestAddFriend($user->id, $profileId);
+        //Delete visiting
+        $this->user->deleteVisited($user->id, $profileId);
+        //Delete visit me
+        $this->user->deleteVisitMe($user->id, $profileId);
+        //TODO Delete blink
+        $this->user->deleteBlink($user->id, $profileId);
+        //Delete message
+        $this->user->deleteMessage($user->id, $profileId);
+        //Remove favorite
+        $this->user->removeFavorite($user->id, $profileId);
+
         $data['status'] = true;
 
         header('Content-Type: application/json');

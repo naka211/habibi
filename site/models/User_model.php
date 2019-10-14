@@ -1286,5 +1286,10 @@ class User_model extends CI_Model{
         $this->db->where("from_user = $profileId AND to_user = $userId")->delete('user_visit');
         return true;
     }
+
+    function deleteBlink($userId = NULL, $profileId = NULL){
+        $this->db->where("(from_user_id = $userId AND to_user_id = $profileId) OR (from_user_id = $profileId AND to_user_id = $userId)")->delete('user_kisses');
+        return true;
+    }
     /** The End*/
 }

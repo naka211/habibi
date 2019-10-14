@@ -1344,7 +1344,7 @@ select:not([multiple]) {
     background: #ffa507;
     font-size: 14px;
     text-transform: uppercase;
-    width: 245px;
+    /*width: 245px;*/
     margin-bottom: 15px;
     font-weight: 500;
     margin-right: 15px;
