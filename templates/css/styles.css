@@ -1787,6 +1787,7 @@ ul.list_action li a .i_report {
 
 .friend_list {
     margin-bottom: 80px;
+    min-height: 500px;
 }
 
 .row_friend_item {
