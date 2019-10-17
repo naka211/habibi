@@ -371,6 +371,16 @@ class Api extends REST_Controller {
         $profileId = $data->profileId;
 
         $this->user->cancelRequestAddFriend($userId, $profileId);
+        //Delete visiting
+        $this->user->deleteVisited($userId, $profileId);
+        //Delete visit me
+        $this->user->deleteVisitMe($userId, $profileId);
+        //Delete blink
+        $this->user->deleteBlink($userId, $profileId);
+        //Delete message
+        $this->user->deleteMessage($userId, $profileId);
+        //Remove favorite
+        $this->user->removeFavorite($userId, $profileId);
         $this->_return(true);
     }
 
@@ -1311,6 +1321,9 @@ class Api extends REST_Controller {
     private function _checkShowingRequestButton($userId, &$profiles){
         foreach ($profiles as $key => $profile){
             $profiles[$key]->showRequestButton = isFriend($profiles[$key]->id, $userId) ? false : true;
+            //Get friend status
+            $status = $this->user->checkStatus($userId, $profile->id);
+            $profiles[$key]->friendStatus = $status->isFriend;
         }
     }
 
@@ -1374,5 +1387,29 @@ class Api extends REST_Controller {
         } else {
             $this->_return(false, 'Can not set the status');
         }
+    }
+
+    public function getFriendStatus_get($userId = null, $profileId = null){
+        $status = $this->user->checkStatus($userId, $profileId);
+        $friendStatus = $status->isFriend;
+        $this->_return(true, '', array('friendStatus'=>$friendStatus));
+    }
+
+    public function deleteVisited_delete(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
+        $this->user->deleteVisited($userId, $profileId);
+        $this->_return(true);
+    }
+
+    public function deleteVisitMe_delete(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
+        $this->user->deleteVisitMe($userId, $profileId);
+        $this->_return(true);
     }
 }

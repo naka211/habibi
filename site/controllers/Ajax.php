@@ -295,7 +295,7 @@ class Ajax extends MX_Controller{
         $this->user->deleteVisited($user->id, $profileId);
         //Delete visit me
         $this->user->deleteVisitMe($user->id, $profileId);
-        //TODO Delete blink
+        //Delete blink
         $this->user->deleteBlink($user->id, $profileId);
         //Delete message
         $this->user->deleteMessage($user->id, $profileId);
