@@ -250,19 +250,23 @@ class Ajax extends MX_Controller{
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
 
-        if ($user && $profileId) {
-            $DB['user_from'] = $user->id;
-            $DB['user_to'] = $profileId;
-            $DB['status'] = 0;
-            $DB['dt_create'] = time();
-            $id = $this->user->addRequestAddFriend($DB);
-            if($id){
-                $data['status'] = true;
+        if($this->user->checkExistRequest($user->id, $profileId)){
+            $data['status'] = false;
+        } else {
+            if ($user && $profileId) {
+                $DB['user_from'] = $user->id;
+                $DB['user_to'] = $profileId;
+                $DB['status'] = 0;
+                $DB['dt_create'] = time();
+                $id = $this->user->addRequestAddFriend($DB);
+                if($id){
+                    $data['status'] = true;
+                } else {
+                    $data['status'] = false;
+                }
             } else {
                 $data['status'] = false;
             }
-        } else {
-            $data['status'] = false;
         }
         header('Content-Type: application/json');
         echo json_encode($data);

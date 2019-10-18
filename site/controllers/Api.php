@@ -274,25 +274,30 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $profileId = $data->profileId;
         //$user = $this->user->getUser($userId);
-        if ($userId && $profileId) {
-            $DB['user_from'] = $userId;
-            $DB['user_to'] = $profileId;
-            $DB['status'] = 0;
-            $DB['dt_create'] = time();
-            $id = $this->user->addRequestAddFriend($DB);
-            if($id){
-                //send push notification
-               /* $data['type'] = 'request';
-                $data = json_encode($data);
-                $this->_pushNotification($profileId, 'You have received a request from '.$user->name, $data);*/
-
-                $this->_return(true, 'Your request is sent.');
-            } else {
-                $this->_return(false, 'Can not save to database');
-            }
+        if($this->user->checkExistRequest($userId, $profileId)){
+            $this->_return(false, 'Your request is sent.');
         } else {
-            $this->_return(false, 'Invalid userId or profileId');
+            if ($userId && $profileId) {
+                $DB['user_from'] = $userId;
+                $DB['user_to'] = $profileId;
+                $DB['status'] = 0;
+                $DB['dt_create'] = time();
+                $id = $this->user->addRequestAddFriend($DB);
+                if($id){
+                    //send push notification
+                    /* $data['type'] = 'request';
+                     $data = json_encode($data);
+                     $this->_pushNotification($profileId, 'You have received a request from '.$user->name, $data);*/
+
+                    $this->_return(true, 'Your request is sent.');
+                } else {
+                    $this->_return(false, 'Can not save to database');
+                }
+            } else {
+                $this->_return(false, 'Invalid userId or profileId');
+            }
         }
+
     }
 
     public function messageList_get($userId, $page = 1, $perPage = 10){

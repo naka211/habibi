@@ -1067,6 +1067,11 @@ class User_model extends CI_Model{
         }
     }
 
+    public function checkExistRequest($userId, $profileId){
+        $query = $this->db->where('user_from', $userId)->where('user_to', $profileId)->where('status', 0)->get('user_friends')->row();
+        return $query;
+    }
+
     public function cancelRequestAddFriend($user_id=NULL,$profile_id=NULL){
         $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friends');
         $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friendlist');
