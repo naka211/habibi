@@ -540,7 +540,7 @@ class User_model extends CI_Model{
         if(!empty($friendStatus)){
             $status->isFriend = $friendStatus->status;
         } else {
-            $status->isFriend = -1;
+            $status->isFriend = "-1";
         }
 
 
