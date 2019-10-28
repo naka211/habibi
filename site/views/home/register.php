@@ -125,7 +125,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
+                        <!--<div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <select class="form-control" name="find_land">
                                     <option value="">Land</option>
@@ -171,7 +171,7 @@
                                     <option value="Bornholm">Bornholm</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <span class="filled">Alle felter skal udfyldes</span>
@@ -293,12 +293,12 @@
                 "find_gender":{
                     required:true
                 },
-                "find_land":{
+                /*"find_land":{
                     required:true
                 },
                 "find_region":{
                     required:true
-                },
+                },*/
                 "term":{
                     required:true
                 },

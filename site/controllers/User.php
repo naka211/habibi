@@ -518,8 +518,8 @@ class User extends MX_Controller
             $DB['region'] = $this->input->post('region');
             $DB['gender'] = $this->input->post('gender');
             $DB['find_gender'] = $this->input->post('find_gender');
-            $DB['find_land'] = $this->input->post('find_land');
-            $DB['find_region'] = $this->input->post('find_region');
+            /*$DB['find_land'] = $this->input->post('find_land');
+            $DB['find_region'] = $this->input->post('find_region');*/
 
             if($this->input->post('gender') == 1){
                 $DB['avatar'] = 'no-avatar1.png';
