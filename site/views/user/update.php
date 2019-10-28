@@ -139,21 +139,21 @@
                             </div>
 
                             <div class="clearfix"></div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h5>Jeg søger</h5>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <?php echo generateOptionsHTMLInUpdate('land', 'find_land', $user->find_land);?>
+                                    <?php /*echo generateOptionsHTMLInUpdate('land', 'find_land', $user->find_land);*/?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <?php echo generateOptionsHTMLInUpdate('region', 'find_region', $user->find_region);?>
+                                    <?php /*echo generateOptionsHTMLInUpdate('region', 'find_region', $user->find_region);*/?>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
