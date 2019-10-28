@@ -98,7 +98,7 @@
             </div>
         </section>-->
 
-        <section class="section_randomProfiles">
+        <section class="section_randomProfiles" style="margin-top: 50px;">
             <div class="row">
                 <h2 class="title">Udvalgte profiler</h2>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
