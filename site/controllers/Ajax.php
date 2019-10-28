@@ -783,13 +783,13 @@ class Ajax extends MX_Controller{
         echo $html;exit();
     }
 
-    public function checkSession(){
+    /*public function checkSession(){
         //Below last_visited should be updated everytime a page is accessed.
         $lastVisitTime = $this->session->userdata("last_visited");
         $tenMinuteBefore = strtotime("-10 minutes");
 
         echo $lastVisitTime > $tenMinuteBefore ? 1 : 0;
-    }
+    }*/
 
     public function checkLoggedInToLogout(){
         $users = $this->user->getLoggedInList();
