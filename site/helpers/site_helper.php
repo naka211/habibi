@@ -410,11 +410,13 @@ function getUser(){
     }
 }
 
-function generateOptionsHTMLInUpdate($type, $name, $selectedValue){
+function generateOptionsHTMLInUpdate($type, $name, $selectedValue, $defaultValue = 1){
     $ci = &get_instance();
     $typeArr = $ci->config->item($type);
     $html = '<select name="'.$name.'" class="form-control">';
-    $html .= '<option value="">Ej oplyst</option>';
+    if($defaultValue == 1){
+        $html .= '<option value="">Ej oplyst</option>';
+    }
     foreach($typeArr as $i=>$item){
         $selected = $selectedValue==$item?'selected':'';
         $html .= '<option '.$selected.' value="'.$item.'">'.$item.'</option>';

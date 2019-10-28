@@ -60,14 +60,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <?php echo generateOptionsHTMLInUpdate('land', 'land', $user->land);?>
+                                    <?php echo generateOptionsHTMLInUpdate('land', 'land', $user->land, 0);?>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <?php echo generateOptionsHTMLInUpdate('region', 'region', $user->region);?>
+                                    <?php echo generateOptionsHTMLInUpdate('region', 'region', $user->region, 0);?>
                                 </div>
                             </div>
 
