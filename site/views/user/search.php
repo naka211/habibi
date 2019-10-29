@@ -138,7 +138,7 @@
                 'unselectAll': 'Fravælg alle',
                 'selectedOptions': ' valgt'
             },
-            selectAll: true,
+            selectAll: false,
             maxPlaceholderOpts: 1
         });
 

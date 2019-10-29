@@ -459,11 +459,11 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Søgeresultat');
 
-        if($this->input->post()){
+        /*if($this->input->post()){
             $this->_updateSearchDataFromForm();
             //Prevent the resubmit message
             redirect(site_url('user/searching'));
-        }
+        }*/
 
         $searchData = $this->session->userdata('searchData');
 
@@ -1035,12 +1035,12 @@ class User extends MX_Controller
 
     private function _updateSearchDataAfterLogin(){
         $user = $this->session->userdata('user');
-        $searchData = array();
-        $searchData['gender'][] = $user->find_gender;
+        $searchData = (array)json_decode($user->search_session);
+        /*$searchData['gender'][] = $user->find_gender;
         $searchData['order'] = 'newest';
         $searchData['fromAge'] = 18;
         $searchData['toAge'] = 90;
-        /*$searchData['fromHeight'] = 100;
+        $searchData['fromHeight'] = 100;
         $searchData['toHeight'] = 230;
         $searchData['fromWeight'] = 40;
         $searchData['toWeight'] = 220;

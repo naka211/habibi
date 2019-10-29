@@ -708,6 +708,12 @@ class Ajax extends MX_Controller{
         $searchData[$searchKey] = $searchValue;
         $this->session->set_userdata('searchData', $searchData);
 
+        //Save search to db
+        $user = $this->session->userdata('user');
+        $db['search_session'] = json_encode($searchData);
+        $this->user->saveUser($db, $user->id);
+
+        //Re-count the number of profiles
         $this->countProfiles();
     }
 
