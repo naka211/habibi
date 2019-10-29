@@ -1035,17 +1035,21 @@ class User extends MX_Controller
 
     private function _updateSearchDataAfterLogin(){
         $user = $this->session->userdata('user');
-        $searchData = (array)json_decode($user->search_session);
-        /*$searchData['gender'][] = $user->find_gender;
-        $searchData['order'] = 'newest';
-        $searchData['fromAge'] = 18;
-        $searchData['toAge'] = 90;
-        $searchData['fromHeight'] = 100;
-        $searchData['toHeight'] = 230;
-        $searchData['fromWeight'] = 40;
-        $searchData['toWeight'] = 220;
-        $searchData['land'][] = $user->find_land;
-        $searchData['region'][] = $user->find_region;*/
+        if(!empty($user->search_session)){
+            $searchData = (array)json_decode($user->search_session);
+        } else {
+            $searchData['gender'][] = $user->find_gender;
+            $searchData['order'] = 'newest';
+            $searchData['fromAge'] = 18;
+            $searchData['toAge'] = 90;
+            /*$searchData['fromHeight'] = 100;
+            $searchData['toHeight'] = 230;
+            $searchData['fromWeight'] = 40;
+            $searchData['toWeight'] = 220;
+            $searchData['land'][] = $user->find_land;
+            $searchData['region'][] = $user->find_region;*/
+        }
+
         $this->session->set_userdata('searchData', $searchData);
     }
 
