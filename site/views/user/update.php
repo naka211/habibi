@@ -60,14 +60,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <?php echo generateOptionsHTMLInUpdate('land', 'land', $user->land);?>
+                                    <?php echo generateOptionsHTMLInUpdate('land', 'land', $user->land, 0);?>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <?php echo generateOptionsHTMLInUpdate('region', 'region', $user->region);?>
+                                    <?php echo generateOptionsHTMLInUpdate('region', 'region', $user->region, 0);?>
                                 </div>
                             </div>
 
@@ -139,21 +139,21 @@
                             </div>
 
                             <div class="clearfix"></div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h5>Jeg søger</h5>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Land</label>
-                                    <?php echo generateOptionsHTMLInUpdate('land', 'find_land', $user->find_land);?>
+                                    <?php /*echo generateOptionsHTMLInUpdate('land', 'find_land', $user->find_land);*/?>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="">Region</label>
-                                    <?php echo generateOptionsHTMLInUpdate('region', 'find_region', $user->find_region);?>
+                                    <?php /*echo generateOptionsHTMLInUpdate('region', 'find_region', $user->find_region);*/?>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
@@ -173,7 +173,8 @@
                                     <label class="radio-inline"><input type="radio" name="chat" value="0" <?php echo $user->chat == 0?'checked':'';?> style="margin-top: 2px;"> Off</label>
                                     <label class="radio-inline"><input type="radio" name="chat" value="1" <?php echo $user->chat == 1?'checked':'';?> style="margin-top: 2px;"> On</label>
                                     <span style="margin-left: 10px; font-weight: 500; line-height: 25px;">
-                                        (Her kan du slå din chat til og fra efter ønske.) <a href="javascript:void(0);" data-fancybox data-src="#modalReadmore" class="readmore">Læs mere</a>
+                                        <span id="chat-info">(<?php if($user->chat == 0) echo 'Her kan du slå din chat til og fra efter ønske'; else echo 'Chatten er åben for alle bruger selv om i ikke er venner';?>)</span>
+                                         <a href="javascript:void(0);" data-fancybox data-src="#modalReadmore" class="readmore">Læs mere</a>
                                     </span>
                                 </div>
                             </div>
@@ -483,5 +484,13 @@
             return $('#password').val().length > 0;
         }
 
+        $('input[name="chat"]').change(function(){
+            if($(this).val() == 1){
+                var chatMessage = '(Chatten er åben for alle bruger selv om i ikke er venner)';
+            } else {
+                var chatMessage = '(Her kan du slå din chat til og fra efter ønske)';
+            }
+            $('#chat-info').html(chatMessage);
+        });
     });
 </script>

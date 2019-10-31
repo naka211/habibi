@@ -830,7 +830,14 @@
             }
             // if copy is larger than button width use "# selected"
             else if( (placeholderTxt.width() > placeholder.width()) || (selOpts.length != selectVals.length) ) {
-                placeholderTxt.text( select.val().length + instance.options.texts.selectedOptions );
+                //placeholderTxt.text( select.val().length + instance.options.texts.selectedOptions );
+                //T.Trung
+                if(select.val().length == 0){
+                    placeholderTxt.text( 'Alle' );
+                } else {
+                    placeholderTxt.text( select.val().length + instance.options.texts.selectedOptions );
+                }
+                //T.Trung end
             }
         },
 

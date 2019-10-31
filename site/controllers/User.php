@@ -459,11 +459,11 @@ class User extends MX_Controller
         $data = array();
         $this->user->addMeta($this->_meta, $data, 'Habibi - Søgeresultat');
 
-        if($this->input->post()){
+        /*if($this->input->post()){
             $this->_updateSearchDataFromForm();
             //Prevent the resubmit message
             redirect(site_url('user/searching'));
-        }
+        }*/
 
         $searchData = $this->session->userdata('searchData');
 
@@ -518,8 +518,8 @@ class User extends MX_Controller
             $DB['region'] = $this->input->post('region');
             $DB['gender'] = $this->input->post('gender');
             $DB['find_gender'] = $this->input->post('find_gender');
-            $DB['find_land'] = $this->input->post('find_land');
-            $DB['find_region'] = $this->input->post('find_region');
+            /*$DB['find_land'] = $this->input->post('find_land');
+            $DB['find_region'] = $this->input->post('find_region');*/
 
             if($this->input->post('gender') == 1){
                 $DB['avatar'] = 'no-avatar1.png';
@@ -811,6 +811,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Modtagne blinks');
 
         $data['user'] = $this->session->userdata('user');
+        $data['userId'] = $data['user']->id;
 
         $ignore = $this->user->getBlockedUserIds($data['user']->id);
 
@@ -857,6 +858,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Besøgte mig');
 
         $data['user'] = $this->session->userdata('user');
+        $data['userId'] = $data['user']->id;
 
         $ignore = $this->user->getBlockedUserIds($data['user']->id);
 
@@ -1033,17 +1035,21 @@ class User extends MX_Controller
 
     private function _updateSearchDataAfterLogin(){
         $user = $this->session->userdata('user');
-        $searchData = array();
-        $searchData['gender'][] = $user->find_gender;
-        $searchData['order'] = 'newest';
-        $searchData['fromAge'] = 18;
-        $searchData['toAge'] = 90;
-        /*$searchData['fromHeight'] = 100;
-        $searchData['toHeight'] = 230;
-        $searchData['fromWeight'] = 40;
-        $searchData['toWeight'] = 220;*/
-        $searchData['land'][] = $user->find_land;
-        $searchData['region'][] = $user->find_region;
+        if(!empty($user->search_session)){
+            $searchData = (array)json_decode($user->search_session);
+        } else {
+            $searchData['gender'][] = $user->find_gender;
+            $searchData['order'] = 'newest';
+            $searchData['fromAge'] = 18;
+            $searchData['toAge'] = 90;
+            /*$searchData['fromHeight'] = 100;
+            $searchData['toHeight'] = 230;
+            $searchData['fromWeight'] = 40;
+            $searchData['toWeight'] = 220;
+            $searchData['land'][] = $user->find_land;
+            $searchData['region'][] = $user->find_region;*/
+        }
+
         $this->session->set_userdata('searchData', $searchData);
     }
 

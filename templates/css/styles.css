@@ -1340,11 +1340,11 @@ select:not([multiple]) {
 }
 
 .btnadd_friend {
-    padding: 3px 30px;
+    padding: 3px 10px;
     background: #ffa507;
     font-size: 14px;
     text-transform: uppercase;
-    width: 245px;
+    /*width: 245px;*/
     margin-bottom: 15px;
     font-weight: 500;
     margin-right: 15px;
@@ -1355,15 +1355,15 @@ select:not([multiple]) {
 }
 
 .btn_cancel_request {
-    padding: 3px 30px;
+    padding: 3px 10px;
     background: #b3b3b3;
     font-size: 14px;
     text-transform: uppercase;
-    /*margin-top: 20px;*/
+    /*margin-top: 10px;*/
     margin-bottom: 15px;
     font-weight: 500;
-    margin-right: 15px;
-    width: 245px;
+    margin-right: 5px;
+    /*width: 245px;*/
 }
 
 .btn_cancel_request:hover {
@@ -1371,7 +1371,7 @@ select:not([multiple]) {
 }
 
 .btnUnfriend {
-    padding: 5px 30px;
+    padding: 3px 10px;
     background: #fa3536;
     font-size: 14px;
     text-transform: uppercase;
@@ -1787,6 +1787,7 @@ ul.list_action li a .i_report {
 
 .friend_list {
     margin-bottom: 80px;
+    min-height: 500px;
 }
 
 .row_friend_item {
@@ -1836,7 +1837,7 @@ ul.list_action li a .i_report {
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
     background: #fa3536;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;
@@ -1858,12 +1859,12 @@ ul.list_action li a .i_report {
 
 .bntMessage {
     background: #ffa507;
-    padding: 3px 13px;
+    padding: 3px 10px;
     font-size: 14px;
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
-    margin-right: 15px;
+    margin-right: 10px;
     border: 1px solid transparent;
 }
 
@@ -1873,7 +1874,7 @@ ul.list_action li a .i_report {
 
 .bntDelete {
     background: #fa3536;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;
@@ -1889,7 +1890,7 @@ ul.list_action li a .i_report {
 .bntRemove {
     font-weight: 500;
     background: #fff;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #949494;
     text-transform: uppercase;
@@ -1903,7 +1904,7 @@ ul.list_action li a .i_report {
 
 .bntReject {
     background: #fff;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #ffa507;
     font-weight: 500;
@@ -1919,12 +1920,13 @@ ul.list_action li a .i_report {
 
 .bntBlock {
     background: #848484;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
     border: 1px solid transparent;
+    margin-right: 10px;
 }
 
 .bntBlock:hover {
@@ -1934,7 +1936,7 @@ ul.list_action li a .i_report {
 
 .bntStatus {
     background: #05AE0E;
-    padding: 3px 20px;
+    padding: 3px 10px;
     font-size: 14.23px;
     color: #fff;
     font-weight: 500;

@@ -14,6 +14,7 @@
             <?php if(!empty($list)){
                 foreach($list as $user){
                     $status = $this->user->checkStatus($userId, $user->id);
+                    if($status->isFriend != 1){
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-12 profile<?php echo $user->id;?>">
                     <div class="frend_item">
@@ -39,11 +40,13 @@
                                 <?php }?>
                                 <?php /*if(isFriend($user->id) == false){*/?><!--<a href="javascript:void(0);" id="requestAddFriendBtn<?php /*echo $user->id;*/?>" class="btn bntMessage" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'requestAddFriendInFavorite')">Venneanmodning</a>--><?php /*}*/?>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
+                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'deleteVisited')" class="btn bntDelete">Slet</a>
                             </div>
                         </div>
                     </div>
                 </div>
             <?php }
+                }
             }?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">

@@ -540,7 +540,7 @@ class User_model extends CI_Model{
         if(!empty($friendStatus)){
             $status->isFriend = $friendStatus->status;
         } else {
-            $status->isFriend = -1;
+            $status->isFriend = "-1";
         }
 
 
@@ -1067,6 +1067,11 @@ class User_model extends CI_Model{
         }
     }
 
+    public function checkExistRequest($userId, $profileId){
+        $query = $this->db->where('user_from', $userId)->where('user_to', $profileId)->where('status', 0)->get('user_friends')->row();
+        return $query;
+    }
+
     public function cancelRequestAddFriend($user_id=NULL,$profile_id=NULL){
         $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friends');
         $this->db->where("(user_from = $user_id AND user_to = $profile_id) OR (user_from = $profile_id AND user_to = $user_id)")->delete('user_friendlist');
@@ -1275,6 +1280,21 @@ class User_model extends CI_Model{
         unlink("./uploads/raw_thumb_photo/".$image->image);
 
         return $this->db->where('id',$photoId)->delete('user_image');
+    }
+
+    function deleteVisited($userId = NULL, $profileId = NULL){
+        $this->db->where("from_user = $userId AND to_user = $profileId")->delete('user_visit');
+        return true;
+    }
+
+    function deleteVisitMe($userId = NULL, $profileId = NULL){
+        $this->db->where("from_user = $profileId AND to_user = $userId")->delete('user_visit');
+        return true;
+    }
+
+    function deleteBlink($userId = NULL, $profileId = NULL){
+        $this->db->where("(from_user_id = $userId AND to_user_id = $profileId) OR (from_user_id = $profileId AND to_user_id = $userId)")->delete('user_kisses');
+        return true;
     }
     /** The End*/
 }

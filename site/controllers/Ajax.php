@@ -250,19 +250,23 @@ class Ajax extends MX_Controller{
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
 
-        if ($user && $profileId) {
-            $DB['user_from'] = $user->id;
-            $DB['user_to'] = $profileId;
-            $DB['status'] = 0;
-            $DB['dt_create'] = time();
-            $id = $this->user->addRequestAddFriend($DB);
-            if($id){
-                $data['status'] = true;
+        if($this->user->checkExistRequest($user->id, $profileId)){
+            $data['status'] = false;
+        } else {
+            if ($user && $profileId) {
+                $DB['user_from'] = $user->id;
+                $DB['user_to'] = $profileId;
+                $DB['status'] = 0;
+                $DB['dt_create'] = time();
+                $id = $this->user->addRequestAddFriend($DB);
+                if($id){
+                    $data['status'] = true;
+                } else {
+                    $data['status'] = false;
+                }
             } else {
                 $data['status'] = false;
             }
-        } else {
-            $data['status'] = false;
         }
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -291,6 +295,17 @@ class Ajax extends MX_Controller{
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
         $this->user->cancelRequestAddFriend($user->id, $profileId);
+        //Delete visiting
+        $this->user->deleteVisited($user->id, $profileId);
+        //Delete visit me
+        $this->user->deleteVisitMe($user->id, $profileId);
+        //Delete blink
+        $this->user->deleteBlink($user->id, $profileId);
+        //Delete message
+        $this->user->deleteMessage($user->id, $profileId);
+        //Remove favorite
+        $this->user->removeFavorite($user->id, $profileId);
+
         $data['status'] = true;
 
         header('Content-Type: application/json');
@@ -693,6 +708,12 @@ class Ajax extends MX_Controller{
         $searchData[$searchKey] = $searchValue;
         $this->session->set_userdata('searchData', $searchData);
 
+        //Save search to db
+        $user = $this->session->userdata('user');
+        $db['search_session'] = json_encode($searchData);
+        $this->user->saveUser($db, $user->id);
+
+        //Re-count the number of profiles
         $this->countProfiles();
     }
 
@@ -768,13 +789,13 @@ class Ajax extends MX_Controller{
         echo $html;exit();
     }
 
-    public function checkSession(){
+    /*public function checkSession(){
         //Below last_visited should be updated everytime a page is accessed.
         $lastVisitTime = $this->session->userdata("last_visited");
         $tenMinuteBefore = strtotime("-10 minutes");
 
         echo $lastVisitTime > $tenMinuteBefore ? 1 : 0;
-    }
+    }*/
 
     public function checkLoggedInToLogout(){
         $users = $this->user->getLoggedInList();
@@ -806,6 +827,28 @@ class Ajax extends MX_Controller{
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
         $this->user->deleteMessage($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function deleteVisited(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->deleteVisited($user->id, $profileId);
+        $data['status'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function deleteVisitMe(){
+        $profileId = $this->input->post('profile_id', true);
+        $user = $this->session->userdata('user');
+        $this->user->deleteVisitMe($user->id, $profileId);
         $data['status'] = true;
 
         header('Content-Type: application/json');
