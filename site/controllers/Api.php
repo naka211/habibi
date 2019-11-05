@@ -575,6 +575,10 @@ class Api extends REST_Controller {
         $ignore[] = $userId;
 
         $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
+        //Save search to db
+        $db['search_session'] = json_encode($searchData);
+        $this->user->saveUser($db, $userId);
+
         if(!empty($users)){
             $this->_setAvatarPath($userId, $users);
             $this->_return(true, '', array('users'=>$users));
