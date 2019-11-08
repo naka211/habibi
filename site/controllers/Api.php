@@ -335,11 +335,13 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $profileId = $data->profileId;
         $message = $data->message;
+        $messageType = $data->messageType;
 
-        $user = $this->user->getUser($userId);
+        //$user = $this->user->getUser($userId);
         $DB['user_from'] = $userId;
         $DB['user_to'] = $profileId;
         $DB['message'] = $message;
+        $DB['messageType'] = $messageType;
         $DB['seen'] = 0;
         $DB['dt_create'] = time();
         $id = $this->user->saveMessage($DB);
@@ -575,6 +577,10 @@ class Api extends REST_Controller {
         $ignore[] = $userId;
 
         $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
+        //Save search to db
+        $db['search_session'] = json_encode($searchData);
+        $this->user->saveUser($db, $userId);
+
         if(!empty($users)){
             $this->_setAvatarPath($userId, $users);
             $this->_return(true, '', array('users'=>$users));
