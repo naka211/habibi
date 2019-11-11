@@ -825,6 +825,36 @@ class User_model extends CI_Model{
     }
 
     function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
+        $this->db->select('DISTINCT(from_user)')->from('tb_user_visit')->where('to_user', $userId);
+        $fromUsers = $this->db->get()->result();
+        if(!empty($fromUsers)){
+            $idArr = array();
+            foreach ($fromUsers as $fromUser){
+                $this->db->select('max(id) as id')->from('tb_user_visit')->where('to_user', $userId)->where('from_user', $fromUser->from_user);
+                $idArr[] = $this->db->get()->row()->id;
+            }
+
+            $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
+            $this->db->from('user_visit as uv');
+            $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
+            $this->db->where('uv.id IN ('.implode(',', $idArr).')');
+            $this->db->where("u.deactivation", 0);
+            $this->db->where("u.deleted", null);
+            if($ignore){
+                $this->db->where_not_in('uv.from_user', $ignore);
+            }
+            $this->db->order_by('uv.id', 'DESC');
+            if($num || $offset){
+                $this->db->limit($num,$offset);
+            }
+            $query = $this->db->get()->result();
+            return $query;
+        } else {
+            return '';
+        }
+    }
+
+    /*function getVisitMe($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
         $this->db->from('user_visit as uv');
         $this->db->join('user as u', 'u.id = uv.from_user', 'inner');
@@ -840,7 +870,7 @@ class User_model extends CI_Model{
         }
         $query = $this->db->get()->result();
         return $query;
-    }
+    }*/
 
     function getNumVisited($user_id = NULL, $ignore = null){
         $this->db->distinct();
@@ -858,21 +888,33 @@ class User_model extends CI_Model{
     }
 
     function getVisited($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
-        $this->db->from('user_visit as uv');
-        $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
-        $this->db->where('uv.id IN (SELECT max(id) FROM tb_user_visit WHERE from_user = '.$userId.' GROUP BY to_user)');
-        $this->db->where("u.deactivation", 0);
-        $this->db->where("u.deleted", null);
-        if($ignore){
-            $this->db->where_not_in('uv.to_user', $ignore);
+        $this->db->select('DISTINCT(to_user)')->from('tb_user_visit')->where('from_user', $userId);
+        $toUsers = $this->db->get()->result();
+        if(!empty($toUsers)){
+            $idArr = array();
+            foreach ($toUsers as $toUser){
+                $this->db->select('max(id) as id')->from('tb_user_visit')->where('from_user', $userId)->where('to_user', $toUser->to_user);
+                $idArr[] = $this->db->get()->row()->id;
+            }
+
+            $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uv.created_at as seen_time');
+            $this->db->from('user_visit as uv');
+            $this->db->join('user as u', 'u.id = uv.to_user', 'inner');
+            $this->db->where('uv.id IN ('.implode(',', $idArr).')');
+            $this->db->where("u.deactivation", 0);
+            $this->db->where("u.deleted", null);
+            if($ignore){
+                $this->db->where_not_in('uv.to_user', $ignore);
+            }
+            $this->db->order_by('uv.id', 'DESC');
+            if($num || $offset){
+                $this->db->limit($num,$offset);
+            }
+            $query = $this->db->get()->result();
+            return $query;
+        } else {
+            return '';
         }
-        $this->db->order_by('uv.id','DESC');
-        if($num || $offset){
-            $this->db->limit($num,$offset);
-        }
-        $query = $this->db->get()->result();
-        return $query;
     }
     /* */
 
