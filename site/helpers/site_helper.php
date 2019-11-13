@@ -453,3 +453,85 @@ function generateSelectInSearch($name){
     $html .= '</select>';
     return $html;
 }
+
+
+//Comet chat
+
+function addUserToComet($userId, $name, $avatar){
+    $ci = &get_instance();
+    $params = json_encode(array(
+        'uid' => (string)$userId,
+        'name' => $name,
+        'avatar' => $avatar
+    ));
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}
+
+function updateAvatarToComet($userId, $newAvatar){
+    $ci = &get_instance();
+    $params = json_encode(array(
+        'avatar' => $newAvatar
+    ));
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}
+
+function deleteUserInComet($userId){
+    $ci = &get_instance();
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}

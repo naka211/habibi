@@ -1,22 +1,22 @@
 $(document).ready(function () {
-   $("#fromAge").change(function () {
-       $("#toAge").prop('disabled', 'disabled');
-       $.ajax({
+    $("#fromAge").change(function () {
+        $("#toAge").prop('disabled', 'disabled');
+        $.ajax({
             method: "POST",
-            url: base_url+"ajax/generateToAgeSelection",
-            data: { fromAge: this.value, csrf_site_name: token_value },
+            url: base_url + "ajax/generateToAgeSelection",
+            data: {fromAge: this.value, csrf_site_name: token_value},
             success: function (html) {
                 $('#toAge').find('option').remove().end().append(html);
                 $('#toAge option:last').prop('selected', true);
                 $("#toAge").prop('disabled', false);
             }
-       });
-       //alert(this.val());
-   });
+        });
+        //alert(this.val());
+    });
 
     $('.regionSelection, .ethnicSelection').multiselect({
         columns: 2,
-        texts:{
+        texts: {
             'selectAll': 'Vælg alle',
             'unselectAll': 'Fravælg alle',
             'selectedOptions': ' valgt'
@@ -24,5 +24,4 @@ $(document).ready(function () {
         selectAll: true,
         maxPlaceholderOpts: 1
     });
-
 });

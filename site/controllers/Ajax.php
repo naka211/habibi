@@ -109,6 +109,9 @@ class Ajax extends MX_Controller{
             $Login = array('isLoginSite', 'user', 'email', 'password');
             $this->session->unset_userdata($Login);
             $this->user->updateLogin($user->id, 0);
+            //Delete comet auth token
+            $DB['cometAuthToken'] = null;
+            $this->user->saveUser($DB, $user->id);
         }
 
         die('ok');
@@ -362,7 +365,6 @@ class Ajax extends MX_Controller{
     function loadMoreMessages(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId', true);
-        $profileName = $this->input->post('profileName', true);
         $total = $this->user->getNumMessages($user->id, $profileId);
         $num = $this->input->post('num', true);
 
@@ -371,9 +373,9 @@ class Ajax extends MX_Controller{
         $messages = array_reverse($messages);
         $newNum = $num + 10;
         if($total > $newNum){
-            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false, \''.$profileName.'\')"';
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false)"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">
-                            <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Load earlier messages</a>
+                            <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Indlæs tidligere meddelelser</a>
                         </li>';
         }
         foreach ($messages as $message){
@@ -408,6 +410,7 @@ class Ajax extends MX_Controller{
             $DB['seen'] = 0;
             $DB['dt_create'] = time();
             $this->user->saveMessage($DB);
+            //Save message to comet
             $item = $this->user->getUser($user->id);
             $html = '<li class="you">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
@@ -458,6 +461,66 @@ class Ajax extends MX_Controller{
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
+    }
+
+    public function loadCometMessages($userId, $profileId){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId.'/users/'.$profileId.'/messages');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        print_r(json_decode($result));exit();
+        curl_close($ch);
+    }
+
+    public function saveMessageToComet(){
+        $userId = $this->session->userdata('user')->id;
+        $profileId = $this->input->post('profileId');
+        $message = $this->input->post('message');
+        $messageType = 'text';
+
+        $params = json_encode(array(
+            'receiver' => (string)$profileId,
+            'receiverType' => 'user',
+            'category' => 'message',
+            'type' => $messageType,
+            'data' => json_encode(array('text' => $message))
+        ));
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId.'/messages');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        print_r($result);exit();
+        curl_close($ch);
     }
 
     /*public function loadMoreFavorites($offset){
@@ -883,6 +946,17 @@ class Ajax extends MX_Controller{
                 } // if there is some rotation necessary
             } // if have the exif orientation info
         } // if function exists
+    }
+
+    public function saveCometAuthToken(){
+        $authToken = $this->input->post('authToken');
+        $user = $this->session->userdata('user');
+
+        $DB['cometAuthToken'] = $authToken;
+        $this->user->saveUser($DB, $user->id);
+
+        $newUser = $this->user->getUser($user->id);
+        $this->session->set_userdata('user', $newUser);
     }
 }
 ?>

@@ -12,7 +12,8 @@
                 foreach ($list as $user){
                     if(!in_array($user->id, $ignore)){
                     if(isGoldMember()){
-                        $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true, \''.$user->name.'\')"';
+                        //$messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$user->id.',0, true, \''.$user->name.'\')"';
+                        $messageLink = 'href="'.site_url('user/chat/'.$user->id.'/'.$user->name).'"';
                         $profileLink = 'href="'.site_url('user/profile/'.$user->id.'/'.$user->name).'"';
                     } else {
                         $messageLink = $profileLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
@@ -40,8 +41,21 @@
                             <p><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                             <p>Sendt: d. <span><?php echo date("d/m/Y", $user->added_time); ?></span> kl. <span><?php echo date("H:i", $user->added_time); ?></span></p>
                             <?php if(isGoldMember() === true){?>
-                            <p class="gray_friend_item"><?php //echo character_limiter($user->message, 20);
-                                echo substr($user->message, 0, 27); ?></p>
+                            <p class="gray_friend_item"><?php
+                                if($user->messageType == 'text'){
+                                    //if(preg_match("^[^?]*\.(jpg|jpeg|gif|png)", $user->message)){
+                                        echo $user->message;
+                                    /*} else {
+                                        echo substr($user->message, 0, 27);
+                                    }*/
+                                } else if($user->messageType == 'image'){
+                                    echo 'Et billede var vedhæftet';
+                                } else if($user->messageType == 'video'){
+                                    echo 'En video var vedhæftet';
+                                } else if($user->messageType == 'image'){
+                                    echo 'En lyd var knyttet';
+                                }
+                            ?></p>
                             <?php }?>
                             <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                             <a onclick="confirmDeleteMessage(<?php echo $user->id;?>, 'Er du sikker på du vil slette chat historik?')" href="javascript:;" class="btn bntBlock">Slet historik</a>
