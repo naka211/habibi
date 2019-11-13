@@ -18,7 +18,7 @@
                 url: base_url+"ajax/deleteMessage",
                 data: { csrf_site_name: token_value, profile_id: profile_id }
             }).done(function() {
-                //TODO Redirect to message page
+                window.location.replace(base_url+"user/messages");
             });
         }
 
