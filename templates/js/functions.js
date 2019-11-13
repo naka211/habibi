@@ -394,9 +394,9 @@ $(document).ready(function() {
         clearInterval(checkMessageInterval);
     }
 
-    loadMoreMessages = function (profileId, num, first, profileName) {
+    loadMoreMessages = function (profileId, num, first) {
         $('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');
-        $("#modalChat h4").html('Chatbesked med '+profileName);
+        /*$("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
         if(first == true){
             $.fancybox.open({
@@ -411,7 +411,7 @@ $(document).ready(function() {
                     }
                 }
             });
-        }
+        }*/
         ////
 
         if(first == false){
@@ -424,12 +424,12 @@ $(document).ready(function() {
         }
 
         //Set onclick function for send message button
-        $(".btnSend").attr('onclick', 'sendMessage('+profileId+')');
+        //$(".btnSend").attr('onclick', 'sendMessage('+profileId+')');
 
         $.ajax({
             method: "POST",
             url: base_url+"ajax/loadMoreMessages",
-            data: { csrf_site_name: token_value, profileId: profileId, num: num, profileName: profileName },
+            data: { csrf_site_name: token_value, profileId: profileId, num: num},
             success: function (html) {
                 $("#messageLoading").fadeOut(100);
                 //Add message to ul
@@ -438,10 +438,11 @@ $(document).ready(function() {
                 if(first == true){
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 }
-                if( $('.friend'+profileId).length ){
+                setCheckMessageInterval(profileId);
+                /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
                     $('.new').remove();
-                }
+                }*/
             }
         });
     }
@@ -465,7 +466,7 @@ $(document).ready(function() {
     }
 
     sendMessage = function (profileId) {
-        var message = $("#message").val();
+        var message = $(".emojionearea-editor").text();
         if(message == ''){
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
@@ -480,18 +481,21 @@ $(document).ready(function() {
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 $("#message").val("");
+                $(".emojionearea-editor").html("");
 
-                $('.friend'+profileId).find('gray_friend_item').html(message);
+                //$('.friend'+profileId).find('gray_friend_item').html(message);
+            });
+
+            $.ajax({
+                type: "post",
+                url: base_url+"ajax/saveMessageToComet",
+                dataType: 'html',
+                data: {message: message, profileId: profileId,'csrf_site_name':token_value}
+            }).done(function(data){
+                console.log(data);
             });
         }
     }
-
-    //Handle enter key in message
-    $('#message').keyup(function(e){
-        if(e.keyCode == 13){
-            $('.btnSend').click();
-        }
-    });
 
     $('.frm_Chat').on('keypress', function(e) {
         return e.which !== 13;
@@ -513,10 +517,35 @@ $(document).ready(function() {
             }
         });
     }*/
-    
-    function getConfirmAndAction() {
-        
-    }
+
+    /*loadCometMessages = function (userId, profileId, limit, apiKey, appId) {
+        CometChat.init(appId).then(
+            () => {
+            CometChat.login(userId, apiKey).then(
+                user => {
+                var messagesRequest = new CometChat.MessagesRequestBuilder().setUID(profileId).setLimit(limit).build();
+                messagesRequest.fetchPrevious().then(
+                    messages => {
+                    $.ajax({
+                        method: "POST",
+                        url: base_url+"ajax/loadCometMessages",
+                        data: { csrf_site_name: token_value, messageJson: JSON.stringify(messages) }
+                    }).done(function(html) {
+                        $(".chat ul").html("");
+                        console.log(html);
+                    });
+            },
+                error => {
+                    console.log("Message fetching failed with error:", error);
+                });
+            });
+        },
+            error => {
+                console.log("Initialization failed with error:", error);
+                //Check the reason for error and take apppropriate action.
+            }
+        );
+    }*/
 
     //Dropdown menu
     // show hide submenu

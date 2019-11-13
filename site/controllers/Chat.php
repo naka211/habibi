@@ -35,8 +35,8 @@ class Chat extends MX_Controller{
 
             $headers = array();
             $headers[] = 'Accept: application/json';
-            $headers[] = 'Apikey: fbf9c6d4581eea89ea74f0cf2823bcfbfbdaf394';
-            $headers[] = 'Appid: 102909260134bf4';
+            $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+            $headers[] = 'Appid: '.$this->config->item('comet_app_id');
             $headers[] = 'Content-Type: application/json';
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 

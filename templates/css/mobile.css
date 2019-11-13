@@ -703,6 +703,27 @@
     .img_guldmedlem img {
         width: 150px;
     }
+
+    /* Chat page*/
+    .frame_chat {
+        width: 100%;
+    }
+    .frame_chat.frame_chat_pc {
+        padding: 15px;
+        min-height: auto;
+        margin-bottom: 60px;
+    }
+    .frm_Chat .btnSend {
+        width: 25%;
+    }
+    .frame_chat_pc .frm_Chat .form-control {
+        width: 100%;
+    }
+    .frame_chat_pc .chat ul {
+        height: 500px;
+        min-height: 200px;
+        padding-right: 0px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
@@ -942,6 +963,11 @@
 @media (max-width: 414px) {
     .navbar-nav > li:first-child > a {
         padding-left: 10px;
+    }
+
+    /* Chat page*/
+    .frame_chat_pc .frm_Chat .btnSend {
+        width: auto;
     }
 }
 

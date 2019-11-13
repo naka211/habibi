@@ -24,7 +24,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile, friendRequests, myPhoto, uploadPhoto, friends, sentBlinks, messages, receivedBlinks, favorites, update, addFavorite, removeFavorite, upgrade, blocked, searching, editAvatar, visitMe, visited, start, editphoto, blockList', 'Checkgold|only:visitme');
+        return array('Checklogin|only:profile, friendRequests, myPhoto, uploadPhoto, friends, sentBlinks, messages, receivedBlinks, favorites, update, addFavorite, removeFavorite, upgrade, blocked, searching, editAvatar, visitMe, visited, start, editphoto, blockList, chat', 'Checkgold|only:visitme');
     }
 
     function setExpireSessionTime(){
@@ -53,7 +53,7 @@ class User extends MX_Controller
         $data['newestUsers'] = $newestUsers;
         $data['popularUsers'] = $popularUsers;
         $data['searchData'] = $searchData;
-        $data['user'] = $user;
+        $data['userLoggedIn'] = $user;
         $data['page'] = 'user/start';
         $this->load->view('templates', $data);
     }
@@ -550,6 +550,8 @@ class User extends MX_Controller
                 $this->session->set_userdata('user', $user);
                 $this->session->set_userdata('isLoginSite', true);
                 $this->_updateSearchDataAfterLogin();
+                //Add user to cometchat
+                addUserToComet($id, $DB['name'], $this->config->item('site').'/uploads/thumb_user/'.$DB['avatar']);
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
                 $sendEmailInfo['email'] = $DB['email'];
@@ -796,10 +798,13 @@ class User extends MX_Controller
             $Login = array('isLoginSite', 'user', 'email', 'password', 'lastVisitTime');
             $this->session->unset_userdata($Login);
             $this->user->updateLogin($user->id, 0);
+            //Delete comet auth token
+            $DB['cometAuthToken'] = null;
+            $this->user->saveUser($DB, $user->id);
         }
         //setcookie('cc_data', '', -time() + (86400 * 30), "/");
 
-        redirect(site_url());
+        redirect(site_url('?authToken='.base64_encode($user->cometAuthToken)));
     }
 
     /** Action function*/
@@ -1061,9 +1066,14 @@ class User extends MX_Controller
         $this->session->set_userdata('searchData', $searchData);
     }
 
-    public function testChat(){
-        /*print_r($_SESSION);exit();*/
-        $data['page'] = 'user/testchat';
+    public function chat($profileId, $profileName){
+        $user = $this->session->userdata('user');
+        $data['user'] = $user;
+        $data['profile'] = $this->user->getUser($profileId);
+
+        $this->user->addMeta($this->_meta, $data, 'Habibi - Chatte med '.$profileName);
+
+        $data['page'] = 'user/chat';
         $this->load->view('templates', $data);
     }
 

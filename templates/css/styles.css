@@ -1857,6 +1857,10 @@ ul.list_action li a .i_report {
     margin-bottom: 10px;
 }
 
+.frend_item .gray_friend_item img{
+    width: 20px;
+}
+
 .bntMessage {
     background: #ffa507;
     padding: 3px 10px;
@@ -2383,12 +2387,11 @@ ul.list_action li a .i_report {
 
 .chat ul {
     list-style: none;
-    padding: 0;
+    padding: 20px 30px 20px 0px;
     margin: 15px 0 15px;
     height: 50vh;
     overflow: auto;
     border-bottom: 1px solid #f4f4f4;
-    padding-right: 30px;
 }
 
 .chat ul li:first-child {
