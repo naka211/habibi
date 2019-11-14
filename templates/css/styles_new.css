@@ -1029,6 +1029,7 @@ section.section_intro {
 	background: #ededed;
 	padding: 10px;
 	border-radius: 3px;
+	margin-bottom: 5px;
 }
 
 .img_content img, .img_content audio, .img_content video{

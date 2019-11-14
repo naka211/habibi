@@ -2403,7 +2403,7 @@ ul.list_action li a .i_report {
 }
 
 .chat ul li {
-    margin: 40px 0 0 0;
+    margin: 45px 0 0 0;
     /*font-weight: 400;*/
 }
 
@@ -2492,11 +2492,11 @@ ul.list_action li a .i_report {
 .chat ul li.other .date {
     float: left;
     /* margin: -20px 25px 0 0; */
-    margin: 8px 70px 0 0;
+    margin: 0px 70px 0 0;
 }
 
 .chat ul li.other .message {
-    margin: 0 90px 0 0;
+    margin: 0 90px 5px 0;
 }
 
 .chat ul li.other .message:before {
@@ -2510,11 +2510,11 @@ ul.list_action li a .i_report {
 
 .chat ul li.you .date {
     float: right;
-    margin: 5px 0 0 25px;
+    margin: 0px 0 0 25px;
 }
 
 .chat ul li.you .message {
-    margin: 0 0 0 90px;
+    margin: 0 0 5px 90px;
 }
 
 .chat ul li.you .message:before {
