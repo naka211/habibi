@@ -379,26 +379,56 @@ class Ajax extends MX_Controller{
                         </li>';
         }
         foreach ($messages as $message){
+
             if($message->uid == $profileId){
-                $html .= '<li class="other">
-                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
-                            <div class="message">
-                                <p>'.nl2br($message->message).'</p>
-                            </div>
-                            <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
-                        </li>';
+                $class = 'other';
             } else {
-                $html .= '<li class="you">
-                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>
-                            <div class="message">
-                                <p>'.nl2br($message->message).'</p>
-                            </div>
+                $class = 'you';
+            }
+            $content = $this->renderMessage($message->message, $message->messageType);
+            $html .= '<li class="'.$class.'">
+                            <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>'.$content.'
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
                         </li>';
-            }
         }
         echo $html;
         exit();
+    }
+
+    public function renderMessage($message, $messageType){
+        switch ($messageType){
+            case 'text':
+                $html = '<div class="message">
+                                <p>'.nl2br($message).'</p>
+                            </div>';
+                break;
+            case 'image':
+                $html = '<div class="message_media">
+                        <p class="img_content">
+                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive"></a>
+                        </p>
+                    </div>';
+                break;
+            case 'audio':
+                $html = '<div class="message_media">
+                        <p class="img_content">
+                        <audio controls>
+                            <source src="'.$message.'" type="audio/mp3">
+                        </audio>
+                        </p>
+                    </div>';
+                break;
+            case 'video':
+                $html = '<div class="message_media">
+                        <p class="img_content">
+                        <video controls>
+                            <source src="'.$message.'" type="video/mp4">
+                        </video>
+                        </p>
+                    </div>';
+                break;
+        }
+        return $html;
     }
 
     function sendMessage(){
@@ -441,11 +471,10 @@ class Ajax extends MX_Controller{
             $html = '';
             foreach($messages as $message){
                 $profile = $this->user->getUser($message->user_from);
+                $content = $this->renderMessage($message->message, $message->messageType);
                 $html .= '<li class="other">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$profile->avatar.'" /></a>
-                            <div class="message">
-                                <p>'.$message->message.'</p>
-                            </div>
+                            '.$content.'
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
                         </li>';
             }

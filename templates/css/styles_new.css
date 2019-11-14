@@ -1025,13 +1025,17 @@ section.section_intro {
 }
 
 .img_content {
-	width: 50%;
 	display: inline-block;
 	text-align: right;
 	background: #ededed;
 	padding: 10px;
 	border-radius: 3px;
 }
+
+.img_content img, .img_content audio, .img_content video{
+	width: 200px;
+}
+
 .frame_chat.frame_chat_pc {
 	background: #fff;
 	padding: 30px;
