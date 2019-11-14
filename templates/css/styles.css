@@ -2496,7 +2496,7 @@ ul.list_action li a .i_report {
 }
 
 .chat ul li.other .message {
-    margin: 0 70px 0 0;
+    margin: 0 90px 0 0;
 }
 
 .chat ul li.other .message:before {
@@ -2514,7 +2514,7 @@ ul.list_action li a .i_report {
 }
 
 .chat ul li.you .message {
-    margin: 0 0 0 70px;
+    margin: 0 0 0 90px;
 }
 
 .chat ul li.you .message:before {

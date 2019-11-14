@@ -1025,8 +1025,7 @@ section.section_intro {
 }
 
 .img_content {
-	display: inline-block;
-	text-align: right;
+	display: block;
 	background: #ededed;
 	padding: 10px;
 	border-radius: 3px;
@@ -1034,6 +1033,16 @@ section.section_intro {
 
 .img_content img, .img_content audio, .img_content video{
 	width: 200px;
+}
+
+.you .img_content{
+	margin-left: 90px;
+	background: none;
+	border: 1px solid #f4f4f4;
+}
+
+.other .img_content{
+	margin-right: 90px;
 }
 
 .frame_chat.frame_chat_pc {
