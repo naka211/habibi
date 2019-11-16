@@ -465,8 +465,15 @@ $(document).ready(function() {
         });
     }
 
-    sendMessage = function (profileId) {
-        var message = $(".emojionearea-editor").text();
+    sendMessage = function (profileId, method) {
+        if(method == 1){
+            var message = $(".emojionearea-editor").html();
+        } else {
+            var message = $("#message").val();
+        }
+        //set input in blank
+        $("#message").val("");
+        $(".emojionearea-editor").html("");
         if(message == ''){
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
@@ -480,8 +487,6 @@ $(document).ready(function() {
                 $(".chat ul").append(html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-                $("#message").val("");
-                $(".emojionearea-editor").html("");
 
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
             });
