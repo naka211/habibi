@@ -26,11 +26,12 @@
             useInternalCDN: true,
             filtersPosition: "bottom",
             tones: false,
-            saveEmojisAs: "image",
+            /*saveEmojisAs: "unicode",*/
             events:{
-                keyup: function (editor, event) {
+                keydown: function (editor, event) {
                     if(event.keyCode == 13){
-                        sendMessage('<?php echo $profile->id;?>', 1);
+                        $("#message").data("emojioneArea").hidePicker();
+                        sendMessage('<?php echo $profile->id;?>', this.getText())
                     }
                 }
             }
@@ -67,7 +68,7 @@
                                     <input type="file" name="messageImage" id="messageImage">
                                 </div>
                                 <img id="image" width="32" style="margin-top: -10px" />
-                                <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', 2)" id="btnSend">SEND</button>
+                                <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', '')" id="btnSend">SEND</button>
                             </form>
                         </div>
                     </div>

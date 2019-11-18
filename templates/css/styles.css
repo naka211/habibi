@@ -2522,6 +2522,20 @@ ul.list_action li a .i_report {
     left: 0;
 }
 
+.message .emojionearea-button{
+    display: none;
+}
+
+.message .emojionearea-editor{
+    padding: 0 !important;
+    min-height: auto !important;
+    color: #000 !important;
+}
+
+.emojionearea{
+    width: auto;
+}
+
 .frm_Chat .form-control {
     width: 608px;
     background: #eee;

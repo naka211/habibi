@@ -439,6 +439,8 @@ $(document).ready(function() {
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 }
                 setCheckMessageInterval(profileId);
+
+                $(".message").emojioneArea();
                 /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
                     $('.new').remove();
@@ -465,29 +467,28 @@ $(document).ready(function() {
         });
     }
 
-    sendMessage = function (profileId, method) {
-        if(method == 1){
-            var message = $(".emojionearea-editor").html();
-        } else {
+    sendMessage = function (profileId, message) {
+        if(message == ''){
             var message = $("#message").val();
         }
         //set input in blank
         $("#message").val("");
-        $(".emojionearea-editor").html("");
+        $(".frm_Chat .emojionearea-editor").html("");
         if(message == ''){
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
-        } else {
+        } else { console.log(message);
             $.ajax({
                 type: "post",
                 url: base_url+"ajax/sendMessage",
                 dataType: 'html',
                 data: {message: message, user_to: profileId,'csrf_site_name':token_value}
-            }).done(function(html){
-                $(".chat ul").append(html);
+            }).done(function(data){console.log(data);
+                var data = $.parseJSON(data);
+                $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-
+                $(".message"+data.messageId).emojioneArea();
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
             });
 
@@ -501,6 +502,13 @@ $(document).ready(function() {
             });
         }
     }
+
+    //Handle enter key in message
+    /*$('#message').keyup(function(e){
+        if(e.keyCode == 13){
+            $('.btnSend').click();
+        }
+    });*/
 
     $('.frm_Chat').on('keypress', function(e) {
         return e.which !== 13;
