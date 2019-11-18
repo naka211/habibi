@@ -398,9 +398,7 @@ class Ajax extends MX_Controller{
     public function renderMessage($message, $messageType){
         switch ($messageType){
             case 'text':
-                $html = '<div class="message">
-                                <p>'.nl2br($message).'</p>
-                            </div>';
+                $html = '<div class="message"><p>'.nl2br($message).'</p></div>';
                 break;
             case 'image':
                 $html = '<div class="message_media">
@@ -439,17 +437,17 @@ class Ajax extends MX_Controller{
             $DB['message'] = $this->input->post('message');
             $DB['seen'] = 0;
             $DB['dt_create'] = time();
-            $this->user->saveMessage($DB);
+            $messageId = $this->user->saveMessage($DB);
+            $data['messageId'] = $messageId;
             //Save message to comet
             $item = $this->user->getUser($user->id);
             $html = '<li class="you">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
-                            <div class="message">
-                                <p>'.$DB['message'].'</p>
-                            </div>
+                            <div class="message message'.$messageId.'"><p>'.$DB['message'].'</p></div>
                             <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
                         </li>';
-            echo $html;
+            $data['html'] = $html;
+            echo json_encode($data);
             return;
         }
         echo "";

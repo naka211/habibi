@@ -1067,6 +1067,7 @@ section.section_intro {
 	font-weight: 500;
 	color: #000;
 	line-height: 1.5em;
+	width: auto;
 }
 .frame_chat_pc .chat ul li a.user {
 	height: 65px;
