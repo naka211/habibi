@@ -440,7 +440,7 @@ $(document).ready(function() {
                 }
                 setCheckMessageInterval(profileId);
 
-                $(".message").emojioneArea();
+                $(".message"+num).emojioneArea();
                 /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
                     $('.new').remove();
