@@ -339,6 +339,11 @@ class User_model extends CI_Model{
         }
     }
 
+    function updateCometMessageId($messageId, $DB=NULL){
+        $this->db->where('id', $messageId);
+        return $this->db->update('user_messages',$DB);
+    }
+
     function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
         $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
 
