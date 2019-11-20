@@ -385,7 +385,7 @@ class Ajax extends MX_Controller{
             } else {
                 $class = 'you';
             }
-            $content = $this->renderMessage($message->message, $message->messageType);
+            $content = $this->renderMessage($message->message, $message->messageType, $num);
             $html .= '<li class="'.$class.'">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$message->avatar.'" /></a>'.$content.'
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
@@ -395,10 +395,10 @@ class Ajax extends MX_Controller{
         exit();
     }
 
-    public function renderMessage($message, $messageType){
+    public function renderMessage($message, $messageType, $num){
         switch ($messageType){
             case 'text':
-                $html = '<div class="message"><p>'.nl2br($message).'</p></div>';
+                $html = '<div class="message message'.$num.'"><p>'.nl2br($message).'</p></div>';
                 break;
             case 'image':
                 $html = '<div class="message_media">
