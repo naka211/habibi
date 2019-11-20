@@ -43,11 +43,7 @@
                             <?php if(isGoldMember() === true){?>
                             <p class="gray_friend_item"><?php
                                 if($user->messageType == 'text'){
-                                    //if(preg_match("^[^?]*\.(jpg|jpeg|gif|png)", $user->message)){
-                                        echo $user->message;
-                                    /*} else {
-                                        echo substr($user->message, 0, 27);
-                                    }*/
+                                    echo substr($user->message, 0, 27);
                                 } else if($user->messageType == 'image'){
                                     echo 'Et billede var vedhæftet';
                                 } else if($user->messageType == 'video'){
