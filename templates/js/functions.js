@@ -477,28 +477,28 @@ $(document).ready(function() {
         if(message == ''){
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
-        } else { console.log(message);
+        } else {
             $.ajax({
                 type: "post",
                 url: base_url+"ajax/sendMessage",
                 dataType: 'html',
                 data: {message: message, user_to: profileId,'csrf_site_name':token_value}
-            }).done(function(data){console.log(data);
+            }).done(function(data){
                 var data = $.parseJSON(data);
                 $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 $(".message"+data.messageId).emojioneArea();
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
-            });
 
-            $.ajax({
-                type: "post",
-                url: base_url+"ajax/saveMessageToComet",
-                dataType: 'html',
-                data: {message: message, profileId: profileId,'csrf_site_name':token_value}
-            }).done(function(data){
-                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: base_url+"ajax/saveMessageToComet",
+                    dataType: 'html',
+                    data: {message: message, profileId: profileId, messageId: data.messageId, 'csrf_site_name':token_value}
+                }).done(function(data){
+                    //console.log(data);
+                });
             });
         }
     }

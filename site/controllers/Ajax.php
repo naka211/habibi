@@ -518,6 +518,7 @@ class Ajax extends MX_Controller{
         $userId = $this->session->userdata('user')->id;
         $profileId = $this->input->post('profileId');
         $message = $this->input->post('message');
+        $messageId = $this->input->post('messageId');
         $messageType = 'text';
 
         $params = json_encode(array(
@@ -546,7 +547,12 @@ class Ajax extends MX_Controller{
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
-        print_r($result);exit();
+
+        //Update comet message id to db
+        $returnData = json_decode($result);
+        $DB['cometMessageId'] = $returnData->data->id;
+        $this->user->updateCometMessageId($messageId, $DB);
+
         curl_close($ch);
     }
 
