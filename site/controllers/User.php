@@ -997,6 +997,8 @@ class User extends MX_Controller
         $savedUser = $this->user->getUser($user->id);
         $this->session->set_userdata('user', $savedUser);
 
+        //Copy original file
+        copy("./uploads/photo/".$imageName, "./uploads/user/".$imageName);
         //create thumb
         $config_resize['image_library'] = 'gd2';
         $config_resize['source_image'] = './uploads/raw_photo/'.$imageName;
