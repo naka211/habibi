@@ -869,9 +869,10 @@ class Api extends REST_Controller {
         }
         $this->user->updateAvatar($userId, $imageName);
 
+        copy('./uploads/photo/'.$imageName, './uploads/user/'.$imageName);
         //create thumb
         $config_resize['image_library'] = 'gd2';
-        $config_resize['source_image'] = './uploads/photo/'.$imageName;
+        $config_resize['source_image'] = './uploads/user/'.$imageName;
         $config_resize['new_image'] = './uploads/thumb_user/'.$imageName;
         $config_resize['thumb_marker'] = '';
         $config_resize['create_thumb'] = TRUE;
