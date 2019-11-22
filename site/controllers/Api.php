@@ -1428,4 +1428,16 @@ class Api extends REST_Controller {
         $this->user->deleteVisitMe($userId, $profileId);
         $this->_return(true);
     }
+
+    public function getNewNotification_get($userId = null){
+        $notification = array();
+        $notification['message'] = $this->user->getUnreadMessageQuantity($userId);
+        $notification['blink'] = $this->user->getBlinkingQuantity($userId);
+        $friendRequestQuantity = $this->user->friendRequestQuantity($userId);
+        $rejectRequestQuantity = $this->user->rejectRequestQuantity($userId);
+        $notification['request'] = $friendRequestQuantity + $rejectRequestQuantity;
+        $notification['friend'] = $this->user->newFriendQuantity($userId);
+
+        $this->_return(true, '', array('notification' => $notification));
+    }
 }
