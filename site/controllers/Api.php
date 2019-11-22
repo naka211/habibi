@@ -1430,14 +1430,13 @@ class Api extends REST_Controller {
     }
 
     public function getNewNotification_get($userId = null){
-        $notification = array();
-        $notification['message'] = $this->user->getUnreadMessageQuantity($userId);
-        $notification['blink'] = $this->user->getBlinkingQuantity($userId);
+        $message = $this->user->getUnreadMessageQuantity($userId);
+        $blink = $this->user->getBlinkingQuantity($userId);
         $friendRequestQuantity = $this->user->friendRequestQuantity($userId);
         $rejectRequestQuantity = $this->user->rejectRequestQuantity($userId);
-        $notification['request'] = $friendRequestQuantity + $rejectRequestQuantity;
-        $notification['friend'] = $this->user->newFriendQuantity($userId);
+        $request = $friendRequestQuantity + $rejectRequestQuantity;
+        $friend = $this->user->newFriendQuantity($userId);
 
-        $this->_return(true, '', array('notification' => $notification));
+        $this->_return(true, '', array('messageCount' => $message, 'blinkCount' => $blink, 'requestCount' => $request, 'friendCount' => $friend));
     }
 }
