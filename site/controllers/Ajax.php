@@ -581,19 +581,19 @@ class Ajax extends MX_Controller{
 
         //Send image to cometchat server
         $messageImage = $_FILES['messageImage'];
-        $messageType = 'image';
+        /*$dataArray['text'] = 'hello';
         $dataArray['attachments']['name'] = $messageImage['name'];
         $dataArray['attachments']['extension'] = end(explode('.', $messageImage['name']));
         $dataArray['attachments']['size'] = $messageImage['size'];
         $dataArray['attachments']['mimeType'] = $messageImage['type'];
-        $dataArray['attachments']['url'] = base_url().'uploads/message/'.$data->file_name;
+        $dataArray['attachments']['url'] = base_url().'uploads/message/'.$data->file_name;*/
 
         $params = json_encode(array(
             'receiver' => (string)$profileId,
             'receiverType' => 'user',
             'category' => 'message',
-            'type' => $messageType,
-            'data' => $dataArray
+            'type' => 'image',
+            'file' => base_url().'uploads/message/'.$data->file_name
         ));
 
         $ch = curl_init();
@@ -611,7 +611,7 @@ class Ajax extends MX_Controller{
         $headers[] = 'Content-Type: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result = curl_exec($ch);
+        $result = curl_exec($ch);print_r($result);exit();
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }

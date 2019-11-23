@@ -529,12 +529,12 @@ $(document).ready(function() {
                 $('#image').attr('src', '');
                 $(".waiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
             },
-            success: function (html) {
-                $(".waiting").fadeOut(100);
+            success: function (html) { console.log(html);
+                /*$(".waiting").fadeOut(100);
                 //add html to chat box
                 $(".chat ul").append(html);
                 //Scroll to bottom of ul
-                $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
+                $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));*/
             }
         });
     }
