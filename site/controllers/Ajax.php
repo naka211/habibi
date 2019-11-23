@@ -439,7 +439,7 @@ class Ajax extends MX_Controller{
             $DB['dt_create'] = time();
             $messageId = $this->user->saveMessage($DB);
             $data['messageId'] = $messageId;
-            //Save message to comet
+
             $item = $this->user->getUser($user->id);
             $html = '<li class="you">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
@@ -556,11 +556,95 @@ class Ajax extends MX_Controller{
         curl_close($ch);
     }
 
-    /*public function loadMoreFavorites($offset){
-        $user = $this->session->userdata('user');
-        $list = $this->user->getFavorites($user->id, 8, $offset);
+    public function sendImage(){
+        $userId = $this->session->userdata('user')->id;
+        $profileId = $this->input->post('profileId');
 
-    }*/
+        //Upload file to server
+        $upload_path = "./uploads/message/";
+
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = '*';
+        $config['max_size'] = $this->config->item('maxupload');
+        $config['encrypt_name'] = TRUE;  //rename to random string image
+        $this->load->library('upload', $config);
+        if (isset($_FILES['messageImage']['name'])) {
+            if (!$this->upload->do_upload('messageImage')) {
+                $response['success'] = 0;
+                $response['message'] = $this->upload->display_errors();
+                echo json_encode($response);
+                exit();
+            } else {
+                $data = (object)$this->upload->data();
+            }
+        }
+
+        //Send image to cometchat server
+        $messageImage = $_FILES['messageImage'];
+        $messageType = 'image';
+        $dataArray['attachments']['name'] = $messageImage['name'];
+        $dataArray['attachments']['extension'] = end(explode('.', $messageImage['name']));
+        $dataArray['attachments']['size'] = $messageImage['size'];
+        $dataArray['attachments']['mimeType'] = $messageImage['type'];
+        $dataArray['attachments']['url'] = base_url().'uploads/message/'.$data->file_name;
+
+        $params = json_encode(array(
+            'receiver' => (string)$profileId,
+            'receiverType' => 'user',
+            'category' => 'message',
+            'type' => $messageType,
+            'data' => $dataArray
+        ));
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId.'/messages');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+        //Save message
+        $returnData = json_decode($result);
+        $DB['cometMessageId'] = $returnData->data->id;
+        $DB['user_from'] = $userId;
+        $DB['user_to'] = $profileId;
+        $DB['message'] = $returnData->data->data->url;
+        $DB['messageType'] = 'image';
+        $DB['seen'] = 0;
+        $DB['dt_create'] = time();
+        $this->user->saveMessage($DB);
+
+        //Delete image on server
+        @unlink("./uploads/message/".$data->file_name);
+
+        //Generate message html
+        $item = $this->user->getUser($userId);
+        $html = '<li class="you">
+                    <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
+                    <div class="message_media">
+                        <p class="img_content">
+                            <a href="'.$returnData->data->data->url.'" data-fancybox="images"><img src="'.$returnData->data->data->url.'" alt="" class="img-responsive"></a>
+                        </p>
+                    </div>
+                    <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
+                </li>';
+        echo $html;
+        return;
+    }
 
     public function loadMultiFilter(){
         $user = $this->session->userdata('user');

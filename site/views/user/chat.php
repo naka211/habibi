@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css" integrity="sha256-LKawN9UgfpZuYSE2HiCxxDxDgLOVDx2R4ogilBI52oc=" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js" integrity="sha256-hhA2Nn0YvhtGlCZrrRo88Exx/6H8h2sd4ITCXwqZOdo=" crossorigin="anonymous"></script>
+<!--<script src="<?php /*echo base_url().'templates/';*/?>js/emojionearea.js"></script>-->
 <script>
     $(document).ready(function() {
         loadMoreMessages('<?php echo $profile->id;?>', 0, true);
@@ -39,15 +40,13 @@
 
         document.getElementById("messageImage").onchange = function () {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
-                console.log(e.target);
                 document.getElementById("image").src = e.target.result;
             };
-
             // read the image file as a data URL.
             reader.readAsDataURL(this.files[0]);
+            $('.previewAction').show();
         };
     });
 </script>
@@ -62,12 +61,17 @@
                             <h4>Chatbesked med <?php echo $profile->name;?></h4>
                             <ul>
                             </ul>
-                            <form class="frm_Chat" action="" method="POST" role="form">
+                            <img id="image" style="width: 100px; margin-bottom: 20px;" />
+                            <span class="previewAction" style="display: none;">
+                                <a href="javscript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
+                                <a href="javscript:void(0);" onclick="sendImage('<?php echo $profile->id;?>')" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                            </span>
+                            <span class="waiting"></span>
+                            <form class="frm_Chat" action="" method="POST" role="form" id="chatForm">
                                 <input type="text" class="form-control" placeholder="Skriv en besked her........." id="message">
                                 <div class="box_sendmedia">
-                                    <input type="file" name="messageImage" id="messageImage">
+                                    <input type="file" name="messageImage" id="messageImage" accept="image/*">
                                 </div>
-                                <img id="image" width="32" style="margin-top: -10px" />
                                 <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', '')" id="btnSend">SEND</button>
                             </form>
                         </div>
