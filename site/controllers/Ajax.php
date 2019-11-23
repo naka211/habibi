@@ -593,7 +593,7 @@ class Ajax extends MX_Controller{
             'receiverType' => 'user',
             'category' => 'message',
             'type' => 'image',
-            'file' => base_url().'uploads/message/'.$data->file_name
+            'file' => $messageImage
         ));
 
         $ch = curl_init();
