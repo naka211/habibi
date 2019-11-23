@@ -1052,7 +1052,7 @@ section.section_intro {
 	margin-bottom: 200px;
 }
 .frame_chat_pc .frm_Chat .form-control {
-	width: 78%;
+	width: 80%;
 }
 .box_sendmedia input {
 	width: 32px;
@@ -1081,4 +1081,12 @@ section.section_intro {
 	width: 65px;
 	object-fit: cover;
 	box-shadow: none;
+}
+
+.previewAction img{
+	margin-left: 10px;
+}
+
+.waiting img{
+	margin-bottom: 20px;
 }
