@@ -1040,6 +1040,7 @@ section.section_intro {
 	margin-left: 90px;
 	background: none;
 	border: 1px solid #f4f4f4;
+	min-height: 222px;
 }
 
 .other .img_content{
