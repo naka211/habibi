@@ -48,6 +48,40 @@
             reader.readAsDataURL(this.files[0]);
             $('.previewAction').show();
         };
+
+        $('#sendImage').click(function () {
+            //Handle click event
+            $('.previewAction').hide();
+            $('#image').attr('src', '');
+            $(".waiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
+
+            //Send message to comet server
+            var appId = "<?php echo $this->config->item('comet_app_id');?>";
+
+            var mediaMessage = new CometChat.MediaMessage('<?php echo $profile->id;?>', document.getElementById('messageImage').files[0], CometChat.MESSAGE_TYPE.IMAGE, CometChat.RECEIVER_TYPE.USER);
+
+            CometChat.init(appId);
+            CometChat.sendMediaMessage(mediaMessage).then(
+                message => {
+                $.ajax({
+                    type: "post",
+                    url: base_url+"ajax/sendImage",
+                    dataType: 'text',
+                    data: {message: message.url, profileId: <?php echo $profile->id;?>, cometMessageId: message.id, 'csrf_site_name':token_value}
+                }).done(function(html){
+                    $(".waiting").fadeOut(100);
+                    //add html to chat box
+                    $(".chat ul").append(html);
+                    //Scroll to bottom of ul
+                    $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
+                });
+            },
+                error => {
+                    console.log("Media message sending failed with error", error);
+                    // Handle exception.
+                }
+            );
+        });
     });
 </script>
 <div id="content">
@@ -64,7 +98,7 @@
                             <img id="image" style="width: 100px; margin-bottom: 20px;" />
                             <span class="previewAction" style="display: none;">
                                 <a href="javscript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
-                                <a href="javscript:void(0);" onclick="sendImage('<?php echo $profile->id;?>')" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                                <a href="javscript:void(0);" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
                             </span>
                             <span class="waiting"></span>
                             <form class="frm_Chat" action="" method="POST" role="form" id="chatForm">

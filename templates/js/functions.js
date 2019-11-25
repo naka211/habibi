@@ -510,35 +510,6 @@ $(document).ready(function() {
         $('.previewAction').hide();
     });
 
-    sendImage = function(profileId){
-        var fileData = $('#messageImage').prop('files')[0];
-        var formData = new FormData();
-        formData.append('csrf_site_name', token_value);
-        formData.append('messageImage', fileData);
-        formData.append('profileId', profileId);
-        $.ajax({
-            url: base_url+"ajax/sendImage", // point to server-side controller method
-            dataType: 'text', // what to expect back from the server
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: formData,
-            type: 'post',
-            beforeSend: function () {
-                $('.previewAction').hide();
-                $('#image').attr('src', '');
-                $(".waiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
-            },
-            success: function (html) { console.log(html);
-                /*$(".waiting").fadeOut(100);
-                //add html to chat box
-                $(".chat ul").append(html);
-                //Scroll to bottom of ul
-                $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));*/
-            }
-        });
-    }
-
     //Handle enter key in message
     /*$('#message').keyup(function(e){
         if(e.keyCode == 13){

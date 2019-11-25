@@ -175,7 +175,7 @@
 <!--Login user to cometchat-->
 <script>
     $(document).ready(function() {
-        var UID = "superhero5";
+        var UID = "<?php echo $userLoggedIn->id;?>";
         var apiKey = "<?php echo $this->config->item('comet_auth_api_key');?>";
         var appID = "<?php echo $this->config->item('comet_app_id');?>";
 
