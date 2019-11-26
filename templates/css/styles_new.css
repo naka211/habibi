@@ -1045,6 +1045,7 @@ section.section_intro {
 
 .other .img_content{
 	margin-right: 90px;
+	min-height: 222px;
 }
 
 .frame_chat.frame_chat_pc {
