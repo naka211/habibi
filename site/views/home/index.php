@@ -1,14 +1,4 @@
 <script src="<?php echo base_url().'templates/';?>js/intro.js"></script>
-<?php if($this->input->get('authToken')){?>
-<!--Logout user to cometchat-->
-<script>
-    $(document).ready(function() {
-        var appID = "<?php echo $this->config->item('comet_app_id');?>";
-        CometChat.init(appID);
-        CometChat.logout('<?php echo base64_decode($this->input->get('authToken'))?>');
-    });
-</script>
-<?php }?>
 <div id="page">
     <section class="banner">
         <div class="swiper_banner swiper-container">
