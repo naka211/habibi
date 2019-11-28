@@ -171,25 +171,14 @@
 
     </div>
 </div>
-<?php if(empty($userLoggedIn->cometAuthToken)){ ?>
+
 <!--Login user to cometchat-->
 <script>
     $(document).ready(function() {
-        var UID = "<?php echo $userLoggedIn->id;?>";
-        var apiKey = "<?php echo $this->config->item('comet_auth_api_key');?>";
         var appID = "<?php echo $this->config->item('comet_app_id');?>";
-
         CometChat.init(appID);
-        CometChat.login(UID, apiKey).then(
-            user => {
-            $.ajax({
-                method: "POST",
-                url: base_url+"ajax/saveCometAuthToken",
-                data: { csrf_site_name: token_value, authToken: user.authToken }
-            }).done(function() {
-                //console.log('ok');
-            });
+        CometChat.login('<?php echo $userLoggedIn->cometAuthToken;?>').then(
+            function(user){ console.log(user);
         });
     });
 </script>
-<?php }?>

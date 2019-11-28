@@ -109,9 +109,6 @@ class Ajax extends MX_Controller{
             $Login = array('isLoginSite', 'user', 'email', 'password');
             $this->session->unset_userdata($Login);
             $this->user->updateLogin($user->id, 0);
-            //Delete comet auth token
-            $DB['cometAuthToken'] = null;
-            $this->user->saveUser($DB, $user->id);
         }
 
         die('ok');
@@ -1010,6 +1007,7 @@ class Ajax extends MX_Controller{
         $DB['cometAuthToken'] = $authToken;
         $this->user->saveUser($DB, $user->id);
 
+        //Update the user session
         $newUser = $this->user->getUser($user->id);
         $this->session->set_userdata('user', $newUser);
     }
