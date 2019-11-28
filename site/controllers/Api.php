@@ -251,10 +251,9 @@ class Api extends REST_Controller {
         $this->_setAvatarPath($userId, $users);
         $this->_checkShowingRequestButton($userId, $users);
         if($users){
-            /*$returnData['status'] = true;
-            $returnData['message'] = '';
-            $returnData['users'] = $users;
-            $this->response($returnData, REST_Controller::HTTP_OK);*/
+            foreach ($users as $key => $user){
+                $users[$key]->numberOfImages = countImages($user->id);
+            }
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
@@ -588,6 +587,9 @@ class Api extends REST_Controller {
 
         if(!empty($users)){
             $this->_setAvatarPath($userId, $users);
+            foreach ($users as $key => $user){
+                $users[$key]->numberOfImages = countImages($user->id);
+            }
             $this->_return(true, '', array('users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
