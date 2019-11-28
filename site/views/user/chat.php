@@ -62,7 +62,7 @@
 
             CometChat.init(appId);
             CometChat.sendMediaMessage(mediaMessage).then(
-                message => {
+                function(message){
                 $.ajax({
                     type: "post",
                     url: base_url+"ajax/sendImage",
@@ -76,7 +76,7 @@
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
                 });
             },
-                error => {
+                function(error){
                     console.log("Media message sending failed with error", error);
                     // Handle exception.
                 }
@@ -97,8 +97,8 @@
                             </ul>
                             <img id="image" style="width: 100px; margin-bottom: 20px;" />
                             <span class="previewAction" style="display: none;">
-                                <a href="javscript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
-                                <a href="javscript:void(0);" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                                <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
+                                <a href="javascript:void(0);" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
                             </span>
                             <span class="waiting"></span>
                             <form class="frm_Chat" action="" method="POST" role="form" id="chatForm">
