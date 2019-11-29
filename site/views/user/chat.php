@@ -90,8 +90,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="frame_chat frame_chat_pc">
+                        <a href="javascript:void(0);" class="btn bntBlock" onclick="confirmDeleteMessage('<?php echo $profile->id;?>', 'Er du sikker på du vil slette chat historik?');">Slet historik</a>
                         <div class="chat">
-                            <a href="javascript:void(0);" class="btn bntDelete" onclick="confirmDeleteMessage('<?php echo $profile->id;?>', 'Er du sikker på du vil slette chat historik?');">Slet historik</a>
                             <h4>Chatbesked med <?php echo $profile->name;?></h4>
                             <ul>
                             </ul>
@@ -102,10 +102,10 @@
                             </span>
                             <span class="waiting"></span>
                             <form class="frm_Chat" action="" method="POST" role="form" id="chatForm">
-                                <input type="text" class="form-control" placeholder="Skriv en besked her........." id="message">
                                 <div class="box_sendmedia">
                                     <input type="file" name="messageImage" id="messageImage" accept="image/*">
                                 </div>
+                                <input type="text" class="form-control" placeholder="Skriv en besked her........." id="message">
                                 <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', '')" id="btnSend">SEND</button>
                             </form>
                         </div>
