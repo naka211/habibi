@@ -1007,17 +1007,17 @@ section.section_intro {
 
 /* Chat page*/
 .box_sendmedia {
-	background: url('../images/1x/attached-file.png') no-repeat;
+	background: url('../images/1x/camera.png') no-repeat;
 	-webkit-background-size: 100%;
 	background-size: 100%;
 	width: 32px;
 	height: 32px;
 	display: inline-block !important;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 .box_sendmedia:hover {
 	cursor: pointer;
-	background: url('../images/1x/attached-file-hover.png') no-repeat;
+	background: url('../images/1x/camera_hover.png') no-repeat;
 }
 .box_sendmedia input {
 	opacity: 0;
@@ -1053,17 +1053,13 @@ section.section_intro {
 	padding: 30px;
 	margin-bottom: 200px;
 }
-.frame_chat_pc .frm_Chat .form-control {
+/*.frame_chat_pc .frm_Chat .form-control {
 	width: 80%;
-}
+}*/
 .box_sendmedia input {
 	width: 32px;
 }
-.frame_chat_pc .frm_Chat .btnSend {
-	width: 13%;
-	padding-top: 6px;
-	padding-bottom: 6px;
-}
+
 .frame_chat_pc .chat ul li .message {
 	font-size: 14px;
 	font-weight: 500;

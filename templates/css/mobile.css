@@ -610,7 +610,6 @@
     }
     .frm_Chat .form-control {
         width: 100%;
-        margin-bottom: 15px;
         max-height: 90px;
         height: 35px;
         padding: 5px 10px;
@@ -716,9 +715,9 @@
     .frm_Chat .btnSend {
         width: 25%;
     }
-    .frame_chat_pc .frm_Chat .form-control {
+    /*.frame_chat_pc .frm_Chat .form-control {
         width: 100%;
-    }
+    }*/
     .frame_chat_pc .chat ul {
         height: 500px;
         min-height: 200px;

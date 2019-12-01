@@ -941,7 +941,10 @@ class Ajax extends MX_Controller{
     public function deleteMessage(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
+        //Delete message in our server
         $this->user->deleteMessage($user->id, $profileId);
+        //Delete message in comet server
+
         $data['status'] = true;
 
         header('Content-Type: application/json');
