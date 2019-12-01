@@ -104,7 +104,7 @@ $(function ($) {
         });
     });
 
-
+    $.fancybox.defaults.buttons = ['close'];
 
 });
 
