@@ -395,7 +395,7 @@ $(document).ready(function() {
     }
 
     loadMoreMessages = function (profileId, num, first) {
-        $('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');
+        /*$('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');*/
         /*$("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
         if(first == true){

@@ -2537,12 +2537,12 @@ ul.list_action li a .i_report {
 }
 
 .frm_Chat .form-control {
-    width: 608px;
+    /*width: 608px;*/
     background: #eee;
     border: none;
     box-shadow: none;
     display: inline-block;
-    float: left;
+    /*float: left;*/
     font-size: 14px;
     /*font-style: italic;*/
     height: 35px;
@@ -2550,18 +2550,38 @@ ul.list_action li a .i_report {
     color: #000;
 }
 
+.frm_Chat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+}
+
 .frm_Chat .btnSend {
-    float: right;
+    /*float: right;*/
     display: inline-block;
     background: #ffa507;
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 13px;
-    width: 100px;
+    /*width: 100px;*/
     position: relative;
     padding-top: 8px;
     padding-bottom: 8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 100px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    padding: 0 5px;
 }
 
 .frm_Chat .btnSend:hover {
