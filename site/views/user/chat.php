@@ -48,13 +48,15 @@
             $('.bntBlock').hide();
             $(".deleteWaiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
 
-            /*$.ajax({
+            $.ajax({
                 method: "POST",
                 url: base_url+"ajax/deleteMessage",
-                data: { csrf_site_name: token_value, profile_id: profile_id }
-            }).done(function() {
-                window.location.replace(base_url+"user/messages");
-            });*/
+                data: { csrf_site_name: token_value, profile_id: profileId }
+            }).done(function(data) {
+                //window.location.replace(base_url+"user/messages");
+                //console.log(data);
+                history.back();
+            });
         }
 
         $("#message").emojioneArea({
