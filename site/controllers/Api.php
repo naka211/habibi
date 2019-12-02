@@ -1441,6 +1441,6 @@ class Api extends REST_Controller {
         $request = $friendRequestQuantity + $rejectRequestQuantity;
         $friend = $this->user->newFriendQuantity($userId);
 
-        $this->_return(true, '', array('messageCount' => $message, 'blinkCount' => $blink, 'requestCount' => $request, 'friendCount' => $friend));
+        $this->_return(true, '', array('messageCount' => $message, 'blinkCount' => $blink, 'requestCount' => $friendRequestQuantity, 'rejectCount' => $rejectRequestQuantity, 'totalRequestCount' => $request, 'friendCount' => $friend));
     }
 }
