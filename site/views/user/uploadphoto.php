@@ -51,6 +51,8 @@
             <?php }?>
             <input id="file" type="file" name="file" multiple="multiple" accept="image/*"/>
             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" style="display: none;" class="btn btn_viewSearch">Gem</a>
+            <a href="javascript:void(0);" style="display: none;" class="btn btnDeleteAcc" onclick="cancelUpload();">Slet</a>
+            <input type="hidden" value="" id="imageIds">
             <div class="row">
                 <?php foreach($listImages as $image){?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-12 photo<?php echo $image->id;?>">
@@ -93,8 +95,16 @@
             allowedExtensions:"jpeg|jpg|png",
             url: base_url+'ajax/uploadPhoto',
             data: {'csrf_site_name':token_value},
-            onFileSuccess: function (file,data) {
+            onFileSuccess: function (file, data) {
+                var cur_val = $('#imageIds').val();
+                if(cur_val){
+                    $('#imageIds').val(cur_val + "," + data.imageId);
+                } else {
+                    $('#imageIds').val(data.imageId);
+                }
+
                 $('.btn_viewSearch').show();
+                $('.btnDeleteAcc').show();
             }
         });
 
@@ -106,6 +116,16 @@
             }).done(function() {
                 $.fancybox.close();
                 $('#reloadPage').click();
+            });
+        }
+
+        cancelUpload = function () {
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/cancelUploadPhoto",
+                data: { csrf_site_name: token_value, imagesIds: $('#imageIds').val() }
+            }).done(function(data) {
+                location.reload();
             });
         }
     });
