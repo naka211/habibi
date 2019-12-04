@@ -646,7 +646,7 @@ class Ajax extends MX_Controller{
                 $DB['image'] = $data['file_name'];
                 $DB['dt_create'] = time();
                 $DB['status'] = 0;
-                $this->user->savePhoto($DB);
+                $imageId = $this->user->savePhoto($DB);
 
                 //resize big image
                 if($data["image_width"] > 1200 || $data["image_height"] > 1200){
@@ -716,6 +716,7 @@ class Ajax extends MX_Controller{
                 }
 
                 $response['success'] = 1;
+                $response['imageId'] = $imageId;
                 $response['message'] = $this->upload->data();
                 echo json_encode($response);
                 exit();
@@ -931,6 +932,18 @@ class Ajax extends MX_Controller{
     public function deletePhoto(){
         $photoId = $this->input->post('photoId');
         $this->user->deletePhoto($photoId);
+
+        $data['status'] = true;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
+    public function cancelUploadPhoto(){
+        $imagesIds = explode(',', $this->input->post('imagesIds'));
+        foreach ($imagesIds as $imagesId){
+            $this->user->deletePhoto($imagesId);
+        }
 
         $data['status'] = true;
         header('Content-Type: application/json');

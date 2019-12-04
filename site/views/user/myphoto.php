@@ -8,6 +8,9 @@
                     </div>
                 </div>
             </div>
+            <a class="btn bntMessage" href="<?php echo site_url('user/uploadPhoto');?>" style="margin-bottom: 20px;">
+                <span>Upload billede</span>
+            </a>
             <div class="row">
                 <?php foreach($listImages as $image){?>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-ms-4 col-xs-12 photo<?php echo $image->id;?>">
