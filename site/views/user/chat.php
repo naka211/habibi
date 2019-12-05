@@ -21,7 +21,7 @@
                                     <input type="file" name="messageImage" id="messageImage" accept="image/*">
                                 </div>
                                 <input type="text" class="form-control" placeholder="Skriv en besked her........." id="message">
-                                <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', '')" id="btnSend"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
+                                <button type="button" class="btn btnSend" onclick="sendMessage('<?php echo $profile->id;?>', '', <?php echo $isMobile?'true':'false';?>)" id="btnSend"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                             </form>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
 <script src="<?php echo base_url().'templates/';?>js/emojionearea.js"></script>
 <script>
     $(document).ready(function() {
-        loadMoreMessages('<?php echo $profile->id;?>', 0, true);
+        loadMoreMessages('<?php echo $profile->id;?>', 0, true, <?php echo $isMobile?'true':'false';?>);
 
         confirmDeleteMessage = function (profileId, text) {
             $('#confirmText').html(text);
@@ -59,6 +59,7 @@
             });
         }
 
+        <?php if($isMobile == false){?>
         $("#message").emojioneArea({
             search: false,
             useInternalCDN: true,
@@ -69,11 +70,24 @@
                 keydown: function (editor, event) {
                     if(event.keyCode == 13){
                         $("#message").data("emojioneArea").hidePicker();
-                        sendMessage('<?php echo $profile->id;?>', this.getText())
+                        sendMessage('<?php echo $profile->id;?>', this.getText(), <?php echo $isMobile?'true':'false';?>)
                     }
                 }
             }
         });
+        <?php } else {?>
+        //Handle enter key in message
+        $('#message').keyup(function(e){
+            if(e.keyCode == 13){
+                $('.btnSend').click();
+            }
+        });
+
+        $('.frm_Chat').on('keypress', function(e) {
+            return e.which !== 13;
+        });
+        ////
+        <?php }?>
 
         document.getElementById("messageImage").onchange = function () {
             var reader = new FileReader();
