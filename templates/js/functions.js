@@ -394,7 +394,7 @@ $(document).ready(function() {
         clearInterval(checkMessageInterval);
     }
 
-    loadMoreMessages = function (profileId, num, first) {
+    loadMoreMessages = function (profileId, num, first, isMobile) { //TODO continue to check mobile to show emoji
         /*$('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');*/
         /*$("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
@@ -440,7 +440,9 @@ $(document).ready(function() {
                 }
                 setCheckMessageInterval(profileId);
 
-                $(".message"+num).emojioneArea();
+                if(isMobile == false){
+                    $(".message"+num).emojioneArea();
+                }
                 /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
                     $('.new').remove();
@@ -467,7 +469,7 @@ $(document).ready(function() {
         });
     }
 
-    sendMessage = function (profileId, message) {
+    sendMessage = function (profileId, message, isMobile) {
         if(message == ''){
             var message = $("#message").val();
         }
@@ -489,7 +491,9 @@ $(document).ready(function() {
                 $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-                $(".message"+data.messageId).emojioneArea();
+                if(isMobile == false){
+                    $(".message"+data.messageId).emojioneArea();
+                }
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
 
                 $.ajax({
@@ -509,18 +513,6 @@ $(document).ready(function() {
         $('#image').attr('src', '');
         $('.previewAction').hide();
     });
-
-    //Handle enter key in message
-    /*$('#message').keyup(function(e){
-        if(e.keyCode == 13){
-            $('.btnSend').click();
-        }
-    });*/
-
-    $('.frm_Chat').on('keypress', function(e) {
-        return e.which !== 13;
-    });
-    ////
 
     /*setInterval(checkSession, 10*60*1000);
     function checkSession() {

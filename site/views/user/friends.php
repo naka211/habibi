@@ -19,7 +19,8 @@
             <?php if(!empty($list)){
                 foreach($list as $profile){
                     if(isGoldMember()){
-                        $messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.',0, true, \''.$profile->name.'\')"';
+                        //$messageLink = 'href="javascript:void(0)" onclick="loadMoreMessages('.$profile->id.',0, true, \''.$profile->name.'\')"';
+                        $messageLink = 'href="'.site_url('user/chat/'.$profile->id.'/'.$profile->name).'"';
                     } else {
                         $messageLink = 'data-fancybox data-src="#modalUpgrade" href="javascript:;"';
                     }

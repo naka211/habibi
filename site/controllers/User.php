@@ -1128,6 +1128,7 @@ class User extends MX_Controller
 
         $this->user->addMeta($this->_meta, $data, 'Habibi - Chatte med '.$profileName);
 
+        $data['isMobile'] = $this->agent->is_mobile();
         $data['page'] = 'user/chat';
         $this->load->view('templates', $data);
     }
