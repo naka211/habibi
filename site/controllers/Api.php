@@ -1467,7 +1467,7 @@ class Api extends REST_Controller {
     public function getFriendStatus_get($userId = null, $profileId = null){
         $status = $this->user->checkStatus($userId, $profileId);
         $friendStatus = $status->isFriend;
-        $favoriteStatus = $status->isFavorite;
+        $favoriteStatus = $status->isFavorite ? '1' : '0';
         $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus));
     }
 
