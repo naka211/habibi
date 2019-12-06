@@ -662,6 +662,7 @@ class Api extends REST_Controller {
             $user->rawThumbNewAvatarPath = base_url().'uploads/raw_thumb_user/'.$user->new_avatar;
             $user->thumbNewAvatarPath = base_url().'uploads/thumb_user/'.$user->new_avatar;
         }
+
         $this->_return(true, '', array('user'=>$user));
     }
 
@@ -1466,7 +1467,8 @@ class Api extends REST_Controller {
     public function getFriendStatus_get($userId = null, $profileId = null){
         $status = $this->user->checkStatus($userId, $profileId);
         $friendStatus = $status->isFriend;
-        $this->_return(true, '', array('friendStatus'=>$friendStatus));
+        $favoriteStatus = $status->isFavorite;
+        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus));
     }
 
     public function deleteVisited_delete(){
