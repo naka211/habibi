@@ -25,7 +25,9 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                             <a data-fancybox="avatarGallery"
                                href="<?php echo base_url(); ?>uploads/user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>uploads/raw_thumb_user/<?php echo $profile->avatar;?>"></a>
                          <?php } else {?>
-                            <img class="img-responsive" src="<?php echo base_url();?>uploads/thumb_user/<?php echo $profile->avatar;?>">
+                            <a data-fancybox="avatarGallery"
+                               href="<?php echo base_url(); ?>uploads/thumb_user/<?php echo $profile->avatar; ?>"><img class="img-responsive" src="<?php echo base_url();?>uploads/thumb_user/<?php echo $profile->avatar;?>"></a>
+                            <!--<img class="img-responsive" src="<?php /*echo base_url();*/?>uploads/thumb_user/<?php /*echo $profile->avatar;*/?>">-->
                         <?php }?>
                     </div>
                 </div>
