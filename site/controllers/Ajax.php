@@ -570,11 +570,13 @@ class Ajax extends MX_Controller{
 
         //Generate message html
         $item = $this->user->getUser($userId);
+        list($width, $height) = getimagesize($this->input->post('message'));
+        $class = $width > $height ? 'rotate-90' : '';
         $html = '<li class="you">
                     <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                     <div class="message_media">
                         <p class="img_content">
-                            <a href="'.$this->input->post('message').'" data-fancybox="images"><img src="'.$this->input->post('message').'" alt="" class="img-responsive"></a>
+                            <a href="'.$this->input->post('message').'" data-fancybox="images"><img src="'.$this->input->post('message').'" alt="" class="img-responsive '.$class.'"></a>
                         </p>
                     </div>
                     <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
