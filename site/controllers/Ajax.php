@@ -398,9 +398,11 @@ class Ajax extends MX_Controller{
                 $html = '<div class="message message'.$num.'"><p>'.nl2br($message).'</p></div>';
                 break;
             case 'image':
+                list($width, $height) = getimagesize($message);
+                $class = $width > $height ? 'rotate-90' : '';
                 $html = '<div class="message_media">
                         <p class="img_content">
-                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive"></a>
+                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive '.$class.'"></a>
                         </p>
                     </div>';
                 break;
