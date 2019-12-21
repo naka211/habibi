@@ -634,10 +634,11 @@ class Api extends REST_Controller {
         $ignore = $this->user->getBlockedUserIds($userId);
         $ignore[] = $userId;
 
-        $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
         //Save search to db
         $db['search_session'] = json_encode($searchData);
         $this->user->saveUser($db, $userId);
+
+        $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
 
         if(!empty($users)){
             $this->_setAvatarPath($userId, $users);
