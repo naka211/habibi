@@ -647,7 +647,7 @@ class Api extends REST_Controller {
             }
             $this->_return(true, '', array('users'=>$users, 'search_session'=>$this->user->getUser($userId)->search_session));
         } else {
-            $this->_return(false, 'Nobody');
+            $this->_return(false, 'Nobody', array('search_session'=>$this->user->getUser($userId)->search_session));
         }
     }
 
