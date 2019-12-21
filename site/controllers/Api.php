@@ -645,7 +645,7 @@ class Api extends REST_Controller {
             foreach ($users as $key => $user){
                 $users[$key]->numberOfImages = countImages($user->id);
             }
-            $this->_return(true, '', array('users'=>$users));
+            $this->_return(true, '', array('users'=>$users, 'search_session'=>$this->user->getUser($userId)->search_session));
         } else {
             $this->_return(false, 'Nobody');
         }
