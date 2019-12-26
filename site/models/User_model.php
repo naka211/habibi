@@ -361,6 +361,10 @@ class User_model extends CI_Model{
         return $query->result();
     }
 
+    function updateSeenMessages($user=NULL, $userID=NULL){
+        $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
+    }
+
     function getNumMessages($user=NULL,$userID=NULL){
         $this->db->select('COUNT(m.id) as num');
         $this->db->from('user_messages m');
