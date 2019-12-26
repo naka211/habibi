@@ -386,6 +386,11 @@ class Api extends REST_Controller {
         }
     }
 
+    public function setSeenMessages_put($userId, $profileId){
+        $this->user->updateSeenMessages($userId, $profileId);
+        $this->_return(true, 'Set');
+    }
+
     public function sendMessage_post(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
