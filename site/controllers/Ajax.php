@@ -1113,5 +1113,10 @@ class Ajax extends MX_Controller{
             echo $fileName; exit();
         }
     }
+
+    public function deleteTempMessageImage(){
+        @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
+        return true;
+    }
 }
 ?>
