@@ -136,8 +136,8 @@
         $('#sendImage').click(function () {
             //Handle click event
             $('.previewAction').hide();
-            $('#image').attr('src', '');
-            $(".waiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
+            $('#imagePre').attr('src', '');
+            $(".waiting").show();
 
             var appId = "<?php echo $this->config->item('comet_app_id');?>";
             var imageName = $("#imageName").val();
