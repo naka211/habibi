@@ -103,7 +103,6 @@
                 img.attr('src', e.target.result);
                 imgPre.attr('src', e.target.result);
                 //$('.previewAction').show();
-
             };
 
             img.on('load', function() {
@@ -190,6 +189,12 @@
                                     $(".chat ul").append(html);
                                     //Scroll to bottom of ul
                                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
+                                    //Delete temp image
+                                    $.ajax({
+                                        method: "POST",
+                                        url: base_url+"ajax/deleteTempMessageImage",
+                                        data: { csrf_site_name: token_value, imageName: imageName }
+                                    });
                                     //
                                     $("#imageName").val('');
                                 });
@@ -204,5 +209,19 @@
                 xhr.send();
             }
         });
+
+        $("#deletePreviewImage").click(function () {
+            $('.previewAction').hide();
+            $('#imagePre').attr('src', '');
+            $('#image').attr('src', '');
+            var imageName = $("#imageName").val();
+            if(imageName != ''){
+                $.ajax({
+                    method: "POST",
+                    url: base_url+"ajax/deleteTempMessageImage",
+                    data: { csrf_site_name: token_value, imageName: imageName }
+                });
+            }
+        })
     });
 </script>
