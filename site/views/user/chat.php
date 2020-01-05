@@ -124,6 +124,7 @@
                             $(".waiting").fadeOut(100);
                             imgPre.show();
                             $("#imageName").val(filename);
+                            $('.previewAction').show();
                         });
                     }
                 });
