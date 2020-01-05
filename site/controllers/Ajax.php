@@ -398,11 +398,9 @@ class Ajax extends MX_Controller{
                 $html = '<div class="message message'.$num.'"><p>'.nl2br($message).'</p></div>';
                 break;
             case 'image':
-                list($width, $height) = getimagesize($message);
-                $class = $width > $height ? 'rotate-90' : '';
                 $html = '<div class="message_media">
                         <p class="img_content">
-                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive '.$class.'"></a>
+                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive"></a>
                         </p>
                     </div>';
                 break;
@@ -568,15 +566,18 @@ class Ajax extends MX_Controller{
         $DB['dt_create'] = time();
         $this->user->saveMessage($DB);
 
+
+        if(!empty($this->input->post('imageName'))){
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
+        }
+
         //Generate message html
         $item = $this->user->getUser($userId);
-        list($width, $height) = getimagesize($this->input->post('message'));
-        $class = $width > $height ? 'rotate-90' : '';
         $html = '<li class="you">
                     <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                     <div class="message_media">
                         <p class="img_content">
-                            <a href="'.$this->input->post('message').'" data-fancybox="images"><img src="'.$this->input->post('message').'" alt="" class="img-responsive '.$class.'"></a>
+                            <a href="'.$this->input->post('message').'" data-fancybox="images"><img src="'.$this->input->post('message').'" alt="" class="img-responsive"></a>
                         </p>
                     </div>
                     <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
@@ -1041,13 +1042,18 @@ class Ajax extends MX_Controller{
         return;
     }
 
-    function correctImageOrientation($filename) {
+    function correctImageOrientation($filename, $extension = 'png') {
         if (function_exists('exif_read_data')) {
             $exif = exif_read_data($filename);
             if($exif && isset($exif['Orientation'])) {
                 $orientation = $exif['Orientation'];
                 if($orientation != 1){
-                    $img = imagecreatefromjpeg($filename);
+                    if($extension == 'jpg'){
+                        header('Content-Type: image/jpeg');
+                        $img = imagecreatefromjpeg($filename);
+                    } else {
+                        $img = imagecreatefrompng($filename);
+                    }
                     $deg = 0;
                     switch ($orientation) {
                         case 3:
@@ -1064,7 +1070,12 @@ class Ajax extends MX_Controller{
                         $img = imagerotate($img, $deg, 0);
                     }
                     // then rewrite the rotated image back to the disk as $filename
-                    imagejpeg($img, $filename, 95);
+                    if($extension == 'jpg'){
+                        imagejpeg($img, $filename, 95);
+                    } else {
+                        imagepng($img, $filename, 95);
+                    }
+                    imagedestroy($img);
                 } // if there is some rotation necessary
             } // if have the exif orientation info
         } // if function exists
@@ -1080,6 +1091,27 @@ class Ajax extends MX_Controller{
         //Update the user session
         $newUser = $this->user->getUser($user->id);
         $this->session->set_userdata('user', $newUser);
+    }
+
+    public function uploadTempMessageImage(){
+        $this->load->helper('string');
+        $imageData = $this->input->post('imageData');
+        $extension = $this->input->post('extension');
+        $fileName = random_string('alnum',30).'.'.$extension;
+
+        if($extension == 'png'){
+            $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        } else if($extension == 'jpg'){
+            $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
+        }
+        $imageData = str_replace(' ', '+', $imageData);
+        $image = base64_decode($imageData);
+
+        $pathFile = './uploads/file/'.$fileName;
+        if(file_put_contents($pathFile, $image) !== false){
+            $this->correctImageOrientation($this->config->item('root') . 'uploads'.DIRECTORY_SEPARATOR.'file'.DIRECTORY_SEPARATOR.$fileName, $extension);
+            echo $fileName; exit();
+        }
     }
 }
 ?>
