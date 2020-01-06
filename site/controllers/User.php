@@ -103,6 +103,7 @@ class User extends MX_Controller
         if(isGoldMember()){
             $data['messages'] = $this->user->getMessages($data['user']->id, $id, 10, 0);
         }
+        $data['isMobile'] = $this->agent->is_mobile();
 
         $data['page'] = 'user/profile';
         $this->load->view('templates', $data);
@@ -368,6 +369,7 @@ class User extends MX_Controller
 
         $data['list'] = $list;
         $data['ignore'] = $this->user->getBlockedUserIds($user->id);
+        $data['isMobile'] = $this->agent->is_mobile();
 
         $data['page'] = 'user/messages';
         $this->load->view('templates', $data);
