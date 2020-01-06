@@ -77,6 +77,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <!--Comet chat-->
     <script type="text/javascript" src="https://unpkg.com/@cometchat-pro/chat@1.8/CometChat.js"></script>
+    <script src="<?php echo base_url().'templates/';?>js/emojionearea.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <?php
     //$this->minify->js('jquery.multiselect.js, all.js, intro.js');
     //echo $this->minify->deploy_js(FALSE);

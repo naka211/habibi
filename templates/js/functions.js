@@ -394,9 +394,9 @@ $(document).ready(function() {
         clearInterval(checkMessageInterval);
     }
 
-    loadMoreMessages = function (profileId, num, first, isMobile) { //TODO continue to check mobile to show emoji
-        /*$('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');*/
-        /*$("#modalChat h4").html('Chatbesked med '+profileName);
+    loadMoreMessages = function (profileId, num, first, isMobile, profileName) {
+        $('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');
+        $("#modalChat h4").html('Chatbesked med '+profileName);
         //Open chat box
         if(first == true){
             $.fancybox.open({
@@ -408,10 +408,12 @@ $(document).ready(function() {
                     },
                     afterClose : function () {
                         stopCheckMessageInterval();
-                    }
+                        $("#profileId").val('');
+                    },
+                    touch: false
                 }
             });
-        }*/
+        }
         ////
 
         if(first == false){
@@ -423,8 +425,11 @@ $(document).ready(function() {
                 '                    </li>');
         }
 
+        $("#message").focus();
         //Set onclick function for send message button
-        //$(".btnSend").attr('onclick', 'sendMessage('+profileId+')');
+        $(".btnSend").attr('onclick', 'sendMessage('+profileId+',"", '+isMobile+')');
+        //Set profileId to hidden file
+        $("#profileId").val(profileId);
 
         $.ajax({
             method: "POST",
@@ -438,7 +443,7 @@ $(document).ready(function() {
                 if(first == true){
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 }
-                setCheckMessageInterval(profileId);
+                //setCheckMessageInterval(profileId);
 
                 if(isMobile == false){
                     $(".message"+num).emojioneArea();
@@ -507,12 +512,20 @@ $(document).ready(function() {
             });
         }
     }
-    
-    $('#deletePreviewImage').click(function () {
-        $('#messageImage').val('');
-        $('#image').attr('src', '');
+
+    $("#deletePreviewImage").click(function () {
         $('.previewAction').hide();
-    });
+        $('#imagePre').attr('src', '');
+        $('#image').attr('src', '');
+        var imageName = $("#imageName").val();
+        if(imageName != ''){
+            $.ajax({
+                method: "POST",
+                url: base_url+"ajax/deleteTempMessageImage",
+                data: { csrf_site_name: token_value, imageName: imageName }
+            });
+        }
+    })
 
     /*setInterval(checkSession, 10*60*1000);
     function checkSession() {
@@ -528,35 +541,6 @@ $(document).ready(function() {
                 }
             }
         });
-    }*/
-
-    /*loadCometMessages = function (userId, profileId, limit, apiKey, appId) {
-        CometChat.init(appId).then(
-            () => {
-            CometChat.login(userId, apiKey).then(
-                user => {
-                var messagesRequest = new CometChat.MessagesRequestBuilder().setUID(profileId).setLimit(limit).build();
-                messagesRequest.fetchPrevious().then(
-                    messages => {
-                    $.ajax({
-                        method: "POST",
-                        url: base_url+"ajax/loadCometMessages",
-                        data: { csrf_site_name: token_value, messageJson: JSON.stringify(messages) }
-                    }).done(function(html) {
-                        $(".chat ul").html("");
-                        console.log(html);
-                    });
-            },
-                error => {
-                    console.log("Message fetching failed with error:", error);
-                });
-            });
-        },
-            error => {
-                console.log("Initialization failed with error:", error);
-                //Check the reason for error and take apppropriate action.
-            }
-        );
     }*/
 
     //Dropdown menu

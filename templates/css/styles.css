@@ -3242,3 +3242,7 @@ label label.error{
 .widthAuto{
     width: auto;
 }
+
+.frm_Chat .emojionearea-editor{
+    min-height: auto;
+}
