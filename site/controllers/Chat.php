@@ -28,7 +28,7 @@ class Chat extends MX_Controller{
 
             $ch = curl_init();
 
-            curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users');
+            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
