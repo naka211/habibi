@@ -1107,8 +1107,8 @@ class Ajax extends MX_Controller{
         $pathFile = './uploads/file/'.$fileName;
         if(file_put_contents($pathFile, $image) !== false){
             $this->correctImageOrientation($this->config->item('root') . 'uploads'.DIRECTORY_SEPARATOR.'file'.DIRECTORY_SEPARATOR.$fileName, $extension);
-            echo $fileName; exit();
         }
+        echo $fileName; exit();
     }
 
     public function deleteTempMessageImage(){

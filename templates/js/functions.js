@@ -410,7 +410,8 @@ $(document).ready(function() {
                         stopCheckMessageInterval();
                         $("#profileId").val('');
                     },
-                    touch: false
+                    touch: false,
+                    keyboard: false
                 }
             });
         }
