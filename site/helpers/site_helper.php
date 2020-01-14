@@ -467,7 +467,7 @@ function addUserToComet($userId, $name, $avatar){
 
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users');
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
@@ -494,7 +494,7 @@ function updateAvatarToComet($userId, $newAvatar){
 
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId);
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
@@ -517,7 +517,7 @@ function deleteUserInComet($userId){
     $ci = &get_instance();
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId);
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 

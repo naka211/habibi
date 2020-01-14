@@ -270,11 +270,16 @@ class User extends CI_Controller
             $id = $this->input->post('id', true);
             if ($this->user->delete_data($id)) {
                 //Delete user in cometchat
+                $params = json_encode(array(
+                    'permanent' => true
+                ));
+
                 $ch = curl_init();
 
-                curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$id);
+                curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$id);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
 
                 $headers = array();
                 $headers[] = 'Accept: application/json';
@@ -533,7 +538,7 @@ class User extends CI_Controller
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId);
+        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);

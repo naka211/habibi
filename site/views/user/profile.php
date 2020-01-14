@@ -278,7 +278,10 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                 url: base_url+"ajax/deleteMessage",
                 data: { csrf_site_name: token_value, profile_id: profileId }
             }).done(function(data) {
-                $.fancybox.destroy();
+                /*$(".deleteWaiting").html('');
+                $('.bntBlock').show();
+                $.fancybox.destroy();*/
+                location.reload();
             });
         }
 

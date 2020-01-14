@@ -76,7 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <!--Comet chat-->
-    <script type="text/javascript" src="https://unpkg.com/@cometchat-pro/chat@1.8/CometChat.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@cometchat-pro/chat@2.0.4/CometChat.js"></script>
     <script src="<?php echo base_url().'templates/';?>js/emojionearea.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <?php

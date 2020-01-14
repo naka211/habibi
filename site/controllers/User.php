@@ -780,7 +780,7 @@ class User extends MX_Controller
                 if(empty($user->cometAuthToken)){
                     $ch = curl_init();
 
-                    curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$user->id.'/auth_tokens');
+                    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$user->id.'/auth_tokens');
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
