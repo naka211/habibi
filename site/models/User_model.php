@@ -344,13 +344,13 @@ class User_model extends CI_Model{
         return $this->db->update('user_messages',$DB);
     }
 
-    function getMessages($user=NULL,$userID=NULL,$num=NULL,$offset=NULL){
-        $this->db->set('seen',1)->where("(user_from = $user AND user_to = $userID) OR (user_from = $userID AND user_to = $user)")->update('user_messages');
+    function getMessages($userId=NULL,$profileId=NULL,$num=NULL,$offset=NULL){
+        $this->db->set('seen',1)->where("(user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)")->update('user_messages');
 
 		$this->db->select('m.*, u.name, u.id as uid, u.avatar');
 		$this->db->from('user_messages m');
         $this->db->join('user u', 'm.user_from = u.id','inner');
-        $this->db->where('(m.user_from='.$user.' AND m.user_to='.$userID.') OR (m.user_from='.$userID.' AND m.user_to='.$user.')');
+        $this->db->where('(m.user_from='.$userId.' AND m.user_to='.$profileId.') OR (m.user_from='.$profileId.' AND m.user_to='.$userId.')');
         $this->db->where("u.deactivation", 0);
         $this->db->where("u.deleted", null);
         $this->db->order_by('m.id DESC');

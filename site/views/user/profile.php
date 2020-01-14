@@ -375,7 +375,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                             type: "post",
                             url: base_url+"ajax/sendImage",
                             dataType: 'text',
-                            data: {message: message.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
+                            data: {message: message.data.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
                         }).done(function(html){
                             $(".waiting").fadeOut(100);
                             //add html to chat box
