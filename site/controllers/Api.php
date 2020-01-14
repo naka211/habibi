@@ -319,18 +319,36 @@ class Api extends REST_Controller {
         $profileId = $data->profileId;
 
         //Delete message in comet server
-        for($i = 1; $i <= 2; $i++){
+
+        $conversationId = $userId.'_user_'.$profileId;
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        if(!empty($result->error)){
+            $conversationId = $profileId.'_user_'.$userId;
+
             $ch = curl_init();
-            if($i == 1){
-                $fromId = $userId;
-                $toId = $profileId;
-            } else {
-                $fromId = $profileId;
-                $toId = $userId;
-            }
-            curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$fromId.'/users/'.$toId.'/messages');
+
+            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
             $headers = array();
@@ -344,30 +362,8 @@ class Api extends REST_Controller {
             if (curl_errno($ch)) {
                 echo 'Error:' . curl_error($ch);
             }
-            $returnData = json_decode($result);
-            foreach ($returnData->data as $item){
-                $ch1 = curl_init();
-
-                curl_setopt($ch1, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$fromId.'/messages/'.$item->id);
-                curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch1, CURLOPT_CUSTOMREQUEST, 'DELETE');
-                curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-
-                $headers = array();
-                $headers[] = 'Accept: application/json';
-                $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-                $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-                $headers[] = 'Content-Type: application/json';
-                curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);
-
-                $result1 = curl_exec($ch1);
-                if (curl_errno($ch1)) {
-                    echo 'Error:' . curl_error($ch1);
-                }
-                curl_close($ch1);
-            }
+            curl_close($ch);
         }
-        curl_close($ch);
 
         //Delete message in server
         $this->user->deleteMessage($userId, $profileId);
