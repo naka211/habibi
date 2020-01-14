@@ -490,7 +490,7 @@ class Ajax extends MX_Controller{
     public function loadCometMessages($userId, $profileId){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.cometchat.com/v1.8/users/'.$userId.'/users/'.$profileId.'/messages');
+        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/users/'.$profileId.'/messages');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -982,6 +982,7 @@ class Ajax extends MX_Controller{
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
+        $result = json_decode($result);
         if(!empty($result->error)){
             $conversationId = $profileId.'_user_'.$user->id;
 
