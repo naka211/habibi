@@ -179,7 +179,9 @@
         var region = "eu";
         var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
         CometChat.init(appID, appSetting);
-        CometChat.login('<?php echo $userLoggedIn->cometAuthToken;?>').then(
+        var UID = "<?php echo $userLoggedIn->id;?>";
+        var apiKey = "<?php echo $this->config->item('comet_auth_api_key');?>";
+        CometChat.login(UID, apiKey).then(
             function(User){
                 console.log("Login successfully:", { User });
                 // User loged in successfully.
