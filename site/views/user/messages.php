@@ -83,14 +83,14 @@
                     <ul>
                     </ul>
                     <img id="image" style="width: 100px; margin-bottom: 20px; display: none;" />
-                    <img id="imagePre" style="width: 100px; margin-bottom: 20px; display: none;" />
                     <span class="previewAction" style="display: none;">
                         <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
                         <a href="javascript:void(0);" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
-                        <input type="hidden" id="imageName" value="">
                         <input type="hidden" id="profileId" value="">
                     </span>
-                    <span class="waiting"></span>
+                    <span class="waiting" style="display: none;">
+                        <img src="<?php echo base_url();?>templates/images/preloader.gif" width="64">
+                    </span>
                     <form class="frm_Chat" action="" method="POST" role="form">
                         <div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
@@ -159,42 +159,26 @@
         <?php }?>
 
         document.getElementById("messageImage").onchange = function () {
-            $(".waiting").append('<img src="'+base_url+'templates/images/preloader.gif" width="64">');
+            $(".waiting").fadeIn(100);
             var img = $('#image');
-            var imgPre = $('#imagePre');
-            //readURLimg(this);
             var reader = new FileReader();
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
                 img.attr('src', e.target.result);
-                imgPre.attr('src', e.target.result);
-                //$('.previewAction').show();
+                //Fix the image orientation
+                img.on('load', function() {
+                    EXIF.getData(img[0], function() {
+                        switch(parseInt(EXIF.getTag(this, "Orientation"))) {
+                            case 6:
+                                img.addClass('rotate-90'); break;
+                        }
+                    });
+                    img.show();
+                    $('.previewAction').show();
+                    $(".waiting").fadeOut(100);
+                });
             };
 
-            img.on('load', function() {
-                EXIF.getData(img[0], function () {
-                    var orient = parseInt(EXIF.getTag(this, "Orientation"));
-                    if(isNaN(orient) == true){
-                        $(".waiting").fadeOut(100);
-                        imgPre.show();
-                        $('.previewAction').show();
-                        $("#imageName").val('');
-                    } else {
-                        $.ajax({
-                            method: "POST",
-                            url: base_url+"ajax/uploadTempMessageImage",
-                            data: { csrf_site_name: token_value, imageData: img.attr('src'), extension: $("#messageImage").val().split('.').pop() }
-                        }).done(function(filename) {
-                            console.log(filename);
-                            imgPre.attr('src', base_url+'uploads/file/'+filename);
-                            $(".waiting").fadeOut(100);
-                            imgPre.show();
-                            $("#imageName").val(filename);
-                            $('.previewAction').show();
-                        });
-                    }
-                });
-            });
             // read the image file as a data URL.
             reader.readAsDataURL(this.files[0]);
         };
@@ -202,79 +186,36 @@
         $('#sendImage').click(function () {
             //Handle click event
             $('.previewAction').hide();
-            $('#imagePre').attr('src', '');
+            $('#image').removeAttr('src');
             $(".waiting").show();
 
             var appId = "<?php echo $this->config->item('comet_app_id');?>";
-            var imageName = $("#imageName").val();
-            if(imageName == ''){
-                //Send message to comet server
-                var mediaMessage = new CometChat.MediaMessage($("#profileId").val(), document.getElementById('messageImage').files[0], CometChat.MESSAGE_TYPE.IMAGE, CometChat.RECEIVER_TYPE.USER);
 
-                CometChat.init(appId);
-                CometChat.sendMediaMessage(mediaMessage).then(
-                    function(message){
-                        $.ajax({
-                            type: "post",
-                            url: base_url+"ajax/sendImage",
-                            dataType: 'text',
-                            data: {message: message.data.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
-                        }).done(function(html){
-                            $(".waiting").fadeOut(100);
-                            //add html to chat box
-                            $(".chat ul").append(html);
-                            //Scroll to bottom of ul
-                            $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
-                        });
-                    },
-                    function(error){
-                        console.log("Media message sending failed with error", error);
-                        // Handle exception.
-                    }
-                );
-            } else {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', base_url+'uploads/file/'+imageName, true);
-                xhr.responseType = 'blob';
-                xhr.onload = function(e) {
-                    if (this.status == 200) {
-                        var myBlob = this.response;
+            //Send message to comet server
+            var mediaMessage = new CometChat.MediaMessage($("#profileId").val(), document.getElementById('messageImage').files[0], CometChat.MESSAGE_TYPE.IMAGE, CometChat.RECEIVER_TYPE.USER);
 
-                        var mediaMessage = new CometChat.MediaMessage($("#profileId").val(), myBlob, CometChat.MESSAGE_TYPE.IMAGE, CometChat.RECEIVER_TYPE.USER);
-
-                        CometChat.init(appId);
-                        CometChat.sendMediaMessage(mediaMessage).then(
-                            function(message){
-                                $.ajax({
-                                    type: "post",
-                                    url: base_url+"ajax/sendImage",
-                                    dataType: 'text',
-                                    data: {message: message.url, profileId: $("#profileId").val(), cometMessageId: message.id, imageName: imageName, 'csrf_site_name':token_value}
-                                }).done(function(html){
-                                    $(".waiting").fadeOut(100);
-                                    //add html to chat box
-                                    $(".chat ul").append(html);
-                                    //Scroll to bottom of ul
-                                    $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
-                                    //Delete temp image
-                                    $.ajax({
-                                        method: "POST",
-                                        url: base_url+"ajax/deleteTempMessageImage",
-                                        data: { csrf_site_name: token_value, imageName: imageName }
-                                    });
-                                    //
-                                    $("#imageName").val('');
-                                });
-                            },
-                            function(error){
-                                console.log("Media message sending failed with error", error);
-                                // Handle exception.
-                            }
-                        );
-                    }
-                };
-                xhr.send();
-            }
+            CometChat.init(appId);
+            CometChat.sendMediaMessage(mediaMessage).then(
+                function(message){ console.log(message);
+                    $.ajax({
+                        type: "post",
+                        url: base_url+"ajax/sendImage",
+                        dataType: 'text',
+                        data: {message: message.data.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
+                    }).done(function(html){
+                        $('#messageImage').val('');
+                        $(".waiting").fadeOut(100);
+                        //add html to chat box
+                        $(".chat ul").append(html);
+                        //Scroll to bottom of ul
+                        $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
+                    });
+                },
+                function(error){
+                    console.log("Media message sending failed with error", error);
+                    // Handle exception.
+                }
+            );
         });
 
         textAreaAdjust = function (o) {

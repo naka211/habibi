@@ -400,7 +400,7 @@ class Ajax extends MX_Controller{
             case 'image':
                 $html = '<div class="message_media">
                         <p class="img_content">
-                        <a href="'.$message.'" data-fancybox="images"><img src="'.$message.'" alt="" class="img-responsive"></a>
+                        <a href="'.renderImageFromComet($message,"large").'" data-fancybox="images"><img src="'.renderImageFromComet($message,"small").'" alt="" class="img-responsive"></a>
                         </p>
                     </div>';
                 break;
@@ -577,7 +577,7 @@ class Ajax extends MX_Controller{
                     <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                     <div class="message_media">
                         <p class="img_content">
-                            <a href="'.$this->input->post('message').'" data-fancybox="images"><img src="'.$this->input->post('message').'" alt="" class="img-responsive"></a>
+                            <a href="'.renderImageFromComet($this->input->post('message'),"large").'" data-fancybox="images"><img src="'.renderImageFromComet($this->input->post('message'),"small").'" alt="" class="img-responsive"></a>
                         </p>
                     </div>
                     <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
@@ -1090,7 +1090,7 @@ class Ajax extends MX_Controller{
         $this->session->set_userdata('user', $newUser);
     }
 
-    public function uploadTempMessageImage(){
+    /*public function uploadTempMessageImage(){
         $this->load->helper('string');
         $imageData = $this->input->post('imageData');
         $extension = $this->input->post('extension');
@@ -1114,6 +1114,6 @@ class Ajax extends MX_Controller{
     public function deleteTempMessageImage(){
         @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
         return true;
-    }
+    }*/
 }
 ?>
