@@ -46,10 +46,10 @@
                                 if($user->messageType == 'text'){
                                     echo substr($user->message, 0, 27);
                                 } else if($user->messageType == 'image'){
-                                    echo 'Et billede var vedhæftet';
+                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Billede';
                                 } else if($user->messageType == 'video'){
                                     echo 'En video var vedhæftet';
-                                } else if($user->messageType == 'image'){
+                                } else if($user->messageType == 'audio'){
                                     echo 'En lyd var knyttet';
                                 }
                             ?></p>

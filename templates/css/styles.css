@@ -1858,7 +1858,7 @@ ul.list_action li a .i_report {
 }
 
 .frend_item .gray_friend_item img{
-    width: 20px;
+    width: 24px;
 }
 
 .bntMessage {
@@ -2185,7 +2185,7 @@ ul.list_action li a .i_report {
     background: #ededed;
     font-size: 13px;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px 15px;
     color: #000;
     height: 45px;
 }
