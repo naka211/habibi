@@ -566,6 +566,8 @@ class Ajax extends MX_Controller{
         $DB['dt_create'] = time();
         $this->user->saveMessage($DB);
 
+        //waiting the thumbnail is created
+        sleep(3);
 
         if(!empty($this->input->post('imageName'))){
             @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
@@ -577,7 +579,7 @@ class Ajax extends MX_Controller{
                     <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                     <div class="message_media">
                         <p class="img_content">
-                            <a href="'.renderImageFromComet($this->input->post('message'),"large").'" data-fancybox="images"><img src="'.renderImageFromComet($this->input->post('message'),"small").'" alt="" class="img-responsive"></a>
+                            <a href="'.renderImageFromComet($this->input->post('message'),"large").'" data-fancybox="images"><img src="'.renderImageFromComet($this->input->post('message'),"small").'" alt="" class="img-responsive" onerror="javascript:this.src=\''.renderImageFromComet($this->input->post('message'),"small").'\'"></a>
                         </p>
                     </div>
                     <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
