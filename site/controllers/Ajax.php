@@ -569,10 +569,6 @@ class Ajax extends MX_Controller{
         //waiting the thumbnail is created
         sleep(3);
 
-        if(!empty($this->input->post('imageName'))){
-            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
-        }
-
         //Generate message html
         $item = $this->user->getUser($userId);
         $html = '<li class="you">
