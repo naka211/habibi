@@ -81,12 +81,11 @@
                 <div class="chat">
                     <ul>
                     </ul>
-                    <img id="image" style="width: 100px; margin-bottom: 20px; display: none;" />
-                    <span class="previewAction" style="display: none;">
+                    <div id="imgContainer" style="width: 100px; margin-bottom: 20px; display: none;">
                         <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
                         <a href="javascript:void(0);" id="sendImage"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
                         <input type="hidden" id="profileId" value="">
-                    </span>
+                    </div>
                     <span class="waiting" style="display: none;">
                         <img src="<?php echo base_url();?>templates/images/preloader.gif" width="64">
                     </span>
@@ -217,29 +216,35 @@
         ////
         <?php }?>
 
-        document.getElementById("messageImage").onchange = function () {
+        document.getElementById("messageImage").onchange = function (evt) {
             $(".waiting").fadeIn(100);
-            var img = $('#image');
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                img.attr('src', e.target.result);
-                //Fix the image orientation
-                img.on('load', function() {
-                    EXIF.getData(img[0], function() {
-                        switch(parseInt(EXIF.getTag(this, "Orientation"))) {
-                            case 6:
-                                img.addClass('rotate-90'); break;
+
+            var image = evt.target.files[0]; // FileList object
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                var reader = new FileReader();
+                // Closure to capture the file information.
+                reader.addEventListener("load", function (e) {
+                    const imageData = e.target.result;
+                    window.loadImage(imageData, function (img) {
+                        if (img.type === "error") {
+                            console.log("couldn't load image:", img);
+                        } else {
+                            window.EXIF.getData(img, function () {
+                                var orientation = window.EXIF.getTag(this, "Orientation");
+                                var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxWidth: 100});
+                                //document.getElementById("container2").appendChild(canvas);
+                                $("#imgContainer").prepend(canvas);
+
+                                $("#imgContainer").show();
+                                $(".waiting").fadeOut(100);
+                            });
                         }
                     });
-                    img.show();
-                    $('.previewAction').show();
-                    $(".waiting").fadeOut(100);
                 });
-            };
-
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
+                reader.readAsDataURL(image);
+            } else {
+                console.log('The File APIs are not fully supported in this browser.');
+            }
         };
 
         $('#sendImage').click(function () {

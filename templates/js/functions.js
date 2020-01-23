@@ -515,20 +515,10 @@ $(document).ready(function() {
     }
 
     $("#deletePreviewImage").click(function () {
-        $('.previewAction').hide();
-        /*$('#imagePre').attr('src', '');*/
-        $('#image').removeAttr('src');
+        $('canvas').remove();
+        $('#imgContainer').hide();
         $('#messageImage').val('');
         $(".waiting").fadeOut(100);
-
-        /*var imageName = $("#imageName").val();
-        if(imageName != ''){
-            $.ajax({
-                method: "POST",
-                url: base_url+"ajax/deleteTempMessageImage",
-                data: { csrf_site_name: token_value, imageName: imageName }
-            });
-        }*/
     })
 
     /*setInterval(checkSession, 10*60*1000);
