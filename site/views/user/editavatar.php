@@ -19,14 +19,19 @@
                         1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
                         2: Du kan gemme billedet, eller uploade et nyt.<br>
                         3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
+                    </p>
+                    <h4>Upload Avatar</h4>
+                    <p>Når du klikker på denne så vil det være muligt at vælge en Avatar fremfor den for udvalgte.</p>
 
-                        <h4>Regler for profilbilleder:</h4>
+                    <h4>Regler for profilbilleder:</h4>
+                     <p>
                         <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man skal kunne se hele dit ansigt<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
-                    </p>
+                     </p>
+
                     <?php } else {?>
                         <h4>Her kan du uploade dit personlige profilbillede <a href="#modal_moretext" data-toggle="modal" class="system_link">Læs mere</a></h4>
                         <div id="modal_moretext" class="modal fade">
@@ -41,6 +46,8 @@
                                             2: Du kan gemme billedet, eller uploade et nyt.<br>
                                             3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på gem og det bliver sendt til validering.</p>
 
+                                        <h4>Upload Avatar</h4>
+                                        <p>Når du klikker på denne så vil det være muligt at vælge en Avatar fremfor den for udvalgte.</p>
                                         <h4>Regler for profilbilleder:</h4>
                                         <p><img src="<?php echo base_url();?>templates/images/green.png" alt=""> Man skal kunne se hele dit ansigt<br>
                                             <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være seksuelle undertoner på billedet<br>
@@ -52,17 +59,17 @@
                             </div>
                         </div>
                     <?php }?>
-                    <input id="file" type="file" name="file" accept="image/*"/>
-                    <!--<div class="text-center">
-                        <a data-fancybox data-src="#modalNotification" href="javascript:void(0)" class="btn btnUpload" style="margin-bottom: 10px;"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload</a>
-                    </div>-->
+                    <div class="text-center">
+                        <input id="file" type="file" name="file" accept="image/*"/>
+                        <a data-fancybox data-src="#modalSelectAvatar" href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload Avatar</a>
+                    </div>
                     <?php if($listImages){?>
                         <div class="text-center">
                             <!--Eller<br>-->
                             <a data-fancybox data-src="#modalSelectImage" href="javascript:void(0);" class="btn bntMessage m_fz13" style="margin-top: 10px; margin-right: 0px; padding: 10px 30px;">Vælg profilbilled fra galleri</a>
                         </div>
                     <?php }?>
-                    <?php if(($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png') || (($user->avatar == 'no-avatar1.png' || $user->avatar == 'no-avatar2.png') && $user->new_avatar != '')){
+                    <?php if((!in_array($user->avatar, $defaultAvatars)) || ((in_array($user->avatar, $defaultAvatars)) && $user->new_avatar != '')){
                         $avatarData = $user->new_avatar?$user->new_avatar:$user->avatar;
                         ?>
                     <!--<a href="<?php /*echo site_url('user/blurAvatar');*/?>" class="btn bntMessage">Sløre</a>
@@ -89,6 +96,9 @@
                         echo form_hidden('sendEmailToApprove', $sendEmail);
                         echo form_close();?>
                     <?php }?>
+                    <?php if($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png'){?>
+                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet profilbillede</a>
+                    <?php }?>
                     <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                 </div>
             </div>
@@ -104,6 +114,32 @@
                 <label>
                     <input type="radio" name="imageName" value="<?php echo $image->image;?>" />
                     <img src="<?php echo base_url();?>uploads/thumb_photo/<?php echo $image->image;?>" width="100">
+                </label>
+            <?php }?>
+            <div class="text-center">
+                <button type="submit" class="btn btn_viewSearch">OK</button>
+            </div>
+            <?php echo form_close();?>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modalSelectAvatar" class="animated-modal modalLogin">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2>Avatars</h2>
+            <?php echo form_open('user/selectAvatarFromList', array('id'=>'selectAvatrForm'))?>
+            <?php
+            if($user->gender == 1){
+                $limit = 16;
+                $gender = 'male';
+            } else {
+                $limit = 30;
+                $gender = 'female';
+            }
+            for ($i = 1; $i <= $limit; $i++){?>
+                <label>
+                    <input type="radio" name="imageName" value="<?php echo $gender.$i.'.png';?>" />
+                    <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $gender.$i.'.png';?>" width="100">
                 </label>
             <?php }?>
             <div class="text-center">

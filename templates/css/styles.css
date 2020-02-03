@@ -2930,7 +2930,7 @@ ul.list_action li a .i_report {
     padding: 10px 30px;
     font-size: 14.23px;
     /*text-transform: uppercase;*/
-    min-width: 160px;
+    /*min-width: 160px;*/
 }
 .btnUpload:hover {
     background: #000;

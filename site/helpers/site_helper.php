@@ -541,3 +541,14 @@ function renderImageFromComet($url, $type = 'small'){
     $tmpFilename = explode('.', $tmpLink[5]);
     return $tmpLink[0].'//'.$tmpLink[2].'/'.$tmpLink[3].'/'.$tmpLink[4].'/thumbnails/'.$tmpFilename[0].'_'.$type.'.'.$tmpFilename[1];
 }
+
+function getDefaultAvatars(){
+    $ci = &get_instance();
+    $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
+    return array_merge($noAvatarArr, $ci->config->item('male_avatar'), $ci->config->item('female_avatar'));
+}
+
+function getGenderAvatars(){
+    $ci = &get_instance();
+    return array_merge($noAvatarArr, $ci->config->item('male_avatar'), $ci->config->item('female_avatar'));
+}

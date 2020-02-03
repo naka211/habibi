@@ -148,6 +148,9 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Rediger avatar');
 
         $user = $this->session->userdata('user');
+        $defaultAvatarArr = getDefaultAvatars();
+
+        $data['defaultAvatars'] = $defaultAvatarArr;
         $data['isMobile'] = $this->agent->is_mobile();
         $data['listImages'] = $this->user->getPhoto($user->id);
         $data['user'] = $this->user->getUser($user->id);
@@ -159,7 +162,8 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
 
         $currentAvatar = $this->user->getAvatar($user->id);
-        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
+        $defaultAvatarArr = getDefaultAvatars();
+        if(!in_array($currentAvatar, $defaultAvatarArr)){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -1092,6 +1096,24 @@ class User extends MX_Controller
             $raw_thumb_user = './uploads/raw_thumb_user/'.$imageName;
             copy($config_crop['new_image'], $raw_thumb_user);
         }
+        customRedirectWithMessage($_SERVER['HTTP_REFERER']);
+    }
+
+    public function selectAvatarFromList(){
+        $imageName = $this->input->post('imageName');
+        $user = $this->session->userdata('user');
+
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        }
+        $this->user->updateAvatar($user->id, $imageName);
+
+        $savedUser = $this->user->getUser($user->id);
+        $this->session->set_userdata('user', $savedUser);
+
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
