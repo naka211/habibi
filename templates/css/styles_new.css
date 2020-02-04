@@ -1099,3 +1099,7 @@ section.section_intro {
 img {
 	image-orientation: from-image;
 }
+
+#modalSelectAvatar img{
+	width: 100px;
+}

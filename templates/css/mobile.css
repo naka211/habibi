@@ -968,6 +968,14 @@
     .frame_chat_pc .frm_Chat .btnSend {
         width: auto;
     }
+
+    #modalSelectAvatar img{
+        width: 100%;
+    }
+
+    #modalSelectAvatar label{
+        width: 49%;
+    }
 }
 
 @media (max-width: 320px) {

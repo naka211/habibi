@@ -139,7 +139,7 @@
             for ($i = 1; $i <= $limit; $i++){?>
                 <label>
                     <input type="radio" name="imageName" value="<?php echo $gender.$i.'.png';?>" />
-                    <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $gender.$i.'.png';?>" width="100">
+                    <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $gender.$i.'.png';?>">
                 </label>
             <?php }?>
             <div class="text-center">
