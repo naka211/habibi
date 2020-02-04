@@ -1533,7 +1533,19 @@ class Api extends REST_Controller {
     }
 
     public function getDefaultAvatars_get(){
-        $this->_return(true, '', array('male'=>$this->config->item('male_avatar'), 'female'=>$this->config->item('female_avatar')));
+        $maleArr = array();
+        foreach($this->config->item('male_avatar') as $key => $item){
+            $maleArr[$key]['imageName'] = $item;
+            $maleArr[$key]['src'] = site_url().'uploads/user/'.$item;
+        }
+
+        $femaleArr = array();
+        foreach($this->config->item('female_avatar') as $key => $item){
+            $femaleArr[$key]['imageName'] = $item;
+            $femaleArr[$key]['src'] = site_url().'uploads/user/'.$item;
+        }
+
+        $this->_return(true, '', array('male'=> $maleArr, 'female'=>$femaleArr));
     }
 
     public function selectAvatarFromList_post(){
