@@ -923,13 +923,17 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $imageName = $data->imageName;
 
-        $currentAvatar = $this->user->getAvatar($userId);
-        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
-            @unlink("./uploads/user/".$currentAvatar);
-            @unlink("./uploads/thumb_user/".$currentAvatar);
-            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
+        $user = $this->user->getUser($userId);
+
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
         }
-        $this->user->updateAvatar($userId, $imageName);
+        $this->user->updateAvatar($user->id, $imageName, 1);
+        //Sending approve email
+        $this->_sendEmailAdminToApproveAvatar($user->name);
 
         copy('./uploads/photo/'.$imageName, './uploads/user/'.$imageName);
         //create thumb
@@ -979,7 +983,8 @@ class Api extends REST_Controller {
         $userId = $data->userId;
 
         $currentAvatar = $this->user->getAvatar($userId);
-        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
+        $defaultAvatarArr = getDefaultAvatars();
+        if(!in_array($currentAvatar, $defaultAvatarArr)){
             @unlink("./uploads/user/".$currentAvatar);
             @unlink("./uploads/thumb_user/".$currentAvatar);
             @unlink("./uploads/raw_thumb_user/".$currentAvatar);
@@ -1525,5 +1530,28 @@ class Api extends REST_Controller {
         }
         print_r(json_decode($result));exit();
         curl_close($ch);
+    }
+
+    public function getDefaultAvatars_get(){
+        $this->_return(true, '', array('male'=>$this->config->item('male_avatar'), 'female'=>$this->config->item('female_avatar')));
+    }
+
+    public function selectAvatarFromList_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $imageName = $data->imageName;
+
+        $newAvatar = $this->user->getNewAvatar($userId);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        }
+        $this->user->updateAvatar($userId, $imageName);
+
+        $savedUser = $this->user->getUser($userId);
+        $this->session->set_userdata('user', $savedUser);
+
+        $this->_return(true, 'The new avatar is set.');
     }
 }
