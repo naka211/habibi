@@ -915,13 +915,18 @@ class Api extends REST_Controller {
         } else {
             $avatar = $this->user->getAvatar($userId);
         }
-        $thumb_user = './uploads/thumb_user/'.$avatar;
-        if(file_put_contents($thumb_user, $image)){
-            $this->user->updateBlurIndex($userId, $blurIndex);
-            $this->_return(true);
+        if(!in_array($avatar, getDefaultAvatars())){
+            $thumb_user = './uploads/thumb_user/'.$avatar;
+            if(file_put_contents($thumb_user, $image)){
+                $this->user->updateBlurIndex($userId, $blurIndex);
+                $this->_return(true);
+            } else {
+                $this->_return(false, 'Can not upload image');
+            }
         } else {
-            $this->_return(false, 'Can not upload image');
+            $this->_return(false, 'Can not save default avatar');
         }
+
     }
 
     public function selectAvatarFromGallery_post(){
