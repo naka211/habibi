@@ -14,23 +14,23 @@
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
                     <?php if($isMobile != true){?>
-                    <h4>Her kan du uploade dit personlige profilbillede</h4>
-                    <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
+                    <h4>Upload billed</h4>
+                    <p>Her kan du uploade dit personlige profilbillede.<br>
+                        Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
                         1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
                         2: Du kan gemme billedet, eller uploade et nyt.<br>
                         3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
                     </p>
-                    <h4>Upload Avatar</h4>
-                    <p>Når du klikker på denne så vil det være muligt at vælge en Avatar fremfor den for udvalgte.</p>
-
-                    <h4>Regler for profilbilleder:</h4>
-                     <p>
+                    <h4>Regler for profilbilleder</h4>
+                    <p>
                         <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man skal kunne se hele dit ansigt<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
-                     </p>
+                    </p>
+                    <h4>Upload Avatar</h4>
+                    <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer digbedst.</p>
 
                     <?php } else {?>
                         <h4>Her kan du uploade dit personlige profilbillede <a href="#modal_moretext" data-toggle="modal" class="system_link">Læs mere</a></h4>
@@ -41,19 +41,23 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.</p>
-                                        <p>1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
+                                        <h4>Upload billed</h4>
+                                        <p>Her kan du uploade dit personlige profilbillede.<br>
+                                            Det må kun være dig selv på billedet. Når du har uploadet det, skal det valideres. Der kan gå op til 24 timer før det er valideret.<br>
+                                            1: Du trykker på upload og dit bibliotek åbner op og derefter vælger du et billede.<br>
                                             2: Du kan gemme billedet, eller uploade et nyt.<br>
-                                            3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på gem og det bliver sendt til validering.</p>
-
+                                            3: Når billedet er uploadet, kan du vælge at sløre det hvis du vil, derefter klikker du på  gem og det bliver sendt til validering.
+                                        </p>
+                                        <h4>Regler for profilbilleder</h4>
+                                        <p>
+                                            <img src="<?php echo base_url();?>templates/images/green.png" style="margin-top: -5px;"> Man skal kunne se hele dit ansigt<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være seksuelle undertoner på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være andre end dig på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være skrevet tekst eller lignede på billedet<br>
+                                            <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
+                                        </p>
                                         <h4>Upload Avatar</h4>
-                                        <p>Når du klikker på denne så vil det være muligt at vælge en Avatar fremfor den for udvalgte.</p>
-                                        <h4>Regler for profilbilleder:</h4>
-                                        <p><img src="<?php echo base_url();?>templates/images/green.png" alt=""> Man skal kunne se hele dit ansigt<br>
-                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være seksuelle undertoner på billedet<br>
-                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være andre end dig på billedet<br>
-                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være skrevet tekst eller lignede på billedet<br>
-                                            <img src="<?php echo base_url();?>templates/images/red.png" alt=""> Der må ikke være rammer rundt om billedet</p>
+                                        <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer digbedst.</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +65,7 @@
                     <?php }?>
                     <div class="text-center">
                         <input id="file" type="file" name="file" accept="image/*"/>
-                        <a data-fancybox data-src="#modalSelectAvatar" href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> Upload Avatar</a>
+                        <a data-fancybox data-src="#modalSelectAvatar" href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> UPLOAD AVATAR</a>
                     </div>
                     <?php if($listImages){?>
                         <div class="text-center">
@@ -96,7 +100,7 @@
                         echo form_hidden('sendEmailToApprove', $sendEmail);
                         echo form_close();?>
                     <?php }?>
-                    <?php if($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png'){?>
+                    <?php if($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png' && $user->new_avatar == ''){?>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet profilbillede</a>
                     <?php }?>
                     <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
@@ -167,7 +171,7 @@
             bootstrap: true,
             showPreview: true,
             showFilename: false,
-            btnText: 'Upload',
+            btnText: 'UPLOAD BILLED',
             allowedExtensions:"jpeg|jpg|png",
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
