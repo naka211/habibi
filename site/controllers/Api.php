@@ -657,7 +657,7 @@ class Api extends REST_Controller {
     public function getInfo_get($userId){
         $user = $this->user->getUser($userId);
 
-        if(in_array($user->avatar, getDefaultAvatars())){
+        if(in_array($user->avatar, getDefaultAvatars()) &&  $user->new_avatar == ''){
             $user->allowBlur = '0';
         } else {
             $user->allowBlur = '1';
