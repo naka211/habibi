@@ -539,7 +539,14 @@ function deleteUserInComet($userId){
 function renderImageFromComet($url, $type = 'small'){
     $tmpLink = explode('/', $url);
     $tmpFilename = explode('.', $tmpLink[5]);
-    return $tmpLink[0].'//'.$tmpLink[2].'/'.$tmpLink[3].'/'.$tmpLink[4].'/thumbnails/'.$tmpFilename[0].'_'.$type.'.'.$tmpFilename[1];
+
+    $arrLength = count($tmpFilename);
+    $lastEle = $arrLength - 1;
+    $fileExt = $tmpFilename[$arrLength - 1]; //Gives the file extension
+    unset($tmpFilename[$lastEle]);
+    $fileNameMinusExt = implode(".",$tmpFilename);
+
+    return $tmpLink[0].'//'.$tmpLink[2].'/'.$tmpLink[3].'/'.$tmpLink[4].'/thumbnails/'.$fileNameMinusExt.'_'.$type.'.'.$fileExt;
 }
 
 function getDefaultAvatars(){
