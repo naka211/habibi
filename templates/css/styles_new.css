@@ -1040,12 +1040,12 @@ section.section_intro {
 	margin-left: 60px;
 	background: none;
 	border: 1px solid #f4f4f4;
-	min-height: 172px;
+	/*min-height: 172px;*/
 }
 
 .other .img_content{
 	margin-right: 90px;
-	min-height: 222px;
+	/*min-height: 222px;*/
 }
 
 .frame_chat.frame_chat_pc {
