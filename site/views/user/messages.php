@@ -46,9 +46,9 @@
                                 if($user->messageType == 'text'){
                                     echo substr($user->message, 0, 27);
                                 } else if($user->messageType == 'image'){
-                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Billede';
+                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Lyd';
                                 } else if($user->messageType == 'video'){
-                                    echo 'En video var vedhæftet';
+                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Video';
                                 } else if($user->messageType == 'audio'){
                                     echo 'En lyd var knyttet';
                                 }
