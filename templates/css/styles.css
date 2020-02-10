@@ -2514,7 +2514,7 @@ ul.list_action li a .i_report {
 }
 
 .chat ul li.you .message {
-    margin: 0 0 5px 90px;
+    margin: 0 0 5px 60px;
 }
 
 .chat ul li.you .message:before {
@@ -2545,7 +2545,7 @@ ul.list_action li a .i_report {
     /*float: left;*/
     font-size: 14px;
     /*font-style: italic;*/
-    height: 35px;
+    height: auto;
     max-height: 90px;
     color: #000;
 }

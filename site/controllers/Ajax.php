@@ -400,7 +400,7 @@ class Ajax extends MX_Controller{
             case 'image':
                 $html = '<div class="message_media">
                         <p class="img_content">
-                        <a href="'.renderImageFromComet($message,"large").'" data-fancybox="images"><img src="'.renderImageFromComet($message,"small").'" alt="" class="img-responsive"></a>
+                        <a href="'.renderImageFromComet($message,"large").'" data-fancybox="images"><img src="'.renderImageFromComet($message,"small").'" alt="" class="img-responsive" onerror="javascript:this.src=\''.renderImageFromComet($message,"small").'\'"></a>
                         </p>
                     </div>';
                 break;
