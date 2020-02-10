@@ -976,6 +976,10 @@
     #modalSelectAvatar label{
         width: 49%;
     }
+
+    .img_content img{
+	    height: 70px;
+    }
 }
 
 @media (max-width: 320px) {
