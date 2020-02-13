@@ -1275,12 +1275,12 @@ class Api extends REST_Controller {
     public function changePassword_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
-        $password = $data->password;
+        /*$password = $data->password;*/
         $newPassword = $data->newPassword;
 
-        if(empty($password) || $this->_checkPassword($userId, $password) == false){
+        /*if(empty($password) || $this->_checkPassword($userId, $password) == false){
             $this->_return(false, 'The password is not match.');
-        }
+        }*/
 
         $data = new stdClass();
         $data->password = md5($newPassword);
