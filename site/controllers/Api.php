@@ -1285,9 +1285,9 @@ class Api extends REST_Controller {
         $data = new stdClass();
         $data->password = md5($newPassword);
         if($this->user->saveUser($data, $userId)){
-            $this->_return(true, 'The new password is changed');
+            $this->_return(true, 'Den nye adgangskode ændres');
         } else {
-            $this->_return(false, 'Can not update new password');
+            $this->_return(false, 'Kan ikke opdatere nyt kodeord');
         }
     }
 
