@@ -255,10 +255,16 @@ class User extends MX_Controller
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
+    public function confirmAvatar(){
+        $this->sendEmailAdminToApproveAvatar();
+
+        customRedirectWithMessage(site_url('user/editAvatar'));
+    }
+
     public function saveAvatar(){
         $sendEmailToApprove = $this->input->post('sendEmailToApprove');
         if($sendEmailToApprove){
-            $this->sendEmailAdminToApproveAvatar();
+            //$this->sendEmailAdminToApproveAvatar();
         }
         $imageData = $this->input->post('imageData');
         $blurIndex = $this->input->post('blurIndex');

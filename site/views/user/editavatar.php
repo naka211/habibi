@@ -9,10 +9,16 @@
                 <div class="col-lg-5 col-md-5 col-sm-5 col-ms-5 col-xs-12 wrap_canvas">
                     <div id="canvasHolder" style="position:absolute;left:15px; top:0px;">
                         <canvas id="canvas"></canvas>
+                        <div id="previewAvatar" style="display: none;"></div>
                         <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
+                        <div id="newAvatarActions" style="display: none;">
+                            <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage  m_fz14 m_mr10" style="margin-top: 15px;">Gem</a>
+                            <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 15px;">Slet profilbillede</a>
+                        </div>
+
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-ms-7 col-xs-12 wrap_info">
                     <?php if($isMobile != true){?>
                     <h4>Upload billed</h4>
                     <p>Her kan du uploade dit personlige profilbillede.<br>
@@ -89,11 +95,12 @@
 
                         <input type="hidden" id="imageData" name="imageData" value="<?php echo base64_encode(file_get_contents( './uploads/raw_thumb_user/'.$avatarData));?>">
                         <input type="hidden" id="blurIndex" name="blurIndex" value="<?php echo $user->blurIndex;?>">
-                        <?php if($user->new_avatar != ''){?>
+                        <?php /*if($user->new_avatar != ''){*/?><!--
                             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage  m_fz14 m_mr10" style="margin-top: 30px;">Gem</a>
-                        <?php } else {?>
+                        <?php /*} else {*/?>
                             <button type="submit" class="btn bntMessage m_fz14 m_mr10" style="margin-top: 30px;">Gem</button>
-                        <?php }?>
+                        --><?php /*}*/?>
+                        <button type="submit" class="btn bntMessage m_fz14 m_mr10" style="margin-top: 30px;">Gem</button>
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet profilbillede</a>
                         <?php
                         $sendEmail = $user->new_avatar != ''?1:0;
@@ -161,7 +168,8 @@
                     Der kan gå optil 24 timer før det bliver valideret.<br><br>
                     Mvh. Habibidating.dk</p>
             </div>
-            <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>
+            <a href="<?php echo site_url('user/confirmAvatar');?>" class="btn bntMessage m_fz14 m_mr10" style="margin-bottom: 0px;">OK</a>
+            <!--<button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>-->
         </div>
     </div>
 </div>
@@ -175,8 +183,15 @@
             allowedExtensions:"jpeg|jpg|png",
             url: base_url+'ajax/uploadAvatar',
             data: {'csrf_site_name':token_value},
-            onFileSuccess: function (file,data) {
-                $('#reloadPage').click();
+            onFileSuccess: function (file, data) {
+                <?php if($isMobile == true){?>
+                $(".wrap_info").css('margin-top', '40px');
+                <?php }?>
+                $("#canvas").hide();
+                $("#previewAvatar").html('<img src="'+base_url+'uploads/raw_thumb_user/'+data.message.file_name+'" style="width: 100%;" />');
+                $("#previewAvatar").show();
+                $("#newAvatarActions").show();
+                //$('#reloadPage').click();
                 /*$.ajax({
                     method: "POST",
                     url: base_url+"ajax/sendEmailAdminToApproveAvatar",
@@ -186,6 +201,12 @@
                 });*/
             }
         });
+
+        confirmClick = function () {
+            $("#reloadPage").click();
+            /*$.fancybox.close();
+            $('#blurForm').submit();*/
+        }
 
 
         // Canvas
@@ -244,10 +265,5 @@
                 $(".tooltipText").text(this.value);
             })
         };
-
-        confirmClick = function () {
-            $.fancybox.close();
-            $('#blurForm').submit();
-        }
     });
 </script>
