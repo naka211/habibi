@@ -13,7 +13,7 @@
                         <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                         <div id="newAvatarActions" style="display: none;">
                             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage  m_fz14 m_mr10" style="margin-top: 15px;">Gem</a>
-                            <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 15px;">Slet profilbillede</a>
+                            <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 15px;">Slet</a>
                         </div>
 
                     </div>
