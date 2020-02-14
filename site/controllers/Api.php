@@ -1577,4 +1577,14 @@ class Api extends REST_Controller {
 
         $this->_return(true, 'The new avatar is set.');
     }
+
+    public function addVisitingLog_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+        $profileId = $data->profileId;
+
+        $this->user->addToVisiting($userId, $profileId);
+
+        $this->_return(true, 'Ok');
+    }
 }
