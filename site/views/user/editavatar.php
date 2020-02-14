@@ -177,7 +177,7 @@
     $(document).ready(function() {
         $("#file").pekeUpload({
             bootstrap: true,
-            showPreview: true,
+            showPreview: false,
             showFilename: false,
             btnText: 'UPLOAD BILLED',
             allowedExtensions:"jpeg|jpg|png",
