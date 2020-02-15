@@ -36,7 +36,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="form-group">
                                         <label for="">År:</label>
-                                        <?php echo generateOptionsInRangeHTML('year', 1930, date('Y')-18, $user->year);?>
+                                        <?php echo generateOptionsInRangeHTML('year', 1930, date('Y')-18, $user->year, '', 'onchange="checkYear(this.value)"');?>
                                     </div>
                                 </div>
                             </div>
@@ -496,5 +496,20 @@
             $('#chat-info').html(chatMessage);
             $('#modalReadmore #message-content').html(chatInfo);
         });
+
+        checkYear = function (year) {
+            if(year == <?php echo date('Y') - 18;?>){
+                var i;
+                for (i = <?php echo date('m') + 1;?>; i <= 12; i++) {
+                    $("select[name='month'] option[value='"+i+"']").attr('hidden', 'hidden');
+                }
+                for (i = <?php echo date('d') + 1;?>; i <= 31; i++) {
+                    $("select[name='day'] option[value='"+i+"']").attr('hidden', 'hidden');
+                }
+            } else {
+                $("select[name='month'] option[hidden='hidden']").removeAttr('hidden');
+                $("select[name='day'] option[hidden='hidden']").removeAttr('hidden');
+            }
+        }
     });
 </script>

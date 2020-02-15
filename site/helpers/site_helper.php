@@ -425,8 +425,8 @@ function generateOptionsHTMLInUpdate($type, $name, $selectedValue, $defaultValue
     return $html;
 }
 
-function generateOptionsInRangeHTML($name, $from, $to, $selectedValue, $unit = ''){
-    $html = '<select name="'.$name.'" class="form-control" id="'.$name.'">';
+function generateOptionsInRangeHTML($name, $from, $to, $selectedValue, $unit = '', $attributes = ''){
+    $html = '<select name="'.$name.'" class="form-control" id="'.$name.'" '.$attributes.'>';
     $html .= '<option value="">Ej oplyst</option>';
     for($i = $from; $i <= $to; $i++){
         $selected = $selectedValue==$i?'selected':'';
