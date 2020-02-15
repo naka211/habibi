@@ -339,6 +339,7 @@ function countImages($profileId){
     $imageQuantity = $ci->db->select('COUNT(id) as quantity')
         ->from('tb_user_image')
         ->where('userID', $profileId)
+        ->where('status', 1)
         ->get()->row()->quantity;
     return $imageQuantity;
 }
