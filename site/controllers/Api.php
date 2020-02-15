@@ -305,9 +305,14 @@ class Api extends REST_Controller {
     public function messageList_get($userId, $page = 1, $perPage = 10){
         $offset = ($page - 1)*$perPage;
         $messageList = $this->user->getUserSent($userId, $perPage, (int)$offset);
+        foreach ($messageList as $key => $item){
+            if(in_array($item->id, $this->user->getBlockedUserIds($userId))){
+                unset($messageList[$key]);
+            }
+        }
         $this->_setAvatarPath($userId, $messageList);
         if($messageList){
-            $this->_return(true, '', array('messageList'=>$messageList, 'ignore'=>$this->user->getBlockedUserIds($userId)));
+            $this->_return(true, '', array('messageList'=>$messageList));
         } else {
             $this->_return(false, 'No messages');
         }
