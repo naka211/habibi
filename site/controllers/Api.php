@@ -1256,7 +1256,7 @@ class Api extends REST_Controller {
         $data->birthday = $data->day . '/' . $data->month . '/' . $data->year;
         $status = $this->user->saveUser($data, $userId);
         if($status != false){
-            $this->_return(true);
+            $this->_return(true, 'Opdateret med success');
         } else {
             $this->_return(false, 'Can not update information');
         }
