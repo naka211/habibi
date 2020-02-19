@@ -249,8 +249,7 @@
 
         $('#sendImage').click(function () {
             //Handle click event
-            $('.previewAction').hide();
-            $('#image').removeAttr('src');
+            $('#imgContainer').hide();
             $(".waiting").show();
 
             var appId = "<?php echo $this->config->item('comet_app_id');?>";

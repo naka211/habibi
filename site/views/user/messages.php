@@ -46,11 +46,11 @@
                                 if($user->messageType == 'text'){
                                     echo substr($user->message, 0, 27);
                                 } else if($user->messageType == 'image'){
-                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Lyd';
+                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Billed';
                                 } else if($user->messageType == 'video'){
-                                    echo '<img src="'.base_url().'/templates/images/1x/camera-icon.png"> Video';
+                                    echo '<img src="'.base_url().'/templates/images/1x/video-icon.png"> Video';
                                 } else if($user->messageType == 'audio'){
-                                    echo 'En lyd var knyttet';
+                                    echo '<img src="'.base_url().'/templates/images/1x/audio-icon.png"> Lyd';
                                 }
                             ?></p>
                             <?php }?>
@@ -190,8 +190,7 @@
 
         $('#sendImage').click(function () {
             //Handle click event
-            $('.previewAction').hide();
-            $('#image').removeAttr('src');
+            $('#imgContainer').hide();
             $(".waiting").show();
 
             var appId = "<?php echo $this->config->item('comet_app_id');?>";
