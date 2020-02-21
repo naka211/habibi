@@ -226,7 +226,7 @@
                         this.previewFile(prev, file);
                         var finfo = $('<div class="col-lg-9 col-md-9 col-xs-8"></div>').appendTo(newRow);
                     } else {
-                        var finfo = $('<div class="col-lg-9 col-md-9 col-xs-12"></div>').appendTo(newRow);
+                        var finfo = $('<div class="col-lg-12 col-md-12 col-xs-12"></div>').appendTo(newRow);
                     }
 
                     if (options.showFilename) {
