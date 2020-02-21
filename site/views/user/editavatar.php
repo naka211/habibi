@@ -107,7 +107,7 @@
                         echo form_hidden('sendEmailToApprove', $sendEmail);
                         echo form_close();?>
                     <?php }?>
-                    <?php if($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png' && $user->new_avatar == ''){?>
+                    <?php if(in_array($user->avatar, getGenderAvatars())){?>
                     <div class="text-center">
                         <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet avatar</a>
                     </div>
