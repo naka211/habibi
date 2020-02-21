@@ -224,8 +224,11 @@
                     if (options.showPreview) {
                         var prev = $('<div class="col-lg-3 col-md-3 col-xs-4"></div>').appendTo(newRow);
                         this.previewFile(prev, file);
+                        var finfo = $('<div class="col-lg-9 col-md-9 col-xs-8"></div>').appendTo(newRow);
+                    } else {
+                        var finfo = $('<div class="col-lg-9 col-md-9 col-xs-12"></div>').appendTo(newRow);
                     }
-                    var finfo = $('<div class="col-lg-9 col-md-9 col-xs-8"></div>').appendTo(newRow);
+
                     if (options.showFilename) {
                         finfo.append('<div class="filename">' + file.name + "</div>");
                     }

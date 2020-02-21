@@ -108,7 +108,9 @@
                         echo form_close();?>
                     <?php }?>
                     <?php if($user->avatar != 'no-avatar1.png' && $user->avatar != 'no-avatar2.png' && $user->new_avatar == ''){?>
-                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet profilbillede</a>
+                    <div class="text-center">
+                        <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 30px;">Slet avatar</a>
+                    </div>
                     <?php }?>
                     <a href="javascript:void(0);" onclick="location.reload();" id="reloadPage" style="display: none;">Reload</a>
                 </div>
