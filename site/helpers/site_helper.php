@@ -207,7 +207,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
     $config['mailtype'] = $mailType;
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'smtp.unoeuro.com';
-    $config['smtp_user'] = 'noreply@habibidating.dk';
+    $config['smtp_user'] = $this->config->item('sender_email');
     $config['smtp_pass'] = $ci->config->item('email_password');
     $config['smtp_port'] = 587;
     $config['smtp_crypto'] = 'tls';
@@ -235,7 +235,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
             if($from){
                 $ci->email->from($from, 'Habibidating.dk');
             }else{
-                $ci->email->from('noreply@habibidating.dk', 'Habibidating.dk');
+                $ci->email->from($this->config->item('sender_email'), 'Habibidating.dk');
             }
             $ci->email->subject($query->subject);
             $ci->email->message($str);

@@ -159,7 +159,7 @@ class Images extends CI_Controller{
         $configEmail['mailtype'] = $mailType;
         $configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.unoeuro.com';
-        $configEmail['smtp_user'] = 'noreply@habibidating.dk';
+        $configEmail['smtp_user'] = $this->config->item('sender_email');
         $configEmail['smtp_pass'] = $this->config->item('email_password');
         $configEmail['smtp_port'] = 587;
         $configEmail['smtp_crypto'] = 'tls';
@@ -173,7 +173,7 @@ class Images extends CI_Controller{
                 $this->email->clear();
                 $this->email->to($email);
                 if($from == NULL ){
-                    $this->email->from('noreply@habibidating.dk ','Habibidating.dk');
+                    $this->email->from($this->config->item('sender_email') ,'Habibidating.dk');
                 }
                 else{
                     $this->email->from($from,'Habibidating.dk');
