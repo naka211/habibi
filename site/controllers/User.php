@@ -1225,20 +1225,24 @@ class User extends MX_Controller
     }
 
     function contact(){
-        $DB['name'] = $this->input->post('name');
-        $DB['phone'] = $this->input->post('phone');
-        $DB['email'] = $this->input->post('email');
-        $DB['message'] = $this->input->post('message');
+        $name = $this->input->post('name');
+        $phone = $this->input->post('phone');
+        $email = $this->input->post('email');
+        $message = $this->input->post('message');
         //$admin = $this->config->item('email');
         //$emailTo = array($admin);
-        $emailTo = array('info@habibidating.dk');
-        if(sendEmail($emailTo, 'contact', $DB, '')){
-            $data['status'] = true;
-            $data['message'] = 'Tak for din henvendelse.<br>Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
-        } else {
-            $data['status'] = false;
-            $data['message'] = 'E-mailen sendes ikke';
-        }
+
+        $content = 'Kære Admin<br /><br />
+                        Du har en forespørgsel fra kontaktformularen:<br /><br />
+                        Navn: '.$name.'<br /><br />
+                        Email: '.$email.'<br /><br />
+                        Telefon: '.$phone.'<br /><br />
+                        Besked: '.$message.'<br /><br />
+                        Habibi Team - Habibidating.dk';
+        $this->general_model->sendEmail(['info@habibidating.dk'], 'Habibidating.dk - En besked fra kontaktformularen', $content);
+        $data['status'] = true;
+        $data['message'] = 'Tak for din henvendelse.<br>Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
+
         //Save DB
         /*$DB['dt_create'] = date('Y-m-d H:i:s');
         $DB['bl_active'] = 1;
