@@ -13,7 +13,7 @@
                         <?php if($user->new_avatar){?>Afventer godkendelse<?php }?>
                         <div id="newAvatarActions" style="display: none;">
                             <a href="javascript:void(0);" data-fancybox data-src="#modalNotification" class="btn bntMessage  m_fz14 m_mr10" style="margin-top: 15px;">Gem</a>
-                            <a href="<?php echo site_url('user/deleteAvatar');?>" class="btn bntDelete m_mr0" style="margin-top: 15px;">Slet</a>
+                            <a href="javascript:void(0);" onclick="location.reload();" class="btn bntDelete m_mr0" style="margin-top: 15px;">Slet</a>
                         </div>
 
                     </div>
@@ -170,7 +170,7 @@
                     Der kan gå optil 24 timer før det bliver valideret.<br><br>
                     Mvh. Habibidating.dk</p>
             </div>
-            <a href="<?php echo site_url('user/confirmAvatar');?>" class="btn bntMessage m_fz14 m_mr10" style="margin-bottom: 0px;">OK</a>
+            <a href="<?php echo site_url('user/confirmAvatar');?>" id="confirmButton" class="btn bntMessage m_fz14 m_mr10" style="margin-bottom: 0px;">OK</a>
             <!--<button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>-->
         </div>
     </div>
@@ -193,6 +193,8 @@
                 $("#previewAvatar").html('<img src="'+base_url+'uploads/raw_thumb_user/'+data.message.file_name+'" style="width: 100%;" />');
                 $("#previewAvatar").show();
                 $("#newAvatarActions").show();
+
+                $('#confirmButton').attr('href', $('#confirmButton').attr('href')+'/'+data.message.file_name);
                 //$('#reloadPage').click();
                 /*$.ajax({
                     method: "POST",

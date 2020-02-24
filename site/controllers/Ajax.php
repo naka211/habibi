@@ -759,13 +759,13 @@ class Ajax extends MX_Controller{
                 //Update image size
                 list($data["image_width"], $data["image_height"]) = getimagesize($data['full_path']);
                 //save to db
-                $newAvatar = $this->user->getNewAvatar($user->id);
+                /*$newAvatar = $this->user->getNewAvatar($user->id);
                 if($newAvatar != ''){
                     @unlink("./uploads/user/".$newAvatar);
                     @unlink("./uploads/thumb_user/".$newAvatar);
                     @unlink("./uploads/raw_thumb_user/".$newAvatar);
                 }
-                $this->user->updateAvatar($user->id, $data['file_name'], 1);
+                $this->user->updateAvatar($user->id, $data['file_name'], 1);*/
                 /*$savedUser = $this->user->getUser($user->id);
                 $this->session->set_userdata('user', $savedUser);*/
                 //create thumb

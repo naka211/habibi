@@ -255,7 +255,16 @@ class User extends MX_Controller
         customRedirectWithMessage($_SERVER['HTTP_REFERER']);
     }
 
-    public function confirmAvatar(){
+    public function confirmAvatar($fileName){
+        $user = $this->session->userdata('user');
+        $newAvatar = $this->user->getNewAvatar($user->id);
+        if($newAvatar != ''){
+            @unlink("./uploads/user/".$newAvatar);
+            @unlink("./uploads/thumb_user/".$newAvatar);
+            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        }
+        $this->user->updateAvatar($user->id, $fileName, 1);
+
         $this->sendEmailAdminToApproveAvatar();
 
         customRedirectWithMessage(site_url('user/editAvatar'));
@@ -1115,6 +1124,14 @@ class User extends MX_Controller
             @unlink("./uploads/thumb_user/".$newAvatar);
             @unlink("./uploads/raw_thumb_user/".$newAvatar);
         }
+
+        $avatar = $this->user->getAvatar($user->id);
+        if(!in_array($avatar, getDefaultAvatars())){
+            @unlink("./uploads/user/".$avatar);
+            @unlink("./uploads/thumb_user/".$avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar);
+        }
+
         $this->user->updateAvatar($user->id, $imageName);
 
         $savedUser = $this->user->getUser($user->id);
