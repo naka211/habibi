@@ -1106,3 +1106,7 @@ img {
 #modalSelectAvatar img{
 	width: 100px;
 }
+
+.fancybox-iframe video{
+	min-width: 275px;
+}
