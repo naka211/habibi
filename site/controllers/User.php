@@ -270,6 +270,14 @@ class User extends MX_Controller
         customRedirectWithMessage(site_url('user/editAvatar'));
     }
 
+    public function cancelAvatar($fileName){
+        @unlink("./uploads/user/".$fileName);
+        @unlink("./uploads/thumb_user/".$fileName);
+        @unlink("./uploads/raw_thumb_user/".$fileName);
+
+        customRedirectWithMessage(site_url('user/editAvatar'));
+    }
+
     public function saveAvatar(){
         $sendEmailToApprove = $this->input->post('sendEmailToApprove');
         if($sendEmailToApprove){
