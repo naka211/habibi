@@ -122,7 +122,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2>Galleri</h2>
-            <?php echo form_open('user/selectAvatarFromGallery', array('id'=>'selectAvatrForm'))?>
+            <?php echo form_open('user/selectAvatarFromGallery', array('id'=>'selectAvatarGalleryForm', 'class' => 'selectAvatarForm'))?>
             <?php foreach ($listImages as $image){?>
                 <label>
                     <input type="radio" name="imageName" value="<?php echo $image->image;?>" />
@@ -140,7 +140,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2>Avatars</h2>
-            <?php echo form_open('user/selectAvatarFromList', array('id'=>'selectAvatrForm'))?>
+            <?php echo form_open('user/selectAvatarFromList', array('id'=>'selectAvatarListForm', 'class' => 'selectAvatarForm'))?>
             <?php
             if($user->gender == 1){
                 $limit = 16;
@@ -151,12 +151,13 @@
             }
             for ($i = 1; $i <= $limit; $i++){?>
                 <label>
-                    <input type="radio" name="imageName" value="<?php echo $gender.$i.'.png';?>" />
+                    <input type="radio" name="imageName" value="<?php echo $gender.$i.'.png';?>" onclick="setButton();" />
                     <img src="<?php echo base_url();?>uploads/thumb_user/<?php echo $gender.$i.'.png';?>">
                 </label>
             <?php }?>
             <div class="text-center">
-                <button type="submit" class="btn btn_viewSearch">OK</button>
+                <button data-fancybox-close class="btn btn_viewSearch" id="closeSelection">OK</button>
+                <button type="submit" class="btn btn_viewSearch" style="display: none;" id="acceptSelection">OK</button>
             </div>
             <?php echo form_close();?>
         </div>
@@ -171,7 +172,6 @@
                     Mvh. Habibidating.dk</p>
             </div>
             <a href="<?php echo site_url('user/confirmAvatar');?>" id="confirmButton" class="btn bntMessage m_fz14 m_mr10" style="margin-bottom: 0px;">OK</a>
-            <!--<button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="confirmClick();">OK</button>-->
         </div>
     </div>
 </div>
@@ -196,23 +196,13 @@
 
                 $('#confirmButton').attr('href', $('#confirmButton').attr('href')+'/'+data.message.file_name);
                 $('#cancelAvatar').attr('href', $('#cancelAvatar').attr('href')+'/'+data.message.file_name);
-                //$('#reloadPage').click();
-                /*$.ajax({
-                    method: "POST",
-                    url: base_url+"ajax/sendEmailAdminToApproveAvatar",
-                    data: { csrf_site_name: token_value}
-                }).done(function() {
-                    $('#reloadPage').click();
-                });*/
             }
         });
 
-        confirmClick = function () {
-            $("#reloadPage").click();
-            /*$.fancybox.close();
-            $('#blurForm').submit();*/
+        setButton = function () {
+            $('#closeSelection').hide();
+            $('#acceptSelection').show();
         }
-
 
         // Canvas
         var canvas = $("#canvas")[0];

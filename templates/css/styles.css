@@ -3084,15 +3084,15 @@ label label.error{
     background-color: transparent;
 }
 
-#selectAvatrForm label > input{ /* HIDE RADIO */
+.selectAvatarForm label > input{ /* HIDE RADIO */
     visibility: hidden; /* Makes input not-clickable */
     position: absolute; /* Remove input from document flow */
 }
-#selectAvatrForm label > input + img{ /* IMAGE STYLES */
+.selectAvatarForm label > input + img{ /* IMAGE STYLES */
     cursor:pointer;
     border:2px solid transparent;
 }
-#selectAvatrForm label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+.selectAvatarForm label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
 }
 
