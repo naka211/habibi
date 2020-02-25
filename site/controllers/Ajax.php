@@ -416,7 +416,10 @@ class Ajax extends MX_Controller{
             case 'video':
                 $html = '<div class="message_media">
                         <p class="img_content">
-                        <a href="'.$message.'" data-fancybox data-type="iframe"><img src="'.base_url().'/templates/images/1x/video.png" alt="" class="img-responsive" ></a>
+                            <a href="#myVideo'.$num.'" data-fancybox><img src="'.base_url().'/templates/images/1x/video.png" alt="" class="img-responsive" ></a>
+                            <video controls id="myVideo'.$num.'" style="display:none;">
+                                <source src="'.$message.'" type="video/mp4">
+                            </video>
                         </p>
                     </div>';
                 break;

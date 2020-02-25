@@ -263,6 +263,7 @@
     }
     .modalChat {
         width: 90%;
+        height: 85%;
     }
     .bntMessage, .bntBlock, .bntRemove, .bntReject {
         font-size: 10px;
@@ -605,7 +606,7 @@
         margin-top: 15px;
     }
     .chat ul {
-        height: 240px;
+        height: 60vh;
         /*min-height: 200px;*/
     }
     .frm_Chat .form-control {
@@ -722,6 +723,11 @@
         height: 500px;
         min-height: 200px;
         padding-right: 0px;
+    }
+
+    .fancybox-slide video {
+        height: auto;
+        width: 90%;
     }
 }
 

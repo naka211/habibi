@@ -1107,6 +1107,7 @@ img {
 	width: 100px;
 }
 
-.fancybox-iframe video{
-	min-width: 275px;
+.fancybox-slide video {
+	height: 90%;
+	width: auto;
 }
