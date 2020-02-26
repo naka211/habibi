@@ -81,7 +81,10 @@ class User_model extends CI_Model{
         $this->db->where('id', $id);
         $avatar = $this->db->get()->row()->avatar;
 
-        if($avatar != 'no-avatar1.png' && $avatar != 'no-avatar2.png'){
+        $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
+        $defaultAvatars = array_merge($noAvatarArr, $this->config->item('male_avatar'), $this->config->item('female_avatar'));
+
+        if(!in_array($avatar, $defaultAvatars())){
             @unlink($this->config->item('root')."uploads/user/".$avatar);
             @unlink($this->config->item('root')."uploads/thumb_user/".$avatar);
             @unlink($this->config->item('root')."uploads/raw_thumb_user/".$avatar);
