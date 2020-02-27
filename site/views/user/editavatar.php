@@ -36,7 +36,7 @@
                         <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
                     </p>
                     <h4>Upload Avatar</h4>
-                    <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer digbedst.</p>
+                    <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer dig bedst.</p>
 
                     <?php } else {?>
                         <h4>Her kan du uploade dit personlige profilbillede <a href="#modal_moretext" data-toggle="modal" class="system_link">Læs mere</a></h4>
@@ -63,7 +63,7 @@
                                             <img src="<?php echo base_url();?>templates/images/red.png" style="margin-top: -5px;"> Der må ikke være rammer rundt om billedet<br>
                                         </p>
                                         <h4>Upload Avatar</h4>
-                                        <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer digbedst.</p>
+                                        <p>Når du klikker på denne, så vil det være muligt at vælge imellem nogle forskellige avatarer, du vælger blot den du syntes der passer dig bedst.</p>
                                     </div>
                                 </div>
                             </div>
