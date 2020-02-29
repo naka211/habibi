@@ -101,6 +101,7 @@
         var token_value = '<?php echo $this->security->get_csrf_hash();?>';
         var base_url = '<?php echo base_url();?>';
         var base_url_lang = '<?php echo base_url().$this->lang->lang();?>/';
+        var isMobile = <?php echo isMobile()?'true':'false';?>;
     </script>
     <?php if(checkLogin() && isGoldMember()){?>
         <!--<script type="text/javascript" charset="utf-8" src="<?php /*echo base_url();*/?>cometchat/js.php"></script>

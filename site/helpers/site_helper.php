@@ -561,3 +561,8 @@ function getGenderAvatars(){
     $ci = &get_instance();
     return array_merge($ci->config->item('male_avatar'), $ci->config->item('female_avatar'));
 }
+
+function isMobile(){
+    $ci = &get_instance();
+    return $ci->agent->is_mobile();
+}

@@ -469,6 +469,9 @@ $(document).ready(function() {
             }
             if(data.newMessage == true){
                 $(".chat ul").append(data.html);
+                if(isMobile == false){
+                    $(".message"+data.num).emojioneArea();
+                }
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
             }

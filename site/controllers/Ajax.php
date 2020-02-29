@@ -464,10 +464,11 @@ class Ajax extends MX_Controller{
 
         $messages = $this->user->checkNewMessage($user->id, $profileId);
         if(!empty($messages)){
+            $num = time();
             $html = '';
             foreach($messages as $message){
                 $profile = $this->user->getUser($message->user_from);
-                $content = $this->renderMessage($message->id, $message->message, $message->messageType);
+                $content = $this->renderMessage($message->id, $message->message, $message->messageType, $num);
                 $html .= '<li class="other">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$profile->avatar.'" /></a>
                             '.$content.'
@@ -476,6 +477,7 @@ class Ajax extends MX_Controller{
             }
             $data['newMessage'] = true;
             $data['html'] = $html;
+            $data['num'] = $num;
 
             $this->user->setSeenMessage($user->id, $profileId);
         } else {
