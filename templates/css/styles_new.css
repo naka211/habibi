@@ -1111,3 +1111,7 @@ img {
 	height: 90%;
 	width: auto;
 }
+
+#imgContainer{
+	margin-bottom: 20px;
+}

@@ -606,8 +606,10 @@
         margin-top: 15px;
     }
     .chat ul {
-        height: 42vh;
+        height: 44vh;
         /*min-height: 200px;*/
+        margin-bottom: 5px;
+        padding-bottom: 5px;
     }
     .frm_Chat .form-control {
         width: 100%;
@@ -728,6 +730,10 @@
     .fancybox-slide video {
         height: auto;
         width: 90%;
+    }
+
+    #imgContainer{
+        margin-bottom: 5px;
     }
 }
 

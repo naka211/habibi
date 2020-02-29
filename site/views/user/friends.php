@@ -81,15 +81,19 @@
                 <div class="chat">
                     <ul>
                     </ul>
-                    <div id="imgContainer" style="width: 100px; margin-bottom: 20px; display: none;">
-                        <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
-                        <a href="javascript:void(0);" id="sendImage" style="margin-left: 40px;"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                    <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
+                        <div class="canvas_wrap col-lg-2 col-md-5 col-sm-5 col-xs-5 pad0">
+                        </div>
+                        <div class="preview_action col-lg-10 col-md-7 col-sm-7 col-xs-7 mt30 pad0">
+                            <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
+                            <a href="javascript:void(0);" id="sendImage" style="margin-left: 15px;"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                        </div>
                         <input type="hidden" id="profileId" value="">
                     </div>
                     <span class="waiting" style="display: none;">
                         <img src="<?php echo base_url();?>templates/images/preloader.gif" width="64">
                     </span>
-                    <form class="frm_Chat" action="" method="POST" role="form">
+                    <form class="frm_Chat col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0" action="" method="POST" role="form">
                         <div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
                         </div>
@@ -231,9 +235,10 @@
                         } else {
                             window.EXIF.getData(img, function () {
                                 var orientation = window.EXIF.getTag(this, "Orientation");
-                                var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxWidth: 100});
+                                var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
                                 //document.getElementById("container2").appendChild(canvas);
-                                $("#imgContainer").prepend(canvas);
+                                $(".canvas_wrap").html('');
+                                $(".canvas_wrap").append(canvas);
 
                                 $("#imgContainer").show();
                                 $(".waiting").fadeOut(100);
