@@ -143,6 +143,9 @@
                     if(event.keyCode == 13){
                         $("#message").data("emojioneArea").hidePicker();
                         sendMessage($("#profileId").val(), this.getText(), <?php echo $isMobile?'true':'false';?>)
+                        // not new line
+                        event.preventDefault();
+                        return false;
                     }
                 }
             }
@@ -152,6 +155,9 @@
         $('#message').keyup(function(e){
             if(e.keyCode == 13){
                 $('.btnSend').click();
+                // not new line
+                e.preventDefault();
+                return false;
             }
         });
 
