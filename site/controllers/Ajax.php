@@ -368,9 +368,10 @@ class Ajax extends MX_Controller{
         $messages = $this->user->getMessages($user->id, $profileId, 10, $num);
         $html = '';
         $messages = array_reverse($messages);
+        $isMobile = $this->agent->is_mobile()?"true":"false";
         $newNum = $num + 10;
         if($total > $newNum){
-            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false, '.$this->agent->is_mobile()?'true':'false'.')"';
+            $loadMoreFunction = 'onclick="loadMoreMessages('.$profileId.','.$newNum.', false, '.$isMobile.')"';
             $html .= '<li style="text-align: center;" id="loadMoreMessage">
                             <a style="color: #f19906;" href="javascript:void(0)" '.$loadMoreFunction.'>Indlæs tidligere meddelelser</a>
                         </li>';
