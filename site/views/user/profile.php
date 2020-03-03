@@ -206,9 +206,9 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     <ul>
                     </ul>
                     <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
-                        <div class="canvas_wrap col-lg-2 col-md-5 col-sm-5 col-xs-5 pad0">
+                        <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
                         </div>
-                        <div class="preview_action col-lg-10 col-md-7 col-sm-7 col-xs-7 mt30 pad0">
+                        <div class="preview_action col-lg-9 col-md-7 col-sm-7 col-xs-5 mt30 pad0">
                             <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
                             <a href="javascript:void(0);" id="sendImage" style="margin-left: 15px;"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
                         </div>
