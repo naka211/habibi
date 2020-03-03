@@ -334,7 +334,7 @@
                 },
                 "confirmPassword": {
                     required: 'Indtast dit kodeord igen',
-                    equalTo: 'Genadgangskoden er ikke som kodeord'
+                    equalTo: 'Gentag kodeord er ikke korrekt'
                 },
                 "find_gender":{
                     required:'Vælg det køn, du vil søge'
