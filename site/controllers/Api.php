@@ -156,6 +156,14 @@ class Api extends REST_Controller {
     public function register_post(){
         $data = (object)json_decode(file_get_contents("php://input"));
 
+        //Check created user
+        $existEmail = $this->user->getUser('', $data->email);
+        $existName = $this->user->getUser('', $data->name);
+        if (!empty($existName) || !empty($existEmail)) {
+            $this->_return(false, 'Dette email eller navn er i brug');
+        }
+        /////
+
         if($data->password != $data->confirmPassword){
             $this->_return(false, 'Genadgangskoden er ikke som kodeord.');
         }
