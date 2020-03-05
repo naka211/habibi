@@ -83,11 +83,11 @@
                     <ul>
                     </ul>
                     <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
-                        <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
+                        <div class="canvas_wrap">
                         </div>
-                        <div class="preview_action col-lg-9 col-md-7 col-sm-7 col-xs-5 mt30 pad0">
+                        <div class="preview_action">
                             <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
-                            <a href="javascript:void(0);" id="sendImage" style="margin-left: 15px;"><img src="<?php echo base_url(); ?>templates/images/1x/paper-plane-24.png"></a>
+                            <button type="button" class="btn" id="sendImage" style="margin-top: 30px;"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                         </div>
                         <input type="hidden" id="profileId" value="">
                     </div>

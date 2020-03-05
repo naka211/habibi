@@ -2560,7 +2560,7 @@ ul.list_action li a .i_report {
     align-content: stretch;
 }
 
-.frm_Chat .btnSend {
+.frm_Chat .btnSend, .preview_action #sendImage {
     /*float: right;*/
     display: inline-block;
     background: #ffa507;
@@ -3246,4 +3246,9 @@ label label.error{
 
 .frm_Chat .emojionearea-editor{
     min-height: auto;
+}
+
+.canvas_wrap{
+    float: left;
+    margin-right: 20px;
 }
