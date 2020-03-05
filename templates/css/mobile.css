@@ -623,7 +623,7 @@
     }
     .modalChat{
         padding: 15px 10px 10px;
-        margin-top: 15px;
+        margin: 15px 0px;
     }
     .btnLogout {
         padding: 10px;
