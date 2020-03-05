@@ -209,8 +209,8 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                         <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
                         </div>
                         <div class="preview_action">
-                            <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png"></a>
-                            <button type="button" class="btn" id="sendImage" style="margin-top: 30px;"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
+                            <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png" style="width: 24px;"></a>
+                            <button type="button" class="btn" id="sendImage" style="margin-top: 50px; width: 24px; height: 24px;"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                         </div>
                         <input type="hidden" id="profileId" value="">
                     </div>
