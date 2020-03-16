@@ -200,6 +200,11 @@
         };
 
         $('#sendImage').click(function () {
+            <?php if($isMobile == false){?>
+                $("#message").data("emojioneArea").disable();
+            <?php } else {?>
+                $("#message").attr('disabled', 'disabled');
+            <?php }?>
             //Handle click event
             $('#imgContainer').hide();
             $(".waiting").show();
@@ -218,6 +223,11 @@
                         dataType: 'text',
                         data: {message: message.data.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
                     }).done(function(html){
+                        <?php if($isMobile == false){?>
+                        $("#message").data("emojioneArea").enable();
+                        <?php } else {?>
+                        $("#message").removeAttr('disabled');
+                        <?php }?>
                         $('#messageImage').val('');
                         $(".waiting").fadeOut(100);
                         //add html to chat box
