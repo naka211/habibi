@@ -571,7 +571,7 @@ class Ajax extends MX_Controller{
         $this->user->saveMessage($DB);
 
         //waiting the thumbnail is created
-        sleep(4);
+        //sleep(4);
 
         //Generate message html
         $item = $this->user->getUser($userId);
