@@ -81,6 +81,7 @@
                 <div class="chat">
                     <ul>
                     </ul>
+                    <input type="hidden" id="latestMsgId" value="">
                     <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
                         <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
                         </div>

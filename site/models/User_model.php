@@ -443,12 +443,10 @@ class User_model extends CI_Model{
         return $query?false:true;
     }
 
-    public function checkNewMessage($userId, $profileId){
+    public function checkNewMessage($userId, $profileId, $latestMsgId){
         $this->db->select('*');
         $this->db->from('user_messages');
-        $this->db->where('user_from', $profileId);
-        $this->db->where('user_to', $userId);
-        $this->db->where('seen', 0);
+        $this->db->where("((user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)) AND (id > $latestMsgId)");
         return $this->db->get()->result();
     }
     /** FAVORITE*/

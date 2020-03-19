@@ -397,6 +397,14 @@ $(document).ready(function() {
     loadMoreMessages = function (profileId, num, first, isMobile, profileName) {
         $('#modalChat .bntBlock').attr('onclick', 'confirmDeleteMessage('+profileId+', "Er du sikker på du vil slette chat historik?")');
         $("#modalChat h4").html('Chatbesked med '+profileName);
+        //Get latest message id
+        $.ajax({
+            type: "get",
+            url: base_url+"ajax/getLatestMsgId/"+profileId,
+            data: {'csrf_site_name':token_value}
+        }).done(function(id){
+            $('#latestMsgId').val(id);
+        });
         //Open chat box
         if(first == true){
             $.fancybox.open({
@@ -462,12 +470,13 @@ $(document).ready(function() {
             type: "post",
             url: base_url+"ajax/checkMessage",
             dataType: 'json',
-            data: {profileId: profileId, csrf_site_name: token_value}
+            data: {profileId: profileId, latestMsgId: $('#latestMsgId').val(),csrf_site_name: token_value}
         }).done(function(data){
             if(data.emptyMessage == true){
                 $(".chat ul").html("");
             }
             if(data.newMessage == true){
+                $('#latestMsgId').val(data.latestMsgId);
                 $(".chat ul").append(data.html);
                 if(isMobile == false){
                     $(".message"+data.num).emojioneArea();
@@ -497,6 +506,7 @@ $(document).ready(function() {
                 data: {message: message, user_to: profileId,'csrf_site_name':token_value}
             }).done(function(data){
                 var data = $.parseJSON(data);
+                $('#latestMsgId').val(data.latestMsgId);
                 $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));

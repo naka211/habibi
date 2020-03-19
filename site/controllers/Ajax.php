@@ -446,6 +446,7 @@ class Ajax extends MX_Controller{
                             <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
                         </li>';
             $data['html'] = $html;
+            $data['latestMsgId'] = $messageId;
             echo json_encode($data);
             return;
         }
@@ -456,6 +457,7 @@ class Ajax extends MX_Controller{
     function checkMessage(){
         $user = $this->session->userdata('user');
         $profileId = $this->input->post('profileId');
+        $latestMsgId = $this->input->post('latestMsgId');
         $emptyMessage = $this->user->checkEmptyMessage($user->id, $profileId);
         if($emptyMessage){
             $data['emptyMessage'] = true;
@@ -463,14 +465,15 @@ class Ajax extends MX_Controller{
             $data['emptyMessage'] = false;
         }
 
-        $messages = $this->user->checkNewMessage($user->id, $profileId);
+        $messages = $this->user->checkNewMessage($user->id, $profileId, $latestMsgId);
         if(!empty($messages)){
             $num = time();
             $html = '';
             foreach($messages as $message){
                 $profile = $this->user->getUser($message->user_from);
+                $ownerClass = $message->user_from == $user->id ? 'you' : 'other';
                 $content = $this->renderMessage($message->id, $message->message, $message->messageType, $num);
-                $html .= '<li class="other">
+                $html .= '<li class="'.$ownerClass.'">
                             <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$profile->avatar.'" /></a>
                             '.$content.'
                             <div class="date">Sendt: d. '.date("d/m/Y", $message->dt_create).' kl. '.date("H:i", $message->dt_create).'</div>
@@ -479,6 +482,7 @@ class Ajax extends MX_Controller{
             $data['newMessage'] = true;
             $data['html'] = $html;
             $data['num'] = $num;
+            $data['latestMsgId'] = $this->getLatestMsgId($profileId, true);
 
             $this->user->setSeenMessage($user->id, $profileId);
         } else {
@@ -1120,30 +1124,21 @@ class Ajax extends MX_Controller{
         $this->session->set_userdata('user', $newUser);
     }
 
-    /*public function uploadTempMessageImage(){
-        $this->load->helper('string');
-        $imageData = $this->input->post('imageData');
-        $extension = $this->input->post('extension');
-        $fileName = random_string('alnum',30).'.'.$extension;
+    function getLatestMsgId($profileId, $returnValue = false){
+        $userId = $this->session->userdata('user')->id;
 
-        if($extension == 'png'){
-            $imageData = str_replace('data:image/png;base64,', '', $imageData);
-        } else if($extension == 'jpg'){
-            $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
+        $query = $this->db->select("id")
+            ->from('tb_user_messages')
+            ->where("(user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)")
+            ->order_by('id DESC')
+            ->limit(1);
+        $result = $query->get()->row();
+        if($returnValue == false){
+            echo $result->id;
+            exit();
+        } else {
+            return $result->id;
         }
-        $imageData = str_replace(' ', '+', $imageData);
-        $image = base64_decode($imageData);
-
-        $pathFile = './uploads/file/'.$fileName;
-        if(file_put_contents($pathFile, $image) !== false){
-            $this->correctImageOrientation($this->config->item('root') . 'uploads'.DIRECTORY_SEPARATOR.'file'.DIRECTORY_SEPARATOR.$fileName, $extension);
-        }
-        echo $fileName; exit();
     }
-
-    public function deleteTempMessageImage(){
-        @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . $this->input->post('imageName'));
-        return true;
-    }*/
 }
 ?>
