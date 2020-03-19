@@ -46,7 +46,7 @@
                                 <?php if($status->isFriend == 0){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_cancel_request mb0" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriendInFavorite')">Annuller anmodning</a>
                                 <?php }?>
-                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage">Send blink</a>
+                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage">BLINK RETUR</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
                             </div>
                         </div>

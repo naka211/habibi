@@ -670,6 +670,8 @@ class Api extends REST_Controller {
     public function getInfo_get($userId){
         $user = $this->user->getUser($userId);
 
+        $user->age = printAge($user->id);
+
         if(in_array($user->avatar, getDefaultAvatars()) &&  $user->new_avatar == ''){
             $user->allowBlur = '0';
         } else {
@@ -1201,7 +1203,7 @@ class Api extends REST_Controller {
 
         $exist = $this->user->checkUser($userId, $name);
         if ($exist) {
-            $this->_return(false, 'This name is in use');
+            $this->_return(false, 'Dette burger navn er I brug');
         } else {
             $this->_return(true);
         }
@@ -1214,7 +1216,7 @@ class Api extends REST_Controller {
 
         $exist = $this->user->checkUser($userId, null, $email);
         if ($exist) {
-            $this->_return(false, 'This email is in use');
+            $this->_return(false, 'Denne mail er I brug');
         } else {
             $this->_return(true);
         }
