@@ -100,7 +100,7 @@
                         <!--<div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
                         </div>-->
-                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden; height: 37px;"></textarea>
                         <button type="button" class="btn btnSend" id="btnSend"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                     </form>
                 </div>
@@ -133,13 +133,12 @@
             });
         }
 
-        <?php if($isMobile == false){?>
+        <?php /*if($isMobile == false){?>
         $("#message").emojioneArea({
             search: false,
             useInternalCDN: true,
             filtersPosition: "bottom",
             tones: false,
-            /*saveEmojisAs: "unicode",*/
             events:{
                 keydown: function (editor, event) {
                     if(event.keyCode == 13){
@@ -152,7 +151,7 @@
                 }
             }
         });
-        <?php } else {?>
+        <?php } else {*/?>
         //Handle enter key in message
         $('#message').keyup(function(e){
             if(e.keyCode == 13){
@@ -167,7 +166,7 @@
             return e.which !== 13;
         });
         ////
-        <?php }?>
+        <?php //}?>
 
         /*document.getElementById("messageImage").onchange = function (evt) {
             $(".waiting").fadeIn(100);
