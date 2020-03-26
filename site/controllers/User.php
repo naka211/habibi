@@ -803,37 +803,6 @@ class User extends MX_Controller
                 $data['status'] = false;
                 $data['message'] = 'Denne konto er blevet slettet';
             } else {
-                //Create authToken on comet server
-                if(empty($user->cometAuthToken)){
-                    $ch = curl_init();
-
-                    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$user->id.'/auth_tokens');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($ch, CURLOPT_POST, 1);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-                    $headers = array();
-                    $headers[] = 'Accept: application/json';
-                    $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-                    $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-                    $headers[] = 'Content-Type: application/json';
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                    $result = curl_exec($ch);
-                    if (curl_errno($ch)) {
-                        echo 'Error:' . curl_error($ch);
-                    }
-                    curl_close($ch);
-
-                    $returnData = json_decode($result);
-                    //Save cometAuthToken to db
-                    $DB['cometAuthToken'] = $returnData->data->authToken;
-                    $this->user->saveUser($DB, $user->id);
-
-                    //Re-get user information
-                    $user = $this->user->getUser($user->id);
-                }
-
                 $data['status'] = true;
                 $this->session->set_userdata('isLoginSite', true);
                 $this->session->set_userdata('user', $user);

@@ -513,16 +513,6 @@ $(document).ready(function() {
                 if(isMobile == false){
                     $(".message"+data.messageId).emojioneArea();
                 }
-                //$('.friend'+profileId).find('gray_friend_item').html(message);
-
-                $.ajax({
-                    type: "post",
-                    url: base_url+"ajax/saveMessageToComet",
-                    dataType: 'html',
-                    data: {message: message, profileId: profileId, messageId: data.messageId, 'csrf_site_name':token_value}
-                }).done(function(data){
-                    //console.log(data);
-                });
             });
         }
     }
