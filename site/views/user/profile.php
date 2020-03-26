@@ -289,13 +289,12 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
             });
         }
 
-        <?php if($isMobile == false){?>
+        <?php /*if($isMobile == false){?>
         $("#message").emojioneArea({
             search: false,
             useInternalCDN: true,
             filtersPosition: "bottom",
             tones: false,
-            /*saveEmojisAs: "unicode",*/
             events:{
                 keydown: function (editor, event) {
                     if(event.keyCode == 13){
@@ -308,7 +307,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                 }
             }
         });
-        <?php } else {?>
+        <?php } else {*/?>
         //Handle enter key in message
         $('#message').keyup(function(e){
             if(e.keyCode == 13){
@@ -323,7 +322,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
             return e.which !== 13;
         });
         ////
-        <?php }?>
+        <?php //}?>
 
         /*document.getElementById("messageImage").onchange = function (evt) {
             $(".waiting").fadeIn(100);
