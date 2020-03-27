@@ -218,7 +218,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     <span class="waiting" style="display: none;">
                         <img src="<?php /*echo base_url();*/?>templates/images/preloader.gif" width="64">
                     </span>-->
-                    <form class="frm_Chat col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0" action="" method="POST" role="form">
+                    <form class="frm_Chat" action="" method="POST" role="form">
                         <!--<div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
                         </div>-->

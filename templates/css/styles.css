@@ -2537,38 +2537,66 @@ ul.list_action li a .i_report {
     width: auto;
 }
 
-.frm_Chat .form-control {
-    /*width: 608px;*/
+/*.frm_Chat .form-control {
+    !*width: 608px;*!
     background: #eee;
     border: none;
     box-shadow: none;
     display: inline-block;
-    /*float: left;*/
+    !*float: left;*!
     font-size: 14px;
-    /*font-style: italic;*/
+    !*font-style: italic;*!
     height: auto;
+    max-height: 90px;
+    color: #000;
+}*/
+
+.frm_Chat .form-control {
+    width: 608px;
+    background: #eee;
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    /* font-style: italic; */
+    height: 35px;
     max-height: 90px;
     color: #000;
 }
 
-.frm_Chat {
+/*.frm_Chat {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     align-content: stretch;
-}
+}*/
 
-.frm_Chat .btnSend, .preview_action #sendImage {
-    /*float: right;*/
+.frm_Chat .btnSend {
+    float: right;
     display: inline-block;
     background: #ffa507;
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 13px;
-    /*width: 100px;*/
+    width: 100px;
+    position: relative;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/*.frm_Chat .btnSend, .preview_action #sendImage {
+    !*float: right;*!
+    display: inline-block;
+    background: #ffa507;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    !*width: 100px;*!
     position: relative;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -2583,7 +2611,7 @@ ul.list_action li a .i_report {
     align-items: center;
     align-content: stretch;
     padding: 0 5px;
-}
+}*/
 
 .frm_Chat .btnSend:hover {
     background: #000;

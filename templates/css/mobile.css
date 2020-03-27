@@ -263,7 +263,7 @@
     }
     .modalChat {
         width: 90%;
-        height: 95%;
+        /*height: 95%;*/
     }
     .bntMessage, .bntBlock, .bntRemove, .bntReject {
         font-size: 10px;
@@ -617,6 +617,7 @@
         max-height: 90px;
         height: 35px;
         padding: 5px 10px;
+        margin-bottom: 15px;
     }
     .modalChat h4 {
         margin-top: 20px;
@@ -716,9 +717,9 @@
         min-height: auto;
         margin-bottom: 60px;
     }
-    .frm_Chat .btnSend {
+    /*.frm_Chat .btnSend {
         width: 12%;
-    }
+    }*/
     /*.frame_chat_pc .frm_Chat .form-control {
         width: 100%;
     }*/
