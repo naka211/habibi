@@ -189,8 +189,6 @@ class Api extends REST_Controller {
         $id = $this->user->saveUser($data);
 
         if ($id) {
-            //Add user to cometchat
-            addUserToComet($id, $data->name, $this->config->item('site').'/uploads/thumb_user/'.$data->avatar);
 
             //Send email
             $sendEmailInfo['name'] = $data->name;
