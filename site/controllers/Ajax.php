@@ -399,9 +399,14 @@ class Ajax extends MX_Controller{
                 $html = '<div class="message message'.$num.'"><p>'.nl2br($message).'</p></div>';
                 break;
             case 'image':
-                $html = '<div class="message_media">
+                /*$html = '<div class="message_media">
                         <p class="img_content">
                         <a href="'.renderImageFromComet($message,"large").'" data-fancybox="images"><img src="'.renderImageFromComet($message,"small").'" alt="" class="img-responsive" onerror="javascript:this.src=\''.renderImageFromComet($message,"small").'\'"></a>
+                        </p>
+                    </div>';*/
+                $html = '<div class="message_media">
+                        <p class="img_content">
+                        <a href="" data-fancybox="images"><img src="" alt="" class="img-responsive"></a>
                         </p>
                     </div>';
                 break;
@@ -493,72 +498,6 @@ class Ajax extends MX_Controller{
         header('Content-Type: application/json');
         echo json_encode($data);
         return;
-    }
-
-    public function loadCometMessages($userId, $profileId){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/users/'.$profileId.'/messages');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        print_r(json_decode($result));exit();
-        curl_close($ch);
-    }
-
-    public function saveMessageToComet(){
-        $userId = $this->session->userdata('user')->id;
-        $profileId = $this->input->post('profileId');
-        $message = $this->input->post('message');
-        $messageId = $this->input->post('messageId');
-        $messageType = 'text';
-
-        $params = json_encode(array(
-            'receiver' => (string)$profileId,
-            'receiverType' => 'user',
-            'category' => 'message',
-            'type' => $messageType,
-            'data' => json_encode(array('text' => $message))
-        ));
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/messages');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-
-        //Update comet message id to db
-        $returnData = json_decode($result);
-        $DB['cometMessageId'] = $returnData->data->id;
-        $this->user->updateCometMessageId($messageId, $DB);
-
-        curl_close($ch);
     }
 
     public function sendImage(){
@@ -965,53 +904,6 @@ class Ajax extends MX_Controller{
     public function deleteMessage(){
         $profileId = $this->input->post('profile_id', true);
         $user = $this->session->userdata('user');
-        //Delete message in comet server
-
-        $conversationId = $user->id.'_user_'.$profileId;
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-        $result = json_decode($result);
-        if(!empty($result->error)){
-            $conversationId = $profileId.'_user_'.$user->id;
-
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-            $headers = array();
-            $headers[] = 'Accept: application/json';
-            $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-            $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-            $headers[] = 'Content-Type: application/json';
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($ch);
-            if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
-            }
-            curl_close($ch);
-        }
 
         //Delete message in server
         $this->user->deleteMessage($user->id, $profileId);

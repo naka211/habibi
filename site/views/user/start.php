@@ -171,25 +171,3 @@
 
     </div>
 </div>
-
-<!--Login user to cometchat-->
-<script>
-    $(document).ready(function() {
-        var appID = "<?php echo $this->config->item('comet_app_id');?>";
-        var region = "eu";
-        var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
-        CometChat.init(appID, appSetting);
-        var UID = "<?php echo $userLoggedIn->id;?>";
-        var apiKey = "<?php echo $this->config->item('comet_auth_api_key');?>";
-        CometChat.login(UID, apiKey).then(
-            function(User){
-                console.log("Login successfully:", { User });
-                // User loged in successfully.
-            },
-            function(error){
-                console.log("Login failed with exception:", { error });
-                // User login failed, check error and take appropriate action.
-            }
-        );
-    });
-</script>

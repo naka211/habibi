@@ -82,23 +82,23 @@
                     <ul>
                     </ul>
                     <input type="hidden" id="latestMsgId" value="">
-                    <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
+                    <input type="hidden" id="profileId" value="">
+                    <!--<div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
                         <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
                         </div>
                         <div class="preview_action">
-                            <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png" style="width: 24px;"></a>
-                            <button type="button" class="btn" id="sendImage" style="margin-top: 50px; width: 24px; height: 24px;"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
+                            <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php /*echo base_url(); */?>templates/images/1x/delete_icon.png" style="width: 24px;"></a>
+                            <button type="button" class="btn" id="sendImage" style="margin-top: 50px; width: 24px; height: 24px;"><img src="<?php /*echo base_url().'templates/';*/?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                         </div>
-                        <input type="hidden" id="profileId" value="">
                     </div>
                     <span class="waiting" style="display: none;">
-                        <img src="<?php echo base_url();?>templates/images/preloader.gif" width="64">
-                    </span>
-                    <form class="frm_Chat col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0" action="" method="POST" role="form">
-                        <div class="box_sendmedia">
+                        <img src="<?php /*echo base_url();*/?>templates/images/preloader.gif" width="64">
+                    </span>-->
+                    <form class="frm_Chat" action="" method="POST" role="form">
+                        <!--<div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
-                        </div>
-                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                        </div>-->
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden; height: 37px;"></textarea>
                         <button type="button" class="btn btnSend" id="btnSend"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                     </form>
                 </div>
@@ -191,13 +191,12 @@
             });
         }
 
-        <?php if($isMobile == false){?>
+        <?php /*if($isMobile == false){?>
         $("#message").emojioneArea({
             search: false,
             useInternalCDN: true,
             filtersPosition: "bottom",
             tones: false,
-            /*saveEmojisAs: "unicode",*/
             events:{
                 keydown: function (editor, event) {
                     if(event.keyCode == 13){
@@ -210,7 +209,7 @@
                 }
             }
         });
-        <?php } else {?>
+        <?php } else {*/?>
         //Handle enter key in message
         $('#message').keyup(function(e){
             if(e.keyCode == 13){
@@ -225,9 +224,9 @@
             return e.which !== 13;
         });
         ////
-        <?php }?>
+        <?php //}?>
 
-        document.getElementById("messageImage").onchange = function (evt) {
+        /*document.getElementById("messageImage").onchange = function (evt) {
             $(".waiting").fadeIn(100);
 
             var image = evt.target.files[0]; // FileList object
@@ -301,6 +300,6 @@
                     // Handle exception.
                 }
             );
-        });
+        });*/
     });
 </script>

@@ -269,30 +269,6 @@ class User extends CI_Controller
         if ($check) {
             $id = $this->input->post('id', true);
             if ($this->user->delete_data($id)) {
-                //Delete user in cometchat
-                $params = json_encode(array(
-                    'permanent' => true
-                ));
-
-                $ch = curl_init();
-
-                curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$id);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-                $headers = array();
-                $headers[] = 'Accept: application/json';
-                $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-                $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-                $headers[] = 'Content-Type: application/json';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                }
-                curl_close($ch);
                 //End
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
@@ -529,33 +505,6 @@ class User extends CI_Controller
                         Din avatar er godkendt.<br /><br />
                         <a href="' . base_url() . '">Habibidating.dk®</a>';
         $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er godkendt', $content);
-
-        //Update avatar for cometchat
-        $newAvatar = $this->user->getCurrentAvatar($userId);
-        $params = json_encode(array(
-            'avatar' => $this->config->item('site').'/uploads/thumb_user/'.$newAvatar
-        ));
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-        ///
 
         redirect($_SERVER['HTTP_REFERER']);
     }

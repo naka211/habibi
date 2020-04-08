@@ -454,9 +454,9 @@ $(document).ready(function() {
                 }
                 //setCheckMessageInterval(profileId);
 
-                if(isMobile == false){
+                /*if(isMobile == false){
                     $(".message"+num).emojioneArea();
-                }
+                }*/
                 /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
                     $('.new').remove();
@@ -478,9 +478,9 @@ $(document).ready(function() {
             if(data.newMessage == true){
                 $('#latestMsgId').val(data.latestMsgId);
                 $(".chat ul").append(data.html);
-                if(isMobile == false){
+                /*if(isMobile == false){
                     $(".message"+data.num).emojioneArea();
-                }
+                }*/
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
             }
@@ -510,19 +510,9 @@ $(document).ready(function() {
                 $(".chat ul").append(data.html);
                 //Scroll to bottom of ul
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
-                if(isMobile == false){
+                /*if(isMobile == false){
                     $(".message"+data.messageId).emojioneArea();
-                }
-                //$('.friend'+profileId).find('gray_friend_item').html(message);
-
-                $.ajax({
-                    type: "post",
-                    url: base_url+"ajax/saveMessageToComet",
-                    dataType: 'html',
-                    data: {message: message, profileId: profileId, messageId: data.messageId, 'csrf_site_name':token_value}
-                }).done(function(data){
-                    //console.log(data);
-                });
+                }*/
             });
         }
     }
