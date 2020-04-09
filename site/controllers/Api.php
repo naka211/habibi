@@ -333,7 +333,7 @@ class Api extends REST_Controller {
 
         //Delete message in comet server
 
-        $conversationId = $userId.'_user_'.$profileId;
+        /*$conversationId = $userId.'_user_'.$profileId;
 
         $ch = curl_init();
 
@@ -377,7 +377,7 @@ class Api extends REST_Controller {
                 echo 'Error:' . curl_error($ch);
             }
             curl_close($ch);
-        }
+        }*/
 
         //Delete message in server
         $this->user->deleteMessage($userId, $profileId);
@@ -1535,7 +1535,7 @@ class Api extends REST_Controller {
         $this->_return(true, '', array('messageCount' => $message, 'blinkCount' => $blink, 'requestCount' => $friendRequestQuantity, 'rejectCount' => $rejectRequestQuantity, 'totalRequestCount' => $request, 'friendCount' => $friend));
     }
 
-    public function loadCometMessages_get($userId, $profileId){
+    /*public function loadCometMessages_get($userId, $profileId){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/users/'.$profileId.'/messages');
@@ -1556,7 +1556,7 @@ class Api extends REST_Controller {
         }
         print_r(json_decode($result));exit();
         curl_close($ch);
-    }
+    }*/
 
     public function getDefaultAvatars_get(){
         $maleArr = array();
