@@ -1,73 +1,73 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 function seoUrl($str) {
     //Vietnam
     $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
-	$str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
-	$str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
-	$str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
-	$str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
-	$str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
-	$str = preg_replace("/(đ)/", 'd', $str);
-	$str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
-	$str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
-	$str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
-	$str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
-	$str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
-	$str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
-	$str = preg_replace("/(Đ)/", 'D', $str);
-	$str = preg_replace("/( )/", '-', $str);
-	$str = preg_replace("/(\'|\"|`|&|,|\.|\?)/", '', $str);
-	$str = preg_replace("/(---|--)/", '-', $str);
-	$str = preg_replace('/([^a-z0-9\-\._])/i', '', $str);
+    $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
+    $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
+    $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
+    $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
+    $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
+    $str = preg_replace("/(đ)/", 'd', $str);
+    $str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
+    $str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
+    $str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
+    $str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
+    $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
+    $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
+    $str = preg_replace("/(Đ)/", 'D', $str);
+    $str = preg_replace("/( )/", '-', $str);
+    $str = preg_replace("/(\'|\"|`|&|,|\.|\?)/", '', $str);
+    $str = preg_replace("/(---|--)/", '-', $str);
+    $str = preg_replace('/([^a-z0-9\-\._])/i', '', $str);
     //Danish
     $str = preg_replace("/(æ)/", 'ae', $str);
-	$str = preg_replace("/(å)/", 'a', $str);
-	$str = preg_replace("/(ø)/", 'o', $str);
-	$str = preg_replace("/(Å)/", 'A', $str);
-	$str = preg_replace("/(Æ)/", 'AE', $str);
-	$str = preg_replace("/(Ø)/", 'O', $str);
+    $str = preg_replace("/(å)/", 'a', $str);
+    $str = preg_replace("/(ø)/", 'o', $str);
+    $str = preg_replace("/(Å)/", 'A', $str);
+    $str = preg_replace("/(Æ)/", 'AE', $str);
+    $str = preg_replace("/(Ø)/", 'O', $str);
     //
-	return url_title($str, 'dash', TRUE);
+    return url_title($str, 'dash', TRUE);
 }
 function stringLimit($str, $len, $charset='UTF-8'){
-	$str = html_entity_decode($str, ENT_QUOTES, $charset);
-	if(mb_strlen($str, $charset)> $len){
-		$arr = explode(' ', $str);
-		$str = mb_substr($str, 0, $len, $charset);
-		$arrRes = explode(' ', $str);
-		$last = $arr[count($arrRes)-1];
-		unset($arr);
-		if(strcasecmp($arrRes[count($arrRes)-1], $last)){
-			unset($arrRes[count($arrRes)-1]);
-		}
-		return implode(' ', $arrRes);
-	}
-	return $str;
+    $str = html_entity_decode($str, ENT_QUOTES, $charset);
+    if(mb_strlen($str, $charset)> $len){
+        $arr = explode(' ', $str);
+        $str = mb_substr($str, 0, $len, $charset);
+        $arrRes = explode(' ', $str);
+        $last = $arr[count($arrRes)-1];
+        unset($arr);
+        if(strcasecmp($arrRes[count($arrRes)-1], $last)){
+            unset($arrRes[count($arrRes)-1]);
+        }
+        return implode(' ', $arrRes);
+    }
+    return $str;
 }
-function html2Txt($str){ 
-	$key = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
-                '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
-				'@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
-				'@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments including CDATA 
-	); 
-	$str = preg_replace($key,'',$str);
-	return $str;
-} 
+function html2Txt($str){
+    $key = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript
+        '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+        '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+        '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments including CDATA
+    );
+    $str = preg_replace($key,'',$str);
+    return $str;
+}
 function stripTagsContent($str, $tags = '', $invert = FALSE){
-	preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
-	$tags = array_unique($tags[1]);
-	if(is_array($tags) AND count($tags) > 0){
-		if($invert == FALSE) {
-			return preg_replace('@<(?!(?:'. implode('|', $tags) .')\b)(\w+)\b.*?>.*?</\1>@si', '', $str);
-		}
-		else {
-			return preg_replace('@<('. implode('|', $tags) .')\b.*?>.*?</\1>@si', '', $str);
-		}
-	}
-	elseif($invert == FALSE) {
-		return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $str);
-	}
-	return $str;
+    preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
+    $tags = array_unique($tags[1]);
+    if(is_array($tags) AND count($tags) > 0){
+        if($invert == FALSE) {
+            return preg_replace('@<(?!(?:'. implode('|', $tags) .')\b)(\w+)\b.*?>.*?</\1>@si', '', $str);
+        }
+        else {
+            return preg_replace('@<('. implode('|', $tags) .')\b.*?>.*?</\1>@si', '', $str);
+        }
+    }
+    elseif($invert == FALSE) {
+        return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $str);
+    }
+    return $str;
 }
 function checkLogin(){
     $ci = &get_instance();
@@ -102,22 +102,22 @@ function userTypeUser($id=NULL){
         if($query){
             return $query;
         }else{
-            return 0;   
+            return 0;
         }
     } else {
         return 0;
     }
 }
 function priceFormat($price,$symbol="DKK"){
-	$decimalPlace = 2;
+    $decimalPlace = 2;
     $decimalPoint = ',';
     $thousandPoint = '.';
-	$string = number_format(round($price, (int)$decimalPlace), (int)$decimalPlace, $decimalPoint, $thousandPoint);
+    $string = number_format(round($price, (int)$decimalPlace), (int)$decimalPlace, $decimalPoint, $thousandPoint);
     $string = str_replace(',00',',-',$string);
-	if($symbol){
-  		$string = $string." ".$symbol;
-	}
-	return $string;
+    if($symbol){
+        $string = $string." ".$symbol;
+    }
+    return $string;
 }
 function getTimeLeft($time){
     $days = intval($time/24/60/60);
@@ -203,7 +203,7 @@ function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
     }
 }
 function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailType='html'){
-   	$ci = &get_instance();
+    $ci = &get_instance();
     $config['mailtype'] = $mailType;
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'smtp.unoeuro.com';
@@ -216,10 +216,10 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
     $ci->email->initialize($config);
     /** Load email template from database */
     $query = $ci->db->select('*')
-                    ->from('email_template')
-                    ->where('code',$template)
-                    ->where('bl_active',1)
-                    ->get()->row();
+        ->from('email_template')
+        ->where('code',$template)
+        ->where('bl_active',1)
+        ->get()->row();
     if(empty($query)){ return false;}
     ob_start();
     extract($data);
@@ -456,6 +456,101 @@ function generateSelectInSearch($name){
     return $html;
 }
 
+
+//Comet chat
+
+function addUserToComet($userId, $name, $avatar){
+    $ci = &get_instance();
+    $params = json_encode(array(
+        'uid' => (string)$userId,
+        'name' => $name,
+        'avatar' => $avatar
+    ));
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}
+
+function updateAvatarToComet($userId, $newAvatar){
+    $ci = &get_instance();
+    $params = json_encode(array(
+        'avatar' => $newAvatar
+    ));
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}
+
+function deleteUserInComet($userId){
+    $ci = &get_instance();
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
+    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+}
+
+function renderImageFromComet($url, $type = 'small'){
+    $tmpLink = explode('/', $url);
+    $tmpFilename = explode('.', $tmpLink[5]);
+
+    $arrLength = count($tmpFilename);
+    $lastEle = $arrLength - 1;
+    $fileExt = $tmpFilename[$arrLength - 1]; //Gives the file extension
+    unset($tmpFilename[$lastEle]);
+    $fileNameMinusExt = implode(".",$tmpFilename);
+
+    return $tmpLink[0].'//'.$tmpLink[2].'/'.$tmpLink[3].'/'.$tmpLink[4].'/thumbnails/'.$fileNameMinusExt.'_'.$type.'.'.$fileExt;
+}
+
 function getDefaultAvatars(){
     $ci = &get_instance();
     $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
@@ -470,4 +565,24 @@ function getGenderAvatars(){
 function isMobile(){
     $ci = &get_instance();
     return $ci->agent->is_mobile();
+}
+
+function checkKiss($userId, &$profiles){
+    $ci = &get_instance();
+
+    foreach ($profiles as $key => $profile){
+        $ci->db->select('*')
+            ->from('user_kisses')
+            ->where("(from_user_id = $userId AND to_user_id = ".$profile->id.") OR (from_user_id = ".$profile->id." AND to_user_id = $userId)")
+            ->order_by('id DESC')
+            ->limit(1, 0);
+
+        $lastKiss = $ci->db->get()->row();
+        if($lastKiss->from_user_id == $userId){
+            $profiles[$key]->returnBlink = 0;
+        } else {
+            $profiles[$key]->returnBlink = 1;
+        }
+    }
+    return $profiles;
 }

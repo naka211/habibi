@@ -37,7 +37,7 @@
                                 <h4><?php echo $user->name; ?> <?php if($user->login == 1){?><span class="status"></span><?php }?></h4>
                                 <p class="age_city"><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                 <p>Besøgt: d. <?php echo date("d/m/Y", $user->seen_time); ?> kl.<span><?php echo date("H:i", $user->seen_time); ?></p>
-                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage">Send blink</a>
+                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage"><?php echo $user->returnBlink?'Blink retur':'Send blink'?></a>
                                 <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a>
                                 <?php }?>

@@ -42,7 +42,7 @@
                                 <p>Besøgte mig: d. <?php echo date("d/m/Y", $user->seen_time); ?> kl.<span><?php echo date("H:i", $user->seen_time); ?></p>
                                 <?php /*if(isFriend($user->id) == false){*/?><!--<a href="javascript:void(0);" id="requestAddFriendBtn<?php /*echo $user->id;*/?>" class="btn bntMessage" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'requestAddFriendInFavorite')">Venneanmodning</a><?php /*}*/?>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'blockUser')" class="btn bntBlock">Bloker</a>-->
-                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage">Send blink</a>
+                                <a <?php echo $sendBlinkLink;?> class="btn bntMessage"><?php echo $user->returnBlink?'Blink retur':'Send blink'?></a>
                                 <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a>
                                 <?php }?>

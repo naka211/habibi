@@ -568,6 +568,7 @@ class Api extends REST_Controller {
         $ignore = $this->user->getBlockedUserIds($userId);
         $users = $this->user->getVisitMe($userId, $perPage, (int)$offset, $ignore);
         if($users){
+            checkKiss($userId, $users);
             $this->_setAvatarPath($userId, $users);
             $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));
@@ -581,6 +582,7 @@ class Api extends REST_Controller {
         $ignore = $this->user->getBlockedUserIds($userId);
         $users = $this->user->getVisited($userId, $perPage, (int)$offset, $ignore);
         if($users){
+            checkKiss($userId, $users);
             $this->_setAvatarPath($userId, $users);
             $this->_checkShowingRequestButton($userId, $users);
             $this->_return(true, '', array('users'=>$users));

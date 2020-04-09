@@ -759,17 +759,17 @@ class User extends MX_Controller
 
     function randomPassword($length, $count, $characters){
 
-    // $length - the length of the generated password
-    // $count - number of passwords to be generated
-    // $characters - types of characters to be used in the password
+        // $length - the length of the generated password
+        // $count - number of passwords to be generated
+        // $characters - types of characters to be used in the password
 
-    // define variables used within the function
+        // define variables used within the function
         $symbols = array();
         $passwords = array();
         $used_symbols = '';
         $pass = '';
 
-    // an array of different character types
+        // an array of different character types
         $symbols["lower_case"] = 'abcdefghijklmnopqrstuvwxyz';
         $symbols["upper_case"] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $symbols["numbers"] = '1234567890';
@@ -803,6 +803,37 @@ class User extends MX_Controller
                 $data['status'] = false;
                 $data['message'] = 'Denne konto er blevet slettet';
             } else {
+                //Create authToken on comet server
+                if(empty($user->cometAuthToken)){
+                    $ch = curl_init();
+
+                    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$user->id.'/auth_tokens');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+                    $headers = array();
+                    $headers[] = 'Accept: application/json';
+                    $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+                    $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+                    $headers[] = 'Content-Type: application/json';
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+                    $result = curl_exec($ch);
+                    if (curl_errno($ch)) {
+                        echo 'Error:' . curl_error($ch);
+                    }
+                    curl_close($ch);
+
+                    $returnData = json_decode($result);
+                    //Save cometAuthToken to db
+                    $DB['cometAuthToken'] = $returnData->data->authToken;
+                    $this->user->saveUser($DB, $user->id);
+
+                    //Re-get user information
+                    $user = $this->user->getUser($user->id);
+                }
+
                 $data['status'] = true;
                 $this->session->set_userdata('isLoginSite', true);
                 $this->session->set_userdata('user', $user);
@@ -924,7 +955,11 @@ class User extends MX_Controller
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getVisitMe($data['user']->id, $config['per_page'], (int)$page, $ignore);
+        $profiles = $this->user->getVisitMe($data['user']->id, $config['per_page'], (int)$page, $ignore);
+
+        checkKiss($data['userId'], $profiles);
+
+        $data['list'] = $profiles;
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/visitme';
@@ -946,7 +981,11 @@ class User extends MX_Controller
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->user->getVisited($data['user']->id, $config['per_page'], (int)$page, $ignore);
+        $profiles = $this->user->getVisited($data['user']->id, $config['per_page'], (int)$page, $ignore);
+
+        checkKiss($data['userId'], $profiles);
+
+        $data['list'] = $profiles;
         $data['pagination'] = $this->pagination->create_links();
 
         $data['page'] = 'user/visited';
