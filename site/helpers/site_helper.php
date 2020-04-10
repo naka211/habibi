@@ -579,9 +579,9 @@ function checkKiss($userId, &$profiles){
 
         $lastKiss = $ci->db->get()->row();
         if($lastKiss->from_user_id == $profile->id){
-            $profiles[$key]->returnBlink = 1;
+            $profiles[$key]->returnBlink = "1";
         } else {
-            $profiles[$key]->returnBlink = 0;
+            $profiles[$key]->returnBlink = "0";
         }
     }
     return $profiles;
