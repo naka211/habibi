@@ -804,7 +804,7 @@ class User extends MX_Controller
                 $data['message'] = 'Denne konto er blevet slettet';
             } else {
                 //Create authToken on comet server
-                if(empty($user->cometAuthToken)){
+                /*if(empty($user->cometAuthToken)){
                     $ch = curl_init();
 
                     curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$user->id.'/auth_tokens');
@@ -832,7 +832,7 @@ class User extends MX_Controller
 
                     //Re-get user information
                     $user = $this->user->getUser($user->id);
-                }
+                }*/
 
                 $data['status'] = true;
                 $this->session->set_userdata('isLoginSite', true);
