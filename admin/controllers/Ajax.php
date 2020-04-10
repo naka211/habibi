@@ -103,7 +103,10 @@ class Ajax extends CI_Controller{
             $user = $this->db->get()->row();
             $avatar = $user->avatar;
 
-            if ($avatar != 'no-avatar1.png' && $avatar != 'no-avatar2.png') {
+            $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
+            $defaultAvatars = array_merge($noAvatarArr, $this->config->item('male_avatar'), $this->config->item('female_avatar'));
+
+            if(!in_array($avatar, $defaultAvatars)){
                 @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $avatar);
                 @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $avatar);
                 @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $avatar);

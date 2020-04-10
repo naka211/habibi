@@ -269,6 +269,30 @@ class User extends CI_Controller
         if ($check) {
             $id = $this->input->post('id', true);
             if ($this->user->delete_data($id)) {
+                //Delete user in cometchat
+                $params = json_encode(array(
+                    'permanent' => true
+                ));
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$id);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+                $headers = array();
+                $headers[] = 'Accept: application/json';
+                $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+                $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+                $headers[] = 'Content-Type: application/json';
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+                $result = curl_exec($ch);
+                if (curl_errno($ch)) {
+                    echo 'Error:' . curl_error($ch);
+                }
+                curl_close($ch);
                 //End
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
@@ -381,13 +405,13 @@ class User extends CI_Controller
             //
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('N3', 'Ngày Đăng Ký');
             $this->phpexcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
-            
+
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('O3', 'Ngày Verify');
             $this->phpexcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-            
+
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('P3', 'Ngày Phản Hồi');
             $this->phpexcel->getActiveSheet()->getColumnDimension('P')->setWidth(20);
-            
+
             $this->phpexcel->setActiveSheetIndex(0)->setCellValue('Q3', 'Loại Phản Hồi');
             $this->phpexcel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
             */
@@ -402,14 +426,14 @@ class User extends CI_Controller
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('D' . $i, $rs->password);
                 /*
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('E'.$i, $rs->province);
-                
+
                 if($rs->mobile == 1){
                     $mobile = 'Mobile';
                 }else{
                     $mobile = 'PC';
                 }
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('F'.$i, $mobile);
-                
+
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('G'.$i, $rs->landingpage);
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('H'.$i, $rs->source);
                 if($rs->medium == 'null'){
@@ -443,9 +467,9 @@ class User extends CI_Controller
                 }
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('M'.$i, $verify);
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('N'.$i, $rs->dt_create);
-                
+
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('O'.$i, $rs->login);
-                
+
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('P'.$i, $rs->confirm);
                 $this->phpexcel->setActiveSheetIndex(0)->setCellValue('Q'.$i, $rs->facebook_id);
                 */
@@ -492,7 +516,10 @@ class User extends CI_Controller
     {
         $currentAvatar = $this->user->getCurrentAvatar($userId);
 
-        if ($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png') {
+        $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
+        $defaultAvatars = array_merge($noAvatarArr, $this->config->item('male_avatar'), $this->config->item('female_avatar'));
+
+        if(!in_array($currentAvatar, $defaultAvatars)){
             @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $currentAvatar);
             @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
             @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
@@ -505,6 +532,33 @@ class User extends CI_Controller
                         Din avatar er godkendt.<br /><br />
                         <a href="' . base_url() . '">Habibidating.dk®</a>';
         $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er godkendt', $content);
+
+        //Update avatar for cometchat
+        $newAvatar = $this->user->getCurrentAvatar($userId);
+        $params = json_encode(array(
+            'avatar' => $this->config->item('site').'/uploads/thumb_user/'.$newAvatar
+        ));
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
+        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        ///
 
         redirect($_SERVER['HTTP_REFERER']);
     }
