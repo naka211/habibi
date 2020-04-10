@@ -270,7 +270,7 @@ class User extends CI_Controller
             $id = $this->input->post('id', true);
             if ($this->user->delete_data($id)) {
                 //Delete user in cometchat
-                $params = json_encode(array(
+                /*$params = json_encode(array(
                     'permanent' => true
                 ));
 
@@ -292,7 +292,7 @@ class User extends CI_Controller
                 if (curl_errno($ch)) {
                     echo 'Error:' . curl_error($ch);
                 }
-                curl_close($ch);
+                curl_close($ch);*/
                 //End
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
@@ -534,7 +534,7 @@ class User extends CI_Controller
         $this->sendEmail([$user->email], 'Habibidating.dk - Din avatar er godkendt', $content);
 
         //Update avatar for cometchat
-        $newAvatar = $this->user->getCurrentAvatar($userId);
+        /*$newAvatar = $this->user->getCurrentAvatar($userId);
         $params = json_encode(array(
             'avatar' => $this->config->item('site').'/uploads/thumb_user/'.$newAvatar
         ));
@@ -557,7 +557,7 @@ class User extends CI_Controller
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
-        curl_close($ch);
+        curl_close($ch);*/
         ///
 
         redirect($_SERVER['HTTP_REFERER']);
