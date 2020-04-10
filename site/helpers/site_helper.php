@@ -578,10 +578,10 @@ function checkKiss($userId, &$profiles){
             ->limit(1, 0);
 
         $lastKiss = $ci->db->get()->row();
-        if($lastKiss->from_user_id == $userId){
-            $profiles[$key]->returnBlink = 0;
-        } else {
+        if($lastKiss->from_user_id == $profile->id){
             $profiles[$key]->returnBlink = 1;
+        } else {
+            $profiles[$key]->returnBlink = 0;
         }
     }
     return $profiles;
