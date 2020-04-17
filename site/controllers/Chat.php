@@ -9,47 +9,34 @@ class Chat extends MX_Controller{
         $this->_meta = $this->general_model->getMetaDataFromUrl();
 	}
 
-    /*protected function middleware(){
-        return array('Checklogin|only:profile,sold');
-    }
+	public function syncUserToFirebase(){
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
+        $auth = $firebase->getAuth();
 
-	function index(){
-
-	}*/
-
-	public function syncUserToComet(){
-	    $users = $this->general->getAllUserForComet();
+	    $users = $this->general->getAllUsers();
 	    foreach($users as $user){
-            $params = json_encode(array(
-                'uid' => (string)$user->id,
-                'name' => $user->name,
-                'avatar' => $this->config->item('site').'/uploads/thumb_user/'.$user->avatar
-            ));
+            $userProperties = [
+            'uid' => $user->id,
+            'email' => $user->email,
+            'emailVerified' => false,
+            'password' => $user->password,
+            'displayName' => $user->name,
+            'photoUrl' => base_url().'uploads/thumb_user/'.$user->avatar,
+            'disabled' => false
+            ];
+            $createdUser = $auth->createUser($userProperties);
 
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-            $headers = array();
-            $headers[] = 'Accept: application/json';
-            $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-            $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-            $headers[] = 'Content-Type: application/json';
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($ch);
-            if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
-            }
-            curl_close($ch);
+            $db->getReference('users/'.$user->id)
+                ->set([
+                    'name' => $user->name,
+                    'avatar' => base_url().'uploads/thumb_user/'.$user->avatar
+                ]);
         }
-	    print_r($result);exit();
     }
 
-    public function syncMessageToCommet(){
+    public function syncMessageToFirebase(){
 
     }
 }

@@ -91,8 +91,8 @@ class General_model extends CI_Model{
         return true;
     }
 
-    public function getAllUserForComet(){
-        $this->db->select('id, name, avatar')->from('user')->where('deleted', null);
+    public function getAllUsers(){
+        $this->db->select('id, name, avatar, password, email')->from('user')->where('deleted', null);
         $query = $this->db->get()->result();
 
         return $query;
