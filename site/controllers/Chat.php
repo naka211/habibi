@@ -4,7 +4,6 @@ class Chat extends MX_Controller{
         parent::__construct();
         $this->load->model('general_model', 'general');
         $this->language = $this->lang->lang();
-
         //Get meta data from url
         $this->_meta = $this->general_model->getMetaDataFromUrl();
 	}
@@ -33,6 +32,7 @@ class Chat extends MX_Controller{
                     'name' => $user->name,
                     'avatar' => base_url().'uploads/thumb_user/'.$user->avatar
                 ]);
+            echo $user->id.'\n';
         }
     }
 
