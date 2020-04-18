@@ -199,7 +199,7 @@ class Api extends REST_Controller {
             $user = $this->user->getUser($id);
 
             //Add user to cometchat
-            addUserToComet($user);
+            addUserToFirebase($user);
 
             $this->_return(true, 'Oprettelsen er gennemført', array('user' => $user));
         } else {

@@ -459,7 +459,7 @@ function generateSelectInSearch($name){
 
 //Comet chat
 
-function addUserToComet($user){
+function addUserToFirebase($user){
     $ci = &get_instance();
     $ci->load->library('firebase');
     $firebase = $ci->firebase->init();

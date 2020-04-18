@@ -580,7 +580,7 @@ class User extends MX_Controller
                 $this->session->set_userdata('isLoginSite', true);
                 $this->_updateSearchDataAfterLogin();
                 //Add user to cometchat
-                addUserToComet($user);
+                addUserToFirebase($user);
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
                 $sendEmailInfo['email'] = $DB['email'];
