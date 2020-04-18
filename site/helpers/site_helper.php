@@ -459,33 +459,29 @@ function generateSelectInSearch($name){
 
 //Comet chat
 
-function addUserToComet($userId, $name, $avatar){
+function addUserToComet($user){
     $ci = &get_instance();
-    $params = json_encode(array(
-        'uid' => (string)$userId,
-        'name' => $name,
-        'avatar' => $avatar
-    ));
+    $ci->load->library('firebase');
+    $firebase = $ci->firebase->init();
+    $db = $firebase->getDatabase();
+    $auth = $firebase->getAuth();
 
-    $ch = curl_init();
+    $userProperties = [
+        'uid' => $user->id,
+        'email' => $user->email,
+        'emailVerified' => false,
+        'password' => $user->password,
+        'displayName' => $user->name,
+        'photoUrl' => $ci->config->item('site').'/uploads/thumb_user/'.$user->avatar,
+        'disabled' => false
+    ];
+    $createdUser = $auth->createUser($userProperties);
 
-    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-    $headers = array();
-    $headers[] = 'Accept: application/json';
-    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
-    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
-    $headers[] = 'Content-Type: application/json';
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-    }
-    curl_close($ch);
+    $db->getReference('users/'.$user->id)
+        ->set([
+            'name' => $user->name,
+            'avatar' => $ci->config->item('site').'/uploads/thumb_user/'.$user->avatar
+        ]);
 }
 
 function updateAvatarToComet($userId, $newAvatar){
@@ -585,4 +581,14 @@ function checkKiss($userId, &$profiles){
         }
     }
     return $profiles;
+}
+
+function uuid(){
+    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,
+        mt_rand(0, 0x3fff) | 0x8000,
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+    );
 }

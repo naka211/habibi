@@ -263,36 +263,13 @@ class User extends CI_Controller
         $this->load->view('templates', $data);
     }
 
-    function del()
-    {
+    function del(){
         $check = $this->check->check('del', '', '');
         if ($check) {
             $id = $this->input->post('id', true);
             if ($this->user->delete_data($id)) {
-                //Delete user in cometchat
-                /*$params = json_encode(array(
-                    'permanent' => true
-                ));
-
-                $ch = curl_init();
-
-                curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$id);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-                $headers = array();
-                $headers[] = 'Accept: application/json';
-                $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-                $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-                $headers[] = 'Content-Type: application/json';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                }
-                curl_close($ch);*/
+                //Delete user in firebase
+                $this->_deleteUserInFirebase($id);
                 //End
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
@@ -317,6 +294,9 @@ class User extends CI_Controller
             for ($i = 0; $i < sizeof($itemid); $i++) {
                 if ($itemid[$i]) {
                     if ($this->user->delete_data($itemid[$i])) {
+                        //Delete user in firebase
+                        $this->_deleteUserInFirebase($itemid[$i]);
+                        //End
                         $data['status'] = true;
                         $data['message'] = lang('admin.delete_successful');
                     } else {
@@ -627,6 +607,16 @@ class User extends CI_Controller
             ? ((date("Y") - $birthDate[2]) - 1)
             : (date("Y") - $birthDate[2]));
         return $age . ' år';
+    }
+
+    private function _deleteUserInFirebase($userId){
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
+        $auth = $firebase->getAuth();
+
+        $auth->deleteUser($userId);
+        $db->getReference('users/'.$userId)->remove();
     }
 }
 

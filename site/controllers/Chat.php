@@ -22,7 +22,7 @@ class Chat extends MX_Controller{
             'emailVerified' => false,
             'password' => $user->password,
             'displayName' => $user->name,
-            'photoUrl' => base_url().'uploads/thumb_user/'.$user->avatar,
+            'photoUrl' => $this->config->item('site').'uploads/thumb_user/'.$user->avatar,
             'disabled' => false
             ];
             $createdUser = $auth->createUser($userProperties);
@@ -30,9 +30,9 @@ class Chat extends MX_Controller{
             $db->getReference('users/'.$user->id)
                 ->set([
                     'name' => $user->name,
-                    'avatar' => base_url().'uploads/thumb_user/'.$user->avatar
+                    'avatar' => $this->config->item('site').'uploads/thumb_user/'.$user->avatar
                 ]);
-            echo $user->id.'\n';
+            echo $user->id."\n";
         }
     }
 

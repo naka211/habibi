@@ -189,9 +189,6 @@ class Api extends REST_Controller {
         $id = $this->user->saveUser($data);
 
         if ($id) {
-            //Add user to cometchat
-            //addUserToComet($id, $data->name, $this->config->item('site').'/uploads/thumb_user/'.$data->avatar);
-
             //Send email
             $sendEmailInfo['name'] = $data->name;
             $sendEmailInfo['email'] = $data->email;
@@ -200,6 +197,9 @@ class Api extends REST_Controller {
             sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
 
             $user = $this->user->getUser($id);
+
+            //Add user to cometchat
+            addUserToComet($user);
 
             $this->_return(true, 'Oprettelsen er gennemført', array('user' => $user));
         } else {
