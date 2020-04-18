@@ -579,7 +579,7 @@ class User extends MX_Controller
                 $this->session->set_userdata('user', $user);
                 $this->session->set_userdata('isLoginSite', true);
                 $this->_updateSearchDataAfterLogin();
-                //Add user to cometchat
+                //Add user to firebase
                 addUserToFirebase($user);
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
@@ -653,6 +653,8 @@ class User extends MX_Controller
                 }
             }
             $status = $this->user->saveUser($DB, $user->id);
+            //Update user to firebase
+            updateUserInfoToFirebase($user->id, $DB['name'], $DB['email']);
             if ($status) {
                 $savedUser = $this->user->getUser($user->id);
                 $this->session->set_userdata('user', $savedUser);

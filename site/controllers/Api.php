@@ -1267,6 +1267,8 @@ class Api extends REST_Controller {
         unset($data->userId);
         $data->birthday = $data->day . '/' . $data->month . '/' . $data->year;
         $status = $this->user->saveUser($data, $userId);
+        //Update user to firebase
+        updateUserInfoToFirebase($userId, $data->name, $data->email);
         if($status != false){
             $this->_return(true, 'Opdateret med success');
         } else {

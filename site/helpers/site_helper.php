@@ -484,6 +484,27 @@ function addUserToFirebase($user){
         ]);
 }
 
+function updateUserInfoToFirebase($userId, $name, $email){
+    $ci = &get_instance();
+    $ci->load->library('firebase');
+    $firebase = $ci->firebase->init();
+    $db = $firebase->getDatabase();
+    $auth = $firebase->getAuth();
+
+    $uid = $userId;
+    $properties = [
+        'displayName' => $name,
+        'email' => $email
+    ];
+
+    $updatedUser = $auth->updateUser($uid, $properties);print_r($updatedUser); exit();
+
+    $db->getReference('users/'.$userId)
+        ->set([
+            'name' => $name
+        ]);
+}
+
 function updateAvatarToComet($userId, $newAvatar){
     $ci = &get_instance();
     $params = json_encode(array(
