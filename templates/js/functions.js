@@ -517,7 +517,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: "post",
-                    url: base_url+"ajax/saveMessageToComet",
+                    url: base_url+"ajax/saveMessageToFirebase",
                     dataType: 'html',
                     data: {message: message, profileId: profileId, messageId: data.messageId, 'csrf_site_name':token_value}
                 }).done(function(data){

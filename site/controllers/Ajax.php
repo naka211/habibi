@@ -519,46 +519,24 @@ class Ajax extends MX_Controller{
         curl_close($ch);
     }
 
-    public function saveMessageToComet(){
+    public function saveMessageToFirebase(){
         $userId = $this->session->userdata('user')->id;
         $profileId = $this->input->post('profileId');
         $message = $this->input->post('message');
         $messageId = $this->input->post('messageId');
-        $messageType = 'text';
 
-        $params = json_encode(array(
-            'receiver' => (string)$profileId,
-            'receiverType' => 'user',
-            'category' => 'message',
-            'type' => $messageType,
-            'data' => json_encode(array('text' => $message))
-        ));
-        $ch = curl_init();
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/messages');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-
-        //Update comet message id to db
-        $returnData = json_decode($result);
-        $DB['cometMessageId'] = $returnData->data->id;
-        $this->user->updateCometMessageId($messageId, $DB);
-
-        curl_close($ch);
+        $messageData = ['message' => $message,
+            'type' => 'text',
+            'messageId' => $messageId,
+            'recipient' => $profileId,
+            'sender' => $userId,
+            'time' => microtime(true)];
+        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
+        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
     }
 
     public function sendImage(){
