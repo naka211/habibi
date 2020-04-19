@@ -457,7 +457,7 @@ function generateSelectInSearch($name){
 }
 
 
-//Comet chat
+//Firebase
 
 function addUserToFirebase($user){
     $ci = &get_instance();
@@ -503,69 +503,6 @@ function updateUserInfoToFirebase($userId, $name, $email){
         ->set([
             'name' => $name
         ]);
-}
-
-function updateAvatarToComet($userId, $newAvatar){
-    $ci = &get_instance();
-    $params = json_encode(array(
-        'avatar' => $newAvatar
-    ));
-
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-
-    $headers = array();
-    $headers[] = 'Accept: application/json';
-    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
-    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
-    $headers[] = 'Content-Type: application/json';
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-    }
-    curl_close($ch);
-}
-
-function deleteUserInComet($userId){
-    $ci = &get_instance();
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-
-
-    $headers = array();
-    $headers[] = 'Accept: application/json';
-    $headers[] = 'Apikey: '.$ci->config->item('comet_full_api_key');
-    $headers[] = 'Appid: '.$ci->config->item('comet_app_id');
-    $headers[] = 'Content-Type: application/json';
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-    }
-    curl_close($ch);
-}
-
-function renderImageFromComet($url, $type = 'small'){
-    $tmpLink = explode('/', $url);
-    $tmpFilename = explode('.', $tmpLink[5]);
-
-    $arrLength = count($tmpFilename);
-    $lastEle = $arrLength - 1;
-    $fileExt = $tmpFilename[$arrLength - 1]; //Gives the file extension
-    unset($tmpFilename[$lastEle]);
-    $fileNameMinusExt = implode(".",$tmpFilename);
-
-    return $tmpLink[0].'//'.$tmpLink[2].'/'.$tmpLink[3].'/'.$tmpLink[4].'/thumbnails/'.$fileNameMinusExt.'_'.$type.'.'.$fileExt;
 }
 
 function getDefaultAvatars(){

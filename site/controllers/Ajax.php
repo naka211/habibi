@@ -1,27 +1,27 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 class Ajax extends MX_Controller{
-	function __construct(){
+    function __construct(){
         parent::__construct();
         $this->load->model('user_model', 'user');
         $this->load->library('session');
         $this->load->library('user_agent');
         $this->session->set_userdata('last_visited', time());
         $this->setExpireSessionTime();
-	}
-	function index(){
-		//Nothing to do
-	}
+    }
+    function index(){
+        //Nothing to do
+    }
     function deleteimage(){
-         $table = $this->input->post('table');
-		 $field = $this->input->post('field');
-		 $id = $this->input->post('id');
-         $fielddelete = $this->input->post('fielddelete');
-         $this->db->set($fielddelete,"");
-		 $this->db->where($field,$id);
-		 $this->db->update($table);
-		 echo true;
-         return;
-	}
+        $table = $this->input->post('table');
+        $field = $this->input->post('field');
+        $id = $this->input->post('id');
+        $fielddelete = $this->input->post('fielddelete');
+        $this->db->set($fielddelete,"");
+        $this->db->where($field,$id);
+        $this->db->update($table);
+        echo true;
+        return;
+    }
     function deletedata(){
         $table = $this->input->post('table');
         $id = $this->input->post('id');
@@ -36,7 +36,7 @@ class Ajax extends MX_Controller{
         $query = $this->db->where('id',$id)->delete($table);
         echo true;
         return;
-	}
+    }
 
 
 
