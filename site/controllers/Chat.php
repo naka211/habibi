@@ -15,6 +15,7 @@ class Chat extends MX_Controller{
         $auth = $firebase->getAuth();
 
 	    $users = $this->general->getAllUsers();
+	    $serverLink = 'https://dev.habibidating.dk/';
 	    foreach($users as $user){
             $userProperties = [
             'uid' => $user->id,
@@ -22,7 +23,7 @@ class Chat extends MX_Controller{
             'emailVerified' => false,
             'password' => $user->password,
             'displayName' => $user->name,
-            'photoUrl' => $this->config->item('site').'uploads/thumb_user/'.$user->avatar,
+            'photoUrl' => $serverLink.'uploads/thumb_user/'.$user->avatar,
             'disabled' => false
             ];
             $createdUser = $auth->createUser($userProperties);
@@ -30,7 +31,7 @@ class Chat extends MX_Controller{
             $db->getReference('users/'.$user->id)
                 ->set([
                     'name' => $user->name,
-                    'avatar' => $this->config->item('site').'uploads/thumb_user/'.$user->avatar
+                    'avatar' => $serverLink.'uploads/thumb_user/'.$user->avatar
                 ]);
             echo $user->id."\n";
         }
