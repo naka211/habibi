@@ -1032,9 +1032,10 @@ section.section_intro {
 	margin-bottom: 5px;
 }
 
-/*.img_content img, .img_content audio, .img_content video{
+.img_content img{
 	height: 150px;
-}*/
+}
+
 .img_content audio{
 	width: 100%;
 }

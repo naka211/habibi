@@ -207,18 +207,20 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     </ul>
                     <input type="hidden" id="latestMsgId" value="">
                     <div id="imgContainer" style="display: none;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0">
-                        <div class="canvas_wrap col-lg-3 col-md-5 col-sm-5 col-xs-7 pad0">
+                        <div class="canvas_wrap">
                         </div>
                         <div class="preview_action">
                             <a href="javascript:void(0);" id="deletePreviewImage"><img src="<?php echo base_url(); ?>templates/images/1x/delete_icon.png" style="width: 24px;"></a>
                             <button type="button" class="btn" id="sendImage" style="margin-top: 50px; width: 24px; height: 24px;"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                         </div>
-                        <input type="hidden" id="profileId" value="">
+
                     </div>
                     <span class="waiting" style="display: none;">
                         <img src="<?php echo base_url();?>templates/images/preloader.gif" width="64">
                     </span>
-                    <form class="frm_Chat col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0" action="" method="POST" role="form">
+                    <form class="frm_Chat col-lg-12 col-md-12 col-sm-12 col-xs-12 pad0" action="" method="POST" role="form" enctype="multipart/form-data">
+                        <input type="hidden" id="profileId" name="profileId" value="">
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                         <div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
                         </div>
@@ -358,6 +360,9 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
         };
 
         $('#sendImage').click(function () {
+            //Handle duplicate error
+            $('#latestMsgId').val(parseInt($('#latestMsgId').val()) + 1);
+
             <?php if($isMobile == false){?>
             $("#message").data("emojioneArea").disable();
             <?php } else {?>
@@ -367,38 +372,30 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
             $('#imgContainer').hide();
             $(".waiting").show();
 
-            var appId = "<?php echo $this->config->item('comet_app_id');?>";
-
-            //Send message to comet server
-            var mediaMessage = new CometChat.MediaMessage($("#profileId").val(), document.getElementById('messageImage').files[0], CometChat.MESSAGE_TYPE.IMAGE, CometChat.RECEIVER_TYPE.USER);
-
-            CometChat.init(appId);
-            CometChat.sendMediaMessage(mediaMessage).then(
-                function(message){ console.log(message);
-                    $.ajax({
-                        type: "post",
-                        url: base_url+"ajax/sendImage",
-                        dataType: 'text',
-                        data: {message: message.data.url, profileId: $("#profileId").val(), cometMessageId: message.id, 'csrf_site_name':token_value}
-                    }).done(function(html){
-                        <?php if($isMobile == false){?>
-                        $("#message").data("emojioneArea").enable();
-                        <?php } else {?>
-                        $("#message").removeAttr('disabled');
-                        <?php }?>
-                        $('#messageImage').val('');
-                        $(".waiting").fadeOut(100);
-                        //add html to chat box
-                        $(".chat ul").append(html);
-                        //Scroll to bottom of ul
-                        $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
-                    });
-                },
-                function(error){
-                    console.log("Media message sending failed with error", error);
-                    // Handle exception.
+            var formData = new FormData($('form.frm_Chat')[0]);
+            $.ajax({
+                type: "POST",
+                url: base_url+"ajax/sendImage",
+                data: formData,
+                dataType: 'json',
+                mimeType:"multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(html){
+                    <?php if($isMobile == false){?>
+                    $("#message").data("emojioneArea").enable();
+                    <?php } else {?>
+                    $("#message").removeAttr('disabled');
+                    <?php }?>
+                    $('#messageImage').val('');
+                    $(".waiting").fadeOut(100);
+                    //add html to chat box
+                    $(".chat ul").append(html);
+                    //Scroll to bottom of ul
+                    $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
                 }
-            );
+            });
         });
 
         textAreaAdjust = function (o) {

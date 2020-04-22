@@ -541,33 +541,110 @@ class Ajax extends MX_Controller{
 
     public function sendImage(){
         $userId = $this->session->userdata('user')->id;
+        $profileId = $this->input->post('profileId');
 
-        //Save message
-        $DB['cometMessageId'] = $this->input->post('cometMessageId');
-        $DB['user_from'] = $userId;
-        $DB['user_to'] = $this->input->post('profileId');
-        $DB['message'] = $this->input->post('message');
-        $DB['messageType'] = 'image';
-        $DB['seen'] = 0;
-        $DB['dt_create'] = time();
-        $this->user->saveMessage($DB);
+        $upload_path = "./uploads/file/";
 
-        //waiting the thumbnail is created
-        //sleep(4);
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = '*';
+        $config['max_size'] = $this->config->item('maxupload');
+        $config['encrypt_name'] = TRUE;  //rename to random string image
+        $this->load->library('upload', $config);
+        if (isset($_FILES['messageImage']['name'])) {
+            if (!$this->upload->do_upload('messageImage')) {
+                $response['success'] = 0;
+                $response['message'] = $this->upload->display_errors();
+                echo json_encode($response);
+                exit();
+            } else {
+                $data = $this->upload->data();
+                //Correct the image orientation
+                $this->correctImageOrientation($data['full_path']);
+                //Update image size
+                $imageWidth = $data['image_width'];
+                $imageHeight = $data['image_height'];
 
-        //Generate message html
-        $item = $this->user->getUser($userId);
-        $html = '<li class="you">
+                //optimize image
+                $this->load->library('compress');  // load the codeginiter library
+
+                $file = base_url().'/uploads/file/'.$data['file_name']; // file that you wanna compress
+                $new_name_image = $data['raw_name']; // name of new file compressed
+                $quality = 10; // Value that I chose
+                $pngQuality = 9; // Exclusive for PNG files
+                $destination = base_url().'/uploads/file'; // This destination must be exist on your project
+
+                $compress = new Compress();
+                $compress->file_url = $file;
+                $compress->new_name_image = $new_name_image;
+                $compress->quality = $quality;
+                $compress->pngQuality = $pngQuality; // Exclusive for PNG files, don´t need to set
+                $compress->destination = $destination;
+
+                $result = $compress->compress_image();
+
+                //Upload image to firebase
+                $this->load->library('firebase');
+                $firebase = $this->firebase->init();
+                $storage = $firebase->getStorage();
+                $bucket = $storage->getBucket();
+
+                $uuid = uuid();
+                $fileName = $userId.'_'.$profileId.'/'.$data['file_name'];
+                $options = [
+                    'name' => $fileName,
+                    'metadata' => [
+                        'metadata' => [
+                            'firebaseStorageDownloadTokens' => $uuid
+                        ]
+                    ]
+                ];
+                $file = $bucket->upload(
+                    fopen($data['full_path'], 'r'),
+                    $options
+                );
+                $imageUrl = "https://firebasestorage.googleapis.com/v0/b/".$bucket->info()['name']."/o/".urlencode($fileName)."?alt=media&token=".$uuid;
+
+                //Save message
+                $DB['user_from'] = $userId;
+                $DB['user_to'] = $profileId;
+                $DB['message'] = $imageUrl;
+                $DB['messageType'] = 'image';
+                $DB['seen'] = 0;
+                $DB['dt_create'] = time();
+                $messageId = $this->user->saveMessage($DB);
+
+                //Save message to firebase
+                $db = $firebase->getDatabase();
+
+                $messageData = [
+                    'width' => $imageWidth,
+                    'height' => $imageHeight,
+                    'message' => $imageUrl,
+                    'type' => 'image',
+                    'messageId' => "$messageId",
+                    'recipient' => $profileId,
+                    'sender' => $userId,
+                    'time' => microtime(true)];
+                $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
+                $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+
+                //Generate message html
+                $item = $this->user->getUser($userId);
+                $html = '<li class="you">
                     <a class="user"><img alt="" src="'.base_url().'/uploads/thumb_user/'.$item->avatar.'" /></a>
                     <div class="message_media">
                         <p class="img_content">
-                            <a href="'.renderImageFromComet($this->input->post('message'),"large").'" data-fancybox="images"><img src="'.renderImageFromComet($this->input->post('message'),"small").'" alt="" class="img-responsive" onerror="javascript:this.src=\''.renderImageFromComet($this->input->post('message'),"small").'\'"></a>
+                            <a href="'.$imageUrl.'" data-fancybox="images"><img src="'.$imageUrl.'" alt="" class="img-responsive" onerror="javascript:this.src=\''.$imageUrl.'\'"></a>
                         </p>
                     </div>
                     <div class="date">Sendt: d. '.date("d/m/Y", $DB['dt_create']).' kl. '.date("H:i", $DB['dt_create']).'</div>
                 </li>';
-        echo $html;
-        return;
+                $dataReturn['html'] = $html;
+                $dataReturn['latestMsgId'] = $messageId;
+                echo json_encode($dataReturn);
+                return;
+            }
+        }
     }
 
     public function loadMultiFilter(){
@@ -942,57 +1019,38 @@ class Ajax extends MX_Controller{
 
     public function deleteMessage(){
         $profileId = $this->input->post('profile_id', true);
-        $user = $this->session->userdata('user');
-        //Delete message in comet server
+        $userId = $this->session->userdata('user')->id;
 
-        $conversationId = $user->id.'_user_'.$profileId;
+        //Delete message in firebase
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
+        $db->getReference('messages/'.$userId.'/'.$profileId)->remove();
+        $db->getReference('messages/'.$profileId.'/'.$userId)->remove();
 
-        $ch = curl_init();
+        $storage = $firebase->getStorage();
+        $bucket = $storage->getBucket();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-        $result = json_decode($result);
-        if(!empty($result->error)){
-            $conversationId = $profileId.'_user_'.$user->id;
-
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-            $headers = array();
-            $headers[] = 'Accept: application/json';
-            $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-            $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-            $headers[] = 'Content-Type: application/json';
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($ch);
-            if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
+        if(!empty($profileId) && !empty($userId)){
+            $prefix = $userId.'_'.$profileId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
             }
-            curl_close($ch);
+
+            $prefix = $profileId.'_'.$userId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
+            }
         }
 
         //Delete message in server
-        $this->user->deleteMessage($user->id, $profileId);
+        $this->user->deleteMessage($userId, $profileId);
 
         $data['status'] = true;
 

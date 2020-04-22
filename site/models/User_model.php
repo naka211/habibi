@@ -444,6 +444,9 @@ class User_model extends CI_Model{
     }
 
     public function checkNewMessage($userId, $profileId, $latestMsgId){
+        if(empty($latestMsgId)){
+            $latestMsgId = 0;
+        }
         $this->db->select('*');
         $this->db->from('user_messages');
         $this->db->where("((user_from = $userId AND user_to = $profileId) OR (user_from = $profileId AND user_to = $userId)) AND (id > $latestMsgId)");
