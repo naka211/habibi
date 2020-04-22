@@ -569,7 +569,7 @@ class Ajax extends MX_Controller{
 
                 $file = base_url().'/uploads/file/'.$data['file_name']; // file that you wanna compress
                 $new_name_image = $data['raw_name']; // name of new file compressed
-                $quality = 10; // Value that I chose
+                $quality = 50; // Value that I chose
                 $pngQuality = 9; // Exclusive for PNG files
                 $destination = base_url().'/uploads/file'; // This destination must be exist on your project
 
