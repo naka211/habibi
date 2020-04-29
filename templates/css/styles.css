@@ -2531,6 +2531,7 @@ ul.list_action li a .i_report {
     padding: 0 !important;
     min-height: auto !important;
     color: #000 !important;
+    max-height: max-content;
 }
 
 .emojionearea{

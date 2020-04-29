@@ -360,8 +360,8 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
         };
 
         $('#sendImage').click(function () {
-            //Handle duplicate error
-            $('#latestMsgId').val(parseInt($('#latestMsgId').val()) + 1);
+            //Stop check new messages
+            stopCheckMessageInterval();
 
             <?php if($isMobile == false){?>
             $("#message").data("emojioneArea").disable();
@@ -394,6 +394,8 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     $(".chat ul").append(html);
                     //Scroll to bottom of ul
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
+                    //continue to check the new messages
+                    setCheckMessageInterval($('#profileId').val());
                 }
             });
         });

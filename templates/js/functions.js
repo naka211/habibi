@@ -488,6 +488,7 @@ $(document).ready(function() {
     }
 
     sendMessage = function (profileId, message, isMobile) {
+        stopCheckMessageInterval();
         if(message == ''){
             var message = $("#message").val();
         }
@@ -514,6 +515,7 @@ $(document).ready(function() {
                     $(".message"+data.messageId).emojioneArea();
                 }
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
+                setCheckMessageInterval(profileId);
 
                 $.ajax({
                     type: "post",

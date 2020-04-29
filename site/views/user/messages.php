@@ -204,8 +204,8 @@
         };
 
         $('#sendImage').click(function () {
-            //Handle duplicate error
-            $('#latestMsgId').val(parseInt($('#latestMsgId').val()) + 1);
+            //Stop check new messages
+            stopCheckMessageInterval();
 
             <?php if($isMobile == false){?>
                 $("#message").data("emojioneArea").disable();
@@ -240,6 +240,8 @@
                     $(".chat ul").append(data.html);
                     //Scroll to bottom of ul
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
+                    //continue to check the new messages
+                    setCheckMessageInterval($('#profileId').val());
                 }
             });
         });
