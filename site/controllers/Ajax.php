@@ -604,6 +604,9 @@ class Ajax extends MX_Controller{
                 );
                 $imageUrl = "https://firebasestorage.googleapis.com/v0/b/".$bucket->info()['name']."/o/".urlencode($fileName)."?alt=media&token=".$uuid;
 
+                //Delete the temporarily file
+                @unlink("./uploads/file/".$data['file_name']);
+
                 //Save message
                 $DB['user_from'] = $userId;
                 $DB['user_to'] = $profileId;
