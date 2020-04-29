@@ -184,9 +184,9 @@
                             console.log("couldn't load image:", img);
                         } else {
                             window.EXIF.getData(img, function () {
-                                //var orientation = window.EXIF.getTag(this, "Orientation"); console.log(orientation);
-                                //var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
-                                var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
+                                var orientation = window.EXIF.getTag(this, "Orientation"); console.log(orientation);
+                                var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                //var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
                                 //document.getElementById("container2").appendChild(canvas);
                                 $(".canvas_wrap").html('');
                                 $(".canvas_wrap").append(canvas);
