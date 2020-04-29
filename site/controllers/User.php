@@ -1034,6 +1034,7 @@ class User extends MX_Controller
 
         $data['list'] = $list;
         $data['friendQuantity'] = $config['total_rows'];
+        $data['isMobile'] = $this->agent->is_mobile();
 
         $data['page'] = 'user/friends';
         $this->load->view('templates', $data);

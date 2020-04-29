@@ -2549,6 +2549,7 @@ ul.list_action li a .i_report {
     height: auto;
     max-height: 90px;
     color: #000;
+    overflow: hidden;
 }
 
 .frm_Chat {
@@ -2572,7 +2573,7 @@ ul.list_action li a .i_report {
     position: relative;
     padding-top: 8px;
     padding-bottom: 8px;
-    width: 34px;
+    width: 38px;
     height: 34px;
     border-radius: 100px;
     margin-left: 10px;
@@ -2587,6 +2588,10 @@ ul.list_action li a .i_report {
 
 .frm_Chat .btnSend:hover {
     background: #000;
+}
+
+.frm_Chat .btnSend img {
+    width: 80%;
 }
 
 .footer_underpages {
