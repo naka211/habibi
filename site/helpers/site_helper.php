@@ -497,12 +497,27 @@ function updateUserInfoToFirebase($userId, $name, $email){
         'email' => $email
     ];
 
-    $updatedUser = $auth->updateUser($uid, $properties);print_r($updatedUser); exit();
+    $updatedUser = $auth->updateUser($uid, $properties);
 
     $db->getReference('users/'.$userId)
         ->set([
             'name' => $name
         ]);
+}
+
+function updateUserPasswordToFirebase($userId, $password){
+    $ci = &get_instance();
+    $ci->load->library('firebase');
+    $firebase = $ci->firebase->init();
+    $db = $firebase->getDatabase();
+    $auth = $firebase->getAuth();
+
+    $uid = $userId;
+    $properties = [
+        'password' => $password
+    ];
+
+    $updatedUser = $auth->updateUser($uid, $properties);
 }
 
 function getDefaultAvatars(){

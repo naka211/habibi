@@ -331,53 +331,33 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $profileId = $data->profileId;
 
-        //Delete message in comet server
+        //Delete message in firebase
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
+        $db->getReference('messages/'.$userId.'/'.$profileId)->remove();
+        $db->getReference('messages/'.$profileId.'/'.$userId)->remove();
 
-        /*$conversationId = $userId.'_user_'.$profileId;
+        $storage = $firebase->getStorage();
+        $bucket = $storage->getBucket();
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-        $result = json_decode($result);
-        if(!empty($result->error)){
-            $conversationId = $profileId.'_user_'.$userId;
-
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/conversations/'.$conversationId);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-            $headers = array();
-            $headers[] = 'Accept: application/json';
-            $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-            $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-            $headers[] = 'Content-Type: application/json';
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($ch);
-            if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
+        if(!empty($profileId) && !empty($userId)){
+            $prefix = $userId.'_'.$profileId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
             }
-            curl_close($ch);
-        }*/
+
+            $prefix = $profileId.'_'.$userId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
+            }
+        }
 
         //Delete message in server
         $this->user->deleteMessage($userId, $profileId);
@@ -408,10 +388,8 @@ class Api extends REST_Controller {
         $profileId = $data->profileId;
         $message = $data->message;
         $messageType = $data->messageType;
-        $cometMessageId = $data->cometMessageId;
 
         //$user = $this->user->getUser($userId);
-        $DB['cometMessageId'] = $cometMessageId;
         $DB['user_from'] = $userId;
         $DB['user_to'] = $profileId;
         $DB['message'] = $message;
@@ -1303,6 +1281,8 @@ class Api extends REST_Controller {
 
         $data = new stdClass();
         $data->password = md5($newPassword);
+        //Update user password to firebase
+        updateUserPasswordToFirebase($userId, $data->password);
         if($this->user->saveUser($data, $userId)){
             $this->_return(true, 'Den nye adgangskode ændres');
         } else {

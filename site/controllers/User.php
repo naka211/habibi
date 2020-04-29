@@ -650,10 +650,12 @@ class User extends MX_Controller
                     redirect(site_url('user/update'));
                 } else {
                     $DB['password'] = md5($this->input->post('password'));
+                    //Update user password to firebase
+                    updateUserPasswordToFirebase($user->id, $DB['password']);
                 }
             }
             $status = $this->user->saveUser($DB, $user->id);
-            //Update user to firebase
+            //Update user info to firebase
             updateUserInfoToFirebase($user->id, $DB['name'], $DB['email']);
             if ($status) {
                 $savedUser = $this->user->getUser($user->id);
