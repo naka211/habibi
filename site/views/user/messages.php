@@ -242,6 +242,14 @@
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
                     //continue to check the new messages
                     setCheckMessageInterval($('#profileId').val());
+
+                    $.ajax({
+                        method: "POST",
+                        url: base_url+"ajax/sendImageMessageToFirebase",
+                        data: { csrf_site_name: token_value, imageWidth: data.imageWidth, imageHeight: data.imageHeight, imageUrl: data.imageUrl, messageId: data.messageId, profileId: data.profileId, userId: data.userId }
+                    }).done(function(data) {
+                        console.log(data);
+                    });
                 }
             });
         });

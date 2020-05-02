@@ -565,7 +565,7 @@ class Ajax extends MX_Controller{
                 $imageHeight = $data['image_height'];
 
                 //optimize image
-                /*$this->load->library('compress');  // load the codeginiter library
+                $this->load->library('compress');  // load the codeginiter library
 
                 $file = base_url().'/uploads/file/'.$data['file_name']; // file that you wanna compress
                 $new_name_image = $data['raw_name']; // name of new file compressed
@@ -580,7 +580,7 @@ class Ajax extends MX_Controller{
                 $compress->pngQuality = $pngQuality; // Exclusive for PNG files, don´t need to set
                 $compress->destination = $destination;
 
-                $result = $compress->compress_image();*/
+                $result = $compress->compress_image();
 
                 //Upload image to firebase
                 $this->load->library('firebase');
@@ -617,7 +617,7 @@ class Ajax extends MX_Controller{
                 $messageId = $this->user->saveMessage($DB);
 
                 //Save message to firebase
-                $db = $firebase->getDatabase();
+                /*$db = $firebase->getDatabase();
 
                 $messageData = [
                     'width' => $imageWidth,
@@ -629,7 +629,15 @@ class Ajax extends MX_Controller{
                     'sender' => $userId,
                     'time' => microtime(true)];
                 $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
-                $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+                $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);*/
+
+                $dataReturn['imageWidth'] = $imageWidth;
+                $dataReturn['imageHeight'] = $imageHeight;
+                $dataReturn['imageUrl'] = $imageUrl;
+                $dataReturn['messageId'] = $messageId;
+                $dataReturn['profileId'] = $profileId;
+                $dataReturn['userId'] = $userId;
+
 
                 //Generate message html
                 $item = $this->user->getUser($userId);
@@ -648,6 +656,34 @@ class Ajax extends MX_Controller{
                 return;
             }
         }
+    }
+
+    public function sendImageMessageToFirebase(){
+        $imageWidth = $this->input->post('imageWidth');
+        $imageHeight = $this->input->post('imageHeight');
+        $imageUrl = $this->input->post('imageUrl');
+        $messageId = $this->input->post('messageId');
+        $profileId = $this->input->post('profileId');
+        $userId = $this->input->post('userId');
+
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+
+        $db = $firebase->getDatabase();
+
+        $messageData = [
+            'width' => $imageWidth,
+            'height' => $imageHeight,
+            'mediaUrl' => $imageUrl,
+            'type' => 'image',
+            'messageId' => "$messageId",
+            'recipient' => $profileId,
+            'sender' => $userId,
+            'time' => microtime(true)];
+        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
+        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+
+        die('ok');
     }
 
     public function loadMultiFilter(){
