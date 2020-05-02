@@ -565,7 +565,7 @@ class Ajax extends MX_Controller{
                 $imageHeight = $data['image_height'];
 
                 //optimize image
-                $this->load->library('compress');  // load the codeginiter library
+                /*$this->load->library('compress');  // load the codeginiter library
 
                 $file = base_url().'/uploads/file/'.$data['file_name']; // file that you wanna compress
                 $new_name_image = $data['raw_name']; // name of new file compressed
@@ -580,7 +580,7 @@ class Ajax extends MX_Controller{
                 $compress->pngQuality = $pngQuality; // Exclusive for PNG files, don´t need to set
                 $compress->destination = $destination;
 
-                $result = $compress->compress_image();
+                $result = $compress->compress_image();*/
 
                 //Upload image to firebase
                 $this->load->library('firebase');
