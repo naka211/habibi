@@ -622,7 +622,7 @@ class Ajax extends MX_Controller{
                 $messageData = [
                     'width' => $imageWidth,
                     'height' => $imageHeight,
-                    'message' => $imageUrl,
+                    'mediaUrl' => $imageUrl,
                     'type' => 'image',
                     'messageId' => "$messageId",
                     'recipient' => $profileId,
