@@ -247,6 +247,8 @@
                     $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight") + 200);
                     //continue to check the new messages
                     setCheckMessageInterval($('#profileId').val());
+                    //Undo prevent default
+                    $('#messageImage').unbind('click');
 
                     $.ajax({
                         method: "POST",
