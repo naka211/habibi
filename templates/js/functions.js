@@ -534,6 +534,8 @@ $(document).ready(function() {
         $('#imgContainer').hide();
         $('#messageImage').val('');
         $(".waiting").fadeOut(100);
+        //Undo prevent default
+        $('#messageImage').unbind('click');
     })
 
     /*setInterval(checkSession, 10*60*1000);

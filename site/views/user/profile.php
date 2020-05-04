@@ -328,34 +328,40 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
         <?php }?>
 
         document.getElementById("messageImage").onchange = function (evt) {
-            $(".waiting").fadeIn(100);
-
             var image = evt.target.files[0]; // FileList object
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                var reader = new FileReader();
-                // Closure to capture the file information.
-                reader.addEventListener("load", function (e) {
-                    const imageData = e.target.result;
-                    window.loadImage(imageData, function (img) {
-                        if (img.type === "error") {
-                            console.log("couldn't load image:", img);
-                        } else {
-                            window.EXIF.getData(img, function () {
-                                var orientation = window.EXIF.getTag(this, "Orientation");
-                                var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
-                                //document.getElementById("container2").appendChild(canvas);
-                                $(".canvas_wrap").html('');
-                                $(".canvas_wrap").append(canvas);
 
-                                $("#imgContainer").show();
-                                $(".waiting").fadeOut(100);
-                            });
-                        }
-                    });
+            if(image != undefined){
+                $('#messageImage').click(function (event) {
+                    event.preventDefault();
                 });
-                reader.readAsDataURL(image);
-            } else {
-                console.log('The File APIs are not fully supported in this browser.');
+                $(".waiting").fadeIn(100);
+
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    var reader = new FileReader();
+                    // Closure to capture the file information.
+                    reader.addEventListener("load", function (e) {
+                        const imageData = e.target.result;
+                        window.loadImage(imageData, function (img) {
+                            if (img.type === "error") {
+                                console.log("couldn't load image:", img);
+                            } else {
+                                window.EXIF.getData(img, function () {
+                                    var orientation = window.EXIF.getTag(this, "Orientation");
+                                    var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                    //document.getElementById("container2").appendChild(canvas);
+                                    $(".canvas_wrap").html('');
+                                    $(".canvas_wrap").append(canvas);
+
+                                    $("#imgContainer").show();
+                                    $(".waiting").fadeOut(100);
+                                });
+                            }
+                        });
+                    });
+                    reader.readAsDataURL(image);
+                } else {
+                    console.log('The File APIs are not fully supported in this browser.');
+                }
             }
         };
 

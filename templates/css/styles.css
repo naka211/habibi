@@ -2550,7 +2550,7 @@ ul.list_action li a .i_report {
     height: auto;
     max-height: 90px;
     color: #000;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .frm_Chat {
@@ -3252,6 +3252,8 @@ label label.error{
 
 .frm_Chat .emojionearea-editor{
     min-height: auto;
+    overflow: hidden;
+    max-height: 70px;
 }
 
 .canvas_wrap{
