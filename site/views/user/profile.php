@@ -402,7 +402,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                     $.ajax({
                         method: "POST",
                         url: base_url+"ajax/sendImageMessageToFirebase",
-                        data: { csrf_site_name: token_value, imageWidth: data.imageWidth, imageHeight: data.imageHeight, imageUrl: data.imageUrl, messageId: data.messageId, profileId: data.profileId, userId: data.userId }
+                        data: { csrf_site_name: token_value, imageWidth: data.imageWidth, imageHeight: data.imageHeight, imageUrl: data.imageUrl, profileId: data.profileId, userId: data.userId }
                     }).done(function(data) {
                         console.log(data);
                     });

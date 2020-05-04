@@ -523,7 +523,6 @@ class Ajax extends MX_Controller{
         $userId = $this->session->userdata('user')->id;
         $profileId = $this->input->post('profileId');
         $message = $this->input->post('message');
-        $messageId = $this->input->post('messageId');
 
         $this->load->library('firebase');
         $firebase = $this->firebase->init();
@@ -538,15 +537,6 @@ class Ajax extends MX_Controller{
             'sender' => $userId,
             'time' => microtime(true)];
         $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$newPostKey)->update($messageData);
-
-        $newPostKey = $db->getReference('messages/'.$profileId.'/'.$userId)->push()->getKey();
-
-        $messageData = ['message' => $message,
-            'type' => 'text',
-            'messageId' => $newPostKey,
-            'recipient' => $profileId,
-            'sender' => $userId,
-            'time' => microtime(true)];
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
 
         //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
@@ -632,24 +622,10 @@ class Ajax extends MX_Controller{
                 $messageId = $this->user->saveMessage($DB);
 
                 //Save message to firebase
-                /*$db = $firebase->getDatabase();
-
-                $messageData = [
-                    'width' => $imageWidth,
-                    'height' => $imageHeight,
-                    'mediaUrl' => $imageUrl,
-                    'type' => 'image',
-                    'messageId' => "$messageId",
-                    'recipient' => $profileId,
-                    'sender' => $userId,
-                    'time' => microtime(true)];
-                $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
-                $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);*/
 
                 $dataReturn['imageWidth'] = $imageWidth;
                 $dataReturn['imageHeight'] = $imageHeight;
                 $dataReturn['imageUrl'] = $imageUrl;
-                $dataReturn['messageId'] = $messageId;
                 $dataReturn['profileId'] = $profileId;
                 $dataReturn['userId'] = $userId;
 
@@ -677,7 +653,6 @@ class Ajax extends MX_Controller{
         $imageWidth = $this->input->post('imageWidth');
         $imageHeight = $this->input->post('imageHeight');
         $imageUrl = $this->input->post('imageUrl');
-        $messageId = $this->input->post('messageId');
         $profileId = $this->input->post('profileId');
         $userId = $this->input->post('userId');
 
@@ -698,22 +673,7 @@ class Ajax extends MX_Controller{
             'sender' => $userId,
             'time' => microtime(true)];
         $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$newPostKey)->update($messageData);
-
-        $newPostKey = $db->getReference('messages/'.$profileId.'/'.$userId)->push()->getKey();
-
-        $messageData = [
-            'width' => (int)$imageWidth,
-            'height' => (int)$imageHeight,
-            'mediaUrl' => $imageUrl,
-            'type' => 'image',
-            'messageId' => $newPostKey,
-            'recipient' => $profileId,
-            'sender' => $userId,
-            'time' => microtime(true)];
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
-
-        //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
-        //$db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
 
         die('ok');
     }

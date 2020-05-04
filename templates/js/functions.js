@@ -521,7 +521,7 @@ $(document).ready(function() {
                     type: "post",
                     url: base_url+"ajax/saveMessageToFirebase",
                     dataType: 'html',
-                    data: {message: message, profileId: profileId, messageId: data.messageId, 'csrf_site_name':token_value}
+                    data: {message: message, profileId: profileId, 'csrf_site_name':token_value}
                 }).done(function(data){
                     //console.log(data);
                 });
