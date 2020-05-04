@@ -488,7 +488,6 @@ $(document).ready(function() {
     }
 
     sendMessage = function (profileId, message, isMobile) {
-        stopCheckMessageInterval();
         if(message == ''){
             var message = $("#message").val();
         }
@@ -500,6 +499,8 @@ $(document).ready(function() {
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
         } else {
+            stopCheckMessageInterval();
+
             $.ajax({
                 type: "post",
                 url: base_url+"ajax/sendMessage",
