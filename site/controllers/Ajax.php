@@ -529,14 +529,29 @@ class Ajax extends MX_Controller{
         $firebase = $this->firebase->init();
         $db = $firebase->getDatabase();
 
+        $newPostKey = $db->getReference('messages/'.$userId.'/'.$profileId)->push()->getKey();
+
         $messageData = ['message' => $message,
             'type' => 'text',
-            'messageId' => $messageId,
+            'messageId' => $newPostKey,
             'recipient' => $profileId,
             'sender' => $userId,
             'time' => microtime(true)];
-        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
-        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$newPostKey)->update($messageData);
+
+        $newPostKey = $db->getReference('messages/'.$profileId.'/'.$userId)->push()->getKey();
+
+        $messageData = ['message' => $message,
+            'type' => 'text',
+            'messageId' => $newPostKey,
+            'recipient' => $profileId,
+            'sender' => $userId,
+            'time' => microtime(true)];
+        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
+
+        //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
+        //$db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+        die('ok');
     }
 
     public function sendImage(){
@@ -671,6 +686,8 @@ class Ajax extends MX_Controller{
 
         $db = $firebase->getDatabase();
 
+        $newPostKey = $db->getReference('messages/'.$userId.'/'.$profileId)->push()->getKey();
+
         $messageData = [
             'width' => $imageWidth,
             'height' => $imageHeight,
@@ -680,8 +697,23 @@ class Ajax extends MX_Controller{
             'recipient' => $profileId,
             'sender' => $userId,
             'time' => microtime(true)];
-        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
-        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
+        $db->getReference('messages/'.$userId.'/'.$profileId.'/'.$newPostKey)->update($messageData);
+
+        $newPostKey = $db->getReference('messages/'.$profileId.'/'.$userId)->push()->getKey();
+
+        $messageData = [
+            'width' => $imageWidth,
+            'height' => $imageHeight,
+            'mediaUrl' => $imageUrl,
+            'type' => 'image',
+            'messageId' => "$messageId",
+            'recipient' => $profileId,
+            'sender' => $userId,
+            'time' => microtime(true)];
+        $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
+
+        //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
+        //$db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
 
         die('ok');
     }
