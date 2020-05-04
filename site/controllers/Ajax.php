@@ -689,11 +689,11 @@ class Ajax extends MX_Controller{
         $newPostKey = $db->getReference('messages/'.$userId.'/'.$profileId)->push()->getKey();
 
         $messageData = [
-            'width' => $imageWidth,
-            'height' => $imageHeight,
+            'width' => (int)$imageWidth,
+            'height' => (int)$imageHeight,
             'mediaUrl' => $imageUrl,
             'type' => 'image',
-            'messageId' => "$messageId",
+            'messageId' => $newPostKey,
             'recipient' => $profileId,
             'sender' => $userId,
             'time' => microtime(true)];
@@ -702,11 +702,11 @@ class Ajax extends MX_Controller{
         $newPostKey = $db->getReference('messages/'.$profileId.'/'.$userId)->push()->getKey();
 
         $messageData = [
-            'width' => $imageWidth,
-            'height' => $imageHeight,
+            'width' => (int)$imageWidth,
+            'height' => (int)$imageHeight,
             'mediaUrl' => $imageUrl,
             'type' => 'image',
-            'messageId' => "$messageId",
+            'messageId' => $newPostKey,
             'recipient' => $profileId,
             'sender' => $userId,
             'time' => microtime(true)];
