@@ -3252,7 +3252,6 @@ label label.error{
 
 .frm_Chat .emojionearea-editor{
     min-height: auto;
-    overflow: hidden;
     max-height: 70px;
 }
 

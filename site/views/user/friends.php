@@ -100,7 +100,7 @@
                         <div class="box_sendmedia">
                             <input type="file" name="messageImage" id="messageImage" accept="image/*">
                         </div>
-                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                        <textarea class="form-control" id="message" placeholder="Skriv en besked her........." onkeyup="textAreaAdjust(this)"></textarea>
                         <button type="button" class="btn btnSend" id="btnSend"><img src="<?php echo base_url().'templates/';?>images/1x/i_send.png" alt="" class="img-responsive"></button>
                     </form>
                 </div>
