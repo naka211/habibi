@@ -537,7 +537,21 @@ $(document).ready(function() {
         $(".waiting").fadeOut(100);
         //Undo prevent default
         $('#messageImage').unbind('click');
+
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            $("#message").removeAttr('disabled');
+        } else {
+            $("#message").data("emojioneArea").enable();
+        }
     })
+
+    iOSversion = function() {
+        if (/iP(hone|od|ad)/.test(navigator.platform)) {
+            var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+        }
+    }
 
     /*setInterval(checkSession, 10*60*1000);
     function checkSession() {

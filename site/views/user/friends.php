@@ -229,6 +229,8 @@
         ////
         <?php }?>
 
+        ver = iOSversion();
+
         document.getElementById("messageImage").onchange = function (evt) {
             var image = evt.target.files[0]; // FileList object
 
@@ -236,6 +238,13 @@
                 $('#messageImage').click(function (event) {
                     event.preventDefault();
                 });
+
+                <?php if($isMobile == false){?>
+                $("#message").data("emojioneArea").disable();
+                <?php } else {?>
+                $("#message").attr('disabled', 'disabled');
+                <?php }?>
+
                 $(".waiting").fadeIn(100);
 
                 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -248,8 +257,16 @@
                                 console.log("couldn't load image:", img);
                             } else {
                                 window.EXIF.getData(img, function () {
+                                    <?php if($isMobile == false){?>
+                                    var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
+                                    <?php } else {?>
                                     var orientation = window.EXIF.getTag(this, "Orientation");
-                                    var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                    if (ver[0] >= 13) {
+                                        var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
+                                    } else {
+                                        var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                    }
+                                    <?php }?>
                                     //document.getElementById("container2").appendChild(canvas);
                                     $(".canvas_wrap").html('');
                                     $(".canvas_wrap").append(canvas);
@@ -271,11 +288,6 @@
             //Stop check new messages
             stopCheckMessageInterval();
 
-            <?php if($isMobile == false){?>
-            $("#message").data("emojioneArea").disable();
-            <?php } else {?>
-            $("#message").attr('disabled', 'disabled');
-            <?php }?>
             //Handle click event
             $('#imgContainer').hide();
             $(".waiting").show();
