@@ -2521,6 +2521,7 @@ ul.list_action li a .i_report {
 .chat ul li.you .message:before {
     margin: -9px 0 0 -16px;
     left: 0;
+    background-color: #ffffff;
 }
 
 .message .emojionearea-button{

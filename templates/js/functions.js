@@ -456,6 +456,7 @@ $(document).ready(function() {
 
                 if(isMobile == false){
                     $(".message"+num).emojioneArea();
+                    $(".message"+num).data("emojioneArea").disable();
                 }
                 /*if( $('.friend'+profileId).length ){
                     $('.friend'+profileId).removeClass('frend_item_new');
@@ -514,6 +515,7 @@ $(document).ready(function() {
                 $('.chat ul').scrollTop($('.chat ul').prop("scrollHeight"));
                 if(isMobile == false){
                     $(".message"+data.messageId).emojioneArea();
+                    $(".message"+data.messageId).data("emojioneArea").disable();
                 }
                 //$('.friend'+profileId).find('gray_friend_item').html(message);
                 setCheckMessageInterval(profileId);
