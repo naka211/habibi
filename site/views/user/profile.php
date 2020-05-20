@@ -13,7 +13,12 @@ if($status->isFavorite){
     $favoriteLink = 'href="javascript:void(0)" onclick="callAjaxFunction('.$profile->id.', \'addFavorite\')" title="Tilføj favorit"';
 }
 $blinkAction = 'href="javascript:void(0);" onclick="sendBlink('.$profile->id.')"';
-$blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'"';
+if(empty($status->isBlocked)){
+    $blockLink = 'href="'.site_url('user/blockUser/'.$profile->id).'" title="Blokere profil"';
+} else {
+    $blockLink = 'href="javascript:void(0);" style="background-color: red;"';
+}
+
 $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"';
 ?>
 <div id="content">
@@ -148,7 +153,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                             <?php }?>
                             <li><a <?php echo $blinkAction;?> <?php if($status->isKissed) echo 'class="hover"'?>  title="Send blink"><i class="i_blink"></i></a></li>
                             <li><a <?php echo $favoriteLink;?> id="favoriteBtn"><i class="i_star"></i></a></li>
-                            <li><a <?php echo $blockLink;?>  title="Blokere profil"><i class="i_block"></i></a></li>
+                            <li><a <?php echo $blockLink;?>><i class="i_block"></i></a></li>
                             <li><a <?php echo $reportLink;?> title="Anmeld profil"><i class="i_report"></i></a></li>
                         </ul>
                     </div>

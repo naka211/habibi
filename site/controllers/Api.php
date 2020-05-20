@@ -1487,7 +1487,8 @@ class Api extends REST_Controller {
         $status = $this->user->checkStatus($userId, $profileId);
         $friendStatus = $status->isFriend;
         $favoriteStatus = $status->isFavorite ? '1' : '0';
-        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus));
+        $blockedStatus = $status->isBlocked ? '1' : '0';
+        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus, 'blocked'=>$blockedStatus));
     }
 
     public function deleteVisited_delete(){
