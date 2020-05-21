@@ -83,7 +83,7 @@
                     switch (options.bootstrap) {
                       case true:
                         //html = '<a href="javascript:void(0)" class="btn btn-primary btn-upload pkuparea"> <i class="glyphicon glyphicon-upload"></i> ' + options.btnText + "</a>";
-                          html = '<a href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> ' + options.btnText + "</a>";
+                          html = '<div class="text-center"><a href="javascript:void(0)" class="btn btnUpload"><i class="fas fa-cloud-upload-alt fa-lg"></i> ' + options.btnText + "</a></div>";
                         break;
 
                       case false:
