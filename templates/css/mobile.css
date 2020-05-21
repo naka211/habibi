@@ -731,6 +731,7 @@
     .fancybox-slide video {
         height: auto;
         width: 90%;
+        max-height: 80%;
     }
 
     #imgContainer{
