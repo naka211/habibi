@@ -50,9 +50,9 @@
                                 <?php if($user->blurIndex != 0){
                                 if($profile->viewAvatar == 0){
                                     ?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmRemoveBlur(<?php echo $profile->id?>, 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')" class="btn bntMessage marginOnMobile" style="margin-top: 15px">Fjern sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmRemoveBlur(<?php echo $profile->id?>, 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')" class="btn bntMessage marginOnMobile" style="margin-top: 15px; padding-left: 30px; padding-right: 30px;">Fjern sløring</a>
                                 <?php } else {?>
-                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmBlur(<?php echo $profile->id?>, 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')" class="btn btn_cancel_request mb0 marginOnMobile widthAuto" style="margin-top: 15px">Sløring</a>
+                                    <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmBlur(<?php echo $profile->id?>, 'Er du sikker på du vil sløre dine billeder for den pågældende profil igen ?')" class="btn btn_cancel_request mb0 marginOnMobile widthAuto" style="margin-top: 15px; padding-left: 30px; padding-right: 30px; ">Sløring</a>
                                 <?php }}?>
                             </div>
                         </div>

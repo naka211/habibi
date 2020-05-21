@@ -8,7 +8,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn bntMessage" href="<?php echo site_url('user/uploadPhoto');?>" style="margin-bottom: 20px;">
+            <a class="btn bntMessage" href="<?php echo site_url('user/uploadPhoto');?>" style="margin-bottom: 20px; font-size: 14px;">
                 <span>Upload billede</span>
             </a>
             <div class="row">
