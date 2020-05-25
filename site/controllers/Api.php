@@ -90,6 +90,9 @@ class Api extends REST_Controller {
 
         $this->api->deleteToken($userId, $token);
 
+        //set login status
+        $this->user->updateLogin($userId, 0);
+
         $this->_return(true);
 
     }
@@ -228,6 +231,9 @@ class Api extends REST_Controller {
     //Home
     public function getUsersInHome_get($userId){
         $user = $this->user->getUser($userId);
+
+        //Change login status
+        $this->user->updateLogin($user->id, 1);
 
         $ignore = $this->user->getBlockedUserIds($userId);
         $ignore[] = $userId;
@@ -1586,5 +1592,15 @@ class Api extends REST_Controller {
         $this->user->addToVisiting($userId, $profileId);
 
         $this->_return(true, 'Ok');
+    }
+
+    public function changeLoginStatus_put(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $userId = $data->userId;
+
+        //Change login status
+        $this->user->updateLogin($userId, 0);
+
+        $this->_return(true);
     }
 }

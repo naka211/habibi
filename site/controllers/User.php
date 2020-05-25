@@ -19,7 +19,7 @@ class User extends MX_Controller
 
         $this->load->library('session');
         $this->session->set_userdata('last_visited', time());
-        $this->setExpireSessionTime();
+        //$this->setExpireSessionTime();
 
     }
 
@@ -39,6 +39,9 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Start');
         $user = $this->session->userdata('user');
         $searchData = $this->session->userdata('searchData');
+
+        //Change login status
+        $this->user->updateLogin($user->id, 1);
 
         $ignore = $this->user->getBlockedUserIds($user->id);
         $ignore[] = $user->id;

@@ -228,15 +228,15 @@ document.addEventListener('DOMContentLoaded', function () {
 var validNavigation = false;
 
 wireUpEvents = function() {
-    /*window.onbeforeunload = function (e) {
+    window.onbeforeunload = function (e) {
         if (!validNavigation) {
             $.ajax({
                 method: "POST",
-                url: base_url+"ajax/logout",
+                url: base_url+"ajax/changeLoginStatus",
                 data: { csrf_site_name: token_value }
             });
         }
-    };*/
+    };
 
 
     //Detect click refresh and back on browser navigation

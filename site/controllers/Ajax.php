@@ -114,6 +114,11 @@ class Ajax extends MX_Controller{
         die('ok');
     }
 
+    function changeLoginStatus(){
+        $userId = $this->session->userdata('user')->id;
+        $this->user->updateLogin($userId, 0);
+    }
+
     function setExpireSessionTime(){
         $user = $this->session->userdata('user');
         if($user){
