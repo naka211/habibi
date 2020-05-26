@@ -1603,4 +1603,24 @@ class Api extends REST_Controller {
 
         $this->_return(true);
     }
+
+    public function sendContact_post(){
+        $data = (object)json_decode(file_get_contents("php://input"));
+        $name = $data->name;
+        $phone = $data->phone;
+        $email = $data->email;
+        $message = $data->message;
+
+        $content = 'Kære Admin<br /><br />
+                        Du har en forespørgsel fra kontaktformularen:<br /><br />
+                        Navn: '.$name.'<br /><br />
+                        Email: '.$email.'<br /><br />
+                        Telefon: '.$phone.'<br /><br />
+                        Besked: '.$message.'<br /><br />
+                        Habibi Team - Habibidating.dk';
+        $this->general_model->sendEmail(['info@habibidating.dk'], 'Habibidating.dk - En besked fra kontaktformularen', $content);
+        $data['status'] = true;
+        $data['message'] = 'Tak for din henvendelse.<br>Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
+        $this->_return(true, '', array('message'=> "Tak for din henvendelse.\nVi kigger på det fremsendte og vender retur inden for 24 timer.\n\nMvh. Habibidating.dk"));
+    }
 }
