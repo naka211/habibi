@@ -1619,8 +1619,6 @@ class Api extends REST_Controller {
                         Besked: '.$message.'<br /><br />
                         Habibi Team - Habibidating.dk';
         $this->general_model->sendEmail(['info@habibidating.dk'], 'Habibidating.dk - En besked fra kontaktformularen', $content);
-        $data['status'] = true;
-        $data['message'] = 'Tak for din henvendelse.<br>Vi kigger på det fremsendte og vender retur inden for 24 timer.<br><br>Mvh. Habibidating.dk';
         $this->_return(true, '', array('message'=> "Tak for din henvendelse.\nVi kigger på det fremsendte og vender retur inden for 24 timer.\n\nMvh. Habibidating.dk"));
     }
 }
