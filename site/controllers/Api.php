@@ -1516,6 +1516,9 @@ class Api extends REST_Controller {
     }
 
     public function getNewNotification_get($userId = null){
+        //Update the session time
+        $this->user->setExpireSessionTime($userId);
+
         $message = $this->user->getUnreadMessageQuantity($userId);
         $blink = $this->user->getBlinkingQuantity($userId);
         $friendRequestQuantity = $this->user->friendRequestQuantity($userId);

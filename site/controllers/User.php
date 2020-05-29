@@ -19,7 +19,7 @@ class User extends MX_Controller
 
         $this->load->library('session');
         $this->session->set_userdata('last_visited', time());
-        //$this->setExpireSessionTime();
+        $this->setExpireSessionTime();
 
     }
 

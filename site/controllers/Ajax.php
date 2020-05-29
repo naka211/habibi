@@ -1015,7 +1015,18 @@ class Ajax extends MX_Controller{
         echo $lastVisitTime > $tenMinuteBefore ? 1 : 0;
     }*/
 
-    public function checkLoggedInToLogout(){
+    /*public function checkLoggedInToLogout(){
+        $users = $this->user->getLoggedInList();
+        if(!empty($users)){
+            foreach ($users as $user){
+                if($user->expiredSessionTime < time()){
+                    $this->user->updateLogin($user->id, 0);
+                }
+            }
+        }
+    }*/
+
+    public function checkOnline(){
         $users = $this->user->getLoggedInList();
         if(!empty($users)){
             foreach ($users as $user){
