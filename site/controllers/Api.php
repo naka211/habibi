@@ -995,24 +995,24 @@ class Api extends REST_Controller {
         $userId = $data->userId;
 
         $user = $this->user->getUser($userId);
-        $avatar = $this->user->getAvatar($userId);
-        if(!empty($avatar->new_avatar)){
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        $allAvatar = $this->user->getAllAvatar($userId);
+        if(!empty($allAvatar->new_avatar)){
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         } else {
             if($user->gender == 1){
                 $noAvatarName = 'no-avatar1.png';
             } else {
                 $noAvatarName = 'no-avatar2.png';
             }
-            $this->user->setCurrentAvatarFromPre($userId, $avatar->pre_avatar, $noAvatarName);
+            $this->user->setCurrentAvatarFromPre($userId, $allAvatar->pre_avatar, $noAvatarName);
 
             $defaultAvatarArr = getDefaultAvatars();
-            if(!in_array($avatar->avatar, $defaultAvatarArr)){
-                @unlink("./uploads/user/".$avatar->avatar);
-                @unlink("./uploads/thumb_user/".$avatar->avatar);
-                @unlink("./uploads/raw_thumb_user/".$avatar->avatar);
+            if(!in_array($allAvatar->avatar, $defaultAvatarArr)){
+                @unlink("./uploads/user/".$allAvatar->avatar);
+                @unlink("./uploads/thumb_user/".$allAvatar->avatar);
+                @unlink("./uploads/raw_thumb_user/".$allAvatar->avatar);
             }
         }
 
@@ -1572,21 +1572,21 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $imageName = $data->imageName;
 
-        $avatar = $this->user->getAvatar($userId);
+        $allAvatar = $this->user->getAllAvatar($userId);
 
         $this->user->setPreAvatarFromCurrent($userId);
-        if(!empty($avatar->pre_avatar)){
+        if(!empty($allAvatar->pre_avatar)){
             if(!in_array($avatar->pre_avatar, getDefaultAvatars())){
-                @unlink("./uploads/user/".$avatar->pre_avatar);
-                @unlink("./uploads/thumb_user/".$avatar->pre_avatar);
-                @unlink("./uploads/raw_thumb_user/".$avatar->pre_avatar);
+                @unlink("./uploads/user/".$allAvatar->pre_avatar);
+                @unlink("./uploads/thumb_user/".$allAvatar->pre_avatar);
+                @unlink("./uploads/raw_thumb_user/".$allAvatar->pre_avatar);
             }
         }
 
-        if(!empty($avatar->new_avatar)){
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        if(!empty($allAvatar->new_avatar)){
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         }
 
         $this->user->updateAvatar($userId, $imageName);

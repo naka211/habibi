@@ -164,25 +164,25 @@ class User extends MX_Controller
     function deleteAvatar(){
         $user = $this->session->userdata('user');
 
-        $avatar = $this->user->getAvatar($user->id);
-        if(!empty($avatar->new_avatar)){
+        $allAvatar = $this->user->getAllAvatar($user->id);
+        if(!empty($allAvatar->new_avatar)){
             $this->user->deleteNewAvatar($user->id);
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         } else {
             if($user->gender == 1){
                 $noAvatarName = 'no-avatar1.png';
             } else {
                 $noAvatarName = 'no-avatar2.png';
             }
-            $this->user->setCurrentAvatarFromPre($user->id, $avatar->pre_avatar, $noAvatarName);
+            $this->user->setCurrentAvatarFromPre($user->id, $allAvatar->pre_avatar, $noAvatarName);
 
             $defaultAvatarArr = getDefaultAvatars();
-            if(!in_array($avatar->avatar, $defaultAvatarArr)){
-                @unlink("./uploads/user/".$avatar->avatar);
-                @unlink("./uploads/thumb_user/".$avatar->avatar);
-                @unlink("./uploads/raw_thumb_user/".$avatar->avatar);
+            if(!in_array($allAvatar->avatar, $defaultAvatarArr)){
+                @unlink("./uploads/user/".$allAvatar->avatar);
+                @unlink("./uploads/thumb_user/".$allAvatar->avatar);
+                @unlink("./uploads/raw_thumb_user/".$allAvatar->avatar);
             }
         }
 
@@ -260,11 +260,11 @@ class User extends MX_Controller
 
     public function confirmAvatar($fileName){
         $user = $this->session->userdata('user');
-        $avatar = $this->user->getAvatar($user->id);
-        if(!empty($avatar->new_avatar)){
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        $allAvatar = $this->user->getAllAvatar($user->id);
+        if(!empty($allAvatar->new_avatar)){
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         }
         $this->user->updateAvatar($user->id, $fileName, 1);
 
@@ -1075,11 +1075,11 @@ class User extends MX_Controller
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
 
-        $avatar = $this->user->getAvatar($user->id);
-        if(!empty($avatar->new_avatar)){
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        $allAvatar = $this->user->getAllAvatar($user->id);
+        if(!empty($allAvatar->new_avatar)){
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         }
         $this->user->updateAvatar($user->id, $imageName, 1);
         //Sending approve email
@@ -1135,21 +1135,21 @@ class User extends MX_Controller
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
 
-        $avatar = $this->user->getAvatar($user->id);
+        $allAvatar = $this->user->getAllAvatar($user->id);
 
         $this->user->setPreAvatarFromCurrent($user->id);
-        if(!empty($avatar->pre_avatar)){
-            if(!in_array($avatar->pre_avatar, getDefaultAvatars())){
-                @unlink("./uploads/user/".$avatar->pre_avatar);
-                @unlink("./uploads/thumb_user/".$avatar->pre_avatar);
-                @unlink("./uploads/raw_thumb_user/".$avatar->pre_avatar);
+        if(!empty($allAvatar->pre_avatar)){
+            if(!in_array($allAvatar->pre_avatar, getDefaultAvatars())){
+                @unlink("./uploads/user/".$allAvatar->pre_avatar);
+                @unlink("./uploads/thumb_user/".$allAvatar->pre_avatar);
+                @unlink("./uploads/raw_thumb_user/".$allAvatar->pre_avatar);
             }
         }
 
-        if(!empty($avatar->new_avatar)){
-            @unlink("./uploads/user/".$avatar->new_avatar);
-            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        if(!empty($allAvatar->new_avatar)){
+            @unlink("./uploads/user/".$allAvatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$allAvatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$allAvatar->new_avatar);
         }
 
         $this->user->updateAvatar($user->id, $imageName);

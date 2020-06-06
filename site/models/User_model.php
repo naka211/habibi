@@ -695,6 +695,14 @@ class User_model extends CI_Model{
         $this->db->select('new_avatar, avatar, pre_avatar');
         $this->db->from('user');
         $this->db->where("id",$userId);
+        $avatar = $this->db->get()->row()->avatar;
+        return $avatar;
+    }
+
+    function getAllAvatar($userId){
+        $this->db->select('new_avatar, avatar, pre_avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
         $avatar = $this->db->get()->row();
         return $avatar;
     }
