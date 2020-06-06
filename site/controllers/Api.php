@@ -994,28 +994,27 @@ class Api extends REST_Controller {
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
 
-        $currentAvatar = $this->user->getAvatar($userId);
-        $defaultAvatarArr = getDefaultAvatars();
-        if(!in_array($currentAvatar, $defaultAvatarArr)){
-            @unlink("./uploads/user/".$currentAvatar);
-            @unlink("./uploads/thumb_user/".$currentAvatar);
-            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
-        }
-
-        $newAvatar = $this->user->getNewAvatar($userId);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
-        }
-
         $user = $this->user->getUser($userId);
-        if($user->gender == 1){
-            $noAvatarName = 'no-avatar1.png';
+        $avatar = $this->user->getAvatar($userId);
+        if(!empty($avatar->new_avatar)){
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
         } else {
-            $noAvatarName = 'no-avatar2.png';
+            if($user->gender == 1){
+                $noAvatarName = 'no-avatar1.png';
+            } else {
+                $noAvatarName = 'no-avatar2.png';
+            }
+            $this->user->setCurrentAvatarFromPre($userId, $avatar->pre_avatar, $noAvatarName);
+
+            $defaultAvatarArr = getDefaultAvatars();
+            if(!in_array($avatar->avatar, $defaultAvatarArr)){
+                @unlink("./uploads/user/".$avatar->avatar);
+                @unlink("./uploads/thumb_user/".$avatar->avatar);
+                @unlink("./uploads/raw_thumb_user/".$avatar->avatar);
+            }
         }
-        $this->user->updateAvatar($userId, $noAvatarName);
 
         $this->_return(true, 'The avatar is deleted.');
     }
@@ -1573,16 +1572,24 @@ class Api extends REST_Controller {
         $userId = $data->userId;
         $imageName = $data->imageName;
 
-        $newAvatar = $this->user->getNewAvatar($userId);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
-        }
-        $this->user->updateAvatar($userId, $imageName);
+        $avatar = $this->user->getAvatar($userId);
 
-        $savedUser = $this->user->getUser($userId);
-        $this->session->set_userdata('user', $savedUser);
+        $this->user->setPreAvatarFromCurrent($userId);
+        if(!empty($avatar->pre_avatar)){
+            if(!in_array($avatar->pre_avatar, getDefaultAvatars())){
+                @unlink("./uploads/user/".$avatar->pre_avatar);
+                @unlink("./uploads/thumb_user/".$avatar->pre_avatar);
+                @unlink("./uploads/raw_thumb_user/".$avatar->pre_avatar);
+            }
+        }
+
+        if(!empty($avatar->new_avatar)){
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
+        }
+
+        $this->user->updateAvatar($userId, $imageName);
 
         $this->_return(true, 'The new avatar is set.');
     }

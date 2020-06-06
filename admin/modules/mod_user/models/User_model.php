@@ -132,16 +132,17 @@ class User_model extends CI_Model{
         return $query->result();
     }
 
-    function updateCurrentAvatarAndDeleteNewAvatar($userId){
+    function updateCurrentAvatar($userId){
+        $this->db->set('pre_avatar', 'avatar', false);
+        $this->db->where('id', $userId);
+        $this->db->update('user');
+        $this->db->reset_query();
+
         $this->db->set('avatar', 'new_avatar', false);
         $this->db->where('id', $userId);
         $this->db->update('user');
         $this->db->reset_query();
 
-        $this->deleteNewAvatar($userId);
-    }
-
-    function deleteNewAvatar($userId){
         $this->db->set('new_avatar', '');
         $this->db->where('id', $userId);
         $this->db->update('user');
@@ -160,6 +161,14 @@ class User_model extends CI_Model{
         $this->db->from('user');
         $this->db->where("id",$userId);
         $avatar = $this->db->get()->row()->avatar;
+        return $avatar;
+    }
+
+    function getAvatar($userId){
+        $this->db->select('new_avatar, avatar, pre_avatar');
+        $this->db->from('user');
+        $this->db->where("id",$userId);
+        $avatar = $this->db->get()->row();
         return $avatar;
     }
 

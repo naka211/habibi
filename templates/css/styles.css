@@ -2080,6 +2080,7 @@ ul.list_action li a .i_report {
     -o-transition: all .2s ease-in-out;
     width: 100%;
     margin: 0 auto;
+    max-height: 270px;
 }
 
 .gallery_number {

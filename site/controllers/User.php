@@ -164,27 +164,27 @@ class User extends MX_Controller
     function deleteAvatar(){
         $user = $this->session->userdata('user');
 
-        $currentAvatar = $this->user->getAvatar($user->id);
-        $defaultAvatarArr = getDefaultAvatars();
-        if(!in_array($currentAvatar, $defaultAvatarArr)){
-            @unlink("./uploads/user/".$currentAvatar);
-            @unlink("./uploads/thumb_user/".$currentAvatar);
-            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
-        }
-
-        $newAvatar = $this->user->getNewAvatar($user->id);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
-        }
-
-        if($user->gender == 1){
-            $noAvatarName = 'no-avatar1.png';
+        $avatar = $this->user->getAvatar($user->id);
+        if(!empty($avatar->new_avatar)){
+            $this->user->deleteNewAvatar($user->id);
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
         } else {
-            $noAvatarName = 'no-avatar2.png';
+            if($user->gender == 1){
+                $noAvatarName = 'no-avatar1.png';
+            } else {
+                $noAvatarName = 'no-avatar2.png';
+            }
+            $this->user->setCurrentAvatarFromPre($user->id, $avatar->pre_avatar, $noAvatarName);
+
+            $defaultAvatarArr = getDefaultAvatars();
+            if(!in_array($avatar->avatar, $defaultAvatarArr)){
+                @unlink("./uploads/user/".$avatar->avatar);
+                @unlink("./uploads/thumb_user/".$avatar->avatar);
+                @unlink("./uploads/raw_thumb_user/".$avatar->avatar);
+            }
         }
-        $this->user->updateAvatar($user->id, $noAvatarName);
 
         $this->updateUserSession($user->id);
 
@@ -260,11 +260,11 @@ class User extends MX_Controller
 
     public function confirmAvatar($fileName){
         $user = $this->session->userdata('user');
-        $newAvatar = $this->user->getNewAvatar($user->id);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        $avatar = $this->user->getAvatar($user->id);
+        if(!empty($avatar->new_avatar)){
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
         }
         $this->user->updateAvatar($user->id, $fileName, 1);
 
@@ -1074,19 +1074,12 @@ class User extends MX_Controller
     public function selectAvatarFromGallery(){
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
-        /*$currentAvatar = $this->user->getAvatar($user->id);
-        if($currentAvatar != 'no-avatar1.png' && $currentAvatar != 'no-avatar2.png'){
-            @unlink("./uploads/user/".$currentAvatar);
-            @unlink("./uploads/thumb_user/".$currentAvatar);
-            @unlink("./uploads/raw_thumb_user/".$currentAvatar);
-        }
-        $this->user->updateAvatar($user->id, $imageName);*/
 
-        $newAvatar = $this->user->getNewAvatar($user->id);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        $avatar = $this->user->getAvatar($user->id);
+        if(!empty($avatar->new_avatar)){
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
         }
         $this->user->updateAvatar($user->id, $imageName, 1);
         //Sending approve email
@@ -1142,18 +1135,21 @@ class User extends MX_Controller
         $imageName = $this->input->post('imageName');
         $user = $this->session->userdata('user');
 
-        $newAvatar = $this->user->getNewAvatar($user->id);
-        if($newAvatar != ''){
-            @unlink("./uploads/user/".$newAvatar);
-            @unlink("./uploads/thumb_user/".$newAvatar);
-            @unlink("./uploads/raw_thumb_user/".$newAvatar);
+        $avatar = $this->user->getAvatar($user->id);
+
+        $this->user->setPreAvatarFromCurrent($user->id);
+        if(!empty($avatar->pre_avatar)){
+            if(!in_array($avatar->pre_avatar, getDefaultAvatars())){
+                @unlink("./uploads/user/".$avatar->pre_avatar);
+                @unlink("./uploads/thumb_user/".$avatar->pre_avatar);
+                @unlink("./uploads/raw_thumb_user/".$avatar->pre_avatar);
+            }
         }
 
-        $avatar = $this->user->getAvatar($user->id);
-        if(!in_array($avatar, getDefaultAvatars())){
-            @unlink("./uploads/user/".$avatar);
-            @unlink("./uploads/thumb_user/".$avatar);
-            @unlink("./uploads/raw_thumb_user/".$avatar);
+        if(!empty($avatar->new_avatar)){
+            @unlink("./uploads/user/".$avatar->new_avatar);
+            @unlink("./uploads/thumb_user/".$avatar->new_avatar);
+            @unlink("./uploads/raw_thumb_user/".$avatar->new_avatar);
         }
 
         $this->user->updateAvatar($user->id, $imageName);

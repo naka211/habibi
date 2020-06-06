@@ -494,18 +494,18 @@ class User extends CI_Controller
 
     public function acceptAvatar($userId)
     {
-        $currentAvatar = $this->user->getCurrentAvatar($userId);
+        $avatar = $this->user->getAvatar($userId);
 
         $noAvatarArr = array('no-avatar1.png', 'no-avatar2.png');
         $defaultAvatars = array_merge($noAvatarArr, $this->config->item('male_avatar'), $this->config->item('female_avatar'));
 
-        if(!in_array($currentAvatar, $defaultAvatars)){
-            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $currentAvatar);
-            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
-            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $currentAvatar);
+        if(!in_array($avatar->pre_avatar, $defaultAvatars)){
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . $avatar->pre_avatar);
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "thumb_user" . DIRECTORY_SEPARATOR . $avatar->pre_avatar);
+            @unlink($this->config->item('root') . "uploads" . DIRECTORY_SEPARATOR . "raw_thumb_user" . DIRECTORY_SEPARATOR . $avatar->pre_avatar);
         }
 
-        $this->user->updateCurrentAvatarAndDeleteNewAvatar($userId);
+        $this->user->updateCurrentAvatar($userId);
 
         $user = $this->user->getUserInfo($userId);
         $content = 'Hej ' . $user->name . '<br /><br />

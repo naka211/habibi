@@ -692,10 +692,10 @@ class User_model extends CI_Model{
     }
 
     function getAvatar($userId){
-        $this->db->select('avatar');
+        $this->db->select('new_avatar, avatar, pre_avatar');
         $this->db->from('user');
         $this->db->where("id",$userId);
-        $avatar = $this->db->get()->row()->avatar;
+        $avatar = $this->db->get()->row();
         return $avatar;
     }
 
@@ -706,6 +706,31 @@ class User_model extends CI_Model{
             $this->db->set('new_avatar', '');
             $this->db->set('avatar', $avatar);
         }
+        $this->db->set('blurIndex', 0);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
+
+    function deleteNewAvatar($userId){
+        $this->db->set('new_avatar', '');
+
+        $this->db->set('blurIndex', 0);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
+
+    function setCurrentAvatarFromPre($userId, $pre_avatar, $noAvatar){
+        $this->db->set('avatar', $pre_avatar);
+        $this->db->set('pre_avatar', $noAvatar);
+
+        $this->db->set('blurIndex', 0);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
+
+    function setPreAvatarFromCurrent($userId){
+        $this->db->set('pre_avatar', 'avatar', false);
+
         $this->db->set('blurIndex', 0);
         $this->db->where('id', $userId);
         return $this->db->update('user');
