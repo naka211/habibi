@@ -1576,7 +1576,7 @@ class Api extends REST_Controller {
 
         $this->user->setPreAvatarFromCurrent($userId);
         if(!empty($allAvatar->pre_avatar)){
-            if(!in_array($avatar->pre_avatar, getDefaultAvatars())){
+            if(!in_array($allAvatar->pre_avatar, getDefaultAvatars())){
                 @unlink("./uploads/user/".$allAvatar->pre_avatar);
                 @unlink("./uploads/thumb_user/".$allAvatar->pre_avatar);
                 @unlink("./uploads/raw_thumb_user/".$allAvatar->pre_avatar);
