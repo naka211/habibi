@@ -1493,7 +1493,16 @@ class Api extends REST_Controller {
         $friendStatus = $status->isFriend;
         $favoriteStatus = $status->isFavorite ? '1' : '0';
         $blockedStatus = $status->isBlocked ? '1' : '0';
-        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus, 'blocked'=>$blockedStatus));
+
+        //Allow to view avatar or not
+        $profile = $this->user->getUser($profileId);
+        if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id, $userId))) {
+            $avatarPath = base_url().'uploads/raw_thumb_user/'.$profile->avatar;
+        } else {
+            $avatarPath = base_url().'uploads/thumb_user/'.$profile->avatar;
+        }
+
+        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus, 'blocked'=>$blockedStatus, 'avatarPath'=>$avatarPath));
     }
 
     public function deleteVisited_delete(){

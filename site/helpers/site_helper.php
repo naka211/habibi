@@ -379,9 +379,11 @@ function inSearch($filterKey, $value){
     }
 }
 
-function allowViewAvatar($profileId){
+function allowViewAvatar($profileId, $userId = null){
     $ci = &get_instance();
-    $userId = $ci->session->userdata('user')->id;
+    if($userId == null){
+        $userId = $ci->session->userdata('user')->id;
+    }
 
     $query = $ci->db->select("viewAvatar")
         ->from('tb_user_friendlist')
