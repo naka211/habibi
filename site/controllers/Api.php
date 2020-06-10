@@ -1503,18 +1503,19 @@ class Api extends REST_Controller {
         }
 
         //Allow to view photos or not
-        $photos = $this->user->getPhoto($userId, 0);
+        $photos = $this->user->getPhoto($profileId, 0);
+        $photoLinks = array();
         foreach($photos as $key=>$photo){
             if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id, $userId))) {
-                $photos[$key]->photoPath = base_url().'uploads/raw_photo/'.$photos[$key]->image;
-                $photos[$key]->thumbPhotoPath = base_url().'uploads/raw_thumb_photo/'.$photos[$key]->image;
+                $photoLinks[$key]->photoPath = base_url().'uploads/raw_photo/'.$photos[$key]->image;
+                $photoLinks[$key]->thumbPhotoPath = base_url().'uploads/raw_thumb_photo/'.$photos[$key]->image;
             } else {
-                $photos[$key]->photoPath = base_url().'uploads/photo/'.$photos[$key]->image;
-                $photos[$key]->thumbPhotoPath = base_url().'uploads/thumb_photo/'.$photos[$key]->image;
+                $photoLinks[$key]->photoPath = base_url().'uploads/photo/'.$photos[$key]->image;
+                $photoLinks[$key]->thumbPhotoPath = base_url().'uploads/thumb_photo/'.$photos[$key]->image;
             }
         }
 
-        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus, 'blocked'=>$blockedStatus, 'avatarPath'=>$avatarPath, 'photos'=>$photos));
+        $this->_return(true, '', array('friendStatus'=>$friendStatus, 'favorite'=>$favoriteStatus, 'blocked'=>$blockedStatus, 'avatarPath'=>$avatarPath, 'photos'=>$photoLinks));
     }
 
     public function deleteVisited_delete(){
