@@ -3261,3 +3261,7 @@ label label.error{
     float: left;
     margin-right: 20px;
 }
+
+.fancybox-image-wrap{
+    background-color: white !important;
+}
