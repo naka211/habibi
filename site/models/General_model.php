@@ -97,4 +97,11 @@ class General_model extends CI_Model{
 
         return $query;
     }
+
+    public function getAllMessages(){
+        $this->db->select('user_from, user_to, message, dt_create')->from('user_messages');
+        $query = $this->db->get()->result();
+
+        return $query;
+    }
 }

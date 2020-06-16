@@ -8,14 +8,14 @@ class Chat extends MX_Controller{
         $this->_meta = $this->general_model->getMetaDataFromUrl();
 	}
 
-	public function syncUserToFirebase(){
+	public function syncUsersToFirebase(){
         $this->load->library('firebase');
         $firebase = $this->firebase->init();
         $db = $firebase->getDatabase();
         $auth = $firebase->getAuth();
 
 	    $users = $this->general->getAllUsers();
-	    $serverLink = 'https://dev.habibidating.dk/';
+	    $serverLink = 'https://www.habibidating.dk/';
 	    foreach($users as $user){
             $userProperties = [
             'uid' => $user->id,
@@ -37,8 +37,28 @@ class Chat extends MX_Controller{
         }
     }
 
-    public function syncMessageToFirebase(){
+    public function syncMessagesToFirebase(){
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
 
+        $messages = $this->general->getAllMessages();
+        foreach($messages as $key => $message) {
+            $message->user_from = (string)$message->user_from;
+            $message->user_to = (string)$message->user_to;
+            $newPostKey = $db->getReference('messages/' . $message->user_from . '/' . $message->user_to)->push()->getKey();
+
+            $messageData = ['message' => $message->message,
+                'type' => 'text',
+                'messageId' => $newPostKey,
+                'recipient' => $message->user_to,
+                'sender' => $message->user_from,
+                'time' => (float)$message->dt_create];
+            $db->getReference('messages/' . $message->user_from . '/' . $message->user_to . '/' . $newPostKey)->update($messageData);
+            $db->getReference('messages/' . $message->user_to . '/' . $message->user_from . '/' . $newPostKey)->update($messageData);
+
+            echo $message->id."\n";
+        }
     }
 }
 ?>
