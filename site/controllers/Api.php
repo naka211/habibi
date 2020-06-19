@@ -641,9 +641,6 @@ class Api extends REST_Controller {
         $this->user->saveUser($db, $userId);
 
         //Re-count the number of profiles
-        $ignore = $this->user->getBlockedUserIds($userId);
-        $ignore[] = $userId;
-
         $numOfProfiles = $this->user->getNum($searchData, $ignore);
 
         $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
