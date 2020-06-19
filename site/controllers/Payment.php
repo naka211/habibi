@@ -16,7 +16,8 @@ class Payment extends MX_Controller {
     }
     function upgrade(){
         $user = $this->session->userdata('user');
-        $package = $this->input->post('package');
+        //$package = $this->input->post('package');
+        $package = 1;
 
         $db['package'] = $package;
         $this->user->saveUser($db, $user->id);
@@ -169,9 +170,11 @@ class Payment extends MX_Controller {
         $users = $this->user->getExpiredUsers();
         if($users){
             foreach ($users as $user){
-                if($user->stand_by_payment != 2 || $user->deactivation == 0){
+                if($user->stand_by_payment == 0 && $user->deactivation == 0){
                     $orderId = randomPassword();
-                    if($user->package == 1){
+                    $packageName = 'price1Month';
+                    $plusTime = '+1 month';
+                    /*if($user->package == 1){
                         $packageName = 'price1Month';
                         $plusTime = '+1 month';
                     } else if($user->package == 3) {
@@ -180,7 +183,7 @@ class Payment extends MX_Controller {
                     } else if($user->package == 6) {
                         $packageName = 'price6Months';
                         $plusTime = '+6 months';
-                    }
+                    }*/
                     //Call payment
                     $ch = curl_init();
 
@@ -206,9 +209,9 @@ class Payment extends MX_Controller {
                         $DB['orderid'] = $request->order_id;
                         $DB['paymenttime'] = time();
                         $DB['expired_at'] = $expired;
-                        if($user->stand_by_payment == 1){
-                            $DB['stand_by_payment'] = 2;
-                        }
+                        /*if($user->stand_by_payment == 1){
+                            $DB['stand_by_payment'] = 0;
+                        }*/
                         $this->user->saveUser($DB, $user->id);
                         //Add log
                         $this->addPaymentLog($user->id, $request);
@@ -236,7 +239,6 @@ class Payment extends MX_Controller {
                 }
 
             }
-            print_r($users);exit();
         } else {
             echo 'Nobody';
         }

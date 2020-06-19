@@ -780,9 +780,12 @@ class Api extends REST_Controller {
         $data = (object)json_decode(file_get_contents("php://input"));
         $userId = $data->userId;
 
+        $db['package'] = 1;
+        $this->user->saveUser($db, $userId);
+
         $user = $this->user->getUser($userId);
         if($user->package == 1){
-            $plusTime = '+1 month';
+            $plusTime = '+3 months';
         } else if($user->package == 3){
             $plusTime = '+3 months';
         } else if($user->package == 6){

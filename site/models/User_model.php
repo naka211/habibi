@@ -1003,6 +1003,7 @@ class User_model extends CI_Model{
             ->from('user')
             ->where('expired_at <', $time)
             ->where('expired_at <>', 0)
+            ->where('subscriptionid <>', '')
             ->get()->result();
         return $result;
     }
