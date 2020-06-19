@@ -640,6 +640,12 @@ class Api extends REST_Controller {
         $db['search_session'] = json_encode($searchData);
         $this->user->saveUser($db, $userId);
 
+        //Re-count the number of profiles
+        $ignore = $this->user->getBlockedUserIds($userId);
+        $ignore[] = $userId;
+
+        $numOfProfiles = $this->user->getNum($searchData, $ignore);
+
         $users = $this->user->getBrowsing($perPage, $offset, $searchData, $ignore);
 
         if(!empty($users)){
@@ -647,7 +653,7 @@ class Api extends REST_Controller {
             foreach ($users as $key => $user){
                 $users[$key]->numberOfImages = countImages($user->id);
             }
-            $this->_return(true, '', array('users'=>$users, 'search_session'=>$this->user->getUser($userId)->search_session));
+            $this->_return(true, '', array('users'=>$users, 'search_session'=>$this->user->getUser($userId)->search_session, 'total'=>$numOfProfiles));
         } else {
             $this->_return(false, 'Nobody', array('search_session'=>$this->user->getUser($userId)->search_session));
         }
