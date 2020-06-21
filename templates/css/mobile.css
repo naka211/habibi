@@ -117,11 +117,12 @@
         display: block;
         text-align: center;
         font-size: 12px;
+        margin: 5px auto 0;
     }
 
     .section_app img {
         display: block;
-        margin: 15px auto 0;
+        /*margin: 15px auto 0;*/
     }
 
     footer {

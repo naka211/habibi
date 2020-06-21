@@ -454,7 +454,7 @@ $(document).ready(function() {
                 }
                 //setCheckMessageInterval(profileId);
 
-                if(isMobile == false){
+                if(isMobile == false && num != ''){
                     $(".message"+num).emojioneArea();
                     $(".message"+num).data("emojioneArea").disable();
                 }

@@ -788,6 +788,7 @@ header .navbar-brand {
     letter-spacing: -0.05em;
     position: relative;
     /*top: 10px;*/
+    margin-top: 10px;
 }
 
 .w_footer {

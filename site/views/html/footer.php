@@ -5,13 +5,16 @@
     <section class="section_app">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-ms-12 col-xs-12">
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 col-ms-12 col-xs-12">
                     <h2>Download App.</h2>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-6">
+                </div>-->
+                <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-4">
                     <a href="https://apps.apple.com/vn/app/habibi-dating/id1454353240"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-6">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-4" style="padding: 0px;">
+                    <h2>Download App.</h2>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-4">
                     <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
                     <!--<h2 class="w_register_sm"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>-->
                 </div>
