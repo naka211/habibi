@@ -1509,7 +1509,7 @@ class Api extends REST_Controller {
         }
 
         //Allow to view photos or not
-        $photos = $this->user->getPhoto($profileId, 0);
+        $photos = $this->user->getPhoto($profileId, 1);
         $photoLinks = array();
         foreach($photos as $key=>$photo){
             if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id, $userId))) {
