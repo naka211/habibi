@@ -45,7 +45,7 @@
                                 <p><?php echo printAge($profile->id); ?> – <?php echo $profile->region; ?></p>
                                 <p>Venner siden d. <?php echo date("d/m/Y", $profile->added_time); ?></p>
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
-                                <a href="javascript:void(0);" onclick="confirmRemoveFriend(<?php echo $profile->id;?>, 'Er du sikker på at du vil fjerne pågældende profil for din venneliste ?')"class="btn bntDelete">Fjern ven</a>
+                                <a href="javascript:void(0);" onclick="confirmRemoveFriend(<?php echo $profile->id;?>, 'Er du sikker på at du vil fjerne pågældende profil fra din venneliste ?')"class="btn bntDelete">Fjern ven</a>
                                 <a href="javascript:void(0);" onclick="confirmBlockUser(<?php echo $profile->id;?>, 'Er du sikker på du vil blokere den pågældende profil ?')" class="btn bntBlock">Bloker</a>
                                 <?php if($user->blurIndex != 0){
                                 if($profile->viewAvatar == 0){
