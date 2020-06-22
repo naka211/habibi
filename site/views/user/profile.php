@@ -164,7 +164,7 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php if(!empty($images)){?>
                     <div class="owl-carousel owl-theme owl_gallerys">
-                        <?php if($profile->blurIndex != 0 && allowViewAvatar($profile->id)) { ?>
+                        <?php if(hasBlurredImage($profile->id) && allowViewAvatar($profile->id)) { ?>
                             <?php foreach ($images as $image) {
                                 if(file_exists($this->config->item('root').'uploads/raw_thumb_photo/'.$image->image)){
                                     $fileFolder = 'raw_thumb_photo';

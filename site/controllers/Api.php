@@ -1512,7 +1512,7 @@ class Api extends REST_Controller {
         $photos = $this->user->getPhoto($profileId, 1);
         $photoLinks = array();
         foreach($photos as $key=>$photo){
-            if($profile->blurIndex == 0 || ($profile->blurIndex != 0 && allowViewAvatar($profile->id, $userId))) {
+            if(hasBlurredImage($profile->id) && allowViewAvatar($profile->id, $userId)) {
                 $photoLinks[$key]->photoPath = base_url().'uploads/raw_photo/'.$photos[$key]->image;
                 $photoLinks[$key]->thumbPhotoPath = base_url().'uploads/raw_thumb_photo/'.$photos[$key]->image;
             } else {

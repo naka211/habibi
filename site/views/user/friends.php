@@ -47,7 +47,7 @@
                                 <a <?php echo $messageLink;?> class="btn bntMessage">Besked</a>
                                 <a href="javascript:void(0);" onclick="confirmRemoveFriend(<?php echo $profile->id;?>, 'Er du sikker på at du vil fjerne pågældende profil fra din venneliste ?')"class="btn bntDelete">Fjern ven</a>
                                 <a href="javascript:void(0);" onclick="confirmBlockUser(<?php echo $profile->id;?>, 'Er du sikker på du vil blokere den pågældende profil ?')" class="btn bntBlock">Bloker</a>
-                                <?php if($user->blurIndex != 0){
+                                <?php if($user->blurIndex != 0 || hasBlurredImage($user->id)){
                                 if($profile->viewAvatar == 0){
                                     ?>
                                     <a href="javascript:void(0);" id="blurBtn<?php echo $profile->id?>" onclick="confirmRemoveBlur(<?php echo $profile->id?>, 'Er du sikker på du vil fjerne sløringen for pågældende profil ?')" class="btn bntMessage marginOnMobile" style="margin-top: 15px; padding-left: 30px; padding-right: 30px;">Fjern sløring</a>

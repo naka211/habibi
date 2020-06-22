@@ -400,6 +400,20 @@ function allowViewAvatar($profileId, $userId = null){
     }
 }
 
+function hasBlurredImage($profileId){
+    $ci = &get_instance();
+
+    $query = $ci->db->select("id")
+        ->from('tb_user_image')
+        ->where("userId = $profileId AND blurIndex <> 0");
+    $result = $query->get()->row();
+    if(empty($result)){
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function getUser(){
     $ci = &get_instance();
     $user = $ci->session->userdata('user');
