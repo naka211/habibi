@@ -364,10 +364,14 @@ $reportLink = 'data-fancybox data-src="#modalReport" href="javascript:void(0);"'
                                     var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
                                     <?php } else {?>
                                     var orientation = window.EXIF.getTag(this, "Orientation");
-                                    if (ver[0] >= 13) {
-                                        var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
+                                    if(ver === undefined){
+                                        var canvas = window.loadImage.scale(img, {orientation: 0 || 0, canvas: true, maxHeight: 100});
                                     } else {
-                                        var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                        if (ver[0] >= 13) {
+                                            var canvas = window.loadImage.scale(img, {orientation: 0, canvas: true, maxHeight: 100});
+                                        } else {
+                                            var canvas = window.loadImage.scale(img, {orientation: orientation || 0, canvas: true, maxHeight: 100});
+                                        }
                                     }
                                     <?php }?>
                                     //document.getElementById("container2").appendChild(canvas);
