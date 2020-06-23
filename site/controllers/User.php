@@ -931,6 +931,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data, 'Habibi - Sendt blinks');
 
         $data['user'] = $this->session->userdata('user');
+        $data['userId'] = $data['user']->id;
 
         $ignore = $this->user->getBlockedUserIds($data['user']->id);
 

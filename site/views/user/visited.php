@@ -41,10 +41,13 @@
                                 <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a>
                                 <?php }?>
-                                <?php if($status->isFriend == 0){?>
-                                    <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_cancel_request mb0" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriendInFavorite')">Annuller anmodning</a>
-                                <?php }?>
-                                <?php /*if(isFriend($user->id) == false){*/?><!--<a href="javascript:void(0);" id="requestAddFriendBtn<?php /*echo $user->id;*/?>" class="btn bntMessage" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'requestAddFriendInFavorite')">Venneanmodning</a>--><?php /*}*/?>
+                                <?php if($status->isFriend == 0){
+                                    if(isGoldMember()){?>
+                                        <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_cancel_request mb0" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriendInFavorite')">Annuller anmodning</a>
+                                    <?php } else {?>
+                                        <a data-fancybox data-src="#modalUpgrade" href="javascript:;" class="btn btn_cancel_request mb0">Annuller anmodning</a>
+                                    <?php }
+                                }?>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'deleteVisited')" class="btn bntDelete" style="margin-top: 5px;">Slet</a>
                             </div>

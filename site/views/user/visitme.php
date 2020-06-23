@@ -40,15 +40,17 @@
                                 <?php }?>
                                 <p class="age_city"><?php echo printAge($user->id); ?> – <?php echo $user->region; ?></p>
                                 <p>Besøgte mig: d. <?php echo date("d/m/Y", $user->seen_time); ?> kl.<span><?php echo date("H:i", $user->seen_time); ?></p>
-                                <?php /*if(isFriend($user->id) == false){*/?><!--<a href="javascript:void(0);" id="requestAddFriendBtn<?php /*echo $user->id;*/?>" class="btn bntMessage" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'requestAddFriendInFavorite')">Venneanmodning</a><?php /*}*/?>
-                                <a href="javascript:void(0);" onclick="callAjaxFunction(<?php /*echo $user->id;*/?>, 'blockUser')" class="btn bntBlock">Bloker</a>-->
                                 <a <?php echo $sendBlinkLink;?> class="btn bntMessage"><?php echo $user->returnBlink?'Blink retur':'Send blink'?></a>
                                 <?php if($status->isFriend == -1 || $status->isFriend == 2){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn bntMessage" onclick="callAjaxFunction(<?php echo $user->id;?>, 'requestAddFriendInFavorite')">Venneanmodning</a>
                                 <?php }?>
-                                <?php if($status->isFriend == 0){?>
+                                <?php if($status->isFriend == 0){
+                                    if(isGoldMember()){?>
                                     <a href="javascript:void(0);" id="requestAddFriendBtn<?php echo $user->id;?>" class="btn btn_cancel_request mb0" onclick="callAjaxFunction(<?php echo $user->id;?>, 'cancelAddFriendInFavorite')">Annuller anmodning</a>
-                                <?php }?>
+                                    <?php } else {?>
+                                        <a data-fancybox data-src="#modalUpgrade" href="javascript:;" class="btn btn_cancel_request mb0">Annuller anmodning</a>
+                                <?php }
+                                }?>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'blockUser')" class="btn bntBlock">Bloker</a>
                                 <a href="javascript:void(0);" onclick="callAjaxFunction(<?php echo $user->id;?>, 'deleteVisitMe')" class="btn bntDelete" style="margin-top: 5px;">Slet</a>
                             </div>
