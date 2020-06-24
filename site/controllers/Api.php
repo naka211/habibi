@@ -424,7 +424,7 @@ class Api extends REST_Controller {
         if($total){
             $users = $this->user->getFriends($userId, $perPage, (int)$offset, $ignore, $keyword);
             $this->_setAvatarPath($userId, $users);
-            $this->_return(true, '', array('total'=>$total, 'users'=>$users));
+            $this->_return(true, '', array('total'=> (int)$total, 'users'=>$users));
         } else {
             $this->_return(false, 'Nobody');
         }
