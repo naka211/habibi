@@ -15,7 +15,7 @@
                     <h2>Download App.</h2>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-4">
-                    <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.hiennguyen102.habibi"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
                     <!--<h2 class="w_register_sm"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>-->
                 </div>
             </div>
