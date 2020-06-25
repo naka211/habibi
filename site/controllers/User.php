@@ -584,6 +584,10 @@ class User extends MX_Controller
                 $this->_updateSearchDataAfterLogin();
                 //Add user to firebase
                 addUserToFirebase($user);
+
+                //Add user to mailjet
+                $this->addUserToMailjet($DB['email'], $DB['name']);
+
                 //Send email
                 $sendEmailInfo['name'] = $DB['name'];
                 $sendEmailInfo['email'] = $DB['email'];
@@ -1413,6 +1417,53 @@ class User extends MX_Controller
             curl_close ($ch);
         }
         redirect(site_url('newsletter'));
+    }
+
+    function addUserToMailjet($email, $name){
+        $pubKey = $this->config->item('mailJetPublicKey');
+        $secKey = $this->config->item('mailJetSecretKey');
+        $contactListId = $this->config->item('contactListId');
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contact/'.urlencode($email));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+        $result = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close ($ch);
+        if($httpCode == 200){
+            $this->session->set_flashdata('error', 'Denne email findes i vores system.');
+        } else {
+            $data = array("Action" => "addnoforce", "Email" => $email, "Name" => $name);
+            $dataStr = json_encode($data);
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contactslist/'.$contactListId.'/managecontact');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataStr);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+            $headers = array();
+            $headers[] = 'Content-Type: application/json';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            $result = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            /*if($httpCode == 400){
+                $this->session->set_flashdata('error', 'En fejl ved at tilføje e-mail til system.');
+            } else {
+                $this->session->set_flashdata('message', "Tak fordi du har tilmeldt dig vores nyhedsbrev.<br><br>Det er vi glade for, derfor vil vi  sende dig en mail når vi går i luften så du kan få dine 3 måneders gratis prøve og samtidig være med i lodtrækningen om gavekort til Magasin du Nord");
+            }*/
+            curl_close ($ch);
+        }
     }
 
     public function checkAndDeleteAccount(){
