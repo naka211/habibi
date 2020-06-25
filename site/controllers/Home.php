@@ -7,7 +7,7 @@ class Home extends MX_Controller {
         parent::__construct();
         $this->session->set_userdata(array('url'=>uri_string()));
         $this->load->model('user_model', 'user');
-        $this->load->model('tilbud_model','tilbud');
+        $this->load->model('general_model', 'general');
         $this->language = $this->lang->lang();
 
         $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
@@ -233,6 +233,25 @@ class Home extends MX_Controller {
         }
 
         $db->getReference('users')->remove();
+    }
+
+    function exportUsersCsv(){
+        $users = $this->general->getAllUsers();
+
+        header("Content-type: application/csv");
+        header("Content-Disposition: attachment; filename=\"".time().".csv\"");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, array("Email","Name"));
+
+        foreach ($users as $user) {
+            $narray = array($user->email, $user->name);
+            fputcsv($handle, $narray);
+        }
+        fclose($handle);
+        exit;
     }
 }
 
