@@ -267,9 +267,12 @@ class User extends CI_Controller
         $check = $this->check->check('del', '', '');
         if ($check) {
             $id = $this->input->post('id', true);
+            $user = $this->user->getUserInfo($id);
             if ($this->user->delete_data($id)) {
                 //Delete user in firebase
                 $this->_deleteUserInFirebase($id);
+                //Delete user in mailjet
+                $this->_deleteUserInMailjet($user->email);
                 //End
                 $data['status'] = true;
                 $data['message'] = lang('admin.delete_successful');
@@ -617,6 +620,38 @@ class User extends CI_Controller
 
         $auth->deleteUser($userId);
         $db->getReference('users/'.$userId)->remove();
+    }
+
+    private function _deleteUserInMailjet($email){
+        $pubKey = $this->config->item('mailJetPublicKey');
+        $secKey = $this->config->item('mailJetSecretKey');
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v3/REST/contact/'.urlencode($email));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+        $result = curl_exec($ch);
+        $contactId = json_decode($result)->Data[0]->ID;
+
+        //Delete contact
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailjet.com/v4/contacts/'.$contactId);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        curl_setopt($ch, CURLOPT_USERPWD, $pubKey.':'.$secKey);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
     }
 }
 
