@@ -787,10 +787,11 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
+
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
-        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.to_user_id = '.$userId.' GROUP BY from_user_id)');
+        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE to_user_id = '.$userId.' GROUP BY from_user_id)');
         $this->db->where("u.deactivation", 0);
         $this->db->where("u.deleted", null);
         if($ignore){
@@ -800,12 +801,12 @@ class User_model extends CI_Model{
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
-        $query = $this->db->get()->result();
+        $result = $this->db->get()->result();
 
         //Set seen = 1
         $this->db->set('seen',1)->where("to_user_id", $userId)->update('user_kisses');
 
-        return $query;
+        return $result;
     }
 
     /**
@@ -1101,6 +1102,17 @@ class User_model extends CI_Model{
         $this->db->where('seen', 0);
         $query = $this->db->get();
         return $query->num_rows();
+
+        /*$this->db->distinct();
+        $this->db->select('uk.from_user_id');
+        $this->db->from('user_kisses uk');
+        $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
+        $this->db->where("uk.to_user_id",$user_id);
+        $this->db->where("u.deactivation", 0);
+        $this->db->where("u.deleted", null);
+
+        $result = $this->db->get()->num_rows();
+        return $result;*/
     }
 
     public function friendRequestQuantity($userId){
