@@ -787,7 +787,6 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getReceivedBlinks($userId = NULL, $num = NULL, $offset = NULL, $ignore = null){
-
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uk.seen, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.from_user_id', 'inner');
@@ -839,7 +838,7 @@ class User_model extends CI_Model{
         $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.blurIndex, u.login, uk.send_at as sent_time');
         $this->db->from('user_kisses as uk');
         $this->db->join('user as u', 'u.id = uk.to_user_id', 'inner');
-        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE uk.from_user_id = '.$userId.' GROUP BY to_user_id)');
+        $this->db->where('uk.id IN (SELECT max(id) FROM tb_user_kisses WHERE from_user_id = '.$userId.' GROUP BY to_user_id)');
         $this->db->where("u.deactivation", 0);
         $this->db->where("u.deleted", null);
         if($ignore){
