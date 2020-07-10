@@ -1216,7 +1216,7 @@ class Api extends REST_Controller {
     public function updateBasicInfo_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
-            $this->_return(false, 'The password is not match.');
+            $this->_return(false, 'Forkert adgangskode');
         }
         $userId = $data->userId;
         unset($data->password);
@@ -1233,7 +1233,7 @@ class Api extends REST_Controller {
     public function updateExtraInfo_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
-            $this->_return(false, 'The password is not match.');
+            $this->_return(false, 'Forkert adgangskode');
         }
         $userId = $data->userId;
         unset($data->password);
@@ -1249,7 +1249,7 @@ class Api extends REST_Controller {
     public function updateInfo_put(){
         $data = (object)json_decode(file_get_contents("php://input"));
         if(empty($data->password) || $this->_checkPassword($data->userId, $data->password) == false){
-            $this->_return(false, 'The password is not match.');
+            $this->_return(false, 'Forkert adgangskode');
         }
         $userId = $data->userId;
         unset($data->password);
@@ -1324,7 +1324,7 @@ class Api extends REST_Controller {
 
         if($status == 1){
             if(empty($password) || $this->_checkPassword($userId, $password) == false){
-                $this->_return(false, 'The password is not match.');
+                $this->_return(false, 'Forkert adgangskode');
             }
         }
 
@@ -1344,7 +1344,7 @@ class Api extends REST_Controller {
 
         if($status == 1){
             if(empty($password) || $this->_checkPassword($userId, $password) == false){
-                $this->_return(false, 'The password is not match.');
+                $this->_return(false, 'Forkert adgangskode');
             }
         }
 
@@ -1362,7 +1362,7 @@ class Api extends REST_Controller {
         $password = $data->password;
 
         if(empty($password) || $this->_checkPassword($userId, $password) == false){
-            $this->_return(false, 'The password is not match.');
+            $this->_return(false, 'Forkert adgangskode');
         }
 
         $db['deleted'] = time();

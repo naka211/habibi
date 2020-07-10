@@ -263,7 +263,7 @@
 <div style="display: none;" id="modalReadmore" class="animated-modal modalLogin">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <p class="f19" id="message-content">
+            <p class="f19" id="chat-message-content">
                 <?php if($user->chat == 0) echo 'Her kan du slå din chat til og fra efter eget ønske, accepteres en venneanmodning fra en anden bruger åbner chatten for vedkommende og chatten vil stadigvæk være lukket for andre bruger.'; else echo 'Har du sat chatten "on" så er du åben for at enhver bruger på Habibidating kan skrive til dig, skulle du på et tidspunkt sætte chatten på "off" så er det kun dine venner på Habibidating der vil kunne skrive til dig.';?></p>
             <button type="button" class="btn btn_viewSearch" style="margin-bottom: 0px;" onclick="$.fancybox.close();">Luk</button>
         </div>
@@ -494,7 +494,7 @@
                 var chatInfo= 'Her kan du slå din chat til og fra efter eget ønske, accepteres en venneanmodning fra en anden bruger åbner chatten for vedkommende og chatten vil stadigvæk være lukket for andre bruger.';
             }
             $('#chat-info').html(chatMessage);
-            $('#modalReadmore #message-content').html(chatInfo);
+            $('#modalReadmore #chat-message-content').html(chatInfo);
         });
 
         checkYear = function (year) {

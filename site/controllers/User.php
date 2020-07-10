@@ -621,7 +621,7 @@ class User extends MX_Controller
             //Login user
             $correctUser = $this->user->getUser($user->id, null, $currentPassword);
             if(empty($correctUser)){
-                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                $this->session->set_flashdata('message', "Forkert adgangskode");
                 redirect(site_url('user/update'));
             }
 
@@ -1219,7 +1219,7 @@ class User extends MX_Controller
             //Login user
             $correctUser = $this->user->getUser($user->id, null, $currentPassword);
             if(empty($correctUser)){
-                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                $this->session->set_flashdata('message', "Forkert adgangskode");
                 redirect(site_url('user/update'));
             }
         }
@@ -1238,7 +1238,7 @@ class User extends MX_Controller
             //Login user
             $correctUser = $this->user->getUser($user->id, null, $currentPassword);
             if(empty($correctUser)){
-                $this->session->set_flashdata('message', "Adgangskoden er forkert");
+                $this->session->set_flashdata('message', "Forkert adgangskode");
                 redirect(site_url('user/update'));
             }
         }
@@ -1256,7 +1256,7 @@ class User extends MX_Controller
         //Login user
         $correctUser = $this->user->getUser($user->id, null, $currentPassword);
         if(empty($correctUser)){
-            $this->session->set_flashdata('message', "Adgangskoden er forkert");
+            $this->session->set_flashdata('message', "Forkert adgangskode");
             redirect(site_url('user/update'));
         }
 
