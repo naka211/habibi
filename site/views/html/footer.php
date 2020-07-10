@@ -12,7 +12,7 @@
                     <a href="https://apps.apple.com/vn/app/habibi-dating/id1454353240"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 hidden-xs" style="padding: 0px;">
-                    <h2>Download App.</h2>
+                    <h2>Download App</h2>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-6">
                     <a href="https://play.google.com/store/apps/details?id=com.hiennguyen102.habibi"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
