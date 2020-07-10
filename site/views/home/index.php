@@ -19,8 +19,14 @@
                     <div class="caption">
                         <h2><?php echo getContent(13, 'title');?></h2>
                         <?php echo getContent(13, 'content');?>
-                        <a href="<?php echo site_url('register');?>" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
-                        <span class="img_guldmedlem"><img src="<?php echo base_url().'templates/';?>images/1x/guldmedlem.gif" alt="" class="img-fluid"></span>
+                        <div class="caption_footer">
+                            <a href="<?php echo site_url('register');?>" class="btn btnCreate_membership">Opret gratis medlemskab her</a>
+                            <span class="img_guldmedlem"><img src="<?php echo base_url().'templates/';?>images/1x/guldmedlem.gif" alt="" class="img-fluid"></span>
+                            <div class="box_app">
+                                <a href="https://apps.apple.com/vn/app/habibi-dating/id1454353240"><img src="<?php echo base_url();?>templates/images/1x/app_store.png" alt="" class="img-fluid"></a>
+                                <a href="https://play.google.com/store/apps/details?id=com.hiennguyen102.habibi"><img src="<?php echo base_url();?>templates/images/1x/google_play.png" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="w_mouse">
                         <svg class="svg_mouseScroll" xmlns="http://www.w3.org/2000/svg" width="16" height="37" viewBox="0 0 34.375 80.375">
@@ -205,15 +211,14 @@
                         <div class="section_app">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-ms-12 col-xs-12">
-                                        <h2>Kommer snart</h2>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-ms-4 col-xs-6">
+                                        <a href="https://apps.apple.com/vn/app/habibi-dating/id1454353240"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-6">
-                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/app_store.png" alt="" class="img-responsive img_app"></a>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 hidden-xs" style="padding: 0px;">
+                                        <h2>Download App.</h2>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-ms-6 col-xs-6">
-                                        <a href="#"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
-                                        <!--<h2 class="w_register_sm"><a class="link_register" href="javascript:;" title="">Kommer snart</a></h2>-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-ms-4 col-xs-6">
+                                        <a href="https://play.google.com/store/apps/details?id=com.hiennguyen102.habibi"><img src="<?php echo base_url().'templates/';?>images/1x/google_play.png" alt="" class="img-responsive img_app"></a>
                                     </div>
                                 </div>
                             </div>

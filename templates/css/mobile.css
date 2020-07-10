@@ -27,6 +27,15 @@
         padding-left: 15px;
         padding-right: 15px;
     }
+    .caption {
+        left: 2%;
+    }
+    .img_guldmedlem {
+        margin-left: 20px;
+    }
+    .box_app {
+        margin-left: 20px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -290,7 +299,10 @@
         font-weight: 500;
     }
     .btnCreate_membership {
-        font-size: 13px;
+        font-size: 15px;
+        display: block;
+        font-weight: 600;
+        margin: 15px 0;
     }
     .fancybox-slide--current .animated-modal .frm_register {
         margin-top: 15px;
@@ -699,13 +711,37 @@
     }
 
     .img_guldmedlem {
-        display: block;
+        display: inline-block;
         margin-top: 15px;
         text-align: center;
+        margin-left: 0;
+        width: 49%;
     }
     .img_guldmedlem img {
         width: 150px;
     }
+    .caption_footer {
+        display: block;
+        width: 100%;
+    }
+    .box_app {
+        display: inline-block;
+        margin-left: 0;
+        text-align: center;
+        width: 49%;
+        position: relative;
+        top: 30px;
+        float: left;
+    }
+    .box_app a {
+        margin-right: 0;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .box_app a:last-child {
+        margin-bottom: 0;
+    }
+    
 
     /* Chat page*/
     .frame_chat {
@@ -998,6 +1034,10 @@
 
     .img_content img{
 	    height: 70px;
+    }
+
+    .box_app a img {
+        width: 100%;
     }
 }
 

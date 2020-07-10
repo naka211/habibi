@@ -1116,3 +1116,32 @@ img {
 #imgContainer{
 	margin-bottom: 20px;
 }
+
+/* 09/07/2020 */
+.caption {
+	top: 40% !important;
+}
+.img_guldmedlem {
+	margin-bottom: 10px;
+}
+.caption_footer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
+.box_app {
+	margin-left: 60px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+	margin-top: 7px;
+}
+.box_app a {
+	margin-right: 15px;
+}
