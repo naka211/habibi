@@ -343,8 +343,8 @@ class Api extends REST_Controller {
         $db = $firebase->getDatabase();
         /*$db->getReference('messages/'.$userId.'/'.$profileId)->remove();
         $db->getReference('messages/'.$profileId.'/'.$userId)->remove();*/
-        $db->getReference('messages/'.$userId.'/'.$profileId)->update(null);
-        $db->getReference('messages/'.$profileId.'/'.$userId)->update(null);
+        $db->getReference('messages/'.$userId.'/'.$profileId)->set(null);
+        $db->getReference('messages/'.$profileId.'/'.$userId)->set(null);
 
         $storage = $firebase->getStorage();
         $bucket = $storage->getBucket();
