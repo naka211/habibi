@@ -1072,8 +1072,8 @@ class Ajax extends MX_Controller{
         $this->load->library('firebase');
         $firebase = $this->firebase->init();
         $db = $firebase->getDatabase();
-        $db->getReference('messages/'.$userId.'/'.$profileId)->remove();
-        $db->getReference('messages/'.$profileId.'/'.$userId)->remove();
+        $db->getReference('messages/'.$userId.'/'.$profileId)->set(null);
+        $db->getReference('messages/'.$profileId.'/'.$userId)->set(null);
 
         $storage = $firebase->getStorage();
         $bucket = $storage->getBucket();
