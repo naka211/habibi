@@ -615,11 +615,11 @@ function sendNotification($userId, $title, $body, $type){
         'registration_ids' => $deviceTokens,
         'notification' => array(
             'title' => $title,
-            'body' => $body
+            'body' => $body,
+            'badge' => $numOfUnreadNotification
         ),
         'data' => array (
-            'type' => $type, // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
-            'count' => $numOfUnreadNotification /// Number of unread notification
+            'type' => $type // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
         )
     );
     $fields = json_encode ( $fields );
