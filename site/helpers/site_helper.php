@@ -617,7 +617,8 @@ function sendNotification($userId, $title, $body, $type){
         'notification' => array(
             'title' => $title,
             'body' => $body,
-            'badge' => $numOfUnreadNotification
+            'badge' => $numOfUnreadNotification,
+            'sound' => 'default'
         ),
         'data' => array (
             'type' => $type // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
