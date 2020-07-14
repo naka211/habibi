@@ -64,14 +64,14 @@ class Api extends REST_Controller {
                 //$this->jwt->decode($data['token'], $this->config->item('encryption_key'), array('HS256'));
 
                 //check exist token
-                if($this->api->existToken($user->id, $data->token) == false){
+                //if($this->api->existToken($user->id, $data->token) == false){
                     //save key and token to database
                     $insertData['user_id'] = $user->id;
                     $insertData['key'] = $returnKey;
                     $insertData['date_created'] = date('Y-m-d H:i:s');
                     $insertData['token'] = $data->token;
                     $this->api->saveToken($insertData);
-                }
+                //}
 
                 //set login status
                 $this->user->updateLogin($user->id, 1);
