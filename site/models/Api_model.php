@@ -22,6 +22,20 @@ class Api_model extends CI_Model{
         return $this->db->where('user_id',$userId)->where('token', $token)->delete('user_keys');
     }
 
+    function existToken($userId, $token){
+        $this->db->select('id')
+            ->from('user_keys')
+            ->where("user_id = $userId")
+            ->where("token = $token");
+
+        $result = $this->db->get()->row();
+        if(!empty($result)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function checkFriend($userId, $profileId){
         $query = $this->db->select("viewAvatar")
             ->from('tb_user_friendlist')
