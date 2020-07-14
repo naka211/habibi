@@ -300,10 +300,8 @@ class Api extends REST_Controller {
                 $DB['dt_create'] = time();
                 $id = $this->user->addRequestAddFriend($DB);
                 if($id){
-                    //send push notification
-                    /* $data['type'] = 'request';
-                     $data = json_encode($data);
-                     $this->_pushNotification($profileId, 'You have received a request from '.$user->name, $data);*/
+                    //Push notification
+                    sendNotification($profileId, 'Du har modtaget en venneanmodning', 'Du har modtaget en venneanmodning', 2);
 
                     $this->_return(true, 'Your request is sent.');
                 } else {
@@ -407,9 +405,8 @@ class Api extends REST_Controller {
         $id = $this->user->saveMessage($DB);
 
         if($id){
-            //$data['type'] = 'message';
-            //$data = json_encode($data);
-            //$this->_pushNotification($profileId, 'You have received a message from '.$user->name, $data);
+            //Push notification
+            sendNotification($profileId, 'Du har modtaget en besked', 'Du har modtaget en besked', 5);
 
             $this->_return(true);
         } else {
@@ -526,6 +523,9 @@ class Api extends REST_Controller {
         $this->user->updateFriendRequest($userId, $profileId, 1);
         $this->user->insertFriendList($userId, $profileId);
 
+        //Push notification
+        sendNotification($profileId, 'Du har accepteret en venneanmodning', 'Du har accepteret en venneanmodning', 4);
+
         $this->_return(true);
     }
 
@@ -535,6 +535,9 @@ class Api extends REST_Controller {
         $profileId = $data->profileId;
 
         $this->user->updateFriendRequest($userId, $profileId, 2);
+
+        //Push notification
+        sendNotification($profileId, 'Du har afvist en venneanmodning', 'Du har afvist en venneanmodning', 3);
 
         $this->_return(true);
     }
@@ -726,10 +729,8 @@ class Api extends REST_Controller {
             $DB['send_at'] = time();
             $id = $this->user->sendBlink($DB);
             if($id){
-                //add push notification
-                /*$data['type'] = 'blink';
-                $data = json_encode($data);
-                $this->_pushNotification($profileId, 'You have received a blink from '.$user->name, $data);*/
+                //Push notification
+                sendNotification($profileId, 'Du har modtaget et blink', 'Du har modtaget et blink', 1);
 
                 $this->_return(true);
             } else {
@@ -1434,27 +1435,6 @@ class Api extends REST_Controller {
         }
     }
 
-    private function _pushNotification($profileId, $msg, $data){
-        $url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-        $send['request'] = array('auth' => $this->auth, 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("'.$this->application.'") * (T("userId", EQ, '.$profileId.') + T("userId", EQ, '.$profileId.'))', 'data'=>$data);
-
-        $request = json_encode($send);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-
-        return $response;
-    }
-
     function correctImageOrientation($filename) {
         if (function_exists('exif_read_data')) {
             $exif = exif_read_data($filename);
@@ -1557,29 +1537,6 @@ class Api extends REST_Controller {
 
         $this->_return(true, '', array('messageCount' => $message, 'blinkCount' => $blink, 'requestCount' => $friendRequestQuantity, 'rejectCount' => $rejectRequestQuantity, 'totalRequestCount' => $request, 'friendCount' => $friend));
     }
-
-    /*public function loadCometMessages_get($userId, $profileId){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api-eu.cometchat.io/v2.0/users/'.$userId.'/users/'.$profileId.'/messages');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Apikey: '.$this->config->item('comet_full_api_key');
-        $headers[] = 'Appid: '.$this->config->item('comet_app_id');
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        print_r(json_decode($result));exit();
-        curl_close($ch);
-    }*/
 
     public function getDefaultAvatars_get(){
         $maleArr = array();

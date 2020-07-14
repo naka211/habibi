@@ -581,3 +581,62 @@ function uuid(){
         mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
     );
 }
+
+function sendNotification($userId, $title, $body, $type){
+    $ci = &get_instance();
+
+    //Get number of unread notification
+    $ci->load->model ('user');
+    $message = $ci->user->getUnreadMessageQuantity($userId);
+    $blink = $ci->user->getBlinkingQuantity($userId);
+    $friendRequestQuantity = $ci->user->friendRequestQuantity($userId);
+    $rejectRequestQuantity = $ci->user->rejectRequestQuantity($userId);
+    $friend = $ci->user->newFriendQuantity($userId);
+    $numOfUnreadNotification = $message + $blink + $friendRequestQuantity + $rejectRequestQuantity + $friend;
+
+    //Get tokens
+    $ci->db->select('token')
+        ->from('user_keys')
+        ->where("user_id = $userId");
+
+    $tokens = $ci->db->get()->result();
+    $deviceTokens = array();
+    foreach ($tokens as $token){
+        $deviceTokens[] = $token->token;
+    }
+    /*if(empty($deviceTokens)){
+        $deviceTokens = array('e8gufFluRx6m2znpQkjjnn:APA91bE2PWIOevjIDUJt5TbbTb-OTVJ3WV5hdAaW7ETeywzfeSOYwYRXTHVoTPCu2PS5O4-xad9jbjWm6L0i_IwLMUIb6Hx3d8kUKxX0T33plTsDPGPN-WtaeaS3Wi1PFf-3Y2g-AoS9');
+    }*/
+
+    //Push notification
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $fields = array (
+        'registration_ids' => $deviceTokens,
+        'notification' => array(
+            'title' => $title,
+            'body' => $body
+        ),
+        'data' => array (
+            'type' => $type, // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
+            'count' => $numOfUnreadNotification /// Number of unread notification
+        )
+    );
+    $fields = json_encode ( $fields );
+
+    $headers = array (
+        'Authorization: key=' . $ci->config->item('cloud_messaging_key'),
+        'Content-Type: application/json'
+    );
+
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $url );
+    curl_setopt ( $ch, CURLOPT_POST, true );
+    curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, $fields );
+
+    $result = curl_exec ( $ch );
+    echo $result;
+    curl_close ( $ch );
+}
