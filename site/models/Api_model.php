@@ -26,7 +26,7 @@ class Api_model extends CI_Model{
         $this->db->select('id')
             ->from('user_keys')
             ->where("user_id = $userId")
-            ->where("token = $token");
+            ->where("token", $token);
 
         $result = $this->db->get()->row();
         if(!empty($result)){
