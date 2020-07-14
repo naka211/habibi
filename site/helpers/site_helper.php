@@ -595,6 +595,7 @@ function sendNotification($userId, $title, $body, $type){
     $numOfUnreadNotification = $message + $blink + $friendRequestQuantity + $rejectRequestQuantity + $friend;
 
     //Get tokens
+    $ci->db->distinct();
     $ci->db->select('token')
         ->from('user_keys')
         ->where("user_id = $userId");
