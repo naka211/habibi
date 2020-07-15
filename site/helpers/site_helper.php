@@ -582,23 +582,29 @@ function uuid(){
     );
 }
 
-function sendNotification($userId, $body, $type){
+function sendNotification($userId, $profileId, $body, $type){
     $ci = &get_instance();
 
     //Get number of unread notification
     $ci->load->model ('user');
-    $message = $ci->user->getUnreadMessageQuantity($userId);
-    $blink = $ci->user->getBlinkingQuantity($userId);
-    $friendRequestQuantity = $ci->user->friendRequestQuantity($userId);
-    $rejectRequestQuantity = $ci->user->rejectRequestQuantity($userId);
-    $friend = $ci->user->newFriendQuantity($userId);
+    $message = $ci->user->getUnreadMessageQuantity($profileId);
+    $blink = $ci->user->getBlinkingQuantity($profileId);
+    $friendRequestQuantity = $ci->user->friendRequestQuantity($profileId);
+    $rejectRequestQuantity = $ci->user->rejectRequestQuantity($profileId);
+    $friend = $ci->user->newFriendQuantity($profileId);
     $numOfUnreadNotification = $message + $blink + $friendRequestQuantity + $rejectRequestQuantity + $friend;
+
+    //Get user name
+    $ci->db->select('name')
+        ->from('user')
+        ->where("id = $userId");
+    $name = $ci->db->get()->row()->name;
 
     //Get tokens
     $ci->db->distinct();
     $ci->db->select('token')
         ->from('user_keys')
-        ->where("user_id = $userId");
+        ->where("user_id = $profileId");
 
     $tokens = $ci->db->get()->result();
     $deviceTokens = array();
@@ -616,7 +622,7 @@ function sendNotification($userId, $body, $type){
         'registration_ids' => $deviceTokens,
         'notification' => array(
             'title' => 'Habibi Dating',
-            'body' => $body,
+            'body' => $name.' '.$body,
             'badge' => $numOfUnreadNotification,
             'sound' => 'default'
         ),

@@ -304,7 +304,7 @@ class Api extends REST_Controller {
                 $id = $this->user->addRequestAddFriend($DB);
                 if($id){
                     //Push notification
-                    sendNotification($profileId, 'Du har modtaget en venneanmodning', 2);
+                    sendNotification($userId, $profileId, 'har sendt en venneanmodning', 2);
 
                     $this->_return(true, 'Your request is sent.');
                 } else {
@@ -409,7 +409,7 @@ class Api extends REST_Controller {
 
         if($id){
             //Push notification
-            sendNotification($profileId, 'Du har modtaget en besked', 5);
+            sendNotification($userId, $profileId, 'har sendt en besked', 5);
 
             $this->_return(true);
         } else {
@@ -527,7 +527,7 @@ class Api extends REST_Controller {
         $this->user->insertFriendList($userId, $profileId);
 
         //Push notification
-        sendNotification($profileId, 'Venneanmodning accepteret', 4);
+        sendNotification($userId, $profileId, 'har accepteret venneanmodning', 4);
 
         $this->_return(true);
     }
@@ -540,7 +540,7 @@ class Api extends REST_Controller {
         $this->user->updateFriendRequest($userId, $profileId, 2);
 
         //Push notification
-        sendNotification($profileId, 'Afvist venneanmodning', 3);
+        sendNotification($userId, $profileId, 'har afvist venneanmodning', 3);
 
         $this->_return(true);
     }
@@ -733,7 +733,7 @@ class Api extends REST_Controller {
             $id = $this->user->sendBlink($DB);
             if($id){
                 //Push notification
-                sendNotification($profileId, 'Du har modtaget et blink', 1);
+                sendNotification($userId, $profileId, 'har sendt et blink', 1);
 
                 $this->_return(true);
             } else {
