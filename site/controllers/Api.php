@@ -527,7 +527,7 @@ class Api extends REST_Controller {
         $this->user->insertFriendList($userId, $profileId);
 
         //Push notification
-        sendNotification($profileId, 'Du har accepteret en venneanmodning', 4);
+        sendNotification($profileId, 'Venneanmodning accepteret', 4);
 
         $this->_return(true);
     }
@@ -540,7 +540,7 @@ class Api extends REST_Controller {
         $this->user->updateFriendRequest($userId, $profileId, 2);
 
         //Push notification
-        sendNotification($profileId, 'Du har afvist en venneanmodning', 3);
+        sendNotification($profileId, 'Afvist venneanmodning', 3);
 
         $this->_return(true);
     }

@@ -355,7 +355,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($profileId, 'Du har accepteret en venneanmodning', 4);
+        sendNotification($profileId, 'Venneanmodning accepteret', 4);
 
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -369,7 +369,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($profileId, 'Du har afvist en venneanmodning', 3);
+        sendNotification($profileId, 'Afvist venneanmodning', 3);
 
         header('Content-Type: application/json');
         echo json_encode($data);
