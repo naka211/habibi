@@ -582,7 +582,7 @@ function uuid(){
     );
 }
 
-function sendNotification($userId, $title, $body, $type){
+function sendNotification($userId, $body, $type){
     $ci = &get_instance();
 
     //Get number of unread notification
@@ -615,7 +615,7 @@ function sendNotification($userId, $title, $body, $type){
     $fields = array (
         'registration_ids' => $deviceTokens,
         'notification' => array(
-            'title' => $title,
+            'title' => 'Habibi Dating',
             'body' => $body,
             'badge' => $numOfUnreadNotification,
             'sound' => 'default'

@@ -154,7 +154,7 @@ class Ajax extends MX_Controller{
             $data['status'] = true;
 
             //Push notification
-            sendNotification($profile_id, 'Du har modtaget et blink', 'Du har modtaget et blink', 1);
+            sendNotification($profile_id, 'Du har modtaget et blink', 1);
         } else {
             $data['status'] = false;
         }
@@ -271,7 +271,7 @@ class Ajax extends MX_Controller{
                     $data['status'] = true;
 
                     //Push notification
-                    sendNotification($profileId, 'Du har modtaget en venneanmodning', 'Du har modtaget en venneanmodning', 2);
+                    sendNotification($profileId, 'Du har modtaget en venneanmodning', 2);
                 } else {
                     $data['status'] = false;
                 }
@@ -355,7 +355,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($profileId, 'Du har accepteret en venneanmodning', 'Du har accepteret en venneanmodning', 4);
+        sendNotification($profileId, 'Du har accepteret en venneanmodning', 4);
 
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -369,7 +369,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($profileId, 'Du har afvist en venneanmodning', 'Du har afvist en venneanmodning', 3);
+        sendNotification($profileId, 'Du har afvist en venneanmodning', 3);
 
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -557,7 +557,7 @@ class Ajax extends MX_Controller{
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
 
         //Push notification
-        sendNotification($profileId, 'Du har modtaget en besked', 'Du har modtaget en besked', 5);
+        sendNotification($profileId, 'Du har modtaget en besked', 5);
 
         //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
         //$db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
@@ -696,7 +696,7 @@ class Ajax extends MX_Controller{
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
 
         //Push notification
-        sendNotification($profileId, 'Du har modtaget en besked', 'Du har modtaget en besked', 5);
+        sendNotification($profileId, 'Du har modtaget en besked', 5);
 
         die('ok');
     }
