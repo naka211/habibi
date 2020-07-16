@@ -627,7 +627,8 @@ function sendNotification($userId, $profileId, $body, $type){
             'sound' => 'default'
         ),
         'data' => array (
-            'type' => $type // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
+            'type' => $type, // 1: blink, 2: friend request (received), 3: friend request (rejected), 4: friend, 5: chat
+            'count' => $numOfUnreadNotification
         )
     );
     $fields = json_encode ( $fields );
