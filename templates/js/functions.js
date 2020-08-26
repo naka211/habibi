@@ -500,6 +500,7 @@ $(document).ready(function() {
             $('#message-content').html('Indtast venligst en besked');
             $.fancybox.open({src: '#modalMessage'});
         } else {
+            $('#message').focus();
             stopCheckMessageInterval();
 
             $.ajax({
