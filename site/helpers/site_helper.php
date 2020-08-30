@@ -582,7 +582,7 @@ function uuid(){
     );
 }
 
-function sendNotification($userId, $profileId, $body, $type){
+function sendNotification($userId, $profileId, $type){
     $ci = &get_instance();
 
     //Get number of unread notification
@@ -595,10 +595,38 @@ function sendNotification($userId, $profileId, $body, $type){
     $numOfUnreadNotification = $message + $blink + $friendRequestQuantity + $rejectRequestQuantity + $friend;
 
     //Get user name
-    $ci->db->select('name')
+    $ci->db->select('name, type')
         ->from('user')
         ->where("id = $userId");
-    $name = $ci->db->get()->row()->name;
+    $result = $ci->db->get()->row();
+    $name = $result->name;
+    $userType = $result->type;
+
+    if($userType == 1){
+        if($type == 1){
+            $body = 'Du har modtaget et blink';
+        } else if($type == 2){
+            $body = 'Du har modtaget en venneanmodning';
+        } else if($type == 3){
+            $body = $name.' har afvist venneanmodning';
+        } else if($type == 4){
+            $body = $name.' har accepteret venneanmodning';
+        } else {
+            $body = 'Du har modtaget en besked';
+        }
+    } else {
+        if($type == 1){
+            $body = $name.' har sendt et blink';
+        } else if($type == 2){
+            $body = $name.' har sendt en venneanmodning';
+        } else if($type == 3){
+            $body = $name.' har afvist venneanmodning';
+        } else if($type == 4){
+            $body = $name.' har accepteret venneanmodning';
+        } else {
+            $body = $name.' har sendt en besked';
+        }
+    }
 
     //Get tokens
     $ci->db->distinct();
@@ -622,7 +650,7 @@ function sendNotification($userId, $profileId, $body, $type){
         'registration_ids' => $deviceTokens,
         'notification' => array(
             'title' => 'Habibi Dating',
-            'body' => $name.' '.$body,
+            'body' => $body,
             'badge' => $numOfUnreadNotification,
             'sound' => 'default'
         ),
@@ -646,6 +674,7 @@ function sendNotification($userId, $profileId, $body, $type){
     curl_setopt ( $ch, CURLOPT_POSTFIELDS, $fields );
 
     $result = curl_exec ( $ch );
-    echo $result;
+    $result = json_decode($result);
     curl_close ( $ch );
+    return $result;
 }

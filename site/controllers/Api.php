@@ -304,9 +304,9 @@ class Api extends REST_Controller {
                 $id = $this->user->addRequestAddFriend($DB);
                 if($id){
                     //Push notification
-                    sendNotification($userId, $profileId, 'har sendt en venneanmodning', 2);
+                    $this->sendNotification($userId, $profileId, 2);
 
-                    $this->_return(true, 'Your request is sent.');
+                    //$this->_return(true, 'Your request is sent.');
                 } else {
                     $this->_return(false, 'Can not save to database');
                 }
@@ -409,9 +409,9 @@ class Api extends REST_Controller {
 
         if($id){
             //Push notification
-            sendNotification($userId, $profileId, 'har sendt en besked', 5);
+            $this->sendNotification($userId, $profileId, 5);
 
-            $this->_return(true);
+            //$this->_return(true);
         } else {
             $this->_return(false, 'Can not send message');
         }
@@ -527,9 +527,9 @@ class Api extends REST_Controller {
         $this->user->insertFriendList($userId, $profileId);
 
         //Push notification
-        sendNotification($userId, $profileId, 'har accepteret venneanmodning', 4);
+        $this->sendNotification($userId, $profileId, 4);
 
-        $this->_return(true);
+        //$this->_return(true);
     }
 
     public function rejectRequest_post(){
@@ -540,9 +540,9 @@ class Api extends REST_Controller {
         $this->user->updateFriendRequest($userId, $profileId, 2);
 
         //Push notification
-        sendNotification($userId, $profileId, 'har afvist venneanmodning', 3);
+        $this->sendNotification($userId, $profileId, 3);
 
-        $this->_return(true);
+        //$this->_return(true);
     }
 
     public function deleteRequest_delete(){
@@ -733,9 +733,8 @@ class Api extends REST_Controller {
             $id = $this->user->sendBlink($DB);
             if($id){
                 //Push notification
-                sendNotification($userId, $profileId, 'har sendt et blink', 1);
+                $this->sendNotification($userId, $profileId, 1);
 
-                $this->_return(true);
             } else {
                 $this->_return(false, 'Can not save to database');
             }
@@ -1620,5 +1619,14 @@ class Api extends REST_Controller {
                         Habibi Team - Habibidating.dk';
         $this->general_model->sendEmail(['info@habibidating.dk'], 'Habibidating.dk - En besked fra kontaktformularen', $content);
         $this->_return(true, '', array('message'=> "Tak for din henvendelse.\nVi kigger på det fremsendte og vender retur inden for 24 timer.\n\nMvh. Habibidating.dk"));
+    }
+
+    public function sendNotification($userId, $profileId, $type){
+        $result = sendNotification($userId, $profileId, $type);
+        if($result['success'] == 0){
+            $this->_return(false, $result['results'][0]['error']);
+        } else {
+            $this->_return(true, 'The notification is sent.');
+        }
     }
 }
