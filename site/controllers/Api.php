@@ -306,7 +306,7 @@ class Api extends REST_Controller {
                     //Push notification
                     $this->sendNotification($userId, $profileId, 2);
 
-                    //$this->_return(true, 'Your request is sent.');
+                    $this->_return(true, 'Your request is sent.');
                 } else {
                     $this->_return(false, 'Can not save to database');
                 }
@@ -411,7 +411,7 @@ class Api extends REST_Controller {
             //Push notification
             $this->sendNotification($userId, $profileId, 5);
 
-            //$this->_return(true);
+            $this->_return(true);
         } else {
             $this->_return(false, 'Can not send message');
         }
@@ -529,7 +529,7 @@ class Api extends REST_Controller {
         //Push notification
         $this->sendNotification($userId, $profileId, 4);
 
-        //$this->_return(true);
+        $this->_return(true);
     }
 
     public function rejectRequest_post(){
@@ -542,7 +542,7 @@ class Api extends REST_Controller {
         //Push notification
         $this->sendNotification($userId, $profileId, 3);
 
-        //$this->_return(true);
+        $this->_return(true);
     }
 
     public function deleteRequest_delete(){
@@ -734,6 +734,7 @@ class Api extends REST_Controller {
             if($id){
                 //Push notification
                 $this->sendNotification($userId, $profileId, 1);
+                $this->_return(true);
 
             } else {
                 $this->_return(false, 'Can not save to database');
@@ -1623,10 +1624,10 @@ class Api extends REST_Controller {
 
     public function sendNotification($userId, $profileId, $type){
         $result = sendNotification($userId, $profileId, $type);
-        if($result->success == 0){
+        /*if($result->success == 0){
             $this->_return(false, $result->results[0]->error);
         } else {
             $this->_return(true, 'The notification is sent.');
-        }
+        }*/
     }
 }
