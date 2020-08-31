@@ -1623,8 +1623,8 @@ class Api extends REST_Controller {
 
     public function sendNotification($userId, $profileId, $type){
         $result = sendNotification($userId, $profileId, $type);
-        if($result['success'] == 0){
-            $this->_return(false, $result['results'][0]['error']);
+        if($result->success == 0){
+            $this->_return(false, $result->results[0]->error);
         } else {
             $this->_return(true, 'The notification is sent.');
         }
