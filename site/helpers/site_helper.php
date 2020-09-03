@@ -595,12 +595,15 @@ function sendNotification($userId, $profileId, $type){
     $numOfUnreadNotification = $message + $blink + $friendRequestQuantity + $rejectRequestQuantity + $friend;
 
     //Get user name
-    $ci->db->select('name, type')
+    $ci->db->select('name')
         ->from('user')
         ->where("id = $userId");
-    $result = $ci->db->get()->row();
-    $name = $result->name;
-    $userType = $result->type;
+    $name = $ci->db->get()->row()->name;
+
+    $ci->db->select('type')
+        ->from('user')
+        ->where("id = $profileId");
+    $userType = $ci->db->get()->row()->type;
 
     if($userType == 1){
         if($type == 1){
