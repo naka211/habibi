@@ -154,7 +154,7 @@ class Ajax extends MX_Controller{
             $data['status'] = true;
 
             //Push notification
-            sendNotification($user->id, $profile_id, 'har sendt et blink', 1);
+            sendNotification($user->id, $profile_id, 1);
         } else {
             $data['status'] = false;
         }
@@ -271,7 +271,7 @@ class Ajax extends MX_Controller{
                     $data['status'] = true;
 
                     //Push notification
-                    sendNotification($user->id, $profileId, 'har sendt en venneanmodning', 2);
+                    sendNotification($user->id, $profileId, 2);
                 } else {
                     $data['status'] = false;
                 }
@@ -355,7 +355,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($user->id, $profileId, 'har accepteret venneanmodning', 4);
+        sendNotification($user->id, $profileId, 4);
 
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -369,7 +369,7 @@ class Ajax extends MX_Controller{
         $data['status'] = true;
 
         //Push notification
-        sendNotification($user->id, $profileId, 'har afvist venneanmodning', 3);
+        sendNotification($user->id, $profileId, 3);
 
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -557,7 +557,7 @@ class Ajax extends MX_Controller{
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
 
         //Push notification
-        sendNotification($userId, $profileId, 'har sendt en besked', 5);
+        sendNotification($userId, $profileId, 5);
 
         //$db->getReference('messages/'.$userId.'/'.$profileId.'/'.$messageId)->update($messageData);
         //$db->getReference('messages/'.$profileId.'/'.$userId.'/'.$messageId)->update($messageData);
@@ -696,7 +696,7 @@ class Ajax extends MX_Controller{
         $db->getReference('messages/'.$profileId.'/'.$userId.'/'.$newPostKey)->update($messageData);
 
         //Push notification
-        sendNotification($userId, $profileId, 'har sendt en besked', 5);
+        sendNotification($userId, $profileId, 5);
 
         die('ok');
     }
