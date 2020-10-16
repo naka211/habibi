@@ -325,6 +325,7 @@ class Api extends REST_Controller {
                 unset($messageList[$key]);
             }
         }
+        $messageList = array_values($messageList);
         $this->_setAvatarPath($userId, $messageList);
         if($messageList){
             $this->_return(true, '', array('messageList'=>$messageList));

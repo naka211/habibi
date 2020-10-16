@@ -1325,8 +1325,7 @@ class User_model extends CI_Model{
         $userIdArr = $this->db->get()->result();
         $result = array();
         if (!empty($userIdArr)) {
-            $key = 0;
-            foreach ($userIdArr as $user) {
+            foreach ($userIdArr as $key => $user) {
                 if(!empty($user->userId)){
                     $this->db->select('name, id, avatar, region, ethnic_origin, year, login, blurIndex');
                     $this->db->from('user');
@@ -1348,8 +1347,6 @@ class User_model extends CI_Model{
                         $result[$key]->added_time = $query->dt_create;
                         $result[$key]->seen = $query->seen;
                         $result[$key]->senderUID = $query->user_from;
-
-                        $key++;
                     }
                 }
             }
