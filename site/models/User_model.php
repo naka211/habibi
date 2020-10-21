@@ -1131,7 +1131,7 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
-    public function rejectRequestQuantity($userId){
+    public function rejectRequestQuantity($userId, $setSeen = 0){
         $ignore = $this->getBlockedUserIds($userId);
 
         $this->db->select('uf.id');
@@ -1139,12 +1139,22 @@ class User_model extends CI_Model{
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
         $this->db->where("uf.status", 2);
+        $this->db->where("uf.seen", 0);
         $this->db->where("u.deleted", null);
 
         if($ignore){
             $this->db->where_not_in('user_to', $ignore);
         }
         $query = $this->db->get();
+
+        //Set seen = 1
+        if($setSeen == 1){
+            $this->db->set('seen',1)
+            ->where("user_from", $userId)
+            ->where("status", 2)
+            ->update('user_friends');
+        }
+
         return $query->num_rows();
     }
 
@@ -1209,7 +1219,7 @@ class User_model extends CI_Model{
     }
 
     public function getRejectedRequests($userId, $ignore = null){
-        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, u.blurIndex, uf.dt_update');
+        $this->db->select('u.name, u.id, u.avatar, u.region, u.ethnic_origin, u.year, u.login, u.blurIndex, uf.dt_update, uf.seen');
         $this->db->from('user_friends as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'inner');
         $this->db->where("uf.user_from", $userId);
@@ -1221,6 +1231,7 @@ class User_model extends CI_Model{
         }
         $this->db->order_by('uf.id','DESC');
         $result = $this->db->get()->result();
+
         return $result;
     }
 

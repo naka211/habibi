@@ -512,6 +512,7 @@ class Api extends REST_Controller {
         $requests = $this->user->getRejectedRequests($userId, $ignore);
 
         if($requests){
+            $this->user->rejectRequestQuantity($userId, 1);
             $this->_setAvatarPath($userId, $requests);
             $this->_return(true, '', array('requests'=>$requests));
         } else {
