@@ -670,6 +670,8 @@ class Api extends REST_Controller {
         $user = $this->user->getUser($userId);
 
         $user->age = printAge($user->id);
+        $user->description = strip_tags($user->description);
+        $user->description = html_entity_decode($user->description);
 
         if(in_array($user->avatar, getDefaultAvatars()) &&  $user->new_avatar == ''){
             $user->allowBlur = '0';
