@@ -3075,7 +3075,7 @@ input[type=range]::-ms-tooltip {
     -o-filter: blur(10px);
     -ms-filter: blur(10px);
     filter: blur(10px);
-    filter: url(blur.svg#blur);
+    /* filter: url(blur.svg#blur); */
 }
 
 label.error{
