@@ -447,6 +447,34 @@ class Api extends REST_Controller {
         $this->user->deleteBlink($userId, $profileId);
         //Delete message
         $this->user->deleteMessage($userId, $profileId);
+        //Delete message in firebase
+        $this->load->library('firebase');
+        $firebase = $this->firebase->init();
+        $db = $firebase->getDatabase();
+
+        $db->getReference('messages/'.$userId.'/'.$profileId)->set(null);
+        $db->getReference('messages/'.$profileId.'/'.$userId)->set(null);
+
+        $storage = $firebase->getStorage();
+        $bucket = $storage->getBucket();
+
+        if(!empty($profileId) && !empty($userId)){
+            $prefix = $userId.'_'.$profileId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
+            }
+
+            $prefix = $profileId.'_'.$userId;
+            $objects = $bucket->objects([
+                'prefix' => $prefix
+            ]);
+            foreach ($objects as $object) {
+                $object->delete();
+            }
+        }
         //Remove favorite
         $this->user->removeFavorite($userId, $profileId);
         $this->_return(true);
