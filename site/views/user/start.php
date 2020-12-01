@@ -98,12 +98,12 @@
             </div>
         </section>-->
 
-        <section class="section_randomProfiles" style="margin-top: 50px;">
+        <section class="section_mostvisitedProfiles" style="border-bottom: none;">
             <div class="row">
-                <h2 class="title">Udvalgte profiler</h2>
+                <h2 class="title">Populære profiler</h2>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="owl-carousel owl-theme owl_latestProfiles">
-                        <?php foreach ($randomUsers as $user){?>
+                    <div class="owl-carousel owl-theme owl_mostvisitedProfiles">
+                        <?php foreach ($popularUsers as $user){?>
                             <div class="item">
                                 <div class="box_user">
                                     <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
@@ -117,8 +117,10 @@
                                 </div>
                             </div>
                         <?php }?>
+
                     </div>
                 </div>
+            </div>
         </section>
 
         <section class="section_latestProfiles">
@@ -144,12 +146,12 @@
                 </div>
         </section>
 
-        <section class="section_mostvisitedProfiles" style="border-bottom: none;">
+        <section class="section_randomProfiles" style="margin-top: 50px;">
             <div class="row">
-                <h2 class="title">Populære profiler</h2>
+                <h2 class="title">Udvalgte profiler</h2>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="owl-carousel owl-theme owl_mostvisitedProfiles">
-                        <?php foreach ($popularUsers as $user){?>
+                    <div class="owl-carousel owl-theme owl_latestProfiles">
+                        <?php foreach ($randomUsers as $user){?>
                             <div class="item">
                                 <div class="box_user">
                                     <?php if($user->blurIndex == 0 || ($user->blurIndex != 0 && allowViewAvatar($user->id))) { ?>
@@ -163,10 +165,8 @@
                                 </div>
                             </div>
                         <?php }?>
-
                     </div>
                 </div>
-            </div>
         </section>
 
     </div>
