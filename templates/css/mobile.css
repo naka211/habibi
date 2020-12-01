@@ -779,6 +779,10 @@
     .frm_Chat .emojionearea-editor{
         padding: 3px 0 0 0;
     }
+
+    .content_profile .owl-theme .item{
+        padding: 8px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
