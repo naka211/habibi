@@ -556,7 +556,7 @@
         margin-bottom: 10px;
     }
     .content_profile section {
-        margin: 0px auto;
+        margin: 8px auto;
         padding-bottom: 0px;
     }
     .table_infoProfile tr th {
@@ -781,7 +781,7 @@
     }
 
     .content_profile .owl-theme .item{
-        padding: 6px;
+        padding: 4px;
     }
 }
 
